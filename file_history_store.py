@@ -1,11 +1,27 @@
 import os
 import json
 from typing import Sequence
+from pathlib import Path
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.messages import message_to_dict,BaseMessage,messages_from_dict
 
+# 与 conversation_store.py 使用同一目录，避免从其他工作目录启动时找不到历史。
+HISTORY_DIR = Path(__file__).resolve().parent / "chat_history"
+
+
 def get_history(session_id):
-    return FileChatMessageHistory(session_id,"./chat_history")
+    return FileChatMessageHistory(str(session_id), str(HISTORY_DIR))
+
+
+def delete_history(session_id):
+    """用户确认删除会话后，同步删除 RAG 保存的上下文文件。"""
+    session_id = str(session_id)
+    if not session_id or session_id != Path(session_id).name or session_id in (".", ".."):
+        raise ValueError("非法的会话 ID")
+    try:
+        (HISTORY_DIR / session_id).unlink()
+    except FileNotFoundError:
+        pass
 
 class FileChatMessageHistory(BaseChatMessageHistory):
     def __init__(self, session_id, storage_path):

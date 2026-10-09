@@ -2,6 +2,8 @@ import html
 import uuid
 import streamlit as st
 from rag import RagService
+from conversation_store import ConversationStore
+from file_history_store import delete_history
 import config_data as config
 
 
@@ -20,6 +22,8 @@ st.set_page_config(
 def create_conversation(state):
     """创建一个新会话，并把它设为当前会话。"""
     sid = str(uuid.uuid4())
+    # 先写磁盘，再更新 Streamlit 状态；刷新和重启后也能恢复。
+    conversation_store.create(sid)
     state["conversations"][sid] = {
         "title": "新对话",
         "messages": [],
@@ -45,6 +49,9 @@ def delete_conversation(state, sid):
         return False
 
     deleting_current = sid == state.get("current_session")
+    # 页面历史（SQLite）与 RAG 上下文（本地文件）一并清除。
+    conversation_store.delete(sid)
+    delete_history(sid)
     del conversations[sid]
 
     if deleting_current:
@@ -54,6 +61,7 @@ def delete_conversation(state, sid):
         if conversations:
             # dict 保持插入顺序，取剩余会话里最新创建的一条。
             state["current_session"] = next(reversed(conversations))
+            conversation_store.set_active(state["current_session"])
         else:
             create_conversation(state)
 
@@ -68,25 +76,47 @@ def delete_conversation(state, sid):
 if "rag" not in st.session_state:
     st.session_state["rag"] = RagService()
 
-if "conversations" not in st.session_state:
-    st.session_state["conversations"] = {}
+# 本地 SQLite：第一次启动时自动建立 chat_history/conversations.sqlite3。
+if "conversation_store" not in st.session_state:
+    st.session_state["conversation_store"] = ConversationStore()
+conversation_store = st.session_state["conversation_store"]
+
+# 如果是老版本直接热更新，先把当前页面尚未落盘的历史补存进去。
+if "_conversation_db_initialized" not in st.session_state:
+    previous_chats = st.session_state.get("conversations")
+    if previous_chats:
+        conversation_store.merge_session_state(previous_chats)
+        previous_sid = st.session_state.get("current_session")
+        if previous_sid in previous_chats:
+            conversation_store.set_active(previous_sid)
+    st.session_state["_conversation_db_initialized"] = True
+
+# 每次 rerun 都从数据库恢复：界面不再以 Session State 为唯一历史来源。
+st.session_state["conversations"] = conversation_store.load_all()
 
 if "pending_prompt" not in st.session_state:
     st.session_state["pending_prompt"] = None
-    
+
 if "force_search" not in st.session_state:
     st.session_state["force_search"] = False
-    
+
 if "delete_confirm_sid" not in st.session_state:
     st.session_state["delete_confirm_sid"] = None
 
-# 不只判断 current_session 是否存在，还保证它确实指向一个现有会话。
+# 刷新/重新打开时，优先恢复上次选中的会话。
 if (
     "current_session" not in st.session_state
-    or st.session_state["current_session"]
-    not in st.session_state["conversations"]
+    or st.session_state["current_session"] not in st.session_state["conversations"]
 ):
-    create_conversation(st.session_state)
+    saved_sid = conversation_store.get_active()
+    if saved_sid not in st.session_state["conversations"]:
+        saved_sid = next(reversed(st.session_state["conversations"]), None)
+
+    if saved_sid is None:
+        create_conversation(st.session_state)
+    else:
+        st.session_state["current_session"] = saved_sid
+        conversation_store.set_active(saved_sid)
 
 
 def current_chat():
@@ -682,6 +712,7 @@ with st.sidebar:
                     help=title,
                 ):
                     st.session_state["current_session"] = sid
+                    conversation_store.set_active(sid)
                     st.session_state["delete_confirm_sid"] = None
                     st.rerun()
 
@@ -777,6 +808,11 @@ else:
 # =========================
 
 if prompt:
+    sid = st.session_state["current_session"]
+    new_title = short_title(prompt) if display_title(chat) == "新对话" else None
+    # 在 rerun 和 AI 流式响应之前就保存用户消息，避免生成中断后丢失问题。
+    conversation_store.add_message(sid, "user", prompt, title=new_title)
+    conversation_store.set_active(sid)
     chat["messages"].append(
         {
             "role": "user",
@@ -785,8 +821,8 @@ if prompt:
     )
 
     # 兼容旧数据：空标题也视为“新对话”。
-    if display_title(chat) == "新对话":
-        chat["title"] = short_title(prompt)
+    if new_title is not None:
+        chat["title"] = new_title
 
     st.session_state["pending_prompt"] = prompt
     st.rerun()
@@ -799,8 +835,9 @@ if prompt:
 pending = st.session_state.get("pending_prompt")
 
 if pending:
-  
+
     st.session_state["pending_prompt"] = None
+    answer_sid = st.session_state["current_session"]
 
 
     # =========================
@@ -834,10 +871,7 @@ if pending:
             },
             {
                 "configurable": {
-                    "session_id":
-                        st.session_state[
-                            "current_session"
-                        ]
+                    "session_id": answer_sid
                 }
             },
         )
@@ -909,6 +943,8 @@ if pending:
         answer = ""
 
 
+    # 模型正常结束后将回答写入 SQLite，与页面显示内容保持一致。
+    conversation_store.add_message(answer_sid, "assistant", str(answer))
     chat["messages"].append(
         {
             "role": "assistant",
