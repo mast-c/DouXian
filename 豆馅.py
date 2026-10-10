@@ -1,5 +1,4 @@
 import html
-import inspect
 import uuid
 import time
 from urllib.parse import urlsplit
@@ -818,6 +817,19 @@ footer,
   .trace-chevron,.trace-source-chip{transition:none}
 }
 
+/* 只调整运行时状态行，已保存的搜索思考记录样式不受影响。 */
+.st-key-douxian-live-progress .trace-live{
+  margin:2px 0 0;
+  min-height:32px;
+}
+.st-key-douxian-live-progress [data-testid="stHorizontalBlock"]{
+  align-items:center;
+  gap:6px !important;
+}
+.st-key-douxian-live-progress iframe{
+  display:block;
+  border:0;
+}
 </style>
 """,
     unsafe_allow_html=True,
@@ -863,7 +875,7 @@ def _web_sources(trace):
 
 
 def _web_queries(trace):
-    """只展示 Responses API 实际返回的检索词，不猜测模型内部思考。"""
+    """只展示 Tavily 实际执行的检索关键词，不猜测模型内部思考。"""
     if not isinstance(trace, dict):
         return []
     candidates = []
@@ -924,102 +936,52 @@ def live_trace_html(label):
 
 
 def live_timer_html(label, elapsed_ms):
-    """生成浏览器独立计时的 HTML，后端搜索阻塞期间也会持续刷新。"""
-    timer_id = "dx_elapsed_" + uuid.uuid4().hex
+    """在浏览器里单独计时；Python 等待 Tavily 时数字也会每秒变化。"""
+    element_id = "douxian_clock_" + uuid.uuid4().hex
     elapsed_ms = max(0, int(elapsed_ms))
+    total_seconds = elapsed_ms // 1000
+    fallback = f"{total_seconds // 60}m {total_seconds % 60}s"
     safe_label = html.escape(str(label))
-    fallback_time = elapsed_label(elapsed_ms / 1000)
-
-    # 只插入本地生成的整数和 UUID；动态文案严格 HTML 转义。
-    # performance.now() 为单调计时，不依赖用户电脑与服务器时钟一致。
+    spark = '<span class="dx-spark" aria-hidden="true">✦</span>' if safe_label else ""
+    prefix = safe_label + " · " if safe_label else ""
     return f"""
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <style>
-html, body {{
-  margin: 0;
-  padding: 0;
-  background: transparent;
+html, body {{margin:0;padding:0;overflow:hidden;background:transparent}}
+.dx-timer {{
+  display:flex;align-items:center;gap:8px;height:32px;
+  color:#718095;font:13.5px/1.55 Inter,-apple-system,BlinkMacSystemFont,
+  "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
 }}
-.dx-live-timer {{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 6px 0 9px;
-  min-height: 26px;
-  color: #737c8d;
-  font: 13.5px/1.65 Inter, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-}}
-.dx-live-timer-spark {{
-  color: #708bc9;
-  font-size: 15px;
-  flex: none;
-}}
-.dx-live-elapsed {{
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}}
-</style>
-<div class="dx-live-timer" role="status">
-  <span class="dx-live-timer-spark" aria-hidden="true">✦</span>
-  <span>{safe_label} ·
-    <span class="dx-live-elapsed" id="{timer_id}" aria-live="off">{fallback_time}</span>
-  </span>
+.dx-spark {{color:#7189c0;font-size:15px;flex:none}}
+.dx-time {{font-variant-numeric:tabular-nums;white-space:nowrap}}
+</style></head><body>
+<div class="dx-timer" role="status">
+ {spark}
+ <span>{prefix}<span class="dx-time" id="{element_id}">{fallback}</span></span>
 </div>
 <script>
-(() => {{
+(()=>{{
   "use strict";
-  const target = document.getElementById("{timer_id}");
-  if (!target) return;
-
-  const initialElapsedMs = {elapsed_ms};
-  const browserStartedAt = performance.now();
-  let intervalId = null;
-
-  function updateElapsed() {{
-    // 旧组件被 Streamlit 替换时主动停止计时，避免残留定时任务。
-    if (!target.isConnected) {{
-      if (intervalId !== null) clearInterval(intervalId);
-      return;
-    }}
-    const elapsedMs = initialElapsedMs + performance.now() - browserStartedAt;
-    const totalSeconds = Math.max(0, Math.floor(elapsedMs / 1000));
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    target.textContent = `${{minutes}}m ${{seconds}}s`;
+  const node = document.getElementById("{element_id}");
+  const startedAt = performance.now();
+  const initialMs = {elapsed_ms};
+  function update(){{
+    const total = Math.max(0, Math.floor((initialMs + performance.now() - startedAt) / 1000));
+    node.textContent = `${{Math.floor(total/60)}}m ${{total%60}}s`;
   }}
-
-  updateElapsed();
-  intervalId = setInterval(updateElapsed, 250);
-  window.addEventListener("pagehide", () => clearInterval(intervalId), {{once: true}});
+  update();
+  const id = window.setInterval(update, 250);
+  window.addEventListener("pagehide", () => window.clearInterval(id), {{once:true}});
 }})();
-</script>
+</script></body></html>
 """
 
 
-def render_live_timer(holder, label, started_at):
-    """优先使用 Streamlit 原生 JS；旧版本使用有脚本能力的 iframe。"""
-    elapsed_ms = max(0, int((time.perf_counter() - started_at) * 1000))
-    content = live_timer_html(label, elapsed_ms)
-
-    # 旧 Streamlit 的 st.html 会忽略 JavaScript，不能直接使用。
-    supports_html_js = False
-    if hasattr(st, "html") and hasattr(holder, "html"):
-        try:
-            supports_html_js = (
-                "unsafe_allow_javascript" in inspect.signature(st.html).parameters
-            )
-        except (TypeError, ValueError):
-            pass
-
-    if supports_html_js:
-        holder.html(content, unsafe_allow_javascript=True)
-    else:
-        # st.iframe 是新版本接口；更老的 Streamlit 使用 components.html。
-        with holder.container():
-            if hasattr(st, "iframe"):
-                st.iframe(content, height=43)
-            else:
-                components.html(content, height=43, scrolling=False)
+def render_live_timer(label, started_at):
+    """计时 iframe 每轮只创建一次，不参与服务器阶段更新时的容器替换。"""
+    elapsed_ms = int(max(0, time.perf_counter() - started_at) * 1000)
+    components.html(live_timer_html(label, elapsed_ms), height=36, scrolling=False)
 
 
 TOOL_LABELS = {
@@ -1313,10 +1275,16 @@ if pending:
     trace = {"version": 1, "events": [], "sources": []}
     clock = {"first_answer_at": None}
 
-    # 浏览器端每 250ms 检查显示值，只有整秒变化才看得出更新。
-    # Python 正在等待网络请求时，计时仍由浏览器独立运行。
-    live_slot = st.empty()
-    render_live_timer(live_slot, "豆馅正在思考", started)
+    # 状态文本和实时计时器分开放置：
+    # 状态变化只替换左侧的原生 HTML，绝不反复卸载右侧的 iframe。
+    # 计时 iframe 仅在本轮启动时创建一次，由其内部 JS 持续更新秒数。
+    with st.container(key="douxian-live-progress"):
+        status_column, elapsed_column = st.columns([1.6, 5.0], gap="small")
+        with status_column:
+            phase_slot = st.empty()
+            render_html_fragment(live_trace_html("豆馅正在思考"), phase_slot)
+        with elapsed_column:
+            render_live_timer("", started)
 
     def show_progress(event):
         if not isinstance(event, dict):
@@ -1325,11 +1293,11 @@ if pending:
         if event.get("type") == "start":
             phase = "正在" + action
         elif event.get("type") == "end":
-            phase = action + ("已完成" if event.get("ok") else "未成功")
+            phase = action + ("已返回" if event.get("ok") else "未成功")
         else:
             return
-        # 始终传入最初的 started，重新渲染状态行也不会让时间归零。
-        render_live_timer(live_slot, phase, started)
+        # 这里只更新普通文本，右侧 iframe 保持不变。
+        render_html_fragment(live_trace_html(phase), phase_slot)
 
     # 以 SQLite 恢复的当前会话为模型上下文的唯一 UI 来源；
     # 当前用户消息已经在 messages 末尾保存，因此不再重复放入 history。
@@ -1354,13 +1322,13 @@ if pending:
                 isinstance(chunk, str) and bool(chunk.strip())
             ):
                 clock["first_answer_at"] = time.perf_counter()
-                render_live_timer(live_slot, "正在生成回答", started)
+                render_html_fragment(live_trace_html("正在生成回答"), phase_slot)
             yield chunk
 
     try:
         answer = st.write_stream(stream_with_timing(stream))
     except Exception:
-        render_html_fragment(live_trace_html("回答未完成 · 请检查服务日志"), live_slot)
+        render_html_fragment(live_trace_html("回答未完成 · 请检查服务日志"), phase_slot)
         # 不伪造回答，也不把失败记录写成成功的历史消息。
         st.error("AI 回答过程中发生错误，请检查服务日志后重试。")
         st.stop()
@@ -1374,7 +1342,9 @@ if pending:
     trace["think_seconds"] = round(think_seconds, 2)
     trace["total_seconds"] = round(total_seconds, 2)
 
-    render_html_fragment(trace_details_html(trace), live_slot)
+    # 不要在这里把正在计时的 iframe 再替换成 <details>。
+    # 先保存完整数据，随后只执行一次 st.rerun()，
+    # 新一轮页面会正常绘制历史消息下的折叠思考记录。
 
     # 先保存答案 + 耗时 + 执行事件，刷新后仍可展开历史记录。
     if answer is None:
