@@ -5,3 +5,4 @@ __pycache__/
 .venv/
 venv/
 chroma_db/
+chat_history/
