@@ -130,7 +130,7 @@ def web_search(query: str) -> str:
 
     api_key = os.getenv("DASHSCOPE_API_KEY")
     base_url = os.getenv("OPENAI_BASE_URL")
-    model = os.getenv("OPENAI_MODEL", "qwen3.8-flash")
+    model = os.getenv("OPENAI_MODEL")
     if not api_key or not base_url:
         return _response(answer="联网搜索未配置：请检查 DASHSCOPE_API_KEY 与 OPENAI_BASE_URL。")
 

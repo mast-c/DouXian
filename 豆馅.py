@@ -1,8 +1,10 @@
 import html
+import inspect
 import uuid
 import time
 from urllib.parse import urlsplit
 import streamlit as st
+import streamlit.components.v1 as components
 from chat_store import ChatStore
 from file_history_store import delete_history
 from rag import RagService
@@ -921,6 +923,105 @@ def live_trace_html(label):
     )
 
 
+def live_timer_html(label, elapsed_ms):
+    """生成浏览器独立计时的 HTML，后端搜索阻塞期间也会持续刷新。"""
+    timer_id = "dx_elapsed_" + uuid.uuid4().hex
+    elapsed_ms = max(0, int(elapsed_ms))
+    safe_label = html.escape(str(label))
+    fallback_time = elapsed_label(elapsed_ms / 1000)
+
+    # 只插入本地生成的整数和 UUID；动态文案严格 HTML 转义。
+    # performance.now() 为单调计时，不依赖用户电脑与服务器时钟一致。
+    return f"""
+<style>
+html, body {{
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}}
+.dx-live-timer {{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 9px;
+  min-height: 26px;
+  color: #737c8d;
+  font: 13.5px/1.65 Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}}
+.dx-live-timer-spark {{
+  color: #708bc9;
+  font-size: 15px;
+  flex: none;
+}}
+.dx-live-elapsed {{
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}}
+</style>
+<div class="dx-live-timer" role="status">
+  <span class="dx-live-timer-spark" aria-hidden="true">✦</span>
+  <span>{safe_label} ·
+    <span class="dx-live-elapsed" id="{timer_id}" aria-live="off">{fallback_time}</span>
+  </span>
+</div>
+<script>
+(() => {{
+  "use strict";
+  const target = document.getElementById("{timer_id}");
+  if (!target) return;
+
+  const initialElapsedMs = {elapsed_ms};
+  const browserStartedAt = performance.now();
+  let intervalId = null;
+
+  function updateElapsed() {{
+    // 旧组件被 Streamlit 替换时主动停止计时，避免残留定时任务。
+    if (!target.isConnected) {{
+      if (intervalId !== null) clearInterval(intervalId);
+      return;
+    }}
+    const elapsedMs = initialElapsedMs + performance.now() - browserStartedAt;
+    const totalSeconds = Math.max(0, Math.floor(elapsedMs / 1000));
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    target.textContent = `${{minutes}}m ${{seconds}}s`;
+  }}
+
+  updateElapsed();
+  intervalId = setInterval(updateElapsed, 250);
+  window.addEventListener("pagehide", () => clearInterval(intervalId), {{once: true}});
+}})();
+</script>
+"""
+
+
+def render_live_timer(holder, label, started_at):
+    """优先使用 Streamlit 原生 JS；旧版本使用有脚本能力的 iframe。"""
+    elapsed_ms = max(0, int((time.perf_counter() - started_at) * 1000))
+    content = live_timer_html(label, elapsed_ms)
+
+    # 旧 Streamlit 的 st.html 会忽略 JavaScript，不能直接使用。
+    supports_html_js = False
+    if hasattr(st, "html") and hasattr(holder, "html"):
+        try:
+            supports_html_js = (
+                "unsafe_allow_javascript" in inspect.signature(st.html).parameters
+            )
+        except (TypeError, ValueError):
+            pass
+
+    if supports_html_js:
+        holder.html(content, unsafe_allow_javascript=True)
+    else:
+        # st.iframe 是新版本接口；更老的 Streamlit 使用 components.html。
+        with holder.container():
+            if hasattr(st, "iframe"):
+                st.iframe(content, height=43)
+            else:
+                components.html(content, height=43, scrolling=False)
+
+
 TOOL_LABELS = {
     "search_knowledge_base": "知识库检索",
     "get_weather": "天气查询",
@@ -1212,16 +1313,23 @@ if pending:
     trace = {"version": 1, "events": [], "sources": []}
     clock = {"first_answer_at": None}
 
-    # 只用页面自己的 HTML 状态条，避免 Streamlit 内部图标字体失效露出英文。
+    # 浏览器端每 250ms 检查显示值，只有整秒变化才看得出更新。
+    # Python 正在等待网络请求时，计时仍由浏览器独立运行。
     live_slot = st.empty()
-    render_html_fragment(live_trace_html("豆馅正在思考…"), live_slot)
+    render_live_timer(live_slot, "豆馅正在思考", started)
 
     def show_progress(event):
-        if clock["first_answer_at"] is None:
-            action = TOOL_LABELS.get(event.get("tool"), "处理请求")
-            phase = "正在" + action if event.get("type") == "start" else action + "已返回"
-            label = phase + " · " + elapsed_label(time.perf_counter() - started)
-            render_html_fragment(live_trace_html(label), live_slot)
+        if not isinstance(event, dict):
+            return
+        action = TOOL_LABELS.get(event.get("tool"), "处理请求")
+        if event.get("type") == "start":
+            phase = "正在" + action
+        elif event.get("type") == "end":
+            phase = action + ("已完成" if event.get("ok") else "未成功")
+        else:
+            return
+        # 始终传入最初的 started，重新渲染状态行也不会让时间归零。
+        render_live_timer(live_slot, phase, started)
 
     # 以 SQLite 恢复的当前会话为模型上下文的唯一 UI 来源；
     # 当前用户消息已经在 messages 末尾保存，因此不再重复放入 history。
@@ -1246,8 +1354,7 @@ if pending:
                 isinstance(chunk, str) and bool(chunk.strip())
             ):
                 clock["first_answer_at"] = time.perf_counter()
-                label = "思考了 " + elapsed_label(clock["first_answer_at"] - started)
-                render_html_fragment(live_trace_html(label), live_slot)
+                render_live_timer(live_slot, "正在生成回答", started)
             yield chunk
 
     try:
