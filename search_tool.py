@@ -1,7 +1,7 @@
 """通过百炼 Qwen Responses API 进行联网搜索并提供可核验的来源。
 
 只有响应内存在真实的 web_search_call，才认为完成了联网检索。
-前端最多展示 10 个去重来源，并保留接口返回的实际来源总数。
+前端最多展示 5 个去重来源；API 实际检索量不由展示上限控制。
 """
 
 import json
@@ -13,7 +13,7 @@ from openai import OpenAI
 
 import config_data as config  # noqa: F401：加载项目配置 / .env
 
-DISPLAY_SOURCE_LIMIT = 10
+DISPLAY_SOURCE_LIMIT = 5
 
 
 def _field(obj, key, default=None):
@@ -37,20 +37,35 @@ def _response_text(response) -> str:
 
 
 def _collect_search_sources(response):
-    """搜索次数取自真实 web_search_call，来源仅取官方 action.sources。"""
+    """提取实际 web_search_call、已完成的来源和真实搜索词。"""
     sources = []
-    seen = set()
+    queries = []
+    seen_urls = set()
+    seen_queries = set()
     search_calls = 0
     completed_calls = 0
+
     for item in _field(response, "output", []) or []:
         if _field(item, "type") != "web_search_call":
             continue
         search_calls += 1
-        status = _field(item, "status", "completed")
-        if status not in ("completed", None):
+        if _field(item, "status", "completed") not in ("completed", None):
             continue
+
         completed_calls += 1
         action = _field(item, "action", {}) or {}
+        raw_queries = _field(action, "query", "")
+        if isinstance(raw_queries, str):
+            raw_queries = [raw_queries]
+        if isinstance(raw_queries, list):
+            for raw_query in raw_queries:
+                if not isinstance(raw_query, str):
+                    continue
+                value = " ".join(raw_query.split()).strip()[:160]
+                if value and value not in seen_queries:
+                    seen_queries.add(value)
+                    queries.append(value)
+
         for source in _field(action, "sources", []) or []:
             url = _field(source, "url", "")
             if not isinstance(url, str):
@@ -60,18 +75,48 @@ def _collect_search_sources(response):
                 parsed = urlsplit(url)
             except ValueError:
                 continue
-            if parsed.scheme not in ("http", "https") or not parsed.netloc or url in seen:
+            if parsed.scheme not in ("http", "https") or not parsed.netloc or url in seen_urls:
                 continue
-            seen.add(url)
+            seen_urls.add(url)
             title = _field(source, "title", "") or parsed.netloc
             sources.append({"url": url, "title": str(title)[:180]})
-    return sources, search_calls, completed_calls
+
+    return sources, search_calls, completed_calls, queries
 
 
-def _response(ok=False, answer="", sources=None, search_calls=0, sources_total=0):
+def _select_display_sources(sources, limit=DISPLAY_SOURCE_LIMIT):
+    """先取不同网站的来源，再按原始顺序补满，避免同一站刷屏。"""
+    if limit <= 0:
+        return []
+    selected = []
+    used_domains = set()
+    used_urls = set()
+
+    for source in sources:
+        url = source["url"]
+        domain = urlsplit(url).netloc.lower().removeprefix("www.")
+        if domain in used_domains:
+            continue
+        selected.append(source)
+        used_domains.add(domain)
+        used_urls.add(url)
+        if len(selected) >= limit:
+            return selected
+
+    for source in sources:
+        if source["url"] not in used_urls:
+            selected.append(source)
+            used_urls.add(source["url"])
+            if len(selected) >= limit:
+                break
+    return selected
+
+
+def _response(ok=False, answer="", sources=None, search_calls=0, sources_total=0, queries=None):
     return json.dumps(
         {"ok": bool(ok), "answer": str(answer), "sources": sources or [],
-         "search_calls": search_calls, "sources_total": sources_total},
+         "search_calls": search_calls, "sources_total": sources_total,
+         "queries": queries or []},
         ensure_ascii=False,
     )
 
@@ -93,11 +138,12 @@ def web_search(query: str) -> str:
         client = OpenAI(api_key=api_key, base_url=base_url, timeout=60.0)
         response = client.responses.create(
             model=model,
-            input=query,
+            input=(query + "\n\n请精简检索：优先核实官方或高可信来源，"
+                   "尽量只选最相关的 3 至 5 篇资料用于回答，避免重复搜索。"),
             tools=[{"type": "web_search"}],
         )
         answer = _response_text(response)
-        sources, calls, completed = _collect_search_sources(response)
+        sources, calls, completed, queries = _collect_search_sources(response)
         ok = completed > 0 and bool(sources) and bool(answer)
         if not ok:
             if calls == 0:
@@ -109,8 +155,9 @@ def web_search(query: str) -> str:
             else:
                 answer = "网页搜索调用已完成，但没有生成可展示的回答。"
         return _response(
-            ok=ok, answer=answer, sources=sources[:DISPLAY_SOURCE_LIMIT],
-            search_calls=calls, sources_total=len(sources),
+            ok=ok, answer=answer,
+            sources=_select_display_sources(sources),
+            search_calls=calls, sources_total=len(sources), queries=queries[:8],
         )
     except Exception as exc:
         # 不向前端暴露 API Key、请求 URL 或可能包含凭据的异常原文。

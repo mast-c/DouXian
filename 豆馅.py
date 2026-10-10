@@ -6,6 +6,7 @@ import streamlit as st
 from chat_store import ChatStore
 from file_history_store import delete_history
 from rag import RagService
+from search_tool import DISPLAY_SOURCE_LIMIT
 import config_data as config
 
 
@@ -634,66 +635,185 @@ footer,
   }
 }
 
-/* 思考记录的折叠箭头是 CSS 画的，不依赖任何图标字体。 */
+/* 与千问思考记录接近的轻量布局：透明、无外框，无背景卡片。 */
+.trace-live,
+.trace-panel{
+  margin:9px 0 14px;
+  padding:0;
+  color:#667085;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0;
+  box-shadow:none !important;
+  font-size:13px;
+}
 .trace-live{
-  display:flex;align-items:center;gap:8px;
-  margin:8px 0 14px;padding:10px 13px;
-  background:#f8f9fb;border:1px solid #e9ebef;border-radius:10px;
-  color:#667085;font-size:13px;line-height:1.6;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-height:26px;
+  line-height:1.6;
 }
 .trace-live-spark{
-  color:var(--blue);font-size:15px;
-  animation:tracePulse 1.3s ease-in-out infinite;
+  color:#6d83b8;
+  font-size:15px;
+  animation:tracePulse 1.4s ease-in-out infinite;
 }
 @keyframes tracePulse{
-  0%,100%{opacity:.48;transform:scale(.94)}
-  50%{opacity:1;transform:scale(1.08)}
-}
-.trace-panel{
-  margin:8px 0 14px;background:#f9fafc;
-  border:1px solid #e8ebf1;border-radius:10px;
-  color:#475467;overflow:hidden;
+  0%,100%{opacity:.45}
+  50%{opacity:1}
 }
 .trace-panel > summary{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 13px;cursor:pointer;list-style:none;
-  color:#475467;font-size:13px;line-height:1.5;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:3px 0;
+  cursor:pointer;
+  list-style:none;
+  background:transparent !important;
+  color:#657084;
+  font-size:13.5px;
+  line-height:1.65;
   user-select:none;
 }
 .trace-panel > summary::-webkit-details-marker{display:none}
-.trace-panel > summary::before{
-  content:"";display:inline-block;flex-shrink:0;
-  width:7px;height:7px;
-  border-right:1.7px solid #667085;border-bottom:1.7px solid #667085;
-  transform:rotate(-45deg);transition:transform .16s ease;
-}
-.trace-panel[open] > summary::before{transform:rotate(45deg)}
-.trace-panel > summary:hover{background:#f1f4f9}
+.trace-panel > summary::marker{content:""}
+.trace-panel > summary:hover{color:#35445e}
 .trace-panel > summary:focus-visible{
-  outline:2px solid var(--blue);outline-offset:-3px;
+  outline:2px solid #8eaaff;
+  outline-offset:4px;
+  border-radius:3px;
 }
+.trace-search-icon{
+  display:inline-block;
+  width:17px;
+  height:17px;
+  position:relative;
+  flex:none;
+  color:#738097;
+}
+.trace-search-icon::before{
+  content:"";
+  position:absolute;
+  left:1px;
+  top:1px;
+  width:10px;
+  height:10px;
+  border:1.35px solid currentColor;
+  border-radius:50%;
+}
+.trace-search-icon::after{
+  content:"";
+  position:absolute;
+  left:12px;
+  top:11px;
+  width:6px;
+  height:1.35px;
+  background:currentColor;
+  transform:rotate(47deg);
+  transform-origin:left center;
+}
+.trace-summary-text{min-width:0}
+.trace-chevron{
+  margin-left:3px;
+  flex:none;
+  width:7px;
+  height:7px;
+  border-right:1.3px solid #8b96a5;
+  border-bottom:1.3px solid #8b96a5;
+  transform:rotate(45deg);
+  transition:transform .18s ease;
+}
+.trace-panel[open] .trace-chevron{transform:rotate(225deg)}
 .trace-panel-body{
-  border-top:1px solid #e9ebef;padding:10px 15px 12px;
-  font-size:12.5px;line-height:1.8;
+  padding:8px 0 4px 25px;
+  border:0 !important;
+  background:transparent !important;
+  color:#697384;
+  font-size:13px;
+  line-height:1.7;
 }
-.trace-note{margin:0 0 8px;color:#858d9a;font-size:12px}
-.trace-events{list-style:none;padding:0;margin:0 0 8px}
-.trace-events li{margin:4px 0;overflow-wrap:anywhere}
-.trace-source-title{
-  margin:10px 0 5px;font-size:12px;
-  font-weight:650;color:#4f596b;
+.trace-step-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:580;
+  color:#5e687a;
 }
-.trace-sources{
-  max-height:230px;overflow:auto;overscroll-behavior:contain;
-  margin:0 0 8px;padding-left:20px;
+.trace-step-icon{
+  color:#8190a7;
+  font-size:14px;
+  font-weight:500;
 }
-.trace-sources li{margin:3px 0;overflow-wrap:anywhere}
-.trace-sources a{color:#2457c6;text-decoration:none}
-.trace-sources a:hover{text-decoration:underline}
-.trace-total{margin:8px 0 0;color:#858d9a;font-size:12px}
-@media (prefers-reduced-motion:reduce){
+.trace-queries{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px 15px;
+  margin:9px 0 3px 21px;
+  color:#8b7067;
+}
+.trace-query{
+  display:inline-block;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+.trace-source-chips{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:9px;
+  margin:12px 0 5px 21px;
+}
+.trace-source-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  max-width:min(100%,315px);
+  padding:5px 11px;
+  background:#f5f6f8;
+  border:0;
+  border-radius:999px;
+  color:#606d80;
+  text-decoration:none !important;
+  font-size:12.5px;
+  line-height:1.55;
+  transition:background .12s ease,color .12s ease;
+}
+.trace-source-chip:hover{
+  background:#eaf0ff;
+  color:#2b56bc;
+}
+.trace-chip-icon{
+  flex:none;
+  color:#7897cf;
+  font-size:12px;
+}
+.trace-chip-text{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.trace-events{
+  margin:9px 0 0;
+  padding:0;
+  list-style:none;
+}
+.trace-events li{margin:5px 0;overflow-wrap:anywhere}
+.trace-alert{color:#aa6b31;margin:7px 0}
+.trace-note,.trace-total{
+  margin:10px 0 0;
+  font-size:11.5px;
+  color:#9aa1ab;
+}
+@media(max-width:780px){
+  .trace-panel-body{padding-left:18px}
+  .trace-queries,.trace-source-chips{margin-left:0}
+  .trace-source-chip{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
   .trace-live-spark{animation:none}
-  .trace-panel > summary::before{transition:none}
+  .trace-chevron,.trace-source-chip{transition:none}
 }
 
 </style>
@@ -715,11 +835,13 @@ def elapsed_label(seconds):
 
 
 def _web_sources(trace):
+    """限制展示条数，也兼容修改前存到 SQLite 的旧记录。"""
     if not isinstance(trace, dict):
         return []
     result = []
     seen = set()
-    for source in (trace.get("sources") or []):
+    sources = trace.get("sources")
+    for source in (sources if isinstance(sources, list) else []):
         if not isinstance(source, dict):
             continue
         url = source.get("url", "")
@@ -729,37 +851,59 @@ def _web_sources(trace):
             parsed = urlsplit(url)
         except ValueError:
             continue
-        if parsed.scheme not in ("http", "https") or not parsed.netloc:
-            continue
-        if url in seen:
+        if parsed.scheme not in ("http", "https") or not parsed.netloc or url in seen:
             continue
         seen.add(url)
         result.append({"url": url, "title": str(source.get("title") or parsed.netloc)})
+        if len(result) >= DISPLAY_SOURCE_LIMIT:
+            break
+    return result
+
+
+def _web_queries(trace):
+    """只展示 Responses API 实际返回的检索词，不猜测模型内部思考。"""
+    if not isinstance(trace, dict):
+        return []
+    candidates = []
+    if isinstance(trace.get("search_queries"), list):
+        candidates.extend(trace["search_queries"])
+    for event in trace.get("events") or []:
+        if isinstance(event, dict) and event.get("tool") == "web_search":
+            values = event.get("queries")
+            if isinstance(values, list):
+                candidates.extend(values)
+    result = []
+    for value in candidates:
+        if isinstance(value, str):
+            value = " ".join(value.split())[:160]
+            if value and value not in result:
+                result.append(value)
+        if len(result) >= 8:
+            break
     return result
 
 
 def trace_heading(trace):
-    seconds = trace.get("think_seconds", 0) if isinstance(trace, dict) else 0
-    label = f"✦ 思考了 {elapsed_label(seconds)}"
-    events = (trace.get("events") or []) if isinstance(trace, dict) else []
-    searched = any(
-        isinstance(event, dict) and event.get("type") == "end"
-        and event.get("tool") == "web_search"
-        for event in events
-    )
-    if searched:
-        success = any(
-            isinstance(event, dict) and event.get("type") == "end"
-            and event.get("tool") == "web_search" and event.get("ok")
-            for event in events
-        )
-        count = trace.get("sources_total") or len(_web_sources(trace))
-        label += (f" · 返回 {count} 条网页来源" if count else " · 已联网检索") if success else " · 联网检索未成功"
-    return label
+    if not isinstance(trace, dict):
+        return "已完成回答"
+    events = trace.get("events") or []
+    ends = [event for event in events if isinstance(event, dict)
+            and event.get("type") == "end"]
+    web_ends = [event for event in ends if event.get("tool") == "web_search"]
+    failure = any(not event.get("ok", False) for event in ends)
+    if web_ends and any(event.get("ok") for event in web_ends):
+        count = len(_web_sources(trace))
+        text = f"已完成分析，展示 {count} 篇参考资料，相关操作已执行" if count else "已完成联网分析"
+        return text + ("（部分操作未成功）" if failure else "")
+    if failure:
+        return "已完成分析，部分操作未成功"
+    if ends:
+        return "已完成分析，相关操作已执行"
+    return "已完成回答"
 
 
 def render_html_fragment(body, holder=None):
-    """优先用 st.html 展示安全转义后的 HTML；兼容没有 st.html 的旧版。"""
+    """st.html 支持原生 details；老版本 Streamlit 回退到 st.markdown。"""
     target = holder if holder is not None else st
     if hasattr(target, "html"):
         target.html(body)
@@ -768,13 +912,14 @@ def render_html_fragment(body, holder=None):
 
 
 def live_trace_html(label):
-    """运行时状态：不使用 st.status，也就没有内部 Material 箭头。"""
+    """轻量状态行：无边框、无色块，且不会展示虚构的思考步骤。"""
     return (
         '<div class="trace-live" role="status" aria-live="polite">'
         '<span class="trace-live-spark" aria-hidden="true">✦</span>'
         f'<span>{html.escape(str(label))}</span>'
         '</div>'
     )
+
 
 TOOL_LABELS = {
     "search_knowledge_base": "知识库检索",
@@ -784,88 +929,85 @@ TOOL_LABELS = {
 
 
 def describe_tool_event(event):
-    """仅使用工具调用的实际元数据，不生成假想的思考文字或来源数量。"""
-    if not isinstance(event, dict):
+    """保留真实的工具运行结果，不显示几十条底层网页计数。"""
+    if not isinstance(event, dict) or event.get("type") != "end":
         return ""
     name = TOOL_LABELS.get(event.get("tool"), "外部工具")
-    if event.get("type") == "start":
-        query = str(event.get("query", "")).strip()
-        return f"⏳ 开始{name}" + (f"：{query}" if query else "")
-    if event.get("type") != "end":
-        return ""
     if not event.get("ok", False):
-        return f"⚠️ {name}未成功"
-    duration = elapsed_label(event.get("duration", 0))
-    if event.get("tool") == "web_search":
-        if "search_calls" in event:
-            count = event.get("sources_total") or len(event.get("sources") or [])
-            if count:
-                return f"✓ {name}完成 · 返回 {count} 条来源 · 耗时 {duration}"
-            try:
-                search_calls = int(event.get("search_calls") or 0)
-            except (ValueError, TypeError):
-                search_calls = 0
-            if search_calls == 0:
-                return f"✓ {name}请求完成（接口未报告实际搜索） · 耗时 {duration}"
-            return f"✓ {name}完成（接口未返回来源链接） · 耗时 {duration}"
-        return f"✓ {name}完成（工具未提供来源统计） · 耗时 {duration}"
-    return f"✓ {name}完成 · 耗时 {duration}"
+        return f"⚠ {name}未成功"
+    return f"✓ 已完成{name}"
 
 
 def trace_details_html(trace):
-    """生成可展开的真实工具步骤。所有动态内容先 HTML 转义。"""
+    """千问风格的原生折叠区：实际检索词 + 最多 5 个紧凑来源标签。"""
     if not isinstance(trace, dict) or not trace:
         return ""
 
     heading = html.escape(trace_heading(trace))
-    events = trace.get("events")
-    events = events if isinstance(events, list) else []
-    steps = []
-    for event in events:
-        if isinstance(event, dict) and event.get("type") == "end":
-            description = describe_tool_event(event)
-            if description:
-                steps.append(
-                    '<li class="trace-event">'
-                    + html.escape(description)
-                    + '</li>'
-                )
-    if not steps:
-        steps.append('<li class="trace-event">本次没有记录到外部工具调用。</li>')
-
-    content = [
-        '<p class="trace-note">实际工具执行记录，不包含模型内部推理。</p>',
-        '<ul class="trace-events">' + "".join(steps) + '</ul>',
-    ]
+    events = trace.get("events") if isinstance(trace.get("events"), list) else []
+    ends = [event for event in events
+            if isinstance(event, dict) and event.get("type") == "end"]
+    web_ends = [event for event in ends if event.get("tool") == "web_search"]
     sources = _web_sources(trace)
-    if sources:
-        content.append(
-            '<div class="trace-source-title">联网来源链接（展示 '
-            + str(len(sources)) + ' 条'
-            + (('，接口共返回 ' + str(trace.get("sources_total")) + ' 条')
-               if (trace.get("sources_total") or 0) > len(sources) else '')
-            + '，已去重）</div>'
+    queries = _web_queries(trace)
+    content = []
+
+    if web_ends:
+        search_label = (
+            f"搜索 {len(queries)} 组关键词" if queries else "已执行联网搜索"
         )
-        links = []
-        for source in sources:
-            # URL 已在 _web_sources 中过滤 http/https；属性与文本继续转义。
-            url = html.escape(source["url"], quote=True)
-            title = html.escape(source["title"])
-            links.append(
-                f'<li><a href="{url}" target="_blank" rel="noopener noreferrer">'
-                f'{title}</a></li>'
+        if sources:
+            search_label += f"，展示 {len(sources)} 篇参考资料"
+        content.append(
+            '<div class="trace-step-title">'
+            '<span class="trace-step-icon" aria-hidden="true">⌕</span>'
+            f'<span>{html.escape(search_label)}</span></div>'
+        )
+        if queries:
+            keyword_html = "".join(
+                f'<span class="trace-query">“{html.escape(query)}”</span>'
+                for query in queries
             )
-        content.append('<ol class="trace-sources">' + "".join(links) + '</ol>')
+            content.append('<div class="trace-queries">' + keyword_html + '</div>')
+
+        if sources:
+            chips = []
+            for source in sources:
+                url = html.escape(source["url"], quote=True)
+                title = html.escape(source["title"])
+                chips.append(
+                    f'<a class="trace-source-chip" href="{url}" '
+                    'target="_blank" rel="noopener noreferrer">'
+                    '<span class="trace-chip-icon" aria-hidden="true">↗</span>'
+                    f'<span class="trace-chip-text">{title}</span></a>'
+                )
+            content.append('<div class="trace-source-chips">' + "".join(chips) + '</div>')
+        if any(not event.get("ok", False) for event in web_ends):
+            content.append('<p class="trace-alert">⚠ 部分联网操作未成功，请检查服务配置。</p>')
+
+    other_ends = [event for event in ends if event.get("tool") != "web_search"]
+    if other_ends:
+        steps = "".join(
+            '<li>' + html.escape(describe_tool_event(event)) + '</li>'
+            for event in other_ends
+        )
+        content.append('<ul class="trace-events">' + steps + '</ul>')
+
+    if not ends:
+        content.append('<p class="trace-note">本次直接生成回答，未调用外部工具。</p>')
+
     if "total_seconds" in trace:
         content.append(
-            '<p class="trace-total">整次回答耗时 '
+            '<p class="trace-total">本次耗时 '
             + html.escape(elapsed_label(trace["total_seconds"]))
-            + '（含文字输出）</p>'
+            + '（含回答生成）</p>'
         )
 
     return (
         '<details class="trace-panel">'
-        f'<summary><span>{heading}</span></summary>'
+        '<summary><span class="trace-search-icon" aria-hidden="true"></span>'
+        f'<span class="trace-summary-text">{heading}</span>'
+        '<span class="trace-chevron" aria-hidden="true"></span></summary>'
         '<div class="trace-panel-body">'
         + "".join(content)
         + '</div></details>'

@@ -21,7 +21,7 @@ from langchain_openai import ChatOpenAI
 
 import config_data as config  # noqa: F401: 加载项目 .env
 from file_history_store import get_history
-from search_tool import web_search
+from search_tool import DISPLAY_SOURCE_LIMIT, web_search
 from vector_stores import VectorStoreService
 from weather_tool import get_weather
 
@@ -197,7 +197,15 @@ class RagService:
             result = str(raw)
             if name == "web_search":
                 data = _search_result(raw)
-                sources = _valid_sources(data.get("sources"))
+                sources = _valid_sources(data.get("sources"))[:DISPLAY_SOURCE_LIMIT]
+                raw_queries = data.get("queries")
+                queries = []
+                if isinstance(raw_queries, list):
+                    for raw_query in raw_queries:
+                        if isinstance(raw_query, str):
+                            value = " ".join(raw_query.split())[:160]
+                            if value and value not in queries:
+                                queries.append(value)
                 try:
                     calls = max(0, int(data.get("search_calls") or 0))
                 except (ValueError, TypeError):
@@ -207,9 +215,15 @@ class RagService:
                     current = trace.setdefault("sources", [])
                     existing = {s["url"] for s in current if isinstance(s, dict) and "url" in s}
                     for source in sources:
+                        if len(current) >= DISPLAY_SOURCE_LIMIT:
+                            break
                         if source["url"] not in existing:
                             current.append(source)
                             existing.add(source["url"])
+                    saved_queries = trace.setdefault("search_queries", [])
+                    for query_text in queries:
+                        if query_text not in saved_queries and len(saved_queries) < 8:
+                            saved_queries.append(query_text)
                     count = data.get("sources_total")
                     try:
                         count = max(len(sources), int(count))
@@ -227,6 +241,7 @@ class RagService:
                     "type": "end", "tool": name, "ok": ok,
                     "duration": round(time.perf_counter() - started, 2),
                     "search_calls": calls, "sources": sources,
+                    "queries": queries,
                     "sources_total": data.get("sources_total", len(sources)),
                 }
             else:
@@ -279,7 +294,7 @@ class RagService:
                 today = _today()
                 result, ok = self._call_tool(
                     "web_search",
-                    {"query": f"请优先检索可靠公开来源，核实日期 {today} 附近的最新信息。用户提问：{question}"},
+                    {"query": f"请优先检索少量可靠公开来源，核实日期 {today} 附近的最新信息。用户提问：{question}"},
                     trace, progress,
                 )
                 if ok:
