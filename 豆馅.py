@@ -1,9 +1,11 @@
 import html
 import uuid
+import time
+from urllib.parse import urlsplit
 import streamlit as st
-from rag import RagService
-from conversation_store import ConversationStore
+from chat_store import ChatStore
 from file_history_store import delete_history
+from rag import RagService
 import config_data as config
 
 
@@ -20,10 +22,9 @@ st.set_page_config(
 # =========================
 
 def create_conversation(state):
-    """创建一个新会话，并把它设为当前会话。"""
+    """创建并持久化会话，再把它设为当前会话。"""
     sid = str(uuid.uuid4())
-    # 先写磁盘，再更新 Streamlit 状态；刷新和重启后也能恢复。
-    conversation_store.create(sid)
+    state["chat_store"].create_conversation(sid)
     state["conversations"][sid] = {
         "title": "新对话",
         "messages": [],
@@ -49,9 +50,17 @@ def delete_conversation(state, sid):
         return False
 
     deleting_current = sid == state.get("current_session")
-    # 页面历史（SQLite）与 RAG 上下文（本地文件）一并清除。
-    conversation_store.delete(sid)
-    delete_history(sid)
+
+    # 先删除 SQLite 中的会话及消息；成功后再更新页面内存。
+    if not state["chat_store"].delete_conversation(sid):
+        return False
+    # UI 消息在 SQLite；后台模型上下文在 JSON。两处必须同时清理。
+    try:
+        delete_history(sid)
+    except OSError as exc:
+        # 不将失败的磁盘清理伪装为已完成；记录在服务日志，便于手工处理。
+        import logging
+        logging.getLogger(__name__).warning("清理 RAG 上下文失败：%s", exc)
     del conversations[sid]
 
     if deleting_current:
@@ -59,9 +68,9 @@ def delete_conversation(state, sid):
         state["pending_prompt"] = None
 
         if conversations:
-            # dict 保持插入顺序，取剩余会话里最新创建的一条。
+            # dict 保持创建顺序，取剩余会话里最新创建的一条。
             state["current_session"] = next(reversed(conversations))
-            conversation_store.set_active(state["current_session"])
+            state["chat_store"].set_active_session(state["current_session"])
         else:
             create_conversation(state)
 
@@ -76,47 +85,41 @@ def delete_conversation(state, sid):
 if "rag" not in st.session_state:
     st.session_state["rag"] = RagService()
 
-# 本地 SQLite：第一次启动时自动建立 chat_history/conversations.sqlite3。
-if "conversation_store" not in st.session_state:
-    st.session_state["conversation_store"] = ConversationStore()
-conversation_store = st.session_state["conversation_store"]
-
-# 如果是老版本直接热更新，先把当前页面尚未落盘的历史补存进去。
-if "_conversation_db_initialized" not in st.session_state:
-    previous_chats = st.session_state.get("conversations")
-    if previous_chats:
-        conversation_store.merge_session_state(previous_chats)
-        previous_sid = st.session_state.get("current_session")
-        if previous_sid in previous_chats:
-            conversation_store.set_active(previous_sid)
-    st.session_state["_conversation_db_initialized"] = True
-
-# 每次 rerun 都从数据库恢复：界面不再以 Session State 为唯一历史来源。
-st.session_state["conversations"] = conversation_store.load_all()
+# 首次启动从 SQLite 加载；热更新时尽量迁移旧的内存会话。
+if "chat_store" not in st.session_state:
+    store = ChatStore()
+    old_conversations = st.session_state.get("conversations", {})
+    store.import_existing(old_conversations)
+    old_selected = st.session_state.get("current_session")
+    if old_selected in old_conversations:
+        store.set_active_session(old_selected)
+    st.session_state["chat_store"] = store
+    st.session_state["conversations"] = store.load_conversations()
 
 if "pending_prompt" not in st.session_state:
     st.session_state["pending_prompt"] = None
 
-if "force_search" not in st.session_state:
-    st.session_state["force_search"] = False
-
 if "delete_confirm_sid" not in st.session_state:
     st.session_state["delete_confirm_sid"] = None
 
-# 刷新/重新打开时，优先恢复上次选中的会话。
+# 不只判断 current_session 是否存在，还保证它确实指向一个现有会话。
 if (
     "current_session" not in st.session_state
-    or st.session_state["current_session"] not in st.session_state["conversations"]
+    or st.session_state["current_session"]
+    not in st.session_state["conversations"]
 ):
-    saved_sid = conversation_store.get_active()
-    if saved_sid not in st.session_state["conversations"]:
-        saved_sid = next(reversed(st.session_state["conversations"]), None)
-
-    if saved_sid is None:
-        create_conversation(st.session_state)
+    restored_sid = st.session_state["chat_store"].get_active_session()
+    if restored_sid in st.session_state["conversations"]:
+        st.session_state["current_session"] = restored_sid
+    elif st.session_state["conversations"]:
+        st.session_state["current_session"] = next(
+            reversed(st.session_state["conversations"])
+        )
+        st.session_state["chat_store"].set_active_session(
+            st.session_state["current_session"]
+        )
     else:
-        st.session_state["current_session"] = saved_sid
-        conversation_store.set_active(saved_sid)
+        create_conversation(st.session_state)
 
 
 def current_chat():
@@ -165,7 +168,8 @@ st.markdown(
   --blue:#2457ff;
 }
 
-html,body,[class*="st-"]{
+/* 只给页面根节点设置正文字体，不能覆盖 Streamlit 内部图标元素。 */
+html,body,.stApp{
   font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
 }
 
@@ -562,21 +566,7 @@ footer,
   }
 }
 
-/* 保留你原来的隐藏规则 */
-span.st-emotion-cache-5r6ut5{
-  display:none !important;
-  visibility:hidden !important;
-  opacity:0 !important;
-  font-size:0 !important;
-  width:0 !important;
-  height:0 !important;
-  color:transparent !important;
-}
-
-button:has(> span.st-emotion-cache-5r6ut5){
-  display:none !important;
-  pointer-events:none !important;
-}
+/* 不再用 Streamlit 自动生成的哈希类名隐藏控件：版本更新后可能误伤图标。 */
 /* 第一次提问后，立即隐藏已经失效的首页输入框 */
 .st-key-home-composer[data-stale="true"],
 .st-key-home-composer:has([data-stale="true"]),
@@ -643,11 +633,249 @@ button:has(> span.st-emotion-cache-5r6ut5){
     opacity:.55;
   }
 }
+
+/* 思考记录的折叠箭头是 CSS 画的，不依赖任何图标字体。 */
+.trace-live{
+  display:flex;align-items:center;gap:8px;
+  margin:8px 0 14px;padding:10px 13px;
+  background:#f8f9fb;border:1px solid #e9ebef;border-radius:10px;
+  color:#667085;font-size:13px;line-height:1.6;
+}
+.trace-live-spark{
+  color:var(--blue);font-size:15px;
+  animation:tracePulse 1.3s ease-in-out infinite;
+}
+@keyframes tracePulse{
+  0%,100%{opacity:.48;transform:scale(.94)}
+  50%{opacity:1;transform:scale(1.08)}
+}
+.trace-panel{
+  margin:8px 0 14px;background:#f9fafc;
+  border:1px solid #e8ebf1;border-radius:10px;
+  color:#475467;overflow:hidden;
+}
+.trace-panel > summary{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 13px;cursor:pointer;list-style:none;
+  color:#475467;font-size:13px;line-height:1.5;
+  user-select:none;
+}
+.trace-panel > summary::-webkit-details-marker{display:none}
+.trace-panel > summary::before{
+  content:"";display:inline-block;flex-shrink:0;
+  width:7px;height:7px;
+  border-right:1.7px solid #667085;border-bottom:1.7px solid #667085;
+  transform:rotate(-45deg);transition:transform .16s ease;
+}
+.trace-panel[open] > summary::before{transform:rotate(45deg)}
+.trace-panel > summary:hover{background:#f1f4f9}
+.trace-panel > summary:focus-visible{
+  outline:2px solid var(--blue);outline-offset:-3px;
+}
+.trace-panel-body{
+  border-top:1px solid #e9ebef;padding:10px 15px 12px;
+  font-size:12.5px;line-height:1.8;
+}
+.trace-note{margin:0 0 8px;color:#858d9a;font-size:12px}
+.trace-events{list-style:none;padding:0;margin:0 0 8px}
+.trace-events li{margin:4px 0;overflow-wrap:anywhere}
+.trace-source-title{
+  margin:10px 0 5px;font-size:12px;
+  font-weight:650;color:#4f596b;
+}
+.trace-sources{
+  max-height:230px;overflow:auto;overscroll-behavior:contain;
+  margin:0 0 8px;padding-left:20px;
+}
+.trace-sources li{margin:3px 0;overflow-wrap:anywhere}
+.trace-sources a{color:#2457c6;text-decoration:none}
+.trace-sources a:hover{text-decoration:underline}
+.trace-total{margin:8px 0 0;color:#858d9a;font-size:12px}
+@media (prefers-reduced-motion:reduce){
+  .trace-live-spark{animation:none}
+  .trace-panel > summary::before{transition:none}
+}
+
 </style>
 """,
     unsafe_allow_html=True,
 )
 
+
+# =========================
+# AI 可验证的执行步骤（不是模型内部推理）
+# =========================
+
+def elapsed_label(seconds):
+    try:
+        value = max(0, int(float(seconds) + 0.5))
+    except (TypeError, ValueError, OverflowError):
+        value = 0
+    return f"{value // 60}m {value % 60}s"
+
+
+def _web_sources(trace):
+    if not isinstance(trace, dict):
+        return []
+    result = []
+    seen = set()
+    for source in (trace.get("sources") or []):
+        if not isinstance(source, dict):
+            continue
+        url = source.get("url", "")
+        if not isinstance(url, str):
+            continue
+        try:
+            parsed = urlsplit(url)
+        except ValueError:
+            continue
+        if parsed.scheme not in ("http", "https") or not parsed.netloc:
+            continue
+        if url in seen:
+            continue
+        seen.add(url)
+        result.append({"url": url, "title": str(source.get("title") or parsed.netloc)})
+    return result
+
+
+def trace_heading(trace):
+    seconds = trace.get("think_seconds", 0) if isinstance(trace, dict) else 0
+    label = f"✦ 思考了 {elapsed_label(seconds)}"
+    events = (trace.get("events") or []) if isinstance(trace, dict) else []
+    searched = any(
+        isinstance(event, dict) and event.get("type") == "end"
+        and event.get("tool") == "web_search"
+        for event in events
+    )
+    if searched:
+        success = any(
+            isinstance(event, dict) and event.get("type") == "end"
+            and event.get("tool") == "web_search" and event.get("ok")
+            for event in events
+        )
+        count = trace.get("sources_total") or len(_web_sources(trace))
+        label += (f" · 返回 {count} 条网页来源" if count else " · 已联网检索") if success else " · 联网检索未成功"
+    return label
+
+
+def render_html_fragment(body, holder=None):
+    """优先用 st.html 展示安全转义后的 HTML；兼容没有 st.html 的旧版。"""
+    target = holder if holder is not None else st
+    if hasattr(target, "html"):
+        target.html(body)
+    else:
+        target.markdown(body, unsafe_allow_html=True)
+
+
+def live_trace_html(label):
+    """运行时状态：不使用 st.status，也就没有内部 Material 箭头。"""
+    return (
+        '<div class="trace-live" role="status" aria-live="polite">'
+        '<span class="trace-live-spark" aria-hidden="true">✦</span>'
+        f'<span>{html.escape(str(label))}</span>'
+        '</div>'
+    )
+
+TOOL_LABELS = {
+    "search_knowledge_base": "知识库检索",
+    "get_weather": "天气查询",
+    "web_search": "联网搜索",
+}
+
+
+def describe_tool_event(event):
+    """仅使用工具调用的实际元数据，不生成假想的思考文字或来源数量。"""
+    if not isinstance(event, dict):
+        return ""
+    name = TOOL_LABELS.get(event.get("tool"), "外部工具")
+    if event.get("type") == "start":
+        query = str(event.get("query", "")).strip()
+        return f"⏳ 开始{name}" + (f"：{query}" if query else "")
+    if event.get("type") != "end":
+        return ""
+    if not event.get("ok", False):
+        return f"⚠️ {name}未成功"
+    duration = elapsed_label(event.get("duration", 0))
+    if event.get("tool") == "web_search":
+        if "search_calls" in event:
+            count = event.get("sources_total") or len(event.get("sources") or [])
+            if count:
+                return f"✓ {name}完成 · 返回 {count} 条来源 · 耗时 {duration}"
+            try:
+                search_calls = int(event.get("search_calls") or 0)
+            except (ValueError, TypeError):
+                search_calls = 0
+            if search_calls == 0:
+                return f"✓ {name}请求完成（接口未报告实际搜索） · 耗时 {duration}"
+            return f"✓ {name}完成（接口未返回来源链接） · 耗时 {duration}"
+        return f"✓ {name}完成（工具未提供来源统计） · 耗时 {duration}"
+    return f"✓ {name}完成 · 耗时 {duration}"
+
+
+def trace_details_html(trace):
+    """生成可展开的真实工具步骤。所有动态内容先 HTML 转义。"""
+    if not isinstance(trace, dict) or not trace:
+        return ""
+
+    heading = html.escape(trace_heading(trace))
+    events = trace.get("events")
+    events = events if isinstance(events, list) else []
+    steps = []
+    for event in events:
+        if isinstance(event, dict) and event.get("type") == "end":
+            description = describe_tool_event(event)
+            if description:
+                steps.append(
+                    '<li class="trace-event">'
+                    + html.escape(description)
+                    + '</li>'
+                )
+    if not steps:
+        steps.append('<li class="trace-event">本次没有记录到外部工具调用。</li>')
+
+    content = [
+        '<p class="trace-note">实际工具执行记录，不包含模型内部推理。</p>',
+        '<ul class="trace-events">' + "".join(steps) + '</ul>',
+    ]
+    sources = _web_sources(trace)
+    if sources:
+        content.append(
+            '<div class="trace-source-title">联网来源链接（展示 '
+            + str(len(sources)) + ' 条'
+            + (('，接口共返回 ' + str(trace.get("sources_total")) + ' 条')
+               if (trace.get("sources_total") or 0) > len(sources) else '')
+            + '，已去重）</div>'
+        )
+        links = []
+        for source in sources:
+            # URL 已在 _web_sources 中过滤 http/https；属性与文本继续转义。
+            url = html.escape(source["url"], quote=True)
+            title = html.escape(source["title"])
+            links.append(
+                f'<li><a href="{url}" target="_blank" rel="noopener noreferrer">'
+                f'{title}</a></li>'
+            )
+        content.append('<ol class="trace-sources">' + "".join(links) + '</ol>')
+    if "total_seconds" in trace:
+        content.append(
+            '<p class="trace-total">整次回答耗时 '
+            + html.escape(elapsed_label(trace["total_seconds"]))
+            + '（含文字输出）</p>'
+        )
+
+    return (
+        '<details class="trace-panel">'
+        f'<summary><span>{heading}</span></summary>'
+        '<div class="trace-panel-body">'
+        + "".join(content)
+        + '</div></details>'
+    )
+
+
+def render_saved_trace(trace):
+    body = trace_details_html(trace)
+    if body:
+        render_html_fragment(body)
 
 # =========================
 # 当前历史会话选中效果
@@ -711,8 +939,8 @@ with st.sidebar:
                     key=f"history-button-{sid}",
                     help=title,
                 ):
+                    st.session_state["chat_store"].set_active_session(sid)
                     st.session_state["current_session"] = sid
-                    conversation_store.set_active(sid)
                     st.session_state["delete_confirm_sid"] = None
                     st.rerun()
 
@@ -768,6 +996,7 @@ for msg in messages:
     if msg["role"] == "user":
         show_user(msg["content"])
     else:
+        render_saved_trace(msg.get("trace"))
         st.markdown(msg["content"])
 
 
@@ -787,7 +1016,6 @@ if not messages:
     )
 
     # 没有消息：首页输入框显示在欢迎语下面
-    
     with st.container(key="home-composer"):
         prompt = st.chat_input(
             "向豆馅提问",
@@ -795,7 +1023,6 @@ if not messages:
         )
 
 else:
-    
     # 有消息以后，输入框固定到底部
     prompt = st.chat_input(
         "给豆馅发送消息",
@@ -808,11 +1035,13 @@ else:
 # =========================
 
 if prompt:
-    sid = st.session_state["current_session"]
+    # 消息先落盘，保证随后的 st.rerun 不会丢失这次提问。
     new_title = short_title(prompt) if display_title(chat) == "新对话" else None
-    # 在 rerun 和 AI 流式响应之前就保存用户消息，避免生成中断后丢失问题。
-    conversation_store.add_message(sid, "user", prompt, title=new_title)
-    conversation_store.set_active(sid)
+    st.session_state["chat_store"].append_message(
+        st.session_state["current_session"],
+        "user", prompt,
+        new_title=new_title,
+    )
     chat["messages"].append(
         {
             "role": "user",
@@ -820,7 +1049,6 @@ if prompt:
         }
     )
 
-    # 兼容旧数据：空标题也视为“新对话”。
     if new_title is not None:
         chat["title"] = new_title
 
@@ -835,122 +1063,78 @@ if prompt:
 pending = st.session_state.get("pending_prompt")
 
 if pending:
-
     st.session_state["pending_prompt"] = None
-    answer_sid = st.session_state["current_session"]
 
+    # 记录从请求发出到首段可见答案的耗时；不是模型内部 token 推理时长。
+    started = time.perf_counter()
+    trace = {"version": 1, "events": [], "sources": []}
+    clock = {"first_answer_at": None}
 
-    # =========================
-    # AI 思考提示
-    # =========================
+    # 只用页面自己的 HTML 状态条，避免 Streamlit 内部图标字体失效露出英文。
+    live_slot = st.empty()
+    render_html_fragment(live_trace_html("豆馅正在思考…"), live_slot)
 
-    thinking_box = st.empty()
+    def show_progress(event):
+        if clock["first_answer_at"] is None:
+            action = TOOL_LABELS.get(event.get("tool"), "处理请求")
+            phase = "正在" + action if event.get("type") == "start" else action + "已返回"
+            label = phase + " · " + elapsed_label(time.perf_counter() - started)
+            render_html_fragment(live_trace_html(label), live_slot)
 
-    thinking_box.markdown(
-    '<div class="thinking-row">'
-    '<span class="thinking-spark">✦</span>'
-    '<span>豆馅正在思考</span>'
-    '<span class="thinking-dots" aria-hidden="true">'
-    '<i></i><i></i><i></i>'
-    '</span>'
-    '</div>',
-    unsafe_allow_html=True,
-    )
-
-
-    # =========================
-    # 调用 RAG
-    # =========================
-
-    stream = (
-        st.session_state["rag"]
-        .chain
-        .stream(
-            {
-                "input": pending
-            },
-            {
-                "configurable": {
-                    "session_id": answer_sid
-                }
-            },
-        )
-    )
-
-
-    # =========================
-    # 第一段回答出来时
-    # 自动删除“思考中”
-    # =========================
-
-    def stream_after_thinking(source):
-
-        first_content_seen = False
-
-        try:
-
-            for chunk in source:
-
-                has_content = (
-                    chunk is not None
-                    and (
-                        not isinstance(
-                            chunk,
-                            str
-                        )
-                        or bool(
-                            chunk.strip()
-                        )
-                    )
-                )
-
-
-                if (
-                    has_content
-                    and
-                    not first_content_seen
-                ):
-
-                    thinking_box.empty()
-
-                    first_content_seen = True
-
-
-                yield chunk
-
-
-        finally:
-
-            # 即使模型没有返回内容
-            # 或流式过程中出现异常，
-            # 思考提示也不会一直留着
-            thinking_box.empty()
-
-
-    # =========================
-    # AI 流式回答
-    # =========================
-
-    answer = st.write_stream(
-        stream_after_thinking(
-            stream
-        )
-    )
-
-
-    if answer is None:
-
-        answer = ""
-
-
-    # 模型正常结束后将回答写入 SQLite，与页面显示内容保持一致。
-    conversation_store.add_message(answer_sid, "assistant", str(answer))
-    chat["messages"].append(
+    # 以 SQLite 恢复的当前会话为模型上下文的唯一 UI 来源；
+    # 当前用户消息已经在 messages 末尾保存，因此不再重复放入 history。
+    previous_messages = messages[:-1] if messages and messages[-1].get("role") == "user" else messages
+    stream = st.session_state["rag"].chain.stream(
         {
-            "role": "assistant",
-            "content": str(answer),
-        }
+            "input": pending,
+            "history": previous_messages,
+            "trace": trace,
+            "on_progress": show_progress,
+        },
+        {
+            "configurable": {
+                "session_id": st.session_state["current_session"]
+            }
+        },
     )
 
+    def stream_with_timing(source):
+        for chunk in source:
+            if clock["first_answer_at"] is None and (
+                isinstance(chunk, str) and bool(chunk.strip())
+            ):
+                clock["first_answer_at"] = time.perf_counter()
+                label = "思考了 " + elapsed_label(clock["first_answer_at"] - started)
+                render_html_fragment(live_trace_html(label), live_slot)
+            yield chunk
 
+    try:
+        answer = st.write_stream(stream_with_timing(stream))
+    except Exception:
+        render_html_fragment(live_trace_html("回答未完成 · 请检查服务日志"), live_slot)
+        # 不伪造回答，也不把失败记录写成成功的历史消息。
+        st.error("AI 回答过程中发生错误，请检查服务日志后重试。")
+        st.stop()
+
+    total_seconds = time.perf_counter() - started
+    think_seconds = (
+        clock["first_answer_at"] - started
+        if clock["first_answer_at"] is not None
+        else total_seconds
+    )
+    trace["think_seconds"] = round(think_seconds, 2)
+    trace["total_seconds"] = round(total_seconds, 2)
+
+    render_html_fragment(trace_details_html(trace), live_slot)
+
+    # 先保存答案 + 耗时 + 执行事件，刷新后仍可展开历史记录。
+    if answer is None:
+        answer = ""
+    st.session_state["chat_store"].append_message(
+        st.session_state["current_session"], "assistant", str(answer),
+        trace=trace,
+    )
+    chat["messages"].append({
+        "role": "assistant", "content": str(answer), "trace": trace,
+    })
     st.rerun()
