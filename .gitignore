@@ -7,3 +7,4 @@ venv/
 chroma_db/
 chat_history/
 data/chat_history.sqlite3
+md5.txt
