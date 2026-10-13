@@ -18,12 +18,22 @@ from langchain_core.documents import Document
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+from pathlib import Path
 
 import config_data as config  # noqa: F401: 加载项目 .env
 from file_history_store import get_history
 from search_tool import DISPLAY_SOURCE_LIMIT, web_search
 from vector_stores import VectorStoreService
-from weather_tool import get_weather
+try:
+    from weather_tool import get_weather  # 项目现有天气模块（如果有）
+except ImportError:
+    @tool("get_weather")
+    def get_weather(city: str) -> str:
+        """获取城市天气；未安装 weather_tool.py 时明确返回不可用。"""
+        return "天气服务暂时不可用：未找到 weather_tool.py。请复制你原来的天气模块。"
+
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 SYSTEM_PROMPT = """你叫豆馅，是一名严谨、友好的中文 AI 助手。
 可用的工具：search_knowledge_base（本地知识库）、get_weather（天气）、
@@ -158,11 +168,16 @@ class RagService:
                 self._retriever = self.vector_service.get_retriever()
             documents: list[Document] = self._retriever.invoke(question)
             if not documents:
-                return "知识库没有检索到相关参考资料。"
-            return "\n\n".join(
-                f"文档内容：{doc.page_content}\n文档元数据：{doc.metadata}"
-                for doc in documents
-            )
+                return json.dumps({"found": False, "sources": [], "excerpts": []}, ensure_ascii=False)
+            excerpts = []
+            sources = []
+            for doc in documents:
+                metadata = doc.metadata if isinstance(doc.metadata, dict) else {}
+                source = str(metadata.get("source") or "未知文件")[:180]
+                if source not in sources:
+                    sources.append(source)
+                excerpts.append({"source": source, "content": doc.page_content[:1800]})
+            return json.dumps({"found": True, "sources": sources, "excerpts": excerpts}, ensure_ascii=False)
 
         self.tools = [search_knowledge_base, get_weather, web_search]
         self.tool_map = {item.name: item for item in self.tools}
@@ -246,6 +261,18 @@ class RagService:
                 }
             else:
                 ok = True
+                if name == "search_knowledge_base":
+                    try:
+                        kb_data = json.loads(result)
+                    except (ValueError, TypeError):
+                        kb_data = {}
+                    if isinstance(kb_data, dict):
+                        refs = kb_data.get("sources")
+                        if isinstance(refs, list):
+                            existing = trace.setdefault("knowledge_sources", [])
+                            for source in refs:
+                                if isinstance(source, str) and source not in existing:
+                                    existing.append(source[:180])
                 if name == "get_weather" and (
                     "天气服务暂时不可用" in result
                     or "没有找到城市" in result
@@ -290,7 +317,8 @@ class RagService:
         answer_parts: list[str] = []
         finished = False
         try:
-            if requires_web_search(question):
+            mode = str(inputs.get("mode") or "自动")
+            if mode == "联网" or (mode != "知识库" and requires_web_search(question)):
                 today = _today()
                 result, ok = self._call_tool(
                     "web_search",
@@ -303,9 +331,40 @@ class RagService:
                     # result 是工具返回的 JSON；严格从 answer 字段获取正文。
                     reply = str(data.get("answer") or "已联网检索，但没有返回回答正文。")
                 else:
-                    reply = f"⚠️ 当前无法核实实时资讯。{result} 请检查百炼联网搜索配置后再试。"
+                    reply = f"⚠️ 当前无法核实实时资讯。{result}"
                 answer_parts.append(reply)
                 yield reply
+            elif mode == "知识库":
+                result, ok = self._call_tool("search_knowledge_base", {"question": question}, trace, progress)
+                try:
+                    kb_data = json.loads(result)
+                except (TypeError, ValueError):
+                    kb_data = {}
+                if not ok or not isinstance(kb_data, dict) or not kb_data.get("found"):
+                    reply = "知识库暂时不可用，或没有检索到相关文档。请先上传资料，或切换到自动模式。"
+                    answer_parts.append(reply)
+                    yield reply
+                else:
+                    # 知识库模式不会访问互联网；引用内容均来自真实检索结果。
+                    kb_text = "\n\n".join(
+                        f"【{item['source']}】{item['content']}"
+                        for item in kb_data.get("excerpts", [])
+                        if isinstance(item, dict) and item.get("content")
+                    )
+                    prompt_messages = [
+                        SystemMessage(content=SYSTEM_PROMPT + "\n你现在处于仅知识库模式。只能根据检索到的材料回答，引用资料时注明【文件名】。没有依据要直接说明，绝不补编材料。"),
+                        *history,
+                        HumanMessage(content=f"用户问题：{question}\n\n检索到的知识库片段：\n{kb_text}"),
+                    ]
+                    for chunk in self.chat_model.stream(prompt_messages):
+                        piece = _plain_content(getattr(chunk, "content", ""))
+                        if piece:
+                            answer_parts.append(piece)
+                            yield piece
+                    if not answer_parts:
+                        reply = "模型没有返回有效文本，请稍后再试。"
+                        answer_parts.append(reply)
+                        yield reply
             else:
                 messages = [
                     SystemMessage(content=SYSTEM_PROMPT + "\n当前服务器日期：" + _today()),
@@ -370,7 +429,7 @@ class RagService:
             finished = True
         finally:
             # 只有生成器完整消耗时才写入后台记忆；中断/异常不误保存完整回答。
-            if finished and answer_parts:
+            if finished and answer_parts and not isinstance(inputs.get("history"), list):
                 history_store.add_messages([
                     HumanMessage(content=question),
                     AIMessage(content="".join(answer_parts)),

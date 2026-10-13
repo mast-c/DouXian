@@ -6,14 +6,78 @@
 
 import json
 import os
+import re
 from urllib.parse import urlsplit
 
 from langchain_core.tools import tool
-from openai import OpenAI
+from openai import OpenAI, APIStatusError, APIConnectionError
 
-import config_data as config  # noqa: F401：加载项目配置 / .env
 
 DISPLAY_SOURCE_LIMIT = 5
+
+
+DEFAULT_WEB_SEARCH_MODEL = "qwen3.7-plus"
+LEGACY_CHAT_MODELS = frozenset({
+    "qwen-plus", "qwen-plus-latest", "qwen-max", "qwen-flash", "qwen-turbo"
+})
+
+
+def _safe_api_error(exc: APIStatusError) -> str:
+    """提取可用于排错的状态码、错误码与短消息，不输出请求头或 API Key。"""
+    status = getattr(exc, "status_code", "?")
+    body = getattr(exc, "body", None)
+    if not isinstance(body, dict):
+        return f"HTTP {status}"
+    problem = body.get("error", body)
+    if not isinstance(problem, dict):
+        return f"HTTP {status}"
+    code = str(problem.get("code") or problem.get("type") or "").strip()
+    message = str(problem.get("message") or "").strip()
+    message = " ".join(message.split())
+    message = re.sub(r"sk-[A-Za-z0-9_-]+", "sk-[已隐藏]", message)
+    message = re.sub(r"(?i)Bearer\s+[A-Za-z0-9._-]+", "Bearer [已隐藏]", message)
+    # 只保留短错误说明，避免把请求体等敏感上下文写到聊天记录中。
+    details = "；".join(p for p in [code[:80], message[:180]] if p)
+    return f"HTTP {status}" + (f"：{details}" if details else "")
+
+
+def _data_inspection_message(exc: APIStatusError) -> str | None:
+    """识别百炼内容安全拦截；不把审核报错误诊为密钥、模型或网络配置问题。"""
+    body = getattr(exc, "body", None)
+    problem = body.get("error", body) if isinstance(body, dict) else {}
+    if not isinstance(problem, dict):
+        problem = {}
+
+    details = " ".join(
+        str(problem.get(field) or "")
+        for field in ("code", "type", "message")
+    )
+    if not details:
+        details = str(exc)
+
+    # 兼容 DataInspectionFailed、data_inspection_failed、
+    # InternalError.Algo.DataInspectionFailed 等不同接口返回格式。
+    normalized = re.sub(r"[^a-z0-9]", "", details.lower())
+    if "datainspectionfailed" not in normalized:
+        return None
+
+    desc = details.lower()
+    if "output data may contain" in desc:
+        where = "本次生成的回答"
+    elif "input data may contain" in desc:
+        where = "本次提交的查询内容"
+    else:
+        where = "本次请求或回答内容"
+
+    # 不能因为被拦截就伪造来源、编写新闻，或自动规避审核重试。
+    return (
+        f"百炼内容安全审核拦截了{where}"
+        "（HTTP 400 / DataInspectionFailed），"
+        "本轮未得到可核验的联网回答。"
+        "这是内容审核结果，并不意味着 API Key 或模型不支持联网。"
+        "可以将正常资讯问题限定到某个主题或具体事件，例如“今天的科技新闻”；"
+        "若合理查询反复被误拦截，可在百炼控制台查询审核记录并提交工单。"
+    )
 
 
 def _field(obj, key, default=None):
@@ -129,13 +193,23 @@ def web_search(query: str) -> str:
         return _response(answer="缺少搜索关键词。")
 
     api_key = os.getenv("DASHSCOPE_API_KEY")
-    base_url = os.getenv("OPENAI_BASE_URL")
-    model = os.getenv("OPENAI_MODEL")
+    base_url = (os.getenv("WEB_SEARCH_BASE_URL") or os.getenv("OPENAI_BASE_URL") or "").strip()
+    model = (os.getenv("WEB_SEARCH_MODEL") or DEFAULT_WEB_SEARCH_MODEL).strip()
     if not api_key or not base_url:
         return _response(answer="联网搜索未配置：请检查 DASHSCOPE_API_KEY 与 OPENAI_BASE_URL。")
+    if not model:
+        return _response(answer="WEB_SEARCH_MODEL 不能为空。")
+    if model.lower() in LEGACY_CHAT_MODELS:
+        return _response(
+            answer=f"当前联网模型 {model} 适用于普通聊天接口，但不适用于该 Responses 联网工具；"
+                   f"请将 .env 中 WEB_SEARCH_MODEL 改为 {DEFAULT_WEB_SEARCH_MODEL}，"
+                   "保留 OPENAI_MODEL 作为普通聊天模型。"
+        )
 
     try:
         client = OpenAI(api_key=api_key, base_url=base_url, timeout=60.0)
+        if not hasattr(client, "responses"):
+            return _response(answer="当前 openai Python SDK 版本过旧，不支持 Responses API；请升级 openai。")
         response = client.responses.create(
             model=model,
             input=(query + "\n\n请精简检索：优先核实官方或高可信来源，"
@@ -159,8 +233,20 @@ def web_search(query: str) -> str:
             sources=_select_display_sources(sources),
             search_calls=calls, sources_total=len(sources), queries=queries[:8],
         )
-    except Exception as exc:
-        # 不向前端暴露 API Key、请求 URL 或可能包含凭据的异常原文。
+    except APIStatusError as exc:
+        # 内容安全拦截与接口配置失败是不同问题；准确分类后提示下一步操作。
+        inspection_message = _data_inspection_message(exc)
+        if inspection_message:
+            return _response(answer=inspection_message)
+        # 其他 HTTP 错误保留脱敏的状态码与原因，方便针对性排查。
         return _response(
-            answer=f"千问联网搜索失败（{type(exc).__name__}），请检查接口地域、模型、API Key 或网络连接。"
+            answer=f"千问联网搜索失败：{_safe_api_error(exc)}。"
+                   "请根据服务端错误码核对模型、地域和账号权限。"
+        )
+    except APIConnectionError:
+        return _response(answer="联网请求无法连接到百炼服务，请检查网络、代理或服务地址。")
+    except Exception as exc:
+        # 避免暴露 API Key、完整 URL 或模型请求内容。
+        return _response(
+            answer=f"千问联网搜索失败（{type(exc).__name__}）。请检查 SDK 版本与服务配置。"
         )

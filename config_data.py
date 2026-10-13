@@ -7,14 +7,17 @@ persist_directory = "./chroma_db"
 # spliter
 chunk_size = 400
 chunk_overlap = 50
-separators = ["\n", "\n\n", "。", "！", "？", ",", "!", "?", "|", ".", ";"]
+separators = [
+    "\n\n",                # 1. 优先保留完整段落
+    "\n",                  # 2. 换行
+    "。", "！", "？", "；",  # 3. 中文句子
+    ". ", "! ", "? ", "; ", # 4. 英文句子
+    "，", ",", "、",        # 5. 句子内部停顿
+    " ",                   # 6. 空格
+    ""                     # 7. 最后按字符兜底
+]
 max_split_char_number=120  #文本分割的阈值
 
 
 #
 similarity_threshold = 2        # 检索返回匹配的文档数量
-session_config={
-        "configurable":{
-            "session_id":"user_001"
-        }
-    }

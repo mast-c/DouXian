@@ -21,12 +21,7 @@ class VectorStoreService(object):
     def get_retriever(self):
         """返回向量检索器, 方便加入chain"""
         return self.vector_store.as_retriever(search_kwargs={"k": config.similarity_threshold})
-
+def main():
+    print("  ")
 if __name__ == '__main__':
-    from langchain_community.embeddings import DashScopeEmbeddings
-    retriever = VectorStoreService(DashScopeEmbeddings(
-            model=os.getenv("DASHSCOPE_EMBEDDING_MODEL"),
-            dashscope_api_key=os.getenv("DASHSCOPE_API_KEY")
-        )).get_retriever()
-    res = retriever.invoke("我的体重140斤,帮我推荐一下尺码")
-    print(res)
+    main()
