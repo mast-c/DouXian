@@ -1,60 +1,33 @@
 
-import os
-from http import HTTPStatus
+from pathlib import Path
+from knowledge_base import KnowledgeBaseService
 
-import dashscope
-from dotenv import load_dotenv
+filename = "../RAG知识库/神经网络与深度学习.md"
+file_path = Path(__file__).resolve().parent / filename
 
-load_dotenv()
+if not file_path.is_file():
+    raise FileNotFoundError(f"找不到文件：{file_path}")
 
+service = KnowledgeBaseService()
 
-def rerank_texts(query: str, documents: list[str], top_n: int = 3):
-    """调用 Reranker，返回 (原文索引, 相关性分数)。"""
-    if not query.strip() or not documents or top_n < 1:
-        return []
+# 3. 检索并检查真实 Metadata
+docs = service.search_with_rerank(
+    query="卷积神经网络中的卷积层有什么作用？",
+    recall_k=10,
+    top_n=3,
+)
 
-    api_key = os.getenv("DASHSCOPE_API_KEY")
-    if not api_key:
-        raise RuntimeError("请先配置 DASHSCOPE_API_KEY")
+assert docs, "没有检索到知识库内容"
 
-    base_url = os.getenv("DASHSCOPE_HTTP_BASE_URL")
-    if base_url:
-        dashscope.base_http_api_url = base_url
+for i, doc in enumerate(docs, 1):
+    metadata = doc.metadata or {}
 
-    response = dashscope.TextReRank.call(
-        model="qwen3-rerank",
-        api_key=api_key,
-        query=query,
-        documents=documents,
-        top_n=min(top_n, len(documents)),
-    )
-
-    if response.status_code != HTTPStatus.OK:
-        raise RuntimeError(
-            f"重排序 API 失败：{response.code} {response.message}"
-        )
-
-    ranked = []
-    for item in response.output["results"]:
-        index = int(item["index"])
-        if not 0 <= index < len(documents):
-            raise ValueError(f"模型返回无效文档索引：{index}")
-        ranked.append((index, float(item["relevance_score"])))
-
-    return ranked
-
-
-if __name__ == "__main__":
-    question = "员工申请病假需要提交什么材料？"
-
-    texts = [
-        "考勤制度：员工上班需要按时打卡。",
-        "请假制度：员工申请病假需要提交医院出具的诊断证明。",
-        "福利制度：员工年假需要提前申请。",
-    ]
-
-    results = rerank_texts(question, texts)
-
-    for rank, (index, score) in enumerate(results, start=1):
-        print(f"排名 {rank} / 相关分数 {score:.4f} / 原索引 {index}")
-        print(texts[index])
+    print(f"\n========== Chunk {i} ==========")
+    print("source:", metadata.get("source"))
+    print("section_path:", metadata.get("section_path"))
+    print("h1:", metadata.get("h1"))
+    print("h2:", metadata.get("h2"))
+    print("h3:", metadata.get("h3"))
+    print("h4:", metadata.get("h4"))
+    print("chunk_id:", metadata.get("chunk_id"))
+    print("正文前150字:", doc.page_content[:150])

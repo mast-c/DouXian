@@ -10,13 +10,14 @@ import re
 import jieba
 from langchain_community.retrievers import BM25Retriever
 from langchain_classic.retrievers import EnsembleRetriever  #RRF
-
 from langchain_text_splitters import (
     MarkdownHeaderTextSplitter,
     RecursiveCharacterTextSplitter,
 )
-
 import config_data as config
+import dashscope
+from http import HTTPStatus
+
 
 load_dotenv()
 md5_path = config.md5_path
@@ -82,11 +83,14 @@ class KnowledgeBaseService:
         )
 
         # 新增：Markdown 结构切分器
+        
         self.md_splitter = MarkdownHeaderTextSplitter(
             headers_to_split_on=[
                 ("#", "h1"),
                 ("##", "h2"),
                 ("###", "h3"),
+                ("####", "h4"),
+                ("#####", "h5"), 
             ],
             strip_headers=True,
         )
@@ -132,7 +136,7 @@ class KnowledgeBaseService:
             # 获取当前章节路径
             title_path = " / ".join(
                 section.metadata[key]
-                for key in ("h1", "h2", "h3")
+                for key in ("h1", "h2", "h3","h4","h5")
                 if section.metadata.get(key)
             )
 
@@ -185,7 +189,7 @@ class KnowledgeBaseService:
             # 组合章节标题
             titles = [
                 doc.metadata.get(key, "")
-                for key in ("h1", "h2", "h3")
+                for key in ("h1", "h2", "h3","h4","h5")
             ]
 
             section_path = " / ".join(
@@ -208,6 +212,8 @@ class KnowledgeBaseService:
     
     def upload_by_str(self, data: str, filename: str) -> str:
         """按来源更新文档：相同 Chunk 不重复入库，变化后替换旧 Chunk。"""
+        # 统一文档名称，避免相对路径不同导致重复入库
+        filename = str(filename).replace("\\", "/").rsplit("/", 1)[-1]
         if not isinstance(data, str) or not data.strip():
             return "[跳过]文档内容为空"
         if not isinstance(filename, str) or not filename.strip():
@@ -340,10 +346,10 @@ class KnowledgeBaseService:
             raise ValueError("BM25 索引为空")
 
         vector_retriever = self.chroma.as_retriever(
-            search_kwargs={"k": 5}
+            search_kwargs={"k": 20}
         )
 
-        self.bm25_retriever.k = 5
+        self.bm25_retriever.k = 20
 
         self.hybrid_retriever = EnsembleRetriever(
             retrievers=[
@@ -353,17 +359,68 @@ class KnowledgeBaseService:
             weights=[0.5, 0.5],
             id_key="chunk_id",
         )
-
+        print(f"混合检索器已构建: 向量 k=20, BM25 k=20, 权重={self.hybrid_retriever.weights}")
 
     def search_hybrid(self, query: str, k: int = 5) -> list[Document]:
         if not isinstance(query, str) or not query.strip():
             return []
         if k <= 0:
             return []
-        if not hasattr(self, "hybrid_retriever"):
+        if not hasattr(self, "hybrid_retriever") or self.hybrid_retriever is None:
             raise RuntimeError("请先调用 build_hybrid_retriever()")
 
         return self.hybrid_retriever.invoke(query)[:k]
+    
+    def search_with_rerank(
+        self, query: str, recall_k: int = 10, top_n: int = 3
+    ) -> list[Document]:
+        """RRF 融合 → DashScope 重排；保留原始 Document 的元数据。"""
+        if not isinstance(query, str) or not query.strip():
+            return []
+        if recall_k < 1 or top_n < 1:
+            raise ValueError("recall_k 和 top_n 都必须为正整数")
+
+        candidates = self.search_hybrid(query, k=recall_k)
+        if not candidates:
+            return []
+
+        api_key = os.getenv("DASHSCOPE_API_KEY")
+        if not api_key:
+            raise RuntimeError("Missing DASHSCOPE_API_KEY")
+        base_url = os.getenv("DASHSCOPE_HTTP_BASE_URL")
+        if base_url:
+            dashscope.base_http_api_url = base_url
+
+        response = dashscope.TextReRank.call(
+            model="qwen3-rerank",
+            api_key=api_key,
+            query=query,
+            documents=[doc.page_content for doc in candidates],
+            top_n=min(top_n, len(candidates)),
+        )
+        if response.status_code != HTTPStatus.OK:
+            raise RuntimeError(
+                f"Rerank重拍失败: {response.code} {response.message}"
+            )
+
+        items = (response.output or {}).get("results", [])
+        if not items:
+            raise RuntimeError("重排未返回任何结果")
+
+        ranked = []
+        seen = set()
+        for item in items:
+            idx = int(item["index"])
+            if idx < 0 or idx >= len(candidates) or idx in seen:
+                raise ValueError(f"无效或重复的重排索引: {idx}")
+            seen.add(idx)
+            doc = candidates[idx]
+            ranked.append(Document(
+                page_content=doc.page_content,
+                metadata={**doc.metadata, "rerank_score": float(item["relevance_score"])}
+            ))
+
+        return ranked[:top_n]
 def main():
     print("")
 if __name__ == "__main__":

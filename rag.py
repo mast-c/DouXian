@@ -20,7 +20,7 @@ from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from pathlib import Path
-
+from knowledge_base import KnowledgeBaseService
 import config_data as config  # noqa: F401: 加载项目 .env
 from file_history_store import get_history
 from search_tool import DISPLAY_SOURCE_LIMIT, web_search
@@ -125,7 +125,35 @@ def _valid_sources(raw: Any) -> list[dict]:
         result.append({"title": str(src.get("title") or parsed.netloc)[:180], "url": url})
     return result
 
+def render_kb_references(
+    answer: str,
+    reference_map: dict[int, tuple[str, str]],
+) -> str:
+    """只根据真实检索证据生成参考资料列表。"""
 
+    cited = list(dict.fromkeys(
+        int(n) for n in re.findall(r"\[(\d+)\]", answer)
+    ))
+
+    valid = [n for n in cited if n in reference_map]
+    invalid = [n for n in cited if n not in reference_map]
+
+    blocks = []
+
+    if valid:
+        lines = [
+            f"[{n}] {reference_map[n][0]} / {reference_map[n][1]}"
+            for n in valid
+        ]
+        blocks.append("参考资料：\n" + "\n".join(lines))
+
+    if invalid:
+        blocks.append(
+            "⚠️ 以下引用编号没有对应的检索证据："
+            + "、".join(f"[{n}]" for n in invalid)
+        )
+
+    return "\n\n" + "\n\n".join(blocks) if blocks else ""
 class _AgentChain:
     """保留旧版 chain.stream/invoke 调用形状，明确传入 trace 引用。"""
 
@@ -154,30 +182,77 @@ class RagService:
             openai_api_key=os.getenv("DASHSCOPE_API_KEY"),
             base_url=os.getenv("OPENAI_BASE_URL"),
         )
-
+        self.knowledge_service = None
+        
         @tool("search_knowledge_base")
         def search_knowledge_base(question: str) -> str:
-            """在本地知识库中检索上传的文件、内部文档与资料。"""
-            if self._retriever is None:
-                self.vector_service = VectorStoreService(
-                    embedding=DashScopeEmbeddings(
-                        model=os.getenv("DASHSCOPE_EMBEDDING_MODEL", "text-embedding-v3"),
-                        dashscope_api_key=os.getenv("DASHSCOPE_API_KEY"),
-                    )
+            """在本地知识库中执行混合检索和 Reranker 精排。"""
+
+            empty_result = {
+                "found": False,
+                "sources": [],
+                "excerpts": [],
+            }
+
+            if not isinstance(question, str) or not question.strip():
+                return json.dumps(empty_result, ensure_ascii=False)
+
+            # 第一次查询时初始化知识库
+            if self.knowledge_service is None:
+                service = KnowledgeBaseService()
+
+                count = service.build_bm25_index()
+                if count <= 0:
+                    return json.dumps(empty_result, ensure_ascii=False)
+
+                service.build_hybrid_retriever()
+                self.knowledge_service = service
+
+            # 复用之前已测试通过的完整检索流程
+            documents: list[Document] = (
+                self.knowledge_service.search_with_rerank(
+                    query=question,
+                    recall_k=10,
+                    top_n=3,
                 )
-                self._retriever = self.vector_service.get_retriever()
-            documents: list[Document] = self._retriever.invoke(question)
+            )
+
             if not documents:
-                return json.dumps({"found": False, "sources": [], "excerpts": []}, ensure_ascii=False)
+                return json.dumps(empty_result, ensure_ascii=False)
+
             excerpts = []
             sources = []
+
             for doc in documents:
-                metadata = doc.metadata if isinstance(doc.metadata, dict) else {}
-                source = str(metadata.get("source") or "未知文件")[:180]
+                metadata = (
+                    doc.metadata
+                    if isinstance(doc.metadata, dict)
+                    else {}
+                )
+                # 从 Chroma Metadata 读取章节，而不是让模型推断
+                section_path = str(
+                    metadata.get("section_path") or ""
+                ).strip()
+                source = str(
+                    metadata.get("source") or "未知文件"
+                )[:180]
+
                 if source not in sources:
                     sources.append(source)
-                excerpts.append({"source": source, "content": doc.page_content[:1800]})
-            return json.dumps({"found": True, "sources": sources, "excerpts": excerpts}, ensure_ascii=False)
+
+                excerpts.append({
+                    "id": len(excerpts) + 1,
+                    "source": source,
+                    "section_path": section_path,
+                    "chunk_id": str(metadata.get("chunk_id") or ""),
+                    "content": doc.page_content[:1800],
+                })
+
+            return json.dumps({
+                "found": True,
+                "sources": sources,
+                "excerpts": excerpts,
+            }, ensure_ascii=False)
 
         self.tools = [search_knowledge_base, get_weather, web_search]
         self.tool_map = {item.name: item for item in self.tools}
@@ -346,25 +421,108 @@ class RagService:
                     yield reply
                 else:
                     # 知识库模式不会访问互联网；引用内容均来自真实检索结果。
-                    kb_text = "\n\n".join(
-                        f"【{item['source']}】{item['content']}"
-                        for item in kb_data.get("excerpts", [])
-                        if isinstance(item, dict) and item.get("content")
-                    )
-                    prompt_messages = [
-                        SystemMessage(content=SYSTEM_PROMPT + "\n你现在处于仅知识库模式。只能根据检索到的材料回答，引用资料时注明【文件名】。没有依据要直接说明，绝不补编材料。"),
-                        *history,
-                        HumanMessage(content=f"用户问题：{question}\n\n检索到的知识库片段：\n{kb_text}"),
-                    ]
+                    # 为有效证据连续编号，不依赖旧文档是否有 id
+                    evidence = []
+                    reference_map = {}
+                    excerpts = kb_data.get("excerpts")
+
+                    if not isinstance(excerpts, list):
+                        excerpts = []
+
+                    for item in excerpts:
+                        if not isinstance(item, dict):
+                            continue
+
+                        content = item.get("content")
+                        if not isinstance(content, str) or not content.strip():
+                            continue
+
+                        number = len(evidence) + 1
+                        source = " ".join(
+                            str(item.get("source") or "未知文件").split()
+                        )[:180]
+                        section = " ".join(
+                            str(item.get("section_path") or "未标注章节").split()
+                        )[:200]
+
+                        evidence.append(
+                            f"[{number}]\n"
+                            f"来源文件：{source}\n"
+                            f"所属章节：{section}\n"
+                            f"正文：\n{content.strip()}"
+                        )
+                        reference_map[number] = (source, section)
+                    if not evidence:
+                        reply = "知识库检索成功，但没有可用的正文片段。"
+                        answer_parts.append(reply)
+                        yield reply
+
+                    else:
+                        kb_text = "\n\n".join(evidence)
+                        print("\n========== 实际提供给模型的知识库证据 ==========")
+                        print(kb_text)
+                        print("================================================\n")
+
+                        prompt_messages = [
+                            SystemMessage(
+                                content=SYSTEM_PROMPT + """
+                            当前是知识库模式，请遵守以下规则：
+                            回答必须严格依据提供的知识库证据。
+                            1. 每个独立的事实结论，都应在该结论后面紧跟对应引用编号。
+                            2. 引用必须直接支持完整结论，不能只包含相关关键词。
+                            3. 如果证据仅说明 A 和 B 分别存在，
+                            不得自行推断“A导致B”“A能够解决B”等因果关系。
+                            4. 对于“有效解决”“显著提高”“完全避免”等效果性结论，
+                            必须有明确证据，否则不要生成该结论。
+                            5. 不允许依靠模型自身的常识补充知识库中没有的事实。
+                            【问题相关性要求】
+                            1. 回答必须围绕用户问题展开，优先提供直接回答问题的事实和机制。
+                            2. 如果用户问“为什么”，应解释具体原因及其作用机制，
+                            不能仅罗列相关概念或其他技术的缺点。
+                            3. 相关背景知识可以用于解释或对比，但必须简短，
+                            不能代替对问题本身的回答。
+                            4. 每个主要论点都应能回答：
+                            “这一点如何帮助解释用户的问题？”
+                            5. 对于无法从现有证据直接支持的机制或因果关系，
+                            不得自行推断。可以说明现有证据不足。
+                            6. 优先选择直接回答问题的检索片段，
+                            避免仅因为某段内容与问题主题相似,就把它作为主要论点。
+                            """
+                            ),
+                            *history,
+                            HumanMessage(
+                                content=(
+                                    f"用户问题：{question}\n\n"
+                                    f"知识库证据：\n{kb_text}"
+                                )
+                            ),
+                        ]
+
+                    # 流式接收模型回答
                     for chunk in self.chat_model.stream(prompt_messages):
-                        piece = _plain_content(getattr(chunk, "content", ""))
+                        piece = _plain_content(
+                            getattr(chunk, "content", "")
+                        )
+
                         if piece:
                             answer_parts.append(piece)
                             yield piece
+
                     if not answer_parts:
                         reply = "模型没有返回有效文本，请稍后再试。"
                         answer_parts.append(reply)
                         yield reply
+
+                    else:
+                        # 3. 模型回答结束后，只生成一次参考资料
+                        footer = render_kb_references(
+                            "".join(answer_parts),
+                            reference_map,
+                        )
+
+                        if footer:
+                            answer_parts.append(footer)
+                            yield footer
             else:
                 messages = [
                     SystemMessage(content=SYSTEM_PROMPT + "\n当前服务器日期：" + _today()),
