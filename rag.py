@@ -45,6 +45,16 @@ web_search（真实互联网搜索）。用户上传文件或者询问知识库�
 
 # 命中这些明确的时间敏感提问时，不再仅依赖模型“主动决定”是否联网。
 # 这里刻意不包含笼统的“今天”/“现在”，避免“今天学什么”之类问题被误判。
+
+
+
+
+
+
+
+
+
+
 _FRESH_PATTERN = re.compile(
     r"(?:今天|今日|昨天|昨日|本周|这周|最近|最新|刚刚|实时|目前|当前|现在|近期|截至.{0,6})"
     r".{0,24}(?:新闻|消息|资讯|动态|热点|热搜|时事|事件|报道|发布|政策|价格|报价|行情|股价|汇率|指数|排名|票房|比分|战况|进展|更新|变动)"
@@ -145,7 +155,7 @@ def render_kb_references(
             f"[{n}] {reference_map[n][0]} / {reference_map[n][1]}"
             for n in valid
         ]
-        blocks.append("参考资料：\n" + "\n".join(lines))
+        blocks.append("参考资料：\n\n" + "\n\n".join(lines))
 
     if invalid:
         blocks.append(
@@ -239,15 +249,16 @@ class RagService:
 
                 if source not in sources:
                     sources.append(source)
-
+                    
+                #  Document 转换为 Evidence 数据
                 excerpts.append({
                     "id": len(excerpts) + 1,
                     "source": source,
                     "section_path": section_path,
                     "chunk_id": str(metadata.get("chunk_id") or ""),
-                    "content": doc.page_content[:1800],
+                    "content": doc.page_content,
                 })
-
+                # 将 Python 字典转换成 JSON 字符串
             return json.dumps({
                 "found": True,
                 "sources": sources,
@@ -348,6 +359,40 @@ class RagService:
                             for source in refs:
                                 if isinstance(source, str) and source not in existing:
                                     existing.append(source[:180])
+
+                        # 只保存前端展示需要的真实证据摘要，不重复检索，也不存整篇原文。
+                        raw_excerpts = kb_data.get("excerpts")
+                        evidence_for_ui = []
+                        if isinstance(raw_excerpts, list):
+                            for item in raw_excerpts[:5]:
+                                if not isinstance(item, dict):
+                                    continue
+                                number = item.get("id")
+                                if type(number) is not int or number < 1:
+                                    number = len(evidence_for_ui) + 1
+                                full_content = item.get("content")
+                                full_content = (
+                                    full_content if isinstance(full_content, str) else ""
+                                )
+                                # 预览去掉重复的章节前缀；展开区仍保留完整原文。
+                                preview_source = full_content
+                                if preview_source.startswith("章节：") and "\n" in preview_source:
+                                    preview_source = preview_source.split("\n", 1)[1]
+                                # 图片 Markdown 链接可能很长，用短标签展示摘要。
+                                preview_source = re.sub(
+                                    r"!\[[^\]]*\]\([^)]*\)", "[图片]", preview_source
+                                )
+                                preview_text = " ".join(preview_source.split())
+                                if len(preview_text) > 240:
+                                    preview_text = preview_text[:240].rstrip() + "…"
+                                evidence_for_ui.append({
+                                    "id": number,
+                                    "source": str(item.get("source") or "未知文件")[:180],
+                                    "section_path": str(item.get("section_path") or "未标注章节")[:240],
+                                    "preview": preview_text,
+                                    "content": full_content,
+                                })
+                        trace["knowledge_evidence"] = evidence_for_ui
                 if name == "get_weather" and (
                     "天气服务暂时不可用" in result
                     or "没有找到城市" in result
@@ -475,18 +520,8 @@ class RagService:
                             4. 对于“有效解决”“显著提高”“完全避免”等效果性结论，
                             必须有明确证据，否则不要生成该结论。
                             5. 不允许依靠模型自身的常识补充知识库中没有的事实。
-                            【问题相关性要求】
-                            1. 回答必须围绕用户问题展开，优先提供直接回答问题的事实和机制。
-                            2. 如果用户问“为什么”，应解释具体原因及其作用机制，
-                            不能仅罗列相关概念或其他技术的缺点。
-                            3. 相关背景知识可以用于解释或对比，但必须简短，
-                            不能代替对问题本身的回答。
-                            4. 每个主要论点都应能回答：
-                            “这一点如何帮助解释用户的问题？”
-                            5. 对于无法从现有证据直接支持的机制或因果关系，
-                            不得自行推断。可以说明现有证据不足。
-                            6. 优先选择直接回答问题的检索片段，
-                            避免仅因为某段内容与问题主题相似,就把它作为主要论点。
+                            6. 只在正文中标注 [1]、[2] 等证据编号，不要自行生成“参考资料”列表，程序会自动添加。
+                            7. 优先回答用户问题；背景知识要简短，不要代替对问题本身的回答。
                             """
                             ),
                             *history,

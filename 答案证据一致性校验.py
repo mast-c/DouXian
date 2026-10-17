@@ -163,6 +163,100 @@ def verify_answer(model, answer, excerpts):
     return results
 
 
+def evaluate_relevance(model, question, checks):
+    """评估原子事实与用户问题的相关性。"""
+
+    claims = [
+        {"id": i, "claim": item["claim"]}
+        for i, item in enumerate(checks, 1)
+    ]
+
+    prompt = """
+你是 RAG 答案相关性评估员。
+
+请根据用户的原始问题，判断每条事实结论的相关性。
+
+分类标准：
+
+direct：
+直接回答用户的问题。
+对于“为什么”类问题，应解释原因、作用机制或关键优势。
+
+background：
+与问题有关，但只提供背景、定义、对比或铺垫，
+本身不能构成对问题的直接回答。
+
+irrelevant：
+与问题没有实质关系，无法帮助用户理解答案。
+
+特别要求：
+1. 事实正确不代表与问题直接相关。
+2. 有知识库引用不代表与问题直接相关。
+3. 不要因为结论提到了问题中的关键词，就判定为direct。
+4. 不得改写或补充输入的结论。
+5. 必须对每个id返回一条结果。
+
+只能返回JSON对象，格式如下：
+
+{
+  "results": [
+    {
+      "id": 1,
+      "relevance": "direct",
+      "reason": "简短的判断理由"
+    }
+  ]
+}
+"""
+
+    payload = {
+        "question": question,
+        "claims": claims,
+    }
+
+    response = model.bind(
+        response_format={"type": "json_object"},
+        temperature=0,
+    ).invoke([
+        SystemMessage(content=prompt),
+        HumanMessage(
+            content=json.dumps(payload, ensure_ascii=False)
+        ),
+    ])
+
+    report = json.loads(_plain_content(response.content))
+    results = report.get("results")
+
+    if not isinstance(results, list):
+        raise ValueError("相关性评估结果格式错误")
+
+    result_map = {}
+    valid_labels = {"direct", "background", "irrelevant"}
+
+    for item in results:
+        if not isinstance(item, dict):
+            raise ValueError("相关性评估条目格式错误")
+
+        number = item.get("id")
+        label = item.get("relevance")
+
+        if (
+            type(number) is not int
+            or number in result_map
+            or label not in valid_labels
+        ):
+            raise ValueError("相关性评估编号或分类不合法")
+
+        result_map[number] = item
+
+    expected = set(range(1, len(claims) + 1))
+
+    if set(result_map) != expected:
+        raise ValueError("相关性评估存在缺失或多余编号")
+
+    return [result_map[i] for i in sorted(result_map)]
+
+
 if __name__ == "__main__":
     question = "卷积神经网络为什么适合处理图像？"
 
@@ -191,7 +285,8 @@ if __name__ == "__main__":
     )
 
     print("\n========== 证据一致性校验 ==========")
-
+    
+        #   这句话有没有知识库依据？
     for i, item in enumerate(checks, 1):
         status = (
             "初步有依据"
@@ -213,3 +308,40 @@ if __name__ == "__main__":
     print(
         f"\n统计：{passed_count}/{len(checks)} 条初步通过"
     )
+    
+    # 新增：答案相关性评估
+    relevance_results = evaluate_relevance(
+        service.chat_model,
+        question,
+        checks,
+    )
+
+    print("\n========== 答案相关性校验 ==========")
+    #这句话有没有真正回答用户的问题？
+
+    counts = {
+        "direct": 0,
+        "background": 0,
+        "irrelevant": 0,
+    }
+
+    labels = {
+        "direct": "直接回答",
+        "background": "相关背景",
+        "irrelevant": "低相关",
+    }
+
+    for item in relevance_results:
+        number = item["id"]
+        category = item["relevance"]
+
+        counts[category] += 1
+
+        print(f"\n{number}. [{labels[category]}]")
+        print("结论：", checks[number - 1]["claim"])
+        print("理由：", item.get("reason", ""))
+
+    print("\n========== 相关性统计 ==========")
+    print("直接回答：", counts["direct"])
+    print("相关背景：", counts["background"])
+    print("低相关：", counts["irrelevant"])

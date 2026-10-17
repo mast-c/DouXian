@@ -5,8 +5,8 @@ collection_name = "rag"
 persist_directory = "./chroma_db"
 
 # spliter
-chunk_size = 400
-chunk_overlap = 50
+chunk_size = 1000
+chunk_overlap = 200
 separators = [
     "\n\n",                # 1. 优先保留完整段落
     "\n",                  # 2. 换行
@@ -18,6 +18,3 @@ separators = [
 ]
 max_split_char_number=120  #文本分割的阈值
 
-
-#
-similarity_threshold = 2        # 检索返回匹配的文档数量

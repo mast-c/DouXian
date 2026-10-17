@@ -817,6 +817,87 @@ footer,
   .trace-chevron,.trace-source-chip{transition:none}
 }
 
+/* 知识库真实检索片段：与现有思考记录一起折叠展示 */
+.kb-evidence-list{
+  display:grid;
+  gap:10px;
+  margin:10px 0 12px 21px;
+}
+.kb-evidence-item{
+  padding:3px 0 3px 11px;
+  border-left:2px solid #dce5f4;
+  overflow-wrap:anywhere;
+}
+.kb-evidence-title{
+  color:#526177;
+  font-size:12.5px;
+  font-weight:650;
+}
+.kb-evidence-section{
+  margin-top:4px;
+  color:#758298;
+  font-size:12px;
+}
+.kb-evidence-preview{
+  margin-top:5px;
+  color:#8a929f;
+  font-size:12px;
+  line-height:1.65;
+}
+.kb-chunk-details{
+  margin:7px 0 2px;
+  color:#667b9e;
+}
+.kb-chunk-details > summary{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  cursor:pointer;
+  font-size:12.5px;
+  line-height:1.9;
+  user-select:none;
+  list-style:none;
+  border-radius:4px;
+}
+.kb-chunk-details > summary::-webkit-details-marker{display:none}
+.kb-chunk-details > summary::marker{content:""}
+.kb-chunk-details > summary::before{
+  content:"▸";
+  font-size:12px;
+  transition:transform .15s ease;
+}
+.kb-chunk-details[open] > summary::before{
+  transform:rotate(90deg);
+}
+.kb-chunk-details > summary:focus-visible{
+  outline:2px solid #8eaaff;
+  outline-offset:3px;
+}
+.kb-chunk-details .kb-label-close{display:none}
+.kb-chunk-details[open] .kb-label-open{display:none}
+.kb-chunk-details[open] .kb-label-close{display:inline}
+.kb-chunk-full{
+  box-sizing:border-box;
+  max-height:400px;
+  overflow-y:auto;
+  overflow-wrap:anywhere;
+  white-space:pre-wrap;
+  user-select:text;
+  background:#f6f8fb;
+  border:1px solid #e6ebf4;
+  border-radius:8px;
+  margin:8px 0 5px;
+  padding:13px 15px;
+  color:#3e4c62;
+  font-size:12.5px;
+  line-height:1.8;
+}
+.kb-evidence-old-note{
+  color:#9a8b74;
+  font-size:12px;
+  margin-top:7px;
+}
+
 /* 只调整运行时状态行，已保存的搜索思考记录样式不受影响。 */
 .st-key-douxian-live-progress .trace-live{
   margin:2px 0 0;
@@ -909,6 +990,12 @@ def trace_heading(trace):
         count = len(_web_sources(trace))
         text = f"已完成分析，展示 {count} 篇参考资料，相关操作已执行" if count else "已完成联网分析"
         return text + ("（部分操作未成功）" if failure else "")
+    kb_ends = [event for event in ends if event.get("tool") == "search_knowledge_base"]
+    if kb_ends and any(event.get("ok") for event in kb_ends):
+        excerpts = trace.get("knowledge_evidence")
+        count = len(excerpts) if isinstance(excerpts, list) else 0
+        label = f"已完成知识库检索 · {count} 条证据" if count else "已完成知识库检索"
+        return label + ("（部分操作未成功）" if failure else "")
     if failure:
         return "已完成分析，部分操作未成功"
     if ends:
@@ -1048,6 +1135,52 @@ def trace_details_html(trace):
         if any(not event.get("ok", False) for event in web_ends):
             content.append('<p class="trace-alert">⚠ 部分联网操作未成功，请检查服务配置。</p>')
 
+    # 与回答 [1]、[2] 引用对应的真实知识库证据；所有字段均进行 HTML 转义。
+    knowledge_evidence = trace.get("knowledge_evidence")
+    if isinstance(knowledge_evidence, list) and knowledge_evidence:
+        cards = []
+        for item in knowledge_evidence[:5]:
+            if not isinstance(item, dict):
+                continue
+            index = item.get("id")
+            index = str(index) if type(index) is int and index > 0 else "?"
+            source = html.escape(str(item.get("source") or "未知文件"))
+            section = html.escape(str(item.get("section_path") or "未标注章节"))
+            preview = html.escape(str(item.get("preview") or ""))
+            full_text = item.get("content")
+            if isinstance(full_text, str) and full_text:
+                # 证据作为纯文本渲染，保留换行，同时防止 Markdown 中的 HTML 注入。
+                safe_full_text = html.escape(full_text)
+                chunk_details = (
+                    '<details class="kb-chunk-details">'
+                    '<summary><span class="kb-label-open">展开完整 Chunk</span>'
+                    '<span class="kb-label-close">收起完整 Chunk</span></summary>'
+                    f'<div class="kb-chunk-full">{safe_full_text}</div>'
+                    '</details>'
+                )
+            else:
+                # 兼容以前的 SQLite 历史消息：旧记录只存过 240 字摘要。
+                chunk_details = (
+                    '<div class="kb-evidence-old-note">'
+                    '旧消息仅保存了摘要，重新提问后即可展开完整 Chunk。'
+                    '</div>'
+                )
+            cards.append(
+                '<div class="kb-evidence-item">'
+                f'<div class="kb-evidence-title">[{index}] {source}</div>'
+                f'<div class="kb-evidence-section">章节：{section}</div>'
+                + (f'<div class="kb-evidence-preview">摘要：{preview}</div>' if preview else "")
+                + chunk_details
+                + '</div>'
+            )
+        if cards:
+            content.append(
+                '<div class="trace-step-title">'
+                '<span class="trace-step-icon" aria-hidden="true">⌕</span>'
+                f'<span>实际命中的知识库证据（{len(cards)} 条）</span></div>'
+            )
+            content.append('<div class="kb-evidence-list">' + "".join(cards) + '</div>')
+
     other_ends = [event for event in ends if event.get("tool") != "web_search"]
     if other_ends:
         steps = "".join(
@@ -1124,6 +1257,14 @@ with st.sidebar:
     if st.button("＋ 新对话", key="new-chat"):
         create_conversation(st.session_state)
         st.rerun()
+
+    st.radio(
+        "回答模式",
+        options=["知识库", "自动", "联网"],
+        key="douxian_answer_mode",
+        horizontal=True,
+        help="知识库：仅使用本地知识库并标注章节；自动：由 Agent 选择工具；联网：检索实时公开信息。",
+    )
 
     st.markdown(
         '<div class="side-title">最近对话</div>',
@@ -1305,6 +1446,7 @@ if pending:
     stream = st.session_state["rag"].chain.stream(
         {
             "input": pending,
+            "mode": st.session_state.get("douxian_answer_mode", "知识库"),
             "history": previous_messages,
             "trace": trace,
             "on_progress": show_progress,
