@@ -8,6 +8,7 @@
 import json
 import os
 import re
+import traceback
 import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -45,14 +46,6 @@ web_search（真实互联网搜索）。用户上传文件或者询问知识库�
 
 # 命中这些明确的时间敏感提问时，不再仅依赖模型“主动决定”是否联网。
 # 这里刻意不包含笼统的“今天”/“现在”，避免“今天学什么”之类问题被误判。
-
-
-
-
-
-
-
-
 
 
 _FRESH_PATTERN = re.compile(
@@ -132,8 +125,10 @@ def _valid_sources(raw: Any) -> list[dict]:
         if parsed.scheme not in ("https", "http") or not parsed.netloc or url in seen:
             continue
         seen.add(url)
-        result.append({"title": str(src.get("title") or parsed.netloc)[:180], "url": url})
+        result.append(
+            {"title": str(src.get("title") or parsed.netloc)[:180], "url": url})
     return result
+
 
 def render_kb_references(
     answer: str,
@@ -141,9 +136,10 @@ def render_kb_references(
 ) -> str:
     """只根据真实检索证据生成参考资料列表。"""
 
-    cited = list(dict.fromkeys(
-        int(n) for n in re.findall(r"\[(\d+)\]", answer)
-    ))
+    cited = sorted({
+        int(n)
+        for n in re.findall(r"\[(\d+)\]", answer)
+    })
 
     valid = [n for n in cited if n in reference_map]
     invalid = [n for n in cited if n not in reference_map]
@@ -164,6 +160,8 @@ def render_kb_references(
         )
 
     return "\n\n" + "\n\n".join(blocks) if blocks else ""
+
+
 class _AgentChain:
     """保留旧版 chain.stream/invoke 调用形状，明确传入 trace 引用。"""
 
@@ -193,7 +191,7 @@ class RagService:
             base_url=os.getenv("OPENAI_BASE_URL"),
         )
         self.knowledge_service = None
-        
+
         @tool("search_knowledge_base")
         def search_knowledge_base(question: str) -> str:
             """在本地知识库中执行混合检索和 Reranker 精排。"""
@@ -218,14 +216,86 @@ class RagService:
                 service.build_hybrid_retriever()
                 self.knowledge_service = service
 
-            # 复用之前已测试通过的完整检索流程
-            documents: list[Document] = (
-                self.knowledge_service.search_with_rerank(
-                    query=question,
+            # 每次请求都需要执行查询分解和检索，不能放在首次初始化条件内。
+            # 1. 判断是否需要拆分问题
+            queries = self.decompose_queries(question)
+
+            print("\n========== 查询分解 ==========")
+            for i, subquery in enumerate(queries, 1):
+                print(f"子问题 {i}: {subquery}")
+
+            # 2. 普通问题：保留原来的检索流程
+            if len(queries) == 1:
+                documents = self.knowledge_service.search_with_rerank(
+                    query=queries[0],
                     recall_k=10,
                     top_n=3,
                 )
-            )
+
+            # 3. 复合问题：每个子问题独立检索
+            else:
+                groups = []
+
+                for subquery in queries:
+                    docs = self.knowledge_service.search_with_rerank(
+                        query=subquery,
+                        recall_k=10,
+                        top_n=2,
+                    )
+                    groups.append(docs)
+
+                    print(f"\n子查询：{subquery}")
+                    for doc in docs:
+                        print(
+                            "命中章节：",
+                            doc.metadata.get("section_path", "")
+                        )
+
+                # 4. 按子问题交替合并，避免某个子问题占满全部名额
+                documents = []
+                seen = set()
+
+                for rank in range(2):
+                    for docs in groups:
+
+                        if rank >= len(docs):
+                            continue
+
+                        doc = docs[rank]
+                        metadata = (
+                            doc.metadata
+                            if isinstance(doc.metadata, dict)
+                            else {}
+                        )
+
+                        # 优先按照 Chroma Chunk ID 去重
+                        key = metadata.get("chunk_id")
+
+                        if not key:
+                            key = (
+                                str(metadata.get("source") or ""),
+                                doc.page_content,
+                            )
+
+                        if key in seen:
+                            continue
+
+                        seen.add(key)
+                        documents.append(doc)
+
+                        # 复合问题最多向模型提供 5 条证据
+                        if len(documents) >= 5:
+                            break
+
+                    if len(documents) >= 5:
+                        break
+
+            print("\n========== 最终证据 ==========")
+            for i, doc in enumerate(documents, 1):
+                print(
+                    f"[{i}]",
+                    doc.metadata.get("section_path", "")
+                )
 
             if not documents:
                 return json.dumps(empty_result, ensure_ascii=False)
@@ -249,7 +319,7 @@ class RagService:
 
                 if source not in sources:
                     sources.append(source)
-                    
+
                 #  Document 转换为 Evidence 数据
                 excerpts.append({
                     "id": len(excerpts) + 1,
@@ -263,12 +333,100 @@ class RagService:
                 "found": True,
                 "sources": sources,
                 "excerpts": excerpts,
+                "subqueries": queries,
             }, ensure_ascii=False)
 
         self.tools = [search_knowledge_base, get_weather, web_search]
         self.tool_map = {item.name: item for item in self.tools}
         self.model_with_tools = self.chat_model.bind_tools(self.tools)
         self.chain = _AgentChain(self)
+
+    def decompose_queries(self, question: str) -> list[str]:
+        """使用 Qwen 将复合问题拆成多个检索子问题。"""
+
+            
+        # 判断用户问题是否可能包含多个检索意图
+        is_compound = (
+            # 例如：A是什么？B有什么作用？
+            question.count("？") + question.count("?") >= 2
+
+            # 例如：A和B分别有什么作用？
+            or bool(
+                re.search(
+                    r"分别|各自|、|以及|对比|比较|区别|差异|异同|"
+                    r"(?:和|与).{0,20}(?:作用|功能|特点|关系)",
+                    question,
+                )
+            )
+        )
+
+        # 单一问题直接进入原来的检索流程
+        if not is_compound:
+            return [question]
+
+        system_prompt = """
+    你是 RAG 检索系统的查询分解器。
+
+    将用户的复合问题拆分成独立、明确、便于检索的子问题。
+
+    规则：
+    1. 一个子问题只关注一个知识点。
+    2. 必须保留原问题的领域、对象和限定条件。
+    3. 不得添加用户没有提出的新知识点。
+    4. 最多返回 4 个子问题。
+    5. 如果原问题不需要拆分，只返回原问题。
+    6. 只输出合法 JSON，不要输出 Markdown 或解释。
+
+    格式：
+    {"queries": ["子问题1", "子问题2"]}
+    """
+
+        try:
+            response = self.chat_model.bind(
+                temperature=0
+            ).invoke([
+                SystemMessage(content=system_prompt),
+                HumanMessage(content=question),
+            ])
+
+            raw = _plain_content(response.content).strip()
+
+            # 允许模型偶尔在 JSON 外附加文本
+            start = raw.find("{")
+            end = raw.rfind("}")
+
+            if start == -1 or end < start:
+                return [question]
+
+            data = json.loads(raw[start:end + 1])
+            values = data.get("queries")
+
+            if not isinstance(values, list):
+                return [question]
+
+            queries = []
+
+            for value in values:
+                if not isinstance(value, str):
+                    continue
+
+                text = " ".join(value.split())
+
+                if 4 <= len(text) <= 180 and text not in queries:
+                    queries.append(text)
+
+                if len(queries) >= 4:
+                    break
+
+            # 拆分不成功，回退到原来的单次检索
+            return queries if len(queries) >= 2 else [question]
+
+        except Exception as exc:
+            print(
+                f"查询分解失败，改为原问题检索："
+                f"{type(exc).__name__}"
+            )
+            return [question]
 
     @staticmethod
     def _ui_history(messages: Any) -> list:
@@ -289,7 +447,8 @@ class RagService:
         """真实执行工具，回传文本和成功标记；记录起止时间、联网来源。"""
         query = args.get("query", args.get("question", args.get("city", "")))
         started = time.perf_counter()
-        _record(trace, progress, {"type": "start", "tool": name, "query": str(query)[:160]})
+        _record(trace, progress, {"type": "start",
+                "tool": name, "query": str(query)[:160]})
         tool_obj = self.tool_map.get(name)
         try:
             if tool_obj is None:
@@ -298,7 +457,8 @@ class RagService:
             result = str(raw)
             if name == "web_search":
                 data = _search_result(raw)
-                sources = _valid_sources(data.get("sources"))[:DISPLAY_SOURCE_LIMIT]
+                sources = _valid_sources(data.get("sources"))[
+                    :DISPLAY_SOURCE_LIMIT]
                 raw_queries = data.get("queries")
                 queries = []
                 if isinstance(raw_queries, list):
@@ -314,7 +474,8 @@ class RagService:
                 ok = bool(data.get("ok")) and calls > 0 and bool(sources)
                 if ok:
                     current = trace.setdefault("sources", [])
-                    existing = {s["url"] for s in current if isinstance(s, dict) and "url" in s}
+                    existing = {s["url"] for s in current if isinstance(
+                        s, dict) and "url" in s}
                     for source in sources:
                         if len(current) >= DISPLAY_SOURCE_LIMIT:
                             break
@@ -331,7 +492,8 @@ class RagService:
                     except (ValueError, TypeError):
                         count = len(sources)
                     # 不把来源条数误称为“搜索了多少个网页”。
-                    trace["sources_total"] = max(trace.get("sources_total", 0), count)
+                    trace["sources_total"] = max(
+                        trace.get("sources_total", 0), count)
                 else:
                     result = str(data.get("answer") or "联网未成功，无法核实实时信息。")
                     if data.get("ok") and not sources:
@@ -355,7 +517,8 @@ class RagService:
                     if isinstance(kb_data, dict):
                         refs = kb_data.get("sources")
                         if isinstance(refs, list):
-                            existing = trace.setdefault("knowledge_sources", [])
+                            existing = trace.setdefault(
+                                "knowledge_sources", [])
                             for source in refs:
                                 if isinstance(source, str) and source not in existing:
                                     existing.append(source[:180])
@@ -372,19 +535,22 @@ class RagService:
                                     number = len(evidence_for_ui) + 1
                                 full_content = item.get("content")
                                 full_content = (
-                                    full_content if isinstance(full_content, str) else ""
+                                    full_content if isinstance(
+                                        full_content, str) else ""
                                 )
                                 # 预览去掉重复的章节前缀；展开区仍保留完整原文。
                                 preview_source = full_content
                                 if preview_source.startswith("章节：") and "\n" in preview_source:
-                                    preview_source = preview_source.split("\n", 1)[1]
+                                    preview_source = preview_source.split("\n", 1)[
+                                        1]
                                 # 图片 Markdown 链接可能很长，用短标签展示摘要。
                                 preview_source = re.sub(
                                     r"!\[[^\]]*\]\([^)]*\)", "[图片]", preview_source
                                 )
                                 preview_text = " ".join(preview_source.split())
                                 if len(preview_text) > 240:
-                                    preview_text = preview_text[:240].rstrip() + "…"
+                                    preview_text = preview_text[:240].rstrip(
+                                    ) + "…"
                                 evidence_for_ui.append({
                                     "id": number,
                                     "source": str(item.get("source") or "未知文件")[:180],
@@ -405,6 +571,7 @@ class RagService:
                     "duration": round(time.perf_counter() - started, 2),
                 }
         except Exception as exc:
+            traceback.print_exc()  # 调试时在 Streamlit 终端展示真实原因
             ok = False
             result = f"{name} 未能成功执行（{type(exc).__name__}），本次无法核实相关数据。"
             end = {
@@ -455,7 +622,8 @@ class RagService:
                 answer_parts.append(reply)
                 yield reply
             elif mode == "知识库":
-                result, ok = self._call_tool("search_knowledge_base", {"question": question}, trace, progress)
+                result, ok = self._call_tool("search_knowledge_base", {
+                                             "question": question}, trace, progress)
                 try:
                     kb_data = json.loads(result)
                 except (TypeError, ValueError):
@@ -560,7 +728,8 @@ class RagService:
                             yield footer
             else:
                 messages = [
-                    SystemMessage(content=SYSTEM_PROMPT + "\n当前服务器日期：" + _today()),
+                    SystemMessage(content=SYSTEM_PROMPT +
+                                  "\n当前服务器日期：" + _today()),
                     *history,
                     HumanMessage(content=question),
                 ]
@@ -590,7 +759,8 @@ class RagService:
                         if getattr(combined, "invalid_tool_calls", None):
                             reply = "模型生成的工具调用参数无法解析，请重新提问。"
                         else:
-                            reply = _plain_content(getattr(combined, "content", "")) or "".join(pending_text)
+                            reply = _plain_content(
+                                getattr(combined, "content", "")) or "".join(pending_text)
                             if not reply:
                                 reply = "抱歉，模型本次没有返回有效文本。"
                         if not streamed_any or getattr(combined, "invalid_tool_calls", None):
@@ -604,11 +774,14 @@ class RagService:
                             "args": raw.get("args") if isinstance(raw.get("args"), dict) else {},
                             "id": str(raw.get("id") or f"call_{round_index}_{i}"),
                         })
-                    messages.append(AIMessage(content=getattr(combined, "content", "") or "", tool_calls=calls))
+                    messages.append(AIMessage(content=getattr(
+                        combined, "content", "") or "", tool_calls=calls))
                     tool_failure = None
                     for item in calls:
-                        result, ok = self._call_tool(item["name"], item["args"], trace, progress)
-                        messages.append(ToolMessage(content=result, tool_call_id=item["id"]))
+                        result, ok = self._call_tool(
+                            item["name"], item["args"], trace, progress)
+                        messages.append(ToolMessage(
+                            content=result, tool_call_id=item["id"]))
                         if not ok:
                             tool_failure = result
                     if tool_failure:
