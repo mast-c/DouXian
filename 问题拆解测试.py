@@ -2,13 +2,11 @@ from rag import RagService
 
 service = RagService()
 
-question = (
-    "汇聚层的作用是什么？"
-)
+question = "贝叶斯网是什么？有什么作用？"
 
 queries = service.decompose_queries(question)
 
-print("\n========== 查询分解结果 ==========")
+print("========== 查询分解结果 ==========")
 
-for i, q in enumerate(queries, 1):
-    print(f"子问题{i}：{q}")
+for i, query in enumerate(queries, 1):
+    print(f"子问题{i}：{query}")

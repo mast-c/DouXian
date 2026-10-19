@@ -1,6 +1,7 @@
 import os
 import re
 import hashlib
+import json
 from datetime import datetime
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -44,6 +45,10 @@ class KnowledgeBaseService:
 
     def __init__(self):
         os.makedirs(config.persist_directory, exist_ok=True)
+        self.temp_directory = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "temp",
+        )
 
         self.chroma = Chroma(
             collection_name=config.collection_name,
@@ -53,7 +58,7 @@ class KnowledgeBaseService:
             ),
             persist_directory=config.persist_directory,
         )
-        # 新增：Markdown 结构切分器
+        # Markdown 结构切分器
         # 把标题层级和内容解析为结构化的 metadata（如 {"Header 1": "第一章", "Header 2": "1.1 概述"}）
         # 将这个 metadata 附加到该标题下所有后续 Chunk 上
         self.md_splitter = MarkdownHeaderTextSplitter(
@@ -67,7 +72,7 @@ class KnowledgeBaseService:
             strip_headers=True,
         )
 
-    # 新增：第一步结构切分
+    # 第一步结构切分
     def split_by_structure(
         self, data: str, filename: str
     ) -> list[Document]:
@@ -197,6 +202,54 @@ class KnowledgeBaseService:
 
         return knowledge_docs
 
+    def save_chunks_to_temp(
+        self,
+        knowledge_docs: list[Document],
+        filename: str,
+    ) -> str:
+        """将最终切分结果保存到 data/temp，便于检查实际入库内容。"""
+
+        os.makedirs(self.temp_directory, exist_ok=True)
+
+        # 用稳定的文档 ID 命名，同一文件再次切分时覆盖旧结果。
+        doc_id = hashlib.sha256(filename.encode("utf-8")).hexdigest()
+        safe_name = re.sub(r"[^A-Za-z0-9._-]+", "_", filename).strip("._")
+        safe_name = safe_name or "document"
+        output_path = os.path.join(
+            self.temp_directory,
+            f"{safe_name}_{doc_id[:12]}.json",
+        )
+
+        payload = {
+            "source": filename,
+            "chunk_count": len(knowledge_docs),
+            "total_content_char_count": sum(
+                len(doc.page_content) for doc in knowledge_docs
+            ),
+            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "chunks": [
+                {
+                    "index": index,
+                    "content": doc.page_content,
+                    "content_char_count": len(doc.page_content),
+                    "section_prefix_char_count": len(
+                        f"章节：{doc.metadata.get('section_path')}\n"
+                    ) if doc.metadata.get("section_path") else 0,
+                    "body_char_count": len(doc.page_content) - (
+                        len(f"章节：{doc.metadata.get('section_path')}\n")
+                        if doc.metadata.get("section_path") else 0
+                    ),
+                    "metadata": doc.metadata,
+                }
+                for index, doc in enumerate(knowledge_docs)
+            ],
+        }
+
+        with open(output_path, "w", encoding="utf-8") as file:
+            json.dump(payload, file, ensure_ascii=False, indent=2)
+
+        return output_path
+
     
     def upload_by_str(self, data: str, filename: str) -> str:
         """按 Chunk 正文增量更新，最大限度复用已有 Embedding。"""
@@ -221,6 +274,8 @@ class KnowledgeBaseService:
 
         if not knowledge_docs:
             return "[跳过]未产生有效 Chunk"
+
+        temp_path = self.save_chunks_to_temp(knowledge_docs, filename)
 
         # 2. 查询这份文档以前入库的正文及 Metadata
         old_data = self.chroma.get(
@@ -313,7 +368,8 @@ class KnowledgeBaseService:
         if not new_docs and not metadata_updates and not stale_ids:
             return (
                 f"[跳过] {filename} 内容未变化，"
-                f"复用 {len(knowledge_docs)} 个 Chunk"
+                f"复用 {len(knowledge_docs)} 个 Chunk\n"
+                f"切分结果：{temp_path}"
             )
 
         batch_size = 20
@@ -353,7 +409,8 @@ class KnowledgeBaseService:
             f"复用旧向量：{reused_count}\n"
             f"新增 Embedding：{len(new_docs)}\n"
             f"仅更新 Metadata：{len(metadata_updates)}\n"
-            f"删除失效 Chunk：{len(stale_ids)}"
+            f"删除失效 Chunk：{len(stale_ids)}\n"
+            f"切分结果：{temp_path}"
         )
 
     def build_bm25_index(self, batch_size: int = 200) -> int:
