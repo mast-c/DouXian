@@ -1,7 +1,6 @@
 import os
 import re
 import hashlib
-import json
 from datetime import datetime
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -41,14 +40,38 @@ def tokenize_for_bm25(text: str) -> list[str]:
     return words
 
 
+def _prepare_rerank_document(doc: Document, max_chars: int) -> str:
+    """只压缩 Reranker 输入；不改 Document 正文或 Chroma 存储。"""
+    original = doc.page_content
+    if max_chars <= 0:
+        return original
+
+    # Markdown 图片 URL 很长，对文本相关性判断通常没有直接贡献。
+    text = re.sub(r"!\\[[^\\]]*\\]\\([^)]*\\)", " [图片] ", original)
+    text = re.sub(r"https?://[^\\s)>]+", " ", text)
+    text = re.sub(r"\\s+", " ", text).strip()
+
+    metadata = doc.metadata if isinstance(doc.metadata, dict) else {}
+    section = str(metadata.get("section_path") or "").strip()
+    header = f"章节：{section[-min(130, max_chars // 4):]}\\n" if section else ""
+    room = max(0, max_chars - len(header))
+
+    # 保留正文开头 + 尾部，防止重要算法步骤刚好位于后半段。
+    if len(text) > room:
+        marker = " … "
+        tail_len = min(120, max(0, room // 5))
+        head_len = max(0, room - tail_len - len(marker))
+        text = text[:head_len] + marker + (text[-tail_len:] if tail_len else "")
+
+    compact = (header + text)[:max_chars]
+    # 短 Chunk 直接使用完整原文，不为添加标题反而增加 Token。
+    return compact if len(compact) < len(original) else original
+
+
 class KnowledgeBaseService:
 
     def __init__(self):
         os.makedirs(config.persist_directory, exist_ok=True)
-        self.temp_directory = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            "temp",
-        )
 
         self.chroma = Chroma(
             collection_name=config.collection_name,
@@ -58,7 +81,7 @@ class KnowledgeBaseService:
             ),
             persist_directory=config.persist_directory,
         )
-        # Markdown 结构切分器
+        # 新增：Markdown 结构切分器
         # 把标题层级和内容解析为结构化的 metadata（如 {"Header 1": "第一章", "Header 2": "1.1 概述"}）
         # 将这个 metadata 附加到该标题下所有后续 Chunk 上
         self.md_splitter = MarkdownHeaderTextSplitter(
@@ -72,7 +95,7 @@ class KnowledgeBaseService:
             strip_headers=True,
         )
 
-    # 第一步结构切分
+    # 新增：第一步结构切分
     def split_by_structure(
         self, data: str, filename: str
     ) -> list[Document]:
@@ -202,54 +225,6 @@ class KnowledgeBaseService:
 
         return knowledge_docs
 
-    def save_chunks_to_temp(
-        self,
-        knowledge_docs: list[Document],
-        filename: str,
-    ) -> str:
-        """将最终切分结果保存到 data/temp，便于检查实际入库内容。"""
-
-        os.makedirs(self.temp_directory, exist_ok=True)
-
-        # 用稳定的文档 ID 命名，同一文件再次切分时覆盖旧结果。
-        doc_id = hashlib.sha256(filename.encode("utf-8")).hexdigest()
-        safe_name = re.sub(r"[^A-Za-z0-9._-]+", "_", filename).strip("._")
-        safe_name = safe_name or "document"
-        output_path = os.path.join(
-            self.temp_directory,
-            f"{safe_name}_{doc_id[:12]}.json",
-        )
-
-        payload = {
-            "source": filename,
-            "chunk_count": len(knowledge_docs),
-            "total_content_char_count": sum(
-                len(doc.page_content) for doc in knowledge_docs
-            ),
-            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "chunks": [
-                {
-                    "index": index,
-                    "content": doc.page_content,
-                    "content_char_count": len(doc.page_content),
-                    "section_prefix_char_count": len(
-                        f"章节：{doc.metadata.get('section_path')}\n"
-                    ) if doc.metadata.get("section_path") else 0,
-                    "body_char_count": len(doc.page_content) - (
-                        len(f"章节：{doc.metadata.get('section_path')}\n")
-                        if doc.metadata.get("section_path") else 0
-                    ),
-                    "metadata": doc.metadata,
-                }
-                for index, doc in enumerate(knowledge_docs)
-            ],
-        }
-
-        with open(output_path, "w", encoding="utf-8") as file:
-            json.dump(payload, file, ensure_ascii=False, indent=2)
-
-        return output_path
-
     
     def upload_by_str(self, data: str, filename: str) -> str:
         """按 Chunk 正文增量更新，最大限度复用已有 Embedding。"""
@@ -274,8 +249,6 @@ class KnowledgeBaseService:
 
         if not knowledge_docs:
             return "[跳过]未产生有效 Chunk"
-
-        temp_path = self.save_chunks_to_temp(knowledge_docs, filename)
 
         # 2. 查询这份文档以前入库的正文及 Metadata
         old_data = self.chroma.get(
@@ -368,8 +341,7 @@ class KnowledgeBaseService:
         if not new_docs and not metadata_updates and not stale_ids:
             return (
                 f"[跳过] {filename} 内容未变化，"
-                f"复用 {len(knowledge_docs)} 个 Chunk\n"
-                f"切分结果：{temp_path}"
+                f"复用 {len(knowledge_docs)} 个 Chunk"
             )
 
         batch_size = 20
@@ -409,8 +381,7 @@ class KnowledgeBaseService:
             f"复用旧向量：{reused_count}\n"
             f"新增 Embedding：{len(new_docs)}\n"
             f"仅更新 Metadata：{len(metadata_updates)}\n"
-            f"删除失效 Chunk：{len(stale_ids)}\n"
-            f"切分结果：{temp_path}"
+            f"删除失效 Chunk：{len(stale_ids)}"
         )
 
     def build_bm25_index(self, batch_size: int = 200) -> int:
@@ -535,17 +506,50 @@ class KnowledgeBaseService:
         if base_url:
             dashscope.base_http_api_url = base_url
 
+        # 默认全文重排；实验时 RERANK_DOC_CHARS=600，只压缩送去排序的文本。
+        # 结果仍用 candidates[idx] 的完整 page_content，不影响最终引用。
+        try:
+            max_chars = int(os.getenv("RERANK_DOC_CHARS", "0"))
+        except ValueError:
+            max_chars = 0
+        if 0 < max_chars < 300:
+            raise ValueError("RERANK_DOC_CHARS 只能为 0，或至少 300")
+
+        rerank_texts = [
+            _prepare_rerank_document(doc, max_chars)
+            for doc in candidates
+        ]
         response = dashscope.TextReRank.call(
-            model="qwen3-rerank",
+            model="qwen3-vl-rerank",
             api_key=api_key,
             query=query,
-            documents=[doc.page_content for doc in candidates],
+            documents=rerank_texts,
             top_n=min(top_n, len(candidates)),
         )
         if response.status_code != HTTPStatus.OK:
             raise RuntimeError(
                 f"Rerank重拍失败: {response.code} {response.message}"
             )
+
+        # 官方响应的 usage.total_tokens 是真实模型 Token 消耗。
+        # 统计字符数仅用于对比压缩比例，不等同于 Token 数。
+        usage = getattr(response, "usage", None)
+        if usage is None and isinstance(response, dict):
+            usage = response.get("usage")
+        if isinstance(usage, dict):
+            total_tokens = usage.get("total_tokens")
+        else:
+            total_tokens = getattr(usage, "total_tokens", None)
+        full_chars = sum(len(doc.page_content) for doc in candidates)
+        sent_chars = sum(len(text) for text in rerank_texts)
+        print(
+            "[Rerank成本] "
+            f"候选={len(candidates)} "
+            f"原文字符={full_chars} "
+            f"发送字符={sent_chars} "
+            f"官方total_tokens={total_tokens if total_tokens is not None else '未返回'} "
+            f"压缩上限={max_chars or '全文'}"
+        )
 
         items = (response.output or {}).get("results", [])
         if not items:

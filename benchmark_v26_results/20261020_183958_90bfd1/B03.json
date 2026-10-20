@@ -1,0 +1,133 @@
+{
+  "id": "B03",
+  "topic": "神经网络 / 计算机制",
+  "question": "神经网络中的反向传播算法如何利用链式法则计算各层参数的梯度？请说明基本步骤。",
+  "negative_control": false,
+  "review_points": [
+    "解释梯度从输出端向前层传播以及链式法则如何发挥作用",
+    "区分梯度计算与优化器更新参数这两件事",
+    "不生成教材没有介绍的具体公式或实验数据",
+    "确认引文支持所列计算步骤；若资料不足应说明"
+  ],
+  "status": "completed",
+  "error": null,
+  "cold_search_run": false,
+  "elapsed_seconds": 8.06,
+  "first_char_seconds": 1.222,
+  "answer": "根据知识库证据，神经网络中的反向传播算法利用链式法则计算各层参数梯度的基本步骤如下：\n\n**1. 前馈计算净输入和激活值**\n首先进行前向传播，计算每一层的净输入 $\\boldsymbol{z}^{(l)}$ 和激活值 $\\mathbf{\\pmb{a}}^{(l)}$，直到最后一层 [2]。\n\n**2. 反向传播计算误差项（利用链式法则）**\n从输出层开始，利用链式法则递归计算每一层的误差项 $\\delta^{(l)}$。\n*   **定义**：第 $l$ 层的误差项定义为损失函数对该层净输入的导数，即 $\\delta^{(l)} \\triangleq \\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{z}^{(l)}}$ [1]。\n*   **链式法则应用**：第 $l$ 层的误差项可以通过第 $l+1$ 层的误差项 $\\delta^{(l + 1)}$、激活函数的导数以及下一层的权重矩阵来计算 [1]。具体公式为：\n    $$ \\delta^{(l)} = f_{l}^{\\prime} (\\boldsymbol{z}^{(l)}) \\odot \\left((\\boldsymbol{W}^{(l + 1)})^{\\top} \\delta^{(l + 1)}\\right) $$\n    其中，$f_{l}^{\\prime} (\\boldsymbol{z}^{(l)})$ 是激活函数的导数，$\\odot$ 表示元素相乘（点积运算符），$(\\boldsymbol{W}^{(l + 1)})^{\\top}$ 是下一层权重矩阵的转置 [1]。这一步体现了链式法则中 $\\frac{\\partial \\boldsymbol{a}^{(l)}}{\\partial \\boldsymbol{z}^{(l)}}$、$\\frac{\\partial \\boldsymbol{z}^{(l + 1)}}{\\partial \\mathbf{a}^{(l)}}$ 和 $\\frac{\\partial \\mathcal{L} }{\\partial \\boldsymbol{z}^{(l + 1)}}$ 的连接 [1]。\n\n**3. 计算参数梯度并更新参数**\n在计算出每一层的误差项 $\\delta^{(l)}$ 后，即可得到每一层参数的梯度 [2]。\n*   **偏置梯度**：第 $l$ 层偏置 $\\boldsymbol{b}^{(l)}$ 的梯度直接等于该层的误差项，即 $\\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{b}^{(l)}} = \\delta^{(l)}$ [2]。\n*   **后续步骤**：最后使用计算出的梯度对参数进行更新 [2]。\n\n综上所述，反向传播算法分为三步：前馈计算净输入和激活值、反向传播计算误差项、计算参数梯度并更新 [2]。\n\n*⚡ 快速模式：本次未执行独立证据校验，请核对引用原文。*\n\n参考资料：\n\n[1] 神经网络与深度学习.md / 《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法\n\n[2] 神经网络与深度学习.md / 《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法",
+  "evidence": [
+    {
+      "id": 1,
+      "source": "神经网络与深度学习.md",
+      "section_path": "《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法",
+      "preview": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法 $$ (4.59) 因此，根据链式法则，第$l$层的误差项为 $$ \\delta^{(l)} \\triangleq \\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{z}^{(l)}}\\tag{4.60} $$ $$ = \\boxed{\\frac{\\partial \\bo…",
+      "content": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法\n$$  \n(4.59)  \n因此，根据链式法则，第$l$层的误差项为  \n$$\n\\delta^{(l)} \\triangleq \\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{z}^{(l)}}\\tag{4.60}\n$$  \n$$\n= \\boxed{\\frac{\\partial \\boldsymbol{a}^{(l)}}{\\partial \\boldsymbol{z}^{(l)}}} \\cdot \\boxed{\\frac{\\partial \\boldsymbol{z}^{(l + 1)}}{\\partial \\boldsymbol{a}^{(l)}}} \\cdot \\boxed{\\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{z}^{(l + 1)}}}\\tag{4.61}\n$$  \n$$\n= \\boxed{\\mathrm{diag} (f_{l}^{\\prime} (\\boldsymbol{z}^{(l)})) \\cdot (\\boldsymbol{W}^{(l + 1)})^{\\top} \\cdot \\delta^{(l + 1)}}\\tag{4.62}\n$$  \n$$\n= f_{l}^{\\prime} (\\boldsymbol{z}^{(l)}) \\odot \\left((\\boldsymbol{W}^{(l + 1)})^{\\top} \\delta^{(l + 1)}\\right) \\quad \\in \\mathbb{R}^{M_{l}}, \\tag{4.63}\n$$  \n其中⊙是向量的点积运算符，表示每个元素相乘"
+    },
+    {
+      "id": 2,
+      "source": "神经网络与深度学习.md",
+      "section_path": "《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法",
+      "preview": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法 $$ \\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{b}^{(l)}} = \\delta^{(l)} \\quad \\in \\mathbb{R}^{M_{l}}.\\tag{4.69} $$ 在计算出每一层的误差项之后，我们就可以得到每一层参数的梯度．因此，使用误差反向传…",
+      "content": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法\n$$\n\\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{b}^{(l)}} = \\delta^{(l)} \\quad \\in \\mathbb{R}^{M_{l}}.\\tag{4.69}\n$$  \n在计算出每一层的误差项之后，我们就可以得到每一层参数的梯度．因此，使用误差反向传播算法的前馈神经网络训练过程可以分为以下三步：  \n（1） 前馈计算每一层的净输入 $\\boldsymbol{z}^{(l)}$ 和激活值 $\\mathbf{\\pmb{a}}^{(l)}$ ，直到最后一层；  \n（2） 反向传播计算每一层的误差项 $\\delta^{(l)}$ ；  \n（3） 计算每一层参数的偏导数，并更新参数  \n算法 给出使用反向传播算法的随机梯度下降训练过程  \n算法 4.1 使用反向传播算法的随机梯度下降训练过程  \n输入: 训练集 $\\mathcal{D} = \\{(\\boldsymbol{x}^{(n)}, y^{(n)})\\}_{n = 1}^{N}$ ，验证集 V, 学习率 $\\alpha$ , 正则化系数 $\\lambda$ , 网络层数 L, 神经元数量 $M_l, 1 \\leq l \\leq L$ .  \n1 随机初始化 W, b;  \n2 repeat  \n3 对训练集 D 中的样本随机重排序;  \n4 for $n = 1 \\cdots N$ do  \n5 从训练集 D 中选取样本 $(\\boldsymbol{x}^{(n)}, y^{(n)})$ ;  \n6 前馈计算每一层的净输入 $z^{(l)}$ 和激活值 $a^{(l)}$ , 直到最后一层;  \n7 反向传播计算每一层的误差 $\\delta^{(l)}$ ; // 公式 (4.63)  \n// 计算每一层参数的导数"
+    },
+    {
+      "id": 3,
+      "source": "神经网络与深度学习.md",
+      "section_path": "《神经网络与深度学习》 / 第6章 循环神经网络 / 6.4 参数学习 / 6.4.1 随时间反向传播算法",
+      "preview": "章节：《神经网络与深度学习》 / 第6章 循环神经网络 / 6.4 参数学习 / 6.4.1 随时间反向传播算法 $$ 链式法则参见公式(B.18) 其中 $\\frac{{\\partial^{+}} z_{k}} {{\\partial{u_{ij}}}}$ 表示“直接”偏导数，即公式 $z_{k} = U h_{k - 1} + W x_{k} + b$ 中保持 $\\pmb{h}_{k - 1}$ 不变，对 $u_{ij}$ 进行求偏导数，得到 $$ \\frac{\\parti…",
+      "content": "章节：《神经网络与深度学习》 / 第6章 循环神经网络 / 6.4 参数学习 / 6.4.1 随时间反向传播算法\n$$  \n链式法则参见公式(B.18)  \n其中 $\\frac{{\\partial^{+}} z_{k}} {{\\partial{u_{ij}}}}$ 表示“直接”偏导数，即公式 $z_{k} = U h_{k - 1} + W x_{k} + b$ 中保持 $\\pmb{h}_{k - 1}$ 不变，对 $u_{ij}$ 进行求偏导数，得到  \n$$\n\\frac{\\partial^{+} \\boldsymbol{z}_{k}}{\\partial u_{ij}} = \\left[0, \\dots, \\boxed{[\\boldsymbol{h}_{k - 1}]_{j}}, \\dots, 0 \\right]\\tag{6.32}\n$$  \n$$\n\\triangleq \\mathbb{I}_{i} ([\\boldsymbol{h}_{k - 1}]_{j}), \\tag{6.33}\n$$  \n其中 $[\\pmb{h}_{k - 1}]_{j}$ 为第$l-1$时刻隐状态的第 $j$ 维； $\\mathbb{I}_{i} (x)$ 除了第𝑖行值为𝑥外，其余都为0的行向量  \n定义误差项 $\\begin{array} {r} {\\delta_{t, k} = \\frac{\\partial \\mathcal{L}_{t}} {\\partial z_{k}}} \\end{array}$ 为第 时刻的损失对第 时刻隐藏神经层的净输入 $z_{k}$ 的导数，则当 $1 \\leq k < t$ 时  \n$$\n\\delta_{t, k} = \\frac{\\partial \\mathcal{L}_{t}}{\\partial \\mathbf{z}_{k}}\\tag{6.34}\n$$  \n$$\n= \\frac{\\partial \\pmb{h}_{k}}{\\partial \\pmb{z}_{k}} \\frac{\\partial \\pmb{z}_{k + 1}}{\\partial \\pmb{h}_{k}} \\frac{\\partial \\mathcal{L}_{t}}{\\partial \\pmb{z}_{k + 1}}\\tag{6.35}\n$$  \n$$"
+    }
+  ],
+  "trace": {
+    "version": 1,
+    "events": [
+      {
+        "type": "start",
+        "tool": "search_knowledge_base",
+        "query": "神经网络中的反向传播算法如何利用链式法则计算各层参数的梯度？请说明基本步骤。"
+      },
+      {
+        "type": "end",
+        "tool": "search_knowledge_base",
+        "ok": true,
+        "duration": 0.49
+      }
+    ],
+    "sources": [],
+    "knowledge_sources": [
+      "神经网络与深度学习.md"
+    ],
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "神经网络与深度学习.md",
+        "section_path": "《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法",
+        "preview": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法 $$ (4.59) 因此，根据链式法则，第$l$层的误差项为 $$ \\delta^{(l)} \\triangleq \\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{z}^{(l)}}\\tag{4.60} $$ $$ = \\boxed{\\frac{\\partial \\bo…",
+        "content": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法\n$$  \n(4.59)  \n因此，根据链式法则，第$l$层的误差项为  \n$$\n\\delta^{(l)} \\triangleq \\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{z}^{(l)}}\\tag{4.60}\n$$  \n$$\n= \\boxed{\\frac{\\partial \\boldsymbol{a}^{(l)}}{\\partial \\boldsymbol{z}^{(l)}}} \\cdot \\boxed{\\frac{\\partial \\boldsymbol{z}^{(l + 1)}}{\\partial \\boldsymbol{a}^{(l)}}} \\cdot \\boxed{\\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{z}^{(l + 1)}}}\\tag{4.61}\n$$  \n$$\n= \\boxed{\\mathrm{diag} (f_{l}^{\\prime} (\\boldsymbol{z}^{(l)})) \\cdot (\\boldsymbol{W}^{(l + 1)})^{\\top} \\cdot \\delta^{(l + 1)}}\\tag{4.62}\n$$  \n$$\n= f_{l}^{\\prime} (\\boldsymbol{z}^{(l)}) \\odot \\left((\\boldsymbol{W}^{(l + 1)})^{\\top} \\delta^{(l + 1)}\\right) \\quad \\in \\mathbb{R}^{M_{l}}, \\tag{4.63}\n$$  \n其中⊙是向量的点积运算符，表示每个元素相乘"
+      },
+      {
+        "id": 2,
+        "source": "神经网络与深度学习.md",
+        "section_path": "《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法",
+        "preview": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法 $$ \\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{b}^{(l)}} = \\delta^{(l)} \\quad \\in \\mathbb{R}^{M_{l}}.\\tag{4.69} $$ 在计算出每一层的误差项之后，我们就可以得到每一层参数的梯度．因此，使用误差反向传…",
+        "content": "章节：《神经网络与深度学习》 / 第4章 前馈神经网络 / 4.4 反向传播算法\n$$\n\\frac{\\partial \\mathcal{L} (\\boldsymbol{y}, \\hat{\\boldsymbol{y}})}{\\partial \\boldsymbol{b}^{(l)}} = \\delta^{(l)} \\quad \\in \\mathbb{R}^{M_{l}}.\\tag{4.69}\n$$  \n在计算出每一层的误差项之后，我们就可以得到每一层参数的梯度．因此，使用误差反向传播算法的前馈神经网络训练过程可以分为以下三步：  \n（1） 前馈计算每一层的净输入 $\\boldsymbol{z}^{(l)}$ 和激活值 $\\mathbf{\\pmb{a}}^{(l)}$ ，直到最后一层；  \n（2） 反向传播计算每一层的误差项 $\\delta^{(l)}$ ；  \n（3） 计算每一层参数的偏导数，并更新参数  \n算法 给出使用反向传播算法的随机梯度下降训练过程  \n算法 4.1 使用反向传播算法的随机梯度下降训练过程  \n输入: 训练集 $\\mathcal{D} = \\{(\\boldsymbol{x}^{(n)}, y^{(n)})\\}_{n = 1}^{N}$ ，验证集 V, 学习率 $\\alpha$ , 正则化系数 $\\lambda$ , 网络层数 L, 神经元数量 $M_l, 1 \\leq l \\leq L$ .  \n1 随机初始化 W, b;  \n2 repeat  \n3 对训练集 D 中的样本随机重排序;  \n4 for $n = 1 \\cdots N$ do  \n5 从训练集 D 中选取样本 $(\\boldsymbol{x}^{(n)}, y^{(n)})$ ;  \n6 前馈计算每一层的净输入 $z^{(l)}$ 和激活值 $a^{(l)}$ , 直到最后一层;  \n7 反向传播计算每一层的误差 $\\delta^{(l)}$ ; // 公式 (4.63)  \n// 计算每一层参数的导数"
+      },
+      {
+        "id": 3,
+        "source": "神经网络与深度学习.md",
+        "section_path": "《神经网络与深度学习》 / 第6章 循环神经网络 / 6.4 参数学习 / 6.4.1 随时间反向传播算法",
+        "preview": "章节：《神经网络与深度学习》 / 第6章 循环神经网络 / 6.4 参数学习 / 6.4.1 随时间反向传播算法 $$ 链式法则参见公式(B.18) 其中 $\\frac{{\\partial^{+}} z_{k}} {{\\partial{u_{ij}}}}$ 表示“直接”偏导数，即公式 $z_{k} = U h_{k - 1} + W x_{k} + b$ 中保持 $\\pmb{h}_{k - 1}$ 不变，对 $u_{ij}$ 进行求偏导数，得到 $$ \\frac{\\parti…",
+        "content": "章节：《神经网络与深度学习》 / 第6章 循环神经网络 / 6.4 参数学习 / 6.4.1 随时间反向传播算法\n$$  \n链式法则参见公式(B.18)  \n其中 $\\frac{{\\partial^{+}} z_{k}} {{\\partial{u_{ij}}}}$ 表示“直接”偏导数，即公式 $z_{k} = U h_{k - 1} + W x_{k} + b$ 中保持 $\\pmb{h}_{k - 1}$ 不变，对 $u_{ij}$ 进行求偏导数，得到  \n$$\n\\frac{\\partial^{+} \\boldsymbol{z}_{k}}{\\partial u_{ij}} = \\left[0, \\dots, \\boxed{[\\boldsymbol{h}_{k - 1}]_{j}}, \\dots, 0 \\right]\\tag{6.32}\n$$  \n$$\n\\triangleq \\mathbb{I}_{i} ([\\boldsymbol{h}_{k - 1}]_{j}), \\tag{6.33}\n$$  \n其中 $[\\pmb{h}_{k - 1}]_{j}$ 为第$l-1$时刻隐状态的第 $j$ 维； $\\mathbb{I}_{i} (x)$ 除了第𝑖行值为𝑥外，其余都为0的行向量  \n定义误差项 $\\begin{array} {r} {\\delta_{t, k} = \\frac{\\partial \\mathcal{L}_{t}} {\\partial z_{k}}} \\end{array}$ 为第 时刻的损失对第 时刻隐藏神经层的净输入 $z_{k}$ 的导数，则当 $1 \\leq k < t$ 时  \n$$\n\\delta_{t, k} = \\frac{\\partial \\mathcal{L}_{t}}{\\partial \\mathbf{z}_{k}}\\tag{6.34}\n$$  \n$$\n= \\frac{\\partial \\pmb{h}_{k}}{\\partial \\pmb{z}_{k}} \\frac{\\partial \\pmb{z}_{k + 1}}{\\partial \\pmb{h}_{k}} \\frac{\\partial \\mathcal{L}_{t}}{\\partial \\pmb{z}_{k + 1}}\\tag{6.35}\n$$  \n$$"
+      }
+    ],
+    "self_rag_retry": {
+      "status": "skipped_fast_mode",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "unchecked"
+    },
+    "evidence_coverage": {
+      "decision": "unchecked",
+      "aspects": [],
+      "evidence_ids": [
+        1,
+        2,
+        3
+      ],
+      "answer_questions": [],
+      "refused_questions": []
+    },
+    "fast_quality_check": {
+      "status": "pass",
+      "valid_citation_ids": [
+        1,
+        2
+      ],
+      "invalid_citation_ids": [],
+      "warnings": [],
+      "checked_by": "local_rules_only"
+    }
+  },
+  "signals": {
+    "elapsed_under_40s": true,
+    "evidence_count": 3,
+    "reference_ids_in_body": [
+      1,
+      2
+    ],
+    "valid_reference_ids": [
+      1,
+      2
+    ],
+    "unknown_reference_ids": [],
+    "quality_rules_status": "pass",
+    "quality_rules_warnings": [],
+    "rerank_total_tokens": 4295,
+    "rerank_calls_with_official_usage": 1,
+    "python_fast_planner_hit": false,
+    "answer_states_insufficient_evidence": false,
+    "human_fact_check": "待人工核验",
+    "human_citation_support_check": "待人工核验"
+  },
+  "log_file": "B03.log"
+}

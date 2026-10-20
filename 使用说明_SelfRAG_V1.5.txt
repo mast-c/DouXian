@@ -1,0 +1,92 @@
+豆馅 RAG / Self-RAG V1.5 — 证据不足时定向补检一次
+===================================================
+
+【先确认】
+你已经安装并运行通过 Evidence Sufficiency V1。
+你的 data 目录应有：
+  rag.py
+  evidence_guard.py
+本包额外提供以下文件：
+  self_rag_retry.py
+  install_self_rag_v15.py
+  test_self_rag_v15.py
+
+【功能】
+初次混合检索 / Reranker → Evidence Sufficiency V1
+  - answer：直接生成回答；不补检
+  - partial/refuse：生成最多 2 个针对欠缺证据的新查询
+    → 每个新查询检索最多 2 条 → 新增最多 3 个不重复 Chunk
+    → 固定首次审核的问题方面，重新审核一次
+    → 仅当审核支持范围确有扩大、已有结论不倒退时才使用新证据；
+       否则保留第一次校验结果
+  - error：按原有 V1 安全策略停止作答
+
+补检不会访问互联网、修改 Chroma、重新向量化。
+但补检会产生额外的查询改写、Reranker、二次校验 API 调用费用和等待时间。
+本功能仅适用于你显式选择的“知识库”模式。
+
+【操作步骤：Windows PowerShell / VS Code】
+1. 停止 Streamlit 程序。
+2. 将此 ZIP 中三个 .py 文件解压到你的 rag.py 同一目录。
+3. 先离线测试（不用 API）：
+       python .\test_self_rag_v15.py
+   预期：Self-RAG V1.5 13 组离线测试通过。
+4. 检查你的 rag.py 能否安全增量安装：
+       python .\install_self_rag_v15.py --dry-run
+   只有提示“dry-run 通过”时才进行下一步。
+5. 正式安装：
+       python .\install_self_rag_v15.py
+   会自动备份原来的 rag.py 为 rag.py.backup_before_selfrag_时间戳。
+6. 验证语法：
+       python -m py_compile .\rag.py .\evidence_guard.py .\self_rag_retry.py
+7. 重启前端：
+       streamlit run .\豆馅.py
+
+【关键安全说明】
+此包没有附送旧的 rag.py，不会整体覆盖你当前的后端和提示词。
+安装器必须检测到已经安装 Evidence Guard V1 的代码标记。
+若 dry-run 失败，文件不会被修改，请直接把错误信息与当前 rag.py 发来。
+安装器同时尝试解决部分拒答重复：生成模型只处理审核通过的方面，
+证据不足的部分仍由 Python 统一追加一次拒答。
+若你已经手工修改过这个位置，安装器会尝试保留你的修改；
+遇到无法识别的结构则安全终止，不进行覆盖。
+
+【推荐的真实测试】
+测试 1（原证据充足，跳过补检）：
+    随机森林与Bagging有什么关系？随机森林有哪些优势？
+终端期望：[Self-RAG V1.5] skipped
+
+测试 2（本来无证据，允许补检但仍拒答）：
+    《机器学习》教材是否记录随机森林在2025年某国际竞赛中的准确率？
+终端可能：no_new_evidence / unchanged / no_queries
+前端应继续拒答，不得编造数值。
+
+测试 3（部分证据充足，先补检再部分拒答）：
+    随机森林为什么能够改善泛化性能？教材是否记录了它在2025年某项竞赛的准确率？
+终端可能：unchanged / no_new_evidence / improved
+最终应保留有依据的解释；准确率如果没证据仍拒答。
+
+测试 4（知识库实际有证据，但初次遗漏）：
+    贝叶斯网是什么？有什么实际作用？如何根据已知信息推断其他变量？
+关注是否有机会重新命中 7.5.3 推断；不能保证每次命中。
+
+新增状态：
+  skipped          证据充分，跳过补检
+  no_queries       未生成有效新查询
+  no_new_evidence  没有发现新增的不重复 Chunk
+  improved         补检后至少一项新问题得到支持且旧结果未退化
+  unchanged        补检后未改善，沿用初次审核
+  retry_error      查询改写报错，安全沿用初次审核
+  judge_error      第二次审核失败，安全沿用初次审核
+
+终端将打印 [Self-RAG V1.5]，详细追踪可在 trace["self_rag_retry"] 中查看。
+
+【限制】
+- 这是模仿 Self-RAG 的工程式定向补检，不是原论文的自反思标记训练方法。
+- 审核仍依赖 Qwen 判断语义充分性，原文引文校验保证真实性，不保证全部逻辑推理必然正确。
+- 第二次审核严格要求与第一次相同的问题方面；若改写过问题，保守回退。
+- 尚未实现回答生成后逐项校验（可作为后续 Self-RAG V2）。
+
+【回滚】
+停止 Streamlit；恢复安装器生成的 rag.py.backup_before_selfrag_* 为 rag.py，
+再重启 Streamlit 即可。无需重建索引或重新 Embedding。
