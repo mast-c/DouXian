@@ -1,0 +1,14 @@
+{
+  "WARNING": "DEMO ONLY: artificial Chroma record, not user production Chroma binding results",
+  "graph_claim_count": 12,
+  "synthetic_snapshot_rows": 1,
+  "status_counts": {
+    "verified": 3,
+    "unbound": 9
+  },
+  "illustrative_verified_claim_ids": [
+    "edge:d8972949d756a8d4",
+    "edge:0d873ce8e1dca645",
+    "edge:b3d65ccbb81fe341"
+  ]
+}
