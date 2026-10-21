@@ -632,6 +632,38 @@ class RagService:
                 f"({len(queries)} 个子问题)"
             )
 
+            # V2.8：图谱仅用于补充已有检索词，不作为答案证据。
+            # 默认 off。所有异常都回退 V2.6，且不会新增检索 / Rerank 次数。
+            graph_assist_info = {
+                "status": "off", "added_terms": [],
+                "queries_before": len(queries), "queries_after": len(queries),
+                "graph_semantic_edges_used": 0,
+            }
+            if os.getenv("DOUXIAN_GRAPH_MODE", "off").strip().lower() == "assist":
+                _graph_started = time.perf_counter()
+                try:
+                    from graph_assist_v28 import (
+                        default_paths, suggest_retrieval_queries,
+                    )
+                    _graph_file, _source_file = default_paths(
+                        Path(__file__).resolve().parent
+                    )
+                    queries, graph_assist_info = suggest_retrieval_queries(
+                        question, queries, _graph_file, _source_file
+                    )
+                except Exception as _graph_exc:
+                    graph_assist_info["status"] = "fallback_error"
+                    print(
+                        "[Graph Assist] 回退原检索："
+                        f"{type(_graph_exc).__name__}"
+                    )
+                print(
+                    "[Graph Assist] "
+                    f"status={graph_assist_info['status']} "
+                    f"hints={len(graph_assist_info['added_terms'])} "
+                    f"耗时={time.perf_counter() - _graph_started:.4f}s"
+                )
+
             print("\n========== 查询分解 ==========")
             for i, subquery in enumerate(queries, 1):
                 print(f"子问题 {i}: {subquery}")
@@ -738,6 +770,7 @@ class RagService:
                 "sources": sources,
                 "excerpts": excerpts,
                 "subqueries": queries,
+                "graph_assist": graph_assist_info,
             }, ensure_ascii=False)
 
         self.tools = [search_knowledge_base, web_search]
@@ -752,6 +785,24 @@ class RagService:
             if fast_queries:
                 print("[Query Planner] fast_path=on, skipped Qwen")
                 return fast_queries
+
+            # V2.9：只在 KB fast 且明确打开新开关时，尝试双层/双方面规则。
+            # 规则未命中或模块不可用时保持 V2.8 原有 Qwen 查询分解。
+            if (
+                os.getenv("DOUXIAN_FAST_COMPONENT_PLAN", "0") == "1"
+                and os.getenv("DOUXIAN_KB_MODE", "strict").strip().lower() == "fast"
+            ):
+                try:
+                    from fast_component_planner_v29 import plan_two_layer_aspects
+                    component_queries = plan_two_layer_aspects(question)
+                    if component_queries:
+                        print("[Query Planner] component_fast_path=on, skipped Qwen")
+                        return component_queries
+                except Exception as component_exc:
+                    print(
+                        "[Query Planner] component_fast_path=fallback "
+                        f"({type(component_exc).__name__})"
+                    )
 
 
             
@@ -1083,6 +1134,9 @@ class RagService:
                     answer_parts.append(reply)
                     yield reply
                 else:
+                    trace["graph_assist"] = kb_data.get(
+                        "graph_assist", {"status": "off"}
+                    )
                     # 知识库模式不会访问互联网；引用内容均来自真实检索结果。
                     # 为有效证据连续编号，不依赖旧文档是否有 id
                     evidence = []

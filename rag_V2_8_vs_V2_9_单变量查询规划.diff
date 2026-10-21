@@ -1,0 +1,27 @@
+--- rag.py (V2.8)
++++ rag.py (V2.9)
+@@ -785,6 +785,24 @@
+             if fast_queries:
+                 print("[Query Planner] fast_path=on, skipped Qwen")
+                 return fast_queries
++
++            # V2.9：只在 KB fast 且明确打开新开关时，尝试双层/双方面规则。
++            # 规则未命中或模块不可用时保持 V2.8 原有 Qwen 查询分解。
++            if (
++                os.getenv("DOUXIAN_FAST_COMPONENT_PLAN", "0") == "1"
++                and os.getenv("DOUXIAN_KB_MODE", "strict").strip().lower() == "fast"
++            ):
++                try:
++                    from fast_component_planner_v29 import plan_two_layer_aspects
++                    component_queries = plan_two_layer_aspects(question)
++                    if component_queries:
++                        print("[Query Planner] component_fast_path=on, skipped Qwen")
++                        return component_queries
++                except Exception as component_exc:
++                    print(
++                        "[Query Planner] component_fast_path=fallback "
++                        f"({type(component_exc).__name__})"
++                    )
+ 
+ 
+             
