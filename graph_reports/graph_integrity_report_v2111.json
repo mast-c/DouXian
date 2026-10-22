@@ -1,0 +1,18 @@
+{
+  "schema": "douxian-claim-link-2.11-1",
+  "created_utc": "2026-10-21T10:26:26+00:00",
+  "graph_schema": "douxian-kg-2.7-offline-1",
+  "graph_sha256": "afcee246d7f45f26db7324c9273cc9c05510b5e10199d4b07a0d28fe37bbfd34",
+  "source_sha256": "40b5ec25a031cfce564657e01145824051edb1e6ca0b225066f4b08c13b0d116",
+  "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+  "snapshot_rows": 1953,
+  "semantic_claims": 12,
+  "status_counts": {
+    "verified": 12
+  },
+  "online_eligible_status": "verified",
+  "binding_rule": "same-source+same-section+exact-contiguous-evidence-quote;unique-chunk",
+  "section_normalization": "strict chapter path; optional matching source book-title prefix",
+  "note": "仅 verified 可供未来在线图谱关系检索；其它状态禁止自动当作已支持的知识",
+  "failed_claims": []
+}

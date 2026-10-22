@@ -80,17 +80,17 @@ streamlit run .\豆馅.py
 
 | 变量 | 未设置时路径 | 作用 |
 |---|---|---|
-| `DOUXIAN_GRAPH_FILE` | `data\knowledge_graph_v27.json` | 指定已构建的 V2.7 图谱 JSON；只有 `DOUXIAN_GRAPH_MODE=assist` 时会使用。 |
-| `DOUXIAN_GRAPH_SOURCE` | 首选 `data\graph_sources\神经网络与深度学习.md`，不存在则查找 `data\神经网络与深度学习.md` | 指定构建图谱时的原始教材快照。图谱加载时会与其 **SHA256** 比对；文件不匹配或不存在，则停用本次图谱增强、退回原检索。 |
+| `DOUXIAN_GRAPH_FILE` | `data\graph_data\knowledge_graph_v27.json` | 指定已构建的 V2.7 图谱 JSON；只有 `DOUXIAN_GRAPH_MODE=assist` 时会使用。 |
+| `DOUXIAN_GRAPH_SOURCE` | `data\graph_data\sources\神经网络与深度学习.md` | 指定构建图谱时的原始教材快照。图谱加载时会与其 **SHA256** 比对；文件不匹配或不存在，则停用本次图谱增强、退回原检索。 |
 
 如果图谱文件**不在默认位置**，可在 `data` 目录运行：
 
 ```powershell
 # 可选：只有需要覆盖默认图谱位置时才设置
-$env:DOUXIAN_GRAPH_FILE=(Join-Path (Get-Location) 'knowledge_graph_v27.json')
+$env:DOUXIAN_GRAPH_FILE=(Join-Path (Get-Location) 'graph_data\knowledge_graph_v27.json')
 
 # 可选：指向与图谱 JSON 构建时完全一致的教材原文
-$env:DOUXIAN_GRAPH_SOURCE=(Join-Path (Get-Location) 'graph_sources\神经网络与深度学习.md')
+$env:DOUXIAN_GRAPH_SOURCE=(Join-Path (Get-Location) 'graph_data\sources\神经网络与深度学习.md')
 ```
 
 这里的两条 `DOUXIAN_GRAPH_*` 路径变量不是开关，不要填 `0` 或 `1`。
@@ -210,13 +210,13 @@ Select-String -Path .\knowledge_base.py -Pattern 'RERANK_DOC_CHARS'
 `DOUXIAN_GRAPH_MODE=assist` 只负责**为部分问题提供额外检索词**。
 未匹配到别名/已核验关系时，`no_match` 是正常结果，不表示图谱安装失败。
 
-可以离线预览：
+旧版独立预览脚本已清理。可以先在 `data` 目录离线核验图谱来源与现有绑定：
 
 ```powershell
-python .\preview_graph_v28.py --question "卷积层与池化层分别完成什么运算？"
+python -m graph_tools.graph_chunk_linker_v211 verify
 ```
 
-常见日志：
+该命令验证文件，不生成在线检索日志。在线启用辅助检索并处理问题时，常见日志如下：
 
 ```text
 [Graph Assist] status=applied hints=1 耗时=...

@@ -642,7 +642,7 @@ class RagService:
             if os.getenv("DOUXIAN_GRAPH_MODE", "off").strip().lower() == "assist":
                 _graph_started = time.perf_counter()
                 try:
-                    from graph_assist_v28 import (
+                    from graph_tools.graph_assist_v28 import (
                         default_paths, suggest_retrieval_queries,
                     )
                     _graph_file, _source_file = default_paths(

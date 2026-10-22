@@ -1,0 +1,30 @@
+{
+  "schema": "douxian-claim-link-2.11-1",
+  "created_utc": "2026-10-22T01:50:30+00:00",
+  "graph_schema": "douxian-kg-2.7-offline-1",
+  "graph_sha256": "a4815f09142504257c0a8e92e5b156c933dc11f2121e110fccd7d55aaad0279d",
+  "source_sha256": "40b5ec25a031cfce564657e01145824051edb1e6ca0b225066f4b08c13b0d116",
+  "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+  "snapshot_rows": 1953,
+  "semantic_claims": 30,
+  "status_counts": {
+    "verified": 29,
+    "ambiguous": 1
+  },
+  "online_eligible_status": "verified",
+  "binding_rule": "same-source+same-section+exact-contiguous-evidence-quote;unique-chunk",
+  "section_normalization": "strict chapter path; optional matching source book-title prefix",
+  "note": "仅 verified 可供未来在线图谱关系检索；其它状态禁止自动当作已支持的知识",
+  "failed_claims": [
+    {
+      "claim_id": "edge:ea8ef831fc4eb2bd",
+      "subject": "平均汇聚",
+      "predicate": "IS_A",
+      "object": "汇聚函数",
+      "status": "ambiguous",
+      "reason": "exact_evidence_in_multiple_chunks",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+      "section_conflict_examples": []
+    }
+  ]
+}

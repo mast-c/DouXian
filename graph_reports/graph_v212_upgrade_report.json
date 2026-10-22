@@ -1,0 +1,205 @@
+{
+  "schema": "douxian-kg-expansion-gate-2.12-1",
+  "created_utc": "2026-10-22T01:51:07+00:00",
+  "source_sha256": "40b5ec25a031cfce564657e01145824051edb1e6ca0b225066f4b08c13b0d116",
+  "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+  "baseline_graph_sha256": "afcee246d7f45f26db7324c9273cc9c05510b5e10199d4b07a0d28fe37bbfd34",
+  "baseline_links_sha256": "42af8867eff9c1e100b8a987d37c59785c03874b5d8a2e3d638a37ee0829ec53",
+  "candidate_graph_sha256": "a4815f09142504257c0a8e92e5b156c933dc11f2121e110fccd7d55aaad0279d",
+  "candidate_links_sha256": "8446c753ad700af6091b450e7f51ce70963ac4ac97fe7fa33993c35f26492c4a",
+  "final_graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+  "final_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+  "alias_registry_sha256": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+  "baseline_verified": 12,
+  "candidate_new_count": 18,
+  "new_verified": 17,
+  "new_not_promoted": 1,
+  "new_status_counts": {
+    "verified": 17,
+    "ambiguous": 1
+  },
+  "final_verified": 29,
+  "alias_verified_groups": 8,
+  "alias_ambiguous_terms": 0,
+  "new_claim_decisions": [
+    {
+      "claim_id": "edge:15f2e7578cdeb597",
+      "relation": "IS_A",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:ea8ef831fc4eb2bd",
+      "relation": "IS_A",
+      "status": "ambiguous",
+      "promoted": false,
+      "chunk_ids": [],
+      "reason": "exact_evidence_in_multiple_chunks"
+    },
+    {
+      "claim_id": "edge:a856abef89b3fd13",
+      "relation": "USES",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:9fcc3bbf51554032",
+      "relation": "USES",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:f4b581a4e332c0a0",
+      "relation": "USES",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:93db5f7a71dc94ca",
+      "relation": "USES",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "b183a9f24d89e3d81ad99bf80252a3678335ab4573520ef7f037f69494ceece9"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:ad12f3d587f3d7d2",
+      "relation": "ALSO_CALLED",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:91a96a4758474fba",
+      "relation": "ALSO_CALLED",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:6fb281515635a996",
+      "relation": "IS_A",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "c156925fac3f8ad2834ffecf5b5120da0e32b7423c877e21a6f1a8f1dc33544e"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:8c790f7f19579098",
+      "relation": "ALSO_CALLED",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "beeab970af3fc81a263c339fc6cae72d86d1a2749df5c527764e5e2152151ab3"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:80e54e791a9c3282",
+      "relation": "IS_A",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "a886eec9ccc5fe7c2045098a1eba6dc1224478256309abf440e15fe3a8c37ce3"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:41b31bbd6e20a286",
+      "relation": "ALSO_CALLED",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "a886eec9ccc5fe7c2045098a1eba6dc1224478256309abf440e15fe3a8c37ce3"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:8293df9366b06034",
+      "relation": "USES",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "b96e1a8576e07549799d3e306ebbc841d63b537e1d30a208e11d90f486367393"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:2633c428a5127361",
+      "relation": "HAS_PART",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "a9a5c01e08f479755a6dfd7c0d2f991531b1ce1ff0c9c241dbc6ffe4f92e99fa"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:8d6288b883739d94",
+      "relation": "ALSO_CALLED",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "b96e1a8576e07549799d3e306ebbc841d63b537e1d30a208e11d90f486367393"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:950528ea327d3c86",
+      "relation": "ALSO_CALLED",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "f1f048009a1e1f65f072f7e47aba6841284f0c667bd45c4fc2428b1ef32d62df"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:86cd0d2d7f8b5ad2",
+      "relation": "ALSO_CALLED",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "feacda34c894c4be4ed99eaf0a455199cbaa924f23705acb52d690d20efd936b"
+      ],
+      "reason": "exact_evidence_and_section"
+    },
+    {
+      "claim_id": "edge:2ab7e570dfc30a47",
+      "relation": "IS_A",
+      "status": "verified",
+      "promoted": true,
+      "chunk_ids": [
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "reason": "exact_evidence_and_section"
+    }
+  ],
+  "note": "Promoted only claims with real, unique, source+section+literal Chunk evidence. Excluded claims remain candidates; original 12 Chunk IDs unchanged."
+}

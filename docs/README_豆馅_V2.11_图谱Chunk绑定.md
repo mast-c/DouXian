@@ -1,5 +1,7 @@
 # 豆馅 V2.11｜本地图谱与 Chroma Chunk 精确绑定
 
+> 当前项目已按四类目录整理，目录总览见 [图谱目录与命令](README_图谱目录与命令.md)。已保存的真实快照是 `graph_bindings/chroma_chunks_v211.json`，基线绑定是 `graph_bindings/graph_chunk_links_v2111.json`，报告是 `graph_reports/graph_integrity_report_v2111.json`；下文关于原始 ZIP 的内容属于历史交付说明。
+
 ## 项目阶段
 
 本轮是 **独立离线准备阶段**，不是上线 GraphRAG。
@@ -26,7 +28,7 @@
 - 源 Markdown 使用 SHA256 核验，Chroma 快照也有 SHA256，后续 `verify` 可以检测变动。
 - 不能据此得出 GraphRAG 已改善回答；在线检索尚未改动。
 
-## 包内文件
+## 历史包内文件
 
 | 路径 | 作用 |
 |---|---|
@@ -37,25 +39,22 @@
 | `README_豆馅_V2.11_图谱Chunk绑定.md` | 本说明 |
 | `graph_integrity_report_v211_示例.json` | 使用人工合成 Chroma 记录生成的**演示报告，不是你真实知识库统计** |
 
-## 一、安装
+## 一、运行现有项目的验证
 
 先用 `Ctrl+C` 停止 Streamlit。进入你本机 `data` 目录，并激活你的环境：
 
 ```powershell
-cd 'E:\VsCode项目\DockerTest_Agent\RAG项目\data'
+cd 'E:\VsCode_Project\DockerTest_Agent\RAG_project\data'
 conda activate rag
 
-# ZIP 放到当前目录后解压（新增文件，不覆盖 rag.py）
-Expand-Archive -LiteralPath .\豆馅_RAG_V2.11_图谱Chunk精确绑定.zip -DestinationPath . -Force
-
-# 只跑本地测试，不收费
-python .\test_graph_chunk_linker_v211.py
+# 对现有真实快照重新验证，不调用模型
+python -m graph_tools.graph_chunk_linker_v211 verify
 ```
 
 预期：
 
 ```text
-V2.11: 11 offline tests passed (no Qwen, no Chroma writes).
+[OK] 原文、快照、绑定关系全部校验通过，覆盖 12 条语义关系
 ```
 
 ## 二、确认现有 Chroma 持久化目录与 Collection 名
@@ -81,10 +80,10 @@ Select-String -Path .\config_data.py -Pattern "persist_directory|collection_name
 因此不能把该步骤承诺为文件系统级严格只读。
 
 ```powershell
-python .\graph_chunk_linker_v211.py export `
+python -m graph_tools.graph_chunk_linker_v211 export `
   --persist-directory "<实际持久化目录>" `
   --collection "<实际集合名>" `
-  --output .\graph_chroma_chunks_v211.jsonl
+  --output .\graph_bindings\graph_chroma_chunks_v211.jsonl
 ```
 
 导出结果包括原始 `chunk_id`、`source`、`section_path` 和 `content`。
@@ -96,12 +95,12 @@ python .\graph_chunk_linker_v211.py export `
 ## 四、生成图谱 Claim 与真实 Chunk 的绑定
 
 ```powershell
-python .\graph_chunk_linker_v211.py link `
-  --graph .\knowledge_graph_v27.json `
-  --source .\graph_sources\神经网络与深度学习.md `
-  --chunks .\graph_chroma_chunks_v211.jsonl `
-  --links .\graph_claim_links_v211.json `
-  --report .\graph_integrity_report_v211.json
+python -m graph_tools.graph_chunk_linker_v211 link `
+  --graph .\graph_data\knowledge_graph_v27.json `
+  --source .\graph_data\sources\神经网络与深度学习.md `
+  --chunks .\graph_bindings\graph_chroma_chunks_v211.jsonl `
+  --links .\graph_bindings\graph_claim_links_v211.json `
+  --report .\graph_reports\graph_integrity_report_v211.json
 ```
 
 **不会覆盖已有输出文件**，防止无意覆盖以前的绑定结果。
@@ -122,11 +121,11 @@ python .\graph_chunk_linker_v211.py link `
 ## 五、验证生成的结果
 
 ```powershell
-python .\graph_chunk_linker_v211.py verify `
-  --graph .\knowledge_graph_v27.json `
-  --source .\graph_sources\神经网络与深度学习.md `
-  --chunks .\graph_chroma_chunks_v211.jsonl `
-  --links .\graph_claim_links_v211.json
+python -m graph_tools.graph_chunk_linker_v211 verify `
+  --graph .\graph_data\knowledge_graph_v27.json `
+  --source .\graph_data\sources\神经网络与深度学习.md `
+  --chunks .\graph_bindings\graph_chroma_chunks_v211.jsonl `
+  --links .\graph_bindings\graph_claim_links_v211.json
 ```
 
 它会重新计算所有绑定，验证 JSON 内容和源文件、快照未发生变化。

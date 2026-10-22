@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "schema": "douxian-claim-link-2.11-1",
+    "created_utc": "2026-10-21T10:26:26+00:00",
+    "graph_schema": "douxian-kg-2.7-offline-1",
+    "graph_sha256": "afcee246d7f45f26db7324c9273cc9c05510b5e10199d4b07a0d28fe37bbfd34",
+    "source_sha256": "40b5ec25a031cfce564657e01145824051edb1e6ca0b225066f4b08c13b0d116",
+    "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "snapshot_rows": 1953,
+    "semantic_claims": 12,
+    "status_counts": {
+      "verified": 12
+    },
+    "online_eligible_status": "verified",
+    "binding_rule": "same-source+same-section+exact-contiguous-evidence-quote;unique-chunk",
+    "section_normalization": "strict chapter path; optional matching source book-title prefix",
+    "note": "仅 verified 可供未来在线图谱关系检索；其它状态禁止自动当作已支持的知识"
+  },
+  "claims": [
+    {
+      "claim_id": "edge:d8972949d756a8d4",
+      "subject_id": "concept:4de6dcfa7c8a64af",
+      "subject": "卷积神经网络",
+      "predicate": "HAS_PART",
+      "object_id": "concept:e6038103eef98be2",
+      "object": "卷积层",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+      "source_line": 4723,
+      "evidence_text": "卷积神经网络一般由卷积层、汇聚层和全连接层构成",
+      "chunk_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:0d873ce8e1dca645",
+      "subject_id": "concept:4de6dcfa7c8a64af",
+      "subject": "卷积神经网络",
+      "predicate": "HAS_PART",
+      "object_id": "concept:8fb7c8245d94fed0",
+      "object": "汇聚层",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+      "source_line": 4723,
+      "evidence_text": "卷积神经网络一般由卷积层、汇聚层和全连接层构成",
+      "chunk_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:b3d65ccbb81fe341",
+      "subject_id": "concept:4de6dcfa7c8a64af",
+      "subject": "卷积神经网络",
+      "predicate": "HAS_PART",
+      "object_id": "concept:51bc2e9dfcc78882",
+      "object": "全连接层",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+      "source_line": 4723,
+      "evidence_text": "卷积神经网络一般由卷积层、汇聚层和全连接层构成",
+      "chunk_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:5ff8af4790e88767",
+      "subject_id": "concept:8fb7c8245d94fed0",
+      "subject": "汇聚层",
+      "predicate": "ALSO_CALLED",
+      "object_id": "concept:3b31538d16bb9c1c",
+      "object": "子采样层",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+      "source_line": 4815,
+      "evidence_text": "汇聚层（Pooling Layer）也叫子采样层（Subsampling Layer），其作用是进行特征选择，降低特征数量，从而减少参数数量",
+      "chunk_ids": [
+        "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:9808503d8a5eb1f7",
+      "subject_id": "concept:a0b1e8cd1d49710e",
+      "subject": "有向图模型",
+      "predicate": "ALSO_CALLED",
+      "object_id": "concept:19277c614029c622",
+      "object": "贝叶斯网络",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.1 有向图模型",
+      "source_line": 10627,
+      "evidence_text": "有向图模型（Directed Graphical Model），也称为贝叶斯网络（BayesianNetwork）或信念网络（BeliefNetwork，BN），是一类用有向图来描述随机向量概率分布的模型",
+      "chunk_ids": [
+        "aa8e50e0f10664de6ffaa3c9473fc40c5a18fa7f51662bc8c595a3d6000023ff"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:2d3d28b5ee301ca1",
+      "subject_id": "concept:a0b1e8cd1d49710e",
+      "subject": "有向图模型",
+      "predicate": "ALSO_CALLED",
+      "object_id": "concept:ddc75c3a6d824f9c",
+      "object": "信念网络",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.1 有向图模型",
+      "source_line": 10627,
+      "evidence_text": "有向图模型（Directed Graphical Model），也称为贝叶斯网络（BayesianNetwork）或信念网络（BeliefNetwork，BN），是一类用有向图来描述随机向量概率分布的模型",
+      "chunk_ids": [
+        "aa8e50e0f10664de6ffaa3c9473fc40c5a18fa7f51662bc8c595a3d6000023ff"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:289d96aa51ba2b95",
+      "subject_id": "concept:a81c59a3640ebec9",
+      "subject": "吉布斯采样",
+      "predicate": "IS_A",
+      "object_id": "concept:a9a71d5be8501e85",
+      "object": "MCMC",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+      "source_line": 11911,
+      "evidence_text": "吉布斯采样（Gibbs Sampling）是一种有效地对高维空间中的分布进行采样的MCMC方法，可以看作Metropolis-Hastings算法的特例．吉布斯采样使用全条件概率（Full Conditional Probability）作为提议分布来依次对每个维度进行采样，并设置接受率为$A$ = 1",
+      "chunk_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:3c3336e8a2d46754",
+      "subject_id": "concept:a81c59a3640ebec9",
+      "subject": "吉布斯采样",
+      "predicate": "SPECIAL_CASE_OF",
+      "object_id": "concept:c6957b372105ae61",
+      "object": "Metropolis-Hastings算法",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+      "source_line": 11911,
+      "evidence_text": "吉布斯采样（Gibbs Sampling）是一种有效地对高维空间中的分布进行采样的MCMC方法，可以看作Metropolis-Hastings算法的特例．吉布斯采样使用全条件概率（Full Conditional Probability）作为提议分布来依次对每个维度进行采样，并设置接受率为$A$ = 1",
+      "chunk_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:f41c568fafd242bd",
+      "subject_id": "concept:a81c59a3640ebec9",
+      "subject": "吉布斯采样",
+      "predicate": "USES",
+      "object_id": "concept:472e68524f326c85",
+      "object": "全条件概率",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+      "source_line": 11911,
+      "evidence_text": "吉布斯采样（Gibbs Sampling）是一种有效地对高维空间中的分布进行采样的MCMC方法，可以看作Metropolis-Hastings算法的特例．吉布斯采样使用全条件概率（Full Conditional Probability）作为提议分布来依次对每个维度进行采样，并设置接受率为$A$ = 1",
+      "chunk_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:a53f6c900996f454",
+      "subject_id": "concept:a9a71d5be8501e85",
+      "subject": "MCMC",
+      "predicate": "BASED_ON",
+      "object_id": "concept:583564e7d6b292c3",
+      "object": "马尔可夫链",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+      "source_line": 11817,
+      "evidence_text": "MCMC方法也有很多不同的具体采样方法，但其核心思想是将采样过程看作一个马尔可夫链",
+      "chunk_ids": [
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:1ab9023125210cf9",
+      "subject_id": "concept:a886c7a765176d74",
+      "subject": "反向传播算法",
+      "predicate": "COMPUTES",
+      "object_id": "concept:9a4adbad63440538",
+      "object": "梯度",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第4章 前馈神经网络 / 4.3 前馈神经网络 / 4.3.3 参数学习",
+      "source_line": 3772,
+      "evidence_text": "梯度下降法需要计算损失函数对参数的偏导数，如果通过链式法则逐一对每个参数进行求偏导比较低效．在神经网络的训练中经常使用反向传播算法来高效地计算梯度",
+      "chunk_ids": [
+        "35799f7eaaa9ae5936cb3e7ba35436ec2684eb69cbf1c06b2647146f9c635bae"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    },
+    {
+      "claim_id": "edge:e772af469f8f29aa",
+      "subject_id": "concept:9bea2bda7ac5f70a",
+      "subject": "深度学习",
+      "predicate": "SUBFIELD_OF",
+      "object_id": "concept:e0ab0981aba5c06d",
+      "object": "机器学习",
+      "source_file": "神经网络与深度学习.md",
+      "section_path": "第1章 绪论 / 1.4 深度学习",
+      "source_line": 587,
+      "evidence_text": "这样我们就需要一种学习方法可以从数据中学习一个“深度模型”，这就是深度学习（Deep Learning，DL）．深度学习是机器学习的一个子问题，其主要目的是从数据中自动学习到有效的特征表示",
+      "chunk_ids": [
+        "ccf254f56101960591fce3c66fc6870567761cc68aab5849d631b12068a97c8e"
+      ],
+      "candidate_chunk_ids": [],
+      "section_conflict_examples": [],
+      "status": "verified",
+      "reason": "exact_evidence_and_section",
+      "extraction_method": "exact_source_phrase"
+    }
+  ]
+}

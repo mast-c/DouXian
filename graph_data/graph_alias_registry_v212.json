@@ -1,0 +1,416 @@
+{
+  "schema": "douxian-verified-aliases-2.12-1",
+  "created_utc": "2026-10-22T01:51:07+00:00",
+  "verified_synonym_groups": [
+    {
+      "canonical_id": "concept:f5029422b5ec6580",
+      "canonical_label": "互相关",
+      "member_ids": [
+        "concept:f5029422b5ec6580",
+        "concept:5dd6f02d7969dd2a"
+      ],
+      "verified_labels": [
+        "互相关",
+        "不翻转卷积"
+      ],
+      "verified_claim_ids": [
+        "edge:86cd0d2d7f8b5ad2"
+      ]
+    },
+    {
+      "canonical_id": "concept:c1b9f557e6faefba",
+      "canonical_label": "卷积核",
+      "member_ids": [
+        "concept:c1b9f557e6faefba",
+        "concept:cd0e4ada8fc2122c"
+      ],
+      "verified_labels": [
+        "卷积核",
+        "滤波器"
+      ],
+      "verified_claim_ids": [
+        "edge:950528ea327d3c86"
+      ]
+    },
+    {
+      "canonical_id": "concept:f04cd9e9d0c9f11d",
+      "canonical_label": "变分推断",
+      "member_ids": [
+        "concept:f04cd9e9d0c9f11d",
+        "concept:0e6d05ec06da7ad1"
+      ],
+      "verified_labels": [
+        "变分推断",
+        "变分贝叶斯"
+      ],
+      "verified_claim_ids": [
+        "edge:8c790f7f19579098"
+      ]
+    },
+    {
+      "canonical_id": "concept:6396676137f133cd",
+      "canonical_label": "拒绝采样",
+      "member_ids": [
+        "concept:6396676137f133cd",
+        "concept:af820cb49f586daa"
+      ],
+      "verified_labels": [
+        "拒绝采样",
+        "接受-拒绝采样"
+      ],
+      "verified_claim_ids": [
+        "edge:41b31bbd6e20a286"
+      ]
+    },
+    {
+      "canonical_id": "concept:203fa11973e6ae3f",
+      "canonical_label": "无向图模型",
+      "member_ids": [
+        "concept:203fa11973e6ae3f",
+        "concept:38da68844b29274d",
+        "concept:e61d8831a5021a77"
+      ],
+      "verified_labels": [
+        "无向图模型",
+        "马尔可夫随机场",
+        "马尔可夫网络"
+      ],
+      "verified_claim_ids": [
+        "edge:ad12f3d587f3d7d2",
+        "edge:91a96a4758474fba"
+      ]
+    },
+    {
+      "canonical_id": "concept:a0b1e8cd1d49710e",
+      "canonical_label": "有向图模型",
+      "member_ids": [
+        "concept:19277c614029c622",
+        "concept:a0b1e8cd1d49710e",
+        "concept:ddc75c3a6d824f9c"
+      ],
+      "verified_labels": [
+        "贝叶斯网络",
+        "有向图模型",
+        "信念网络"
+      ],
+      "verified_claim_ids": [
+        "edge:9808503d8a5eb1f7",
+        "edge:2d3d28b5ee301ca1"
+      ]
+    },
+    {
+      "canonical_id": "concept:603820ad94e8cccd",
+      "canonical_label": "残差连接",
+      "member_ids": [
+        "concept:603820ad94e8cccd",
+        "concept:177058162a97da54"
+      ],
+      "verified_labels": [
+        "残差连接",
+        "直连边"
+      ],
+      "verified_claim_ids": [
+        "edge:8d6288b883739d94"
+      ]
+    },
+    {
+      "canonical_id": "concept:8fb7c8245d94fed0",
+      "canonical_label": "汇聚层",
+      "member_ids": [
+        "concept:8fb7c8245d94fed0",
+        "concept:3b31538d16bb9c1c"
+      ],
+      "verified_labels": [
+        "汇聚层",
+        "子采样层"
+      ],
+      "verified_claim_ids": [
+        "edge:5ff8af4790e88767"
+      ]
+    }
+  ],
+  "verified_label_to_canonical_id": {
+    "mcmc": "concept:a9a71d5be8501e85",
+    "metropolis-hastings算法": "concept:c6957b372105ae61",
+    "relu": "concept:a08413c4bcb43cfc",
+    "不翻转卷积": "concept:f5029422b5ec6580",
+    "互相关": "concept:f5029422b5ec6580",
+    "信念传播算法": "concept:8c9c66912af23fb9",
+    "信念网络": "concept:a0b1e8cd1d49710e",
+    "全条件概率": "concept:472e68524f326c85",
+    "全连接层": "concept:51bc2e9dfcc78882",
+    "卷积层": "concept:e6038103eef98be2",
+    "卷积核": "concept:c1b9f557e6faefba",
+    "卷积神经网络": "concept:4de6dcfa7c8a64af",
+    "反向传播算法": "concept:a886c7a765176d74",
+    "变分推断": "concept:f04cd9e9d0c9f11d",
+    "变分贝叶斯": "concept:f04cd9e9d0c9f11d",
+    "吉布斯采样": "concept:a81c59a3640ebec9",
+    "子采样层": "concept:8fb7c8245d94fed0",
+    "平均汇聚": "concept:0a4aa879d3051433",
+    "拒绝采样": "concept:6396676137f133cd",
+    "接受-拒绝采样": "concept:6396676137f133cd",
+    "无向图模型": "concept:203fa11973e6ae3f",
+    "最大汇聚": "concept:ccfbb1489e2bc222",
+    "有向图模型": "concept:a0b1e8cd1d49710e",
+    "机器学习": "concept:e0ab0981aba5c06d",
+    "梯度": "concept:9a4adbad63440538",
+    "概率图模型": "concept:71bfa519cb8c17ea",
+    "残差单元": "concept:8910f86345020f3a",
+    "残差网络": "concept:fa3ed411277dd087",
+    "残差连接": "concept:603820ad94e8cccd",
+    "汇聚函数": "concept:1e37217e48d8cf85",
+    "汇聚层": "concept:8fb7c8245d94fed0",
+    "深度学习": "concept:9bea2bda7ac5f70a",
+    "滤波器": "concept:c1b9f557e6faefba",
+    "直连边": "concept:603820ad94e8cccd",
+    "神经网络": "concept:eeed14fad8af23d2",
+    "精确推断": "concept:739e6f1af14d271f",
+    "自动微分": "concept:a29edf5dcb611827",
+    "贝叶斯网络": "concept:a0b1e8cd1d49710e",
+    "近似推断": "concept:50caadc33bc8709e",
+    "采样法": "concept:29d85a8c719bdebb",
+    "重要性采样": "concept:a67f6df5abf99895",
+    "链式法则": "concept:1dcafbbe144f44a9",
+    "非线性激活函数": "concept:c73788d681be7729",
+    "马尔可夫网络": "concept:203fa11973e6ae3f",
+    "马尔可夫链": "concept:583564e7d6b292c3",
+    "马尔可夫随机场": "concept:203fa11973e6ae3f"
+  },
+  "search_only_hints": [
+    {
+      "concept_id": "concept:eeed14fad8af23d2",
+      "term": "人工神经网络",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:eeed14fad8af23d2",
+      "term": "Neural Network",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:e0ab0981aba5c06d",
+      "term": "Machine Learning",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:9bea2bda7ac5f70a",
+      "term": "Deep Learning",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:4de6dcfa7c8a64af",
+      "term": "CNN",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:4de6dcfa7c8a64af",
+      "term": "Convolutional Neural Network",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:e6038103eef98be2",
+      "term": "Convolutional Layer",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:8fb7c8245d94fed0",
+      "term": "Pooling Layer",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:8fb7c8245d94fed0",
+      "term": "池化层",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:51bc2e9dfcc78882",
+      "term": "Fully Connected Layer",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:c1b9f557e6faefba",
+      "term": "滤波器",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:c1b9f557e6faefba",
+      "term": "Filter",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:c73788d681be7729",
+      "term": "激活函数",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:c73788d681be7729",
+      "term": "Activation Function",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a08413c4bcb43cfc",
+      "term": "Rectified Linear Unit",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:f5029422b5ec6580",
+      "term": "Cross-Correlation",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:ccfbb1489e2bc222",
+      "term": "Max Pooling",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:0a4aa879d3051433",
+      "term": "Mean Pooling",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a886c7a765176d74",
+      "term": "BackPropagation",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a886c7a765176d74",
+      "term": "Backpropagation",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a886c7a765176d74",
+      "term": "反向传播",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:9a4adbad63440538",
+      "term": "Gradient",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:1dcafbbe144f44a9",
+      "term": "Chain Rule",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a29edf5dcb611827",
+      "term": "Automatic Differentiation",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:71bfa519cb8c17ea",
+      "term": "Probabilistic Graphical Model",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:739e6f1af14d271f",
+      "term": "Exact Inference",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:50caadc33bc8709e",
+      "term": "Approximate Inference",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:8c9c66912af23fb9",
+      "term": "信念传播",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:8c9c66912af23fb9",
+      "term": "Belief Propagation",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:19277c614029c622",
+      "term": "贝叶斯网",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:19277c614029c622",
+      "term": "Bayesian Network",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a0b1e8cd1d49710e",
+      "term": "Directed Graphical Model",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:ddc75c3a6d824f9c",
+      "term": "Belief Network",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:203fa11973e6ae3f",
+      "term": "Undirected Graphical Model",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:583564e7d6b292c3",
+      "term": "Markov Chain",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a9a71d5be8501e85",
+      "term": "马尔可夫链蒙特卡罗",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a9a71d5be8501e85",
+      "term": "Markov Chain Monte Carlo",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:c6957b372105ae61",
+      "term": "Metropolis-Hastings",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:c6957b372105ae61",
+      "term": "MH算法",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a81c59a3640ebec9",
+      "term": "Gibbs Sampling",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:472e68524f326c85",
+      "term": "Full Conditional Probability",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:3b31538d16bb9c1c",
+      "term": "Subsampling Layer",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:f04cd9e9d0c9f11d",
+      "term": "Variational Inference",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:6396676137f133cd",
+      "term": "Rejection Sampling",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:a67f6df5abf99895",
+      "term": "Importance Sampling",
+      "status": "search_hint_only_not_proven_equivalent"
+    },
+    {
+      "concept_id": "concept:29d85a8c719bdebb",
+      "term": "Sampling",
+      "status": "search_hint_only_not_proven_equivalent"
+    }
+  ],
+  "ambiguous_terms": [],
+  "warning": "Only verified ALSO_CALLED claims establish equivalence. Search hints never do.",
+  "graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+  "links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d"
+}
