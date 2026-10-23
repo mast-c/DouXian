@@ -1,0 +1,46 @@
+{
+  "release": "DouXian_V2.16_Graph_Assist_Query_Planning_Offline_Research",
+  "phase": "additive_read_only_planner_and_optional_original_Hybrid_A_B",
+  "pinned_existing_sha256": {
+    "graph_data/knowledge_graph_v212.json": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "graph_bindings/graph_chunk_links_v212.json": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "graph_data/graph_alias_registry_v212.json": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+    "graph_bindings/chroma_chunks_v211.json": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "graph_data/sources/机器学习.md": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+    "graph_data/expansions/machine_learning_relations_v215.json": "9ffb154913a242cee05614a18d239ea8dedfe6f310edf8a5a1f9def97accb6ef",
+    "graph_bindings/expansions/machine_learning_claim_links_v215.json": "d36c3360b34923e07016f167e2db3965d01023c6502bb042b99929a3ba843047",
+    "graph_data/expansions/multi_source_claim_index_v215.json": "a8979b4d3d9c21b43d85eb51debece123d4272b9f35c504ef0e7198754236dd1",
+    "graph_data/expansions/machine_learning_curated_spec_v215.json": "12109667f465fde870e2b7f49511ed1ec734cb377f9f4aaac4e7cf340774298f",
+    "graph_tools/verify_machine_graph_v215.py": "a1e679037a676adbfcb14ee7dc4df29f11128d048f647f343b6f0d7dce1bfea2",
+    "graph_reports/expansions/v2151_preliminary_semantic_flags.json": "93c348945e644b0e69e43bdc2148f613c81702548560694214ad5fe7f62b81d8",
+    "graph_tools/graph_retriever_v213.py": "5b4a1bc07f56f0c610c1b04c21b4bb14c6c77642cf84a921f3574a6e4ac3b53d",
+    "graph_tools/graph_assist_v28.py": "099f6bb8716ad0eca9e283a15dd8bf7efd4620b52671f5b309fd0da26f101065",
+    "graph_tools/graph_paths.py": "8a9b944e4ea3903054279ff822a305ad3de29e80a26fd9df608924f3dbef5ce3",
+    "graph_reports/expansions/machine_learning_gate_v215.json": "50bb352f6e5996227c7b5d5c6afdd2ffbdf5bd259d5f3d3b53ec975754efe78a"
+  },
+  "required_runtime_files": [
+    "rag.py",
+    "knowledge_base.py",
+    "config_data.py",
+    "graph_tools/graph_chunk_linker_v211.py"
+  ],
+  "additive_payload_sha256": {
+    "graph_reports/assist_v216/fixed_eval_cases_v216.json": "9b1b8e79f45e9158a4ec27f358bc5023b7c381a8d05bfa883c9ab82f366cffd5",
+    "graph_tools/eval_graph_assist_v216.py": "c3f1ac3321cc7b46ce260627d26dc793ecc605d3144dc899d0455803b73bf0ea",
+    "graph_tools/graph_assist_planner_v216.py": "256a8b7e146b274fb9862d0765d8bcaa8cc0a2a4b06c550e1daca12e914c014c",
+    "graph_tools/test_eval_graph_assist_v216.py": "d97b1baeb1fd86e3189d215f7bb5185b52431408ff1845b82122c5a33b4f8853",
+    "graph_tools/test_graph_assist_planner_v216.py": "d4ba6464577bba94e5a72ec4d4d98d19d5da696eae40a488585d887eb4bbd254"
+  },
+  "no_modification_to": [
+    "rag.py",
+    "knowledge_base.py",
+    "graph_tools/graph_assist_v28.py",
+    "graph_tools/graph_retriever_v213.py",
+    "graph_data/knowledge_graph_v212.json",
+    "graph_bindings/graph_chunk_links_v212.json",
+    "Chroma indexes",
+    "source textbooks"
+  ],
+  "new_relations_online_eligible": false,
+  "pending_new_relation_use": "explicit offline-only opt-in with V2.15.1 risk gate"
+}

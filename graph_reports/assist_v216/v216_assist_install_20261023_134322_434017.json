@@ -1,0 +1,11 @@
+{
+  "project": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data",
+  "files_created": {
+    "graph_reports/assist_v216/fixed_eval_cases_v216.json": "9b1b8e79f45e9158a4ec27f358bc5023b7c381a8d05bfa883c9ab82f366cffd5",
+    "graph_tools/eval_graph_assist_v216.py": "c3f1ac3321cc7b46ce260627d26dc793ecc605d3144dc899d0455803b73bf0ea",
+    "graph_tools/graph_assist_planner_v216.py": "256a8b7e146b274fb9862d0765d8bcaa8cc0a2a4b06c550e1daca12e914c014c",
+    "graph_tools/test_eval_graph_assist_v216.py": "d97b1baeb1fd86e3189d215f7bb5185b52431408ff1845b82122c5a33b4f8853",
+    "graph_tools/test_graph_assist_planner_v216.py": "d4ba6464577bba94e5a72ec4d4d98d19d5da696eae40a488585d887eb4bbd254"
+  },
+  "phase": "offline_planner_not_online"
+}

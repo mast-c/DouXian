@@ -1,0 +1,505 @@
+{
+  "schema": "douxian-multisource-machine-curated-spec-v215-1",
+  "source_file": "机器学习.md",
+  "source_sha256": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+  "frozen_chroma_snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+  "baseline_verified_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+  "review_policy": "Exact quote + matching source + exact chapter path + unique existing chunk. Semantic second review before online promotion.",
+  "candidate_definitions": [
+    {
+      "source_line": 2408,
+      "subject": "ID3决策树学习算法",
+      "predicate": "USES",
+      "object": "信息增益",
+      "begin": "著名的ID3决策树学习算法",
+      "end": "来选择划分属性.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 2490,
+      "subject": "C4.5决策树算法",
+      "predicate": "USES",
+      "object": "增益率",
+      "begin": "著名的 C4.5 决策树算法",
+      "end": "来选择最优划分属性.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 2510,
+      "subject": "CART决策树",
+      "predicate": "USES",
+      "object": "基尼指数",
+      "begin": "CART 决策树",
+      "end": "来选择划分属性.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 2532,
+      "subject": "预剪枝",
+      "predicate": "IS_A",
+      "object": "决策树剪枝",
+      "begin": "决策树剪枝的基本策略",
+      "end": "[Quinlan, 1993].",
+      "qualifier": ""
+    },
+    {
+      "source_line": 2532,
+      "subject": "后剪枝",
+      "predicate": "IS_A",
+      "object": "决策树剪枝",
+      "begin": "决策树剪枝的基本策略",
+      "end": "[Quinlan, 1993].",
+      "qualifier": ""
+    },
+    {
+      "source_line": 4131,
+      "subject": "高斯核",
+      "predicate": "ALSO_CALLED",
+      "object": "RBF核",
+      "begin": "高斯核亦称RBF核.",
+      "end": "高斯核亦称RBF核.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 4878,
+      "subject": "朴素贝叶斯分类器",
+      "predicate": "USES",
+      "object": "属性条件独立性假设",
+      "begin": "朴素贝叶斯分类器(naïve Bayes classifier)",
+      "end": "对已知类别, 假设所有属性相互独立.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5159,
+      "subject": "贝叶斯网",
+      "predicate": "ALSO_CALLED",
+      "object": "信念网",
+      "begin": "贝叶斯网(Bayesian network)",
+      "end": "信念网”(belief network)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5159,
+      "subject": "贝叶斯网",
+      "predicate": "USES",
+      "object": "有向无环图",
+      "begin": "贝叶斯网(Bayesian network)",
+      "end": "依赖关系",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5165,
+      "subject": "贝叶斯网",
+      "predicate": "HAS_PART",
+      "object": "网络结构",
+      "begin": "一个贝叶斯网 B 由结构 G",
+      "end": "两部分构成",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5165,
+      "subject": "贝叶斯网",
+      "predicate": "HAS_PART",
+      "object": "网络参数",
+      "begin": "一个贝叶斯网 B 由结构 G",
+      "end": "两部分构成",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5320,
+      "subject": "贝叶斯网近似推断",
+      "predicate": "USES",
+      "object": "吉布斯采样",
+      "begin": "在现实应用中，贝叶斯网的近似推断",
+      "end": "这是一种随机采样方法",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5715,
+      "subject": "Boosting",
+      "predicate": "IS_A",
+      "object": "序列化集成学习方法",
+      "begin": "根据个体学习器的生成方式",
+      "end": "后者的代表是 Bagging 和 “随机森林” (Random Forest).",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5715,
+      "subject": "Bagging",
+      "predicate": "IS_A",
+      "object": "并行化集成学习方法",
+      "begin": "根据个体学习器的生成方式",
+      "end": "后者的代表是 Bagging 和 “随机森林” (Random Forest).",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5715,
+      "subject": "随机森林",
+      "predicate": "IS_A",
+      "object": "并行化集成学习方法",
+      "begin": "根据个体学习器的生成方式",
+      "end": "后者的代表是 Bagging 和 “随机森林” (Random Forest).",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5719,
+      "subject": "Boosting",
+      "predicate": "USES",
+      "object": "弱学习器",
+      "begin": "Boosting 是一族可将弱学习器",
+      "end": "提升为强学习器的算法.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5896,
+      "subject": "Bagging",
+      "predicate": "IS_A",
+      "object": "并行式集成学习方法",
+      "begin": "Bagging [Breiman, 1996a]",
+      "end": "并行式集成学习方法最著名的代表.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5896,
+      "subject": "Bagging",
+      "predicate": "BASED_ON",
+      "object": "自助采样法",
+      "begin": "Bagging [Breiman, 1996a]",
+      "end": "自助采样法 (bootstrap sampling).",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5939,
+      "subject": "随机森林",
+      "predicate": "ALSO_CALLED",
+      "object": "RF",
+      "begin": "随机森林(Random Forest, 简称 RF)",
+      "end": "随机森林(Random Forest, 简称 RF)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5939,
+      "subject": "随机森林",
+      "predicate": "VARIANT_OF",
+      "object": "Bagging",
+      "begin": "随机森林(Random Forest, 简称 RF)",
+      "end": "Bagging 的一个扩展变体.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5939,
+      "subject": "随机森林",
+      "predicate": "USES",
+      "object": "决策树",
+      "begin": "RF 在以决策树为基学习器",
+      "end": "在决策树的训练过程中引入了随机属性选择.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 5939,
+      "subject": "随机森林",
+      "predicate": "USES",
+      "object": "随机属性选择",
+      "begin": "RF 在以决策树为基学习器",
+      "end": "在决策树的训练过程中引入了随机属性选择.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 7235,
+      "subject": "DBSCAN",
+      "predicate": "IS_A",
+      "object": "密度聚类算法",
+      "begin": "DBSCAN 是一种著名的密度聚类算法",
+      "end": "DBSCAN 是一种著名的密度聚类算法",
+      "qualifier": ""
+    },
+    {
+      "source_line": 7235,
+      "subject": "DBSCAN",
+      "predicate": "USES",
+      "object": "邻域参数",
+      "begin": "DBSCAN 是一种著名的密度聚类算法",
+      "end": "来刻画样本分布的紧密程度.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 7361,
+      "subject": "AGNES",
+      "predicate": "IS_A",
+      "object": "层次聚类算法",
+      "begin": "AGNES 是一种采用自底向上聚合策略的层次聚类算法.",
+      "end": "AGNES 是一种采用自底向上聚合策略的层次聚类算法.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 7813,
+      "subject": "k近邻学习",
+      "predicate": "ALSO_CALLED",
+      "object": "kNN",
+      "begin": "k 近邻(k-Nearest Neighbor, 简称 kNN)",
+      "end": "k 近邻(k-Nearest Neighbor, 简称 kNN)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 7813,
+      "subject": "k近邻学习",
+      "predicate": "IS_A",
+      "object": "监督学习方法",
+      "begin": "k 近邻(k-Nearest Neighbor, 简称 kNN)学习",
+      "end": "常用的监督学习方法",
+      "qualifier": ""
+    },
+    {
+      "source_line": 7981,
+      "subject": "主成分分析",
+      "predicate": "ALSO_CALLED",
+      "object": "PCA",
+      "begin": "主成分分析(Principal Component Analysis, 简称 PCA)",
+      "end": "主成分分析(Principal Component Analysis, 简称 PCA)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 7981,
+      "subject": "主成分分析",
+      "predicate": "IS_A",
+      "object": "降维方法",
+      "begin": "主成分分析(Principal Component Analysis, 简称 PCA)",
+      "end": "最常用的一种降维方法.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10905,
+      "subject": "隐马尔可夫模型",
+      "predicate": "ALSO_CALLED",
+      "object": "HMM",
+      "begin": "隐马尔可夫模型(Hidden Markov Model, 简称 HMM)",
+      "end": "隐马尔可夫模型(Hidden Markov Model, 简称 HMM)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10905,
+      "subject": "隐马尔可夫模型",
+      "predicate": "IS_A",
+      "object": "动态贝叶斯网",
+      "begin": "隐马尔可夫模型(Hidden Markov Model, 简称 HMM)",
+      "end": "动态贝叶斯网(dynamic Bayesian network)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10907,
+      "subject": "隐马尔可夫模型",
+      "predicate": "HAS_PART",
+      "object": "状态变量",
+      "begin": "隐马尔可夫模型中的变量可分为两组.",
+      "end": "第一组是状态变量",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10907,
+      "subject": "隐马尔可夫模型",
+      "predicate": "HAS_PART",
+      "object": "观测变量",
+      "begin": "隐马尔可夫模型中的变量可分为两组.",
+      "end": "第二组是观测变量",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10974,
+      "subject": "马尔可夫随机场",
+      "predicate": "ALSO_CALLED",
+      "object": "MRF",
+      "begin": "马尔可夫随机场(Markov Random Field, 简称 MRF)",
+      "end": "马尔可夫随机场(Markov Random Field, 简称 MRF)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10974,
+      "subject": "马尔可夫随机场",
+      "predicate": "ALSO_CALLED",
+      "object": "马尔可夫网",
+      "begin": "马尔可夫随机场(Markov Random Field, 简称 MRF)",
+      "end": "典型的马尔可夫网",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10974,
+      "subject": "马尔可夫随机场",
+      "predicate": "IS_A",
+      "object": "无向图模型",
+      "begin": "马尔可夫随机场(Markov Random Field, 简称 MRF)",
+      "end": "无向图模型.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10974,
+      "subject": "马尔可夫随机场",
+      "predicate": "USES",
+      "object": "势函数",
+      "begin": "马尔可夫随机场有一组势函数(potential functions)",
+      "end": "马尔可夫随机场有一组势函数(potential functions)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 10974,
+      "subject": "势函数",
+      "predicate": "ALSO_CALLED",
+      "object": "因子",
+      "begin": "势函数(potential functions), 亦称 “因子” (factor)",
+      "end": "势函数(potential functions), 亦称 “因子” (factor)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11095,
+      "subject": "条件随机场",
+      "predicate": "ALSO_CALLED",
+      "object": "CRF",
+      "begin": "条件随机场(Conditional Random Field, 简称 CRF)",
+      "end": "条件随机场(Conditional Random Field, 简称 CRF)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11095,
+      "subject": "条件随机场",
+      "predicate": "IS_A",
+      "object": "判别式无向图模型",
+      "begin": "条件随机场(Conditional Random Field, 简称 CRF)",
+      "end": "一种判别式无向图模型.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11095,
+      "subject": "条件随机场",
+      "predicate": "IS_A",
+      "object": "判别式模型",
+      "begin": "而条件随机场则是判别式模型.",
+      "end": "而条件随机场则是判别式模型.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11095,
+      "subject": "隐马尔可夫模型",
+      "predicate": "IS_A",
+      "object": "生成式模型",
+      "begin": "前面介绍的隐马尔可夫模型和马尔可夫随机场",
+      "end": "都是生成式模型",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11095,
+      "subject": "马尔可夫随机场",
+      "predicate": "IS_A",
+      "object": "生成式模型",
+      "begin": "前面介绍的隐马尔可夫模型和马尔可夫随机场",
+      "end": "都是生成式模型",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11093,
+      "subject": "条件随机场",
+      "predicate": "CONDITIONAL_FORM_OF",
+      "object": "马尔可夫随机场",
+      "begin": "条件随机场可看作给定观测值的马尔可夫随机场",
+      "end": "条件随机场可看作给定观测值的马尔可夫随机场",
+      "qualifier": "可看作"
+    },
+    {
+      "source_line": 11267,
+      "subject": "采样",
+      "predicate": "IS_A",
+      "object": "近似推断方法",
+      "begin": "近似推断方法大致可分为两大类: 第一类是采样(sampling)",
+      "end": "通过使用随机化方法完成近似",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11267,
+      "subject": "变分推断",
+      "predicate": "IS_A",
+      "object": "近似推断方法",
+      "begin": "第二类是使用确定性近似完成近似推断",
+      "end": "典型代表为变分推断(variational inference).",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11291,
+      "subject": "MCMC",
+      "predicate": "ALSO_CALLED",
+      "object": "马尔可夫链蒙特卡罗",
+      "begin": "马尔可夫链蒙特卡罗(Markov Chain Monte Carlo, 简称 MCMC)",
+      "end": "马尔可夫链蒙特卡罗(Markov Chain Monte Carlo, 简称 MCMC)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11291,
+      "subject": "MCMC",
+      "predicate": "IS_A",
+      "object": "采样技术",
+      "begin": "概率图模型中最常用的采样技术",
+      "end": "方法.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11317,
+      "subject": "MCMC",
+      "predicate": "BASED_ON",
+      "object": "马尔可夫链",
+      "begin": "MCMC 方法先设法构造一条马尔可夫链",
+      "end": "MCMC 方法先设法构造一条马尔可夫链",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11321,
+      "subject": "Metropolis-Hastings算法",
+      "predicate": "ALSO_CALLED",
+      "object": "MH算法",
+      "begin": "Metropolis-Hastings (简称 MH) 算法",
+      "end": "Metropolis-Hastings (简称 MH) 算法",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11321,
+      "subject": "Metropolis-Hastings算法",
+      "predicate": "IS_A",
+      "object": "MCMC",
+      "begin": "Metropolis-Hastings (简称 MH) 算法",
+      "end": "MCMC 的重要代表.",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11321,
+      "subject": "Metropolis-Hastings算法",
+      "predicate": "BASED_ON",
+      "object": "拒绝采样",
+      "begin": "Metropolis-Hastings (简称 MH) 算法",
+      "end": "拒绝采样” (reject sampling)",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11353,
+      "subject": "吉布斯采样",
+      "predicate": "SPECIAL_CASE_OF",
+      "object": "MH算法",
+      "begin": "吉布斯采样(Gibbs sampling)",
+      "end": "MH 算法的特例",
+      "qualifier": "有时被视为"
+    },
+    {
+      "source_line": 11353,
+      "subject": "吉布斯采样",
+      "predicate": "USES",
+      "object": "马尔可夫链",
+      "begin": "它也使用马尔可夫链获取样本",
+      "end": "它也使用马尔可夫链获取样本",
+      "qualifier": ""
+    },
+    {
+      "source_line": 11363,
+      "subject": "变分推断",
+      "predicate": "USES",
+      "object": "简单分布",
+      "begin": "变分推断通过使用已知简单分布",
+      "end": "逼近需推断的复杂分布",
+      "qualifier": ""
+    }
+  ]
+}

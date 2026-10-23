@@ -1,0 +1,1266 @@
+{
+  "claims": [
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143"
+      ],
+      "claim_id": "edge:ml215:0333f46785db9a8a",
+      "evidence_text": "前面介绍的隐马尔可夫模型和马尔可夫随机场都是生成式模型",
+      "object": "生成式模型",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a"
+      ],
+      "claim_id": "edge:ml215:084a17baea014174",
+      "evidence_text": "吉布斯采样(Gibbs sampling)有时被视为 MH 算法的特例",
+      "object": "MH算法",
+      "online_eligible": false,
+      "predicate": "SPECIAL_CASE_OF",
+      "qualifier": "有时被视为",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11353,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "吉布斯采样"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8"
+      ],
+      "claim_id": "edge:ml215:0b63f552d603eea8",
+      "evidence_text": "根据个体学习器的生成方式, 目前的集成学习方法大致可分为两大类, 即个体学习器间存在强依赖关系、必须串行生成的序列化方法, 以及个体学习器间不存在强依赖关系、可同时生成的并行化方法; 前者的代表是 Boosting, 后者的代表是 Bagging 和 “随机森林” (Random Forest).",
+      "object": "并行化集成学习方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+      "source_file": "机器学习.md",
+      "source_line": 5715,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc"
+      ],
+      "claim_id": "edge:ml215:10a13d9505820fa0",
+      "evidence_text": "马尔可夫随机场(Markov Random Field, 简称 MRF)是典型的马尔可夫网",
+      "object": "马尔可夫网",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de"
+      ],
+      "claim_id": "edge:ml215:179b8e6aef2203f9",
+      "evidence_text": "随机森林(Random Forest, 简称 RF) [Breiman, 2001a] 是 Bagging 的一个扩展变体.",
+      "object": "Bagging",
+      "online_eligible": false,
+      "predicate": "VARIANT_OF",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "70474bf1f1f463bc99bfb08b4127cd5707846684f6cc3b3998713a532f33da9b"
+      ],
+      "claim_id": "edge:ml215:1824beebcd376472",
+      "evidence_text": "决策树剪枝的基本策略有“预剪枝”(prepruning)和“后剪枝”(post-pruning)[Quinlan, 1993].",
+      "object": "决策树剪枝",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+      "source_file": "机器学习.md",
+      "source_line": 2532,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "预剪枝"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143"
+      ],
+      "claim_id": "edge:ml215:19aff6dfad272063",
+      "evidence_text": "条件随机场(Conditional Random Field, 简称 CRF)",
+      "object": "CRF",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "b2cce1277ae6ad15091cb2ebb616fe6503c2647ede42ad8958d1053a4e39dee0"
+      ],
+      "claim_id": "edge:ml215:1a7d26cb58ef4797",
+      "evidence_text": "变分推断通过使用已知简单分布来逼近需推断的复杂分布",
+      "object": "简单分布",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.2 变分推断",
+      "source_file": "机器学习.md",
+      "source_line": 11363,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "变分推断"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "a50dceb8e72c94be8fa1d51e778df1d751c1fd53de70453654ee8428f55078f5"
+      ],
+      "claim_id": "edge:ml215:1a7e351abd594eba",
+      "evidence_text": "CART 决策树 [Breiman et al., 1984] 使用 “基尼指数” (Gini index) 来选择划分属性.",
+      "object": "基尼指数",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.3 基尼指数",
+      "source_file": "机器学习.md",
+      "source_line": 2510,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "CART决策树"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83"
+      ],
+      "claim_id": "edge:ml215:1adfd3c8bd2a17ed",
+      "evidence_text": "第二类是使用确定性近似完成近似推断, 典型代表为变分推断(variational inference).",
+      "object": "近似推断方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+      "source_file": "机器学习.md",
+      "source_line": 11267,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "变分推断"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "d0548373c1a08cedd23dae7b5bb9522e8b00357055effc0454bc27da1444538a"
+      ],
+      "claim_id": "edge:ml215:215b4acdac5593d4",
+      "evidence_text": "Boosting 是一族可将弱学习器提升为强学习器的算法.",
+      "object": "弱学习器",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.2 Boosting",
+      "source_file": "机器学习.md",
+      "source_line": 5719,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Boosting"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "0f93176f8c8012dc581769cdb4ce8662cafdb0cf66ce4b6a987a8d03c36a1009"
+      ],
+      "claim_id": "edge:ml215:21b1f92b43cf34ea",
+      "evidence_text": "在现实应用中，贝叶斯网的近似推断常使用吉布斯采样(Gibbs sampling)来完成，这是一种随机采样方法",
+      "object": "吉布斯采样",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网 / 7.5.3 推断",
+      "source_file": "机器学习.md",
+      "source_line": 5320,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网近似推断"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "c9bdc3b78e1d26525a761fb5e0b55d5f1024265617188d9d7e41ebe58bfe28d6"
+      ],
+      "claim_id": "edge:ml215:235d6338d567b926",
+      "evidence_text": "AGNES 是一种采用自底向上聚合策略的层次聚类算法.",
+      "object": "层次聚类算法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第9章 聚类 / 9.6 层次聚类",
+      "source_file": "机器学习.md",
+      "source_line": 7361,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "AGNES"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc"
+      ],
+      "claim_id": "edge:ml215:25866562a0405607",
+      "evidence_text": "马尔可夫随机场(Markov Random Field, 简称 MRF)是典型的马尔可夫网, 这是一种著名的无向图模型.",
+      "object": "无向图模型",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143"
+      ],
+      "claim_id": "edge:ml215:27d0a9b3fa28c2e5",
+      "evidence_text": "而条件随机场则是判别式模型.",
+      "object": "判别式模型",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd"
+      ],
+      "claim_id": "edge:ml215:2b5df3c80f8cf795",
+      "evidence_text": "贝叶斯网(Bayesian network)亦称“信念网”(belief network), 它借助有向无环图 (Directed Acyclic Graph, 简称 DAG)来刻画属性之间的依赖关系",
+      "object": "有向无环图",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5159,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143"
+      ],
+      "claim_id": "edge:ml215:2f9e0844bc868fe9",
+      "evidence_text": "前面介绍的隐马尔可夫模型和马尔可夫随机场都是生成式模型",
+      "object": "生成式模型",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "6f39966142638e1b6ded736268364594b716bcb778a9b2cc1fe896962932c510"
+      ],
+      "claim_id": "edge:ml215:3233bc7b38fb3df4",
+      "evidence_text": "主成分分析(Principal Component Analysis, 简称 PCA)是最常用的一种降维方法.",
+      "object": "降维方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+      "source_file": "机器学习.md",
+      "source_line": 7981,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "主成分分析"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd"
+      ],
+      "claim_id": "edge:ml215:32372032b81f6065",
+      "evidence_text": "一个贝叶斯网 B 由结构 G 和参数 $\\Theta$ 两部分构成",
+      "object": "网络参数",
+      "online_eligible": false,
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5165,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd"
+      ],
+      "claim_id": "edge:ml215:38754793e893e787",
+      "evidence_text": "贝叶斯网(Bayesian network)亦称“信念网”(belief network)",
+      "object": "信念网",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5159,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8"
+      ],
+      "claim_id": "edge:ml215:3a906e4e482a37af",
+      "evidence_text": "根据个体学习器的生成方式, 目前的集成学习方法大致可分为两大类, 即个体学习器间存在强依赖关系、必须串行生成的序列化方法, 以及个体学习器间不存在强依赖关系、可同时生成的并行化方法; 前者的代表是 Boosting, 后者的代表是 Bagging 和 “随机森林” (Random Forest).",
+      "object": "并行化集成学习方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+      "source_file": "机器学习.md",
+      "source_line": 5715,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Bagging"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a"
+      ],
+      "claim_id": "edge:ml215:40d6140b945ec984",
+      "evidence_text": "它也使用马尔可夫链获取样本",
+      "object": "马尔可夫链",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11353,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "吉布斯采样"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4"
+      ],
+      "claim_id": "edge:ml215:43922f58313fb854",
+      "evidence_text": "Metropolis-Hastings (简称 MH) 算法是 MCMC 的重要代表. 它基于 “拒绝采样” (reject sampling)",
+      "object": "拒绝采样",
+      "online_eligible": false,
+      "predicate": "BASED_ON",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11321,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Metropolis-Hastings算法"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143"
+      ],
+      "claim_id": "edge:ml215:4aeb3ad8470a10cc",
+      "evidence_text": "条件随机场可看作给定观测值的马尔可夫随机场",
+      "object": "马尔可夫随机场",
+      "online_eligible": false,
+      "predicate": "CONDITIONAL_FORM_OF",
+      "qualifier": "可看作",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11093,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "b3c6419e71b2c06ed76711c7ea575d23d16bb5f3c398f5a0f237237729e3c82e"
+      ],
+      "claim_id": "edge:ml215:4f4e50bfb0c0cadd",
+      "evidence_text": "著名的ID3决策树学习算法 [Quinlan, 1986] 就是以信息增益为准则来选择划分属性.",
+      "object": "信息增益",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.1 信息增益",
+      "source_file": "机器学习.md",
+      "source_line": 2408,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "ID3决策树学习算法"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de"
+      ],
+      "claim_id": "edge:ml215:5552283f24dfe492",
+      "evidence_text": "RF 在以决策树为基学习器构建 Bagging 集成的基础上, 进一步在决策树的训练过程中引入了随机属性选择.",
+      "object": "决策树",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "4af7f6d66a14c23706d7c8158048e3d9c223f312898ce93d1cd8d76c661943ff"
+      ],
+      "claim_id": "edge:ml215:598f5fe69bdacce9",
+      "evidence_text": "k 近邻(k-Nearest Neighbor, 简称 kNN)学习是一种常用的监督学习方法",
+      "object": "监督学习方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+      "source_file": "机器学习.md",
+      "source_line": 7813,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "k近邻学习"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143"
+      ],
+      "claim_id": "edge:ml215:704ca72f51240309",
+      "evidence_text": "条件随机场(Conditional Random Field, 简称 CRF) 是一种判别式无向图模型.",
+      "object": "判别式无向图模型",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378"
+      ],
+      "claim_id": "edge:ml215:798156c02e542aaa",
+      "evidence_text": "隐马尔可夫模型(Hidden Markov Model, 简称 HMM)",
+      "object": "HMM",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10905,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "3f6b56ab29917577506f0dffa2bf05c8d84ec4ce25754b6f96d3ca288b2c7702"
+      ],
+      "claim_id": "edge:ml215:7bc9bc9dc1953e07",
+      "evidence_text": "DBSCAN 是一种著名的密度聚类算法",
+      "object": "密度聚类算法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+      "source_file": "机器学习.md",
+      "source_line": 7235,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "DBSCAN"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "4af7f6d66a14c23706d7c8158048e3d9c223f312898ce93d1cd8d76c661943ff"
+      ],
+      "claim_id": "edge:ml215:830bc1e6e53fc09d",
+      "evidence_text": "k 近邻(k-Nearest Neighbor, 简称 kNN)",
+      "object": "kNN",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+      "source_file": "机器学习.md",
+      "source_line": 7813,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "k近邻学习"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378"
+      ],
+      "claim_id": "edge:ml215:88b721e640520ada",
+      "evidence_text": "隐马尔可夫模型中的变量可分为两组. 第一组是状态变量 $\\{y_{1}, y_{2}, \\ldots, y_{n}\\}$ , 其中 $y_{i} \\in Y$ 表示第 i 时刻的系统状态. 通常假定状态变量是隐藏的、不可被观测的, 因此状态变量亦称隐变量(hidden variable). 第二组是观测变量",
+      "object": "观测变量",
+      "online_eligible": false,
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10907,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "70474bf1f1f463bc99bfb08b4127cd5707846684f6cc3b3998713a532f33da9b"
+      ],
+      "claim_id": "edge:ml215:8c1652116077fc39",
+      "evidence_text": "决策树剪枝的基本策略有“预剪枝”(prepruning)和“后剪枝”(post-pruning)[Quinlan, 1993].",
+      "object": "决策树剪枝",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+      "source_file": "机器学习.md",
+      "source_line": 2532,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "后剪枝"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8"
+      ],
+      "claim_id": "edge:ml215:8d9cf55cbb0441a5",
+      "evidence_text": "根据个体学习器的生成方式, 目前的集成学习方法大致可分为两大类, 即个体学习器间存在强依赖关系、必须串行生成的序列化方法, 以及个体学习器间不存在强依赖关系、可同时生成的并行化方法; 前者的代表是 Boosting, 后者的代表是 Bagging 和 “随机森林” (Random Forest).",
+      "object": "序列化集成学习方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+      "source_file": "机器学习.md",
+      "source_line": 5715,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Boosting"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34"
+      ],
+      "claim_id": "edge:ml215:942786ce51a57201",
+      "evidence_text": "概率图模型中最常用的采样技术是马尔可夫链蒙特卡罗(Markov Chain Monte Carlo, 简称 MCMC)方法.",
+      "object": "采样技术",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11291,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "MCMC"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378"
+      ],
+      "claim_id": "edge:ml215:99cdde8b965ab561",
+      "evidence_text": "隐马尔可夫模型中的变量可分为两组. 第一组是状态变量",
+      "object": "状态变量",
+      "online_eligible": false,
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10907,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de"
+      ],
+      "claim_id": "edge:ml215:9b6854453dc78732",
+      "evidence_text": "RF 在以决策树为基学习器构建 Bagging 集成的基础上, 进一步在决策树的训练过程中引入了随机属性选择.",
+      "object": "随机属性选择",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b"
+      ],
+      "claim_id": "edge:ml215:a1cbb484f77000d9",
+      "evidence_text": "Bagging [Breiman, 1996a] 是并行式集成学习方法最著名的代表. 从名字即可看出, 它直接基于我们在 2.2.3 节介绍过的自助采样法 (bootstrap sampling).",
+      "object": "自助采样法",
+      "online_eligible": false,
+      "predicate": "BASED_ON",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+      "source_file": "机器学习.md",
+      "source_line": 5896,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Bagging"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "07f86f657fe1b86c60d6b6589ebaf4de3abcf7adcdbf06c87824c00c25f774fa"
+      ],
+      "claim_id": "edge:ml215:a2e83ee17caf0608",
+      "evidence_text": "著名的 C4.5 决策树算法 [Quinlan, 1993] 不直接使用信息增益, 而是使用 “增益率” (gain ratio) 来选择最优划分属性.",
+      "object": "增益率",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.2 增益率",
+      "source_file": "机器学习.md",
+      "source_line": 2490,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "C4.5决策树算法"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "6d8e18e34350548f3d6311c93b87fa2b0ee037e4fec278c168be1695fb17bac4"
+      ],
+      "claim_id": "edge:ml215:a5fef0a300eb80be",
+      "evidence_text": "朴素贝叶斯分类器(naïve Bayes classifier)采用了“属性条件独立性假设”(attribute conditional independence assumption): 对已知类别, 假设所有属性相互独立.",
+      "object": "属性条件独立性假设",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.3 朴素贝叶斯分类器",
+      "source_file": "机器学习.md",
+      "source_line": 4878,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "朴素贝叶斯分类器"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4"
+      ],
+      "claim_id": "edge:ml215:a8884e55c3eaf74e",
+      "evidence_text": "Metropolis-Hastings (简称 MH) 算法",
+      "object": "MH算法",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11321,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Metropolis-Hastings算法"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34"
+      ],
+      "claim_id": "edge:ml215:af57931f6b0f1d8d",
+      "evidence_text": "马尔可夫链蒙特卡罗(Markov Chain Monte Carlo, 简称 MCMC)",
+      "object": "马尔可夫链蒙特卡罗",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11291,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "MCMC"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd"
+      ],
+      "claim_id": "edge:ml215:b0a3731449ebff42",
+      "evidence_text": "一个贝叶斯网 B 由结构 G 和参数 $\\Theta$ 两部分构成",
+      "object": "网络结构",
+      "online_eligible": false,
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5165,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83"
+      ],
+      "claim_id": "edge:ml215:b63c2b4fc74db7a2",
+      "evidence_text": "近似推断方法大致可分为两大类: 第一类是采样(sampling), 通过使用随机化方法完成近似",
+      "object": "近似推断方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+      "source_file": "机器学习.md",
+      "source_line": 11267,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "采样"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc"
+      ],
+      "claim_id": "edge:ml215:ba03bfc621b5dab7",
+      "evidence_text": "马尔可夫随机场有一组势函数(potential functions)",
+      "object": "势函数",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "3f6b56ab29917577506f0dffa2bf05c8d84ec4ce25754b6f96d3ca288b2c7702"
+      ],
+      "claim_id": "edge:ml215:bc517234f1cdd1a6",
+      "evidence_text": "DBSCAN 是一种著名的密度聚类算法, 它基于一组 “邻域” (neighborhood) 参数 $(\\epsilon, MinPts)$ 来刻画样本分布的紧密程度.",
+      "object": "邻域参数",
+      "online_eligible": false,
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+      "source_file": "机器学习.md",
+      "source_line": 7235,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "DBSCAN"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378"
+      ],
+      "claim_id": "edge:ml215:bc7bf4b772a8ff5d",
+      "evidence_text": "隐马尔可夫模型(Hidden Markov Model, 简称 HMM)是结构最简单的动态贝叶斯网(dynamic Bayesian network)",
+      "object": "动态贝叶斯网",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10905,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4"
+      ],
+      "claim_id": "edge:ml215:be749acac051e18b",
+      "evidence_text": "MCMC 方法先设法构造一条马尔可夫链",
+      "object": "马尔可夫链",
+      "online_eligible": false,
+      "predicate": "BASED_ON",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11317,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "MCMC"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc"
+      ],
+      "claim_id": "edge:ml215:cfb31749c4c8bfc8",
+      "evidence_text": "马尔可夫随机场(Markov Random Field, 简称 MRF)",
+      "object": "MRF",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4"
+      ],
+      "claim_id": "edge:ml215:d028bd533f734b04",
+      "evidence_text": "Metropolis-Hastings (简称 MH) 算法是 MCMC 的重要代表.",
+      "object": "MCMC",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11321,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Metropolis-Hastings算法"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de"
+      ],
+      "claim_id": "edge:ml215:e3bfd0e3028a2b60",
+      "evidence_text": "随机森林(Random Forest, 简称 RF)",
+      "object": "RF",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "6f39966142638e1b6ded736268364594b716bcb778a9b2cc1fe896962932c510"
+      ],
+      "claim_id": "edge:ml215:eec7271e47778db8",
+      "evidence_text": "主成分分析(Principal Component Analysis, 简称 PCA)",
+      "object": "PCA",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+      "source_file": "机器学习.md",
+      "source_line": 7981,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "主成分分析"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b"
+      ],
+      "claim_id": "edge:ml215:ef0c13576dd4b807",
+      "evidence_text": "Bagging [Breiman, 1996a] 是并行式集成学习方法最著名的代表.",
+      "object": "并行式集成学习方法",
+      "online_eligible": false,
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+      "source_file": "机器学习.md",
+      "source_line": 5896,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Bagging"
+    },
+    {
+      "binding_checks": {
+        "exact_chapter_section": true,
+        "exact_contiguous_quote_in_snapshot_chunk": true,
+        "exact_source_file": "机器学习.md",
+        "exact_source_line_span": true,
+        "unique_snapshot_chunk_id": true
+      },
+      "chunk_ids": [
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc"
+      ],
+      "claim_id": "edge:ml215:fb9beac59a89053a",
+      "evidence_text": "势函数(potential functions), 亦称 “因子” (factor)",
+      "object": "因子",
+      "online_eligible": false,
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "势函数"
+    }
+  ],
+  "metadata": {
+    "baseline_aliases_sha256": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+    "baseline_graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "baseline_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "binding_rule": "same-original-source-line+same-source+exact-full-section+contiguous-quote+unique-existing-Chunk",
+    "graph_sha256": "9ffb154913a242cee05614a18d239ea8dedfe6f310edf8a5a1f9def97accb6ef",
+    "new_source_snapshot_rows": 895,
+    "online_eligible_status": null,
+    "phase": "offline_evidence_bound_pending_review",
+    "schema": "douxian-claim-link-multisource-v215-1",
+    "semantic_claims": 54,
+    "snapshot_rows": 1953,
+    "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "source_file": "机器学习.md",
+    "source_sha256": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+    "spec_sha256": "12109667f465fde870e2b7f49511ed1ec734cb377f9f4aaac4e7cf340774298f",
+    "status_counts": {
+      "evidence_bound_pending_independent_semantic_review": 54
+    }
+  }
+}

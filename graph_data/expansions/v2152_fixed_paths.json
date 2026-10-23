@@ -1,0 +1,58 @@
+{
+  "schema": "douxian-v2152-fixed-multi-book-path-tests-1",
+  "phase": "offline_pending_semantic_review",
+  "note": "Paths provide two separate proven/pending evidence edges; they never imply a new direct A-C graph edge. The new textbook claims remain NOT ONLINE ELIGIBLE.",
+  "cases": [
+    {
+      "case_id": "gibbs_mcmc_markov",
+      "query": "吉布斯采样的采样机制依赖哪类随机过程？",
+      "path_claim_ids": [
+        "edge:289d96aa51ba2b95",
+        "edge:ml215:be749acac051e18b"
+      ],
+      "intent": "theoretical_basis",
+      "expected_start": "吉布斯采样",
+      "expected_intermediate": "MCMC",
+      "expected_end": "马尔可夫链",
+      "risk_note": "MCMC 来源于第二教材的边仍待独立语义审核；不自动生成吉布斯采样直接 BASED_ON 马尔可夫链关系。"
+    },
+    {
+      "case_id": "mh_mcmc_markov",
+      "query": "Metropolis-Hastings算法通过什么随机过程开展采样？",
+      "path_claim_ids": [
+        "edge:ml215:d028bd533f734b04",
+        "edge:a53f6c900996f454"
+      ],
+      "intent": "theoretical_basis",
+      "expected_start": "Metropolis-Hastings算法",
+      "expected_intermediate": "MCMC",
+      "expected_end": "马尔可夫链",
+      "risk_note": "新书 MH 算法属于 MCMC 的语义边待复核，不能把这条路径当作新的直接断言。"
+    },
+    {
+      "case_id": "undirected_mrf_potential",
+      "query": "无向图模型使用什么函数表达概率分布？",
+      "path_claim_ids": [
+        "edge:ad12f3d587f3d7d2",
+        "edge:ml215:ba03bfc621b5dab7"
+      ],
+      "intent": "representation_mechanism",
+      "expected_start": "无向图模型",
+      "expected_intermediate": "马尔可夫随机场",
+      "expected_end": "势函数",
+      "risk_note": "第一边是旧版已验证同义关系，第二边来源于新教材；仅用于寻址第二本教材的证据。"
+    }
+  ],
+  "negative_controls": [
+    {
+      "query": "吉布斯采样是什么？",
+      "expected_path_expansion": false,
+      "reason": "定义问题不应默认扩展至第二跳"
+    },
+    {
+      "query": "随机森林使用哪些方法训练？",
+      "expected_path_expansion": false,
+      "reason": "本次三条路径与此问题无关；原 Hybrid 已直接找到训练机制"
+    }
+  ]
+}

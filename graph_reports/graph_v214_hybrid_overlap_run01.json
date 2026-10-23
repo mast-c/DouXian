@@ -1,0 +1,225 @@
+{
+  "experiment": "DouXian_V2.14_Live_Hybrid_Overlap_Audit",
+  "phase": "read_only_live_hybrid_candidates_only",
+  "run_utc": "2026-10-22T09:49:00.330419+00:00",
+  "original_offline_report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\graph_reports\\graph_v214_local_run01.json",
+  "original_offline_report_sha256": "b36677d776a634f4f45b5d861a56eeafd8bfadedee7ca5fd2a2046033f003ee6",
+  "source_artifact_sha256": {
+    "v212_graph": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "v212_links": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "v212_aliases": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+    "v212_snapshot": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "v212_gate": "c5fc8d379f853b1a6486068235b88f25835db060ed07d8de521ae3b03c3158bf",
+    "textbook": "40b5ec25a031cfce564657e01145824051edb1e6ca0b225066f4b08c13b0d116"
+  },
+  "chroma_collection_count": 1953,
+  "bm25_indexed_chunks": 1953,
+  "index_build_seconds": 6.836,
+  "fixed_subqueries": true,
+  "query_decomposition_performed": false,
+  "raw_hybrid_top_k": 20,
+  "reranker_calls": 0,
+  "answer_generation_calls": 0,
+  "graph_candidate_budget": [
+    2
+  ],
+  "queries_checked": 2,
+  "total_v214_new_vs_v213_graph_ids": 2,
+  "total_truly_novel_vs_raw_hybrid_top10": 1,
+  "total_truly_novel_vs_raw_hybrid_top20": 1,
+  "results": [
+    {
+      "query": "吉布斯采样的理论依据是什么？",
+      "intent_gates": [
+        "theoretical_basis"
+      ],
+      "budget": 2,
+      "v213_graph_candidate_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8"
+      ],
+      "v214_budgeted_graph_candidate_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "v214_new_vs_v213_graph_ids": [
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "matched_two_hop_claim_paths": [
+        [
+          "edge:289d96aa51ba2b95",
+          "edge:a53f6c900996f454"
+        ]
+      ],
+      "candidate_validation": "live_chroma_equal_to_verified_v212_snapshot",
+      "raw_hybrid_query_seconds": 0.352,
+      "hybrid_returned": 20,
+      "hybrid_top10_chunk_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "70c44fe43891205f099813c7bb8d6e5cf9afa642e8d73897dfb8cd7105a6b68f",
+        "379aed183df95de4fe18620e798e6ad85b0b2aeaeae50a62cb9c2c96bda6c715",
+        "65e047fd0caef9ad6866868f3ea0fd3edb00bd8cd0d92a76a2d8a5c9d2294fb6",
+        "dc362984ede8f817fbc28e1e601fe8c05f4e6ae67fe4bebad59ee6fac8b2c06d",
+        "26d9b1836d67bee741ecefb199e314ca3119212a26860b507212a9894a2021f7",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "e7484b2d374744a65c332972bd558bb1e9ada86a2a42dd1d221a0de170623d46",
+        "345c1bc4339282b3cfe72e1a1bd0c0395a9b40ac65806cd07d8d60df9634f79d",
+        "257177d957a99f1a510d988d52c6c0fb1b7bcedff6ef2405c690f009fa6bdebb"
+      ],
+      "hybrid_top20_chunk_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "70c44fe43891205f099813c7bb8d6e5cf9afa642e8d73897dfb8cd7105a6b68f",
+        "379aed183df95de4fe18620e798e6ad85b0b2aeaeae50a62cb9c2c96bda6c715",
+        "65e047fd0caef9ad6866868f3ea0fd3edb00bd8cd0d92a76a2d8a5c9d2294fb6",
+        "dc362984ede8f817fbc28e1e601fe8c05f4e6ae67fe4bebad59ee6fac8b2c06d",
+        "26d9b1836d67bee741ecefb199e314ca3119212a26860b507212a9894a2021f7",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "e7484b2d374744a65c332972bd558bb1e9ada86a2a42dd1d221a0de170623d46",
+        "345c1bc4339282b3cfe72e1a1bd0c0395a9b40ac65806cd07d8d60df9634f79d",
+        "257177d957a99f1a510d988d52c6c0fb1b7bcedff6ef2405c690f009fa6bdebb",
+        "0f93176f8c8012dc581769cdb4ce8662cafdb0cf66ce4b6a987a8d03c36a1009",
+        "2dfd11d3d98f5b2038fc166076f618138623a2207aa84bbf30286db425b7f8e9",
+        "7f2b90ec7b02b7035de8e349f9572d23d3022971bf45ea09c3dc85e34ebc7310",
+        "2aeecd082ee85d901bcce3936b4182a0e0e090ab553ff104cf311d8c1d96abe7",
+        "a30c3fe3311e57b61edc37dc624e3cd8bafced5e213e2fcb6cfb32c826b6e521",
+        "acd30e3fbf473de1a3c7e381f7b7c6ac963795eaf47dbb4fa2de6a65f88faf8e",
+        "0458144bb6364fe433b7040289014cc1f631fed9e08195862b49b220a27342f1",
+        "c5dbdad3b0429d50fc06f8688bc2d11e1d9fcb3ddfd6fe82d4eebd5e113afe07",
+        "39d8722e1cc69c9141462bc79a7cf9fb1828626e5d4ba33a887d244e6d41ff84",
+        "8dd8f3cfa8606559538b9c0d1f779fcf7624a465527ed0d09746ae7640f3f506"
+      ],
+      "v213_graph_candidate_id_ranks": {
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8": 1
+      },
+      "v214_graph_candidate_id_ranks": {
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8": 1,
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206": null
+      },
+      "v214_new_candidate_audit": [
+        {
+          "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+          "hybrid_rank_top20": null,
+          "exact_in_hybrid_top10": false,
+          "exact_in_hybrid_top20": false,
+          "same_content_other_id_top10": [],
+          "same_content_other_id_top20": [],
+          "candidate_novel_vs_hybrid_top10": true,
+          "candidate_novel_vs_hybrid_top20": true
+        }
+      ],
+      "v214_new_candidate_count": 1,
+      "v214_new_vs_hybrid_top10": 1,
+      "v214_new_vs_hybrid_top20": 1,
+      "not_measured": [
+        "rerank_survival",
+        "final_evidence",
+        "answer_quality",
+        "citation_correctness",
+        "reranker_tokens"
+      ]
+    },
+    {
+      "query": "卷积神经网络包含哪些层，这些层怎样进行特征计算？",
+      "intent_gates": [
+        "composition_mechanism"
+      ],
+      "budget": 2,
+      "v213_graph_candidate_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7"
+      ],
+      "v214_budgeted_graph_candidate_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+      ],
+      "v214_new_vs_v213_graph_ids": [
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+      ],
+      "matched_two_hop_claim_paths": [
+        [
+          "edge:d8972949d756a8d4",
+          "edge:a856abef89b3fd13"
+        ],
+        [
+          "edge:d8972949d756a8d4",
+          "edge:9fcc3bbf51554032"
+        ],
+        [
+          "edge:0d873ce8e1dca645",
+          "edge:f4b581a4e332c0a0"
+        ]
+      ],
+      "candidate_validation": "live_chroma_equal_to_verified_v212_snapshot",
+      "raw_hybrid_query_seconds": 0.127,
+      "hybrid_returned": 20,
+      "hybrid_top10_chunk_ids": [
+        "199bba1b6f6fac405525dee87a23faa1964684d216bda8f13aed5c9beb152161",
+        "8ad62cb5a140d282f490ab413191f0bc7af1477ca9642c960f1f9b378c525339",
+        "76944f77350ad023c1717410c514a7e85aca526ff6712138a7a8097bba61183a",
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+        "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b",
+        "654dd368e892972f47923d1e598ee763b3da639a2de7d733cb5c4535ec2705d4",
+        "f7dfb4d7df44ecc22e17d3fe57ecdc89a7e7d07e219886b03c7cd0cd6186b3e6",
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+        "aebd7c309eb29c7d963a92ad96cdcd6cef7f82fdf3fd38bd5daa1989ca2383f6",
+        "8b474a477c8fa370d2342d9641a0b4f7bc7de65fb07efca1c840341a3d98042b"
+      ],
+      "hybrid_top20_chunk_ids": [
+        "199bba1b6f6fac405525dee87a23faa1964684d216bda8f13aed5c9beb152161",
+        "8ad62cb5a140d282f490ab413191f0bc7af1477ca9642c960f1f9b378c525339",
+        "76944f77350ad023c1717410c514a7e85aca526ff6712138a7a8097bba61183a",
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+        "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b",
+        "654dd368e892972f47923d1e598ee763b3da639a2de7d733cb5c4535ec2705d4",
+        "f7dfb4d7df44ecc22e17d3fe57ecdc89a7e7d07e219886b03c7cd0cd6186b3e6",
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+        "aebd7c309eb29c7d963a92ad96cdcd6cef7f82fdf3fd38bd5daa1989ca2383f6",
+        "8b474a477c8fa370d2342d9641a0b4f7bc7de65fb07efca1c840341a3d98042b",
+        "272c4414ef8700d2d0415cfe4b183b4961a0ec2472a6aa41294fba263ae6600e",
+        "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+        "a31a73bd3889a8d8eaf71f78db855d7e3b9cf7c9ab14b8d1696385a54817c198",
+        "03a588b9c2ef6531d5a8bf1677dab8739756c31ac8e5ac14b6c6fa29f5b3296f",
+        "a23a1dda7fb60e68946d23b4014d636b6ca288a8e829fa53d356eec3f997bdc9",
+        "b0e7cdd2e9e206beaf923815fa316c863f8ff8458b2be4f139aa47504ba96b05",
+        "7588f2dc3e1bff5b99b1c51f4fb1b284f8b097992e662167d69b81e9811ab7dc",
+        "6c59942de6ed2d39283a4ae56175d9a47aa8db841e34e911b330686c4bf63663",
+        "d96b3ebe93543b021a22cb4d0d308c2ab532847cf1aa020cff054ce589470455",
+        "4ac2947f7215a0902393ec6ed893ef09c69ca09eb7aa4317c90c81ef0cebb50d"
+      ],
+      "v213_graph_candidate_id_ranks": {
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7": 8
+      },
+      "v214_graph_candidate_id_ranks": {
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7": 8,
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22": 4
+      },
+      "v214_new_candidate_audit": [
+        {
+          "chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+          "hybrid_rank_top20": 4,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_content_other_id_top10": [],
+          "same_content_other_id_top20": [],
+          "candidate_novel_vs_hybrid_top10": false,
+          "candidate_novel_vs_hybrid_top20": false
+        }
+      ],
+      "v214_new_candidate_count": 1,
+      "v214_new_vs_hybrid_top10": 0,
+      "v214_new_vs_hybrid_top20": 0,
+      "not_measured": [
+        "rerank_survival",
+        "final_evidence",
+        "answer_quality",
+        "citation_correctness",
+        "reranker_tokens"
+      ]
+    }
+  ],
+  "limitations": [
+    "New compared with V2.13 graph != new compared with Hybrid.",
+    "This uses original raw Hybrid on fixed full question; does not reproduce LLM query decomposition.",
+    "Chroma embedding lookups may incur embedding API calls and latency.",
+    "No Reranker, citations, final answer, or answer quality evaluation.",
+    "Novelty relative to top K is not proof no deeper Hybrid rank exists."
+  ]
+}

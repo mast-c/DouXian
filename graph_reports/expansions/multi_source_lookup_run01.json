@@ -1,0 +1,325 @@
+{
+  "phase": "v215_offline_exact_label_lookup_only",
+  "warning": "New relations are pending semantic review; not a Hybrid or Reranker evaluation.",
+  "results": [
+    {
+      "query": "吉布斯采样和MCMC有什么关系？",
+      "matched_labels": [
+        "MCMC",
+        "吉布斯采样"
+      ],
+      "matched_claim_count": 12,
+      "candidate_count": 6,
+      "sources": {
+        "机器学习.md": 7,
+        "神经网络与深度学习.md": 5
+      },
+      "chunks": [
+        {
+          "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+          "source_file": "神经网络与深度学习.md",
+          "chapter": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+          "claim_ids": [
+            "edge:289d96aa51ba2b95",
+            "edge:3c3336e8a2d46754",
+            "edge:f41c568fafd242bd"
+          ],
+          "status": "verified",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+          "source_file": "神经网络与深度学习.md",
+          "chapter": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+          "claim_ids": [
+            "edge:2ab7e570dfc30a47",
+            "edge:a53f6c900996f454"
+          ],
+          "status": "verified",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "claim_ids": [
+            "edge:ml215:084a17baea014174",
+            "edge:ml215:40d6140b945ec984"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "0f93176f8c8012dc581769cdb4ce8662cafdb0cf66ce4b6a987a8d03c36a1009",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网 / 7.5.3 推断",
+          "claim_ids": [
+            "edge:ml215:21b1f92b43cf34ea"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "claim_ids": [
+            "edge:ml215:942786ce51a57201",
+            "edge:ml215:af57931f6b0f1d8d"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "claim_ids": [
+            "edge:ml215:be749acac051e18b",
+            "edge:ml215:d028bd533f734b04"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        }
+      ],
+      "truncated": false,
+      "no_online_promotion": true
+    },
+    {
+      "query": "马尔可夫随机场的证据来自哪本教材？",
+      "matched_labels": [
+        "马尔可夫随机场"
+      ],
+      "matched_claim_count": 7,
+      "candidate_count": 3,
+      "sources": {
+        "机器学习.md": 6,
+        "神经网络与深度学习.md": 1
+      },
+      "chunks": [
+        {
+          "chunk_id": "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+          "source_file": "神经网络与深度学习.md",
+          "chapter": "第11章 概率图模型 / 11.1 模型表示 / 11.1.3 无向图模型",
+          "claim_ids": [
+            "edge:ad12f3d587f3d7d2"
+          ],
+          "status": "verified",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+          "claim_ids": [
+            "edge:ml215:0333f46785db9a8a",
+            "edge:ml215:4aeb3ad8470a10cc"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+          "claim_ids": [
+            "edge:ml215:10a13d9505820fa0",
+            "edge:ml215:25866562a0405607",
+            "edge:ml215:ba03bfc621b5dab7",
+            "edge:ml215:cfb31749c4c8bfc8"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        }
+      ],
+      "truncated": false,
+      "no_online_promotion": true
+    },
+    {
+      "query": "变分推断属于哪类推断方法？",
+      "matched_labels": [
+        "变分推断"
+      ],
+      "matched_claim_count": 4,
+      "candidate_count": 4,
+      "sources": {
+        "机器学习.md": 2,
+        "神经网络与深度学习.md": 2
+      },
+      "chunks": [
+        {
+          "chunk_id": "c156925fac3f8ad2834ffecf5b5120da0e32b7423c877e21a6f1a8f1dc33544e",
+          "source_file": "神经网络与深度学习.md",
+          "chapter": "第11章 概率图模型 / 11.3 推断 / 11.3.2 近似推断",
+          "claim_ids": [
+            "edge:6fb281515635a996"
+          ],
+          "status": "verified",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "beeab970af3fc81a263c339fc6cae72d86d1a2749df5c527764e5e2152151ab3",
+          "source_file": "神经网络与深度学习.md",
+          "chapter": "第11章 概率图模型 / 11.4 变分推断",
+          "claim_ids": [
+            "edge:8c790f7f19579098"
+          ],
+          "status": "verified",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "b2cce1277ae6ad15091cb2ebb616fe6503c2647ede42ad8958d1053a4e39dee0",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.2 变分推断",
+          "claim_ids": [
+            "edge:ml215:1a7d26cb58ef4797"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+          "claim_ids": [
+            "edge:ml215:1adfd3c8bd2a17ed"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        }
+      ],
+      "truncated": false,
+      "no_online_promotion": true
+    },
+    {
+      "query": "随机森林使用哪些方法训练？",
+      "matched_labels": [
+        "随机森林"
+      ],
+      "matched_claim_count": 5,
+      "candidate_count": 2,
+      "sources": {
+        "机器学习.md": 5
+      },
+      "chunks": [
+        {
+          "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+          "claim_ids": [
+            "edge:ml215:0b63f552d603eea8"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+          "claim_ids": [
+            "edge:ml215:179b8e6aef2203f9",
+            "edge:ml215:5552283f24dfe492",
+            "edge:ml215:9b6854453dc78732",
+            "edge:ml215:e3bfd0e3028a2b60"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        }
+      ],
+      "truncated": false,
+      "no_online_promotion": true
+    },
+    {
+      "query": "隐马尔可夫模型是什么？",
+      "matched_labels": [
+        "隐马尔可夫模型"
+      ],
+      "matched_claim_count": 5,
+      "candidate_count": 2,
+      "sources": {
+        "机器学习.md": 5
+      },
+      "chunks": [
+        {
+          "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+          "claim_ids": [
+            "edge:ml215:2f9e0844bc868fe9"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+          "claim_ids": [
+            "edge:ml215:798156c02e542aaa",
+            "edge:ml215:88b721e640520ada",
+            "edge:ml215:99cdde8b965ab561",
+            "edge:ml215:bc7bf4b772a8ff5d"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        }
+      ],
+      "truncated": false,
+      "no_online_promotion": true
+    },
+    {
+      "query": "条件随机场与马尔可夫随机场有什么关联？",
+      "matched_labels": [
+        "条件随机场",
+        "马尔可夫随机场"
+      ],
+      "matched_claim_count": 10,
+      "candidate_count": 3,
+      "sources": {
+        "机器学习.md": 9,
+        "神经网络与深度学习.md": 1
+      },
+      "chunks": [
+        {
+          "chunk_id": "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+          "source_file": "神经网络与深度学习.md",
+          "chapter": "第11章 概率图模型 / 11.1 模型表示 / 11.1.3 无向图模型",
+          "claim_ids": [
+            "edge:ad12f3d587f3d7d2"
+          ],
+          "status": "verified",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+          "claim_ids": [
+            "edge:ml215:0333f46785db9a8a",
+            "edge:ml215:19aff6dfad272063",
+            "edge:ml215:27d0a9b3fa28c2e5",
+            "edge:ml215:4aeb3ad8470a10cc",
+            "edge:ml215:704ca72f51240309"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        },
+        {
+          "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+          "source_file": "机器学习.md",
+          "chapter": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+          "claim_ids": [
+            "edge:ml215:10a13d9505820fa0",
+            "edge:ml215:25866562a0405607",
+            "edge:ml215:ba03bfc621b5dab7",
+            "edge:ml215:cfb31749c4c8bfc8"
+          ],
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "online_eligible_in_new_v215": false
+        }
+      ],
+      "truncated": false,
+      "no_online_promotion": true
+    }
+  ]
+}

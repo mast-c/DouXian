@@ -1,0 +1,86 @@
+{
+  "baseline_aliases_sha256": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+  "baseline_distinct_chunk_ids": 18,
+  "baseline_graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+  "baseline_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+  "baseline_verified_claims": 29,
+  "candidate_count": 55,
+  "cross_source_exact_label_candidate_count": 8,
+  "cross_source_exact_labels": [
+    "MCMC",
+    "Metropolis-Hastings算法",
+    "变分推断",
+    "吉布斯采样",
+    "拒绝采样",
+    "无向图模型",
+    "马尔可夫链",
+    "马尔可夫随机场"
+  ],
+  "merged_claim_count_for_offline_analysis": 83,
+  "merged_distinct_bound_chunk_ids": 41,
+  "new_chapter_counts": {
+    "10": 4,
+    "14": 26,
+    "4": 5,
+    "7": 6,
+    "8": 10,
+    "9": 3
+  },
+  "new_evidence_distinct_chunk_ids": 23,
+  "new_graph_sha256": "9ffb154913a242cee05614a18d239ea8dedfe6f310edf8a5a1f9def97accb6ef",
+  "new_links_sha256": "d36c3360b34923e07016f167e2db3965d01023c6502bb042b99929a3ba843047",
+  "new_relation_type_counts": {
+    "ALSO_CALLED": 11,
+    "BASED_ON": 3,
+    "CONDITIONAL_FORM_OF": 1,
+    "HAS_PART": 4,
+    "IS_A": 20,
+    "SPECIAL_CASE_OF": 1,
+    "USES": 13,
+    "VARIANT_OF": 1
+  },
+  "new_source_snapshot_chunk_count": 895,
+  "note": "This is a reproducible evidence-bound candidate graph, NOT a verified online GraphRAG upgrade.",
+  "passed_exact_quote_section_unique_chunk": 54,
+  "phase": "offline_gate_no_online_promotion",
+  "rejected_candidates": [
+    {
+      "candidate_index": 6,
+      "evidence_text": "高斯核亦称RBF核.",
+      "matching_native_chunk_ids": [
+        "9039237f22b564118199a263937b00042563fbc1d965de352217d2b71ab85088",
+        "918bfa6b241bb3f2fdd3633fad31d781cd4a97405b5be430e2766427d62a2500"
+      ],
+      "object": "RBF核",
+      "predicate": "ALSO_CALLED",
+      "reason_codes": [
+        "ambiguous_overlapping_chunk_match"
+      ],
+      "section_path": "机器学习 / 第6章 支持向量机 / 6.3 核函数",
+      "source_line": 4131,
+      "subject": "高斯核"
+    }
+  ],
+  "rejected_count": 1,
+  "schema": "douxian-machine-expansion-evidence-gate-v215-1",
+  "semantic_review_gate": {
+    "chroma_database_modified": false,
+    "independent_human_semantic_review": "pending",
+    "literal_quote_and_binding": "passed for accepted candidates",
+    "live_chroma_verified": false,
+    "new_edges_online_eligible": false,
+    "new_relation_types_require_explicit_retriever_support": [
+      "VARIANT_OF",
+      "CONDITIONAL_FORM_OF"
+    ],
+    "old_v212_graph_modified": false,
+    "qa_rerank_impact_verified": false,
+    "qualified_assertions_must_keep_modality": true
+  },
+  "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+  "snapshot_total_chunk_count": 1953,
+  "source": "机器学习.md",
+  "source_lines": 14474,
+  "source_sha256": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+  "spec_sha256": "12109667f465fde870e2b7f49511ed1ec734cb377f9f4aaac4e7cf340774298f"
+}

@@ -1,0 +1,86 @@
+{
+  "experiment": "DouXian_V2.16_ReadOnly_Hybrid_Query_Reformulation_Study",
+  "phase": "live_unaugmented_hybrid_with_optional_independent_planned_queries",
+  "run_utc": "2026-10-23T05:46:13.186085+00:00",
+  "mode": "verified_only",
+  "live_chroma_count": 1953,
+  "bm25_in_memory_count": 1953,
+  "old_v212_verified_relations": 29,
+  "v215_new_relations_promoted": 0,
+  "fixed_queries": true,
+  "query_decomposition_performed": false,
+  "raw_hybrid_top_k": 20,
+  "original_embeddings_and_new_embeddings_calls": 2,
+  "run_optional_branches": true,
+  "reranker_calls": 0,
+  "answer_generation_calls": 0,
+  "tested_cases": [
+    "gibbs_random_process"
+  ],
+  "new_target_evidence_candidates_vs_hybrid_top20": 1,
+  "recovered_omitted_evidence_chunks": 1,
+  "results": [
+    {
+      "case_id": "gibbs_random_process",
+      "question": "吉布斯采样的采样机制依赖哪类随机过程？",
+      "graph_intent": "theoretical_basis",
+      "planner_branches": 1,
+      "raw_hybrid_seconds": 0.285,
+      "raw_hybrid_top20_original_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "70c44fe43891205f099813c7bb8d6e5cf9afa642e8d73897dfb8cd7105a6b68f",
+        "379aed183df95de4fe18620e798e6ad85b0b2aeaeae50a62cb9c2c96bda6c715",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "dc362984ede8f817fbc28e1e601fe8c05f4e6ae67fe4bebad59ee6fac8b2c06d",
+        "2dfd11d3d98f5b2038fc166076f618138623a2207aa84bbf30286db425b7f8e9",
+        "65e047fd0caef9ad6866868f3ea0fd3edb00bd8cd0d92a76a2d8a5c9d2294fb6",
+        "26d9b1836d67bee741ecefb199e314ca3119212a26860b507212a9894a2021f7",
+        "39d8722e1cc69c9141462bc79a7cf9fb1828626e5d4ba33a887d244e6d41ff84",
+        "e7484b2d374744a65c332972bd558bb1e9ada86a2a42dd1d221a0de170623d46",
+        "8dd8f3cfa8606559538b9c0d1f779fcf7624a465527ed0d09746ae7640f3f506",
+        "7f2b90ec7b02b7035de8e349f9572d23d3022971bf45ea09c3dc85e34ebc7310",
+        "2aeecd082ee85d901bcce3936b4182a0e0e090ab553ff104cf311d8c1d96abe7",
+        "a30c3fe3311e57b61edc37dc624e3cd8bafced5e213e2fcb6cfb32c826b6e521",
+        "f1526e75cefc81ceebee5a0ae8729dfeffcc91ec6dbe1f4a7258f81004e87a75",
+        "bbf928d6b5af8f2a3ece7c5de79453b60a80651159bc103a03ad621f8ddfd19f",
+        "0458144bb6364fe433b7040289014cc1f631fed9e08195862b49b220a27342f1",
+        "46b0b00e18d23e50b66138188a58d01c7b398758b93c96b6c180d3f471974803",
+        "388d59c5fbe9e44ef788345bc9c064e065462c22b5a463a9ecbcb39ae4223cc2",
+        "acd30e3fbf473de1a3c7e381f7b7c6ac963795eaf47dbb4fa2de6a65f88faf8e"
+      ],
+      "target_evidence_audits": [
+        {
+          "planner_query": "MCMC 马尔可夫链",
+          "evidence_chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+          "path_claim_ids": [
+            "edge:289d96aa51ba2b95",
+            "edge:a53f6c900996f454"
+          ],
+          "path_kind": "same_textbook_directed_two_edge_path",
+          "risk": "formal_v212_verified",
+          "baseline_rank": null,
+          "already_in_baseline_top10": false,
+          "novel_bound_evidence_vs_baseline_top20": true,
+          "identical_content_source_other_ids": [],
+          "branch_executed": true,
+          "branch_target_rank": 1,
+          "branch_recovered_absent_baseline_target": true,
+          "skip_reason": "",
+          "manual_query_relevance_reviewed": false,
+          "same_content_in_branch_other_id": []
+        }
+      ],
+      "new_target_evidence_candidates_vs_hybrid_top20": 1,
+      "branch_queries_executed": 1,
+      "recovered_omitted_evidence_chunks": 1
+    }
+  ],
+  "limitations": [
+    "Only a few fixed, author-chosen queries; not a retrieval benchmark.",
+    "Per-branch target is a source-bound existing Chunk, not a measured relevant/gold passage.",
+    "Planned query may miss its targeted Chunk or retrieve extra unrelated Chunks.",
+    "Hybrid expansion is NOT integrated into production RAG and no reranker calls made.",
+    "V2.15 pending edges not human approved and never promoted.",
+    "Baseline+target discovery or recovery alone is not answer quality improvement."
+  ]
+}

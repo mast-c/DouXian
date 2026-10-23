@@ -1,0 +1,62 @@
+{
+  "schema": "douxian-v216-assist-controlled-eval-1",
+  "pilot_size": 11,
+  "guidance": "Purpose-built retrieval-planning diagnostic only; NOT an unbiased general-RAG benchmark.",
+  "queries": [
+    {
+      "id": "gibbs_basis",
+      "question": "吉布斯采样的理论依据是什么？",
+      "group": "positive_old_verified"
+    },
+    {
+      "id": "gibbs_random_process",
+      "question": "吉布斯采样的采样机制依赖哪类随机过程？",
+      "group": "positive_old_verified"
+    },
+    {
+      "id": "cnn_mechanism",
+      "question": "卷积神经网络包含哪些层，这些层怎样完成特征计算？",
+      "group": "positive_old_verified"
+    },
+    {
+      "id": "pooling",
+      "question": "汇聚层如何使用最大汇聚完成特征压缩？",
+      "group": "positive_old_verified"
+    },
+    {
+      "id": "mh_crossbook",
+      "question": "Metropolis-Hastings算法通过什么随机过程开展采样？",
+      "group": "positive_pending_crossbook"
+    },
+    {
+      "id": "undirected_prob",
+      "question": "无向图模型使用什么函数表达概率分布？",
+      "group": "positive_pending_crossbook"
+    },
+    {
+      "id": "random_forest",
+      "question": "随机森林如何训练？",
+      "group": "exploratory_pending_singlebook"
+    },
+    {
+      "id": "gibbs_definition",
+      "question": "吉布斯采样是什么？",
+      "group": "negative_definition"
+    },
+    {
+      "id": "mrf_definition",
+      "question": "马尔可夫随机场是什么？",
+      "group": "negative_definition"
+    },
+    {
+      "id": "rf_comparison",
+      "question": "随机森林与Bagging的区别是什么？",
+      "group": "negative_comparison"
+    },
+    {
+      "id": "unrelated",
+      "question": "月球的环形山属于哪类天文地貌？",
+      "group": "negative_out_of_graph"
+    }
+  ]
+}

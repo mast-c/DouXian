@@ -1,0 +1,464 @@
+{
+  "experiment": "DouXian_V2.14_Offline_Relation_Path_Probe",
+  "phase": "offline_candidates_only",
+  "source_artifact_sha256": {
+    "graph": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "links": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "aliases": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe"
+  },
+  "inventory": {
+    "semantic_relation_count": 29,
+    "relation_type_counts": {
+      "ALSO_CALLED": 10,
+      "BASED_ON": 1,
+      "COMPUTES": 1,
+      "HAS_PART": 4,
+      "IS_A": 5,
+      "SPECIAL_CASE_OF": 1,
+      "SUBFIELD_OF": 1,
+      "USES": 6
+    },
+    "distinct_verified_bound_chunk_ids": 18,
+    "directed_two_hop_path_count_excluding_synonyms": 6,
+    "directed_two_hop_edge_paths": [
+      [
+        "edge:d8972949d756a8d4",
+        "edge:a856abef89b3fd13"
+      ],
+      [
+        "edge:d8972949d756a8d4",
+        "edge:9fcc3bbf51554032"
+      ],
+      [
+        "edge:0d873ce8e1dca645",
+        "edge:f4b581a4e332c0a0"
+      ],
+      [
+        "edge:289d96aa51ba2b95",
+        "edge:a53f6c900996f454"
+      ],
+      [
+        "edge:289d96aa51ba2b95",
+        "edge:2ab7e570dfc30a47"
+      ],
+      [
+        "edge:f4b581a4e332c0a0",
+        "edge:15f2e7578cdeb597"
+      ]
+    ]
+  },
+  "comparison": "V2.13 lexical-edge candidate selection vs. V2.14 controlled two-hop; same candidate budget",
+  "no_live_qa_claim": true,
+  "queries": [
+    {
+      "query": "残差单元是什么？",
+      "intent_gates": [],
+      "v213_candidate_ids": [
+        "a9a5c01e08f479755a6dfd7c0d2f991531b1ce1ff0c9c241dbc6ffe4f92e99fa"
+      ],
+      "v213_matched_edges": 1,
+      "v213_matched_labels": [
+        "残差单元"
+      ],
+      "two_hop_paths": [],
+      "two_hop_second_edge_ids": [],
+      "new_two_hop_ids_before_budget": [],
+      "v214_budgeted_candidate_ids": [
+        "a9a5c01e08f479755a6dfd7c0d2f991531b1ce1ff0c9c241dbc6ffe4f92e99fa"
+      ],
+      "new_ids_in_budgeted_v214": [],
+      "v213_ids_displaced_by_budget": [],
+      "budget": 2,
+      "not_measured": [
+        "live_chroma_id_content_validation",
+        "hybrid_overlap",
+        "reranker_relevance",
+        "final_evidence",
+        "answer_quality",
+        "token_usage",
+        "runtime_latency"
+      ]
+    },
+    {
+      "query": "马尔可夫随机场是什么？",
+      "intent_gates": [],
+      "v213_candidate_ids": [
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a"
+      ],
+      "v213_matched_edges": 2,
+      "v213_matched_labels": [
+        "无向图模型",
+        "马尔可夫网络",
+        "马尔可夫随机场"
+      ],
+      "two_hop_paths": [],
+      "two_hop_second_edge_ids": [],
+      "new_two_hop_ids_before_budget": [],
+      "v214_budgeted_candidate_ids": [
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a"
+      ],
+      "new_ids_in_budgeted_v214": [],
+      "v213_ids_displaced_by_budget": [],
+      "budget": 2,
+      "not_measured": [
+        "live_chroma_id_content_validation",
+        "hybrid_overlap",
+        "reranker_relevance",
+        "final_evidence",
+        "answer_quality",
+        "token_usage",
+        "runtime_latency"
+      ]
+    },
+    {
+      "query": "吉布斯采样的理论依据是什么？",
+      "intent_gates": [
+        "theoretical_basis"
+      ],
+      "v213_candidate_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8"
+      ],
+      "v213_matched_edges": 3,
+      "v213_matched_labels": [
+        "吉布斯采样"
+      ],
+      "two_hop_paths": [
+        {
+          "start_concept": "吉布斯采样",
+          "intents": [
+            "theoretical_basis"
+          ],
+          "edges": [
+            {
+              "claim_id": "edge:289d96aa51ba2b95",
+              "predicate": "IS_A",
+              "subject": "吉布斯采样",
+              "object": "MCMC",
+              "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+              "evidence_text": "吉布斯采样（Gibbs Sampling）是一种有效地对高维空间中的分布进行采样的MCMC方法，可以看作Metropolis-Hastings算法的特例．吉布斯采样使用全条件概率（Full Conditional Probability）作为提议分布来依次对每个维度进行采样，并设置接受率为$A$ = 1"
+            },
+            {
+              "claim_id": "edge:a53f6c900996f454",
+              "predicate": "BASED_ON",
+              "subject": "MCMC",
+              "object": "马尔可夫链",
+              "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+              "evidence_text": "MCMC方法也有很多不同的具体采样方法，但其核心思想是将采样过程看作一个马尔可夫链"
+            }
+          ],
+          "path_chunk_ids": [
+            "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+            "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+          ],
+          "second_hop_chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+          "note": "Path gives linked evidence only; it is not a new direct A-to-C claim."
+        }
+      ],
+      "two_hop_second_edge_ids": [
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "new_two_hop_ids_before_budget": [
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "v214_budgeted_candidate_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "new_ids_in_budgeted_v214": [
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "v213_ids_displaced_by_budget": [],
+      "budget": 2,
+      "not_measured": [
+        "live_chroma_id_content_validation",
+        "hybrid_overlap",
+        "reranker_relevance",
+        "final_evidence",
+        "answer_quality",
+        "token_usage",
+        "runtime_latency"
+      ]
+    },
+    {
+      "query": "卷积神经网络包含哪些层，这些层怎样进行特征计算？",
+      "intent_gates": [
+        "composition_mechanism"
+      ],
+      "v213_candidate_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7"
+      ],
+      "v213_matched_edges": 3,
+      "v213_matched_labels": [
+        "卷积神经网络",
+        "神经网络"
+      ],
+      "two_hop_paths": [
+        {
+          "start_concept": "卷积神经网络",
+          "intents": [
+            "composition_mechanism"
+          ],
+          "edges": [
+            {
+              "claim_id": "edge:d8972949d756a8d4",
+              "predicate": "HAS_PART",
+              "subject": "卷积神经网络",
+              "object": "卷积层",
+              "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+              "evidence_text": "卷积神经网络一般由卷积层、汇聚层和全连接层构成"
+            },
+            {
+              "claim_id": "edge:a856abef89b3fd13",
+              "predicate": "USES",
+              "subject": "卷积层",
+              "object": "卷积核",
+              "chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.2 卷积层",
+              "evidence_text": "为了计算输出特征映射 $\\mathbf{Y}^{p}$ ，用卷积核 $W^{p, 1}, W^{p, 2}, \\cdots, W^{p, D}$ 分别对输入特征映射 $X^{1}, X^{2}, \\cdots, X^{D}$ 进行卷积，然后将卷积结果相加，并加上一个标量偏置𝑏得到卷积层的净输入 $z^{p}$ ，再经过非线性激活函数后得到输出特征映射 $\\mathbf{Y}^{p}$"
+            }
+          ],
+          "path_chunk_ids": [
+            "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+            "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+          ],
+          "second_hop_chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+          "note": "Path gives linked evidence only; it is not a new direct A-to-C claim."
+        },
+        {
+          "start_concept": "卷积神经网络",
+          "intents": [
+            "composition_mechanism"
+          ],
+          "edges": [
+            {
+              "claim_id": "edge:d8972949d756a8d4",
+              "predicate": "HAS_PART",
+              "subject": "卷积神经网络",
+              "object": "卷积层",
+              "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+              "evidence_text": "卷积神经网络一般由卷积层、汇聚层和全连接层构成"
+            },
+            {
+              "claim_id": "edge:9fcc3bbf51554032",
+              "predicate": "USES",
+              "subject": "卷积层",
+              "object": "非线性激活函数",
+              "chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.2 卷积层",
+              "evidence_text": "为了计算输出特征映射 $\\mathbf{Y}^{p}$ ，用卷积核 $W^{p, 1}, W^{p, 2}, \\cdots, W^{p, D}$ 分别对输入特征映射 $X^{1}, X^{2}, \\cdots, X^{D}$ 进行卷积，然后将卷积结果相加，并加上一个标量偏置𝑏得到卷积层的净输入 $z^{p}$ ，再经过非线性激活函数后得到输出特征映射 $\\mathbf{Y}^{p}$"
+            }
+          ],
+          "path_chunk_ids": [
+            "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+            "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+          ],
+          "second_hop_chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+          "note": "Path gives linked evidence only; it is not a new direct A-to-C claim."
+        },
+        {
+          "start_concept": "卷积神经网络",
+          "intents": [
+            "composition_mechanism"
+          ],
+          "edges": [
+            {
+              "claim_id": "edge:0d873ce8e1dca645",
+              "predicate": "HAS_PART",
+              "subject": "卷积神经网络",
+              "object": "汇聚层",
+              "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+              "evidence_text": "卷积神经网络一般由卷积层、汇聚层和全连接层构成"
+            },
+            {
+              "claim_id": "edge:f4b581a4e332c0a0",
+              "predicate": "USES",
+              "subject": "汇聚层",
+              "object": "最大汇聚",
+              "chunk_id": "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+              "evidence_text": "典型的汇聚层是将每个特征映射划分为 $2 \\times 2$ 大小的不重叠区域，然后使用最大汇聚的方式进行下采样．汇聚层也可以看作一个特殊的卷积层，卷积核大小为 $K \\times K$ ，步长为 $S \\times S$ ，卷积核为max函数或mean函数．过大的采样区域会急剧减少神经元的数量，也会造成过多的信息损失"
+            }
+          ],
+          "path_chunk_ids": [
+            "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+            "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda"
+          ],
+          "second_hop_chunk_id": "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+          "note": "Path gives linked evidence only; it is not a new direct A-to-C claim."
+        }
+      ],
+      "two_hop_second_edge_ids": [
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+        "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda"
+      ],
+      "new_two_hop_ids_before_budget": [
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+        "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda"
+      ],
+      "v214_budgeted_candidate_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+      ],
+      "new_ids_in_budgeted_v214": [
+        "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+      ],
+      "v213_ids_displaced_by_budget": [],
+      "budget": 2,
+      "not_measured": [
+        "live_chroma_id_content_validation",
+        "hybrid_overlap",
+        "reranker_relevance",
+        "final_evidence",
+        "answer_quality",
+        "token_usage",
+        "runtime_latency"
+      ]
+    },
+    {
+      "query": "卷积神经网络由哪些层构成？",
+      "intent_gates": [],
+      "v213_candidate_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7"
+      ],
+      "v213_matched_edges": 3,
+      "v213_matched_labels": [
+        "卷积神经网络",
+        "神经网络"
+      ],
+      "two_hop_paths": [],
+      "two_hop_second_edge_ids": [],
+      "new_two_hop_ids_before_budget": [],
+      "v214_budgeted_candidate_ids": [
+        "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7"
+      ],
+      "new_ids_in_budgeted_v214": [],
+      "v213_ids_displaced_by_budget": [],
+      "budget": 2,
+      "not_measured": [
+        "live_chroma_id_content_validation",
+        "hybrid_overlap",
+        "reranker_relevance",
+        "final_evidence",
+        "answer_quality",
+        "token_usage",
+        "runtime_latency"
+      ]
+    },
+    {
+      "query": "汇聚层如何使用最大汇聚进行下采样？",
+      "intent_gates": [
+        "pooling_operation"
+      ],
+      "v213_candidate_ids": [
+        "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+        "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b"
+      ],
+      "v213_matched_edges": 4,
+      "v213_matched_labels": [
+        "子采样层",
+        "最大汇聚",
+        "汇聚层"
+      ],
+      "two_hop_paths": [
+        {
+          "start_concept": "汇聚层",
+          "intents": [
+            "pooling_operation"
+          ],
+          "edges": [
+            {
+              "claim_id": "edge:f4b581a4e332c0a0",
+              "predicate": "USES",
+              "subject": "汇聚层",
+              "object": "最大汇聚",
+              "chunk_id": "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+              "evidence_text": "典型的汇聚层是将每个特征映射划分为 $2 \\times 2$ 大小的不重叠区域，然后使用最大汇聚的方式进行下采样．汇聚层也可以看作一个特殊的卷积层，卷积核大小为 $K \\times K$ ，步长为 $S \\times S$ ，卷积核为max函数或mean函数．过大的采样区域会急剧减少神经元的数量，也会造成过多的信息损失"
+            },
+            {
+              "claim_id": "edge:15f2e7578cdeb597",
+              "predicate": "IS_A",
+              "subject": "最大汇聚",
+              "object": "汇聚函数",
+              "chunk_id": "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+              "evidence_text": "（1） 最大汇聚（Maximum Pooling或Max Pooling）"
+            }
+          ],
+          "path_chunk_ids": [
+            "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+            "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b"
+          ],
+          "second_hop_chunk_id": "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b",
+          "note": "Path gives linked evidence only; it is not a new direct A-to-C claim."
+        }
+      ],
+      "two_hop_second_edge_ids": [
+        "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b"
+      ],
+      "new_two_hop_ids_before_budget": [],
+      "v214_budgeted_candidate_ids": [
+        "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+        "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b"
+      ],
+      "new_ids_in_budgeted_v214": [],
+      "v213_ids_displaced_by_budget": [],
+      "budget": 2,
+      "not_measured": [
+        "live_chroma_id_content_validation",
+        "hybrid_overlap",
+        "reranker_relevance",
+        "final_evidence",
+        "answer_quality",
+        "token_usage",
+        "runtime_latency"
+      ]
+    },
+    {
+      "query": "残差网络由哪些结构组成，又通过什么连接方式提高信息传播效率？",
+      "intent_gates": [],
+      "v213_candidate_ids": [
+        "a9a5c01e08f479755a6dfd7c0d2f991531b1ce1ff0c9c241dbc6ffe4f92e99fa",
+        "b96e1a8576e07549799d3e306ebbc841d63b537e1d30a208e11d90f486367393"
+      ],
+      "v213_matched_edges": 2,
+      "v213_matched_labels": [
+        "残差网络"
+      ],
+      "two_hop_paths": [],
+      "two_hop_second_edge_ids": [],
+      "new_two_hop_ids_before_budget": [],
+      "v214_budgeted_candidate_ids": [
+        "a9a5c01e08f479755a6dfd7c0d2f991531b1ce1ff0c9c241dbc6ffe4f92e99fa",
+        "b96e1a8576e07549799d3e306ebbc841d63b537e1d30a208e11d90f486367393"
+      ],
+      "new_ids_in_budgeted_v214": [],
+      "v213_ids_displaced_by_budget": [],
+      "budget": 2,
+      "not_measured": [
+        "live_chroma_id_content_validation",
+        "hybrid_overlap",
+        "reranker_relevance",
+        "final_evidence",
+        "answer_quality",
+        "token_usage",
+        "runtime_latency"
+      ]
+    }
+  ]
+}

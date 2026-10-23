@@ -1,0 +1,121 @@
+{
+  "schema": "douxian-v2151-preliminary-semantic-review-1",
+  "review_kind": "model_assisted_preliminary_flags_not_independent_human_semantic_approval",
+  "source": "机器学习.md",
+  "new_candidate_relations": 54,
+  "new_claims_human_approved": 0,
+  "new_claims_online_eligible": 0,
+  "flagged_assertions_count": 9,
+  "flagged_assertions": [
+    {
+      "claim_id": "edge:ml215:10a13d9505820fa0",
+      "source_line": 10974,
+      "subject": "马尔可夫随机场",
+      "predicate": "ALSO_CALLED",
+      "object": "马尔可夫网",
+      "issue_type": "hold",
+      "finding": "原文为“是典型的马尔可夫网”，不能单凭这句证明两个标签严格互为别名；需要直接的别名证据，或暂按从属/相关关系处理。",
+      "source_quote": "马尔可夫随机场(Markov Random Field, 简称 MRF)是典型的马尔可夫网",
+      "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:21b1f92b43cf34ea",
+      "source_line": 5320,
+      "subject": "贝叶斯网近似推断",
+      "predicate": "USES",
+      "object": "吉布斯采样",
+      "issue_type": "qualify",
+      "finding": "原文明确使用“常使用”，不能将其转写为所有贝叶斯网近似推断都必须用吉布斯采样；需保留频度限定。",
+      "source_quote": "在现实应用中，贝叶斯网的近似推断常使用吉布斯采样(Gibbs sampling)来完成，这是一种随机采样方法",
+      "chunk_id": "0f93176f8c8012dc581769cdb4ce8662cafdb0cf66ce4b6a987a8d03c36a1009",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:b63c2b4fc74db7a2",
+      "source_line": 11267,
+      "subject": "采样",
+      "predicate": "IS_A",
+      "object": "近似推断方法",
+      "issue_type": "scope",
+      "finding": "该句限定在概率图模型的近似推断章节；广义“采样”并非无条件都是近似推断方法，需要限定概念适用范围。",
+      "source_quote": "近似推断方法大致可分为两大类: 第一类是采样(sampling), 通过使用随机化方法完成近似",
+      "chunk_id": "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:43922f58313fb854",
+      "source_line": 11321,
+      "subject": "Metropolis-Hastings算法",
+      "predicate": "BASED_ON",
+      "object": "拒绝采样",
+      "issue_type": "hold",
+      "finding": "教材写“基于拒绝采样”，但经典拒绝采样算法与 MH 的接受/拒绝机制容易混淆；需人工核实术语指代后再形成可遍历语义边。",
+      "source_quote": "Metropolis-Hastings (简称 MH) 算法是 MCMC 的重要代表. 它基于 “拒绝采样” (reject sampling)",
+      "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:3a906e4e482a37af",
+      "source_line": 5715,
+      "subject": "Bagging",
+      "predicate": "IS_A",
+      "object": "并行化集成学习方法",
+      "issue_type": "taxonomy",
+      "finding": "另一条关系以“并行式集成学习方法”为上位类，概念标签近义但不应在没有审核时重复或自动合并。",
+      "source_quote": "根据个体学习器的生成方式, 目前的集成学习方法大致可分为两大类, 即个体学习器间存在强依赖关系、必须串行生成的序列化方法, 以及个体学习器间不存在强依赖关系、可同时生成的并行化方法; 前者的代表是 Boosting, 后者的代表是 Bagging 和 “随机森林” (Random Forest).",
+      "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:ef0c13576dd4b807",
+      "source_line": 5896,
+      "subject": "Bagging",
+      "predicate": "IS_A",
+      "object": "并行式集成学习方法",
+      "issue_type": "taxonomy",
+      "finding": "与“并行化集成学习方法”存在未审核的上位类词形变化；应建立同义审核后保持一个规范类。",
+      "source_quote": "Bagging [Breiman, 1996a] 是并行式集成学习方法最著名的代表.",
+      "chunk_id": "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:4aeb3ad8470a10cc",
+      "source_line": 11093,
+      "subject": "条件随机场",
+      "predicate": "CONDITIONAL_FORM_OF",
+      "object": "马尔可夫随机场",
+      "issue_type": "qualify_new_type",
+      "finding": "“可看作”的限定已记录，但 CONDITIONAL_FORM_OF 是新增谓词，旧检索器不支持；需要校验其路径扩展语义。",
+      "source_quote": "条件随机场可看作给定观测值的马尔可夫随机场",
+      "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:084a17baea014174",
+      "source_line": 11353,
+      "subject": "吉布斯采样",
+      "predicate": "SPECIAL_CASE_OF",
+      "object": "MH算法",
+      "issue_type": "qualify",
+      "finding": "原文限定“有时被视为”，目前已放在 qualifier；上线时必须确保不会丢失限定。",
+      "source_quote": "吉布斯采样(Gibbs sampling)有时被视为 MH 算法的特例",
+      "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    },
+    {
+      "claim_id": "edge:ml215:179b8e6aef2203f9",
+      "source_line": 5939,
+      "subject": "随机森林",
+      "predicate": "VARIANT_OF",
+      "object": "Bagging",
+      "issue_type": "new_type",
+      "finding": "VARIANT_OF 是新增谓词；现有 V2.13 不能自动遍历，需明确定义路径行为。",
+      "source_quote": "随机森林(Random Forest, 简称 RF) [Breiman, 2001a] 是 Bagging 的一个扩展变体.",
+      "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+      "recommendation": "保留离线待审状态；不能自动晋升到 VERIFIED"
+    }
+  ],
+  "other_claims": "仍需独立逐条复核；未标记不代表通过语义审核。",
+  "no_files_or_relations_promoted": true
+}

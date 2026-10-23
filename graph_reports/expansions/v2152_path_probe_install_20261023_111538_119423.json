@@ -1,0 +1,8 @@
+{
+  "project": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data",
+  "files_added": {
+    "graph_data/expansions/v2152_fixed_paths.json": "678da6ce7e77f64491d10ccf1f347c796cf609b03bf69eb617b22d2cc41f217d",
+    "graph_tools/path_multibook_v2152.py": "ae6b82f83a0dbbcd4b487efb9ea14ed67525caeeb0442285946028a24a2a30f4",
+    "graph_tools/test_path_multibook_v2152.py": "373b47fb55bd8214e7b5f99b657a303b972328fcd4c60b93f82c42e6fe0af0ec"
+  }
+}

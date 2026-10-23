@@ -596,7 +596,20 @@ class RagService:
             # 第一次查询时初始化知识库
             if self.knowledge_service is None:
                 _phase_started = time.perf_counter()
-                service = KnowledgeBaseService()
+                # V2.13: Graph ON uses a wrapper around the existing service.
+                # It intercepts search_hybrid before the original Qwen Reranker.
+                service_class = KnowledgeBaseService
+                if os.getenv("DOUXIAN_GRAPH_V213", "0").strip() == "1":
+                    try:
+                        from graph_tools.graph_retriever_v213 import (
+                            create_graph_augmented_service,
+                        )
+                        service_class = create_graph_augmented_service(KnowledgeBaseService)
+                    except Exception as graph_init_exc:
+                        # Strict fallback: original Hybrid RAG remains available.
+                        print("[Graph V2.13] 初始化回退到 Hybrid："
+                              f"{type(graph_init_exc).__name__}")
+                service = service_class()
                 print(
                     "[RAG耗时] Chroma 初始化："
                     f"{time.perf_counter() - _phase_started:.2f}s"
@@ -639,7 +652,10 @@ class RagService:
                 "queries_before": len(queries), "queries_after": len(queries),
                 "graph_semantic_edges_used": 0,
             }
-            if os.getenv("DOUXIAN_GRAPH_MODE", "off").strip().lower() == "assist":
+            if (
+                os.getenv("DOUXIAN_GRAPH_V213", "0").strip() != "1"
+                and os.getenv("DOUXIAN_GRAPH_MODE", "off").strip().lower() == "assist"
+            ):
                 _graph_started = time.perf_counter()
                 try:
                     from graph_tools.graph_assist_v28 import (
@@ -668,6 +684,10 @@ class RagService:
             for i, subquery in enumerate(queries, 1):
                 print(f"子问题 {i}: {subquery}")
 
+            # V2.13: keep non-content retrieval telemetry for A/B comparison.
+            graph_v213_runs = []
+            graph_v213_reranked_groups = []
+
             # 2. 普通问题：保留原来的检索流程
             if len(queries) == 1:
                 _phase_started = time.perf_counter()
@@ -676,6 +696,20 @@ class RagService:
                     recall_k=10,
                     top_n=3,
                 )
+                if isinstance(
+                    getattr(self.knowledge_service, "graph_v213_last_diagnostics", None),
+                    dict
+                ):
+                    _graph_diag = dict(
+                        self.knowledge_service.graph_v213_last_diagnostics
+                    )
+                    _extra_ids = set(_graph_diag.get("injected_chunk_ids") or [])
+                    _graph_diag["survived_rerank"] = sum(
+                        str(doc.metadata.get("chunk_id") or "") in _extra_ids
+                        for doc in documents if isinstance(doc.metadata, dict)
+                    )
+                    graph_v213_runs.append(_graph_diag)
+                    graph_v213_reranked_groups.append(documents)
                 print(
                     "[RAG耗时] 单问题 Hybrid+Rerank："
                     f"{time.perf_counter() - _phase_started:.2f}s"
@@ -692,6 +726,20 @@ class RagService:
                         recall_k=20,
                         top_n=10,
                     )
+                    if isinstance(
+                        getattr(self.knowledge_service, "graph_v213_last_diagnostics", None),
+                        dict
+                    ):
+                        _graph_diag = dict(
+                            self.knowledge_service.graph_v213_last_diagnostics
+                        )
+                        _extra_ids = set(_graph_diag.get("injected_chunk_ids") or [])
+                        _graph_diag["survived_rerank"] = sum(
+                            str(doc.metadata.get("chunk_id") or "") in _extra_ids
+                            for doc in docs if isinstance(doc.metadata, dict)
+                        )
+                        graph_v213_runs.append(_graph_diag)
+                        graph_v213_reranked_groups.append(docs)
                     print(
                         f"[RAG耗时] 子问题 {_subquery_index} Hybrid+Rerank："
                         f"{time.perf_counter() - _phase_started:.2f}s "
@@ -721,6 +769,56 @@ class RagService:
                     "多查询候选总数：", sum(len(group) for group in groups),
                     "最终去重/多样性选择：", len(documents),
                 )
+
+            if os.getenv("DOUXIAN_GRAPH_V213", "0").strip() == "1":
+                _final_chunk_ids = {
+                    str(doc.metadata.get("chunk_id") or "")
+                    for doc in documents if isinstance(doc.metadata, dict)
+                }
+                # V2.13.1: metric computation is pure and runs after final selection.
+                from graph_tools.graph_diagnostics_v2131 import finish_run, aggregate
+                graph_v213_runs = [
+                    finish_run(_run, _reranked, documents)
+                    for _run, _reranked in zip(graph_v213_runs, graph_v213_reranked_groups)
+                ]
+                _v2131_totals = aggregate(graph_v213_runs, documents)
+                graph_assist_info["v213"] = {
+                    "status": (
+                        "applied" if any(r["status"] == "applied" for r in graph_v213_runs)
+                        else "not_active" if not graph_v213_runs
+                        else "no_injected_chunks"
+                    ),
+                    "runs": graph_v213_runs,
+                    "injected_chunks": sum(
+                        int(r.get("added_chunks") or 0) for r in graph_v213_runs
+                    ),
+                    "survived_final": _v2131_totals["survived_final"],
+                    "v2131": _v2131_totals,
+                }
+                print(
+                    "[Graph V2.13] request_status="
+                    f"{graph_assist_info['v213']['status']} "
+                    f"subqueries={len(graph_v213_runs)} "
+                    f"injected_chunks={graph_assist_info['v213']['injected_chunks']}"
+                )
+                print(
+                    "[Graph V2.13] survived_final=",
+                    graph_assist_info["v213"]["survived_final"]
+                )
+
+                print(
+                    "[Graph V2.13] per_subquery=",
+                    [
+                        {
+                            "added": r.get("added_chunks"),
+                            "reranked": r.get("survived_rerank"),
+                            "final": r.get("survived_final"),
+                        }
+                        for r in graph_v213_runs
+                    ]
+                )
+                print("[Graph V2.13.1] readonly_diagnostics=",
+                      json.dumps(_v2131_totals, ensure_ascii=False))
 
             print(
                 "[RAG耗时] 知识库检索总计（到证据确定为止）："

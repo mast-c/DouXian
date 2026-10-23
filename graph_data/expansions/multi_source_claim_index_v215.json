@@ -1,0 +1,2579 @@
+{
+  "by_exact_label": {
+    "agnes": {
+      "claim_ids": [
+        "edge:ml215:235d6338d567b926"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "AGNES"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "bagging": {
+      "claim_ids": [
+        "edge:ml215:179b8e6aef2203f9",
+        "edge:ml215:3a906e4e482a37af",
+        "edge:ml215:a1cbb484f77000d9",
+        "edge:ml215:ef0c13576dd4b807"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "Bagging"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "boosting": {
+      "claim_ids": [
+        "edge:ml215:215b4acdac5593d4",
+        "edge:ml215:8d9cf55cbb0441a5"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "Boosting"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "c4.5决策树算法": {
+      "claim_ids": [
+        "edge:ml215:a2e83ee17caf0608"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "C4.5决策树算法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "cart决策树": {
+      "claim_ids": [
+        "edge:ml215:1a7e351abd594eba"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "CART决策树"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "crf": {
+      "claim_ids": [
+        "edge:ml215:19aff6dfad272063"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "CRF"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "dbscan": {
+      "claim_ids": [
+        "edge:ml215:7bc9bc9dc1953e07",
+        "edge:ml215:bc517234f1cdd1a6"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "DBSCAN"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "hmm": {
+      "claim_ids": [
+        "edge:ml215:798156c02e542aaa"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "HMM"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "id3决策树学习算法": {
+      "claim_ids": [
+        "edge:ml215:4f4e50bfb0c0cadd"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "ID3决策树学习算法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "knn": {
+      "claim_ids": [
+        "edge:ml215:830bc1e6e53fc09d"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "kNN"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "k近邻学习": {
+      "claim_ids": [
+        "edge:ml215:598f5fe69bdacce9",
+        "edge:ml215:830bc1e6e53fc09d"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "k近邻学习"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "mcmc": {
+      "claim_ids": [
+        "edge:289d96aa51ba2b95",
+        "edge:2ab7e570dfc30a47",
+        "edge:a53f6c900996f454",
+        "edge:ml215:942786ce51a57201",
+        "edge:ml215:af57931f6b0f1d8d",
+        "edge:ml215:be749acac051e18b",
+        "edge:ml215:d028bd533f734b04"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "MCMC"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    },
+    "metropolis-hastings算法": {
+      "claim_ids": [
+        "edge:3c3336e8a2d46754",
+        "edge:ml215:43922f58313fb854",
+        "edge:ml215:a8884e55c3eaf74e",
+        "edge:ml215:d028bd533f734b04"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "Metropolis-Hastings算法"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    },
+    "mh算法": {
+      "claim_ids": [
+        "edge:ml215:084a17baea014174",
+        "edge:ml215:a8884e55c3eaf74e"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "MH算法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "mrf": {
+      "claim_ids": [
+        "edge:ml215:cfb31749c4c8bfc8"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "MRF"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "pca": {
+      "claim_ids": [
+        "edge:ml215:eec7271e47778db8"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "PCA"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "rf": {
+      "claim_ids": [
+        "edge:ml215:e3bfd0e3028a2b60"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "RF"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "不翻转卷积": {
+      "claim_ids": [
+        "edge:86cd0d2d7f8b5ad2"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "不翻转卷积"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "主成分分析": {
+      "claim_ids": [
+        "edge:ml215:3233bc7b38fb3df4",
+        "edge:ml215:eec7271e47778db8"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "主成分分析"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "互相关": {
+      "claim_ids": [
+        "edge:86cd0d2d7f8b5ad2"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "互相关"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "信念网": {
+      "claim_ids": [
+        "edge:ml215:38754793e893e787"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "信念网"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "信念网络": {
+      "claim_ids": [
+        "edge:2d3d28b5ee301ca1"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "信念网络"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "信息增益": {
+      "claim_ids": [
+        "edge:ml215:4f4e50bfb0c0cadd"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "信息增益"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "全条件概率": {
+      "claim_ids": [
+        "edge:f41c568fafd242bd"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "全条件概率"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "全连接层": {
+      "claim_ids": [
+        "edge:b3d65ccbb81fe341"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "全连接层"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "决策树": {
+      "claim_ids": [
+        "edge:ml215:5552283f24dfe492"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "决策树"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "决策树剪枝": {
+      "claim_ids": [
+        "edge:ml215:1824beebcd376472",
+        "edge:ml215:8c1652116077fc39"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "决策树剪枝"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "判别式无向图模型": {
+      "claim_ids": [
+        "edge:ml215:704ca72f51240309"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "判别式无向图模型"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "判别式模型": {
+      "claim_ids": [
+        "edge:ml215:27d0a9b3fa28c2e5"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "判别式模型"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "动态贝叶斯网": {
+      "claim_ids": [
+        "edge:ml215:bc7bf4b772a8ff5d"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "动态贝叶斯网"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "势函数": {
+      "claim_ids": [
+        "edge:ml215:ba03bfc621b5dab7",
+        "edge:ml215:fb9beac59a89053a"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "势函数"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "卷积层": {
+      "claim_ids": [
+        "edge:9fcc3bbf51554032",
+        "edge:a856abef89b3fd13",
+        "edge:d8972949d756a8d4"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "卷积层"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "卷积核": {
+      "claim_ids": [
+        "edge:950528ea327d3c86",
+        "edge:a856abef89b3fd13"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "卷积核"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "卷积神经网络": {
+      "claim_ids": [
+        "edge:0d873ce8e1dca645",
+        "edge:b3d65ccbb81fe341",
+        "edge:d8972949d756a8d4"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "卷积神经网络"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "反向传播算法": {
+      "claim_ids": [
+        "edge:1ab9023125210cf9"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "反向传播算法"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "变分推断": {
+      "claim_ids": [
+        "edge:6fb281515635a996",
+        "edge:8c790f7f19579098",
+        "edge:ml215:1a7d26cb58ef4797",
+        "edge:ml215:1adfd3c8bd2a17ed"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "变分推断"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    },
+    "变分贝叶斯": {
+      "claim_ids": [
+        "edge:8c790f7f19579098"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "变分贝叶斯"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "吉布斯采样": {
+      "claim_ids": [
+        "edge:289d96aa51ba2b95",
+        "edge:3c3336e8a2d46754",
+        "edge:f41c568fafd242bd",
+        "edge:ml215:084a17baea014174",
+        "edge:ml215:21b1f92b43cf34ea",
+        "edge:ml215:40d6140b945ec984"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "吉布斯采样"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    },
+    "后剪枝": {
+      "claim_ids": [
+        "edge:ml215:8c1652116077fc39"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "后剪枝"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "因子": {
+      "claim_ids": [
+        "edge:ml215:fb9beac59a89053a"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "因子"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "基尼指数": {
+      "claim_ids": [
+        "edge:ml215:1a7e351abd594eba"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "基尼指数"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "增益率": {
+      "claim_ids": [
+        "edge:ml215:a2e83ee17caf0608"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "增益率"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "子采样层": {
+      "claim_ids": [
+        "edge:5ff8af4790e88767"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "子采样层"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "密度聚类算法": {
+      "claim_ids": [
+        "edge:ml215:7bc9bc9dc1953e07"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "密度聚类算法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "层次聚类算法": {
+      "claim_ids": [
+        "edge:ml215:235d6338d567b926"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "层次聚类算法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "属性条件独立性假设": {
+      "claim_ids": [
+        "edge:ml215:a5fef0a300eb80be"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "属性条件独立性假设"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "并行化集成学习方法": {
+      "claim_ids": [
+        "edge:ml215:0b63f552d603eea8",
+        "edge:ml215:3a906e4e482a37af"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "并行化集成学习方法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "并行式集成学习方法": {
+      "claim_ids": [
+        "edge:ml215:ef0c13576dd4b807"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "并行式集成学习方法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "序列化集成学习方法": {
+      "claim_ids": [
+        "edge:ml215:8d9cf55cbb0441a5"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "序列化集成学习方法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "弱学习器": {
+      "claim_ids": [
+        "edge:ml215:215b4acdac5593d4"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "弱学习器"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "拒绝采样": {
+      "claim_ids": [
+        "edge:41b31bbd6e20a286",
+        "edge:80e54e791a9c3282",
+        "edge:ml215:43922f58313fb854"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "拒绝采样"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    },
+    "接受-拒绝采样": {
+      "claim_ids": [
+        "edge:41b31bbd6e20a286"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "接受-拒绝采样"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "无向图模型": {
+      "claim_ids": [
+        "edge:91a96a4758474fba",
+        "edge:ad12f3d587f3d7d2",
+        "edge:ml215:25866562a0405607"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "无向图模型"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    },
+    "最大汇聚": {
+      "claim_ids": [
+        "edge:15f2e7578cdeb597",
+        "edge:f4b581a4e332c0a0"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "最大汇聚"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "有向图模型": {
+      "claim_ids": [
+        "edge:2d3d28b5ee301ca1",
+        "edge:9808503d8a5eb1f7"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "有向图模型"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "有向无环图": {
+      "claim_ids": [
+        "edge:ml215:2b5df3c80f8cf795"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "有向无环图"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "朴素贝叶斯分类器": {
+      "claim_ids": [
+        "edge:ml215:a5fef0a300eb80be"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "朴素贝叶斯分类器"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "机器学习": {
+      "claim_ids": [
+        "edge:e772af469f8f29aa"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "机器学习"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "条件随机场": {
+      "claim_ids": [
+        "edge:ml215:19aff6dfad272063",
+        "edge:ml215:27d0a9b3fa28c2e5",
+        "edge:ml215:4aeb3ad8470a10cc",
+        "edge:ml215:704ca72f51240309"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "条件随机场"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "梯度": {
+      "claim_ids": [
+        "edge:1ab9023125210cf9"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "梯度"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "残差单元": {
+      "claim_ids": [
+        "edge:2633c428a5127361"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "残差单元"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "残差网络": {
+      "claim_ids": [
+        "edge:2633c428a5127361",
+        "edge:8293df9366b06034"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "残差网络"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "残差连接": {
+      "claim_ids": [
+        "edge:8293df9366b06034",
+        "edge:8d6288b883739d94"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "残差连接"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "汇聚函数": {
+      "claim_ids": [
+        "edge:15f2e7578cdeb597"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "汇聚函数"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "汇聚层": {
+      "claim_ids": [
+        "edge:0d873ce8e1dca645",
+        "edge:5ff8af4790e88767",
+        "edge:f4b581a4e332c0a0"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "汇聚层"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "深度学习": {
+      "claim_ids": [
+        "edge:e772af469f8f29aa"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "深度学习"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "滤波器": {
+      "claim_ids": [
+        "edge:950528ea327d3c86"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "滤波器"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "状态变量": {
+      "claim_ids": [
+        "edge:ml215:99cdde8b965ab561"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "状态变量"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "生成式模型": {
+      "claim_ids": [
+        "edge:ml215:0333f46785db9a8a",
+        "edge:ml215:2f9e0844bc868fe9"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "生成式模型"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "监督学习方法": {
+      "claim_ids": [
+        "edge:ml215:598f5fe69bdacce9"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "监督学习方法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "直连边": {
+      "claim_ids": [
+        "edge:8d6288b883739d94"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "直连边"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "简单分布": {
+      "claim_ids": [
+        "edge:ml215:1a7d26cb58ef4797"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "简单分布"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "网络参数": {
+      "claim_ids": [
+        "edge:ml215:32372032b81f6065"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "网络参数"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "网络结构": {
+      "claim_ids": [
+        "edge:ml215:b0a3731449ebff42"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "网络结构"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "自动微分": {
+      "claim_ids": [
+        "edge:93db5f7a71dc94ca"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "自动微分"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "自助采样法": {
+      "claim_ids": [
+        "edge:ml215:a1cbb484f77000d9"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "自助采样法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "观测变量": {
+      "claim_ids": [
+        "edge:ml215:88b721e640520ada"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "观测变量"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "贝叶斯网": {
+      "claim_ids": [
+        "edge:ml215:2b5df3c80f8cf795",
+        "edge:ml215:32372032b81f6065",
+        "edge:ml215:38754793e893e787",
+        "edge:ml215:b0a3731449ebff42"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "贝叶斯网"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "贝叶斯网络": {
+      "claim_ids": [
+        "edge:9808503d8a5eb1f7"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "贝叶斯网络"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "贝叶斯网近似推断": {
+      "claim_ids": [
+        "edge:ml215:21b1f92b43cf34ea"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "贝叶斯网近似推断"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "近似推断": {
+      "claim_ids": [
+        "edge:6fb281515635a996"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "近似推断"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "近似推断方法": {
+      "claim_ids": [
+        "edge:ml215:1adfd3c8bd2a17ed",
+        "edge:ml215:b63c2b4fc74db7a2"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "近似推断方法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "邻域参数": {
+      "claim_ids": [
+        "edge:ml215:bc517234f1cdd1a6"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "邻域参数"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "采样": {
+      "claim_ids": [
+        "edge:ml215:b63c2b4fc74db7a2"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "采样"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "采样技术": {
+      "claim_ids": [
+        "edge:ml215:942786ce51a57201"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "采样技术"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "采样法": {
+      "claim_ids": [
+        "edge:2ab7e570dfc30a47",
+        "edge:80e54e791a9c3282"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "采样法"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "链式法则": {
+      "claim_ids": [
+        "edge:93db5f7a71dc94ca"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "链式法则"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "降维方法": {
+      "claim_ids": [
+        "edge:ml215:3233bc7b38fb3df4"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "降维方法"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "随机属性选择": {
+      "claim_ids": [
+        "edge:ml215:9b6854453dc78732"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "随机属性选择"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "随机森林": {
+      "claim_ids": [
+        "edge:ml215:0b63f552d603eea8",
+        "edge:ml215:179b8e6aef2203f9",
+        "edge:ml215:5552283f24dfe492",
+        "edge:ml215:9b6854453dc78732",
+        "edge:ml215:e3bfd0e3028a2b60"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "随机森林"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "隐马尔可夫模型": {
+      "claim_ids": [
+        "edge:ml215:2f9e0844bc868fe9",
+        "edge:ml215:798156c02e542aaa",
+        "edge:ml215:88b721e640520ada",
+        "edge:ml215:99cdde8b965ab561",
+        "edge:ml215:bc7bf4b772a8ff5d"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "隐马尔可夫模型"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "非线性激活函数": {
+      "claim_ids": [
+        "edge:9fcc3bbf51554032"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "非线性激活函数"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "预剪枝": {
+      "claim_ids": [
+        "edge:ml215:1824beebcd376472"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "预剪枝"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "马尔可夫网": {
+      "claim_ids": [
+        "edge:ml215:10a13d9505820fa0"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "马尔可夫网"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "马尔可夫网络": {
+      "claim_ids": [
+        "edge:91a96a4758474fba"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "马尔可夫网络"
+      ],
+      "source_files": [
+        "神经网络与深度学习.md"
+      ]
+    },
+    "马尔可夫链": {
+      "claim_ids": [
+        "edge:a53f6c900996f454",
+        "edge:ml215:40d6140b945ec984",
+        "edge:ml215:be749acac051e18b"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "马尔可夫链"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    },
+    "马尔可夫链蒙特卡罗": {
+      "claim_ids": [
+        "edge:ml215:af57931f6b0f1d8d"
+      ],
+      "is_cross_source_exact_label_candidate": false,
+      "labels": [
+        "马尔可夫链蒙特卡罗"
+      ],
+      "source_files": [
+        "机器学习.md"
+      ]
+    },
+    "马尔可夫随机场": {
+      "claim_ids": [
+        "edge:ad12f3d587f3d7d2",
+        "edge:ml215:0333f46785db9a8a",
+        "edge:ml215:10a13d9505820fa0",
+        "edge:ml215:25866562a0405607",
+        "edge:ml215:4aeb3ad8470a10cc",
+        "edge:ml215:ba03bfc621b5dab7",
+        "edge:ml215:cfb31749c4c8bfc8"
+      ],
+      "is_cross_source_exact_label_candidate": true,
+      "labels": [
+        "马尔可夫随机场"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ]
+    }
+  },
+  "claims": [
+    {
+      "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+      "claim_id": "edge:0d873ce8e1dca645",
+      "object": "汇聚层",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "HAS_PART",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4723,
+      "status": "verified",
+      "subject": "卷积神经网络"
+    },
+    {
+      "chunk_id": "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b",
+      "claim_id": "edge:15f2e7578cdeb597",
+      "object": "汇聚函数",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "IS_A",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4825,
+      "status": "verified",
+      "subject": "最大汇聚"
+    },
+    {
+      "chunk_id": "35799f7eaaa9ae5936cb3e7ba35436ec2684eb69cbf1c06b2647146f9c635bae",
+      "claim_id": "edge:1ab9023125210cf9",
+      "object": "梯度",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "COMPUTES",
+      "section_path": "第4章 前馈神经网络 / 4.3 前馈神经网络 / 4.3.3 参数学习",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 3772,
+      "status": "verified",
+      "subject": "反向传播算法"
+    },
+    {
+      "chunk_id": "a9a5c01e08f479755a6dfd7c0d2f991531b1ce1ff0c9c241dbc6ffe4f92e99fa",
+      "claim_id": "edge:2633c428a5127361",
+      "object": "残差单元",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "HAS_PART",
+      "section_path": "第5章 卷积神经网络 / 5.4 几种典型的卷积神经网络 / 5.4.4 残差网络",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 5129,
+      "status": "verified",
+      "subject": "残差网络"
+    },
+    {
+      "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+      "claim_id": "edge:289d96aa51ba2b95",
+      "object": "MCMC",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "IS_A",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11911,
+      "status": "verified",
+      "subject": "吉布斯采样"
+    },
+    {
+      "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+      "claim_id": "edge:2ab7e570dfc30a47",
+      "object": "采样法",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "IS_A",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11815,
+      "status": "verified",
+      "subject": "MCMC"
+    },
+    {
+      "chunk_id": "aa8e50e0f10664de6ffaa3c9473fc40c5a18fa7f51662bc8c595a3d6000023ff",
+      "claim_id": "edge:2d3d28b5ee301ca1",
+      "object": "信念网络",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.1 有向图模型",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 10627,
+      "status": "verified",
+      "subject": "有向图模型"
+    },
+    {
+      "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+      "claim_id": "edge:3c3336e8a2d46754",
+      "object": "Metropolis-Hastings算法",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "SPECIAL_CASE_OF",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11911,
+      "status": "verified",
+      "subject": "吉布斯采样"
+    },
+    {
+      "chunk_id": "a886eec9ccc5fe7c2045098a1eba6dc1224478256309abf440e15fe3a8c37ce3",
+      "claim_id": "edge:41b31bbd6e20a286",
+      "object": "接受-拒绝采样",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.2 拒绝采样",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11727,
+      "status": "verified",
+      "subject": "拒绝采样"
+    },
+    {
+      "chunk_id": "5cd5c7b1e4c400eb5de12e7189ca64b6e9ff3a49ca8ce91f017c12699407875b",
+      "claim_id": "edge:5ff8af4790e88767",
+      "object": "子采样层",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4815,
+      "status": "verified",
+      "subject": "汇聚层"
+    },
+    {
+      "chunk_id": "c156925fac3f8ad2834ffecf5b5120da0e32b7423c877e21a6f1a8f1dc33544e",
+      "claim_id": "edge:6fb281515635a996",
+      "object": "近似推断",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "IS_A",
+      "section_path": "第11章 概率图模型 / 11.3 推断 / 11.3.2 近似推断",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11547,
+      "status": "verified",
+      "subject": "变分推断"
+    },
+    {
+      "chunk_id": "a886eec9ccc5fe7c2045098a1eba6dc1224478256309abf440e15fe3a8c37ce3",
+      "claim_id": "edge:80e54e791a9c3282",
+      "object": "采样法",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "IS_A",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.2 拒绝采样",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11727,
+      "status": "verified",
+      "subject": "拒绝采样"
+    },
+    {
+      "chunk_id": "b96e1a8576e07549799d3e306ebbc841d63b537e1d30a208e11d90f486367393",
+      "claim_id": "edge:8293df9366b06034",
+      "object": "残差连接",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "USES",
+      "section_path": "第5章 卷积神经网络 / 5.4 几种典型的卷积神经网络 / 5.4.4 残差网络",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 5106,
+      "status": "verified",
+      "subject": "残差网络"
+    },
+    {
+      "chunk_id": "feacda34c894c4be4ed99eaf0a455199cbaa924f23705acb52d690d20efd936b",
+      "claim_id": "edge:86cd0d2d7f8b5ad2",
+      "object": "不翻转卷积",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第5章 卷积神经网络 / 5.1 卷积 / 5.1.2 互相关",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4583,
+      "status": "verified",
+      "subject": "互相关"
+    },
+    {
+      "chunk_id": "beeab970af3fc81a263c339fc6cae72d86d1a2749df5c527764e5e2152151ab3",
+      "claim_id": "edge:8c790f7f19579098",
+      "object": "变分贝叶斯",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第11章 概率图模型 / 11.4 变分推断",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11573,
+      "status": "verified",
+      "subject": "变分推断"
+    },
+    {
+      "chunk_id": "b96e1a8576e07549799d3e306ebbc841d63b537e1d30a208e11d90f486367393",
+      "claim_id": "edge:8d6288b883739d94",
+      "object": "直连边",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第5章 卷积神经网络 / 5.4 几种典型的卷积神经网络 / 5.4.4 残差网络",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 5106,
+      "status": "verified",
+      "subject": "残差连接"
+    },
+    {
+      "chunk_id": "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+      "claim_id": "edge:91a96a4758474fba",
+      "object": "马尔可夫网络",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.3 无向图模型",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 10798,
+      "status": "verified",
+      "subject": "无向图模型"
+    },
+    {
+      "chunk_id": "b183a9f24d89e3d81ad99bf80252a3678335ab4573520ef7f037f69494ceece9",
+      "claim_id": "edge:93db5f7a71dc94ca",
+      "object": "链式法则",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "USES",
+      "section_path": "第4章 前馈神经网络 / 4.5 自动梯度计算 / 4.5.3 自动微分",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4005,
+      "status": "verified",
+      "subject": "自动微分"
+    },
+    {
+      "chunk_id": "f1f048009a1e1f65f072f7e47aba6841284f0c667bd45c4fc2428b1ef32d62df",
+      "claim_id": "edge:950528ea327d3c86",
+      "object": "滤波器",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第5章 卷积神经网络 / 5.1 卷积 / 5.1.1 卷积的定义 / 5.1.1.1 一维卷积",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4483,
+      "status": "verified",
+      "subject": "卷积核"
+    },
+    {
+      "chunk_id": "aa8e50e0f10664de6ffaa3c9473fc40c5a18fa7f51662bc8c595a3d6000023ff",
+      "claim_id": "edge:9808503d8a5eb1f7",
+      "object": "贝叶斯网络",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.1 有向图模型",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 10627,
+      "status": "verified",
+      "subject": "有向图模型"
+    },
+    {
+      "chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+      "claim_id": "edge:9fcc3bbf51554032",
+      "object": "非线性激活函数",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "USES",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.2 卷积层",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4790,
+      "status": "verified",
+      "subject": "卷积层"
+    },
+    {
+      "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+      "claim_id": "edge:a53f6c900996f454",
+      "object": "马尔可夫链",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "BASED_ON",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11817,
+      "status": "verified",
+      "subject": "MCMC"
+    },
+    {
+      "chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+      "claim_id": "edge:a856abef89b3fd13",
+      "object": "卷积核",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "USES",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.2 卷积层",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4790,
+      "status": "verified",
+      "subject": "卷积层"
+    },
+    {
+      "chunk_id": "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+      "claim_id": "edge:ad12f3d587f3d7d2",
+      "object": "马尔可夫随机场",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "ALSO_CALLED",
+      "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.3 无向图模型",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 10798,
+      "status": "verified",
+      "subject": "无向图模型"
+    },
+    {
+      "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+      "claim_id": "edge:b3d65ccbb81fe341",
+      "object": "全连接层",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "HAS_PART",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4723,
+      "status": "verified",
+      "subject": "卷积神经网络"
+    },
+    {
+      "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+      "claim_id": "edge:d8972949d756a8d4",
+      "object": "卷积层",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "HAS_PART",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4723,
+      "status": "verified",
+      "subject": "卷积神经网络"
+    },
+    {
+      "chunk_id": "ccf254f56101960591fce3c66fc6870567761cc68aab5849d631b12068a97c8e",
+      "claim_id": "edge:e772af469f8f29aa",
+      "object": "机器学习",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "SUBFIELD_OF",
+      "section_path": "第1章 绪论 / 1.4 深度学习",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 587,
+      "status": "verified",
+      "subject": "深度学习"
+    },
+    {
+      "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+      "claim_id": "edge:f41c568fafd242bd",
+      "object": "全条件概率",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "USES",
+      "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 11911,
+      "status": "verified",
+      "subject": "吉布斯采样"
+    },
+    {
+      "chunk_id": "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+      "claim_id": "edge:f4b581a4e332c0a0",
+      "object": "最大汇聚",
+      "online_eligible_in_existing_v213": true,
+      "online_eligible_in_new_v215": false,
+      "origin": "formal_v212_baseline",
+      "predicate": "USES",
+      "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+      "source_file": "神经网络与深度学习.md",
+      "source_line": 4860,
+      "status": "verified",
+      "subject": "汇聚层"
+    },
+    {
+      "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+      "claim_id": "edge:ml215:0333f46785db9a8a",
+      "object": "生成式模型",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+      "claim_id": "edge:ml215:084a17baea014174",
+      "object": "MH算法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "SPECIAL_CASE_OF",
+      "qualifier": "有时被视为",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11353,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "吉布斯采样"
+    },
+    {
+      "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+      "claim_id": "edge:ml215:0b63f552d603eea8",
+      "object": "并行化集成学习方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+      "source_file": "机器学习.md",
+      "source_line": 5715,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+      "claim_id": "edge:ml215:10a13d9505820fa0",
+      "object": "马尔可夫网",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+      "claim_id": "edge:ml215:179b8e6aef2203f9",
+      "object": "Bagging",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "VARIANT_OF",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "chunk_id": "70474bf1f1f463bc99bfb08b4127cd5707846684f6cc3b3998713a532f33da9b",
+      "claim_id": "edge:ml215:1824beebcd376472",
+      "object": "决策树剪枝",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+      "source_file": "机器学习.md",
+      "source_line": 2532,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "预剪枝"
+    },
+    {
+      "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+      "claim_id": "edge:ml215:19aff6dfad272063",
+      "object": "CRF",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "chunk_id": "b2cce1277ae6ad15091cb2ebb616fe6503c2647ede42ad8958d1053a4e39dee0",
+      "claim_id": "edge:ml215:1a7d26cb58ef4797",
+      "object": "简单分布",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.2 变分推断",
+      "source_file": "机器学习.md",
+      "source_line": 11363,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "变分推断"
+    },
+    {
+      "chunk_id": "a50dceb8e72c94be8fa1d51e778df1d751c1fd53de70453654ee8428f55078f5",
+      "claim_id": "edge:ml215:1a7e351abd594eba",
+      "object": "基尼指数",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.3 基尼指数",
+      "source_file": "机器学习.md",
+      "source_line": 2510,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "CART决策树"
+    },
+    {
+      "chunk_id": "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+      "claim_id": "edge:ml215:1adfd3c8bd2a17ed",
+      "object": "近似推断方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+      "source_file": "机器学习.md",
+      "source_line": 11267,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "变分推断"
+    },
+    {
+      "chunk_id": "d0548373c1a08cedd23dae7b5bb9522e8b00357055effc0454bc27da1444538a",
+      "claim_id": "edge:ml215:215b4acdac5593d4",
+      "object": "弱学习器",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.2 Boosting",
+      "source_file": "机器学习.md",
+      "source_line": 5719,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Boosting"
+    },
+    {
+      "chunk_id": "0f93176f8c8012dc581769cdb4ce8662cafdb0cf66ce4b6a987a8d03c36a1009",
+      "claim_id": "edge:ml215:21b1f92b43cf34ea",
+      "object": "吉布斯采样",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网 / 7.5.3 推断",
+      "source_file": "机器学习.md",
+      "source_line": 5320,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网近似推断"
+    },
+    {
+      "chunk_id": "c9bdc3b78e1d26525a761fb5e0b55d5f1024265617188d9d7e41ebe58bfe28d6",
+      "claim_id": "edge:ml215:235d6338d567b926",
+      "object": "层次聚类算法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第9章 聚类 / 9.6 层次聚类",
+      "source_file": "机器学习.md",
+      "source_line": 7361,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "AGNES"
+    },
+    {
+      "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+      "claim_id": "edge:ml215:25866562a0405607",
+      "object": "无向图模型",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+      "claim_id": "edge:ml215:27d0a9b3fa28c2e5",
+      "object": "判别式模型",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+      "claim_id": "edge:ml215:2b5df3c80f8cf795",
+      "object": "有向无环图",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5159,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+      "claim_id": "edge:ml215:2f9e0844bc868fe9",
+      "object": "生成式模型",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "chunk_id": "6f39966142638e1b6ded736268364594b716bcb778a9b2cc1fe896962932c510",
+      "claim_id": "edge:ml215:3233bc7b38fb3df4",
+      "object": "降维方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+      "source_file": "机器学习.md",
+      "source_line": 7981,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "主成分分析"
+    },
+    {
+      "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+      "claim_id": "edge:ml215:32372032b81f6065",
+      "object": "网络参数",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5165,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+      "claim_id": "edge:ml215:38754793e893e787",
+      "object": "信念网",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5159,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+      "claim_id": "edge:ml215:3a906e4e482a37af",
+      "object": "并行化集成学习方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+      "source_file": "机器学习.md",
+      "source_line": 5715,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Bagging"
+    },
+    {
+      "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+      "claim_id": "edge:ml215:40d6140b945ec984",
+      "object": "马尔可夫链",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11353,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "吉布斯采样"
+    },
+    {
+      "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+      "claim_id": "edge:ml215:43922f58313fb854",
+      "object": "拒绝采样",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "BASED_ON",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11321,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Metropolis-Hastings算法"
+    },
+    {
+      "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+      "claim_id": "edge:ml215:4aeb3ad8470a10cc",
+      "object": "马尔可夫随机场",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "CONDITIONAL_FORM_OF",
+      "qualifier": "可看作",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11093,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "chunk_id": "b3c6419e71b2c06ed76711c7ea575d23d16bb5f3c398f5a0f237237729e3c82e",
+      "claim_id": "edge:ml215:4f4e50bfb0c0cadd",
+      "object": "信息增益",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.1 信息增益",
+      "source_file": "机器学习.md",
+      "source_line": 2408,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "ID3决策树学习算法"
+    },
+    {
+      "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+      "claim_id": "edge:ml215:5552283f24dfe492",
+      "object": "决策树",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "chunk_id": "4af7f6d66a14c23706d7c8158048e3d9c223f312898ce93d1cd8d76c661943ff",
+      "claim_id": "edge:ml215:598f5fe69bdacce9",
+      "object": "监督学习方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+      "source_file": "机器学习.md",
+      "source_line": 7813,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "k近邻学习"
+    },
+    {
+      "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+      "claim_id": "edge:ml215:704ca72f51240309",
+      "object": "判别式无向图模型",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "source_line": 11095,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "条件随机场"
+    },
+    {
+      "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+      "claim_id": "edge:ml215:798156c02e542aaa",
+      "object": "HMM",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10905,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "chunk_id": "3f6b56ab29917577506f0dffa2bf05c8d84ec4ce25754b6f96d3ca288b2c7702",
+      "claim_id": "edge:ml215:7bc9bc9dc1953e07",
+      "object": "密度聚类算法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+      "source_file": "机器学习.md",
+      "source_line": 7235,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "DBSCAN"
+    },
+    {
+      "chunk_id": "4af7f6d66a14c23706d7c8158048e3d9c223f312898ce93d1cd8d76c661943ff",
+      "claim_id": "edge:ml215:830bc1e6e53fc09d",
+      "object": "kNN",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+      "source_file": "机器学习.md",
+      "source_line": 7813,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "k近邻学习"
+    },
+    {
+      "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+      "claim_id": "edge:ml215:88b721e640520ada",
+      "object": "观测变量",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10907,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "chunk_id": "70474bf1f1f463bc99bfb08b4127cd5707846684f6cc3b3998713a532f33da9b",
+      "claim_id": "edge:ml215:8c1652116077fc39",
+      "object": "决策树剪枝",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+      "source_file": "机器学习.md",
+      "source_line": 2532,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "后剪枝"
+    },
+    {
+      "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+      "claim_id": "edge:ml215:8d9cf55cbb0441a5",
+      "object": "序列化集成学习方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+      "source_file": "机器学习.md",
+      "source_line": 5715,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Boosting"
+    },
+    {
+      "chunk_id": "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34",
+      "claim_id": "edge:ml215:942786ce51a57201",
+      "object": "采样技术",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11291,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "MCMC"
+    },
+    {
+      "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+      "claim_id": "edge:ml215:99cdde8b965ab561",
+      "object": "状态变量",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10907,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+      "claim_id": "edge:ml215:9b6854453dc78732",
+      "object": "随机属性选择",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "chunk_id": "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b",
+      "claim_id": "edge:ml215:a1cbb484f77000d9",
+      "object": "自助采样法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "BASED_ON",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+      "source_file": "机器学习.md",
+      "source_line": 5896,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Bagging"
+    },
+    {
+      "chunk_id": "07f86f657fe1b86c60d6b6589ebaf4de3abcf7adcdbf06c87824c00c25f774fa",
+      "claim_id": "edge:ml215:a2e83ee17caf0608",
+      "object": "增益率",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.2 增益率",
+      "source_file": "机器学习.md",
+      "source_line": 2490,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "C4.5决策树算法"
+    },
+    {
+      "chunk_id": "6d8e18e34350548f3d6311c93b87fa2b0ee037e4fec278c168be1695fb17bac4",
+      "claim_id": "edge:ml215:a5fef0a300eb80be",
+      "object": "属性条件独立性假设",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.3 朴素贝叶斯分类器",
+      "source_file": "机器学习.md",
+      "source_line": 4878,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "朴素贝叶斯分类器"
+    },
+    {
+      "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+      "claim_id": "edge:ml215:a8884e55c3eaf74e",
+      "object": "MH算法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11321,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Metropolis-Hastings算法"
+    },
+    {
+      "chunk_id": "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34",
+      "claim_id": "edge:ml215:af57931f6b0f1d8d",
+      "object": "马尔可夫链蒙特卡罗",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11291,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "MCMC"
+    },
+    {
+      "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+      "claim_id": "edge:ml215:b0a3731449ebff42",
+      "object": "网络结构",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "HAS_PART",
+      "qualifier": "",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "source_line": 5165,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "贝叶斯网"
+    },
+    {
+      "chunk_id": "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+      "claim_id": "edge:ml215:b63c2b4fc74db7a2",
+      "object": "近似推断方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+      "source_file": "机器学习.md",
+      "source_line": 11267,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "采样"
+    },
+    {
+      "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+      "claim_id": "edge:ml215:ba03bfc621b5dab7",
+      "object": "势函数",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "chunk_id": "3f6b56ab29917577506f0dffa2bf05c8d84ec4ce25754b6f96d3ca288b2c7702",
+      "claim_id": "edge:ml215:bc517234f1cdd1a6",
+      "object": "邻域参数",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "USES",
+      "qualifier": "",
+      "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+      "source_file": "机器学习.md",
+      "source_line": 7235,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "DBSCAN"
+    },
+    {
+      "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+      "claim_id": "edge:ml215:bc7bf4b772a8ff5d",
+      "object": "动态贝叶斯网",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "source_line": 10905,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "隐马尔可夫模型"
+    },
+    {
+      "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+      "claim_id": "edge:ml215:be749acac051e18b",
+      "object": "马尔可夫链",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "BASED_ON",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11317,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "MCMC"
+    },
+    {
+      "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+      "claim_id": "edge:ml215:cfb31749c4c8bfc8",
+      "object": "MRF",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "马尔可夫随机场"
+    },
+    {
+      "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+      "claim_id": "edge:ml215:d028bd533f734b04",
+      "object": "MCMC",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "source_line": 11321,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Metropolis-Hastings算法"
+    },
+    {
+      "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+      "claim_id": "edge:ml215:e3bfd0e3028a2b60",
+      "object": "RF",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "source_line": 5939,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "随机森林"
+    },
+    {
+      "chunk_id": "6f39966142638e1b6ded736268364594b716bcb778a9b2cc1fe896962932c510",
+      "claim_id": "edge:ml215:eec7271e47778db8",
+      "object": "PCA",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+      "source_file": "机器学习.md",
+      "source_line": 7981,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "主成分分析"
+    },
+    {
+      "chunk_id": "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b",
+      "claim_id": "edge:ml215:ef0c13576dd4b807",
+      "object": "并行式集成学习方法",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "IS_A",
+      "qualifier": "",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+      "source_file": "机器学习.md",
+      "source_line": 5896,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "Bagging"
+    },
+    {
+      "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+      "claim_id": "edge:ml215:fb9beac59a89053a",
+      "object": "因子",
+      "online_eligible_in_existing_v213": false,
+      "online_eligible_in_new_v215": false,
+      "origin": "machine_v215_sidecar",
+      "predicate": "ALSO_CALLED",
+      "qualifier": "",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "source_line": 10974,
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "subject": "势函数"
+    }
+  ],
+  "cross_source_exact_label_candidates": [
+    {
+      "canonical_lexical_key": "mcmc",
+      "labels": [
+        "MCMC"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    },
+    {
+      "canonical_lexical_key": "metropolis-hastings算法",
+      "labels": [
+        "Metropolis-Hastings算法"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    },
+    {
+      "canonical_lexical_key": "变分推断",
+      "labels": [
+        "变分推断"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    },
+    {
+      "canonical_lexical_key": "吉布斯采样",
+      "labels": [
+        "吉布斯采样"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    },
+    {
+      "canonical_lexical_key": "拒绝采样",
+      "labels": [
+        "拒绝采样"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    },
+    {
+      "canonical_lexical_key": "无向图模型",
+      "labels": [
+        "无向图模型"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    },
+    {
+      "canonical_lexical_key": "马尔可夫链",
+      "labels": [
+        "马尔可夫链"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    },
+    {
+      "canonical_lexical_key": "马尔可夫随机场",
+      "labels": [
+        "马尔可夫随机场"
+      ],
+      "source_files": [
+        "机器学习.md",
+        "神经网络与深度学习.md"
+      ],
+      "status": "exact_label_lookup_only_not_claimed_equivalent"
+    }
+  ],
+  "metadata": {
+    "baseline_graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "baseline_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "baseline_verified_claim_count": 29,
+    "cross_source_alias_promotion": false,
+    "machine_pending_review_claim_count": 54,
+    "new_graph_sha256": "9ffb154913a242cee05614a18d239ea8dedfe6f310edf8a5a1f9def97accb6ef",
+    "new_links_sha256": "d36c3360b34923e07016f167e2db3965d01023c6502bb042b99929a3ba843047",
+    "online_eligible": false,
+    "phase": "offline_search_lookup_only",
+    "schema": "douxian-multi-source-lookup-v215-1",
+    "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "source_sha256": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+    "warning": "Exact same label across books is only a search lookup bridge; it does not prove synonymous identities or create an inferred relationship."
+  }
+}

@@ -1,0 +1,1777 @@
+{
+  "edges": [
+    {
+      "evidence": {
+        "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "extraction": "curated_literal_line_span",
+        "line": 11095,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+        "source_file": "机器学习.md",
+        "text": "前面介绍的隐马尔可夫模型和马尔可夫随机场都是生成式模型"
+      },
+      "id": "edge:ml215:0333f46785db9a8a",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:38da68844b29274d",
+      "source_section": "sec:ml215:4d1fea336d8f222e",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:6db749a7881379f5"
+    },
+    {
+      "evidence": {
+        "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "extraction": "curated_literal_line_span",
+        "line": 11353,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "吉布斯采样(Gibbs sampling)有时被视为 MH 算法的特例"
+      },
+      "id": "edge:ml215:084a17baea014174",
+      "qualifier": "有时被视为",
+      "relation": "SPECIAL_CASE_OF",
+      "source": "concept:ml215:a81c59a3640ebec9",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:3523df859eae6cb3"
+    },
+    {
+      "evidence": {
+        "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+        "extraction": "curated_literal_line_span",
+        "line": 5715,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+        "source_file": "机器学习.md",
+        "text": "根据个体学习器的生成方式, 目前的集成学习方法大致可分为两大类, 即个体学习器间存在强依赖关系、必须串行生成的序列化方法, 以及个体学习器间不存在强依赖关系、可同时生成的并行化方法; 前者的代表是 Boosting, 后者的代表是 Bagging 和 “随机森林” (Random Forest)."
+      },
+      "id": "edge:ml215:0b63f552d603eea8",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:b3581c2f7d1ed290",
+      "source_section": "sec:ml215:e7c65678ab5cf04d",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:2716c6744a59b004"
+    },
+    {
+      "evidence": {
+        "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "extraction": "curated_literal_line_span",
+        "line": 10974,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+        "source_file": "机器学习.md",
+        "text": "马尔可夫随机场(Markov Random Field, 简称 MRF)是典型的马尔可夫网"
+      },
+      "id": "edge:ml215:10a13d9505820fa0",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:38da68844b29274d",
+      "source_section": "sec:ml215:5c572e3e19270e36",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:6a22a8fbb881a8f4"
+    },
+    {
+      "evidence": {
+        "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+        "extraction": "curated_literal_line_span",
+        "line": 5939,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+        "source_file": "机器学习.md",
+        "text": "随机森林(Random Forest, 简称 RF) [Breiman, 2001a] 是 Bagging 的一个扩展变体."
+      },
+      "id": "edge:ml215:179b8e6aef2203f9",
+      "qualifier": "",
+      "relation": "VARIANT_OF",
+      "source": "concept:ml215:b3581c2f7d1ed290",
+      "source_section": "sec:ml215:8edb831cc536b159",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:d6cfc4812434ce65"
+    },
+    {
+      "evidence": {
+        "chunk_id": "70474bf1f1f463bc99bfb08b4127cd5707846684f6cc3b3998713a532f33da9b",
+        "extraction": "curated_literal_line_span",
+        "line": 2532,
+        "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+        "source_file": "机器学习.md",
+        "text": "决策树剪枝的基本策略有“预剪枝”(prepruning)和“后剪枝”(post-pruning)[Quinlan, 1993]."
+      },
+      "id": "edge:ml215:1824beebcd376472",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:7e7054d5ab15f6da",
+      "source_section": "sec:ml215:6849c65b9a2a5664",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:6d8883873485607b"
+    },
+    {
+      "evidence": {
+        "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "extraction": "curated_literal_line_span",
+        "line": 11095,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+        "source_file": "机器学习.md",
+        "text": "条件随机场(Conditional Random Field, 简称 CRF)"
+      },
+      "id": "edge:ml215:19aff6dfad272063",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:89e9f2e93a54ace3",
+      "source_section": "sec:ml215:4d1fea336d8f222e",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:1832152a3c4010d9"
+    },
+    {
+      "evidence": {
+        "chunk_id": "b2cce1277ae6ad15091cb2ebb616fe6503c2647ede42ad8958d1053a4e39dee0",
+        "extraction": "curated_literal_line_span",
+        "line": 11363,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.2 变分推断",
+        "source_file": "机器学习.md",
+        "text": "变分推断通过使用已知简单分布来逼近需推断的复杂分布"
+      },
+      "id": "edge:ml215:1a7d26cb58ef4797",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:f04cd9e9d0c9f11d",
+      "source_section": "sec:ml215:caa184d4cb296a3a",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:20ee6364df9a86e5"
+    },
+    {
+      "evidence": {
+        "chunk_id": "a50dceb8e72c94be8fa1d51e778df1d751c1fd53de70453654ee8428f55078f5",
+        "extraction": "curated_literal_line_span",
+        "line": 2510,
+        "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.3 基尼指数",
+        "source_file": "机器学习.md",
+        "text": "CART 决策树 [Breiman et al., 1984] 使用 “基尼指数” (Gini index) 来选择划分属性."
+      },
+      "id": "edge:ml215:1a7e351abd594eba",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:a0c799c64ad4de6a",
+      "source_section": "sec:ml215:de910273ca3da0ba",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:3257c38d764eb269"
+    },
+    {
+      "evidence": {
+        "chunk_id": "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+        "extraction": "curated_literal_line_span",
+        "line": 11267,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+        "source_file": "机器学习.md",
+        "text": "第二类是使用确定性近似完成近似推断, 典型代表为变分推断(variational inference)."
+      },
+      "id": "edge:ml215:1adfd3c8bd2a17ed",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:f04cd9e9d0c9f11d",
+      "source_section": "sec:ml215:585f6f7246452794",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:a643763d7b4bc8fa"
+    },
+    {
+      "evidence": {
+        "chunk_id": "d0548373c1a08cedd23dae7b5bb9522e8b00357055effc0454bc27da1444538a",
+        "extraction": "curated_literal_line_span",
+        "line": 5719,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.2 Boosting",
+        "source_file": "机器学习.md",
+        "text": "Boosting 是一族可将弱学习器提升为强学习器的算法."
+      },
+      "id": "edge:ml215:215b4acdac5593d4",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:b8583b83ae88faac",
+      "source_section": "sec:ml215:50b26da2b1e53bac",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:92eab71e4cc676fa"
+    },
+    {
+      "evidence": {
+        "chunk_id": "0f93176f8c8012dc581769cdb4ce8662cafdb0cf66ce4b6a987a8d03c36a1009",
+        "extraction": "curated_literal_line_span",
+        "line": 5320,
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网 / 7.5.3 推断",
+        "source_file": "机器学习.md",
+        "text": "在现实应用中，贝叶斯网的近似推断常使用吉布斯采样(Gibbs sampling)来完成，这是一种随机采样方法"
+      },
+      "id": "edge:ml215:21b1f92b43cf34ea",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:5719239021acd03a",
+      "source_section": "sec:ml215:10560bb4ed1b1e3c",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:a81c59a3640ebec9"
+    },
+    {
+      "evidence": {
+        "chunk_id": "c9bdc3b78e1d26525a761fb5e0b55d5f1024265617188d9d7e41ebe58bfe28d6",
+        "extraction": "curated_literal_line_span",
+        "line": 7361,
+        "section_path": "机器学习 / 第9章 聚类 / 9.6 层次聚类",
+        "source_file": "机器学习.md",
+        "text": "AGNES 是一种采用自底向上聚合策略的层次聚类算法."
+      },
+      "id": "edge:ml215:235d6338d567b926",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:c9fdfeabeec31d09",
+      "source_section": "sec:ml215:25699f851d911f7a",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:bf39d3ba785b5fd9"
+    },
+    {
+      "evidence": {
+        "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "extraction": "curated_literal_line_span",
+        "line": 10974,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+        "source_file": "机器学习.md",
+        "text": "马尔可夫随机场(Markov Random Field, 简称 MRF)是典型的马尔可夫网, 这是一种著名的无向图模型."
+      },
+      "id": "edge:ml215:25866562a0405607",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:38da68844b29274d",
+      "source_section": "sec:ml215:5c572e3e19270e36",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:203fa11973e6ae3f"
+    },
+    {
+      "evidence": {
+        "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "extraction": "curated_literal_line_span",
+        "line": 11095,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+        "source_file": "机器学习.md",
+        "text": "而条件随机场则是判别式模型."
+      },
+      "id": "edge:ml215:27d0a9b3fa28c2e5",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:89e9f2e93a54ace3",
+      "source_section": "sec:ml215:4d1fea336d8f222e",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:c4ac71238eca79ab"
+    },
+    {
+      "evidence": {
+        "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+        "extraction": "curated_literal_line_span",
+        "line": 5159,
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+        "source_file": "机器学习.md",
+        "text": "贝叶斯网(Bayesian network)亦称“信念网”(belief network), 它借助有向无环图 (Directed Acyclic Graph, 简称 DAG)来刻画属性之间的依赖关系"
+      },
+      "id": "edge:ml215:2b5df3c80f8cf795",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:f1b9c36b2f8f87d0",
+      "source_section": "sec:ml215:dd7a2d5ac2e2bed4",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:df4ebc32256166a0"
+    },
+    {
+      "evidence": {
+        "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "extraction": "curated_literal_line_span",
+        "line": 11095,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+        "source_file": "机器学习.md",
+        "text": "前面介绍的隐马尔可夫模型和马尔可夫随机场都是生成式模型"
+      },
+      "id": "edge:ml215:2f9e0844bc868fe9",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:244b5c74b527d103",
+      "source_section": "sec:ml215:4d1fea336d8f222e",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:6db749a7881379f5"
+    },
+    {
+      "evidence": {
+        "chunk_id": "6f39966142638e1b6ded736268364594b716bcb778a9b2cc1fe896962932c510",
+        "extraction": "curated_literal_line_span",
+        "line": 7981,
+        "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+        "source_file": "机器学习.md",
+        "text": "主成分分析(Principal Component Analysis, 简称 PCA)是最常用的一种降维方法."
+      },
+      "id": "edge:ml215:3233bc7b38fb3df4",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:de5c83d759c8020d",
+      "source_section": "sec:ml215:2fa966f4282eb1ee",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:8e7da3baf7989687"
+    },
+    {
+      "evidence": {
+        "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+        "extraction": "curated_literal_line_span",
+        "line": 5165,
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+        "source_file": "机器学习.md",
+        "text": "一个贝叶斯网 B 由结构 G 和参数 $\\Theta$ 两部分构成"
+      },
+      "id": "edge:ml215:32372032b81f6065",
+      "qualifier": "",
+      "relation": "HAS_PART",
+      "source": "concept:ml215:f1b9c36b2f8f87d0",
+      "source_section": "sec:ml215:dd7a2d5ac2e2bed4",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:a71d1f5ac5d17c49"
+    },
+    {
+      "evidence": {
+        "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+        "extraction": "curated_literal_line_span",
+        "line": 5159,
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+        "source_file": "机器学习.md",
+        "text": "贝叶斯网(Bayesian network)亦称“信念网”(belief network)"
+      },
+      "id": "edge:ml215:38754793e893e787",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:f1b9c36b2f8f87d0",
+      "source_section": "sec:ml215:dd7a2d5ac2e2bed4",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:502333bc2c65eb5b"
+    },
+    {
+      "evidence": {
+        "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+        "extraction": "curated_literal_line_span",
+        "line": 5715,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+        "source_file": "机器学习.md",
+        "text": "根据个体学习器的生成方式, 目前的集成学习方法大致可分为两大类, 即个体学习器间存在强依赖关系、必须串行生成的序列化方法, 以及个体学习器间不存在强依赖关系、可同时生成的并行化方法; 前者的代表是 Boosting, 后者的代表是 Bagging 和 “随机森林” (Random Forest)."
+      },
+      "id": "edge:ml215:3a906e4e482a37af",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:d6cfc4812434ce65",
+      "source_section": "sec:ml215:e7c65678ab5cf04d",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:2716c6744a59b004"
+    },
+    {
+      "evidence": {
+        "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "extraction": "curated_literal_line_span",
+        "line": 11353,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "它也使用马尔可夫链获取样本"
+      },
+      "id": "edge:ml215:40d6140b945ec984",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:a81c59a3640ebec9",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:583564e7d6b292c3"
+    },
+    {
+      "evidence": {
+        "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+        "extraction": "curated_literal_line_span",
+        "line": 11321,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "Metropolis-Hastings (简称 MH) 算法是 MCMC 的重要代表. 它基于 “拒绝采样” (reject sampling)"
+      },
+      "id": "edge:ml215:43922f58313fb854",
+      "qualifier": "",
+      "relation": "BASED_ON",
+      "source": "concept:ml215:c6957b372105ae61",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:6396676137f133cd"
+    },
+    {
+      "evidence": {
+        "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "extraction": "curated_literal_line_span",
+        "line": 11093,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+        "source_file": "机器学习.md",
+        "text": "条件随机场可看作给定观测值的马尔可夫随机场"
+      },
+      "id": "edge:ml215:4aeb3ad8470a10cc",
+      "qualifier": "可看作",
+      "relation": "CONDITIONAL_FORM_OF",
+      "source": "concept:ml215:89e9f2e93a54ace3",
+      "source_section": "sec:ml215:4d1fea336d8f222e",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:38da68844b29274d"
+    },
+    {
+      "evidence": {
+        "chunk_id": "b3c6419e71b2c06ed76711c7ea575d23d16bb5f3c398f5a0f237237729e3c82e",
+        "extraction": "curated_literal_line_span",
+        "line": 2408,
+        "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.1 信息增益",
+        "source_file": "机器学习.md",
+        "text": "著名的ID3决策树学习算法 [Quinlan, 1986] 就是以信息增益为准则来选择划分属性."
+      },
+      "id": "edge:ml215:4f4e50bfb0c0cadd",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:6e9b45a99bc5c95b",
+      "source_section": "sec:ml215:3ff75a3641337333",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:333b3b8473c8ab81"
+    },
+    {
+      "evidence": {
+        "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+        "extraction": "curated_literal_line_span",
+        "line": 5939,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+        "source_file": "机器学习.md",
+        "text": "RF 在以决策树为基学习器构建 Bagging 集成的基础上, 进一步在决策树的训练过程中引入了随机属性选择."
+      },
+      "id": "edge:ml215:5552283f24dfe492",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:b3581c2f7d1ed290",
+      "source_section": "sec:ml215:8edb831cc536b159",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:082e04312a340fa9"
+    },
+    {
+      "evidence": {
+        "chunk_id": "4af7f6d66a14c23706d7c8158048e3d9c223f312898ce93d1cd8d76c661943ff",
+        "extraction": "curated_literal_line_span",
+        "line": 7813,
+        "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+        "source_file": "机器学习.md",
+        "text": "k 近邻(k-Nearest Neighbor, 简称 kNN)学习是一种常用的监督学习方法"
+      },
+      "id": "edge:ml215:598f5fe69bdacce9",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:d50f1440e5cbb40a",
+      "source_section": "sec:ml215:40c30ccd2fab5716",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:c2dbb50741156634"
+    },
+    {
+      "evidence": {
+        "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "extraction": "curated_literal_line_span",
+        "line": 11095,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+        "source_file": "机器学习.md",
+        "text": "条件随机场(Conditional Random Field, 简称 CRF) 是一种判别式无向图模型."
+      },
+      "id": "edge:ml215:704ca72f51240309",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:89e9f2e93a54ace3",
+      "source_section": "sec:ml215:4d1fea336d8f222e",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:860fb36352e8bbe0"
+    },
+    {
+      "evidence": {
+        "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+        "extraction": "curated_literal_line_span",
+        "line": 10905,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+        "source_file": "机器学习.md",
+        "text": "隐马尔可夫模型(Hidden Markov Model, 简称 HMM)"
+      },
+      "id": "edge:ml215:798156c02e542aaa",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:244b5c74b527d103",
+      "source_section": "sec:ml215:54615e44342464d8",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:a16f8803e5c21cc5"
+    },
+    {
+      "evidence": {
+        "chunk_id": "3f6b56ab29917577506f0dffa2bf05c8d84ec4ce25754b6f96d3ca288b2c7702",
+        "extraction": "curated_literal_line_span",
+        "line": 7235,
+        "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+        "source_file": "机器学习.md",
+        "text": "DBSCAN 是一种著名的密度聚类算法"
+      },
+      "id": "edge:ml215:7bc9bc9dc1953e07",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:93702bb2a31e8706",
+      "source_section": "sec:ml215:1b9855ddcd693627",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:c71d0ad08ece3a90"
+    },
+    {
+      "evidence": {
+        "chunk_id": "4af7f6d66a14c23706d7c8158048e3d9c223f312898ce93d1cd8d76c661943ff",
+        "extraction": "curated_literal_line_span",
+        "line": 7813,
+        "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+        "source_file": "机器学习.md",
+        "text": "k 近邻(k-Nearest Neighbor, 简称 kNN)"
+      },
+      "id": "edge:ml215:830bc1e6e53fc09d",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:d50f1440e5cbb40a",
+      "source_section": "sec:ml215:40c30ccd2fab5716",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:7957335c4498b13e"
+    },
+    {
+      "evidence": {
+        "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+        "extraction": "curated_literal_line_span",
+        "line": 10907,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+        "source_file": "机器学习.md",
+        "text": "隐马尔可夫模型中的变量可分为两组. 第一组是状态变量 $\\{y_{1}, y_{2}, \\ldots, y_{n}\\}$ , 其中 $y_{i} \\in Y$ 表示第 i 时刻的系统状态. 通常假定状态变量是隐藏的、不可被观测的, 因此状态变量亦称隐变量(hidden variable). 第二组是观测变量"
+      },
+      "id": "edge:ml215:88b721e640520ada",
+      "qualifier": "",
+      "relation": "HAS_PART",
+      "source": "concept:ml215:244b5c74b527d103",
+      "source_section": "sec:ml215:54615e44342464d8",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:0da85d7465a792da"
+    },
+    {
+      "evidence": {
+        "chunk_id": "70474bf1f1f463bc99bfb08b4127cd5707846684f6cc3b3998713a532f33da9b",
+        "extraction": "curated_literal_line_span",
+        "line": 2532,
+        "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+        "source_file": "机器学习.md",
+        "text": "决策树剪枝的基本策略有“预剪枝”(prepruning)和“后剪枝”(post-pruning)[Quinlan, 1993]."
+      },
+      "id": "edge:ml215:8c1652116077fc39",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:9d2a00f2c33a1315",
+      "source_section": "sec:ml215:6849c65b9a2a5664",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:6d8883873485607b"
+    },
+    {
+      "evidence": {
+        "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+        "extraction": "curated_literal_line_span",
+        "line": 5715,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+        "source_file": "机器学习.md",
+        "text": "根据个体学习器的生成方式, 目前的集成学习方法大致可分为两大类, 即个体学习器间存在强依赖关系、必须串行生成的序列化方法, 以及个体学习器间不存在强依赖关系、可同时生成的并行化方法; 前者的代表是 Boosting, 后者的代表是 Bagging 和 “随机森林” (Random Forest)."
+      },
+      "id": "edge:ml215:8d9cf55cbb0441a5",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:b8583b83ae88faac",
+      "source_section": "sec:ml215:e7c65678ab5cf04d",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:0ba42fbe692cdc1e"
+    },
+    {
+      "evidence": {
+        "chunk_id": "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34",
+        "extraction": "curated_literal_line_span",
+        "line": 11291,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "概率图模型中最常用的采样技术是马尔可夫链蒙特卡罗(Markov Chain Monte Carlo, 简称 MCMC)方法."
+      },
+      "id": "edge:ml215:942786ce51a57201",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:a9a71d5be8501e85",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:014a5ad31cc73e6b"
+    },
+    {
+      "evidence": {
+        "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+        "extraction": "curated_literal_line_span",
+        "line": 10907,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+        "source_file": "机器学习.md",
+        "text": "隐马尔可夫模型中的变量可分为两组. 第一组是状态变量"
+      },
+      "id": "edge:ml215:99cdde8b965ab561",
+      "qualifier": "",
+      "relation": "HAS_PART",
+      "source": "concept:ml215:244b5c74b527d103",
+      "source_section": "sec:ml215:54615e44342464d8",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:6aa39d79ef77f22e"
+    },
+    {
+      "evidence": {
+        "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+        "extraction": "curated_literal_line_span",
+        "line": 5939,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+        "source_file": "机器学习.md",
+        "text": "RF 在以决策树为基学习器构建 Bagging 集成的基础上, 进一步在决策树的训练过程中引入了随机属性选择."
+      },
+      "id": "edge:ml215:9b6854453dc78732",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:b3581c2f7d1ed290",
+      "source_section": "sec:ml215:8edb831cc536b159",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:ffd8dcdad099fbfc"
+    },
+    {
+      "evidence": {
+        "chunk_id": "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b",
+        "extraction": "curated_literal_line_span",
+        "line": 5896,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+        "source_file": "机器学习.md",
+        "text": "Bagging [Breiman, 1996a] 是并行式集成学习方法最著名的代表. 从名字即可看出, 它直接基于我们在 2.2.3 节介绍过的自助采样法 (bootstrap sampling)."
+      },
+      "id": "edge:ml215:a1cbb484f77000d9",
+      "qualifier": "",
+      "relation": "BASED_ON",
+      "source": "concept:ml215:d6cfc4812434ce65",
+      "source_section": "sec:ml215:140b40f8cb359d95",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:04f260a9caaba66a"
+    },
+    {
+      "evidence": {
+        "chunk_id": "07f86f657fe1b86c60d6b6589ebaf4de3abcf7adcdbf06c87824c00c25f774fa",
+        "extraction": "curated_literal_line_span",
+        "line": 2490,
+        "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.2 增益率",
+        "source_file": "机器学习.md",
+        "text": "著名的 C4.5 决策树算法 [Quinlan, 1993] 不直接使用信息增益, 而是使用 “增益率” (gain ratio) 来选择最优划分属性."
+      },
+      "id": "edge:ml215:a2e83ee17caf0608",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:7e37db74400247ba",
+      "source_section": "sec:ml215:513e6d684a1e37ee",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:ce8b58cfe5891bdc"
+    },
+    {
+      "evidence": {
+        "chunk_id": "6d8e18e34350548f3d6311c93b87fa2b0ee037e4fec278c168be1695fb17bac4",
+        "extraction": "curated_literal_line_span",
+        "line": 4878,
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.3 朴素贝叶斯分类器",
+        "source_file": "机器学习.md",
+        "text": "朴素贝叶斯分类器(naïve Bayes classifier)采用了“属性条件独立性假设”(attribute conditional independence assumption): 对已知类别, 假设所有属性相互独立."
+      },
+      "id": "edge:ml215:a5fef0a300eb80be",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:a83cd137ff47ec66",
+      "source_section": "sec:ml215:2a467ae3d2f59db8",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:3b27e88d4beab795"
+    },
+    {
+      "evidence": {
+        "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+        "extraction": "curated_literal_line_span",
+        "line": 11321,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "Metropolis-Hastings (简称 MH) 算法"
+      },
+      "id": "edge:ml215:a8884e55c3eaf74e",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:c6957b372105ae61",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:3523df859eae6cb3"
+    },
+    {
+      "evidence": {
+        "chunk_id": "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34",
+        "extraction": "curated_literal_line_span",
+        "line": 11291,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "马尔可夫链蒙特卡罗(Markov Chain Monte Carlo, 简称 MCMC)"
+      },
+      "id": "edge:ml215:af57931f6b0f1d8d",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:a9a71d5be8501e85",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:8ac53df5c3310acf"
+    },
+    {
+      "evidence": {
+        "chunk_id": "25b32b334f4b652bae6d4eaacf39aa98ccb823cf0006837fc35bfb08761022fd",
+        "extraction": "curated_literal_line_span",
+        "line": 5165,
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+        "source_file": "机器学习.md",
+        "text": "一个贝叶斯网 B 由结构 G 和参数 $\\Theta$ 两部分构成"
+      },
+      "id": "edge:ml215:b0a3731449ebff42",
+      "qualifier": "",
+      "relation": "HAS_PART",
+      "source": "concept:ml215:f1b9c36b2f8f87d0",
+      "source_section": "sec:ml215:dd7a2d5ac2e2bed4",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:f0bf406ed7914afc"
+    },
+    {
+      "evidence": {
+        "chunk_id": "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+        "extraction": "curated_literal_line_span",
+        "line": 11267,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+        "source_file": "机器学习.md",
+        "text": "近似推断方法大致可分为两大类: 第一类是采样(sampling), 通过使用随机化方法完成近似"
+      },
+      "id": "edge:ml215:b63c2b4fc74db7a2",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:3ad98c6147478448",
+      "source_section": "sec:ml215:585f6f7246452794",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:a643763d7b4bc8fa"
+    },
+    {
+      "evidence": {
+        "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "extraction": "curated_literal_line_span",
+        "line": 10974,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+        "source_file": "机器学习.md",
+        "text": "马尔可夫随机场有一组势函数(potential functions)"
+      },
+      "id": "edge:ml215:ba03bfc621b5dab7",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:38da68844b29274d",
+      "source_section": "sec:ml215:5c572e3e19270e36",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:0310705771f1c22e"
+    },
+    {
+      "evidence": {
+        "chunk_id": "3f6b56ab29917577506f0dffa2bf05c8d84ec4ce25754b6f96d3ca288b2c7702",
+        "extraction": "curated_literal_line_span",
+        "line": 7235,
+        "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+        "source_file": "机器学习.md",
+        "text": "DBSCAN 是一种著名的密度聚类算法, 它基于一组 “邻域” (neighborhood) 参数 $(\\epsilon, MinPts)$ 来刻画样本分布的紧密程度."
+      },
+      "id": "edge:ml215:bc517234f1cdd1a6",
+      "qualifier": "",
+      "relation": "USES",
+      "source": "concept:ml215:93702bb2a31e8706",
+      "source_section": "sec:ml215:1b9855ddcd693627",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:478f142d711dfe8d"
+    },
+    {
+      "evidence": {
+        "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+        "extraction": "curated_literal_line_span",
+        "line": 10905,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+        "source_file": "机器学习.md",
+        "text": "隐马尔可夫模型(Hidden Markov Model, 简称 HMM)是结构最简单的动态贝叶斯网(dynamic Bayesian network)"
+      },
+      "id": "edge:ml215:bc7bf4b772a8ff5d",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:244b5c74b527d103",
+      "source_section": "sec:ml215:54615e44342464d8",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:696ae1e4874a1ba4"
+    },
+    {
+      "evidence": {
+        "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+        "extraction": "curated_literal_line_span",
+        "line": 11317,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "MCMC 方法先设法构造一条马尔可夫链"
+      },
+      "id": "edge:ml215:be749acac051e18b",
+      "qualifier": "",
+      "relation": "BASED_ON",
+      "source": "concept:ml215:a9a71d5be8501e85",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:583564e7d6b292c3"
+    },
+    {
+      "evidence": {
+        "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "extraction": "curated_literal_line_span",
+        "line": 10974,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+        "source_file": "机器学习.md",
+        "text": "马尔可夫随机场(Markov Random Field, 简称 MRF)"
+      },
+      "id": "edge:ml215:cfb31749c4c8bfc8",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:38da68844b29274d",
+      "source_section": "sec:ml215:5c572e3e19270e36",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:75f239af945d5a02"
+    },
+    {
+      "evidence": {
+        "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+        "extraction": "curated_literal_line_span",
+        "line": 11321,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md",
+        "text": "Metropolis-Hastings (简称 MH) 算法是 MCMC 的重要代表."
+      },
+      "id": "edge:ml215:d028bd533f734b04",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:c6957b372105ae61",
+      "source_section": "sec:ml215:2ee00f95cceab210",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:a9a71d5be8501e85"
+    },
+    {
+      "evidence": {
+        "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+        "extraction": "curated_literal_line_span",
+        "line": 5939,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+        "source_file": "机器学习.md",
+        "text": "随机森林(Random Forest, 简称 RF)"
+      },
+      "id": "edge:ml215:e3bfd0e3028a2b60",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:b3581c2f7d1ed290",
+      "source_section": "sec:ml215:8edb831cc536b159",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:585f45ee4ce012e2"
+    },
+    {
+      "evidence": {
+        "chunk_id": "6f39966142638e1b6ded736268364594b716bcb778a9b2cc1fe896962932c510",
+        "extraction": "curated_literal_line_span",
+        "line": 7981,
+        "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+        "source_file": "机器学习.md",
+        "text": "主成分分析(Principal Component Analysis, 简称 PCA)"
+      },
+      "id": "edge:ml215:eec7271e47778db8",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:de5c83d759c8020d",
+      "source_section": "sec:ml215:2fa966f4282eb1ee",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:ecb5685051d20e53"
+    },
+    {
+      "evidence": {
+        "chunk_id": "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b",
+        "extraction": "curated_literal_line_span",
+        "line": 5896,
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+        "source_file": "机器学习.md",
+        "text": "Bagging [Breiman, 1996a] 是并行式集成学习方法最著名的代表."
+      },
+      "id": "edge:ml215:ef0c13576dd4b807",
+      "qualifier": "",
+      "relation": "IS_A",
+      "source": "concept:ml215:d6cfc4812434ce65",
+      "source_section": "sec:ml215:140b40f8cb359d95",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:5b0b51bc5b33c6c6"
+    },
+    {
+      "evidence": {
+        "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "extraction": "curated_literal_line_span",
+        "line": 10974,
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+        "source_file": "机器学习.md",
+        "text": "势函数(potential functions), 亦称 “因子” (factor)"
+      },
+      "id": "edge:ml215:fb9beac59a89053a",
+      "qualifier": "",
+      "relation": "ALSO_CALLED",
+      "source": "concept:ml215:0310705771f1c22e",
+      "source_section": "sec:ml215:5c572e3e19270e36",
+      "status": "evidence_bound_pending_independent_semantic_review",
+      "target": "concept:ml215:860b01c3f25d6a8b"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网 / 7.5.3 推断",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:10560bb4ed1b1e3c",
+      "relation": "PART_OF",
+      "source": "sec:ml215:10560bb4ed1b1e3c",
+      "target": "sec:ml215:dd7a2d5ac2e2bed4"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:140b40f8cb359d95",
+      "relation": "PART_OF",
+      "source": "sec:ml215:140b40f8cb359d95",
+      "target": "sec:ml215:93bb7faaeaa3b520"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第9章 聚类",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:158d748c34ef67e4",
+      "relation": "PART_OF",
+      "source": "sec:ml215:158d748c34ef67e4",
+      "target": "doc:ml215:1f35636eaddf19ed"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:1b9855ddcd693627",
+      "relation": "PART_OF",
+      "source": "sec:ml215:1b9855ddcd693627",
+      "target": "sec:ml215:158d748c34ef67e4"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第9章 聚类 / 9.6 层次聚类",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:25699f851d911f7a",
+      "relation": "PART_OF",
+      "source": "sec:ml215:25699f851d911f7a",
+      "target": "sec:ml215:158d748c34ef67e4"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.3 朴素贝叶斯分类器",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:2a467ae3d2f59db8",
+      "relation": "PART_OF",
+      "source": "sec:ml215:2a467ae3d2f59db8",
+      "target": "sec:ml215:8cb65ad4f30e846c"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:2ee00f95cceab210",
+      "relation": "PART_OF",
+      "source": "sec:ml215:2ee00f95cceab210",
+      "target": "sec:ml215:585f6f7246452794"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:2fa966f4282eb1ee",
+      "relation": "PART_OF",
+      "source": "sec:ml215:2fa966f4282eb1ee",
+      "target": "sec:ml215:5597e25ca735be4e"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.1 信息增益",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:3ff75a3641337333",
+      "relation": "PART_OF",
+      "source": "sec:ml215:3ff75a3641337333",
+      "target": "sec:ml215:95c61c300cf061ab"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:40c30ccd2fab5716",
+      "relation": "PART_OF",
+      "source": "sec:ml215:40c30ccd2fab5716",
+      "target": "sec:ml215:5597e25ca735be4e"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:4d1fea336d8f222e",
+      "relation": "PART_OF",
+      "source": "sec:ml215:4d1fea336d8f222e",
+      "target": "sec:ml215:cff16d7e4dfd260f"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第8章 集成学习 / 8.2 Boosting",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:50b26da2b1e53bac",
+      "relation": "PART_OF",
+      "source": "sec:ml215:50b26da2b1e53bac",
+      "target": "sec:ml215:7d2ee72f377ce1c0"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.2 增益率",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:513e6d684a1e37ee",
+      "relation": "PART_OF",
+      "source": "sec:ml215:513e6d684a1e37ee",
+      "target": "sec:ml215:95c61c300cf061ab"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:54615e44342464d8",
+      "relation": "PART_OF",
+      "source": "sec:ml215:54615e44342464d8",
+      "target": "sec:ml215:cff16d7e4dfd260f"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第10章 降维与度量学习",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:5597e25ca735be4e",
+      "relation": "PART_OF",
+      "source": "sec:ml215:5597e25ca735be4e",
+      "target": "doc:ml215:1f35636eaddf19ed"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:585f6f7246452794",
+      "relation": "PART_OF",
+      "source": "sec:ml215:585f6f7246452794",
+      "target": "sec:ml215:cff16d7e4dfd260f"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:5c572e3e19270e36",
+      "relation": "PART_OF",
+      "source": "sec:ml215:5c572e3e19270e36",
+      "target": "sec:ml215:cff16d7e4dfd260f"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:6849c65b9a2a5664",
+      "relation": "PART_OF",
+      "source": "sec:ml215:6849c65b9a2a5664",
+      "target": "sec:ml215:f070367d5802c143"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第8章 集成学习",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:7d2ee72f377ce1c0",
+      "relation": "PART_OF",
+      "source": "sec:ml215:7d2ee72f377ce1c0",
+      "target": "doc:ml215:1f35636eaddf19ed"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第7章 贝叶斯分类器",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:8cb65ad4f30e846c",
+      "relation": "PART_OF",
+      "source": "sec:ml215:8cb65ad4f30e846c",
+      "target": "doc:ml215:1f35636eaddf19ed"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:8edb831cc536b159",
+      "relation": "PART_OF",
+      "source": "sec:ml215:8edb831cc536b159",
+      "target": "sec:ml215:93bb7faaeaa3b520"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:93bb7faaeaa3b520",
+      "relation": "PART_OF",
+      "source": "sec:ml215:93bb7faaeaa3b520",
+      "target": "sec:ml215:7d2ee72f377ce1c0"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:95c61c300cf061ab",
+      "relation": "PART_OF",
+      "source": "sec:ml215:95c61c300cf061ab",
+      "target": "sec:ml215:f070367d5802c143"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.2 变分推断",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:caa184d4cb296a3a",
+      "relation": "PART_OF",
+      "source": "sec:ml215:caa184d4cb296a3a",
+      "target": "sec:ml215:585f6f7246452794"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第14章 概率图模型",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:cff16d7e4dfd260f",
+      "relation": "PART_OF",
+      "source": "sec:ml215:cff16d7e4dfd260f",
+      "target": "doc:ml215:1f35636eaddf19ed"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:dd7a2d5ac2e2bed4",
+      "relation": "PART_OF",
+      "source": "sec:ml215:dd7a2d5ac2e2bed4",
+      "target": "sec:ml215:8cb65ad4f30e846c"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.3 基尼指数",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:de910273ca3da0ba",
+      "relation": "PART_OF",
+      "source": "sec:ml215:de910273ca3da0ba",
+      "target": "sec:ml215:95c61c300cf061ab"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:e7c65678ab5cf04d",
+      "relation": "PART_OF",
+      "source": "sec:ml215:e7c65678ab5cf04d",
+      "target": "sec:ml215:7d2ee72f377ce1c0"
+    },
+    {
+      "evidence": {
+        "section_path": "机器学习 / 第4章 决策树",
+        "source_file": "机器学习.md"
+      },
+      "id": "edge:ml215:section:f070367d5802c143",
+      "relation": "PART_OF",
+      "source": "sec:ml215:f070367d5802c143",
+      "target": "doc:ml215:1f35636eaddf19ed"
+    }
+  ],
+  "metadata": {
+    "baseline_aliases_sha256": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+    "baseline_graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "baseline_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "new_concepts": 67,
+    "new_sections": 29,
+    "note": "New statements have exact original line/section/unique Chroma snapshot evidence, but require independent semantic review and live Chroma revalidation before promotion.",
+    "old_graph_untouched": true,
+    "online_eligible": false,
+    "phase": "offline_evidence_bound_pending_review",
+    "schema": "douxian-kg-multisource-sidecar-v215-1",
+    "semantic_edges": 54,
+    "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "source_file": "机器学习.md",
+    "source_sha256": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+    "spec_sha256": "12109667f465fde870e2b7f49511ed1ec734cb377f9f4aaac4e7cf340774298f",
+    "structural_edges": 29
+  },
+  "nodes": [
+    {
+      "id": "concept:ml215:014a5ad31cc73e6b",
+      "label": "采样技术",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:0310705771f1c22e",
+      "label": "势函数",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:04f260a9caaba66a",
+      "label": "自助采样法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:082e04312a340fa9",
+      "label": "决策树",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:0ba42fbe692cdc1e",
+      "label": "序列化集成学习方法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:0da85d7465a792da",
+      "label": "观测变量",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:1832152a3c4010d9",
+      "label": "CRF",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:203fa11973e6ae3f",
+      "label": "无向图模型",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:20ee6364df9a86e5",
+      "label": "简单分布",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:244b5c74b527d103",
+      "label": "隐马尔可夫模型",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:2716c6744a59b004",
+      "label": "并行化集成学习方法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:3257c38d764eb269",
+      "label": "基尼指数",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:333b3b8473c8ab81",
+      "label": "信息增益",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:3523df859eae6cb3",
+      "label": "MH算法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:38da68844b29274d",
+      "label": "马尔可夫随机场",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:3ad98c6147478448",
+      "label": "采样",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:3b27e88d4beab795",
+      "label": "属性条件独立性假设",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:478f142d711dfe8d",
+      "label": "邻域参数",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:502333bc2c65eb5b",
+      "label": "信念网",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:5719239021acd03a",
+      "label": "贝叶斯网近似推断",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:583564e7d6b292c3",
+      "label": "马尔可夫链",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:585f45ee4ce012e2",
+      "label": "RF",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:5b0b51bc5b33c6c6",
+      "label": "并行式集成学习方法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:6396676137f133cd",
+      "label": "拒绝采样",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:696ae1e4874a1ba4",
+      "label": "动态贝叶斯网",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:6a22a8fbb881a8f4",
+      "label": "马尔可夫网",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:6aa39d79ef77f22e",
+      "label": "状态变量",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:6d8883873485607b",
+      "label": "决策树剪枝",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:6db749a7881379f5",
+      "label": "生成式模型",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:6e9b45a99bc5c95b",
+      "label": "ID3决策树学习算法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:75f239af945d5a02",
+      "label": "MRF",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:7957335c4498b13e",
+      "label": "kNN",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:7e37db74400247ba",
+      "label": "C4.5决策树算法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:7e7054d5ab15f6da",
+      "label": "预剪枝",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:860b01c3f25d6a8b",
+      "label": "因子",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:860fb36352e8bbe0",
+      "label": "判别式无向图模型",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:89e9f2e93a54ace3",
+      "label": "条件随机场",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:8ac53df5c3310acf",
+      "label": "马尔可夫链蒙特卡罗",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:8e7da3baf7989687",
+      "label": "降维方法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:92eab71e4cc676fa",
+      "label": "弱学习器",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:93702bb2a31e8706",
+      "label": "DBSCAN",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:9d2a00f2c33a1315",
+      "label": "后剪枝",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:a0c799c64ad4de6a",
+      "label": "CART决策树",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:a16f8803e5c21cc5",
+      "label": "HMM",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:a643763d7b4bc8fa",
+      "label": "近似推断方法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:a71d1f5ac5d17c49",
+      "label": "网络参数",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:a81c59a3640ebec9",
+      "label": "吉布斯采样",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:a83cd137ff47ec66",
+      "label": "朴素贝叶斯分类器",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:a9a71d5be8501e85",
+      "label": "MCMC",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:b3581c2f7d1ed290",
+      "label": "随机森林",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:b8583b83ae88faac",
+      "label": "Boosting",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:bf39d3ba785b5fd9",
+      "label": "层次聚类算法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:c2dbb50741156634",
+      "label": "监督学习方法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:c4ac71238eca79ab",
+      "label": "判别式模型",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:c6957b372105ae61",
+      "label": "Metropolis-Hastings算法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:c71d0ad08ece3a90",
+      "label": "密度聚类算法",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:c9fdfeabeec31d09",
+      "label": "AGNES",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:ce8b58cfe5891bdc",
+      "label": "增益率",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:d50f1440e5cbb40a",
+      "label": "k近邻学习",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:d6cfc4812434ce65",
+      "label": "Bagging",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:de5c83d759c8020d",
+      "label": "主成分分析",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:df4ebc32256166a0",
+      "label": "有向无环图",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:ecb5685051d20e53",
+      "label": "PCA",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:f04cd9e9d0c9f11d",
+      "label": "变分推断",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:f0bf406ed7914afc",
+      "label": "网络结构",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:f1b9c36b2f8f87d0",
+      "label": "贝叶斯网",
+      "type": "Concept"
+    },
+    {
+      "id": "concept:ml215:ffd8dcdad099fbfc",
+      "label": "随机属性选择",
+      "type": "Concept"
+    },
+    {
+      "id": "doc:ml215:1f35636eaddf19ed",
+      "label": "机器学习.md",
+      "source_lines": 14474,
+      "source_sha256": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+      "type": "Document"
+    },
+    {
+      "id": "sec:ml215:10560bb4ed1b1e3c",
+      "label": "7.5.3 推断",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网 / 7.5.3 推断",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:140b40f8cb359d95",
+      "label": "8.3.1 Bagging",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.1 Bagging",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:158d748c34ef67e4",
+      "label": "第9章 聚类",
+      "section_path": "机器学习 / 第9章 聚类",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:1b9855ddcd693627",
+      "label": "9.5 密度聚类",
+      "section_path": "机器学习 / 第9章 聚类 / 9.5 密度聚类",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:25699f851d911f7a",
+      "label": "9.6 层次聚类",
+      "section_path": "机器学习 / 第9章 聚类 / 9.6 层次聚类",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:2a467ae3d2f59db8",
+      "label": "7.3 朴素贝叶斯分类器",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.3 朴素贝叶斯分类器",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:2ee00f95cceab210",
+      "label": "14.5.1 MCMC采样",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:2fa966f4282eb1ee",
+      "label": "10.3 主成分分析",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.3 主成分分析",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:3ff75a3641337333",
+      "label": "4.2.1 信息增益",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.1 信息增益",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:40c30ccd2fab5716",
+      "label": "10.1 $k$ 近邻学习",
+      "section_path": "机器学习 / 第10章 降维与度量学习 / 10.1 $k$ 近邻学习",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:4d1fea336d8f222e",
+      "label": "14.3 条件随机场",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:50b26da2b1e53bac",
+      "label": "8.2 Boosting",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.2 Boosting",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:513e6d684a1e37ee",
+      "label": "4.2.2 增益率",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.2 增益率",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:54615e44342464d8",
+      "label": "14.1 隐马尔可夫模型",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:5597e25ca735be4e",
+      "label": "第10章 降维与度量学习",
+      "section_path": "机器学习 / 第10章 降维与度量学习",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:585f6f7246452794",
+      "label": "14.5 近似推断",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:5c572e3e19270e36",
+      "label": "14.2 马尔可夫随机场",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:6849c65b9a2a5664",
+      "label": "4.3 剪枝处理",
+      "section_path": "机器学习 / 第4章 决策树 / 4.3 剪枝处理",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:7d2ee72f377ce1c0",
+      "label": "第8章 集成学习",
+      "section_path": "机器学习 / 第8章 集成学习",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:8cb65ad4f30e846c",
+      "label": "第7章 贝叶斯分类器",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:8edb831cc536b159",
+      "label": "8.3.2 随机森林",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:93bb7faaeaa3b520",
+      "label": "8.3 Bagging与随机森林",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:95c61c300cf061ab",
+      "label": "4.2 划分选择",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:caa184d4cb296a3a",
+      "label": "14.5.2 变分推断",
+      "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.2 变分推断",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:cff16d7e4dfd260f",
+      "label": "第14章 概率图模型",
+      "section_path": "机器学习 / 第14章 概率图模型",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:dd7a2d5ac2e2bed4",
+      "label": "7.5 贝叶斯网",
+      "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:de910273ca3da0ba",
+      "label": "4.2.3 基尼指数",
+      "section_path": "机器学习 / 第4章 决策树 / 4.2 划分选择 / 4.2.3 基尼指数",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:e7c65678ab5cf04d",
+      "label": "8.1 个体与集成",
+      "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    },
+    {
+      "id": "sec:ml215:f070367d5802c143",
+      "label": "第4章 决策树",
+      "section_path": "机器学习 / 第4章 决策树",
+      "source_file": "机器学习.md",
+      "type": "Section"
+    }
+  ]
+}

@@ -1,0 +1,833 @@
+{
+  "experiment": "DouXian_V2.15.1_MultiSource_ReadOnly_RawHybrid_Overlap",
+  "phase": "original_hybrid_top20_candidate_overlap_only",
+  "run_utc": "2026-10-23T03:05:21.412070+00:00",
+  "offline_lookup_sha256": "3a2a53c8049e68af37e3ef0cc6c8386a32e9b50c1c1a980aa9de5811a644c76d",
+  "v215_index_sha256": "a8979b4d3d9c21b43d85eb51debece123d4272b9f35c504ef0e7198754236dd1",
+  "v212_graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+  "v212_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+  "v212_snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+  "v215_source_sha256": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+  "chroma_live_chunk_count": 1953,
+  "bm25_in_memory_count": 1953,
+  "index_build_seconds": 6.983,
+  "fixed_subqueries": true,
+  "query_decomposition_performed": false,
+  "raw_hybrid_top_k": 20,
+  "reranker_calls": 0,
+  "generation_calls": 0,
+  "old_29_verified_relations_unchanged": true,
+  "new_54_relations_semantically_promoted": false,
+  "pilot_queries": 6,
+  "total_distinct_graph_candidate_ids": 16,
+  "total_distinct_graph_candidate_ids_novel_vs_hybrid_top20": 2,
+  "total_query_candidate_novelties_top20": 2,
+  "queries": [
+    {
+      "query": "吉布斯采样和MCMC有什么关系？",
+      "matched_labels": [
+        "MCMC",
+        "吉布斯采样"
+      ],
+      "graph_matched_claims": 12,
+      "graph_candidate_chunk_count": 6,
+      "raw_hybrid_returned": 20,
+      "hybrid_top10_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "70c44fe43891205f099813c7bb8d6e5cf9afa642e8d73897dfb8cd7105a6b68f",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "65e047fd0caef9ad6866868f3ea0fd3edb00bd8cd0d92a76a2d8a5c9d2294fb6",
+        "379aed183df95de4fe18620e798e6ad85b0b2aeaeae50a62cb9c2c96bda6c715",
+        "e7484b2d374744a65c332972bd558bb1e9ada86a2a42dd1d221a0de170623d46",
+        "dc362984ede8f817fbc28e1e601fe8c05f4e6ae67fe4bebad59ee6fac8b2c06d",
+        "a30c3fe3311e57b61edc37dc624e3cd8bafced5e213e2fcb6cfb32c826b6e521",
+        "2dfd11d3d98f5b2038fc166076f618138623a2207aa84bbf30286db425b7f8e9",
+        "7f2b90ec7b02b7035de8e349f9572d23d3022971bf45ea09c3dc85e34ebc7310"
+      ],
+      "hybrid_top20_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "70c44fe43891205f099813c7bb8d6e5cf9afa642e8d73897dfb8cd7105a6b68f",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "65e047fd0caef9ad6866868f3ea0fd3edb00bd8cd0d92a76a2d8a5c9d2294fb6",
+        "379aed183df95de4fe18620e798e6ad85b0b2aeaeae50a62cb9c2c96bda6c715",
+        "e7484b2d374744a65c332972bd558bb1e9ada86a2a42dd1d221a0de170623d46",
+        "dc362984ede8f817fbc28e1e601fe8c05f4e6ae67fe4bebad59ee6fac8b2c06d",
+        "a30c3fe3311e57b61edc37dc624e3cd8bafced5e213e2fcb6cfb32c826b6e521",
+        "2dfd11d3d98f5b2038fc166076f618138623a2207aa84bbf30286db425b7f8e9",
+        "7f2b90ec7b02b7035de8e349f9572d23d3022971bf45ea09c3dc85e34ebc7310",
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+        "26d9b1836d67bee741ecefb199e314ca3119212a26860b507212a9894a2021f7",
+        "0458144bb6364fe433b7040289014cc1f631fed9e08195862b49b220a27342f1",
+        "39d8722e1cc69c9141462bc79a7cf9fb1828626e5d4ba33a887d244e6d41ff84",
+        "f1526e75cefc81ceebee5a0ae8729dfeffcc91ec6dbe1f4a7258f81004e87a75",
+        "7779a6aceb2326f444ddd0b0e81c31f0346fbb0f842c3205c5f4162ec458fc06",
+        "acd30e3fbf473de1a3c7e381f7b7c6ac963795eaf47dbb4fa2de6a65f88faf8e",
+        "39ac4b63934419b166d7cc988f890b6eb49dd38b477c41a00d765c45f37ec021",
+        "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+        "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34"
+      ],
+      "per_book": {
+        "神经网络与深度学习.md": {
+          "graph_candidate_chunks": 2,
+          "missing_in_hybrid_top10": 1,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 0,
+          "not_reviewed_for_question_relevance": true
+        },
+        "机器学习.md": {
+          "graph_candidate_chunks": 4,
+          "missing_in_hybrid_top10": 3,
+          "missing_in_hybrid_top20": 1,
+          "pending_semantic_review": 4,
+          "not_reviewed_for_question_relevance": true
+        }
+      },
+      "candidate_audit": [
+        {
+          "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+          "source_file": "神经网络与深度学习.md",
+          "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+          "status": "verified",
+          "semantic_review_pending": false,
+          "matched_claim_ids": [
+            "edge:289d96aa51ba2b95",
+            "edge:3c3336e8a2d46754",
+            "edge:f41c568fafd242bd"
+          ],
+          "hybrid_rank_top20": 1,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+          "source_file": "神经网络与深度学习.md",
+          "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+          "status": "verified",
+          "semantic_review_pending": false,
+          "matched_claim_ids": [
+            "edge:2ab7e570dfc30a47",
+            "edge:a53f6c900996f454"
+          ],
+          "hybrid_rank_top20": 11,
+          "exact_in_hybrid_top10": false,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": true,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:084a17baea014174",
+            "edge:ml215:40d6140b945ec984"
+          ],
+          "hybrid_rank_top20": 3,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "0f93176f8c8012dc581769cdb4ce8662cafdb0cf66ce4b6a987a8d03c36a1009",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第7章 贝叶斯分类器 / 7.5 贝叶斯网 / 7.5.3 推断",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:21b1f92b43cf34ea"
+          ],
+          "hybrid_rank_top20": null,
+          "exact_in_hybrid_top10": false,
+          "exact_in_hybrid_top20": false,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": true,
+          "novel_candidate_vs_hybrid_top20": true
+        },
+        {
+          "chunk_id": "39d0b37daccbbadfa9e14109a903e99c6b063e167c05d10a36fb58c9accaac34",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:942786ce51a57201",
+            "edge:ml215:af57931f6b0f1d8d"
+          ],
+          "hybrid_rank_top20": 20,
+          "exact_in_hybrid_top10": false,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": true,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "2212c7273bbc841a43e55a40607781a9b53eb79fd468ccb6cd76beabfcc1fcb4",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:be749acac051e18b",
+            "edge:ml215:d028bd533f734b04"
+          ],
+          "hybrid_rank_top20": 19,
+          "exact_in_hybrid_top10": false,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": true,
+          "novel_candidate_vs_hybrid_top20": false
+        }
+      ],
+      "total_missing_in_hybrid_top10": 4,
+      "total_missing_in_hybrid_top20": 1,
+      "not_measured": [
+        "manual_query_specific_evidence_relevance",
+        "relation_path_retrieval_value",
+        "reranker_top3_survival",
+        "final_cited_evidence",
+        "answer_quality",
+        "reranker_tokens"
+      ],
+      "raw_hybrid_query_seconds": 0.251
+    },
+    {
+      "query": "马尔可夫随机场的证据来自哪本教材？",
+      "matched_labels": [
+        "马尔可夫随机场"
+      ],
+      "graph_matched_claims": 7,
+      "graph_candidate_chunk_count": 3,
+      "raw_hybrid_returned": 20,
+      "hybrid_top10_ids": [
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "2644a021ebf7d43da9c2104f87bd66d847a8bdda54e0c9c5f33d15764850f536",
+        "033dad2004b2c298d23d608d81b4d51baad1cf0bcc5a668f967995663f739105",
+        "0c79c70e34bfc991a29eaa9114f81f15714ce58a8c185494bec8726adebbfa29",
+        "930d3b3a950576719bc75dfc7950d95ec9985c720f67c254f3a1b5cedcaa77e9",
+        "95117cb4bbee6f28374b44a08e5313610c6be5b80b71a590487f2e16d459bb40",
+        "fcc7e45060e19658278c11dec0b7e21740bbb23fe2443a309afad9d6224066e3",
+        "9e98f18e4bdc3f3b701c9dd44200b2ac48b8e8f489fa3f124834363e0e312ccc",
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143"
+      ],
+      "hybrid_top20_ids": [
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "2644a021ebf7d43da9c2104f87bd66d847a8bdda54e0c9c5f33d15764850f536",
+        "033dad2004b2c298d23d608d81b4d51baad1cf0bcc5a668f967995663f739105",
+        "0c79c70e34bfc991a29eaa9114f81f15714ce58a8c185494bec8726adebbfa29",
+        "930d3b3a950576719bc75dfc7950d95ec9985c720f67c254f3a1b5cedcaa77e9",
+        "95117cb4bbee6f28374b44a08e5313610c6be5b80b71a590487f2e16d459bb40",
+        "fcc7e45060e19658278c11dec0b7e21740bbb23fe2443a309afad9d6224066e3",
+        "9e98f18e4bdc3f3b701c9dd44200b2ac48b8e8f489fa3f124834363e0e312ccc",
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "c20a7e3e9b922cc139076d72a0e4dc36801ae90fb4baff577946c96e554bd81c",
+        "0458144bb6364fe433b7040289014cc1f631fed9e08195862b49b220a27342f1",
+        "c61b51bcf879dcd884e230448b51bf5ebbc8be456b47414fa76da1506b65f47e",
+        "f77aa312fad6bf9d4a20eb13565c9a67cc36b8c60f6f0425f2cb2761925f68ea",
+        "a2d1dba3ab7766aa6566cd5adb42f7d5a2b6d29c54645ed9fd0f5397fbb39da7",
+        "58629f304a7033824f24fb9401ee2c408bef11b3b0a0cc1d37087a2b5e98f392",
+        "73af37fbac5ecf993f3eef021544e5bb2ba3f8fc446111421306978a4f957f91",
+        "5e8b1ec9822680561f4b3a495ac99f2c13160265e1d39855b6c90621fda40a69",
+        "20daf080309ee3c36f1a007f1ce1a0ba94cdb259c8bef2d359838bddc07d8206",
+        "0f766cd74f325200fd3d234402c82d4119815aece0e84daa23d6e93e499bb689"
+      ],
+      "per_book": {
+        "神经网络与深度学习.md": {
+          "graph_candidate_chunks": 1,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 0,
+          "not_reviewed_for_question_relevance": true
+        },
+        "机器学习.md": {
+          "graph_candidate_chunks": 2,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 2,
+          "not_reviewed_for_question_relevance": true
+        }
+      },
+      "candidate_audit": [
+        {
+          "chunk_id": "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+          "source_file": "神经网络与深度学习.md",
+          "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.3 无向图模型",
+          "status": "verified",
+          "semantic_review_pending": false,
+          "matched_claim_ids": [
+            "edge:ad12f3d587f3d7d2"
+          ],
+          "hybrid_rank_top20": 1,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:0333f46785db9a8a",
+            "edge:ml215:4aeb3ad8470a10cc"
+          ],
+          "hybrid_rank_top20": 10,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:10a13d9505820fa0",
+            "edge:ml215:25866562a0405607",
+            "edge:ml215:ba03bfc621b5dab7",
+            "edge:ml215:cfb31749c4c8bfc8"
+          ],
+          "hybrid_rank_top20": 2,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        }
+      ],
+      "total_missing_in_hybrid_top10": 0,
+      "total_missing_in_hybrid_top20": 0,
+      "not_measured": [
+        "manual_query_specific_evidence_relevance",
+        "relation_path_retrieval_value",
+        "reranker_top3_survival",
+        "final_cited_evidence",
+        "answer_quality",
+        "reranker_tokens"
+      ],
+      "raw_hybrid_query_seconds": 0.118
+    },
+    {
+      "query": "变分推断属于哪类推断方法？",
+      "matched_labels": [
+        "变分推断"
+      ],
+      "graph_matched_claims": 4,
+      "graph_candidate_chunk_count": 4,
+      "raw_hybrid_returned": 20,
+      "hybrid_top10_ids": [
+        "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+        "c156925fac3f8ad2834ffecf5b5120da0e32b7423c877e21a6f1a8f1dc33544e",
+        "b2cce1277ae6ad15091cb2ebb616fe6503c2647ede42ad8958d1053a4e39dee0",
+        "71ed2de7f7d3b6160091e4d4fe93ce329044846985f43944dd5c031badadcc37",
+        "beeab970af3fc81a263c339fc6cae72d86d1a2749df5c527764e5e2152151ab3",
+        "ea27c9b0644b66b9c1f5567b18077532a28d29fa2578259e94c63e5e6ea55db1",
+        "10606afdd0073b449ceaf67b23e624e702540ee0e5f2806387e8e60d710eb14a",
+        "72e862a1ddb73a2159518512f457909e8a8ab7ca95f8ac6ff20e1bb11b16ab83",
+        "3a82e8190d1a6901687b1aa4b84fa4cb8702bb30b27de31befa9d63d0d8016cb",
+        "8fd1237515262ace72cbd89b63da18741eff9fdf7ef92b64e7f78859e153ec46"
+      ],
+      "hybrid_top20_ids": [
+        "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+        "c156925fac3f8ad2834ffecf5b5120da0e32b7423c877e21a6f1a8f1dc33544e",
+        "b2cce1277ae6ad15091cb2ebb616fe6503c2647ede42ad8958d1053a4e39dee0",
+        "71ed2de7f7d3b6160091e4d4fe93ce329044846985f43944dd5c031badadcc37",
+        "beeab970af3fc81a263c339fc6cae72d86d1a2749df5c527764e5e2152151ab3",
+        "ea27c9b0644b66b9c1f5567b18077532a28d29fa2578259e94c63e5e6ea55db1",
+        "10606afdd0073b449ceaf67b23e624e702540ee0e5f2806387e8e60d710eb14a",
+        "72e862a1ddb73a2159518512f457909e8a8ab7ca95f8ac6ff20e1bb11b16ab83",
+        "3a82e8190d1a6901687b1aa4b84fa4cb8702bb30b27de31befa9d63d0d8016cb",
+        "8fd1237515262ace72cbd89b63da18741eff9fdf7ef92b64e7f78859e153ec46",
+        "b63084f8aa96ec58ae29fbb5ebe8c6948af7abedbc641a8e37ad7c89af92bf97",
+        "1c9ac33ea5241416feefe456da53d2fbc80fdf3c5f1f32c93055530b719d44d4",
+        "a415d3803b6a49f1ce960c57e78a2ad47dfe92e9d94ec5d848ec08f5b2201fb7",
+        "8b85c2b381d4afd35346a82b6035394cfc6012bbae6f3ec500c58477d2ba9a88",
+        "633b6b2250c908d93f66731c0dad376be4724c1f4cba4327f9b59b0e493db172",
+        "d48d3ffdec0921634addb0e443e0a6160eefd4d95d46a3b0d8a66238ed688d25",
+        "e98741d312bd11504301b89e7b0a5ba6acc108b01f068d70cfb04e836fa7ca8b",
+        "bd3686144069719ca9958ca3da1bedfa45aa444e5a71d3afa61041a7e175423e",
+        "fc34048c70544c45dd8685415fb7c43b313e4d124393feb69316f5ad7eaed5cd",
+        "5e8b1ec9822680561f4b3a495ac99f2c13160265e1d39855b6c90621fda40a69"
+      ],
+      "per_book": {
+        "神经网络与深度学习.md": {
+          "graph_candidate_chunks": 2,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 0,
+          "not_reviewed_for_question_relevance": true
+        },
+        "机器学习.md": {
+          "graph_candidate_chunks": 2,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 2,
+          "not_reviewed_for_question_relevance": true
+        }
+      },
+      "candidate_audit": [
+        {
+          "chunk_id": "c156925fac3f8ad2834ffecf5b5120da0e32b7423c877e21a6f1a8f1dc33544e",
+          "source_file": "神经网络与深度学习.md",
+          "section_path": "第11章 概率图模型 / 11.3 推断 / 11.3.2 近似推断",
+          "status": "verified",
+          "semantic_review_pending": false,
+          "matched_claim_ids": [
+            "edge:6fb281515635a996"
+          ],
+          "hybrid_rank_top20": 2,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "beeab970af3fc81a263c339fc6cae72d86d1a2749df5c527764e5e2152151ab3",
+          "source_file": "神经网络与深度学习.md",
+          "section_path": "第11章 概率图模型 / 11.4 变分推断",
+          "status": "verified",
+          "semantic_review_pending": false,
+          "matched_claim_ids": [
+            "edge:8c790f7f19579098"
+          ],
+          "hybrid_rank_top20": 5,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "b2cce1277ae6ad15091cb2ebb616fe6503c2647ede42ad8958d1053a4e39dee0",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.2 变分推断",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:1a7d26cb58ef4797"
+          ],
+          "hybrid_rank_top20": 3,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "77a79810274727469cf8f262f3df528a62798bfbe687311aca6b82ebc31b6f83",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:1adfd3c8bd2a17ed"
+          ],
+          "hybrid_rank_top20": 1,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        }
+      ],
+      "total_missing_in_hybrid_top10": 0,
+      "total_missing_in_hybrid_top20": 0,
+      "not_measured": [
+        "manual_query_specific_evidence_relevance",
+        "relation_path_retrieval_value",
+        "reranker_top3_survival",
+        "final_cited_evidence",
+        "answer_quality",
+        "reranker_tokens"
+      ],
+      "raw_hybrid_query_seconds": 0.149
+    },
+    {
+      "query": "随机森林使用哪些方法训练？",
+      "matched_labels": [
+        "随机森林"
+      ],
+      "graph_matched_claims": 5,
+      "graph_candidate_chunk_count": 2,
+      "raw_hybrid_returned": 20,
+      "hybrid_top10_ids": [
+        "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+        "ce84b9aa79dd00787962cd6fb98761c3addd07abec11679d17d6136911c5b0cb",
+        "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b",
+        "33d91cb956d57426b0f9d5a55c6fd1f3f60d1d145a6ebc20ef7ec00e766adf67",
+        "38669cdc8ef33396c7388369588574f90e7f7c7547223d6271f3369389751f9d",
+        "3cf10fe37ab35e7a93d48514f8a66a1be9cb8803ee49162d172ea8863465b29c",
+        "d86d4260e623c03161706deb84d5eded34601c62a642f8942bf9111bc403a389",
+        "159313627541b16415350799518d674bddbff4ae0a1b3b3331b71966f5992f3a",
+        "c2d9f8027b1cb86081bc1ac40d3cf77574c07402dfc08277c45d56b37ffa9756",
+        "689ae67e7d7c73e223c4996edb29e4c5fab1340235901e93e42e654a5876c46a"
+      ],
+      "hybrid_top20_ids": [
+        "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+        "ce84b9aa79dd00787962cd6fb98761c3addd07abec11679d17d6136911c5b0cb",
+        "8080082be9e5856beb403587994270f2291a942c2c991ab7b460fa17a19d2f0b",
+        "33d91cb956d57426b0f9d5a55c6fd1f3f60d1d145a6ebc20ef7ec00e766adf67",
+        "38669cdc8ef33396c7388369588574f90e7f7c7547223d6271f3369389751f9d",
+        "3cf10fe37ab35e7a93d48514f8a66a1be9cb8803ee49162d172ea8863465b29c",
+        "d86d4260e623c03161706deb84d5eded34601c62a642f8942bf9111bc403a389",
+        "159313627541b16415350799518d674bddbff4ae0a1b3b3331b71966f5992f3a",
+        "c2d9f8027b1cb86081bc1ac40d3cf77574c07402dfc08277c45d56b37ffa9756",
+        "689ae67e7d7c73e223c4996edb29e4c5fab1340235901e93e42e654a5876c46a",
+        "fa8250421686c25b7a6c2f3db485fa346aea7e6d613961e2b8a915ad14b67def",
+        "7e831a40ef9b81b001eec8d4fe5add76567829d9e13d448dbf575711d3bf76e2",
+        "3cb460e0b566eac79490c622b76c563c70e447987463130cd174e111e9235d05",
+        "c1da325c3bf2ca216cd8f5040dd71608231024ccecc366fd8081aab8d385e5b8",
+        "019049911e667ca39ef844da4d8bfb337c300cd4fccf24db16c9be4e25cc81d0",
+        "71532898d8e3bf956b6ff5b0b2595d16d5b9dc59000029e658f724ef2e79c612",
+        "cd935ffc4020850fb231a2781e5834bd5ff6ad65609182e9da72ef8a71c28065",
+        "8fa83cb07dd7667a75ecf3423bcbc0e1cccc128dc59d92d48ac4c07b3a9e3b8b",
+        "c68e293dd2f3676d24ef65560a247df82ac55f988ed867cc4df2f9d34c9321ca",
+        "5d3ff16b7160f2cb7951b4f4bf74d1a63c39cabcc9debf667031248bdcf81f32"
+      ],
+      "per_book": {
+        "神经网络与深度学习.md": {
+          "graph_candidate_chunks": 0,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 0,
+          "not_reviewed_for_question_relevance": true
+        },
+        "机器学习.md": {
+          "graph_candidate_chunks": 2,
+          "missing_in_hybrid_top10": 1,
+          "missing_in_hybrid_top20": 1,
+          "pending_semantic_review": 2,
+          "not_reviewed_for_question_relevance": true
+        }
+      },
+      "candidate_audit": [
+        {
+          "chunk_id": "13fabbf281e58edd21f1fa0c513df17e7b6cf1c22234867ac8c7cfe80910e7e8",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第8章 集成学习 / 8.1 个体与集成",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:0b63f552d603eea8"
+          ],
+          "hybrid_rank_top20": null,
+          "exact_in_hybrid_top10": false,
+          "exact_in_hybrid_top20": false,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": true,
+          "novel_candidate_vs_hybrid_top20": true
+        },
+        {
+          "chunk_id": "df6401ac494d7d928794831b059a3150cc30897be435721da2752cf8d101f9de",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第8章 集成学习 / 8.3 Bagging与随机森林 / 8.3.2 随机森林",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:179b8e6aef2203f9",
+            "edge:ml215:5552283f24dfe492",
+            "edge:ml215:9b6854453dc78732",
+            "edge:ml215:e3bfd0e3028a2b60"
+          ],
+          "hybrid_rank_top20": 1,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        }
+      ],
+      "total_missing_in_hybrid_top10": 1,
+      "total_missing_in_hybrid_top20": 1,
+      "not_measured": [
+        "manual_query_specific_evidence_relevance",
+        "relation_path_retrieval_value",
+        "reranker_top3_survival",
+        "final_cited_evidence",
+        "answer_quality",
+        "reranker_tokens"
+      ],
+      "raw_hybrid_query_seconds": 0.117
+    },
+    {
+      "query": "隐马尔可夫模型是什么？",
+      "matched_labels": [
+        "隐马尔可夫模型"
+      ],
+      "graph_matched_claims": 5,
+      "graph_candidate_chunk_count": 2,
+      "raw_hybrid_returned": 20,
+      "hybrid_top10_ids": [
+        "3394a27ffa77a6cd3f267a5149eae7c2f1252b634611b8db378639256226b275",
+        "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+        "84bec0ef098beffe6e69dd1bb4001a405ad5fcfb69a2b614e1c376483445d99c",
+        "6c5b0db50b5bf0d731514091655cd5239b6ed3c4aaa0c350cd32ea779bdf0b8b",
+        "d9a14e8d00cf7d8e7deeba141fe6b40d9a7a8731849866252996c1895ab6507f",
+        "3a8cae8d6af4a5a2daac1dafc21a8c0e3b34aec022c05bed5ec26f31b90b6634",
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+        "eae35c78b2584541d5a0a8e268ec32ac9c8a5195883b2f4dfb6f72f94862b903",
+        "9e98f18e4bdc3f3b701c9dd44200b2ac48b8e8f489fa3f124834363e0e312ccc",
+        "930d3b3a950576719bc75dfc7950d95ec9985c720f67c254f3a1b5cedcaa77e9"
+      ],
+      "hybrid_top20_ids": [
+        "3394a27ffa77a6cd3f267a5149eae7c2f1252b634611b8db378639256226b275",
+        "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+        "84bec0ef098beffe6e69dd1bb4001a405ad5fcfb69a2b614e1c376483445d99c",
+        "6c5b0db50b5bf0d731514091655cd5239b6ed3c4aaa0c350cd32ea779bdf0b8b",
+        "d9a14e8d00cf7d8e7deeba141fe6b40d9a7a8731849866252996c1895ab6507f",
+        "3a8cae8d6af4a5a2daac1dafc21a8c0e3b34aec022c05bed5ec26f31b90b6634",
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+        "eae35c78b2584541d5a0a8e268ec32ac9c8a5195883b2f4dfb6f72f94862b903",
+        "9e98f18e4bdc3f3b701c9dd44200b2ac48b8e8f489fa3f124834363e0e312ccc",
+        "930d3b3a950576719bc75dfc7950d95ec9985c720f67c254f3a1b5cedcaa77e9",
+        "e2e2138c21917b3b808c738eca3e6217e1a66ea0c8641451e7464ab05251b5ce",
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+        "bc417d99b2a18cdf886d2d93e0cf97e6a77afb405c12c7577618b79f4a9702c8",
+        "4e8f45e7f7ea449d231594857e12671c8dde652a270dd2dbef76886abf3ca6c3",
+        "40bb6074f866733a359ffc9da395d3e0610029dc6469fe178f5dc17d1225dbe6",
+        "58726308b754a6fb3864b2a2b173b271219f5e7460842b2f976ce8dc34be28da",
+        "cfbcee92c73ecee53e93ae194ad6488c217415b84420b1bd2d692c9e1f703a80",
+        "110c09ebf20c31108a6db8a8c9bd1b7aaa7b85a69abc9fcb3c0620f30b1eb397",
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc"
+      ],
+      "per_book": {
+        "神经网络与深度学习.md": {
+          "graph_candidate_chunks": 0,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 0,
+          "not_reviewed_for_question_relevance": true
+        },
+        "机器学习.md": {
+          "graph_candidate_chunks": 2,
+          "missing_in_hybrid_top10": 1,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 2,
+          "not_reviewed_for_question_relevance": true
+        }
+      },
+      "candidate_audit": [
+        {
+          "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:2f9e0844bc868fe9"
+          ],
+          "hybrid_rank_top20": 12,
+          "exact_in_hybrid_top10": false,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": true,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "f921a181a791b87bf55e0d8bf8dc20dab9d6cc6f05d07f7b07b18ae9f2a04378",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.1 隐马尔可夫模型",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:798156c02e542aaa",
+            "edge:ml215:88b721e640520ada",
+            "edge:ml215:99cdde8b965ab561",
+            "edge:ml215:bc7bf4b772a8ff5d"
+          ],
+          "hybrid_rank_top20": 2,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        }
+      ],
+      "total_missing_in_hybrid_top10": 1,
+      "total_missing_in_hybrid_top20": 0,
+      "not_measured": [
+        "manual_query_specific_evidence_relevance",
+        "relation_path_retrieval_value",
+        "reranker_top3_survival",
+        "final_cited_evidence",
+        "answer_quality",
+        "reranker_tokens"
+      ],
+      "raw_hybrid_query_seconds": 0.132
+    },
+    {
+      "query": "条件随机场与马尔可夫随机场有什么关联？",
+      "matched_labels": [
+        "条件随机场",
+        "马尔可夫随机场"
+      ],
+      "graph_matched_claims": 10,
+      "graph_candidate_chunk_count": 3,
+      "raw_hybrid_returned": 20,
+      "hybrid_top10_ids": [
+        "c20a7e3e9b922cc139076d72a0e4dc36801ae90fb4baff577946c96e554bd81c",
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "58629f304a7033824f24fb9401ee2c408bef11b3b0a0cc1d37087a2b5e98f392",
+        "033dad2004b2c298d23d608d81b4d51baad1cf0bcc5a668f967995663f739105",
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "2644a021ebf7d43da9c2104f87bd66d847a8bdda54e0c9c5f33d15764850f536",
+        "95117cb4bbee6f28374b44a08e5313610c6be5b80b71a590487f2e16d459bb40",
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+        "0c79c70e34bfc991a29eaa9114f81f15714ce58a8c185494bec8726adebbfa29",
+        "0458144bb6364fe433b7040289014cc1f631fed9e08195862b49b220a27342f1"
+      ],
+      "hybrid_top20_ids": [
+        "c20a7e3e9b922cc139076d72a0e4dc36801ae90fb4baff577946c96e554bd81c",
+        "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+        "58629f304a7033824f24fb9401ee2c408bef11b3b0a0cc1d37087a2b5e98f392",
+        "033dad2004b2c298d23d608d81b4d51baad1cf0bcc5a668f967995663f739105",
+        "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+        "2644a021ebf7d43da9c2104f87bd66d847a8bdda54e0c9c5f33d15764850f536",
+        "95117cb4bbee6f28374b44a08e5313610c6be5b80b71a590487f2e16d459bb40",
+        "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+        "0c79c70e34bfc991a29eaa9114f81f15714ce58a8c185494bec8726adebbfa29",
+        "0458144bb6364fe433b7040289014cc1f631fed9e08195862b49b220a27342f1",
+        "3da8ba349172d350a2532ec4cc2263642b9c2eb76507058768ff47ec3f587d2b",
+        "dc91a329897aa0ee5ac99423f7e1fcbc7ab0d29f66df76d13d481102546e361b",
+        "fcc7e45060e19658278c11dec0b7e21740bbb23fe2443a309afad9d6224066e3",
+        "d5d3d5173a0606e06fe94ede94eee012fce4fbc847c70d1fa01a9a20ff39c0d9",
+        "b0a72f5c409cbbc5c3fb21880cd037c77483eef98b61d92020fc551f41393d67",
+        "5e8b1ec9822680561f4b3a495ac99f2c13160265e1d39855b6c90621fda40a69",
+        "c7aff7389b4b74e5a1ab3ef410b80a63d0a9c29d43899711093284267fdc27ea",
+        "acd30e3fbf473de1a3c7e381f7b7c6ac963795eaf47dbb4fa2de6a65f88faf8e",
+        "0f766cd74f325200fd3d234402c82d4119815aece0e84daa23d6e93e499bb689",
+        "2474cd804b0a671b96b6f4a5056bf77ed193f08120718adc83d4772a6ab8db6d"
+      ],
+      "per_book": {
+        "神经网络与深度学习.md": {
+          "graph_candidate_chunks": 1,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 0,
+          "not_reviewed_for_question_relevance": true
+        },
+        "机器学习.md": {
+          "graph_candidate_chunks": 2,
+          "missing_in_hybrid_top10": 0,
+          "missing_in_hybrid_top20": 0,
+          "pending_semantic_review": 2,
+          "not_reviewed_for_question_relevance": true
+        }
+      },
+      "candidate_audit": [
+        {
+          "chunk_id": "ab6883274fdd9cb3b1b41578ce1aa388b81601cad1f0baf35ff609bbf63c3e4a",
+          "source_file": "神经网络与深度学习.md",
+          "section_path": "第11章 概率图模型 / 11.1 模型表示 / 11.1.3 无向图模型",
+          "status": "verified",
+          "semantic_review_pending": false,
+          "matched_claim_ids": [
+            "edge:ad12f3d587f3d7d2"
+          ],
+          "hybrid_rank_top20": 8,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "5329a7bd50a829623dc8a12a115b5dea71a4a6303ed2e04bc4614cdf02b2e143",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.3 条件随机场",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:0333f46785db9a8a",
+            "edge:ml215:19aff6dfad272063",
+            "edge:ml215:27d0a9b3fa28c2e5",
+            "edge:ml215:4aeb3ad8470a10cc",
+            "edge:ml215:704ca72f51240309"
+          ],
+          "hybrid_rank_top20": 2,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        },
+        {
+          "chunk_id": "333e0b3a90bd5cae14a2035eee2d5236662657caa2339a89414ecbf4f44a22bc",
+          "source_file": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.2 马尔可夫随机场",
+          "status": "evidence_bound_pending_independent_semantic_review",
+          "semantic_review_pending": true,
+          "matched_claim_ids": [
+            "edge:ml215:10a13d9505820fa0",
+            "edge:ml215:25866562a0405607",
+            "edge:ml215:ba03bfc621b5dab7",
+            "edge:ml215:cfb31749c4c8bfc8"
+          ],
+          "hybrid_rank_top20": 5,
+          "exact_in_hybrid_top10": true,
+          "exact_in_hybrid_top20": true,
+          "same_body_same_source_other_id_top10": [],
+          "same_body_same_source_other_id_top20": [],
+          "novel_candidate_vs_hybrid_top10": false,
+          "novel_candidate_vs_hybrid_top20": false
+        }
+      ],
+      "total_missing_in_hybrid_top10": 0,
+      "total_missing_in_hybrid_top20": 0,
+      "not_measured": [
+        "manual_query_specific_evidence_relevance",
+        "relation_path_retrieval_value",
+        "reranker_top3_survival",
+        "final_cited_evidence",
+        "answer_quality",
+        "reranker_tokens"
+      ],
+      "raw_hybrid_query_seconds": 0.122
+    }
+  ],
+  "limitations": [
+    "This measures exact-label lookup candidate novelty, NOT a multi-hop graph traversal experiment.",
+    "A novel candidate may be irrelevant to its query.",
+    "V2.15 new-book relations are evidence-bound but pending independent semantic review and cannot be used online.",
+    "Query embedding calls may incur costs.",
+    "No production query decomposition or Qwen Reranker used.",
+    "No generated answers, citations, or quality comparisons.",
+    "Missing from raw Top20 does not mean missing from the entire collection."
+  ]
+}

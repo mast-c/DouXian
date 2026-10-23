@@ -1,0 +1,143 @@
+{
+  "experiment": "DouXian_V2.14_ReadOnly_Production_Reranker_AB",
+  "phase": "controlled_single_query_reranker_top3_only",
+  "run_utc": "2026-10-23T02:28:18.238922+00:00",
+  "offline_sha256": "b36677d776a634f4f45b5d861a56eeafd8bfadedee7ca5fd2a2046033f003ee6",
+  "hybrid_overlap_sha256": "188dad33c000b165041f83817b475173edd61ba6f57d13fb8ecee0fc0eea24a8",
+  "source_sha256": {
+    "v212_graph": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "v212_links": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "v212_aliases": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+    "v212_snapshot": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "v212_gate": "c5fc8d379f853b1a6486068235b88f25835db060ed07d8de521ae3b03c3158bf",
+    "textbook": "40b5ec25a031cfce564657e01145824051edb1e6ca0b225066f4b08c13b0d116"
+  },
+  "local_chroma_count": 1953,
+  "fixed_subqueries": true,
+  "query_decomposition_performed": false,
+  "reranker_backend": "KnowledgeBaseService.search_with_rerank / qwen3-vl-rerank",
+  "top_n": 3,
+  "baseline_pool": "original_unaugmented_hybrid_top10",
+  "graph_pool": "same_baseline_top10_plus_new_verified_v214_chunks",
+  "force_inclusion_in_rerank_top3": false,
+  "reranker_model_calls": 2,
+  "answer_generation_calls": 0,
+  "results": [
+    {
+      "query": "吉布斯采样的理论依据是什么？",
+      "novel_verified_graph_chunk_ids": [
+        "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+      ],
+      "two_hop_claim_paths": [
+        [
+          "edge:289d96aa51ba2b95",
+          "edge:a53f6c900996f454"
+        ]
+      ],
+      "baseline_hybrid_top10_ids": [
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+        "70c44fe43891205f099813c7bb8d6e5cf9afa642e8d73897dfb8cd7105a6b68f",
+        "379aed183df95de4fe18620e798e6ad85b0b2aeaeae50a62cb9c2c96bda6c715",
+        "65e047fd0caef9ad6866868f3ea0fd3edb00bd8cd0d92a76a2d8a5c9d2294fb6",
+        "dc362984ede8f817fbc28e1e601fe8c05f4e6ae67fe4bebad59ee6fac8b2c06d",
+        "26d9b1836d67bee741ecefb199e314ca3119212a26860b507212a9894a2021f7",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "e7484b2d374744a65c332972bd558bb1e9ada86a2a42dd1d221a0de170623d46",
+        "345c1bc4339282b3cfe72e1a1bd0c0395a9b40ac65806cd07d8d60df9634f79d",
+        "257177d957a99f1a510d988d52c6c0fb1b7bcedff6ef2405c690f009fa6bdebb"
+      ],
+      "baseline_rerank_top3_ids": [
+        "345c1bc4339282b3cfe72e1a1bd0c0395a9b40ac65806cd07d8d60df9634f79d",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8"
+      ],
+      "graph_augmented_rerank_top3_ids": [
+        "345c1bc4339282b3cfe72e1a1bd0c0395a9b40ac65806cd07d8d60df9634f79d",
+        "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+        "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8"
+      ],
+      "new_graph_chunk_selected_top3_ids": [],
+      "novel_graph_survived_rerank_top3": false,
+      "top3_changed": false,
+      "top3_overlap_size": 3,
+      "baseline_rerank_top3": [
+        {
+          "rank": 1,
+          "chunk_id": "345c1bc4339282b3cfe72e1a1bd0c0395a9b40ac65806cd07d8d60df9634f79d",
+          "source": "神经网络与深度学习.md",
+          "section_path": "《神经网络与深度学习》 / 第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.1 采样法",
+          "relevance_score": 0.8420005358879997,
+          "v214_new_graph_chunk": false
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+          "source": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "relevance_score": 0.8356713515319456,
+          "v214_new_graph_chunk": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+          "source": "神经网络与深度学习.md",
+          "section_path": "《神经网络与深度学习》 / 第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+          "relevance_score": 0.8246297542740462,
+          "v214_new_graph_chunk": false
+        }
+      ],
+      "graph_augmented_rerank_top3": [
+        {
+          "rank": 1,
+          "chunk_id": "345c1bc4339282b3cfe72e1a1bd0c0395a9b40ac65806cd07d8d60df9634f79d",
+          "source": "神经网络与深度学习.md",
+          "section_path": "《神经网络与深度学习》 / 第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.1 采样法",
+          "relevance_score": 0.8420005358879997,
+          "v214_new_graph_chunk": false
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5022d01071ae9cc02bc63cd6e1389c2d4ea10c23f55746f6c0853bc9a7e8755a",
+          "source": "机器学习.md",
+          "section_path": "机器学习 / 第14章 概率图模型 / 14.5 近似推断 / 14.5.1 MCMC采样",
+          "relevance_score": 0.8356713515319456,
+          "v214_new_graph_chunk": false
+        },
+        {
+          "rank": 3,
+          "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+          "source": "神经网络与深度学习.md",
+          "section_path": "《神经网络与深度学习》 / 第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+          "relevance_score": 0.824629730781279,
+          "v214_new_graph_chunk": false
+        }
+      ],
+      "baseline_rerank_cost": {
+        "candidate_count": 10,
+        "full_document_chars": 8603,
+        "sent_document_chars": 5956,
+        "official_total_tokens": 4551,
+        "rerank_doc_chars_setting": "600"
+      },
+      "graph_augmented_rerank_cost": {
+        "candidate_count": 11,
+        "full_document_chars": 9447,
+        "sent_document_chars": 6556,
+        "official_total_tokens": 5016,
+        "rerank_doc_chars_setting": "600"
+      },
+      "extra_rerank_tokens_if_reported": 465,
+      "baseline_rerank_call_seconds": 0.458,
+      "graph_augmented_rerank_call_seconds": 0.355,
+      "no_answer_generated": true,
+      "no_final_rag_citation_ascertained": true
+    }
+  ],
+  "limitations": [
+    "Candidate budget grows from 10 to 11 (or 12) when graph adds docs; reranker cost may increase.",
+    "This is one call per condition; reranking may show model randomness.",
+    "Top3 after reranking is not the final cited evidence or answer.",
+    "Only fixed single-question Top10 pools are tested, not query decomposition.",
+    "No answer generation, final citation comparison or quality judgments."
+  ]
+}

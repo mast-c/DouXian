@@ -1,0 +1,613 @@
+{
+  "experiment": "DouXian_V2.16_Graph_Assist_ReadOnly_Plan_Study",
+  "phase": "offline_planning_no_external_calls",
+  "run_utc": "2026-10-23T05:43:41.178368+00:00",
+  "old_v28_gate_comparison": "RELATION_INTENT regex necessary gate ONLY; not actual legacy graph evidence retrieval",
+  "legacy_v28_source_sha256": "099f6bb8716ad0eca9e283a15dd8bf7efd4620b52671f5b309fd0da26f101065",
+  "fixed_case_file_sha256": "9b1b8e79f45e9158a4ec27f358bc5023b7c381a8d05bfa883c9ab82f366cffd5",
+  "mode": "verified_only",
+  "source_checksums": {
+    "v212_graph_sha256": "b25488923465999c8e8554119798e123fbb249f24cd0e15c496e9937a3514e4f",
+    "v212_links_sha256": "96680e7204b4b6e25220652a6b8e0f77c8f1907083946a59f2e203c47b70ba5d",
+    "v212_alias_sha256": "1ecaf5dc4a7b549bf2000362471514db4e2d2475d9f81689306ecc46d48c43fe",
+    "snapshot_sha256": "046fb1dc09444d7c66c8a99c42536385ad7e6a8245497ca1c98e67444b459ecc",
+    "v215_claims_sha256": "d36c3360b34923e07016f167e2db3965d01023c6502bb042b99929a3ba843047",
+    "v215_graph_sha256": "9ffb154913a242cee05614a18d239ea8dedfe6f310edf8a5a1f9def97accb6ef",
+    "v215_index_sha256": "a8979b4d3d9c21b43d85eb51debece123d4272b9f35c504ef0e7198754236dd1",
+    "v2151_semantic_screening_sha256": null
+  },
+  "verified_old_relations": 29,
+  "pending_relations_explorable": 0,
+  "total_questions": 11,
+  "negative_control_questions": 4,
+  "old_v28_regex_match_count": 1,
+  "v216_planned_query_count": 4,
+  "questions_with_plan": 3,
+  "old_original_queries_modified": 0,
+  "embedding_calls": 0,
+  "reranker_calls": 0,
+  "answer_generation_calls": 0,
+  "new_relations_promoted": 0,
+  "results": [
+    {
+      "case_id": "gibbs_basis",
+      "question": "吉布斯采样的理论依据是什么？",
+      "group": "positive_old_verified",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "theoretical_basis",
+      "v216_status": "planned",
+      "matched_anchors": [
+        {
+          "label": "吉布斯采样",
+          "concept_lookup_key": "吉布斯采样",
+          "span": [
+            0,
+            5
+          ]
+        }
+      ],
+      "v216_planned_branch_count": 1,
+      "branches": [
+        {
+          "query": "MCMC 马尔可夫链",
+          "intent_source_anchor": "吉布斯采样",
+          "target_chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+          "path_chunk_ids": [
+            "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+            "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+          ],
+          "path_claim_ids": [
+            "edge:289d96aa51ba2b95",
+            "edge:a53f6c900996f454"
+          ],
+          "path_labels": [
+            "吉布斯采样",
+            "MCMC",
+            "马尔可夫链"
+          ],
+          "path_predicates": [
+            "IS_A",
+            "BASED_ON"
+          ],
+          "path_kind": "same_textbook_directed_two_edge_path",
+          "intermediate_join_type": "exact_label",
+          "score": 178.0,
+          "source_risk": "formal_v212_verified",
+          "online_eligible": false,
+          "asserts_new_direct_fact": false,
+          "edges": [
+            {
+              "claim_id": "edge:289d96aa51ba2b95",
+              "subject": "吉布斯采样",
+              "predicate": "IS_A",
+              "object": "MCMC",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+              "source_line": 11911,
+              "evidence_quote": "吉布斯采样（Gibbs Sampling）是一种有效地对高维空间中的分布进行采样的MCMC方法，可以看作Metropolis-Hastings算法的特例．吉布斯采样使用全条件概率（Full Conditional Probability）作为提议分布来依次对每个维度进行采样，并设置接受率为$A$ = 1",
+              "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            },
+            {
+              "claim_id": "edge:a53f6c900996f454",
+              "subject": "MCMC",
+              "predicate": "BASED_ON",
+              "object": "马尔可夫链",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+              "source_line": 11817,
+              "evidence_quote": "MCMC方法也有很多不同的具体采样方法，但其核心思想是将采样过程看作一个马尔可夫链",
+              "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            }
+          ]
+        }
+      ],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 1,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "gibbs_random_process",
+      "question": "吉布斯采样的采样机制依赖哪类随机过程？",
+      "group": "positive_old_verified",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "theoretical_basis",
+      "v216_status": "planned",
+      "matched_anchors": [
+        {
+          "label": "吉布斯采样",
+          "concept_lookup_key": "吉布斯采样",
+          "span": [
+            0,
+            5
+          ]
+        }
+      ],
+      "v216_planned_branch_count": 1,
+      "branches": [
+        {
+          "query": "MCMC 马尔可夫链",
+          "intent_source_anchor": "吉布斯采样",
+          "target_chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+          "path_chunk_ids": [
+            "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+            "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206"
+          ],
+          "path_claim_ids": [
+            "edge:289d96aa51ba2b95",
+            "edge:a53f6c900996f454"
+          ],
+          "path_labels": [
+            "吉布斯采样",
+            "MCMC",
+            "马尔可夫链"
+          ],
+          "path_predicates": [
+            "IS_A",
+            "BASED_ON"
+          ],
+          "path_kind": "same_textbook_directed_two_edge_path",
+          "intermediate_join_type": "exact_label",
+          "score": 178.0,
+          "source_risk": "formal_v212_verified",
+          "online_eligible": false,
+          "asserts_new_direct_fact": false,
+          "edges": [
+            {
+              "claim_id": "edge:289d96aa51ba2b95",
+              "subject": "吉布斯采样",
+              "predicate": "IS_A",
+              "object": "MCMC",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法 / 11.5.4.3 吉布斯采样",
+              "source_line": 11911,
+              "evidence_quote": "吉布斯采样（Gibbs Sampling）是一种有效地对高维空间中的分布进行采样的MCMC方法，可以看作Metropolis-Hastings算法的特例．吉布斯采样使用全条件概率（Full Conditional Probability）作为提议分布来依次对每个维度进行采样，并设置接受率为$A$ = 1",
+              "chunk_id": "2a089dd0fe46fbb77518d27c8fc7f94fc06388c017a712c3a3d921eea5fb67e8",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            },
+            {
+              "claim_id": "edge:a53f6c900996f454",
+              "subject": "MCMC",
+              "predicate": "BASED_ON",
+              "object": "马尔可夫链",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第11章 概率图模型 / 11.5 基于采样法的近似推断 / 11.5.4 马尔可夫链蒙特卡罗方法",
+              "source_line": 11817,
+              "evidence_quote": "MCMC方法也有很多不同的具体采样方法，但其核心思想是将采样过程看作一个马尔可夫链",
+              "chunk_id": "597a2dc03ef9549ba6a4c8e765f50b1f29dcbc6df9a406b53f8c42f25e4fb206",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            }
+          ]
+        }
+      ],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 1,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "cnn_mechanism",
+      "question": "卷积神经网络包含哪些层，这些层怎样完成特征计算？",
+      "group": "positive_old_verified",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "mechanism",
+      "v216_status": "planned",
+      "matched_anchors": [
+        {
+          "label": "卷积神经网络",
+          "concept_lookup_key": "卷积神经网络",
+          "span": [
+            0,
+            6
+          ]
+        }
+      ],
+      "v216_planned_branch_count": 2,
+      "branches": [
+        {
+          "query": "卷积层 卷积核",
+          "intent_source_anchor": "卷积神经网络",
+          "target_chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+          "path_chunk_ids": [
+            "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+            "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22"
+          ],
+          "path_claim_ids": [
+            "edge:d8972949d756a8d4",
+            "edge:a856abef89b3fd13"
+          ],
+          "path_labels": [
+            "卷积神经网络",
+            "卷积层",
+            "卷积核"
+          ],
+          "path_predicates": [
+            "HAS_PART",
+            "USES"
+          ],
+          "path_kind": "same_textbook_directed_two_edge_path",
+          "intermediate_join_type": "exact_label",
+          "score": 182.0,
+          "source_risk": "formal_v212_verified",
+          "online_eligible": false,
+          "asserts_new_direct_fact": false,
+          "edges": [
+            {
+              "claim_id": "edge:d8972949d756a8d4",
+              "subject": "卷积神经网络",
+              "predicate": "HAS_PART",
+              "object": "卷积层",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+              "source_line": 4723,
+              "evidence_quote": "卷积神经网络一般由卷积层、汇聚层和全连接层构成",
+              "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            },
+            {
+              "claim_id": "edge:a856abef89b3fd13",
+              "subject": "卷积层",
+              "predicate": "USES",
+              "object": "卷积核",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.2 卷积层",
+              "source_line": 4790,
+              "evidence_quote": "为了计算输出特征映射 $\\mathbf{Y}^{p}$ ，用卷积核 $W^{p, 1}, W^{p, 2}, \\cdots, W^{p, D}$ 分别对输入特征映射 $X^{1}, X^{2}, \\cdots, X^{D}$ 进行卷积，然后将卷积结果相加，并加上一个标量偏置𝑏得到卷积层的净输入 $z^{p}$ ，再经过非线性激活函数后得到输出特征映射 $\\mathbf{Y}^{p}$",
+              "chunk_id": "f9dc4d834372d69e38a6298d0490eecac922e3f77f79b958bca8957af23c1a22",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            }
+          ]
+        },
+        {
+          "query": "汇聚层 最大汇聚",
+          "intent_source_anchor": "卷积神经网络",
+          "target_chunk_id": "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+          "path_chunk_ids": [
+            "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+            "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda"
+          ],
+          "path_claim_ids": [
+            "edge:0d873ce8e1dca645",
+            "edge:f4b581a4e332c0a0"
+          ],
+          "path_labels": [
+            "卷积神经网络",
+            "汇聚层",
+            "最大汇聚"
+          ],
+          "path_predicates": [
+            "HAS_PART",
+            "USES"
+          ],
+          "path_kind": "same_textbook_directed_two_edge_path",
+          "intermediate_join_type": "exact_label",
+          "score": 182.0,
+          "source_risk": "formal_v212_verified",
+          "online_eligible": false,
+          "asserts_new_direct_fact": false,
+          "edges": [
+            {
+              "claim_id": "edge:0d873ce8e1dca645",
+              "subject": "卷积神经网络",
+              "predicate": "HAS_PART",
+              "object": "汇聚层",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络",
+              "source_line": 4723,
+              "evidence_quote": "卷积神经网络一般由卷积层、汇聚层和全连接层构成",
+              "chunk_id": "7ca7324b213f89c6d51fcfd3f521d044a34e25b5806ddb479ebe0d8adc4819a7",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            },
+            {
+              "claim_id": "edge:f4b581a4e332c0a0",
+              "subject": "汇聚层",
+              "predicate": "USES",
+              "object": "最大汇聚",
+              "source_file": "神经网络与深度学习.md",
+              "section_path": "第5章 卷积神经网络 / 5.2 卷积神经网络 / 5.2.3 汇聚层",
+              "source_line": 4860,
+              "evidence_quote": "典型的汇聚层是将每个特征映射划分为 $2 \\times 2$ 大小的不重叠区域，然后使用最大汇聚的方式进行下采样．汇聚层也可以看作一个特殊的卷积层，卷积核大小为 $K \\times K$ ，步长为 $S \\times S$ ，卷积核为max函数或mean函数．过大的采样区域会急剧减少神经元的数量，也会造成过多的信息损失",
+              "chunk_id": "abaee73ee6d2ff183df03fb8808fa9e03a5715f4449a8b7fa19437daa7de9fda",
+              "qualifier": "",
+              "status": "verified",
+              "verified_status": "formal_v212"
+            }
+          ]
+        }
+      ],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 3,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 1,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "pooling",
+      "question": "汇聚层如何使用最大汇聚完成特征压缩？",
+      "group": "positive_old_verified",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "mechanism",
+      "v216_status": "no_expansion",
+      "matched_anchors": [
+        {
+          "label": "汇聚层",
+          "concept_lookup_key": "汇聚层",
+          "span": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "最大汇聚",
+          "concept_lookup_key": "最大汇聚",
+          "span": [
+            7,
+            11
+          ]
+        }
+      ],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 2,
+        "skipped_in_question": 2,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "mh_crossbook",
+      "question": "Metropolis-Hastings算法通过什么随机过程开展采样？",
+      "group": "positive_pending_crossbook",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "theoretical_basis",
+      "v216_status": "no_expansion",
+      "matched_anchors": [
+        {
+          "label": "Metropolis-Hastings算法",
+          "concept_lookup_key": "metropolis-hastings算法",
+          "span": [
+            0,
+            21
+          ]
+        }
+      ],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 0,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "undirected_prob",
+      "question": "无向图模型使用什么函数表达概率分布？",
+      "group": "positive_pending_crossbook",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "mechanism",
+      "v216_status": "no_expansion",
+      "matched_anchors": [
+        {
+          "label": "无向图模型",
+          "concept_lookup_key": "无向图模型",
+          "span": [
+            0,
+            5
+          ]
+        }
+      ],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 0,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "random_forest",
+      "question": "随机森林如何训练？",
+      "group": "exploratory_pending_singlebook",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "mechanism",
+      "v216_status": "no_expansion",
+      "matched_anchors": [],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 0,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "gibbs_definition",
+      "question": "吉布斯采样是什么？",
+      "group": "negative_definition",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "definition",
+      "v216_status": "no_expansion",
+      "matched_anchors": [],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 0,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "mrf_definition",
+      "question": "马尔可夫随机场是什么？",
+      "group": "negative_definition",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "definition",
+      "v216_status": "no_expansion",
+      "matched_anchors": [],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 0,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "rf_comparison",
+      "question": "随机森林与Bagging的区别是什么？",
+      "group": "negative_comparison",
+      "old_v28_relation_intent_regex_matched": false,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "comparison_unsupported",
+      "v216_status": "no_expansion",
+      "matched_anchors": [],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 0,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    },
+    {
+      "case_id": "unrelated",
+      "question": "月球的环形山属于哪类天文地貌？",
+      "group": "negative_out_of_graph",
+      "old_v28_relation_intent_regex_matched": true,
+      "old_v28_full_suggest_retrieval_queries_executed": false,
+      "v216_intent": "hierarchy",
+      "v216_status": "no_expansion",
+      "matched_anchors": [],
+      "v216_planned_branch_count": 0,
+      "branches": [],
+      "diagnostics": {
+        "old_verified_edges": 29,
+        "pending_edges_explorable": 0,
+        "pending_edges_suppressed": 0,
+        "candidate_paths_considered": 0,
+        "skipped_in_question": 0,
+        "skipped_same_evidence": 0,
+        "skipped_duplicate_query": 0,
+        "query_calls_executed": 0,
+        "reranker_calls_executed": 0,
+        "online_eligible": false
+      },
+      "original_query_modified": false
+    }
+  ],
+  "limitations": [
+    "This only tests intent, directed path planning and evidence provenance.",
+    "The V2.8 comparison is a regex gate, NOT actual retrieval/output accuracy.",
+    "Eleven deliberately chosen fixed queries do not measure overall accuracy.",
+    "No Hybrid/Chroma search, Qwen Reranker, final evidence or answer A/B.",
+    "V2.15 new-book semantic edges remain offline pending human review.",
+    "A planned query does not prove it can retrieve a useful missing Chunk."
+  ]
+}

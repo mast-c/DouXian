@@ -1,0 +1,16 @@
+{
+  "project": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data",
+  "created": {
+    "graph_bindings/expansions/machine_learning_claim_links_v215.json": "d36c3360b34923e07016f167e2db3965d01023c6502bb042b99929a3ba843047",
+    "graph_data/expansions/machine_learning_curated_spec_v215.json": "12109667f465fde870e2b7f49511ed1ec734cb377f9f4aaac4e7cf340774298f",
+    "graph_data/expansions/machine_learning_relations_v215.json": "9ffb154913a242cee05614a18d239ea8dedfe6f310edf8a5a1f9def97accb6ef",
+    "graph_data/expansions/multi_source_claim_index_v215.json": "a8979b4d3d9c21b43d85eb51debece123d4272b9f35c504ef0e7198754236dd1",
+    "graph_data/sources/机器学习.md": "f45117d78592f74291869a14d0a1f6478577fcdf91b4e950c6fd34629d8e5b66",
+    "graph_reports/expansions/machine_learning_gate_v215.json": "50bb352f6e5996227c7b5d5c6afdd2ffbdf5bd259d5f3d3b53ec975754efe78a",
+    "graph_reports/expansions/machine_learning_semantic_review_v215.md": "6a84eac8df22ebd8258bd446823460eb721f52e3ceb29ff2c582dd7942f7b460",
+    "graph_tools/probe_machine_multisource_v215.py": "d9d035910c2696860082c0c7abf374af4569e694822149422f45090eba92d349",
+    "graph_tools/test_machine_graph_v215.py": "9614f7f59a17aaa8ade26de01191b5d983b565a9ce80dcec0638d2ce520d5fe0",
+    "graph_tools/verify_machine_graph_v215.py": "a1e679037a676adbfcb14ee7dc4df29f11128d048f647f343b6f0d7dce1bfea2"
+  },
+  "release": "v215_offline_sidecar"
+}
