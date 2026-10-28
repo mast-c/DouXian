@@ -1,0 +1,33 @@
+{
+  "status": "exported_provisional_text_claims_not_expert_validated",
+  "candidates_checked": 60,
+  "decisions": {
+    "approved": 50,
+    "rejected": 10
+  },
+  "accepted_claims": 50,
+  "disease_terms": 44,
+  "relation_types": {
+    "treatment": 44,
+    "prevention": 1,
+    "symptom_relief": 5
+  },
+  "context_sensitive_approved": 6,
+  "annotation_methods": {
+    "AI_assisted_not_expert_verified": 50
+  },
+  "context_flag_decision_matrix": {
+    "manual_semantic_review|approved": 28,
+    "manual_semantic_review|rejected": 2,
+    "negation_or_restriction_check|approved": 6,
+    "negation_or_restriction_check|rejected": 4,
+    "short_term_manual_check|approved": 16,
+    "short_term_manual_check|rejected": 4
+  },
+  "source_csv_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "graph_snapshot_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "output_claim_sha256": "21d82c82a2fe83ca3ee5cb6605fb905aa9abd7d9cdb57c7d810e4ac8201c8420",
+  "output_disease_sha256": "6a282a4f8a01b627dec6647138e0fbb9dc06fbc38df1d149533f6ef4a14a975c",
+  "schema_version": "qualified_review_v2_2026_10",
+  "warning": "This is a text-supported provisional graph, NOT NMPA-approved indications."
+}

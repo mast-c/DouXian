@@ -1,0 +1,47 @@
+{
+  "sample_type": "development_pilot_not_locked_holdout",
+  "sample_size": 60,
+  "approved": 50,
+  "rejected": 10,
+  "accepted_relation_types": {
+    "treatment": 44,
+    "prevention": 1,
+    "symptom_relief": 5
+  },
+  "unweighted_candidate_acceptance_rate": 0.8333,
+  "stratified_weighted_exploratory_rate": 0.8808,
+  "context_sensitive_approved": 6,
+  "source_evidence_integrity_errors": 0,
+  "manual_notes_complete": true,
+  "declared_rejection_causes": {
+    "disease_name_overbroad_or_incomplete": 6,
+    "negative_or_condition_scope": 3,
+    "wrong_target_role": 1
+  },
+  "strata": {
+    "manual_semantic_review": {
+      "population": 12275,
+      "pilot_n": 30,
+      "approved": 28,
+      "rejected": 2,
+      "approval_fraction": 0.9333
+    },
+    "short_term_manual_check": {
+      "population": 7183,
+      "pilot_n": 20,
+      "approved": 16,
+      "rejected": 4,
+      "approval_fraction": 0.8
+    },
+    "negation_or_restriction_check": {
+      "population": 227,
+      "pilot_n": 10,
+      "approved": 6,
+      "rejected": 4,
+      "approval_fraction": 0.6
+    }
+  },
+  "reviewer_field": "Codex-医学文本审核",
+  "annotation_provenance": "AI_assisted_not_independent_expert_standard",
+  "warning": "Cannot estimate Recall/F1 from candidate-only annotations; pilot is for development, not unbiased held-out model evaluation."
+}

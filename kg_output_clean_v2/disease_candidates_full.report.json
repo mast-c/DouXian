@@ -1,0 +1,48 @@
+{
+  "status": "all_candidates_pending_manual_review",
+  "disease_lexicon_size": 8271,
+  "vocabulary_sha256": "268f8e824df0ca49e6dcd98c95babf1db04fef0b89b9483854bb637586d1e49d",
+  "graph_source_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "vocabulary_schema_check": {
+    "record_count": 8808,
+    "sample_names": [
+      "肺泡蛋白质沉积症",
+      "百日咳",
+      "苯中毒",
+      "喘息样支气管炎",
+      "成人呼吸窘迫综合征",
+      "大量羊水吸入",
+      "单纯性肺嗜酸粒细胞浸润症",
+      "大叶性肺炎"
+    ],
+    "top_fields": {
+      "_id": 8808,
+      "name": 8808,
+      "desc": 8808,
+      "category": 8808,
+      "prevent": 8808,
+      "cause": 8808,
+      "symptom": 8808,
+      "check": 8808,
+      "recommand_drug": 8808,
+      "drug_detail": 8808,
+      "yibao_status": 8807,
+      "acompany": 8807,
+      "cure_department": 8807,
+      "cost_money": 8807
+    },
+    "records_with_disease_schema": 8808,
+    "records_with_drug_schema": 0,
+    "warning": "请人工确认 sample_names 为疾病名，而不是药品名。"
+  },
+  "random_seed": 42,
+  "sample_limit": 0,
+  "unique_drugs_with_candidates": 7331,
+  "scanned_indication_sections": 11576,
+  "candidate_mentions": 19685,
+  "flag_manual_semantic_review": 12275,
+  "flag_short_term_manual_check": 7183,
+  "flag_negation_or_restriction_check": 227,
+  "output_csv": "kg_output_clean_v2\\disease_candidates_full.csv",
+  "note": "Clinical validity and relation semantics have not been established."
+}

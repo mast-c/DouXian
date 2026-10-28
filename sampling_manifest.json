@@ -1,0 +1,30 @@
+{
+  "source_csv": "disease_candidates_full.csv",
+  "source_csv_sha256": "cf964a386878ed92d7aeae7d5d5cc7574f8db3b5b1e8abb9f2e5e3fd8bf02315",
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "disease_vocabulary_sha256": "268f8e824df0ca49e6dcd98c95babf1db04fef0b89b9483854bb637586d1e49d",
+  "seed": 20261028,
+  "sampling_unit": "candidate row (each has a unique candidate_id)",
+  "sampling_method": "random stratified by context_flag; pilot and holdout disjoint",
+  "source_strata": {
+    "manual_semantic_review": 12275,
+    "short_term_manual_check": 7183,
+    "negation_or_restriction_check": 227
+  },
+  "pilot_counts": {
+    "manual_semantic_review": 30,
+    "short_term_manual_check": 20,
+    "negation_or_restriction_check": 10
+  },
+  "holdout_counts": {
+    "manual_semantic_review": 150,
+    "short_term_manual_check": 100,
+    "negation_or_restriction_check": 50
+  },
+  "holdout_sample_weights": {
+    "manual_semantic_review": 81.833333,
+    "short_term_manual_check": 71.83,
+    "negation_or_restriction_check": 4.54
+  },
+  "review_policy": "all pending; no automatic approvals or clinical validation"
+}

@@ -1,0 +1,12 @@
+{
+  "test_only": true,
+  "aggregate": {
+    "disease_lexicon_size": 13,
+    "sample_limit": 300,
+    "scanned_indication_sections": 293,
+    "unique_drugs_with_candidates": 54,
+    "candidate_mentions": 78,
+    "flag_negation_or_restriction_check": 4
+  },
+  "disclaimer": "Only a tiny test lexicon, no clinical validation."
+}
