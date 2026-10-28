@@ -1,0 +1,53 @@
+{
+  "new_drug_count": 11953,
+  "new_source_count": 11960,
+  "new_candidate_count": 13275,
+  "db_old_source_count": 12043,
+  "sources_to_add": 407,
+  "sources_to_remove": 490,
+  "old_manifest_found": true,
+  "old_manifest_candidates": 13275,
+  "candidate_ids_to_remove": 0,
+  "obsolete_mentions_to_check": 0,
+  "reviewed_claims_blocking_sync": 0,
+  "removed_drug_names_preview": [
+    "（冰片",
+    "肺宁颗粒",
+    "赖氨匹林颗粒",
+    "薄荷桉油含片",
+    "复方板蓝根颗粒",
+    "（疮肿灵软膏",
+    "碘[131I]化钠胶囊",
+    "人参补丸",
+    "（益金解毒片",
+    ")苯酚伪麻片",
+    "痰宁糖浆",
+    "结灵胶囊",
+    "养血当归糖浆",
+    "克霉唑片",
+    "小儿回春丸",
+    "盐酸地尔硫缓释胶囊",
+    "红霉素肠溶散",
+    "(白毛夏枯草胶囊",
+    "(血见愁片",
+    "西汉养生口服液"
+  ],
+  "mode": "PENDING",
+  "source_file": "data\\raw\\drug_db\\MedGraphRAG-Drug-DB\\drug_db_v2_cleaned.json",
+  "new_dataset_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "cleaned_snapshot": {
+    "name_cleaning_version": "1.0",
+    "additional_source_records": 0,
+    "additional_sections": 0,
+    "additional_chunks": 0,
+    "candidate_alias_nodes": 343,
+    "redirects_audit_count": 483,
+    "provenance_audit_count": 408
+  },
+  "warnings": [
+    "This project uses a name-derived Drug.id; renaming can create a new ID.",
+    "SourceRecord.id also depends on source content; changes need stale-record cleanup.",
+    "Requires database backup before --apply.",
+    "Third-party medication data remains clinically unverified."
+  ]
+}

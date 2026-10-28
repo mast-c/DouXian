@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-10-27T10:27:49.365520+00:00",
+  "input_name": "drug_db_v2.json",
+  "input_sha256": "71bf6a5fbe59e31268e20cee918063e339b30760118ce0b61f6802dcc8d2f9e4",
+  "source_drug_count": 12043,
+  "source_interaction_count": 13316,
+  "sample_limit": 0,
+  "sample_seed": 42,
+  "counts": {
+    "drugs": 12043,
+    "source_records": 12043,
+    "sections": 106985,
+    "chunks": 108327,
+    "mentions": 7978,
+    "interaction_candidates": 13316
+  },
+  "field_counts": {
+    "section_approval_numbers": 12043,
+    "section_indication": 11654,
+    "section_contraindications": 8453,
+    "section_warnings": 10511,
+    "section_composition": 11102,
+    "section_dosage": 11316,
+    "section_adverse_reactions": 8331,
+    "section_drug_interactions": 7511,
+    "section_storage": 9523,
+    "section_validity": 7061,
+    "section_manufacturers": 9480
+  },
+  "interaction_metrics": {
+    "interaction_exact_evidence": 11956,
+    "interaction_without_exact_evidence": 1360,
+    "both_drug_names_resolved": 56
+  },
+  "invalid_drug_name_samples": [],
+  "notes": [
+    "Drug 节点是数据源的名称级实体，不等于真实注册药品产品",
+    "InteractionCandidate 是未经医学验证的候选相互作用",
+    "不会自动从适应症文本推断药品-疾病获批关系",
+    "保留原文字段和字符偏移以便后续人工校验与向量检索"
+  ]
+}

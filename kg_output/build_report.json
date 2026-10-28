@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.2.0",
+  "created_utc": "2026-10-28T07:53:20.263212+00:00",
+  "input_name": "drug_db_v2.json",
+  "input_sha256": "cd3820ed902731c191808d5964582353e8e7dc55c02cc3e92c1f1850424042e9",
+  "source_drug_count": 11953,
+  "source_interaction_count": 13275,
+  "sample_limit": 0,
+  "sample_seed": 42,
+  "chunk_size": 800,
+  "overlap": 90,
+  "name_quality": {
+    "before_drugs": 12043,
+    "after_drugs": 11953,
+    "duplicate_source_records_removed": 78,
+    "additional_source_records": 7,
+    "before_interactions": 13316,
+    "after_interactions": 13275
+  },
+  "name_changes": 483,
+  "quarantined_records": 5,
+  "counts": {
+    "drugs": 11953,
+    "source_records": 11960,
+    "sections": 106445,
+    "chunks": 107787,
+    "mentions": 7949,
+    "interaction_candidates": 13275
+  },
+  "field_counts": {
+    "section_indication": 11576,
+    "section_contraindications": 8419,
+    "section_warnings": 10452,
+    "section_composition": 11039,
+    "section_dosage": 11239,
+    "section_adverse_reactions": 8300,
+    "section_storage": 9465,
+    "section_approval_numbers": 11960,
+    "section_drug_interactions": 7494,
+    "section_validity": 7040,
+    "section_manufacturers": 9461
+  },
+  "interaction_metrics": {
+    "interaction_exact_evidence": 12911,
+    "interaction_without_exact_evidence": 364,
+    "both_drug_names_resolved": 64
+  },
+  "invalid_drug_name_samples": [],
+  "notes": [
+    "Drug 节点是数据源的名称级实体，不等于真实注册药品产品",
+    "InteractionCandidate 是未经医学验证的候选相互作用",
+    "不会自动从适应症文本推断药品-疾病获批关系",
+    "保留原文字段和字符偏移以便后续人工校验与向量检索"
+  ]
+}

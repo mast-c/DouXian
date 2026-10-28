@@ -1,0 +1,157 @@
+{
+  "mode": "PREVIEW",
+  "utc": "2026-10-28T08:55:24.168756+00:00",
+  "database": "neo4j",
+  "snapshot_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "current_nodes": {
+    "Drug": 12040,
+    "SourceRecord_for_dataset": 11960,
+    "InteractionCandidate": 14288
+  },
+  "expected_clean": {
+    "Drug": 11953,
+    "SourceRecord": 11960,
+    "InteractionCandidate": 13275
+  },
+  "current_expected_nodes_present": {
+    "Drug": 11953,
+    "SourceRecord": 11960,
+    "InteractionCandidate": 13275
+  },
+  "obsolete_interaction_ids": 1013,
+  "obsolete_interactions_present_in_db": 1013,
+  "obsolete_interactions_missing_in_db": 0,
+  "obsolete_interactions_blocked": 0,
+  "blocked_samples": [],
+  "obsolete_drugs": {
+    "obsolete_drug_nodes_still_present": 87,
+    "already_isolated_and_removable": 0,
+    "remaining_link_types": {
+      "SOURCE_DRUG": 87
+    },
+    "examples_with_links": [
+      {
+        "name": "托西酸舒他西林颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "舒心颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "风寒感冒颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "精蛋白锌胰岛素注射液",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "感冒咳嗽颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "喉痛灵颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "人参五味子颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "贝诺酯颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "精血补片",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "清咽丸",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "宁神灵颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "维胺颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "抗菌消炎片",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "保儿宁颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "阿莫西林克拉维酸钾片",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "资生丸",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "午时茶颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "棕榈氯霉素片",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "健脾颗粒",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      },
+      {
+        "name": "红霉素肠溶散",
+        "relations": [
+          "SOURCE_DRUG"
+        ]
+      }
+    ]
+  },
+  "obsolete_mention_ids": 340,
+  "warning": "All deletes are scoped by exact old-vs-clean IDs. This does not validate medical facts."
+}

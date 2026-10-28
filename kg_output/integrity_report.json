@@ -1,0 +1,22 @@
+{
+  "counts": {
+    "drugs": 11953,
+    "source_records": 11960,
+    "sections": 106445,
+    "chunks": 107787,
+    "mentions": 7949,
+    "interaction_candidates": 13275,
+    "disease_terms": 0,
+    "indication_claims": 0
+  },
+  "error_count": 0,
+  "errors": [],
+  "mention_status_counts": {
+    "resolved_dataset_drug": 5939,
+    "unresolved_name_or_category": 1393,
+    "category_mention_not_drug": 213,
+    "non_specific_reference": 8,
+    "unresolved_compound_or_text": 395,
+    "dosage_form_mention_not_drug": 1
+  }
+}

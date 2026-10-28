@@ -1,0 +1,13 @@
+{
+  "source_input": "drug_db_v2.json",
+  "checks": {
+    "drug_records": 12043,
+    "source_records": 12043,
+    "sections": 106985,
+    "chunks": 108327,
+    "interaction_candidates": 13316
+  },
+  "errors": 0,
+  "examples": [],
+  "note": "静态文件引用与字符偏移验证；未连接真实 Neo4j 服务"
+}

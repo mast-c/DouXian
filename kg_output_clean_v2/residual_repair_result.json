@@ -1,0 +1,19 @@
+{
+  "mode": "APPLIED",
+  "deleted_candidates": 1013,
+  "deleted_orphan_drugs": 87,
+  "deleted_orphan_mentions": 340,
+  "remaining_obsolete_candidates": 0,
+  "remaining_blocked_candidates": 0,
+  "nodes_after": {
+    "Drug": 11953,
+    "SourceRecord_for_dataset": 11960,
+    "InteractionCandidate": 13275
+  },
+  "expected_clean": {
+    "Drug": 11953,
+    "SourceRecord": 11960,
+    "InteractionCandidate": 13275
+  },
+  "note": "If Drug count remains above the clean expected count, remaining old nodes have relationships; do not force-delete"
+}

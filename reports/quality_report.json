@@ -1,0 +1,69 @@
+{
+  "profile_generated_utc": "2026-10-27T10:23:30.164826+00:00",
+  "input_filename": "drug_db_v2.json",
+  "input_sha256": "71bf6a5fbe59e31268e20cee918063e339b30760118ce0b61f6802dcc8d2f9e4",
+  "drug_records": 12043,
+  "interaction_candidates": 13316,
+  "field_nonempty_counts": {
+    "indication": 11654,
+    "contraindications": 8453,
+    "warnings": 10511,
+    "composition": 11102,
+    "dosage": 11316,
+    "adverse_reactions": 8331,
+    "storage": 9523,
+    "approval_numbers": 12043,
+    "manufacturers": 9480,
+    "drug_interactions": 7511,
+    "validity": 7061
+  },
+  "field_nonempty_percent": {
+    "indication": 96.77,
+    "contraindications": 70.19,
+    "warnings": 87.28,
+    "composition": 92.19,
+    "dosage": 93.96,
+    "adverse_reactions": 69.18,
+    "storage": 79.07,
+    "approval_numbers": 100.0,
+    "manufacturers": 78.72,
+    "drug_interactions": 62.37,
+    "validity": 58.63
+  },
+  "placeholder_text_counts": {
+    "drug_interactions": 685,
+    "contraindications": 1625,
+    "adverse_reactions": 2896,
+    "warnings": 30,
+    "dosage": 1
+  },
+  "unique_source_urls": 11963,
+  "records_with_approval_code_pattern": 5240,
+  "contraindication_caution_record_count": 519,
+  "risk_labels": {
+    "high": 1728,
+    "none": 39,
+    "medium": 2840,
+    "unknown": 8709
+  },
+  "endpoint_exact_name_resolution": {
+    "source_known__target_unknown": 12047,
+    "source_unknown__target_unknown": 1203,
+    "source_known__target_known": 56,
+    "source_unknown__target_known": 10
+  },
+  "interaction_quote_evidence": {
+    "exact_note_in_interaction_text": 11950,
+    "source_unresolved_or_note_empty": 1213,
+    "source_note_not_exactly_found": 147,
+    "exact_note_in_warnings_text": 6
+  },
+  "invalid_interaction_records": 0,
+  "duplicate_interaction_pairs": 0,
+  "caveats": [
+    "此报告仅统计结构和字符串匹配，未审核临床正确性",
+    "risk 是数据源标签，不是权威临床风险等级",
+    "nonempty 字段可能包含 尚不明确、慎用等非严格事实",
+    "数据是一份按药名汇总的第三方记录，不能代表已批准的单一产品说明书版本"
+  ]
+}

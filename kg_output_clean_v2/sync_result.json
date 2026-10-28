@@ -1,0 +1,8 @@
+{
+  "status": "SUCCESS",
+  "source_records_expected": 11960,
+  "source_records_actual": 11960,
+  "old_source_records_remaining": 0,
+  "new_source_records_missing": 0,
+  "note": "New source output lives in --out. Use that directory for subsequent disease extraction and RAG indexing."
+}
