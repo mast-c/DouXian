@@ -1,0 +1,36 @@
+{
+  "version": "indication_semantic_v3_2026_10",
+  "mode": "llm",
+  "input_csv": "kg_output_clean_v2\\pilot_review_60.csv",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "graph_source_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "output_csv": "kg_output_clean_v2\\pilot_v3_llm_fixed.csv",
+  "output_sha256": "682ce636e9a1e4a65843d52b359e9c1e2ace6912150a37937de8638a582e13ad",
+  "counts": {
+    "llm_attempted": 60,
+    "llm_valid": 58,
+    "rows": 60,
+    "decision_accept": 44,
+    "decision_uncertain": 13,
+    "specificity_flagged": 9,
+    "polarity_flagged": 17,
+    "decision_reject": 3,
+    "target_role_flagged": 2,
+    "llm_errors": 2
+  },
+  "llm_model": "qwen3.7-flash",
+  "llm_system_prompt_sha256": "7996c3c152be088223e98a365f1d89bf33145ea566883565d16e51d95cceb55f",
+  "llm_error_samples": [
+    {
+      "candidate_id": "diseasecandidate_29fdd21ff632371e7ea3f161",
+      "error": "model disease surface does not reference candidate"
+    },
+    {
+      "candidate_id": "diseasecandidate_b301f3a86d8885c84b730fac",
+      "error": "model quote is not an exact evidence substring"
+    }
+  ],
+  "clinical_status": "not_validated",
+  "manual_status": "unchanged",
+  "warning": "V3 output contains provisional research proposals only; no Neo4j writes."
+}

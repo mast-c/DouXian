@@ -1,0 +1,66 @@
+{
+  "version": "indication_semantic_v3_2026_10",
+  "mode": "llm",
+  "input_csv": "kg_output_clean_v2\\pilot_review_60.csv",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "graph_source_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "output_csv": "kg_output_clean_v2\\pilot_v3_llm.csv",
+  "output_sha256": "29d0f47465e3686eee7ade7fe8d63234e7dc17c0988efd86fa7fdefb495e4121",
+  "counts": {
+    "llm_attempted": 60,
+    "llm_errors": 60,
+    "rows": 60,
+    "decision_uncertain": 58,
+    "specificity_flagged": 9,
+    "polarity_flagged": 17,
+    "decision_reject": 2,
+    "target_role_flagged": 2
+  },
+  "llm_model": "qwen3.7-flash",
+  "llm_system_prompt_sha256": "7996c3c152be088223e98a365f1d89bf33145ea566883565d16e51d95cceb55f",
+  "llm_error_samples": [
+    {
+      "candidate_id": "diseasecandidate_5f2d53836c022a2e3b1f3fa3",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_85c4f62a802f8869dc1e7a8b",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_17aa47199306b2170139802d",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_e494c27bef075110709c8b9a",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_5be19aa15dd2ff5d4289a5bf",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_27f823d470d43148c6ecc869",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_6a3e6b614cd34e0c864b65ac",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_74be725859141f89d8687655",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_71a47acc4ff97e095c8f6fb2",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    },
+    {
+      "candidate_id": "diseasecandidate_0de8988ce7ab8d3d80eee63f",
+      "error": "'latin-1' codec can't encode characters in position 125-130: ordinal not in range(256)"
+    }
+  ],
+  "clinical_status": "not_validated",
+  "manual_status": "unchanged",
+  "warning": "V3 output contains provisional research proposals only; no Neo4j writes."
+}

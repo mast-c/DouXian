@@ -1,0 +1,23 @@
+{
+  "version": "indication_semantic_v3_2026_10",
+  "mode": "rules",
+  "input_csv": "kg_output_clean_v2\\pilot_review_60.csv",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "graph_source_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "output_csv": "kg_output_clean_v2\\pilot_v3_rules.csv",
+  "output_sha256": "699a4ca6a697061d3a8e38df4f4594bba9309184f95c55eafcfa701d6a66247f",
+  "counts": {
+    "rows": 60,
+    "decision_uncertain": 58,
+    "specificity_flagged": 9,
+    "polarity_flagged": 17,
+    "decision_reject": 2,
+    "target_role_flagged": 2
+  },
+  "llm_model": "",
+  "llm_system_prompt_sha256": "",
+  "llm_error_samples": [],
+  "clinical_status": "not_validated",
+  "manual_status": "unchanged",
+  "warning": "V3 output contains provisional research proposals only; no Neo4j writes."
+}
