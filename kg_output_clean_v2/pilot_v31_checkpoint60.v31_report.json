@@ -1,0 +1,115 @@
+{
+  "checkpoint_metadata_path": "kg_output_clean_v2\\pilot_v31_checkpoint60.v31_checkpoint.json",
+  "complete": true,
+  "completed_rows": 60,
+  "counts": {
+    "api_requests": 60,
+    "decision_accept": 20,
+    "decision_uncertain": 40,
+    "llm_attempted": 60,
+    "llm_errors": 31,
+    "llm_valid": 29,
+    "overridden": 40,
+    "rows": 60,
+    "text_conditional_positive_proposal": 2,
+    "text_conditional_support_unverified": 3,
+    "text_direct_text_support_proposal": 20,
+    "text_not_assessed": 31,
+    "text_specific_target_proposed_review": 4
+  },
+  "errors": [
+    {
+      "candidate_id": "diseasecandidate_85c4f62a802f8869dc1e7a8b",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_17aa47199306b2170139802d",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_74be725859141f89d8687655",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_a941ba271c786f4a8323e53e",
+      "error": "invalid relation_type"
+    },
+    {
+      "candidate_id": "diseasecandidate_c20d478fe82c055c00924e45",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_b8f9b797da49368b71785bfe",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_bf6b294b9c4ba5a46f2a2f8b",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_534b02d395d623ee1e1f7ac6",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_252b862a86ff70f015a506bc",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_64758daedcea9bf80566937c",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_8c1b9232e93fd5e633ae46d5",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_29fdd21ff632371e7ea3f161",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_45e2ade16c5f4b42a7a0ef25",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_f870e66df3507c6cee21ee0a",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_a4de65b717db0599b11ecfa7",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_972cdb3ae13f52c71c029f92",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_c54e614bee07cbd33598cd1b",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_cb2bfb5c876c400aa1e006ea",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_3e60d7c806e93c21b4c940de",
+      "error": "The read operation timed out"
+    },
+    {
+      "candidate_id": "diseasecandidate_bf68da6101dc39429bfe417b",
+      "error": "The read operation timed out"
+    }
+  ],
+  "graph_writes": 0,
+  "ids_from_sha256": "",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "manual_review_status": "all_proposals_pending_human_review",
+  "mode": "llm",
+  "model": "qwen3.7-flash",
+  "output_sha256": "1c9074ec1019f00e5e94a76a23830aa73a231b8ba28c426f605cf6ff2d4915a8",
+  "prompt_sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+  "remaining_rows": 0,
+  "safety_note": "No regulatory or expert clinical validation performed. No unqualified drug-disease edges may be created from this CSV.",
+  "selected_rows": 60,
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "version": "indication_semantic_v31_checkpoint_2026_10"
+}

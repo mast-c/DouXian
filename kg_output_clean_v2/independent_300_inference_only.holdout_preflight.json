@@ -1,0 +1,19 @@
+{
+  "blind_annotation_csv": "review\\independent_300_blind_annotation.csv",
+  "blind_annotation_sha256": "904c69f0c10eef152a0ceb17acc96c576ef81b5de4fa716fd88dff2be3041265",
+  "candidate_count": 300,
+  "dev_candidate_id_overlap": 0,
+  "freeze_sha256": "230101d8c2ef0a0059862634fb2bd7dfe81b105a66788eb3f70a6ab3efae7434",
+  "independence_scope": "candidate_id_only; source/document overlap may remain",
+  "label_columns_in_inference_csv": false,
+  "max_retries": 0,
+  "model": "qwen3.7-flash",
+  "sanitized_inference_csv": "kg_output_clean_v2\\independent_300_inference_only.csv",
+  "sanitized_inference_sha256": "cefc2356e89055934620be50fa341c4aef5d350556141d90d161b4bbeee84eb1",
+  "section_overlap_count": 8,
+  "source_holdout_path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\independent_evaluation_300.csv",
+  "source_holdout_sha256": "c9469be014165fe22d44656ae8128d74ff7a4073e0a9f917ca75cca149facbee",
+  "source_quote_overlap_count": 7,
+  "source_record_overlap_count": 8,
+  "timeout": 90
+}

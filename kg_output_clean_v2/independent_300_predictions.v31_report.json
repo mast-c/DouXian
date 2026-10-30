@@ -1,0 +1,31 @@
+{
+  "checkpoint_metadata_path": "kg_output_clean_v2\\independent_300_predictions.v31_checkpoint.json",
+  "complete": false,
+  "completed_rows": 10,
+  "counts": {
+    "api_requests": 10,
+    "decision_accept": 7,
+    "decision_uncertain": 3,
+    "llm_attempted": 10,
+    "llm_valid": 10,
+    "overridden": 3,
+    "rows": 10,
+    "text_conditional_support_unverified": 1,
+    "text_direct_text_support_proposal": 7,
+    "text_specific_target_proposed_review": 2
+  },
+  "errors": [],
+  "graph_writes": 0,
+  "ids_from_sha256": "",
+  "input_sha256": "cefc2356e89055934620be50fa341c4aef5d350556141d90d161b4bbeee84eb1",
+  "manual_review_status": "all_proposals_pending_human_review",
+  "mode": "llm",
+  "model": "qwen3.7-flash",
+  "output_sha256": "688a2d85909af7bc75374de300f17e41a24d81a8c6d457f0800acc7f87f80c62",
+  "prompt_sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+  "remaining_rows": 290,
+  "safety_note": "No regulatory or expert clinical validation performed. No unqualified drug-disease edges may be created from this CSV.",
+  "selected_rows": 300,
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "version": "indication_semantic_v31_checkpoint_2026_10"
+}

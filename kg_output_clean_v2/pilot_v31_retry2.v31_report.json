@@ -1,0 +1,31 @@
+{
+  "version": "indication_semantic_v31_2026_10",
+  "mode": "llm",
+  "model": "qwen3.7-flash",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "ids_from_sha256": "7e4821bba8684257a8f97aa42c716912af944d5775c4d9d674ddc2295d9d0744",
+  "selected_rows": 2,
+  "output_sha256": "e4a34b5599d30d09d28d1e3729538bc3a18399d45c1951a85c13e282f47a251b",
+  "prompt_sha256": "2b77a844b3aea22711656061be4610ba526a4f8ba5f8ee3d89de6c14191d86fa",
+  "counts": {
+    "llm_attempted": 2,
+    "api_requests": 3,
+    "llm_errors": 1,
+    "rows": 2,
+    "decision_uncertain": 2,
+    "text_not_assessed": 1,
+    "overridden": 2,
+    "llm_valid": 1,
+    "text_specific_target_proposed_review": 1
+  },
+  "errors": [
+    {
+      "candidate_id": "diseasecandidate_c20d478fe82c055c00924e45",
+      "error": "exact_disease_surface does not cover selected disease span"
+    }
+  ],
+  "manual_review_status": "all_proposals_pending_human_review",
+  "graph_writes": 0,
+  "safety_note": "No regulatory or expert clinical validation performed. No unqualified drug-disease edges may be created from this CSV."
+}

@@ -1,0 +1,18 @@
+# Isolated DrugKG cleaned V2 graph. Does not touch the existing Neo4j volume.
+# Set $env:NEO4J_PASSWORD in PowerShell before `docker compose up -d`.
+services:
+  drugkg-clean-v2:
+    image: neo4j:5.26
+    container_name: drugkg-clean-v2
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: "neo4j/${NEO4J_PASSWORD:?NEO4J_PASSWORD is required}"
+      NEO4J_PLUGINS: '[]'
+    ports:
+      - "127.0.0.1:7475:7474"
+      - "127.0.0.1:7688:7687"
+    volumes:
+      - drugkg_clean_v2_neo4j_data:/data
+
+volumes:
+  drugkg_clean_v2_neo4j_data:

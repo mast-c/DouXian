@@ -1,0 +1,30 @@
+{
+  "clinical_release_ready": false,
+  "code_path": "kg\\indication_v31_checkpoint.py",
+  "code_sha256": "2fdf77205de31ccedd0f65e198d33c2c41779922457cc3604b7ef6ca69c0496d",
+  "dev_candidate_ids_sha256": "7c83ecf9b9b3e7a6df45f8dd5fec0cb173883ac0995d6009774b548bb2128edc",
+  "dev_csv_path": "kg_output_clean_v2\\pilot_v31_merged60.csv",
+  "dev_csv_sha256": "75c55ab3615632371a65e42f10144d0c079972c56a1bfc966dc777eb89b60f3d",
+  "dev_eval_size": 60,
+  "dev_input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "dev_output_valid": 58,
+  "dev_report_path": "kg_output_clean_v2\\pilot_v31_merged60.v31_report.json",
+  "dev_report_sha256": "bfd6439f8df10e2eb20a3e08ed238fc57ccc1c0286081d46ee37772187bbf7b4",
+  "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "max_retries": 0,
+  "metadata": {
+    "frozen_before_holdout": true,
+    "holdout_accessed_during_freeze": false,
+    "memo": "Freeze does not validate drug indications or authorization.",
+    "no_ne04j_writes": true,
+    "reference_labels": "AI-assisted, NOT independently expert verified"
+  },
+  "model": "qwen3.7-flash",
+  "never_claims_clinical_approval": true,
+  "prompt_path": "prompts\\indication_semantic_review_v31_checkpoint.md",
+  "prompt_sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+  "schema_version": "drugkg_v31_study_gate_1",
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "status": "engineering_baseline_only",
+  "timeout": 90
+}

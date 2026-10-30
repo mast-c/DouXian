@@ -1,0 +1,15 @@
+{
+  "status": "VERIFIED",
+  "disease_candidates": 19685,
+  "model_assessments": 60,
+  "invalid_links_or_evidence": 0,
+  "verified_clinical_indications": 0,
+  "base_ids_confirmed": {
+    "Drug": 11953,
+    "SourceRecord": 11960,
+    "Section": 106445,
+    "Chunk": 107787,
+    "DrugAlias": 343
+  },
+  "graph_writes_performed": true
+}

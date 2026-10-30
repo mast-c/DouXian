@@ -1,0 +1,24 @@
+{
+  "version": "indication_semantic_v31_anchor_2026_10",
+  "mode": "llm",
+  "model": "qwen3.7-flash",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "ids_from_sha256": "9ce616c8a362a1cb0b86a3268f3521b81ec2b9b38c3aef2671e39fb1451b0af4",
+  "selected_rows": 1,
+  "output_sha256": "fd8a50af1cf61f9460c245596e50a3d944c8384ced32915dae9fec623ad2db75",
+  "prompt_sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+  "counts": {
+    "llm_attempted": 1,
+    "api_requests": 1,
+    "llm_valid": 1,
+    "rows": 1,
+    "decision_uncertain": 1,
+    "text_specific_target_proposed_review": 1,
+    "overridden": 1
+  },
+  "errors": [],
+  "manual_review_status": "all_proposals_pending_human_review",
+  "graph_writes": 0,
+  "safety_note": "No regulatory or expert clinical validation performed. No unqualified drug-disease edges may be created from this CSV."
+}

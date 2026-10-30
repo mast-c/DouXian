@@ -1,0 +1,35 @@
+{
+  "checkpoint_metadata_path": "kg_output_clean_v2\\pilot_v31_format2_retry.v31_checkpoint.json",
+  "complete": true,
+  "completed_rows": 2,
+  "counts": {
+    "api_requests": 3,
+    "decision_uncertain": 2,
+    "llm_attempted": 2,
+    "llm_errors": 1,
+    "llm_valid": 1,
+    "overridden": 2,
+    "rows": 2,
+    "text_conditional_positive_proposal": 1,
+    "text_not_assessed": 1
+  },
+  "errors": [
+    {
+      "candidate_id": "diseasecandidate_a941ba271c786f4a8323e53e",
+      "error": "invalid relation_type"
+    }
+  ],
+  "graph_writes": 0,
+  "ids_from_sha256": "7fe40a9862a4f26239f2de14c4715fde7216f937ce767995f413598fde88e2c1",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "manual_review_status": "all_proposals_pending_human_review",
+  "mode": "llm",
+  "model": "qwen3.7-flash",
+  "output_sha256": "a980df2485d9d1213fb267b4cde0f51901861c1ee180e12db6a585b20e0ce5e4",
+  "prompt_sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+  "remaining_rows": 0,
+  "safety_note": "No regulatory or expert clinical validation performed. No unqualified drug-disease edges may be created from this CSV.",
+  "selected_rows": 2,
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "version": "indication_semantic_v31_checkpoint_2026_10"
+}

@@ -1,0 +1,32 @@
+{
+  "api_key_env": "DASHSCOPE_API_KEY",
+  "checkpoint_schema": 1,
+  "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "ids_from_sha256": "7fe40a9862a4f26239f2de14c4715fde7216f937ce767995f413598fde88e2c1",
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "max_llm": 2,
+  "max_retries": 1,
+  "mode": "llm",
+  "model": "qwen3.7-flash",
+  "no_json_mode": false,
+  "prompt_sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+  "script_sha256": "2fdf77205de31ccedd0f65e198d33c2c41779922457cc3604b7ef6ca69c0496d",
+  "selected_rows": 2,
+  "selection_sha256": "670799cabc2ff525f3c4e177641fc6d84ac39bf14332ec3537bacfbc1fa45231",
+  "source_graph_build_sha256": "0bb3a49af75fec2f8f038a69de713431955caa63029a9ccd68376776bd51fe7f",
+  "source_graph_files": {
+    "drugs.jsonl": {
+      "mtime_ns": 1793176467680380000,
+      "size": 2248653
+    },
+    "sections.jsonl": {
+      "mtime_ns": 1793176467680380000,
+      "size": 42188404
+    },
+    "source_records.jsonl": {
+      "mtime_ns": 1793176467680380000,
+      "size": 6052324
+    }
+  },
+  "timeout": 90
+}

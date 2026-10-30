@@ -1,0 +1,16 @@
+{
+  "version": "indication_semantic_v31_anchor_2026_10",
+  "basis": "DrugKG V3.1 plus source-anchored repeated disease mention hints",
+  "offline_tests_passed": 14,
+  "reconstructed_source_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "drug_count_in_recreated_source": 11953,
+  "verified_candidate": "diseasecandidate_c20d478fe82c055c00924e45",
+  "selected_mention_number": 2,
+  "selected_mention_total": 2,
+  "source_segment_hint": "非何杰金淋巴瘤",
+  "one_row_rules_preflight": "passed",
+  "live_qwen_requests": 0,
+  "clinical_status": "not_validated",
+  "neo4j_changes": 0,
+  "note": "Hint not asserted to be a medically approved indication; original evidence anchoring still mandatory."
+}

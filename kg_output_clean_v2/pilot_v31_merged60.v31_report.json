@@ -1,0 +1,183 @@
+{
+  "version": "indication_semantic_v31_checkpoint_2026_10",
+  "mode": "llm",
+  "model": "qwen3.7-flash",
+  "complete": true,
+  "selected_rows": 60,
+  "completed_rows": 60,
+  "remaining_rows": 0,
+  "input_sha256": "098cc7dd3876f79727c98b5fecbb1a8fda2d26fd4272ebd3880a5bc73ac7d3aa",
+  "source_graph_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "prompt_sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+  "output_sha256": "75c55ab3615632371a65e42f10144d0c079972c56a1bfc966dc777eb89b60f3d",
+  "counts": {
+    "rows": 60,
+    "decision_accept": 26,
+    "text_direct_text_support_proposal": 26,
+    "llm_valid": 58,
+    "decision_uncertain": 34,
+    "text_specific_target_proposed_review": 15,
+    "overridden": 34,
+    "text_conditional_positive_proposal": 9,
+    "text_conditional_support_unverified": 7,
+    "text_not_assessed": 2,
+    "llm_errors": 2,
+    "text_role_or_polarity_conflict": 1
+  },
+  "validated_retry_replacements": 29,
+  "retry_candidates_still_failed": [
+    {
+      "candidate_id": "diseasecandidate_5835fdc606232038853203da",
+      "last_retry_error": "invalid relation_type",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_a941ba271c786f4a8323e53e",
+      "last_retry_error": "invalid relation_type",
+      "source": "kg_output_clean_v2\\pilot_v31_format2_retry.csv"
+    }
+  ],
+  "original_validated_rows_preserved": 29,
+  "source_runs": [
+    {
+      "csv": "kg_output_clean_v2\\pilot_v31_checkpoint60.csv",
+      "csv_sha256": "1c9074ec1019f00e5e94a76a23830aa73a231b8ba28c426f605cf6ff2d4915a8",
+      "report_sha256": "0364cd3255c5ae33ea3d6d6d606444c97446935ba63de5dfe20cb7de1edf8931",
+      "recorded_api_requests": 60
+    },
+    {
+      "csv": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv",
+      "csv_sha256": "decc8ce79cfbf0b6f4694147c36392f86b0d1f1647bf12ee2a53ba0887e665d4",
+      "report_sha256": "f178b158e0096dc0bbd3678d5c84fca9afa6f8dc44da284b22278e4e12aa36e9",
+      "recorded_api_requests": 29
+    },
+    {
+      "csv": "kg_output_clean_v2\\pilot_v31_format2_retry.csv",
+      "csv_sha256": "a980df2485d9d1213fb267b4cde0f51901861c1ee180e12db6a585b20e0ce5e4",
+      "report_sha256": "d7ca694aca046b11eff6c72579e881c5892b2bf97f9d4da9e23a0b9d63b09bc3",
+      "recorded_api_requests": 3
+    }
+  ],
+  "recorded_api_requests_across_all_runs": 92,
+  "replaced_candidates": [
+    {
+      "candidate_id": "diseasecandidate_85c4f62a802f8869dc1e7a8b",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_17aa47199306b2170139802d",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_74be725859141f89d8687655",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_c20d478fe82c055c00924e45",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_b8f9b797da49368b71785bfe",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_bf6b294b9c4ba5a46f2a2f8b",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_534b02d395d623ee1e1f7ac6",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_252b862a86ff70f015a506bc",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_64758daedcea9bf80566937c",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_8c1b9232e93fd5e633ae46d5",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_29fdd21ff632371e7ea3f161",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_45e2ade16c5f4b42a7a0ef25",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_f870e66df3507c6cee21ee0a",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_a4de65b717db0599b11ecfa7",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_972cdb3ae13f52c71c029f92",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_c54e614bee07cbd33598cd1b",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_cb2bfb5c876c400aa1e006ea",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_3e60d7c806e93c21b4c940de",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_bf68da6101dc39429bfe417b",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_09802e63ade3e2bcb07e5bda",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_6805dbc46bc49e16b7e9cabc",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_975a5d2ddc57aaa55953c1e9",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_c15f71db3ec23b2e266da987",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_d5199cb71e8782d3f1ed2ae0",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_70f9707614c72c732323e213",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_b301f3a86d8885c84b730fac",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_fb2c01adc188b2fdeb03cc6c",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_c4eb1a40abbdadfd1942ffab",
+      "source": "kg_output_clean_v2\\pilot_v31_timeout29_retry.csv"
+    },
+    {
+      "candidate_id": "diseasecandidate_bdfad02f32b7e471e8fe9c23",
+      "source": "kg_output_clean_v2\\pilot_v31_format2_retry.csv"
+    }
+  ],
+  "manual_review_status": "all_proposals_pending_human_review",
+  "graph_writes": 0,
+  "warning": "A merged development set is not a prospective independent test. Original labels are AI-assisted, not clinical expert gold. Retry failures are still uncertain."
+}

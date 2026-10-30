@@ -1,0 +1,17 @@
+{
+  "version": "indication_semantic_v31_checkpoint_2026_10",
+  "unit_tests_passed": 20,
+  "source_rebuilt_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "dev_set_verified_rows": 60,
+  "offline_rule_incremental_test": {
+    "initial_count": 5,
+    "after_first_resume": 20,
+    "after_second_resume": 60,
+    "duplicate_candidate_ids": 0,
+    "complete": true
+  },
+  "live_qwen_tested": false,
+  "neo4j_writes": 0,
+  "security": "API key read from environment; not included in output metadata",
+  "notes": "Original V3.1 is preserved. New checkpoint experiment uses a new CSV name."
+}
