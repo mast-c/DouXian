@@ -898,6 +898,36 @@ footer,
   margin-top:7px;
 }
 
+
+/* GraphRAG 候选证据：只有展开检索详情时才出现，配色与“豆馅”一致。 */
+.kb-graph-evidence-item{
+  padding:15px 17px;
+  border:1px solid #e2eaf6;
+  border-left:3px solid #8aa9e6;
+  border-radius:12px;
+  background:#fbfcff;
+  box-shadow:0 4px 18px rgba(20,48,100,.035);
+}
+.kb-graph-evidence-top{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.kb-graph-evidence-name{font-size:13.5px;font-weight:650;color:#293b59;}
+.kb-graph-tag{
+  padding:2px 9px;border-radius:20px;background:#fff4e3;color:#956820;
+  font-size:11px;line-height:1.6;font-weight:600;
+}
+.kb-graph-evidence-quote{
+  margin:8px 0 9px;border-left:2px solid #ccd8ed;padding:6px 0 6px 12px;
+  color:#3d526b;font-size:13px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.kb-graph-meta{font-size:12px;color:#8190a5;margin-top:7px;}
+.kb-graph-source{
+  display:inline-flex;align-items:center;gap:5px;margin-top:7px;
+  font-size:12px;font-weight:550;color:#2457cd;text-decoration:none;
+}
+.kb-graph-source:hover{text-decoration:underline;color:#173c92;}
+
 /* 只调整运行时状态行，已保存的搜索思考记录样式不受影响。 */
 .st-key-douxian-live-progress .trace-live{
   margin:2px 0 0;
@@ -990,11 +1020,27 @@ def trace_heading(trace):
         count = len(_web_sources(trace))
         text = f"已完成分析，展示 {count} 篇参考资料，相关操作已执行" if count else "已完成联网分析"
         return text + ("（部分操作未成功）" if failure else "")
-    kb_ends = [event for event in ends if event.get("tool") == "search_knowledge_base"]
+    kb_ends = [event for event in ends
+               if event.get("tool") in ("search_knowledge_base", "search_drug_graph")]
     if kb_ends and any(event.get("ok") for event in kb_ends):
-        excerpts = trace.get("knowledge_evidence")
-        count = len(excerpts) if isinstance(excerpts, list) else 0
-        label = f"已完成知识库检索 · {count} 条证据" if count else "已完成知识库检索"
+        report = trace.get("retrieval_summary")
+        if isinstance(report, dict):
+            graph_hits = report.get("search_drug_graph", {}).get("hits", 0)
+            chroma_hits = report.get("search_knowledge_base", {}).get("hits", 0)
+            try:
+                graph_hits, chroma_hits = int(graph_hits), int(chroma_hits)
+            except (ValueError, TypeError):
+                graph_hits, chroma_hits = 0, 0
+            label = f"已检索医疗知识库 · Neo4j {graph_hits} 条 / Chroma {chroma_hits} 条"
+            validation = report.get("search_knowledge_base", {}).get("medical_validation")
+            if isinstance(validation, dict) and validation.get("verified"):
+                label += f" · 原文核验 {validation['verified']} 条"
+        elif trace.get("graph_answer_kind") == "unverified_candidates":
+            label = f"已检索药品图谱 · {trace.get('graph_candidates_found', 0)} 条候选证据"
+        else:
+            excerpts = trace.get("knowledge_evidence")
+            count = len(excerpts) if isinstance(excerpts, list) else 0
+            label = f"已完成知识库检索 · {count} 条证据" if count else "已完成知识库检索"
         return label + ("（部分操作未成功）" if failure else "")
     if failure:
         return "已完成分析，部分操作未成功"
@@ -1073,6 +1119,7 @@ def render_live_timer(label, started_at):
 
 TOOL_LABELS = {
     "search_knowledge_base": "知识库检索",
+    "search_drug_graph": "Neo4j 图谱检索",
     "get_weather": "天气查询",
     "web_search": "联网搜索",
 }
@@ -1086,6 +1133,52 @@ def describe_tool_event(event):
     if not event.get("ok", False):
         return f"⚠ {name}未成功"
     return f"✓ 已完成{name}"
+
+
+def graph_evidence_html(item, index):
+    """GraphRAG 专用的折叠证据卡；HTML 全部转义，不执行原文中的标签。"""
+    drug = html.escape(str(item.get("drug_name") or "未知药品")[:120])
+    disease = html.escape(str(item.get("disease_term") or "未知疾病词条")[:120])
+    quote = html.escape(str(item.get("evidence_quote") or "原文片段缺失")[:500])
+    raw_url = str(item.get("source_url") or "").strip()
+    url_html = ''
+    if len(raw_url) <= 2048:
+        try:
+            parts = urlsplit(raw_url)
+            if parts.scheme in ("http", "https") and parts.netloc:
+                url_html = (
+                    '<a class="kb-graph-source" href="'
+                    + html.escape(raw_url, quote=True)
+                    + '" target="_blank" rel="noopener noreferrer">'
+                    '查看原始药品资料 ↗</a>'
+                )
+        except ValueError:
+            pass
+    if not url_html:
+        url_html = '<div class="kb-graph-meta">原始来源链接未提供</div>'
+
+    raw_review = str(item.get("candidate_status") or "")
+    raw_clinical = str(item.get("clinical_status") or "")
+    raw_source_status = str(item.get("source_status") or "")
+    review = "待人工复核" if raw_review == "pending_human_review" else "审核状态待核对"
+    clinical = "医学有效性未验证" if raw_clinical == "not_validated" else "医学验证状态待核对"
+    source_label = "第三方来源待核验" if raw_source_status == "third_party_unverified" else "来源状态待核验"
+
+    full = item.get("content")
+    full_details = (
+        '<details class="kb-chunk-details"><summary>查看原始结构化记录</summary>'
+        '<div class="kb-chunk-full">' + html.escape(full[:7000]) + '</div></details>'
+    ) if isinstance(full, str) and full else ''
+    return (
+        '<div class="kb-evidence-item kb-graph-evidence-item">'
+        '<div class="kb-graph-evidence-top">'
+        f'<span class="kb-graph-evidence-name">[{index}] {drug} / {disease}</span>'
+        f'<span class="kb-graph-tag">{review}</span>'
+        '</div>'
+        '<div class="kb-graph-evidence-quote">“' + quote + '”</div>'
+        '<div class="kb-graph-meta">' + clinical + ' · ' + source_label + '</div>'
+        + url_html + full_details + '</div>'
+    )
 
 
 def trace_details_html(trace):
@@ -1144,6 +1237,9 @@ def trace_details_html(trace):
                 continue
             index = item.get("id")
             index = str(index) if type(index) is int and index > 0 else "?"
+            if item.get("evidence_type") == "unverified_drug_disease_candidate":
+                cards.append(graph_evidence_html(item, index))
+                continue
             source = html.escape(str(item.get("source") or "未知文件"))
             section = html.escape(str(item.get("section_path") or "未标注章节"))
             preview = html.escape(str(item.get("preview") or ""))
@@ -1165,11 +1261,32 @@ def trace_details_html(trace):
                     '旧消息仅保存了摘要，重新提问后即可展开完整 Chunk。'
                     '</div>'
                 )
+            raw_url = str(item.get("source_url") or "").strip()
+            source_link_html = ""
+            if len(raw_url) <= 2048:
+                try:
+                    parsed = urlsplit(raw_url)
+                    if parsed.scheme in ("http", "https") and parsed.netloc:
+                        source_link_html = (
+                            '<a class="kb-graph-source" target="_blank" '
+                            'rel="noopener noreferrer" href="'
+                            + html.escape(raw_url, quote=True)
+                            + '">查看药品资料来源 ↗</a>'
+                        )
+                except ValueError:
+                    pass
+            verified_label = (
+                '<div class="kb-evidence-section">原文回溯：Neo4j Section 精确匹配 ✓ '
+                '（不代表临床审核）</div>'
+                if item.get("parent_verified") else ""
+            )
             cards.append(
                 '<div class="kb-evidence-item">'
                 f'<div class="kb-evidence-title">[{index}] {source}</div>'
                 f'<div class="kb-evidence-section">章节：{section}</div>'
+                + verified_label
                 + (f'<div class="kb-evidence-preview">摘要：{preview}</div>' if preview else "")
+                + source_link_html
                 + chunk_details
                 + '</div>'
             )
@@ -1180,6 +1297,37 @@ def trace_details_html(trace):
                 f'<span>实际命中的知识库证据（{len(cards)} 条）</span></div>'
             )
             content.append('<div class="kb-evidence-list">' + "".join(cards) + '</div>')
+
+    report = trace.get("retrieval_summary")
+    if isinstance(report, dict):
+        graph_status = report.get("search_drug_graph", {}).get("status", "未执行")
+        chroma_status = report.get("search_knowledge_base", {}).get("status", "未执行")
+        status_chinese = {
+            "ok": "已命中", "no_match": "未命中", "empty_collection": "文档库为空",
+            "error": "检索失败", "invalid_response": "响应异常",
+            "provenance_rejected": "原文定位未通过，已拒绝引用",
+            "no_relevant_sections": "本次命中栏目不相关",
+        }
+        parts = [
+            "Neo4j：" + status_chinese.get(graph_status, "状态待核对"),
+            "Chroma：" + status_chinese.get(chroma_status, "状态待核对"),
+        ]
+        if chroma_status == "empty_collection":
+            parts.append("请检查 collection_name 与医疗文档入库情况")
+        medical_validation = report.get("search_knowledge_base", {}).get(
+            "medical_validation")
+        if isinstance(medical_validation, dict):
+            verified = int(medical_validation.get("verified") or 0)
+            rejected = int(medical_validation.get("failed_provenance") or 0)
+            skipped = int(medical_validation.get("skipped_section") or 0)
+            if verified or rejected or skipped:
+                parts.append(
+                    f"原文回溯通过 {verified} 条，栏目不相关 {skipped} 条，"
+                    f"来源校验拒绝 {rejected} 条"
+                )
+        content.append(
+            '<p class="trace-note">' + html.escape(" · ".join(parts)) + '</p>'
+        )
 
     other_ends = [event for event in ends if event.get("tool") != "web_search"]
     if other_ends:
@@ -1258,12 +1406,16 @@ with st.sidebar:
         create_conversation(st.session_state)
         st.rerun()
 
+    # 历史会话可能记录旧 GraphRAG 模式；统一归入“知识库”。
+    if st.session_state.get("douxian_answer_mode") == "GraphRAG":
+        st.session_state["douxian_answer_mode"] = "知识库"
+
     st.radio(
         "回答模式",
         options=["知识库", "自动", "联网"],
         key="douxian_answer_mode",
         horizontal=True,
-        help="知识库：仅使用本地知识库并标注章节；自动：由 Agent 选择工具；联网：检索实时公开信息。",
+        help="知识库：同时检索 Neo4j 药品图谱和原文章节、Chroma Hybrid 文档；自动：由 Agent 选择工具；联网：检索最新公开信息。",
     )
 
     st.markdown(
