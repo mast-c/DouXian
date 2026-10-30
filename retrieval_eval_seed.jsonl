@@ -1,0 +1,14 @@
+{"id": "Q01", "question": "阿托伐他汀钙片与动脉粥样硬化有什么关联？", "target_drugs": ["阿托伐他汀钙片"], "expected_field": "indication", "category": "drug_disease_risk", "annotation_status": "unreviewed"}
+{"id": "Q02", "question": "阿托伐他汀钙片的禁忌是什么？", "target_drugs": ["阿托伐他汀钙片"], "expected_field": "contraindications", "category": "drug_contraindication", "annotation_status": "unreviewed"}
+{"id": "Q03", "question": "5-氨基水杨酸肠溶片的适应症是什么？", "target_drugs": ["5-氨基水杨酸肠溶片"], "expected_field": "indication", "category": "drug_indication", "annotation_status": "unreviewed"}
+{"id": "Q04", "question": "5-氨基水杨酸肠溶片的不良反应有哪些？", "target_drugs": ["5-氨基水杨酸肠溶片"], "expected_field": "adverse_reactions", "category": "drug_adverse", "annotation_status": "unreviewed"}
+{"id": "Q05", "question": "18种氨基酸注射液的适应症是什么？", "target_drugs": ["18种氨基酸注射液"], "expected_field": "indication", "category": "drug_indication", "annotation_status": "unreviewed"}
+{"id": "Q06", "question": "18种氨基酸葡萄糖注射液有哪些注意事项？", "target_drugs": ["18种氨基酸葡萄糖注射液"], "expected_field": "warnings", "category": "drug_warning", "annotation_status": "unreviewed"}
+{"id": "Q07", "question": "L-谷氨酰胺胶囊有哪些禁忌？", "target_drugs": ["L-谷氨酰胺胶囊"], "expected_field": "contraindications", "category": "drug_contraindication", "annotation_status": "unreviewed"}
+{"id": "Q08", "question": "L-赖氨酸盐酸盐颗粒剂的不良反应有哪些？", "target_drugs": ["L-赖氨酸盐酸盐颗粒剂"], "expected_field": "adverse_reactions", "category": "drug_adverse", "annotation_status": "unreviewed"}
+{"id": "Q09", "question": "一清胶囊的适应症是什么？", "target_drugs": ["一清胶囊"], "expected_field": "indication", "category": "drug_indication", "annotation_status": "unreviewed"}
+{"id": "Q10", "question": "一清颗粒的禁忌是什么？", "target_drugs": ["一清颗粒"], "expected_field": "contraindications", "category": "drug_contraindication", "annotation_status": "unreviewed"}
+{"id": "Q11", "question": "一支蒿伤湿祛痛膏有哪些注意事项？", "target_drugs": ["一支蒿伤湿祛痛膏"], "expected_field": "warnings", "category": "drug_warning", "annotation_status": "unreviewed"}
+{"id": "Q12", "question": "10%、20%、30%脂肪乳注射液的适应症是什么？", "target_drugs": ["10%、20%、30%脂肪乳注射液"], "expected_field": "indication", "category": "drug_indication", "annotation_status": "unreviewed"}
+{"id": "Q13", "question": "阿托伐他汀钙片和10%、20%、30%脂肪乳注射液的适应症有什么区别？", "target_drugs": ["阿托伐他汀钙片", "10%、20%、30%脂肪乳注射液"], "expected_field": "indication", "category": "multi_drug_comparison", "annotation_status": "unreviewed"}
+{"id": "Q14", "question": "有关动脉粥样硬化的药品资料中提到了哪些药物？", "target_drugs": [], "expected_field": null, "category": "disease_only", "annotation_status": "unreviewed"}

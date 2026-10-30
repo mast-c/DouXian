@@ -30,6 +30,14 @@ from search_tool import DISPLAY_SOURCE_LIMIT, web_search
 from vector_stores import VectorStoreService
 from drug_graph_retriever import DrugGraphRetriever
 from graph_answer_view import build_candidate_answer
+from medical_answer_quality import (
+    MedicalAnswerStreamFilter, render_compact_references,
+    requested_refusal_questions,
+)
+from medical_entity_gate import (
+    filter_evidence_for_query, filter_documents_for_drugs,
+    query_drug_names,
+)
 from medical_evidence_bridge import (
     prepare_medical_documents, collapse_duplicate_parent_sections,
 )
@@ -93,7 +101,7 @@ MEDICAL_KB_ANSWER_PROMPT = """【当前模式：医疗知识库 / GraphRAG 证�
 - 自然中文，优先简短回答问题，再解释关键原文及其限制；有必要时用简短小标题。
 - 不输出 pending_human_review、not_validated、AI_assisted_not_expert_verified 等内部英文状态，必要时转述为“待人工审核”“尚未临床核验”。
 - 不把一长串原始 URL 写入回答正文；来源链接由程序负责展示。
-- 不重复警告段、技术日志或模板化空话；保持医疗准确性与可读性。不要输出空的 Markdown 列表项，也不要生成 [svg](http://localhost:8501/#1) 之类的本地伪引用链接；仅以纯文本编号 [1]、[2] 引用证据。"""
+- 优先用“结论（1～2句）→ 直接原文及解释 → 来源状态（1句）”回答。单个问题通常控制在 150～350 个汉字，多方面复杂问题可以适当增加；用户没有询问监管批准状态时，不额外扩展冗长的审批论证。待人工审核 ≠ 审核未通过；仅能说“当前知识库未提供足够资料核实批准状态”，不能声称该药未获批准。不得重复警告段、技术日志或模板化空话；不要输出空 Markdown 列表项或 [svg](http://localhost:8501/#1) 这类本地伪链接，只用纯文本编号 [1]、[2] 引用证据。同一来源 URL 的多个编号不是独立临床研究。"""
 
 MEDICAL_FAST_QUALITY_PROMPT = """【医疗快速模式补充要求】
 本轮没有执行独立的证据充分性复核。务必逐条核对给定原文是否直接支持药品—疾病关系，
@@ -193,32 +201,8 @@ def render_kb_references(
     answer: str,
     reference_map: dict[int, tuple[str, str]],
 ) -> str:
-    """只根据真实检索证据生成参考资料列表。"""
-
-    cited = sorted({
-        int(n)
-        for n in re.findall(r"\[(\d+)\]", answer)
-    })
-
-    valid = [n for n in cited if n in reference_map]
-    invalid = [n for n in cited if n not in reference_map]
-
-    blocks = []
-
-    if valid:
-        lines = [
-            f"[{n}] {reference_map[n][0]} / {reference_map[n][1]}"
-            for n in valid
-        ]
-        blocks.append("参考资料：\n\n" + "\n\n".join(lines))
-
-    if invalid:
-        blocks.append(
-            "⚠️ 以下引用编号没有对应的检索证据："
-            + "、".join(f"[{n}]" for n in invalid)
-        )
-
-    return "\n\n" + "\n\n".join(blocks) if blocks else ""
+    """使用真实证据编号，按同一来源合并参考资料。"""
+    return render_compact_references(answer, reference_map)
 
 
 def inspect_fast_kb_answer(
@@ -248,49 +232,6 @@ def inspect_fast_kb_answer(
         seen_lines.add(normalized)
     if repeated_long_lines:
         warnings.append("检测到疑似重复的较长段落，请检查正文是否重复。")
-
-    # 仅对同层级的独立 Markdown 列表项发出“可能混淆”提示。
-    bullets = []
-    for index, line in enumerate(answer.splitlines()):
-        match = re.match(r"^([ \t]*)[-*+]\s+(.+)$", line)
-        if match:
-            indent_size = len(match.group(1).expandtabs(4))
-            bullets.append((index, indent_size, match.group(2)))
-
-    hierarchy_conflict = False
-    for pos, (index, level, content) in enumerate(bullets):
-        if not re.search(r"(?<![A-Za-z])MCMC(?![A-Za-z])|马尔可夫链蒙特卡罗", content, re.I):
-            continue
-        for later_index, later_level, later_text in bullets[pos + 1:]:
-            if later_index - index > 5:
-                break
-            if (later_level == level and
-                    re.search(r"(?<![A-Za-z])Gibbs(?![A-Za-z])|吉布斯", later_text, re.I)):
-                hierarchy_conflict = True
-                break
-        if hierarchy_conflict:
-            break
-    if hierarchy_conflict:
-        warnings.append(
-            "MCMC 与 Gibbs 似乎被列为同级方法；"
-            "Gibbs 采样通常是 MCMC 的一种具体算法，请核对层级。"
-        )
-
-    # “独立抽样”可用于普通 Monte Carlo，但不应直接套用于 MCMC。
-    # 这里只提醒人工复核，不能用关键词替代语义判断。
-    if re.search(r"(?<![A-Za-z])MCMC(?![A-Za-z])|马尔可夫链蒙特卡罗", answer, re.I):
-        for match in re.finditer(
-            r"(?:大量|许多|若干|相互|彼此)?独立(?:同分布)?(?:的)?样本"
-            r"|独立采样",
-            answer,
-        ):
-            preceding = answer[max(0, match.start() - 12):match.start()]
-            if not re.search(r"并非|不是|并不|不保证|无法保证|非$", preceding):
-                warnings.append(
-                    "正文同时提及 MCMC 和独立采样；"
-                    "MCMC 的连续样本通常相关，请核对对应说明。"
-                )
-                break
 
     return {
         "status": "warn" if (warnings or invalid_ids) else "pass",
@@ -783,6 +724,21 @@ class RagService:
                     "最终去重/多样性选择：", len(documents),
                 )
 
+            # 先按问题中的精确药名过滤跨药品候选，再做父级 Section 回溯。
+            # 不改变 Hybrid + Reranker 的算法，只防止名为 X 的问题拿 Y 的
+            # 原文占据有限的 top_n/原文核验配额。
+            medical_named_drugs = query_drug_names(
+                question,
+                [
+                    getattr(doc, "metadata", {})
+                    for doc in documents
+                    if isinstance(getattr(doc, "metadata", None), dict)
+                ],
+            )
+            if medical_named_drugs:
+                documents = filter_documents_for_drugs(
+                    documents, medical_named_drugs,
+                )
             documents, medical_report = prepare_medical_documents(
                 documents,
                 question,
@@ -1250,7 +1206,10 @@ class RagService:
                         if unique_key in seen_excerpts:
                             continue
                         seen_excerpts.add(unique_key)
-                        merged_excerpts.append({**item, "id": len(merged_excerpts) + 1})
+                        merged_excerpts.append({
+                            **item, "id": len(merged_excerpts) + 1,
+                            "_retrieval_tool": tool_name,
+                        })
                         if len(merged_excerpts) >= 8:
                             break
                     for source in data.get("sources") or []:
@@ -1262,7 +1221,35 @@ class RagService:
                 # Chroma 中已逐字回溯到父级 Section 的内容，
                 # 优先于同一父级 Section 的 Neo4j 冗余完整章节片段；
                 # 图谱 DiseaseCandidate 仍作为候选关系单独保留。
+                # V1.9：原文回溯正确也可能属于另一种药品，例如
+                # “阿托伐他汀钙片”问答被疾病共现的脂肪乳注射液污染。
+                # 只对用户明确点名的药品做过滤；疾病-only 查询不限制药品。
+                merged_excerpts, entity_report = filter_evidence_for_query(
+                    question, merged_excerpts,
+                )
                 merged_excerpts = collapse_duplicate_parent_sections(merged_excerpts)
+                merged_sources = list(dict.fromkeys(
+                    str(item.get("source") or "")
+                    for item in merged_excerpts
+                    if str(item.get("source") or "")
+                ))
+                for tool_name in names:
+                    if tool_name not in tool_reports:
+                        continue
+                    report = tool_reports[tool_name]
+                    report["hits_before_entity_gate"] = report.get("hits", 0)
+                    report["hits"] = sum(
+                        item.get("_retrieval_tool") == tool_name
+                        for item in merged_excerpts
+                    )
+                trace["evidence_entity_gate"] = entity_report
+                print(
+                    "[医疗药品实体门控] "
+                    f"指定药品={entity_report['explicit_drugs']} "
+                    f"过滤其他药品={entity_report['removed_other_drugs']} "
+                    f"过滤无药品证据={entity_report['removed_unattributed']} "
+                    f"最终证据={len(merged_excerpts)}"
+                )
                 trace["retrieval_summary"] = tool_reports
                 kb_data = {
                     "found": bool(merged_excerpts),
@@ -1311,14 +1298,11 @@ class RagService:
                         for item in merged_excerpts
                     )
                 )
-                # 面对“是否治疗/适应症/预防/用药”类医学结论提问，
-                # 即使 Chroma 同时命中普通文档，仍不使用未经核验的图谱候选
-                # 作为肯定治疗关系的依据；第一版直接返回原文候选清单。
-                clinical_claim_question = bool(re.search(
-                    r"治疗|适应症|适应证|预防|疗效|能治|药效|用于什么|用药|服用",
-                    question,
-                ))
-                if only_unverified_graph or (graph_candidate_only and clinical_claim_question):
+                # 只在“全部证据都是未经核验的疾病提及候选”时使用固定模板。
+                # 如果还有经过 Neo4j 逐字回溯的 Chroma 原文或 SourceRecord/Section，
+                # 必须把它们交给证据审核和生成环节，不能仅因提问含“适应症”
+                # 就提前返回疾病候选并丢掉更直接的原文。
+                if only_unverified_graph:
                     candidate_rows = [
                         item for item in merged_excerpts
                         if item.get("evidence_type") == "unverified_drug_disease_candidate"
@@ -1401,13 +1385,6 @@ class RagService:
                         yield reply
 
                     else:
-                        if graph_candidate_only:
-                            graph_notice = (
-                                "**⚠️ 图谱说明：检索到的是药品说明书中的疾病提及候选，"
-                                "尚未完成医学语义与权威来源验证，不能直接视作药品治疗或获批适应症。**\n\n"
-                            )
-                            answer_parts.append(graph_notice)
-                            yield graph_notice
                         kb_text = "\n\n".join(evidence)
                         # BEGIN EVIDENCE_GUARD_V1
                         # 先审核原始问题的每个方面；子查询仅作为检索线索。
@@ -1491,16 +1468,19 @@ class RagService:
                                     coverage=coverage,
                                     original_queries=kb_data.get("subqueries"),
                                     search_fn=lambda subquery: (
-                                        prepare_medical_documents(
-                                            self.knowledge_service.search_with_rerank(
-                                                query=subquery,
-                                                recall_k=10,
-                                                top_n=8,
-                                            ),
-                                            question,
-                                            fetch_parent=self._get_medical_parent_section,
-                                            limit=2,
-                                        )[0]
+                                        filter_documents_for_drugs(
+                                            prepare_medical_documents(
+                                                self.knowledge_service.search_with_rerank(
+                                                    query=subquery,
+                                                    recall_k=10,
+                                                    top_n=8,
+                                                ),
+                                                question,
+                                                fetch_parent=self._get_medical_parent_section,
+                                                limit=2,
+                                            )[0],
+                                            entity_report["explicit_drugs"],
+                                        )
                                     ),
                                     judge_fn=lambda **params: reassess_fixed_aspects(
                                         original_coverage=coverage,
@@ -1720,6 +1700,7 @@ class RagService:
                     _generation_started = time.perf_counter()
                     _first_piece_logged = False
                     _output_chars = 0
+                    _medical_stream_filter = MedicalAnswerStreamFilter()
                     # 最终参考资料由程序统一生成；避免模型（尤其受历史回答影响）
                     # 自己生成“快速模式提示/参考资料”，造成相同尾注出现两次。
                     # 留住最多 max(marker)-1 个字符，兼容跨多个流式 chunk 的标记。
@@ -1757,6 +1738,7 @@ class RagService:
                         else:
                             piece = ""
 
+                        piece = _medical_stream_filter.feed(piece)
                         if piece:
                             if not _first_piece_logged:
                                 _first_piece_logged = True
@@ -1768,17 +1750,31 @@ class RagService:
                             answer_parts.append(piece)
                             yield piece
 
-                    # 最后不足 reserve 长度的正文不可被丢掉。
+                    # 模型正文尾部也经过同样的去伪链接/空列表清理。
                     if _footer_buffer and not _footer_cutoff:
+                        _remaining = _medical_stream_filter.feed(_footer_buffer)
+                        if _remaining:
+                            if not _first_piece_logged:
+                                _first_piece_logged = True
+                                print(
+                                    "[RAG耗时] 最终回答首字等待："
+                                    f"{time.perf_counter() - _generation_started:.2f}s"
+                                )
+                            _output_chars += len(_remaining)
+                            answer_parts.append(_remaining)
+                            yield _remaining
+
+                    _remaining = _medical_stream_filter.finish()
+                    if _remaining:
                         if not _first_piece_logged:
                             _first_piece_logged = True
                             print(
                                 "[RAG耗时] 最终回答首字等待："
                                 f"{time.perf_counter() - _generation_started:.2f}s"
                             )
-                        _output_chars += len(_footer_buffer)
-                        answer_parts.append(_footer_buffer)
-                        yield _footer_buffer
+                        _output_chars += len(_remaining)
+                        answer_parts.append(_remaining)
+                        yield _remaining
 
                     print(
                         "[RAG耗时] 最终答案流式生成总计："
@@ -1793,15 +1789,16 @@ class RagService:
                     else:
                         # 对无证据的方面追加确定性部分拒答，避免仅依赖生成模型。
                         if coverage["decision"] == "partial":
-                            refused_note = (
-                                "\n\n**当前知识库证据不足，暂无法可靠回答：**\n"
-                                + "\n".join(
-                                    "- " + q
-                                    for q in coverage["refused_questions"]
-                                )
+                            requested_refusals = requested_refusal_questions(
+                                question, coverage.get("refused_questions"),
                             )
-                            answer_parts.append(refused_note)
-                            yield refused_note
+                            if requested_refusals:
+                                refused_note = (
+                                    "\n\n**当前知识库证据不足，暂无法可靠回答：**\n"
+                                    + "\n".join("- " + q for q in requested_refusals)
+                                )
+                                answer_parts.append(refused_note)
+                                yield refused_note
 
                         # 快速模式轻量自检：无模型调用，耗时只含本地字符串检查。
                         if fast_kb_mode:
