@@ -1,12 +1,15 @@
 import html
 import uuid
 import time
+import json
 from urllib.parse import urlsplit
 import streamlit as st
 import streamlit.components.v1 as components
 from chat_store import ChatStore
 from file_history_store import delete_history
 from rag import RagService
+from medical_retrieval_status import retrieval_heading, retrieval_status_html
+from medical_quality_acceptance import make_export_payload
 from search_tool import DISPLAY_SOURCE_LIMIT
 import config_data as config
 
@@ -817,6 +820,61 @@ footer,
   .trace-chevron,.trace-source-chip{transition:none}
 }
 
+
+/* V1.11 检索状态：不把图谱去重后的 0 误认为 Neo4j 未参与。 */
+.kb-retrieval-status{
+  margin:15px 0 5px;
+  padding-top:12px;
+  border-top:1px solid #e7ebf1;
+}
+.kb-retrieval-metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin:10px 0 4px 21px;
+  padding:0;
+}
+.kb-retrieval-metrics .kb-stat{
+  padding:0 9px 0 11px;
+  border-left:2px solid #e3e8ef;
+  min-width:0;
+}
+.kb-retrieval-metrics dt{
+  margin:0;
+  color:#667387;
+  font-size:12px;
+  font-weight:500;
+}
+.kb-retrieval-metrics dd{
+  margin:3px 0 2px;
+  font-size:16px;
+  font-weight:650;
+  line-height:1.5;
+  color:#33445d;
+  font-variant-numeric:tabular-nums;
+}
+.kb-stat-detail{
+  display:block;
+  color:#8a929f;
+  font-size:11px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.kb-stat-note{
+  margin:8px 0 0 21px;
+  color:#758298;
+  font-size:12px;
+  line-height:1.75;
+  overflow-wrap:anywhere;
+}
+@media(max-width:1000px){
+  .kb-retrieval-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:520px){
+  .kb-retrieval-metrics{grid-template-columns:1fr;gap:9px}
+  .kb-retrieval-metrics,.kb-stat-note{margin-left:0}
+}
+
 /* 知识库真实检索片段：与现有思考记录一起折叠展示 */
 .kb-evidence-list{
   display:grid;
@@ -1023,6 +1081,11 @@ def trace_heading(trace):
     kb_ends = [event for event in ends
                if event.get("tool") in ("search_knowledge_base", "search_drug_graph")]
     if kb_ends and any(event.get("ok") for event in kb_ends):
+        # V1.11 优先展示独立检索、原文核验与合并去重的统一统计。
+        # 历史消息没有新版快照时仍沿用旧口径。
+        new_heading = retrieval_heading(trace)
+        if new_heading:
+            return new_heading
         report = trace.get("retrieval_summary")
         if isinstance(report, dict):
             graph_hits = report.get("search_drug_graph", {}).get("hits", 0)
@@ -1031,10 +1094,15 @@ def trace_heading(trace):
                 graph_hits, chroma_hits = int(graph_hits), int(chroma_hits)
             except (ValueError, TypeError):
                 graph_hits, chroma_hits = 0, 0
-            label = f"已检索医疗知识库 · Neo4j {graph_hits} 条 / Chroma {chroma_hits} 条"
+            # 旧会话只存了去重后计数，无法倒推出真实直查数量；
+            # 明示它是“独立保留”，不要写成 Neo4j 实际检索了 0 条。
+            label = (
+                "已检索医疗知识库 · 旧会话独立证据："
+                f"Neo4j {graph_hits} 条 / Chroma {chroma_hits} 条"
+            )
             validation = report.get("search_knowledge_base", {}).get("medical_validation")
             if isinstance(validation, dict) and validation.get("verified"):
-                label += f" · 原文核验 {validation['verified']} 条"
+                label += f" · Neo4j 原文核验 {validation['verified']} 条"
         elif trace.get("graph_answer_kind") == "unverified_candidates":
             label = f"已检索药品图谱 · {trace.get('graph_candidates_found', 0)} 条候选证据"
         else:
@@ -1182,7 +1250,7 @@ def graph_evidence_html(item, index):
 
 
 def trace_details_html(trace):
-    """千问风格的原生折叠区：实际检索词 + 最多 5 个紧凑来源标签。"""
+    """医疗检索的折叠区：同一回答中的所有可引用证据均能展开核对。"""
     if not isinstance(trace, dict) or not trace:
         return ""
 
@@ -1228,11 +1296,51 @@ def trace_details_html(trace):
         if any(not event.get("ok", False) for event in web_ends):
             content.append('<p class="trace-alert">⚠ 部分联网操作未成功，请检查服务配置。</p>')
 
+    # 优先展示通道统计，再列证据卡；避免用户翻过长原文才能发现
+    # Neo4j 虽然独立保留0条，实际上已经参与了原文核验。
+    retrieval_panel = retrieval_status_html(trace)
+    if retrieval_panel:
+        content.append(retrieval_panel)
+
+    overview = trace.get("multi_drug_scope")
+    if isinstance(overview, dict):
+        drugs = overview.get("listed_drugs") or []
+        fields = overview.get("supplement_fields") or []
+        if isinstance(drugs, list) and drugs:
+            field_names = {
+                "indication": "适应症", "adverse_reactions": "不良反应",
+                "warnings": "注意事项", "contraindications": "禁忌",
+                "drug_interactions": "相互作用",
+            }
+            label = "、".join(
+                field_names.get(str(field), "")
+                for field in fields if field in field_names
+            )
+            excluded = overview.get("removed_off_scope") or 0
+            try:
+                excluded = max(0, int(excluded))
+            except (TypeError, ValueError):
+                excluded = 0
+            excluded_note = (
+                f"已排除 {excluded} 条非所列药品的证据。"
+                if excluded else ""
+            )
+            note = (
+                f"开放式检索：本轮仅列出前 {len(drugs)} 种匹配药品资料，"
+                f"并按药品补查{label or '相关章节'}。"
+                + excluded_note
+                + "疾病候选提及不等于已批准的治疗适应症；"
+                  "本次未取到某栏目也不意味着该药没有不良反应或风险。"
+            )
+            content.append('<p class="trace-note">' + html.escape(note) + '</p>')
+
     # 与回答 [1]、[2] 引用对应的真实知识库证据；所有字段均进行 HTML 转义。
     knowledge_evidence = trace.get("knowledge_evidence")
     if isinstance(knowledge_evidence, list) and knowledge_evidence:
         cards = []
-        for item in knowledge_evidence[:5]:
+        # 不能写死只显示前5条：模型可能引用[8]或补检追加的[9]。
+        # 显示本轮真实保存的全部证据，完整 Chunk 仍由各卡片单独折叠。
+        for item in knowledge_evidence:
             if not isinstance(item, dict):
                 continue
             index = item.get("id")
@@ -1298,36 +1406,28 @@ def trace_details_html(trace):
             )
             content.append('<div class="kb-evidence-list">' + "".join(cards) + '</div>')
 
-    report = trace.get("retrieval_summary")
-    if isinstance(report, dict):
-        graph_status = report.get("search_drug_graph", {}).get("status", "未执行")
-        chroma_status = report.get("search_knowledge_base", {}).get("status", "未执行")
-        status_chinese = {
-            "ok": "已命中", "no_match": "未命中", "empty_collection": "文档库为空",
-            "error": "检索失败", "invalid_response": "响应异常",
-            "provenance_rejected": "原文定位未通过，已拒绝引用",
-            "no_relevant_sections": "本次命中栏目不相关",
-        }
-        parts = [
-            "Neo4j：" + status_chinese.get(graph_status, "状态待核对"),
-            "Chroma：" + status_chinese.get(chroma_status, "状态待核对"),
-        ]
-        if chroma_status == "empty_collection":
-            parts.append("请检查 collection_name 与医疗文档入库情况")
-        medical_validation = report.get("search_knowledge_base", {}).get(
-            "medical_validation")
-        if isinstance(medical_validation, dict):
-            verified = int(medical_validation.get("verified") or 0)
-            rejected = int(medical_validation.get("failed_provenance") or 0)
-            skipped = int(medical_validation.get("skipped_section") or 0)
-            if verified or rejected or skipped:
-                parts.append(
-                    f"原文回溯通过 {verified} 条，栏目不相关 {skipped} 条，"
-                    f"来源校验拒绝 {rejected} 条"
-                )
-        content.append(
-            '<p class="trace-note">' + html.escape(" · ".join(parts)) + '</p>'
-        )
+    # V1.11 独立来源检索 ≠ Chroma 使用 Neo4j 校验父级 Section。
+    # 两种角色在同一个统计区分开展示；历史 trace 不会被强制迁移。
+    if not retrieval_panel:
+        report = trace.get("retrieval_summary")
+        if isinstance(report, dict):
+            graph = report.get("search_drug_graph", {})
+            chroma = report.get("search_knowledge_base", {})
+            graph = graph if isinstance(graph, dict) else {}
+            chroma = chroma if isinstance(chroma, dict) else {}
+            validation = chroma.get("medical_validation", {})
+            validation = validation if isinstance(validation, dict) else {}
+            graph_kept = int(graph.get("hits") or 0)
+            chroma_kept = int(chroma.get("hits") or 0)
+            verified = int(validation.get("verified") or 0)
+            parts = [
+                f"旧会话统计：Neo4j 独立保留 {graph_kept} 条",
+                f"Chroma 独立保留 {chroma_kept} 条",
+                f"Neo4j Section 原文核验 {verified} 条",
+            ]
+            content.append(
+                '<p class="trace-note">' + html.escape(" · ".join(parts)) + '</p>'
+            )
 
     other_ends = [event for event in ends if event.get("tool") != "web_search"]
     if other_ends:
@@ -1490,12 +1590,37 @@ chat = current_chat()
 messages = chat["messages"]
 
 
-for msg in messages:
+last_question_for_acceptance = ""
+for message_index, msg in enumerate(messages):
     if msg["role"] == "user":
+        last_question_for_acceptance = str(msg.get("content") or "")
         show_user(msg["content"])
     else:
         render_saved_trace(msg.get("trace"))
         st.markdown(msg["content"])
+        # 只在用户主动点击时下载：包含该轮问题、回答与引用原文；
+        # 不读取其他会话，不上传服务器，不输出 .env 或账号密钥。
+        current_trace = msg.get("trace")
+        if (isinstance(current_trace, dict)
+                and isinstance(current_trace.get("knowledge_evidence"), list)
+                and current_trace["knowledge_evidence"]):
+            with st.expander("检索质量验收（单轮数据导出）", expanded=False):
+                export_data = make_export_payload(
+                    last_question_for_acceptance,
+                    str(msg.get("content") or ""),
+                    current_trace,
+                )
+                st.download_button(
+                    "导出本轮证据验收 JSON",
+                    data=json.dumps(export_data, ensure_ascii=False, indent=2),
+                    file_name=f"medical_trace_{message_index:03d}.json",
+                    mime="application/json",
+                    key=f"medical-trace-export-{st.session_state['current_session']}-{message_index}",
+                )
+                st.caption(
+                    "仅下载当前这一轮的问题、回答和证据原文。"
+                    "如涉及个人医疗信息或第三方内容，请在授权范围内保存与分享。"
+                )
 
 
 if not messages:

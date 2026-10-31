@@ -1,0 +1,13 @@
+﻿E:\VsCode_Project\DockerTest_Agent\RAG_project\data\__pycache__
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\kg\__pycache__
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\tests\__pycache__
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\drug_graph_retriever.py.bak
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\rag.py.bak_20261031_111750
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\medical_overview_answer.py.bak_20261031_111750
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\v117_guard_trace_minfix.patch
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\v117_pediatric_route.patch
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\v117_pediatric_safety.patch
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\v117_phase2_prompt_and_overview.patch
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\v117_route_patch
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\support
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\demo

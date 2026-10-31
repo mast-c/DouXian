@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "question": "10%、20%、30%脂肪乳注射液对婴儿和儿童有哪些特别注意？30%制剂可以直接用于儿童吗",
+  "answer": "根据检索到的资料，30%脂肪乳注射液**不推荐直接用于婴儿和儿童**。\n\n具体限制条件及推荐意见如下：\n1.  **使用建议**：因缺乏30%脂肪乳注射液用于婴儿和儿童的经验，所以暂不推荐给婴儿和儿童使用 [2]。\n2.  **监测要求**：若使用本品一周以上必须做脂肪廓清试验；对于婴儿和儿童，监测脂肪廓清能力的最可靠办法是定期测定血清甘油三酯水平 [2]。\n3.  **特殊人群谨慎使用**：新生儿和未成熟儿伴有高胆红素血症或可疑肺动脉高压者应谨慎使用；新生儿（特别是未成熟儿）长期使用需监测血小板数目、肝功能试验和血清甘油三酯浓度 [2]。\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[2] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy2536r.htm) · 10%、20%、30%脂肪乳注射液 / 注意事项 / warnings · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料 · 10%、20%、30%脂肪乳注射液",
+        "section_path": "Neo4j / 药品资料 / 用法用量（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：10%、20%、30%脂肪乳注射液 栏目：用法用量 原文：成人：静脉滴注，按脂肪量计，每天最大推荐剂量为3g(甘油三酯)/kg。本品提供的能量可占总能量的70％。10％、20％脂肪乳注射液500ml的输注时间不少于5小时；30％脂肪乳注射液250ml的输注时间不少于4小时。新生儿和婴儿：10％、20％脂肪乳注射液每天使用剂量为0.5～4g(甘油三酯)／kg，输注速度不超过0.17g／kg／小时。每天最大用量不应超过4g／kg…",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：10%、20%、30%脂肪乳注射液\n栏目：用法用量\n原文：成人：静脉滴注，按脂肪量计，每天最大推荐剂量为3g(甘油三酯)/kg。本品提供的能量可占总能量的70％。10％、20％脂肪乳注射液500ml的输注时间不少于5小时；30％脂肪乳注射液250ml的输注时间不少于4小时。新生儿和婴儿：10％、20％脂肪乳注射液每天使用剂量为0.5～4g(甘油三酯)／kg，输注速度不超过0.17g／kg／小时。每天最大用量不应超过4g／kg。只有在密切监测血清甘油三酯、肝功能、氧饱和度等指标的情况下输注剂量才可逐渐增加至每天4g／kg。早产儿及低体重新生儿，最好是24小时连续输\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_c93d6e21803ba47b6934a68d",
+        "section_field": "dosage",
+        "candidate_id": "",
+        "section_id": "section_99874bb60d1a6683dcca4ad4",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 注意事项 / warnings",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：本品慎用于脂肪代谢功能减退的患者，如肝、肾功能不全，糖尿病酮中毒、胰腺炎、甲状腺机能低下(伴有高脂血症)以及败血症患者慎用。这些患者输注本品时，应密切观察血清甘油三酯浓度，连续使用一周以上的患者，应检查患者的脂肪廓清能力。对大豆蛋白过敏者慎用本品，使用前必须做过敏试验。新生儿和未成熟儿伴有高胆红素血症或可疑肺动脉高压者应谨慎使用本品。新生儿，特别是未成熟儿，长期使用本…",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：本品慎用于脂肪代谢功能减退的患者，如肝、肾功能不全，糖尿病酮中毒、胰腺炎、甲状腺机能低下(伴有高脂血症)以及败血症患者慎用。这些患者输注本品时，应密切观察血清甘油三酯浓度，连续使用一周以上的患者，应检查患者的脂肪廓清能力。对大豆蛋白过敏者慎用本品，使用前必须做过敏试验。新生儿和未成熟儿伴有高胆红素血症或可疑肺动脉高压者应谨慎使用本品。新生儿，特别是未成熟儿，长期使用本品必须监测血小板数目、肝功能试验和血清甘油三酯浓度。采血时，如本品还没有从血流中完全清除，则将干扰其它实验室检测项目(如胆红素、乳酸脱氢酶、氧饱和度、血红蛋白等)。绝大多数病人在本品输注后5～6小时，即可被完全清除。孕妇：已有报道表明妊娠妇女使用10％和20％脂肪乳注射液是安全和成功的。理论上30％与10％和20％脂肪乳注射液一样，也能用于妊娠妇女，但尚缺乏动物生殖研究的证据。婴儿与儿童：因缺乏30％脂肪乳注射液用于婴儿和儿童的经验，所以暂不推荐给婴儿和儿童使用。使用本品一周以上必须做脂肪廓清试验。具体操作如下：输注前采血样，离心，如果血浆呈乳状，则原定的输注计划应延期实施(此法不适用于高脂血症的患者)；当发现病人脂肪廓清能力降低时，最好再查血清甘油三酯。对于婴儿和儿童，监测脂肪廓请能力的最可靠的办法是定期测定血清甘油三酯水平。本品开瓶后一次未使用完的药液应予丢弃，不得再次使用。\n可引起体温升高，偶见发冷畏寒以及恶心、呕吐。其它副作用比较罕见，包括：1．即刻和早期副作用：高过敏反应(过敏反应、皮疹、荨麻疹)，呼吸影响(如呼吸急促)以及循环影响(如高血压／低血压)。溶血、网状红细胞增多、腹痛、头痛、疲倦、阴茎异常勃起等。2．迟发副作用：长期输注本品，婴儿可能发生血小板减少。另外，长期静脉营养时即使不用本品也会有短暂的肝功能指标的异常。偶可发生静脉炎，血管痛及出血倾向。3．病人脂肪廓清能力减退时，尽管输注速度正常仍可能导致脂肪超载综合征。脂肪超载综合征偶尔也可发生于肾功能障碍和感染患者。脂肪超载综合征表现为：高脂血症、发热、脂肪浸润、脏器功能紊乱等，但一般只要停止输注，上述症状即可消退。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_c93d6e21803ba47b6934a68d",
+        "section_field": "warnings",
+        "candidate_id": "",
+        "section_id": "section_b63f07f5103525275d332ee1",
+        "parent_verified": true
+      },
+      {
+        "id": 3,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 适应症 / indication",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症，也为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供必需脂肪酸。30％脂肪乳注射液更适合输液量受限制和能量需求高度增加的病人。卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。在药用辅料中作增溶剂、乳化剂及油脂类的抗…",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症，也为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供必需脂肪酸。30％脂肪乳注射液更适合输液量受限制和能量需求高度增加的病人。卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。在药用辅料中作增溶剂、乳化剂及油脂类的抗氧化剂。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_c93d6e21803ba47b6934a68d",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_1277b916e2c0b4316802175a",
+        "parent_verified": true
+      },
+      {
+        "id": 4,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 不良反应 / adverse_reactions",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：不良反应 资料状态：第三方来源尚未完成医学权威核验 证据原文：可引起体温升高，偶见发冷畏寒以及恶心、呕吐。其它副作用比较罕见，包括：1．即刻和早期副作用：高过敏反应(过敏反应、皮疹、荨麻疹)，呼吸影响(如呼吸急促)以及循环影响(如高血压／低血压)。溶血、网状红细胞增多、腹痛、头痛、疲倦、阴茎异常勃起等。2．迟发副作用：长期输注本品，婴儿可能发生血小板减少。另外，长期静脉营养时即使不用本品也会有短暂的肝功能指标的异常。偶可发生静脉…",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：不良反应\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：可引起体温升高，偶见发冷畏寒以及恶心、呕吐。其它副作用比较罕见，包括：1．即刻和早期副作用：高过敏反应(过敏反应、皮疹、荨麻疹)，呼吸影响(如呼吸急促)以及循环影响(如高血压／低血压)。溶血、网状红细胞增多、腹痛、头痛、疲倦、阴茎异常勃起等。2．迟发副作用：长期输注本品，婴儿可能发生血小板减少。另外，长期静脉营养时即使不用本品也会有短暂的肝功能指标的异常。偶可发生静脉炎，血管痛及出血倾向。3．病人脂肪廓清能力减退时，尽管输注速度正常仍可能导致脂肪超载综合征。脂肪超载综合征偶尔也可发生于肾功能障碍和感染患者。脂肪超载综合征表现为：高脂血症、发热、脂肪浸润、脏器功能紊乱等，但一般只要停止输注，上述症状即可消退。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_c93d6e21803ba47b6934a68d",
+        "section_field": "adverse_reactions",
+        "candidate_id": "",
+        "section_id": "section_64acfebc7b79837a0fab9605",
+        "parent_verified": true
+      },
+      {
+        "id": 5,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 禁忌 / contraindications[0]",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：休克和严重脂质代谢紊乱(如高脂血症)血栓患者禁用",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：休克和严重脂质代谢紊乱(如高脂血症)血栓患者禁用",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_c93d6e21803ba47b6934a68d",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_e36172418984ad9232b54bc3",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 4,
+        "direct_sections": 4,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 4,
+        "retained": 1,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 4,
+        "indexed_chunks": 313,
+        "parent_verified": 4,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 4,
+        "retained": 4
+      },
+      "merge": {
+        "unique_before_entity_filter": 8,
+        "after_entity_filter": 8,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 3,
+        "retained": 5,
+        "retained_neo4j_verified": 4,
+        "explicit_drugs": [
+          "10%、20%、30%脂肪乳注射液"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 1,
+        "section_count": 4,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 4
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 4,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 4,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 4,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [],
+          "selected": 4
+        },
+        "hits_before_entity_gate": 4
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "10%、20%、30%脂肪乳注射液"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 8
+    },
+    "evidence_coverage": {
+      "decision": "partial",
+      "aspects": [
+        {
+          "question": "10%、20%、30%脂肪乳注射液在婴儿和儿童人群中的用药剂量、输注速度及监测注意事项有哪些？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "至少一条必要引文缺失、编号无效或与原文不一致"
+        },
+        {
+          "question": "30%脂肪乳注射液是否可以直接用于儿童，其限制条件或推荐意见为何？",
+          "status": "supported",
+          "evidence_ids": [
+            2
+          ],
+          "quotes": [
+            {
+              "id": 2,
+              "quote": "婴儿与儿童：因缺乏30％脂肪乳注射液用于婴儿和儿童的经验，所以暂不推荐给婴儿和儿童使用。"
+            }
+          ],
+          "reason": "证据2直接针对30%制剂在儿童中的应用给出明确结论，指出因缺乏相关经验暂不推荐使用。"
+        }
+      ],
+      "evidence_ids": [
+        2
+      ],
+      "answer_questions": [
+        "30%脂肪乳注射液是否可以直接用于儿童，其限制条件或推荐意见为何？"
+      ],
+      "refused_questions": [
+        "10%、20%、30%脂肪乳注射液在婴儿和儿童人群中的用药剂量、输注速度及监测注意事项有哪些？"
+      ],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "no_new_evidence",
+      "queries": [
+        "10%、20%与30%脂肪乳注射液在婴幼儿及儿童患者中的推荐用量与静脉滴注速率应如何设定？",
+        "儿童使用不同浓度（10%、20%、30%）脂肪乳注射液时，需重点监测的生理指标与临床观察要点包括哪些？"
+      ],
+      "new_chunks": 0,
+      "final_decision": "partial"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 64.56
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

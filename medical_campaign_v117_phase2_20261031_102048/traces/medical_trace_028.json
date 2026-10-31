@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "question": "儿童扁桃体炎可以自己服用丙酸交沙霉素颗粒吗？",
+  "answer": "**用药安全提醒（一般性建议，不是本轮药品说明书的引文）：不建议在没有医生评估和指导的情况下自行给儿童使用抗菌药。**是否需要抗菌治疗，应由医生根据病因、年龄、体重、过敏史等判断。即使资料中列出了小儿剂量，也不能据此判断某个孩子适合用药，更不能将该剂量直接作为个人用药方案。\n\n根据检索到的资料，针对您的提问回答如下：\n\n### 1. 丙酸交沙霉素颗粒是否适用于治疗扁桃体炎？\n**是。** 资料原文指出：“本品适用于化脓性链球菌引起的咽炎及**扁桃体炎**” [3]。\n\n### 2. 该药物针对儿童的用法与剂量如何规定？\n资料原文规定：“口服，小儿按体重一日30mg/kg，分3～4次服用” [4]。\n\n***\n\n**说明**：以上信息基于本轮提供的第三方来源资料，尚未完成医学权威核验。具体用药请遵医嘱。\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[3]、[4] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy31890.htm) · Neo4j / 药品资料 / 适应症（来源待核验） · Neo4j 原文 Section；Neo4j / 药品资料 / 用法用量（来源待核验） · Neo4j 原文 Section",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 禁忌（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：禁忌 原文：对本品、红霉素或其他大环内酯类抗生素过敏者禁用 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：禁忌\n原文：对本品、红霉素或其他大环内酯类抗生素过敏者禁用\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_7c0bcbf96f161f25db59dcc3",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_4c36ed44ecf63d5478e44e8a",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 注意事项（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：注意事项 原文：1．患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。2．溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。3．肾功能减退患者一般无需减少用量。4．服用本品期间宜定期随访肝功能。肝病患者和严重肾功能损害者的剂量应适当减少。5．对实验室检查指标的干扰：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值…",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：注意事项\n原文：1．患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。2．溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。3．肾功能减退患者一般无需减少用量。4．服用本品期间宜定期随访肝功能。肝病患者和严重肾功能损害者的剂量应适当减少。5．对实验室检查指标的干扰：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值出现假性增高。血清碱性磷酸酶、胆红素、丙氨酸氨基转移酶和门冬氨酸氨基转移酶的测定值均可能增高。6．因不同细菌对本品的敏感性存在一定差异，故宜作药敏测定。\n1．胃肠道反应有腹泻、恶心、呕吐、中上腹痛、口舌疼痛、胃纳减退等，发生率与剂量有关。本品的胃肠道反应发生率明显低于红霉素。2．乏力、恶心、呕吐、腹痛、发热及肝功能异常等肝毒性症状少见，偶见黄疸等。3．大剂量服用本品，可能引起听力减退，停药后大多可恢复。4．偶见过敏反应，表现为药物热、皮疹、嗜酸性粒细胞增多等。5．偶有心律失常、口腔或阴道念珠菌感染。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_7c0bcbf96f161f25db59dcc3",
+        "section_field": "warnings",
+        "candidate_id": "",
+        "section_id": "section_544a97aa8694dc332a004c06",
+        "parent_verified": false
+      },
+      {
+        "id": 3,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 适应症（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：适应症 原文：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：适应症\n原文：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_7c0bcbf96f161f25db59dcc3",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_a21fbf747237f81a4390988a",
+        "parent_verified": false
+      },
+      {
+        "id": 4,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 用法用量（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：用法用量 原文：口服，小儿按体重一日30mg/kg，分3～4次服用。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：用法用量\n原文：口服，小儿按体重一日30mg/kg，分3～4次服用。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_7c0bcbf96f161f25db59dcc3",
+        "section_field": "dosage",
+        "candidate_id": "",
+        "section_id": "section_e196cb446a0a09fdc90f1969",
+        "parent_verified": false
+      },
+      {
+        "id": 5,
+        "source": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：丙酸交沙霉素颗粒 疾病词条：扁桃体炎 原文证据：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。 候选 ID：diseasecandidate_d941f467add0915974a11a5a 候选审核状态：pending_human_review 临床验证状态：not_validat…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：丙酸交沙霉素颗粒\n疾病词条：扁桃体炎\n原文证据：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。\n候选 ID：diseasecandidate_d941f467add0915974a11a5a\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy31890.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_7c0bcbf96f161f25db59dcc3",
+        "section_field": "",
+        "candidate_id": "",
+        "section_id": "section_a21fbf747237f81a4390988a",
+        "parent_verified": false
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 5,
+        "direct_sections": 4,
+        "candidate_cards": 1,
+        "raw_candidate_nodes": 1,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 5,
+        "retained": 5,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 0,
+        "retained": 0
+      },
+      "merge": {
+        "unique_before_entity_filter": 8,
+        "after_entity_filter": 5,
+        "removed_by_entity_filter": 3,
+        "removed_by_dedup": 0,
+        "retained": 5,
+        "retained_neo4j_verified": 0,
+        "explicit_drugs": [
+          "丙酸交沙霉素颗粒"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 5,
+        "section_count": 4,
+        "candidate_count": 1,
+        "raw_candidate_nodes": 1,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 5
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 0,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "丙酸交沙霉素颗粒"
+      ],
+      "removed_other_drugs": 3,
+      "removed_unattributed": 0,
+      "kept": 5
+    },
+    "evidence_coverage": {
+      "decision": "partial",
+      "aspects": [
+        {
+          "question": "丙酸交沙霉素颗粒是否适用于治疗扁桃体炎？",
+          "status": "supported",
+          "evidence_ids": [
+            3
+          ],
+          "quotes": [
+            {
+              "id": 3,
+              "quote": "本品适用于化脓性链球菌引起的咽炎及扁桃体炎"
+            }
+          ],
+          "reason": "证据3原文明确列出该药适应症包含化脓性链球菌引起的扁桃体炎。"
+        },
+        {
+          "question": "该药物针对儿童的用法与剂量如何规定？",
+          "status": "supported",
+          "evidence_ids": [
+            4
+          ],
+          "quotes": [
+            {
+              "id": 4,
+              "quote": "口服，小儿按体重一日30mg/kg，分3～4次服用。"
+            }
+          ],
+          "reason": "证据4直接提供了小儿按体重计算的具体日剂量及分次服用方法。"
+        },
+        {
+          "question": "儿童使用该药前需警惕哪些禁忌症与不良反应？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "至少一条必要引文缺失、编号无效或与原文不一致"
+        },
+        {
+          "question": "现有证据是否说明儿童可“自行服用”该药（如处方属性或自我药疗指引）？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "证据仅摘录药品资料，未提及该药是否为处方药，也未给出关于儿童自行用药的安全指引或限制。"
+        }
+      ],
+      "evidence_ids": [
+        3,
+        4
+      ],
+      "answer_questions": [
+        "丙酸交沙霉素颗粒是否适用于治疗扁桃体炎？",
+        "该药物针对儿童的用法与剂量如何规定？"
+      ],
+      "refused_questions": [
+        "儿童使用该药前需警惕哪些禁忌症与不良反应？",
+        "现有证据是否说明儿童可“自行服用”该药（如处方属性或自我药疗指引）？"
+      ],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "no_new_evidence",
+      "queries": [
+        "丙酸交沙霉素颗粒是否为处方药，儿童扁桃体炎是否允许家长自行购药服用？",
+        "儿童使用丙酸交沙霉素颗粒的禁忌症与常见不良反应有哪些？"
+      ],
+      "new_chunks": 0,
+      "final_decision": "partial"
+    },
+    "medical_safety_guidance": {
+      "applied": true,
+      "category": "pediatric_antibiotic_self_medication",
+      "source_type": "general_safety_advice_not_document_evidence"
+    },
+    "total_seconds": 42.28
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

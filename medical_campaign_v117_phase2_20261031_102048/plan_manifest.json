@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "campaign_version": "V1.17",
+  "purpose": "阶段2质量回归；不是医学事实验证或官方说明书审核",
+  "unique_questions": 20,
+  "question_plan_sha256": "2c919a59a5fd43f88c5c4dcdf8d10158b1ee21de1c56637aa9ffafc308f74bf4",
+  "source_file": "evaluation_questions_v117_phase2_20.jsonl",
+  "requirements": {
+    "fresh_separate_chats": true,
+    "one_trace_per_question": true,
+    "do_not_reuse_old_review_labels": true,
+    "no_automatic_qwen_calls": true
+  }
+}

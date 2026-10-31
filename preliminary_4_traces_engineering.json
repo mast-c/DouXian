@@ -1,0 +1,35 @@
+{
+  "scope": "截至目前上传的4份修复后初步trace；早于最近一次儿童用药安全提示补丁的确认",
+  "source": "本次会话已上传的实际单轮问答文件；使用原 V1.17 medical_quality_acceptance.analyze_export 评估",
+  "engineering": [
+    {
+      "file": "medical_trace_005 (1).json",
+      "question": "阿托伐他汀钙片与10%、20%、30%脂肪乳注射液的适应症有何不同？",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "file": "medical_trace_007 (1).json",
+      "question": "脂肪乳注射液中卵磷脂的描述是否意味着脂肪乳可直接治疗动脉粥样硬化？",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "file": "medical_trace_009 (1).json",
+      "question": "儿童扁桃体炎可以自己服用丙酸交沙霉素颗粒吗？",
+      "status": "PASS",
+      "issues": []
+    },
+    {
+      "file": "medical_trace_011 (1).json",
+      "question": "如果查询不到某个药的禁忌信息，是否表示该药没有禁忌？",
+      "status": "PASS",
+      "issues": []
+    }
+  ],
+  "engineering_PASS": 4,
+  "engineering_WARN": 0,
+  "engineering_FAIL": 0,
+  "not_a_20_question_baseline": true,
+  "medical_review": "本轮未重新获得人工审核CSV，不得以工程PASS替代医学结论"
+}

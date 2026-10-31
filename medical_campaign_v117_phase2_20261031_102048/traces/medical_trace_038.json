@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "question": "这些 Neo4j 的 DiseaseCandidate 是否已经是可靠的药物治疗疾病关系？",
+  "answer": "当前检索到的知识库证据不足，无法可靠回答该问题。",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料：L-门冬氨酸氨氯地平片",
+        "section_path": "L-门冬氨酸氨氯地平片 / 注意事项 / warnings",
+        "preview": "药品：L-门冬氨酸氨氯地平片 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：1.肝功能受损病人:与其它所有钙离子阻滞剂相同，本品的半衰期在肝功能受损时延长，但尚未确定相应的推荐剂量，因此，在这种情况下使用本品应十分小心。 2.肾功能衰竭病人:本品广泛代谢为无活性代谢物，仅10%的药物以原形经尿液排泄，故血药浓度的改变与肾功能损害程度无相关性，肾功能损害患者可以采用正常剂量。本品不被透析。 3.本品如其它钙离子阻滞剂，可罕见有齿龈增生，多在治疗1-9月时发…",
+        "content": "药品：L-门冬氨酸氨氯地平片\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1.肝功能受损病人:与其它所有钙离子阻滞剂相同，本品的半衰期在肝功能受损时延长，但尚未确定相应的推荐剂量，因此，在这种情况下使用本品应十分小心。 2.肾功能衰竭病人:本品广泛代谢为无活性代谢物，仅10%的药物以原形经尿液排泄，故血药浓度的改变与肾功能损害程度无相关性，肾功能损害患者可以采用正常剂量。本品不被透析。 3.本品如其它钙离子阻滞剂，可罕见有齿龈增生，多在治疗1-9月时发生，但停药后1-21周症状和增生可有改变。 4.外科手术前无须停药，但麻醉师须知道用此药治疗。 5.下列情况禁用: (1)严重低血压。 (2)主动脉瓣狭窄。\n1.较常见的不良反应有头痛﹑水肿﹑疲劳﹑失眠﹑恶心﹑腹痛﹑面红﹑心悸和头晕。 2.较为少见的不良反应为心绞痛，低血压，心动过缓，体位性低血压﹑瘙痒﹑皮疹﹑呼吸困难，无力﹑肌肉痉挛和消化不良。 3.本品与其它钙拮抗剂相似，极少有心肌梗塞和胸痛的不良反应报道，而且这些不良反应不能与病人本身的基础疾病明确区分;尚未发现与本品有关的实验室检查参数异常。\n本品用于妊娠和哺乳期妇女的安全性尚未确定。动物试验中给予大鼠本品10mg/kg，除引起分娩延迟和滞产外，宫内死亡增加5倍，同窝崽数减少50%，因此，仅在无其他更安全的代替药物和疾病本身对母子的危险性更大是才可使用本品。尚未见本品是否排入乳汁的报道。\n尚未有本品用于儿童的资料。\n本品血药浓度达峰时间在老年和年轻患者是相似的，老年患者药时曲线下面积（AUC）增加，消除半衰期延长，使清除率有下降趋势.有报道在接受相似剂量的氨氯地平时，老年患者具有与年轻患者相同的良好耐受性.因此，老年患者可用正常剂量，但开始宜用较小剂量，再渐增量为妥.\n现有资料提示，严重过量用药能导致外周血管过度扩张，继而出现显著而持久的全身性低血压，心动过缓，罕见有Ⅱ或Ⅲ度房室传导阻滞，少数病人可发生心脏停搏。前者应静脉给予多巴胺，去甲肾上腺素治疗，后者须给阿托品，异丙肾，氯化钙治疗，如有适应症应安置心脏起搏器.",
+        "source_url": "https://www.yaopinnet.com/huayao/hy5996u.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "L-门冬氨酸氨氯地平片",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_8ab6e2edbaf6bd7c9d416d54",
+        "section_field": "warnings",
+        "candidate_id": "",
+        "section_id": "section_fb3199a7fa69c12f333cd3c3",
+        "parent_verified": true
+      },
+      {
+        "id": 2,
+        "source": "药品资料：L-谷氨酰胺胶囊",
+        "section_path": "L-谷氨酰胺胶囊 / 禁忌 / contraindications[0]",
+        "preview": "药品：L-谷氨酰胺胶囊 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：尚不明确",
+        "content": "药品：L-谷氨酰胺胶囊\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确",
+        "source_url": "https://www.yaopinnet.com/huayao/hy52136.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "L-谷氨酰胺胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_ee0f63a965fa6919d904f6c8",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_ac5595a178a92a68d336be45",
+        "parent_verified": true
+      },
+      {
+        "id": 3,
+        "source": "药品资料：七叶皂苷钠搽剂",
+        "section_path": "七叶皂苷钠搽剂 / 药物相互作用 / drug_interactions",
+        "preview": "药品：七叶皂苷钠搽剂 栏目：药物相互作用 资料状态：第三方来源尚未完成医学权威核验 证据原文：未进行该项实验且无可靠参考文献。",
+        "content": "药品：七叶皂苷钠搽剂\n栏目：药物相互作用\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：未进行该项实验且无可靠参考文献。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy6147g.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "七叶皂苷钠搽剂",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_31b77f376f67280d57a76f5c",
+        "section_field": "drug_interactions",
+        "candidate_id": "",
+        "section_id": "section_d6e11b328a6b8dd1c3b6e809",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "no_match",
+        "returned": 0,
+        "direct_sections": 0,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 0,
+        "retained": 0,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 3,
+        "retained": 3
+      },
+      "merge": {
+        "unique_before_entity_filter": 3,
+        "after_entity_filter": 3,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 0,
+        "retained": 3,
+        "retained_neo4j_verified": 3,
+        "explicit_drugs": []
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "no_match",
+        "hits": 0,
+        "section_count": 0,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 0
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 3,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "unrestricted",
+      "explicit_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 3
+    },
+    "evidence_coverage": {
+      "decision": "refuse",
+      "aspects": [
+        {
+          "question": "Neo4j中的DiseaseCandidate是否代表已验证或可靠的药物-疾病关系？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "提供的证据仅为三种具体药品的说明书内容，完全未涉及Neo4j数据库、DiseaseCandidate的概念定义、数据验证机制或可靠性评估标准，无法支撑回答。"
+        }
+      ],
+      "evidence_ids": [],
+      "answer_questions": [],
+      "refused_questions": [
+        "Neo4j中的DiseaseCandidate是否代表已验证或可靠的药物-疾病关系？"
+      ],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "unchanged",
+      "queries": [
+        "Neo4j图谱中DiseaseCandidate实体的具体定义是什么，其属性字段包含哪些用于评估可靠性的验证状态或置信度信息？",
+        "该Neo4j数据集中DiseaseCandidate所关联的药物-疾病对是如何获取的，依据什么标准判断其属于已验证关系还是候选预测？"
+      ],
+      "new_chunks": 2,
+      "final_decision": "refuse"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 54.66
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

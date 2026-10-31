@@ -174,19 +174,43 @@ _MEDICAL_FIELDS = {
 
 
 def fields_for_question(question: str) -> list[str]:
-    """只选择最相关的药品说明书栏目，避免把整份说明书灌进模型。"""
+    """按原问题覆盖的所有医学维度返回字段并集，而非命中第一个字段就停止。"""
     text = str(question or "")
-    if re.search(r"禁忌|禁用|不宜|慎用|不能用|过敏", text):
-        return ["contraindications", "warnings"]
-    if re.search(r"不良反应|副作用|不适|毒性|安全性", text):
-        return ["adverse_reactions", "warnings"]
-    if re.search(r"相互作用|药物联用|合用|一起吃|配伍", text):
-        return ["drug_interactions", "warnings"]
-    if re.search(r"剂量|用法|用量|怎么服|服用次数|给药途径", text):
-        return ["dosage", "warnings"]
-    if re.search(r"成分|组成|主要物质", text):
-        return ["composition"]
-    return ["indication"]
+    found: set[str] = set()
+    patterns = (
+        (r"治疗|哪些药|什么药|药物有哪些|有哪些药物|适应症|适应证|用于什么|预防", ("indication",)),
+        (r"禁忌|禁用|不宜|不能用|过敏", ("contraindications",)),
+        (r"不良反应|副作用|不适反应|毒性|安全性", ("adverse_reactions",)),
+        (r"注意事项|警告|慎用|注意什么", ("warnings",)),
+        (r"相互作用|药物联用|合用|一起吃|配伍", ("drug_interactions", "warnings")),
+        (r"剂量|用法|用量|怎么服|服用次数|给药途径", ("dosage",)),
+        (r"成分|组成|主要物质", ("composition",)),
+    )
+    for pattern, fields in patterns:
+        if re.search(pattern, text):
+            found.update(fields)
+
+    # V1.17 阶段 2：儿童适用性/自行用药问题需同时核对说明书的安全栏目。
+    # 只调整只读 Neo4j Section 检索范围，不据此批准自行用药或推荐剂量。
+    pediatric = bool(re.search(r"儿童|小儿|婴幼儿|婴儿|新生儿|孩子", text))
+    suitability = bool(re.search(
+        r"能否|能不能|可不可以|可以|可否|是否适合|适合|"
+        r"能给|能用|能吃|能服用|自行|自己|安全吗|安全性", text
+    ))
+    self_medication = bool(re.search(
+        r"自行(?:服用|服药|用药|吃药)?|自己(?:服用|服药|用药|吃药)|"
+        r"未经(?:医生|医师|医嘱)|不用看医生", text
+    ))
+    if pediatric and suitability:
+        found.update(("indication", "warnings", "contraindications", "dosage"))
+    elif self_medication:
+        found.update(("indication", "warnings", "contraindications"))
+
+    if not found:
+        found.add("indication")
+    priority = ("indication", "adverse_reactions", "warnings", "contraindications",
+                "drug_interactions", "dosage", "composition")
+    return [field for field in priority if field in found]
 
 
 def format_section(record: dict[str, Any]) -> dict[str, Any] | None:
@@ -222,6 +246,32 @@ def format_section(record: dict[str, Any]) -> dict[str, Any] | None:
 
 
 
+_SECTION_BY_DRUG_NAME_AND_FIELD = """
+MATCH (d:Drug {name: $drug_name})-[:HAS_RECORD]->(r:SourceRecord)
+      -[:HAS_SECTION]->(s:Section)
+WHERE toLower(coalesce(s.field, '')) = $field
+  AND s.text IS NOT NULL AND trim(s.text) <> ''
+RETURN d.name AS drug_name,
+       r.id AS record_id, r.source_url AS source_url,
+       r.authority_status AS authority_status,
+       s.id AS section_id, s.field AS section_field, s.text AS section_text
+ORDER BY r.id, s.id
+LIMIT $limit
+"""
+
+
+def is_disease_drug_list_question(question: str) -> bool:
+    """识别要求列出疾病相关药品的查询，不据此推定任何治疗关系。"""
+    text = str(question or "").strip()
+    return bool(re.search(
+        r"(?:药物|药品|药).{0,5}有哪些|有哪些.{0,5}(?:药物|药品|药)|"
+        r"(?:什么|哪些)(?:药物|药品|药)|"
+        r"治疗.{0,24}(?:药物|药品|什么药|哪些药)",
+        text,
+    ))
+
+
+
 _PARENT_SECTION_BY_IDS = """
 MATCH (d:Drug {id: $drug_id})-[:HAS_RECORD]->
       (r:SourceRecord {id: $record_id})-[:HAS_SECTION]->
@@ -230,6 +280,71 @@ RETURN d.name AS drug_name, r.source_url AS source_url,
        s.field AS field, s.text AS full_section
 LIMIT 2
 """
+
+
+def compact_same_quote_candidates(
+    items: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """同一药品同一 Section 的相同证据句只展示一遍，保留词条与候选 ID。"""
+    groups: dict[tuple[str, ...], dict[str, Any]] = {}
+    ordered: list[dict[str, Any]] = []
+    for item in items:
+        if item.get("evidence_type") != "unverified_drug_disease_candidate":
+            ordered.append(dict(item))
+            continue
+        record_id = str(item.get("record_id") or "").strip()
+        section_id = str(item.get("section_id") or "").strip()
+        candidate_id = str(item.get("candidate_id") or "").strip()
+        term = str(item.get("disease_term") or "").strip()
+        quote = " ".join(str(item.get("evidence_quote") or "").split())
+        # 只有能够确定属于同一原文 Section 的候选才合并。
+        if not all((record_id, section_id, quote, candidate_id)):
+            result = dict(item)
+            result["candidate_ids"] = [candidate_id] if candidate_id else []
+            result["disease_terms"] = [term] if term else []
+            ordered.append(result)
+            continue
+        key = (
+            str(item.get("drug_name") or ""), record_id, section_id,
+            quote, str(item.get("source_url") or ""),
+            str(item.get("candidate_status") or ""),
+            str(item.get("clinical_status") or ""),
+            str(item.get("source_status") or ""),
+        )
+        if key not in groups:
+            result = dict(item)
+            result["candidate_ids"] = [candidate_id]
+            result["disease_terms"] = [term] if term else []
+            groups[key] = result
+            ordered.append(result)
+        else:
+            result = groups[key]
+            if candidate_id not in result["candidate_ids"]:
+                result["candidate_ids"].append(candidate_id)
+            if term and term not in result["disease_terms"]:
+                result["disease_terms"].append(term)
+
+    for item in ordered:
+        terms = item.get("disease_terms") or []
+        ids = item.get("candidate_ids") or []
+        if len(terms) <= 1:
+            continue
+        item["disease_term"] = "、".join(terms)
+        original = item.get("content") or ""
+        original_first_term = str(original.split("疾病词条：", 1)[-1].split("\n", 1)[0])
+        if "疾病词条：" in original:
+            item["content"] = original.replace(
+                "疾病词条：" + original_first_term,
+                "疾病词条（同句多个候选）： " + "、".join(terms), 1
+            )
+        oldid = str(item.get("candidate_id") or "")
+        if oldid and "候选 ID：" in item["content"]:
+            item["content"] = item["content"].replace(
+                "候选 ID：" + oldid,
+                "候选 ID（同句）： " + "、".join(ids), 1
+            )
+    return ordered
+
 
 class DrugGraphRetriever:
     def __init__(self, driver: Any = None):
@@ -259,14 +374,26 @@ class DrugGraphRetriever:
                 lambda tx: [row.data() for row in tx.run(cypher, **parameters)]
             )
 
-    def search(self, question: str, limit: int = 5) -> list[dict[str, Any]]:
+    def search(self, question: str, limit: int = 5, *,
+               explicit_disease_only: bool = False) -> list[dict[str, Any]]:
         """以用户完整问题匹配图谱中的明确药品/疾病名称，避免错误模糊关联。"""
         if not isinstance(question, str) or not question.strip():
             return []
         limit = max(1, min(int(limit), 10))
         normalized = " ".join(question.split())[:500]
         drugs = self._run(_DRUG_IDENTIFY, question=normalized)
-        terms = self._run(_TERM_IDENTIFY, question=normalized)
+        # 疾病名必须明确出现在用户提问中，而不是仅出现在药品名称的内部
+        # 子串里（例如药名中的通用词恰好与某个疾病词匹配）。
+        disease_part = normalized
+        for drug in drugs:
+            name = str(drug.get("name") or "").strip()
+            if name:
+                disease_part = disease_part.replace(name, " ")
+        terms = self._run(_TERM_IDENTIFY, question=disease_part)
+        # 对适应症比较与开放的治疗问题，未命中明确疾病名称时，不应该
+        # 按候选 ID 枚举恰好排在前面的三条疾病词；优先返回说明书章节。
+        if explicit_disease_only and not terms:
+            return []
         seen: set[str] = set()
         results: list[dict[str, Any]] = []
         if drugs and terms:
@@ -276,9 +403,15 @@ class DrugGraphRetriever:
                 for term in terms:
                     if not drug.get("id") or not term.get("id"):
                         continue
+                    # 两药比较同一疾病时，不能让第一种药占满全局候选上限。
+                    per_pair_limit = max(
+                        1, (limit + len(drugs) * len(terms) - 1)
+                        // (len(drugs) * len(terms))
+                    )
                     records = self._run(
                         _PAIR_CANDIDATES,
-                        id=drug["id"], term_id=term["id"], limit=limit,
+                        id=drug["id"], term_id=term["id"],
+                        limit=per_pair_limit,
                     )
                     for record in records:
                         candidate = format_candidate(record)
@@ -295,7 +428,13 @@ class DrugGraphRetriever:
                 eid = str(entity.get("id") or "").strip()
                 if not eid:
                     continue
-                for record in self._run(cypher, id=eid, limit=limit):
+                # 没有疾病名的开放探索，尽可能均匀覆盖不同被点名药品。
+                per_entity_limit = max(
+                    1, (limit + len(entities) - 1) // len(entities)
+                )
+                for record in self._run(
+                    cypher, id=eid, limit=per_entity_limit
+                ):
                     candidate = format_candidate(record)
                     if candidate is None or candidate["candidate_id"] in seen:
                         continue
@@ -315,10 +454,12 @@ class DrugGraphRetriever:
         limit = max(1, min(int(limit), 4))
         results: list[dict[str, Any]] = []
         seen = set()
-        for drug in drugs:
-            if not drug.get("id"):
-                continue
-            remaining = limit - len(results)
+        valid_drugs = [d for d in drugs if d.get("id")]
+        # 一药多 SourceRecord 时不能把所有名额占满：先为每种明确药物
+        # 分配自己的 Section 配额，避免双药对比只显示第一种药。
+        per_drug = max(1, limit // max(1, len(valid_drugs)))
+        for drug in valid_drugs:
+            remaining = min(per_drug, limit - len(results))
             if remaining <= 0:
                 break
             rows = self._run(
@@ -334,6 +475,51 @@ class DrugGraphRetriever:
                     continue
                 seen.add(key)
                 results.append(section)
+        return results
+
+
+    def search_fields_for_drugs(
+        self, drug_names: list[str], fields: list[str],
+        *, max_drugs: int = 4, max_sections: int = 8,
+    ) -> list[dict[str, Any]]:
+        """对疾病候选识别出的药品，按药名×栏目补查真实说明书 Section。
+
+        只使用 Drug.name 精确匹配和固定字段白名单；每药每栏目最多一段原文。
+        结果只是第三方数据集中的原文，不证明临床有效性。
+        """
+        if not (1 <= max_drugs <= 6 and 1 <= max_sections <= 16):
+            raise ValueError("max_drugs/max_sections 超出受控范围")
+        distinct = list(dict.fromkeys(
+            name.strip() for name in drug_names
+            if isinstance(name, str) and name.strip()
+        ))[:max_drugs]
+        allowed_fields = list(dict.fromkeys(
+            field for field in fields if field in _MEDICAL_FIELDS
+        ))
+        if not distinct or not allowed_fields:
+            return []
+
+        results: list[dict[str, Any]] = []
+        seen: set[tuple[str, str]] = set()
+        # 先每药选第一个栏目，再选第二个栏目，保证跨药品公平性。
+        for field in allowed_fields:
+            for drug_name in distinct:
+                if len(results) >= max_sections:
+                    return results
+                rows = self._run(
+                    _SECTION_BY_DRUG_NAME_AND_FIELD,
+                    drug_name=drug_name, field=field, limit=1,
+                )
+                for row in rows:
+                    section = format_section(row)
+                    if section is None:
+                        continue
+                    key = (section["record_id"], section["section_id"])
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    results.append(section)
+                    break
         return results
 
     def fetch_parent_section(self, meta: dict[str, Any]) -> dict[str, Any] | None:

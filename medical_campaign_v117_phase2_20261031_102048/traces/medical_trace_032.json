@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "question": "丁苯酞软胶囊的适应症和不良反应有哪些？",
+  "answer": "根据检索到的资料，丁苯酞软胶囊的适应症和不良反应如下：\n\n### 1. 适应症\n用于轻、中度急性缺血性脑卒中 [1]。\n\n### 2. 不良反应\n本品不良反应较少，主要为转氨酶轻度升高（停药后可恢复正常）。偶见恶心、腹部不适、皮疹及精神症状等 [2]。\n\n***\n\n**说明**：以上信息基于本轮提供的第三方来源资料，尚未完成医学权威核验。具体用药请遵医嘱。\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1]、[2] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy6294t.htm) · 丁苯酞软胶囊 / 适应症 / indication · Chroma Hybrid 召回，Neo4j Section 原文核对；丁苯酞软胶囊 / 不良反应 / adverse_reactions · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料：丁苯酞软胶囊",
+        "section_path": "丁苯酞软胶囊 / 适应症 / indication",
+        "preview": "药品：丁苯酞软胶囊 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：轻、中度急性缺血性脑卒中。",
+        "content": "药品：丁苯酞软胶囊\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：轻、中度急性缺血性脑卒中。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy6294t.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "丁苯酞软胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_6a33ede07cc68c8cd6bc198b",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_2c3e3959b56633b1e44abcf8",
+        "parent_verified": true
+      },
+      {
+        "id": 2,
+        "source": "药品资料：丁苯酞软胶囊",
+        "section_path": "丁苯酞软胶囊 / 不良反应 / adverse_reactions",
+        "preview": "药品：丁苯酞软胶囊 栏目：不良反应 资料状态：第三方来源尚未完成医学权威核验 证据原文：本品不良反应较少，主要为转氨酶轻度升高，根据部分随访观察的病例，停药后可恢复正常。偶见恶心、腹部不适、皮疹及精神症状等。在丁苯酞Ⅱ、Ⅲ期临床研究中，与药物相关的不良反应见表1：表1与药物相关的不良反应发生率不良反应丁苯酞组n=376对照组n=168例数发生率例数发生率",
+        "content": "药品：丁苯酞软胶囊\n栏目：不良反应\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：本品不良反应较少，主要为转氨酶轻度升高，根据部分随访观察的病例，停药后可恢复正常。偶见恶心、腹部不适、皮疹及精神症状等。在丁苯酞Ⅱ、Ⅲ期临床研究中，与药物相关的不良反应见表1：表1与药物相关的不良反应发生率不良反应丁苯酞组n=376对照组n=168例数发生率例数发生率",
+        "source_url": "https://www.yaopinnet.com/huayao/hy6294t.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "丁苯酞软胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_6a33ede07cc68c8cd6bc198b",
+        "section_field": "adverse_reactions",
+        "candidate_id": "",
+        "section_id": "section_3c7e52f3d6ee782a5c6d09be",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 2,
+        "direct_sections": 2,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 2,
+        "retained": 0,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 2,
+        "indexed_chunks": 313,
+        "parent_verified": 2,
+        "parent_rejected": 0,
+        "section_not_relevant": 4,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 2,
+        "retained": 2
+      },
+      "merge": {
+        "unique_before_entity_filter": 4,
+        "after_entity_filter": 4,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 2,
+        "retained": 2,
+        "retained_neo4j_verified": 2,
+        "explicit_drugs": [
+          "丁苯酞软胶囊"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 0,
+        "section_count": 2,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 2
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 2,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 6,
+          "skipped_section": 4,
+          "failed_provenance": 0,
+          "verified": 2,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "adverse_reactions",
+            "indication"
+          ],
+          "selected": 2
+        },
+        "hits_before_entity_gate": 2
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "丁苯酞软胶囊"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 4
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "丁苯酞软胶囊的适应症有哪些？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "证据原文：轻、中度急性缺血性脑卒中。"
+            }
+          ],
+          "reason": "证据1直接明确记载了该药品的适应症范围，可完整回答。"
+        },
+        {
+          "question": "丁苯酞软胶囊的不良反应有哪些？",
+          "status": "supported",
+          "evidence_ids": [
+            2
+          ],
+          "quotes": [
+            {
+              "id": 2,
+              "quote": "证据原文：本品不良反应较少，主要为转氨酶轻度升高，根据部分随访观察的病例，停药后可恢复正常。偶见恶心、腹部不适、皮疹及精神症状等。"
+            }
+          ],
+          "reason": "证据2详细列举了主要及偶见的不良反应类型，满足提问需求。"
+        }
+      ],
+      "evidence_ids": [
+        1,
+        2
+      ],
+      "answer_questions": [
+        "丁苯酞软胶囊的适应症有哪些？",
+        "丁苯酞软胶囊的不良反应有哪些？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "skipped",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 22.79
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

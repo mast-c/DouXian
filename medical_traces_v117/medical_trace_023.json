@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "question": "丙酸交沙霉素颗粒是否经监管机构正式批准用于扁桃体炎？",
+  "answer": "根据本轮提供的证据 [1]，关于丙酸交沙霉素颗粒适应症信息的权威性与来源性质如下：\n\n**1. 来源性质：第三方非官方资料**\n该信息来源于“药品资料”中的第三方数据集，并非上市产品的最新版官方核准说明书。证据明确标注为“数据集中保存的第三方资料文本”，仅描述资料如何陈述，不等同于官方核准内容。\n\n**2. 权威性与审核状态：待核验/未权威认证**\n*   **章节状态**：所属章节标记为“来源待核验”。\n*   **医学权威性**：明确注明“来源未完成医学权威核验”。\n*   **结论**：当前证据无法核实其是否为官方批准的最新适应症，不能视为已证实的权威治疗依据。\n\n\n\n**当前知识库证据不足，暂无法可靠回答：**\n- 丙酸交沙霉素颗粒是否经监管机构正式批准用于扁桃体炎？\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy31890.htm) · Neo4j / 药品资料 / 适应症（来源待核验） · Neo4j 原文 Section",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 适应症（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：适应症 原文：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：适应症\n原文：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_a21fbf747237f81a4390988a",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：丙酸交沙霉素颗粒 疾病词条：扁桃体炎 原文证据：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。 候选 ID：diseasecandidate_d941f467add0915974a11a5a 候选审核状态：pending_human_review 临床验证状态：not_validat…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：丙酸交沙霉素颗粒\n疾病词条：扁桃体炎\n原文证据：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。\n候选 ID：diseasecandidate_d941f467add0915974a11a5a\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy31890.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_a21fbf747237f81a4390988a",
+        "parent_verified": false
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 2,
+        "direct_sections": 1,
+        "candidate_cards": 1,
+        "raw_candidate_nodes": 1,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 2,
+        "retained": 2,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 0,
+        "retained": 0
+      },
+      "merge": {
+        "unique_before_entity_filter": 5,
+        "after_entity_filter": 2,
+        "removed_by_entity_filter": 3,
+        "removed_by_dedup": 0,
+        "retained": 2,
+        "retained_neo4j_verified": 0,
+        "explicit_drugs": [
+          "丙酸交沙霉素颗粒"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 2,
+        "section_count": 1,
+        "candidate_count": 1,
+        "raw_candidate_nodes": 1,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 2
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 0,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "丙酸交沙霉素颗粒"
+      ],
+      "removed_other_drugs": 3,
+      "removed_unattributed": 0,
+      "kept": 2
+    },
+    "evidence_coverage": {
+      "decision": "partial",
+      "aspects": [
+        {
+          "question": "丙酸交沙霉素颗粒是否经监管机构正式批准用于扁桃体炎？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "证据仅展示第三方未核验的适应症文本，明确声明不等同于官方核准说明书，且完全缺失任何监管机构的审批记录或批复文件，无法证实实际获批状态。"
+        },
+        {
+          "question": "当前证据中关于该药适应症信息的权威性与来源性质为何？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。"
+            }
+          ],
+          "reason": "证据原文直接定性该适应症内容属于未经验核的第三方数据集文本，明确指出其不具备官方说明书的等效效力。"
+        }
+      ],
+      "evidence_ids": [
+        1
+      ],
+      "answer_questions": [
+        "当前证据中关于该药适应症信息的权威性与来源性质为何？"
+      ],
+      "refused_questions": [
+        "丙酸交沙霉素颗粒是否经监管机构正式批准用于扁桃体炎？"
+      ],
+      "message": ""
+    },
+    "total_seconds": 49.78
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "question": "丙酸交沙霉素颗粒对红霉素过敏者是否可以使用？有哪些原文禁忌和注意事项？",
+  "answer": "根据检索到的资料，针对您的提问回答如下：\n\n### 1. 丙酸交沙霉素颗粒对红霉素过敏者是否可以使用？\n**不可以使用。**\n*   **依据（禁忌）**：资料原文明确规定：“对本品、红霉素或其他大环内酯类抗生素过敏者禁用” [1]。\n*   **依据（注意事项）**：资料原文指出：“患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受” [2]。\n\n### 2. 丙酸交沙霉素颗粒的原文禁忌内容有哪些？\n根据资料，其禁忌内容为：\n*   “对本品、红霉素或其他大环内酯类抗生素过敏者禁用” [1]。\n\n### 3. 丙酸交沙霉素颗粒的原文注意事项内容有哪些？\n根据资料，其注意事项包括以下内容 [2]：\n1.  **过敏交叉反应**：患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。\n2.  **疗程要求**：溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。\n3.  **剂量调整**：肾功能减退患者一般无需减少用量；肝病患者和严重肾功能损害者的剂量应适当减少。\n4.  **随访监测**：服用本品期间宜定期随访肝功能。\n5.  **实验室检查干扰**：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值出现假性增高；血清碱性磷酸酶、胆红素、丙氨酸氨基转移酶和门冬氨酸氨基转移酶的测定值均可能增高。\n6.  **药敏测定建议**：因不同细菌对本品的敏感性存在一定差异，故宜作药敏测定。\n7.  **不良反应提示**：\n    *   **胃肠道反应**：有腹泻、恶心、呕吐、中上腹痛、口舌疼痛、胃纳减退等，发生率与剂量有关。本品的胃肠道反应发生率明显低于红霉素。\n    *   **肝毒性症状**：乏力、恶心、呕吐、腹痛、发热及肝功能异常等肝毒性症状少见，偶见黄疸等。\n    *   **听力影响**：大剂量服用本品，可能引起听力减退，停药后大多可恢复。\n    *   **过敏反应**：偶见过敏反应，表现为药物热、皮疹、嗜酸性粒细胞增多等。\n    *   **其他**：偶有心律失常、口腔或阴道念珠菌感染。\n\n***\n\n**说明**：以上信息基于本轮提供的第三方来源资料，尚未完成医学权威核验。具体用药请遵医嘱。\n\n\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1]、[2] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy31890.htm) · Neo4j / 药品资料 / 禁忌（来源待核验） · Neo4j 原文 Section；Neo4j / 药品资料 / 注意事项（来源待核验） · Neo4j 原文 Section",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 禁忌（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：禁忌 原文：对本品、红霉素或其他大环内酯类抗生素过敏者禁用 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：禁忌\n原文：对本品、红霉素或其他大环内酯类抗生素过敏者禁用\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_7c0bcbf96f161f25db59dcc3",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_4c36ed44ecf63d5478e44e8a",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 注意事项（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：注意事项 原文：1．患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。2．溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。3．肾功能减退患者一般无需减少用量。4．服用本品期间宜定期随访肝功能。肝病患者和严重肾功能损害者的剂量应适当减少。5．对实验室检查指标的干扰：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值…",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：注意事项\n原文：1．患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。2．溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。3．肾功能减退患者一般无需减少用量。4．服用本品期间宜定期随访肝功能。肝病患者和严重肾功能损害者的剂量应适当减少。5．对实验室检查指标的干扰：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值出现假性增高。血清碱性磷酸酶、胆红素、丙氨酸氨基转移酶和门冬氨酸氨基转移酶的测定值均可能增高。6．因不同细菌对本品的敏感性存在一定差异，故宜作药敏测定。\n1．胃肠道反应有腹泻、恶心、呕吐、中上腹痛、口舌疼痛、胃纳减退等，发生率与剂量有关。本品的胃肠道反应发生率明显低于红霉素。2．乏力、恶心、呕吐、腹痛、发热及肝功能异常等肝毒性症状少见，偶见黄疸等。3．大剂量服用本品，可能引起听力减退，停药后大多可恢复。4．偶见过敏反应，表现为药物热、皮疹、嗜酸性粒细胞增多等。5．偶有心律失常、口腔或阴道念珠菌感染。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_7c0bcbf96f161f25db59dcc3",
+        "section_field": "warnings",
+        "candidate_id": "",
+        "section_id": "section_544a97aa8694dc332a004c06",
+        "parent_verified": false
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 2,
+        "direct_sections": 2,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 2,
+        "retained": 2,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 5,
+        "indexed_chunks": 313,
+        "parent_verified": 5,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 0,
+        "retained": 0
+      },
+      "merge": {
+        "unique_before_entity_filter": 7,
+        "after_entity_filter": 2,
+        "removed_by_entity_filter": 5,
+        "removed_by_dedup": 0,
+        "retained": 2,
+        "retained_neo4j_verified": 0,
+        "explicit_drugs": [
+          "丙酸交沙霉素颗粒"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 2,
+        "section_count": 2,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 2
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 0,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 5,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 5,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "contraindications",
+            "warnings"
+          ],
+          "selected": 5
+        },
+        "hits_before_entity_gate": 5
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "丙酸交沙霉素颗粒"
+      ],
+      "removed_other_drugs": 5,
+      "removed_unattributed": 0,
+      "kept": 2
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "丙酸交沙霉素颗粒对红霉素过敏者是否可以使用？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "对本品、红霉素或其他大环内酯类抗生素过敏者禁用"
+            }
+          ],
+          "reason": "证据1明确记载对本品、红霉素或其他大环内酯类过敏者禁用，可直接得出不可使用的结论。"
+        },
+        {
+          "question": "丙酸交沙霉素颗粒的原文禁忌内容有哪些？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "对本品、红霉素或其他大环内酯类抗生素过敏者禁用"
+            }
+          ],
+          "reason": "证据1完整提供了禁忌章节原文，明确列出对本品、红霉素及其他大环内酯类过敏者禁用。"
+        },
+        {
+          "question": "丙酸交沙霉素颗粒的原文注意事项内容有哪些？",
+          "status": "supported",
+          "evidence_ids": [
+            2
+          ],
+          "quotes": [
+            {
+              "id": 2,
+              "quote": "患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。"
+            },
+            {
+              "id": 2,
+              "quote": "溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。"
+            }
+          ],
+          "reason": "证据2详细列出了注意事项原文，涵盖交叉过敏风险、特定感染疗程、肝肾功能调整、实验室干扰及常见不良反应等。"
+        }
+      ],
+      "evidence_ids": [
+        1,
+        2
+      ],
+      "answer_questions": [
+        "丙酸交沙霉素颗粒对红霉素过敏者是否可以使用？",
+        "丙酸交沙霉素颗粒的原文禁忌内容有哪些？",
+        "丙酸交沙霉素颗粒的原文注意事项内容有哪些？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "skipped",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 53.4
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

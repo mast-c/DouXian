@@ -17,12 +17,31 @@ _FAKE_LOCAL_LINK = re.compile(
 )
 _EMPTY_BULLET = re.compile(r"^\s*[-*+]\s*$")
 _REFERENCE_MARKERS = re.compile(r"\[([0-9]+)\]")
+# LLM可能模仿历史回答，自行写出下方这种尾注；程序已有唯一的真实引用表。
+# 支持“参考资料（同一来源的不同片段合并显示）”：以及 Markdown 标题。
+_MODEL_FOOTER_HEADING = re.compile(
+    r"^\s*(?:#{1,6}\s*)?(?:\*{1,2})?"
+    r"(?:参考资料|参考文献|引用来源)"
+    r"(?:（[^）\n]{0,90}）|\([^)]{0,90}\))?"
+    r"(?:\*{1,2})?\s*(?:[:：]\s*(?:\*{0,2})?|(?=\s*$))",
+    re.IGNORECASE,
+)
 
 
 def _clean_line(line: str) -> str | None:
     """只修复可证明无意义的本地 SVG 链接与空列表行。"""
     if _EMPTY_BULLET.fullmatch(line):
         return None
+    # 仅修复此前模型实际出现过的医学审核措辞错误，不改变来源文档。
+    # 通过的是程序级文本核对，并非医学专家审批。
+    line = line.replace(
+        "根据审核通过的证据",
+        "根据检索到并完成程序级原文核对的资料",
+    )
+    line = line.replace(
+        "依据审核通过的证据",
+        "依据检索到并完成程序级原文核对的资料",
+    )
     return _FAKE_LOCAL_LINK.sub("", line).rstrip()
 
 
@@ -39,14 +58,21 @@ class MedicalAnswerStreamFilter:
         self._buffer = ""
         self._threshold = int(long_line_threshold)
         self._reserve = int(reserve)
+        self._footer_detected = False
 
     def feed(self, piece: str) -> str:
-        if not isinstance(piece, str) or not piece:
+        if not isinstance(piece, str) or not piece or self._footer_detected:
             return ""
         self._buffer += piece
         output = []
         while "\n" in self._buffer:
             line, self._buffer = self._buffer.split("\n", 1)
+            if _MODEL_FOOTER_HEADING.match(line):
+                # 一旦模型自己开始了参考资料块，后续正文全部丢弃。
+                # rag.py 会在模型输出结束后追加且只追加一次正式引用。
+                self._footer_detected = True
+                self._buffer = ""
+                break
             clean = _clean_line(line)
             if clean is not None:
                 output.append(clean + "\n")
@@ -54,12 +80,20 @@ class MedicalAnswerStreamFilter:
         # 只在未换行的超长句子中保留 240 字符尾部，保持流式输出。
         # 避免空项和 [svg](...) 恰好跨流式分块时被提前显示。
         if len(self._buffer) > self._threshold:
-            safe_cut = len(self._buffer) - self._reserve
-            prefix, self._buffer = self._buffer[:safe_cut], self._buffer[safe_cut:]
-            output.append(_FAKE_LOCAL_LINK.sub("", prefix))
+            # 不输出本身已经以“参考资料（...）”开头的长尾注。
+            if _MODEL_FOOTER_HEADING.match(self._buffer):
+                self._footer_detected = True
+                self._buffer = ""
+            else:
+                safe_cut = len(self._buffer) - self._reserve
+                prefix, self._buffer = self._buffer[:safe_cut], self._buffer[safe_cut:]
+                output.append(_FAKE_LOCAL_LINK.sub("", prefix))
         return "".join(output)
 
     def finish(self) -> str:
+        if self._footer_detected or _MODEL_FOOTER_HEADING.match(self._buffer):
+            self._buffer = ""
+            return ""
         last = _clean_line(self._buffer)
         self._buffer = ""
         return last if last is not None else ""

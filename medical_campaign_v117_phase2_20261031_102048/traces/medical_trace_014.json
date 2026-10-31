@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "question": "阿托伐他汀钙片与10%、20%、30%脂肪乳注射液的适应症有何不同？",
+  "answer": "根据检索到的资料，阿托伐他汀钙片与脂肪乳注射液的适应症内容及核心差异如下：\n\n### 1. 阿托伐他汀钙片的适应症\n根据资料，该药主要用于 [1]：\n*   **原发性高胆固醇血症和混合性高脂血症**：用于降低升高的总胆固醇（TC）、低密度脂蛋白胆固醇（LDL-C）、载脂蛋白B（ApoB）和甘油三酯（TG）水平。\n*   **高危患者管理**：适用于患有高胆固醇血症并有动脉粥样硬化危险的患者。\n\n### 2. 10%、20%、30%脂肪乳注射液的适应症\n根据资料，该药作为静脉营养的组成部分，主要用途为 [2]：\n*   **能量与必需脂肪酸补充**：为机体提供能量和必需脂肪酸，用于胃肠外营养补充，预防和治疗人体必需脂肪酸缺乏症。\n*   **特定人群适用**：为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供补充；其中 **30％脂肪乳注射液** 更适合输液量受限制和能量需求高度增加的患者。\n*   **辅料相关作用**：资料提及卵磷脂成分可辅助治疗动脉粥样硬化、脂肪肝、小儿湿疹及神经衰弱症，并在药用辅料中作增溶剂、乳化剂及抗氧化剂。\n\n### 3. 两者适应症的核心差异\n两者的核心差异在于治疗目的和作用机制不同 [1][2]：\n*   **阿托伐他汀钙片**是**降脂药物**，核心作用是调节血脂指标（降低TC、LDL-C等），针对的是脂质代谢异常及相关心血管风险。\n*   **脂肪乳注射液**是**营养支持药物**，核心作用是提供能量和必需脂肪酸，针对的是营养摄入不足或无法通过口服获取营养的患者。尽管资料提到其辅料成分对动脉粥样硬化有辅助治疗作用，但其主要获批适应症定位为营养补充而非直接降脂治疗。\n\n***\n\n**说明**：以上信息基于本轮提供的第三方来源资料，尚未完成医学权威核验。具体用药请遵医嘱。\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy1695u.htm) · 阿托伐他汀钙片 / 适应症 / indication · Chroma Hybrid 召回，Neo4j Section 原文核对\n\n[2] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy2536r.htm) · 10%、20%、30%脂肪乳注射液 / 适应症 / indication · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料：阿托伐他汀钙片",
+        "section_path": "阿托伐他汀钙片 / 适应症 / indication",
+        "preview": "药品：阿托伐他汀钙片 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：1．原发性高胆固醇血症和混合性高脂血症，降低升高的TC、LDL-C、ApoB和TG水平。 2．高胆固醇血症并有动脉粥样硬化危险的病人。",
+        "content": "药品：阿托伐他汀钙片\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1．原发性高胆固醇血症和混合性高脂血症，降低升高的TC、LDL-C、ApoB和TG水平。 2．高胆固醇血症并有动脉粥样硬化危险的病人。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy1695u.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "阿托伐他汀钙片",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_a6145c3efe6425c88b6556c0",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_e3eaa7b8ef9966530caa82fb",
+        "parent_verified": true
+      },
+      {
+        "id": 2,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 适应症 / indication",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症，也为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供必需脂肪酸。30％脂肪乳注射液更适合输液量受限制和能量需求高度增加的病人。卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。在药用辅料中作增溶剂、乳化剂及油脂类的抗…",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症，也为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供必需脂肪酸。30％脂肪乳注射液更适合输液量受限制和能量需求高度增加的病人。卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。在药用辅料中作增溶剂、乳化剂及油脂类的抗氧化剂。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_c93d6e21803ba47b6934a68d",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_1277b916e2c0b4316802175a",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 2,
+        "direct_sections": 2,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 2,
+        "retained": 0,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 2,
+        "indexed_chunks": 313,
+        "parent_verified": 2,
+        "parent_rejected": 0,
+        "section_not_relevant": 6,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 2,
+        "retained": 2
+      },
+      "merge": {
+        "unique_before_entity_filter": 4,
+        "after_entity_filter": 4,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 2,
+        "retained": 2,
+        "retained_neo4j_verified": 2,
+        "explicit_drugs": [
+          "10%、20%、30%脂肪乳注射液",
+          "阿托伐他汀钙片"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 0,
+        "section_count": 2,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 2
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 2,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 8,
+          "skipped_section": 6,
+          "failed_provenance": 0,
+          "verified": 2,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "indication"
+          ],
+          "selected": 2
+        },
+        "hits_before_entity_gate": 2
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "10%、20%、30%脂肪乳注射液",
+        "阿托伐他汀钙片"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 4
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "阿托伐他汀钙片的适应症具体内容是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "1．原发性高胆固醇血症和混合性高脂血症，降低升高的TC、LDL-C、ApoB和TG水平。 2．高胆固醇血症并有动脉粥样硬化危险的病人。"
+            }
+          ],
+          "reason": "证据1直接提供了该药品说明书中关于适应症的原文明确描述。"
+        },
+        {
+          "question": "10%、20%、30%脂肪乳注射液的适应症具体内容是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            2
+          ],
+          "quotes": [
+            {
+              "id": 2,
+              "quote": "能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症"
+            }
+          ],
+          "reason": "证据2直接提供了该注射液作为静脉营养补充剂及相关防治用途的适应症原文。"
+        },
+        {
+          "question": "两者适应症的核心差异是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            1,
+            2
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "原发性高胆固醇血症和混合性高脂血症"
+            },
+            {
+              "id": 2,
+              "quote": "用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症"
+            }
+          ],
+          "reason": "结合两则证据原文，前者针对血脂代谢异常，后者针对营养与能量补充，作用定位与临床用途差异明确。"
+        }
+      ],
+      "evidence_ids": [
+        1,
+        2
+      ],
+      "answer_questions": [
+        "阿托伐他汀钙片的适应症具体内容是什么？",
+        "10%、20%、30%脂肪乳注射液的适应症具体内容是什么？",
+        "两者适应症的核心差异是什么？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "skipped",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 58.99
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

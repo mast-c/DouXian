@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "question": "请列出数据库中所有治疗扁桃体炎的药品并保证没有遗漏。",
+  "answer": "根据检索到的证据 [1]，**所列药品（一清胶囊）尚未获得权威医学验证或官方核准的治疗依据。**\n\n资料明确标注该来源为“Neo4j 疾病提及候选”，且临床验证状态为“not_validated”（未验证），审核状态为“pending_human_review”（待人工审核）。这仅证明文档中提到了该疾病词条，不代表该药已获监管机构批准用于治疗扁桃体炎。\n\n**当前知识库证据不足，暂无法可靠回答：**\n- 证据中明确列出的涉及扁桃体炎治疗的药品名称有哪些？\n- 现有证据能否支持“保证没有遗漏”这一完整性要求？\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/zhongyao/zy3985h.htm) · Neo4j / 适应症语料 / 疾病提及候选（未审核） · Neo4j 疾病提及候选（未经医学验证）",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：一清胶囊 疾病词条：扁桃体炎 原文证据：咽炎、扁桃体炎、牙跟炎见上述证候者。 候选 ID：diseasecandidate_6ee507a3473abcb48f71f394 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semantic_review 来源链接：https://www.ya…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：一清胶囊\n疾病词条：扁桃体炎\n原文证据：咽炎、扁桃体炎、牙跟炎见上述证候者。\n候选 ID：diseasecandidate_6ee507a3473abcb48f71f394\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/zhongyao/zy3985h.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "一清胶囊",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "咽炎、扁桃体炎、牙跟炎见上述证候者。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_7532cbf18177d134069bf281",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "https://www.yaopinnet.com/zhongyao/zy3986s.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：一清颗粒 疾病词条：扁桃体炎 原文证据：咽炎、扁桃体炎、牙跟炎见上述证候者。 候选 ID：diseasecandidate_d164a0f21893d8cab211da69 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semantic_review 来源链接：https://www.ya…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：一清颗粒\n疾病词条：扁桃体炎\n原文证据：咽炎、扁桃体炎、牙跟炎见上述证候者。\n候选 ID：diseasecandidate_d164a0f21893d8cab211da69\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/zhongyao/zy3986s.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3986s.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "一清颗粒",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "咽炎、扁桃体炎、牙跟炎见上述证候者。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_c4dda571ba2ddc3b4504e6b7",
+        "parent_verified": false
+      },
+      {
+        "id": 3,
+        "source": "https://www.yaopinnet.com/zhongyao/zy4503z.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：万通炎康片 疾病词条：扁桃体炎 原文证据：急慢性咽炎、扁桃体炎、牙龈炎、疮疖见上述证候者。 候选 ID：diseasecandidate_702ef9281504239223c901b3 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semantic_review 来源链接：https:/…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：万通炎康片\n疾病词条：扁桃体炎\n原文证据：急慢性咽炎、扁桃体炎、牙龈炎、疮疖见上述证候者。\n候选 ID：diseasecandidate_702ef9281504239223c901b3\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/zhongyao/zy4503z.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy4503z.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "万通炎康片",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "急慢性咽炎、扁桃体炎、牙龈炎、疮疖见上述证候者。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_497b9d42c68205c5c792cf4b",
+        "parent_verified": false
+      },
+      {
+        "id": 4,
+        "source": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：丙酸交沙霉素颗粒 疾病词条：扁桃体炎 原文证据：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。 候选 ID：diseasecandidate_d941f467add0915974a11a5a 候选审核状态：pending_human_review 临床验证状态：not_validat…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：丙酸交沙霉素颗粒\n疾病词条：扁桃体炎\n原文证据：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。\n候选 ID：diseasecandidate_d941f467add0915974a11a5a\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy31890.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_a21fbf747237f81a4390988a",
+        "parent_verified": false
+      },
+      {
+        "id": 5,
+        "source": "药品资料 · 一清胶囊",
+        "section_path": "Neo4j / 药品资料 / 适应症（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：一清胶囊 栏目：适应症 原文：清热泻火解毒， 化淤凉血止血。用于火毒血热所致的身热烦躁、目赤口疮、咽喉牙跟肿痛、大便秘结、吐血、咯血、衄血、痔血；咽炎、扁桃体炎、牙跟炎见上述证候者。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：一清胶囊\n栏目：适应症\n原文：清热泻火解毒， 化淤凉血止血。用于火毒血热所致的身热烦躁、目赤口疮、咽喉牙跟肿痛、大便秘结、吐血、咯血、衄血、痔血；咽炎、扁桃体炎、牙跟炎见上述证候者。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "一清胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_7532cbf18177d134069bf281",
+        "parent_verified": false
+      },
+      {
+        "id": 6,
+        "source": "药品资料 · 万通炎康片",
+        "section_path": "Neo4j / 药品资料 / 适应症（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：万通炎康片 栏目：适应症 原文：疏风清热，解毒消肿。用于外感风热所致的咽部红肿、牙龈红肿、疮疖肿痛；急慢性咽炎、扁桃体炎、牙龈炎、疮疖见上述证候者。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：万通炎康片\n栏目：适应症\n原文：疏风清热，解毒消肿。用于外感风热所致的咽部红肿、牙龈红肿、疮疖肿痛；急慢性咽炎、扁桃体炎、牙龈炎、疮疖见上述证候者。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy4503z.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "万通炎康片",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_497b9d42c68205c5c792cf4b",
+        "parent_verified": false
+      },
+      {
+        "id": 7,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 适应症（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：适应症 原文：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：适应症\n原文：本品适用于化脓性链球菌引起的咽炎及扁桃体炎，敏感菌所致的鼻窦炎、中耳炎、急性支气管炎及口腔脓肿，肺炎支原体所致的肺炎，敏感细菌引起的皮肤软组织感染，也可用于对青霉素、红霉素耐药的葡萄球菌感染。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_a21fbf747237f81a4390988a",
+        "parent_verified": false
+      },
+      {
+        "id": 8,
+        "source": "药品资料：一清颗粒",
+        "section_path": "一清颗粒 / 适应症 / indication",
+        "preview": "药品：一清颗粒 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：清热泻火解毒，化痪凉血止血。用于火毒血热所致的身热烦躁、目赤口疮、咽喉牙跟肿痛、大便秘结、吐血、咯血、衄血、痔血；咽炎、扁桃体炎、牙跟炎见上述证候者。",
+        "content": "药品：一清颗粒\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：清热泻火解毒，化痪凉血止血。用于火毒血热所致的身热烦躁、目赤口疮、咽喉牙跟肿痛、大便秘结、吐血、咯血、衄血、痔血；咽炎、扁桃体炎、牙跟炎见上述证候者。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3986s.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_c4dda571ba2ddc3b4504e6b7",
+        "parent_verified": true
+      },
+      {
+        "id": 9,
+        "source": "药品资料：一清颗粒",
+        "section_path": "一清颗粒 / 注意事项 / warnings",
+        "preview": "药品：一清颗粒 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用量服用，本品不宜长期服用。 8.服药3天症状无缓解，应去医院就诊。 9.对…",
+        "content": "药品：一清颗粒\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用量服用，本品不宜长期服用。 8.服药3天症状无缓解，应去医院就诊。 9.对本品过敏者禁用，过敏体质者慎用。 10.本品性状发生改变时禁止使用。 11.儿童必须在成人监护下使用。 12.请将本品放在儿童不能接触的地方。 13.如正在使用其他药品，使用本品前请咨询医师或药师。\n偶见皮疹，恶心，腹泻，腹痛。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3986s.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_17a5569c523148ca53c0615e",
+        "parent_verified": true
+      },
+      {
+        "id": 10,
+        "source": "药品资料：一清胶囊",
+        "section_path": "一清胶囊 / 注意事项 / warnings",
+        "preview": "药品：一清胶囊 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。服药后大便次数每日2到3次者，应减量；每日3次以上者，应停用并向医师咨询。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用…",
+        "content": "药品：一清胶囊\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。服药后大便次数每日2到3次者，应减量；每日3次以上者，应停用并向医师咨询。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用量服用，本品不宜长期服用。 8.服药3天症状无缓解，应去医院就诊。 9.对本品过敏者禁用，过敏体质者慎用。 10.本品性状发生改变时禁止使用。 11.儿童必须在成人监护下使用。 12.请将本品放在儿童不能接触的地方。 13.如正在使用其他药品，使用本品前请咨询医师或药师。 14.本品易吸潮，开袋取药后应密闭保存，注意防潮。 15.如因保存不当，导致本品出现吸潮结块等性状改变，请勿继续使用。 16.请将本品放在儿童不能看见的地方。\n偶见皮疹，恶心，腹泻，腹痛。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_64214f7b014a8162928c676d",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 8,
+        "direct_sections": 4,
+        "candidate_cards": 4,
+        "raw_candidate_nodes": 10,
+        "grouped_same_quote_nodes": 6,
+        "after_entity_filter": 8,
+        "retained": 7,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 3,
+        "retained": 3
+      },
+      "merge": {
+        "unique_before_entity_filter": 11,
+        "after_entity_filter": 11,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 1,
+        "retained": 10,
+        "retained_neo4j_verified": 3,
+        "explicit_drugs": []
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 7,
+        "section_count": 4,
+        "candidate_count": 4,
+        "raw_candidate_nodes": 10,
+        "grouped_same_quote_nodes": 6,
+        "partial_error": false,
+        "disease_drug_overview": true,
+        "selected_drugs": [
+          "一清胶囊",
+          "一清颗粒",
+          "万通炎康片",
+          "丙酸交沙霉素颗粒"
+        ],
+        "supplement_fields": [
+          "indication"
+        ],
+        "supplemented_sections": 4,
+        "hits_before_entity_gate": 8
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 3,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "multi_drug_scope": {
+      "listed_drugs": [
+        "一清胶囊",
+        "一清颗粒",
+        "万通炎康片",
+        "丙酸交沙霉素颗粒"
+      ],
+      "supplement_fields": [
+        "indication"
+      ],
+      "max_listed_drugs": 4,
+      "removed_off_scope": 0,
+      "scope_note": "这是数据库匹配的部分疾病提及候选，不是完整治疗药品清单或官方临床推荐。"
+    },
+    "graph_drug_scope": {
+      "applied": true,
+      "retrieved_drugs": [
+        "一清胶囊",
+        "一清颗粒",
+        "万通炎康片",
+        "丙酸交沙霉素颗粒"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 11
+    },
+    "evidence_entity_gate": {
+      "mode": "graph_discovered_drugs",
+      "explicit_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 11,
+      "retrieved_drugs": [
+        "一清胶囊",
+        "一清颗粒",
+        "万通炎康片",
+        "丙酸交沙霉素颗粒"
+      ]
+    },
+    "evidence_coverage": {
+      "decision": "partial",
+      "aspects": [
+        {
+          "question": "证据中明确列出的涉及扁桃体炎治疗的药品名称有哪些？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "至少一条必要引文缺失、编号无效或与原文不一致"
+        },
+        {
+          "question": "现有证据能否支持“保证没有遗漏”这一完整性要求？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "至少一条必要引文缺失、编号无效或与原文不一致"
+        },
+        {
+          "question": "所列药品是否已获得权威医学验证或官方核准的治疗依据？",
+          "status": "refuted",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。"
+            }
+          ],
+          "reason": "所有证据均附带强制免责声明，指出内容仅为第三方文本提及，未经医学权威核验，不等同于官方核准说明书，直接否定了其作为权威治疗依据的前提。"
+        }
+      ],
+      "evidence_ids": [
+        1
+      ],
+      "answer_questions": [
+        "所列药品是否已获得权威医学验证或官方核准的治疗依据？"
+      ],
+      "refused_questions": [
+        "证据中明确列出的涉及扁桃体炎治疗的药品名称有哪些？",
+        "现有证据能否支持“保证没有遗漏”这一完整性要求？"
+      ],
+      "message": ""
+    },
+    "total_seconds": 57.79
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

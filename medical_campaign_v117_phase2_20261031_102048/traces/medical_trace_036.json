@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "question": "如果查询不到某个药的禁忌信息，是否表示该药没有禁忌？",
+  "answer": "根据检索到的资料，针对您提出的两个方面回答如下：\n\n### 1. “尚不明确”及资料状态的真实记录含义\n根据证据 [1]，一清颗粒在“禁忌”栏目中的原文记载为“尚不明确”。同时，该资料的来源状态标记为“第三方来源尚未完成医学权威核验”。\n*   **含义**：“尚不明确”仅表示当前检索到的说明书原文中未列出具体禁忌项。\n*   **资料状态**：该信息来自未经过医学专家审核的第三方数据库，属于待分析材料，其准确性和完整性需结合最新版权威说明书进行核实。\n\n### 2. 纠正错误前提：查询不到禁忌信息是否普遍代表该药无禁忌或绝对安全？\n**需要纠正错误前提：查询不到禁忌信息（或记载为“尚不明确”）不代表该药无禁忌或绝对安全。**\n*   **依据**：证据 [1] 明确显示，尽管禁忌栏记载为“尚不明确”，但该药品仍可能存在其他未在此处列出的风险或限制条件。此外，作为“尚未完成医学权威核验”的资料，其内容的缺失或不完整不能直接推导出“安全无禁忌”的结论。\n*   **结论**：不能将“尚不明确”等同于“没有禁忌”。在实际用药中，应参考完整的官方说明书并遵医嘱，避免因误认为“无禁忌”而忽略潜在风险。\n\n***\n\n**说明**：以上信息基于本轮提供的第三方来源资料，尚未完成医学权威核验。具体用药请遵医嘱。\n\n\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/zhongyao/zy3986s.htm) · 一清颗粒 / 禁忌 / contraindications[0] · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料：一清颗粒",
+        "section_path": "一清颗粒 / 禁忌 / contraindications[0]",
+        "preview": "药品：一清颗粒 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：尚不明确",
+        "content": "药品：一清颗粒\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3986s.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_a45291e1a2736c34f4bb8fec",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_9e71170007a6c4b6e60cf3b6",
+        "parent_verified": true
+      },
+      {
+        "id": 2,
+        "source": "药品资料：一清胶囊",
+        "section_path": "一清胶囊 / 禁忌 / contraindications[0]",
+        "preview": "药品：一清胶囊 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：尚不明确",
+        "content": "药品：一清胶囊\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_cab267e035fa92e45fd92f68",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_652be7884e5e27aa22a9cd43",
+        "parent_verified": true
+      },
+      {
+        "id": 3,
+        "source": "药品资料：七宝美髯颗粒",
+        "section_path": "七宝美髯颗粒 / 禁忌 / contraindications[0]",
+        "preview": "药品：七宝美髯颗粒 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：尚不明确",
+        "content": "药品：七宝美髯颗粒\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy41968.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "七宝美髯颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_e44c0fd547f29dceaef2e704",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_fa7344d136653e8d199b6cb9",
+        "parent_verified": true
+      },
+      {
+        "id": 4,
+        "source": "药品资料：七味益气胶囊",
+        "section_path": "七味益气胶囊 / 禁忌 / contraindications[0]",
+        "preview": "药品：七味益气胶囊 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：尚不明确",
+        "content": "药品：七味益气胶囊\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy2999m.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "七味益气胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_fd902aca83188f539a499e20",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_232208cf8a49b53ca2bf953d",
+        "parent_verified": true
+      },
+      {
+        "id": 5,
+        "source": "药品资料：一把抓",
+        "section_path": "一把抓 / 禁忌 / contraindications[0]",
+        "preview": "药品：一把抓 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：尚不明确",
+        "content": "药品：一把抓\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy6372k.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一把抓",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_afe16cd4e2f1b1f45ac51fae",
+        "section_field": "contraindications",
+        "candidate_id": "",
+        "section_id": "section_dd8f0ec11c13f9aa52c4366b",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "no_match",
+        "returned": 0,
+        "direct_sections": 0,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 0,
+        "retained": 0,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 3,
+        "retained": 3
+      },
+      "merge": {
+        "unique_before_entity_filter": 3,
+        "after_entity_filter": 3,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 0,
+        "retained": 3,
+        "retained_neo4j_verified": 3,
+        "explicit_drugs": []
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "no_match",
+        "hits": 0,
+        "section_count": 0,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 0
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 3,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "contraindications"
+          ],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "unrestricted",
+      "explicit_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 3
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "证据中“尚不明确”及资料状态的真实记录含义是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确"
+            }
+          ],
+          "reason": "证据明确记载该状态系第三方来源未完成医学权威核验，仅反映当前数据库数据待完善与未定稿的客观记录。"
+        },
+        {
+          "question": "查询不到禁忌信息是否普遍代表该药无禁忌或绝对安全？",
+          "status": "refuted",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "资料状态：第三方来源尚未完成医学权威核验\n证据原文：尚不明确"
+            }
+          ],
+          "reason": "证据表明“尚不明确”仅为数据核验进度状态，非临床结论，严禁据此推论药品无禁忌或绝对安全。"
+        }
+      ],
+      "evidence_ids": [
+        1
+      ],
+      "answer_questions": [
+        "证据中“尚不明确”及资料状态的真实记录含义是什么？",
+        "查询不到禁忌信息是否普遍代表该药无禁忌或绝对安全？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "improved",
+      "queries": [
+        "药品说明书或临床数据库未记载禁忌症时，相关监管标准与药学共识通常作何解释？",
+        "药物检索系统返回禁忌信息为空的情况下，临床用药安全评估应遵循怎样的默认判定原则或补充验证流程？"
+      ],
+      "new_chunks": 2,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 85.06
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

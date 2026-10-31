@@ -1,0 +1,1131 @@
+{
+  "schema_version": 1,
+  "campaign_version": "V1.17",
+  "snapshot_label": "",
+  "source_directory": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_traces_v117",
+  "glob_pattern": "medical_trace_*.json",
+  "summary": {
+    "valid_unique_runs": 18,
+    "distinct_questions": 18,
+    "repeated_question_runs": 0,
+    "invalid_or_duplicate_files": 0,
+    "engineering_status_counts": {
+      "PASS": 2,
+      "WARN": 16,
+      "FAIL": 0
+    },
+    "engineering_pass_fraction": 0.1111,
+    "evidence_cards": 69,
+    "invalid_body_citations": 0,
+    "definite_duplicate_sections": 0,
+    "unverified_candidate_cards": 19,
+    "structured_multi_drug_runs": 2,
+    "multi_drug_expected_cells": 12,
+    "multi_drug_correctly_cited_cells": 12,
+    "multi_drug_citation_coverage": 1.0,
+    "multi_drug_false_missing_cells": 0,
+    "issue_code_frequency": {
+      "missing_parent_identifiers": 16,
+      "no_body_citations": 3,
+      "non_structured_multi_drug": 1,
+      "pipeline_count_diff": 1
+    },
+    "notes": [
+      "自动验收仅检查引用编号、同源 Section 身份、药品栏目覆盖等工程约束。",
+      "不能由工程 PASS 推定答案医学正确、官方批准或临床安全。",
+      "如果本次没有人工医学审核，不能声称医疗问答的真实正确率。"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "QA006D573276E28DA8",
+      "source_filename": "medical_trace_001.json",
+      "source_sha256": "006d573276e28da8732f034f28f57dee24e506cef93819da97a025da97f1aefd",
+      "question": "治疗扁桃体炎的药物有哪些？药物有没有不良反应和注意事项？",
+      "answer_excerpt": "**本轮资料中与“扁桃体炎”有关的药品提及候选：4 种。**\n\n以下按药品逐项列出数据库中的疾病提及和说明书栏目原文。**这不是完整的治疗药物清单，也不代表已经确认的获批适应症或处方推荐。**\n\n\n### 一清胶囊\n\n**疾病关联原文（待人工审核）**：咽炎、扁桃体炎、牙跟炎见上述证候者。 [1]\n\n- **不良反应（原文节选）**：偶见皮疹，恶心，腹泻，腹痛。 [5]\n\n- **注意事项（原文节",
+      "review_focus": "disease_drug_scope|risk_fields|medical_relation|unreviewed_candidate",
+      "unverified_disease_candidate_count": 4,
+      "engineering_status": "PASS",
+      "engineering_issue_codes": [],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 0,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "治疗扁桃体炎的药物有哪些？药物有没有不良反应和注意事项？",
+        "answer_mode": "structured_disease_drug_source_overview",
+        "evidence_cards": 12,
+        "evidence_types": {
+          "unverified_drug_disease_candidate": 4,
+          "unverified_drug_source_section": 6,
+          "json_neo4j_text_verified": 2
+        },
+        "cited_ids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 12,
+        "reported_neo4j_parent_verified": 5,
+        "multi_drug": {
+          "selected_drugs": [
+            "一清胶囊",
+            "一清颗粒",
+            "万通炎康片",
+            "丙酸交沙霉素颗粒"
+          ],
+          "requested_fields": [
+            "adverse_reactions",
+            "warnings"
+          ],
+          "expected_cells": 8,
+          "cells_with_source": 8,
+          "correctly_cited_cells": 8,
+          "false_missing_cells": 0,
+          "cell_citation_coverage": 1.0,
+          "cells": [
+            {
+              "drug_name": "一清胶囊",
+              "field": "adverse_reactions",
+              "source_present": true,
+              "source_evidence_ids": [
+                5
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "一清胶囊",
+              "field": "warnings",
+              "source_present": true,
+              "source_evidence_ids": [
+                12
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "一清颗粒",
+              "field": "adverse_reactions",
+              "source_present": true,
+              "source_evidence_ids": [
+                6
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "一清颗粒",
+              "field": "warnings",
+              "source_present": true,
+              "source_evidence_ids": [
+                11
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "万通炎康片",
+              "field": "adverse_reactions",
+              "source_present": true,
+              "source_evidence_ids": [
+                7
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "万通炎康片",
+              "field": "warnings",
+              "source_present": true,
+              "source_evidence_ids": [
+                9
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "丙酸交沙霉素颗粒",
+              "field": "adverse_reactions",
+              "source_present": true,
+              "source_evidence_ids": [
+                8
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "丙酸交沙霉素颗粒",
+              "field": "warnings",
+              "source_present": true,
+              "source_evidence_ids": [
+                10
+              ],
+              "answer_citation_valid": true
+            }
+          ]
+        }
+      },
+      "issues": []
+    },
+    {
+      "case_id": "QA81855CE8F6411119",
+      "source_filename": "medical_trace_003.json",
+      "source_sha256": "81855ce8f6411119379370a3f0e6c53bd5d7b7513d4cda3fdab6ea918034b289",
+      "question": "一清胶囊与一清颗粒的不良反应有什么不同？",
+      "answer_excerpt": "根据本轮检索到的原文证据，**一清胶囊与一清颗粒的不良反应没有不同**。\n\n两者在资料中记载的不良反应完全一致，均为“偶见皮疹，恶心，腹泻，腹痛” [1]、[2]。\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/zhongyao/zy3985h.htm) · 一清胶囊 / 不良反应 / adverse_reactio",
+      "review_focus": "risk_fields",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "一清胶囊与一清颗粒的不良反应有什么不同？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 2,
+        "evidence_types": {
+          "json_neo4j_text_verified": 2
+        },
+        "cited_ids": [
+          1,
+          2
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 2,
+        "reported_neo4j_parent_verified": 2
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA7EE767942DEFC572",
+      "source_filename": "medical_trace_005.json",
+      "source_sha256": "7ee767942defc57211dd70ad656e7643ae3c889994bcf886fc89a9f69bb39f0c",
+      "question": "丙酸交沙霉素颗粒的注意事项有哪些？",
+      "answer_excerpt": "根据检索到的资料，丙酸交沙霉素颗粒的注意事项主要包括以下几点 [1]：\n\n1. **过敏与交叉反应**：若患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受，对其他大环内酯类药物（包括本品）也可能过敏或不能耐受。\n2. **疗程要求**：溶血性链球菌感染患者治疗时至少需持续10日，以防止急性风湿热的发生。\n3. **特殊人群用药**：肾功能减退患者一般无需减少用量；但肝病患者和严重肾功能损害者的",
+      "review_focus": "risk_fields",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "丙酸交沙霉素颗粒的注意事项有哪些？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 1,
+        "evidence_types": {
+          "unverified_drug_source_section": 1
+        },
+        "cited_ids": [
+          1
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 1,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QACAB4F5861B6D3AFD",
+      "source_filename": "medical_trace_007.json",
+      "source_sha256": "cab4f5861b6d3afdebae714e7e983fdd55813584fea6b69d1422c8c2cc1f58a9",
+      "question": "万通炎康片的不良反应写着“尚不明确”，是不是没有不良反应？",
+      "answer_excerpt": "当前检索到的知识库证据不足，无法可靠回答该问题。",
+      "review_focus": "risk_fields",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "no_body_citations",
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 2,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "万通炎康片的不良反应写着“尚不明确”，是不是没有不良反应？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 1,
+        "evidence_types": {
+          "unverified_drug_source_section": 1
+        },
+        "cited_ids": [],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          1
+        ],
+        "reference_footer_blocks": 0,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 1,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "no_body_citations",
+          "description": "答案正文没有使用本轮任何证据编号"
+        },
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA19628D738E0FB41E",
+      "source_filename": "medical_trace_009.json",
+      "source_sha256": "19628d738e0fb41e2b60eb6d6f1891eacf9c6c8bfa6a7809419ab2c4a0f0a903",
+      "question": "一清颗粒的不良反应和注意事项是什么？",
+      "answer_excerpt": "根据检索到的资料，一清颗粒的不良反应和注意事项如下：\n\n**不良反应**\n偶见皮疹、恶心、腹泻、腹痛 [2]。\n\n**注意事项**\n1. 饮食禁忌：忌烟、酒及辛辣食物 [1]。\n2. 药物相互作用：不宜在服药期间同时服用滋补性中药 [1]。\n3. 特殊人群用药：糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用；儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用；",
+      "review_focus": "risk_fields",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "一清颗粒的不良反应和注意事项是什么？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 2,
+        "evidence_types": {
+          "json_neo4j_text_verified": 2
+        },
+        "cited_ids": [
+          1,
+          2
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 2,
+        "reported_neo4j_parent_verified": 2
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA4AD4DC35F567AD9E",
+      "source_filename": "medical_trace_011.json",
+      "source_sha256": "4ad4dc35f567ad9eab83dd6524a9e36696d270deccb7b9cdb53bdd45218baaeb",
+      "question": "阿托伐他汀钙片与10%、20%、30%脂肪乳注射液的适应症有何不同？",
+      "answer_excerpt": "根据检索到的资料，两种药物的适应症及核心区别如下：\n\n### 1. 阿托伐他汀钙片的适应症\n主要用于调节血脂和降低心血管风险 [1]：\n*   **原发性高胆固醇血症和混合性高脂血症**：用于降低升高的总胆固醇（TC）、低密度脂蛋白胆固醇（LDL-C）、载脂蛋白B（ApoB）和甘油三酯（TG）水平。\n*   **动脉粥样硬化高危人群**：适用于患有高胆固醇血症并有动脉粥样硬化危险的病人。\n\n###",
+      "review_focus": "medical_relation",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "阿托伐他汀钙片与10%、20%、30%脂肪乳注射液的适应症有何不同？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 2,
+        "evidence_types": {
+          "json_neo4j_text_verified": 2
+        },
+        "cited_ids": [
+          1,
+          2
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 2,
+        "reported_neo4j_parent_verified": 2
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA0F9A4E0AD277F4BE",
+      "source_filename": "medical_trace_013.json",
+      "source_sha256": "0f9a4e0ad277f4be6222e6dcd940970a16612a5e3be8e1d10d4a02e0e219e49c",
+      "question": "阿托伐他汀钙片与动脉粥样硬化有什么关联？",
+      "answer_excerpt": "当前检索到的知识库证据不足，无法可靠回答该问题。",
+      "review_focus": "unreviewed_candidate",
+      "unverified_disease_candidate_count": 1,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "no_body_citations",
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 2,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "阿托伐他汀钙片与动脉粥样硬化有什么关联？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 2,
+        "evidence_types": {
+          "unverified_drug_disease_candidate": 1,
+          "json_neo4j_text_verified": 1
+        },
+        "cited_ids": [],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          1,
+          2
+        ],
+        "reference_footer_blocks": 0,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 2,
+        "reported_neo4j_parent_verified": 1
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "no_body_citations",
+          "description": "答案正文没有使用本轮任何证据编号"
+        },
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QAF5647B4425C62F81",
+      "source_filename": "medical_trace_015.json",
+      "source_sha256": "f5647b4425c62f81cdea6ca4c15d44c8caa61f0afb70434a55f3c20b56759b31",
+      "question": "脂肪乳注射液中卵磷脂的描述是否意味着脂肪乳可直接治疗动脉粥样硬化？",
+      "answer_excerpt": "根据检索到的资料，针对您提出的四个方面回答如下：\n\n### 1. 脂肪乳注射液的实际临床适应症\n根据药品资料原文，10%、20%、30%脂肪乳注射液的获批/标示适应症为**静脉营养的组成部分** [5]。具体包括：\n*   为机体提供能量和必需脂肪酸；\n*   用于胃肠外营养补充能量及必需脂肪酸；\n*   预防和治疗人体必需脂肪酸缺乏症；\n*   为经口服途径不能维持和恢复正常必需脂肪酸水平的病人",
+      "review_focus": "medical_relation|unreviewed_candidate",
+      "unverified_disease_candidate_count": 4,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "脂肪乳注射液中卵磷脂的描述是否意味着脂肪乳可直接治疗动脉粥样硬化？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 7,
+        "evidence_types": {
+          "unverified_drug_disease_candidate": 4,
+          "json_neo4j_text_verified": 3
+        },
+        "cited_ids": [
+          1,
+          5,
+          6
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          2,
+          3,
+          4,
+          7
+        ],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 7,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            5,
+            6,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QAAF2006C3CF0EB7FB",
+      "source_filename": "medical_trace_017.json",
+      "source_sha256": "af2006c3cf0eb7fbdb4929c0322c3beafce53b98dd6808bb137a816d2329933d",
+      "question": "七味解痛口服液与扁桃体炎有明确的适应症依据吗？",
+      "answer_excerpt": "针对您提出的关于“七味解痛口服液”的两个方面，依据本轮检索到的证据 [1] 回答如下：\n\n### 1. 需纠正错误前提：是否有针对“扁桃体炎”的明确适应症？\n**没有。** 当前知识库证据不支持该药用于“扁桃体炎”。\n*   **纠正说明**：在提供的药品资料原文中，仅提及了“胃脘痛”和“原发性痛经”，**未出现**“扁桃体炎”字样。不能仅凭关键词匹配或相邻实体推断其具有治疗扁桃体炎的作用。\n* ",
+      "review_focus": "medical_relation",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "七味解痛口服液与扁桃体炎有明确的适应症依据吗？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 1,
+        "evidence_types": {
+          "json_neo4j_text_verified": 1
+        },
+        "cited_ids": [
+          1
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 1,
+        "reported_neo4j_parent_verified": 1
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA83D5A91251071D35",
+      "source_filename": "medical_trace_019.json",
+      "source_sha256": "83d5a91251071d35326c22aa5cd2af94e40d4b97e3f5807f3daf38e415c98566",
+      "question": "治疗扁桃体炎的药物及各自禁忌有哪些？",
+      "answer_excerpt": "**本轮资料中与“扁桃体炎”有关的药品提及候选：4 种。**\n\n以下按药品逐项列出数据库中的疾病提及和说明书栏目原文。**这不是完整的治疗药物清单，也不代表已经确认的获批适应症或处方推荐。**\n\n\n### 一清胶囊\n\n**疾病关联原文（待人工审核）**：咽炎、扁桃体炎、牙跟炎见上述证候者。 [1]\n\n- **禁忌**：资料原文为“尚不明确”；这不等于已确认没有相关风险。[5]\n\n\n### 一清颗粒",
+      "review_focus": "disease_drug_scope|risk_fields|medical_relation|unreviewed_candidate",
+      "unverified_disease_candidate_count": 4,
+      "engineering_status": "PASS",
+      "engineering_issue_codes": [],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 0,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "治疗扁桃体炎的药物及各自禁忌有哪些？",
+        "answer_mode": "structured_disease_drug_source_overview",
+        "evidence_cards": 8,
+        "evidence_types": {
+          "unverified_drug_disease_candidate": 4,
+          "unverified_drug_source_section": 4
+        },
+        "cited_ids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 8,
+        "reported_neo4j_parent_verified": 5,
+        "multi_drug": {
+          "selected_drugs": [
+            "一清胶囊",
+            "一清颗粒",
+            "万通炎康片",
+            "丙酸交沙霉素颗粒"
+          ],
+          "requested_fields": [
+            "contraindications"
+          ],
+          "expected_cells": 4,
+          "cells_with_source": 4,
+          "correctly_cited_cells": 4,
+          "false_missing_cells": 0,
+          "cell_citation_coverage": 1.0,
+          "cells": [
+            {
+              "drug_name": "一清胶囊",
+              "field": "contraindications",
+              "source_present": true,
+              "source_evidence_ids": [
+                5
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "一清颗粒",
+              "field": "contraindications",
+              "source_present": true,
+              "source_evidence_ids": [
+                6
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "万通炎康片",
+              "field": "contraindications",
+              "source_present": true,
+              "source_evidence_ids": [
+                7
+              ],
+              "answer_citation_valid": true
+            },
+            {
+              "drug_name": "丙酸交沙霉素颗粒",
+              "field": "contraindications",
+              "source_present": true,
+              "source_evidence_ids": [
+                8
+              ],
+              "answer_citation_valid": true
+            }
+          ]
+        }
+      },
+      "issues": []
+    },
+    {
+      "case_id": "QA899A1582164409C2",
+      "source_filename": "medical_trace_021.json",
+      "source_sha256": "899a1582164409c223c8edd0c731d3bc89272666212a27fcbdba9248ca97610c",
+      "question": "请列出数据库中所有治疗扁桃体炎的药品并保证没有遗漏。",
+      "answer_excerpt": "根据检索到的证据 [1]，**所列药品（一清胶囊）尚未获得权威医学验证或官方核准的治疗依据。**\n\n资料明确标注该来源为“Neo4j 疾病提及候选”，且临床验证状态为“not_validated”（未验证），审核状态为“pending_human_review”（待人工审核）。这仅证明文档中提到了该疾病词条，不代表该药已获监管机构批准用于治疗扁桃体炎。\n\n**当前知识库证据不足，暂无法可靠回答：*",
+      "review_focus": "disease_drug_scope|medical_relation|unreviewed_candidate",
+      "unverified_disease_candidate_count": 4,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers",
+        "non_structured_multi_drug"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 2,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "请列出数据库中所有治疗扁桃体炎的药品并保证没有遗漏。",
+        "answer_mode": "unspecified",
+        "evidence_cards": 10,
+        "evidence_types": {
+          "unverified_drug_disease_candidate": 4,
+          "unverified_drug_source_section": 3,
+          "json_neo4j_text_verified": 3
+        },
+        "cited_ids": [
+          1
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 10,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "severity": "WARN",
+          "code": "non_structured_multi_drug",
+          "description": "本轮不是 V1.15 结构化原文回答，需人工检查多药栏目遗漏"
+        }
+      ]
+    },
+    {
+      "case_id": "QA116A549125BC0CB0",
+      "source_filename": "medical_trace_023.json",
+      "source_sha256": "116a549125bc0cb0f3250d8688227667e2bd198380c519f198a0232aaa32c8d1",
+      "question": "丙酸交沙霉素颗粒是否经监管机构正式批准用于扁桃体炎？",
+      "answer_excerpt": "根据本轮提供的证据 [1]，关于丙酸交沙霉素颗粒适应症信息的权威性与来源性质如下：\n\n**1. 来源性质：第三方非官方资料**\n该信息来源于“药品资料”中的第三方数据集，并非上市产品的最新版官方核准说明书。证据明确标注为“数据集中保存的第三方资料文本”，仅描述资料如何陈述，不等同于官方核准内容。\n\n**2. 权威性与审核状态：待核验/未权威认证**\n*   **章节状态**：所属章节标记为“来源待",
+      "review_focus": "unreviewed_candidate",
+      "unverified_disease_candidate_count": 1,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "丙酸交沙霉素颗粒是否经监管机构正式批准用于扁桃体炎？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 2,
+        "evidence_types": {
+          "unverified_drug_source_section": 1,
+          "unverified_drug_disease_candidate": 1
+        },
+        "cited_ids": [
+          1
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          2
+        ],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 2,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA53FABAC9853FBC95",
+      "source_filename": "medical_trace_025.json",
+      "source_sha256": "53fabac9853fbc95ab0bb43775e7dadbf7efa4a770b167b93bb704b6f19efb25",
+      "question": "儿童扁桃体炎可以自己服用丙酸交沙霉素颗粒吗？",
+      "answer_excerpt": "根据检索到的资料，丙酸交沙霉素颗粒**适用于治疗扁桃体炎**。\n\n具体依据如下：\n1.  **明确适应症描述**：资料原文指出“本品适用于化脓性链球菌引起的咽炎及**扁桃体炎**” [1]。\n2.  **适用条件**：该药针对的是由**化脓性链球菌**引起的扁桃体炎。\n3.  **证据局限性说明**：此信息来源于第三方资料，且标注为“来源待核验”、“未完成医学权威核验”。这仅表示资料中如此陈述，不",
+      "review_focus": "unreviewed_candidate",
+      "unverified_disease_candidate_count": 1,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "儿童扁桃体炎可以自己服用丙酸交沙霉素颗粒吗？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 2,
+        "evidence_types": {
+          "unverified_drug_source_section": 1,
+          "unverified_drug_disease_candidate": 1
+        },
+        "cited_ids": [
+          1
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          2
+        ],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 2,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA9A76F747F0F4CB7D",
+      "source_filename": "medical_trace_027.json",
+      "source_sha256": "9a76f747f0f4cb7d4d44fd4212e4c03d843ea192d92409ac7cd8fe0f39c20cf1",
+      "question": "扁桃体化脓并发烧，我能只吃一清胶囊不去医院吗？",
+      "answer_excerpt": "根据检索到的资料，扁桃体化脓并发烧时，**不能仅服用一清胶囊而不去医院**。\n\n依据药品注意事项原文第5条明确规定：“扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊” [1]。这意味着出现上述症状时，自行服药是不符合用药安全规范的，必须寻求专业医疗帮助。\n\n*注：该资料来源于第三方来源，尚未完成医学权威核验。*\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源]",
+      "review_focus": "citation_grounding",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "扁桃体化脓并发烧，我能只吃一清胶囊不去医院吗？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 3,
+        "evidence_types": {
+          "json_neo4j_text_verified": 3
+        },
+        "cited_ids": [
+          1
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          2,
+          3
+        ],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 3,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA91A709EDF2904C01",
+      "source_filename": "medical_trace_029.json",
+      "source_sha256": "91a709edf2904c016e0ba3a2dc4934f166fbdcff77570f6042dba02a369cd744",
+      "question": "丁苯酞软胶囊的适应症和不良反应有哪些？",
+      "answer_excerpt": "根据检索到的资料，丁苯酞软胶囊的适应症和相关信息如下：\n\n**1. 适应症**\n主要用于治疗轻、中度急性缺血性脑卒中 [1]。\n\n**2. 不良反应**\n本品不良反应较少，主要情况包括：\n*   **常见表现**主要为转氨酶轻度升高（停药后可恢复正常）；偶见恶心、腹部不适、皮疹及精神症状等 [2]。\n*   **临床研究数据**：在丁苯酞Ⅱ、Ⅲ期临床研究中，记录了与药物相关的不良反应发生率对比表（",
+      "review_focus": "risk_fields|medical_relation",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "丁苯酞软胶囊的适应症和不良反应有哪些？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 2,
+        "evidence_types": {
+          "json_neo4j_text_verified": 2
+        },
+        "cited_ids": [
+          1,
+          2
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 2,
+        "reported_neo4j_parent_verified": 2
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA7A15A37AB7B5D7CE",
+      "source_filename": "medical_trace_031.json",
+      "source_sha256": "7a15a37ab7b5d7ce211d904ec1a393c1898319205339fa0fcd3fa2a01c843005",
+      "question": "丁溴东莨菪碱注射液有哪些药物相互作用？",
+      "answer_excerpt": "根据检索到的资料 [2]，丁溴东莨菪碱注射液的药物相互作用及具体表现如下：\n\n### 1. 存在相互作用的药物或类别\n*   **其他抗胆碱能药、吩噻嗪类药物** [2]。\n*   **促胃肠动力药**（如甲氧氯普胺、多潘立酮） [2]。\n*   **某些抗心律失常药**（如奎尼丁、丙吡胺等） [2]。\n*   **拟肾上腺素能药物**（如右旋苯丙胺） [2]。\n*   **三环类抗抑郁药**（如",
+      "review_focus": "disease_drug_scope|risk_fields",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 1,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "丁溴东莨菪碱注射液有哪些药物相互作用？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 3,
+        "evidence_types": {
+          "unverified_drug_source_section": 1,
+          "json_neo4j_text_verified": 2
+        },
+        "cited_ids": [
+          2
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          1,
+          3
+        ],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 3,
+        "reported_neo4j_parent_verified": 2
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "QA3ED83B0CD187AA04",
+      "source_filename": "medical_trace_033.json",
+      "source_sha256": "3ed83b0cd187aa048591e7fbc72ee0795550e59fde72076cedc3b10699fc133b",
+      "question": "如果查询不到某个药的禁忌信息，是否表示该药没有禁忌？",
+      "answer_excerpt": "根据检索到的资料 [1]、[2]，针对您提出的两个方面回答如下：\n\n### 1. 需纠正错误前提：“尚不明确”是否意味着该药绝对没有禁忌？\n**不是。** “尚不明确”绝不等于该药没有禁忌。\n*   **纠正说明**：在药品说明书中，“尚不明确”通常表示在该药品的临床试验或上市后监测阶段，尚未收集到充分的证据来明确具体的禁忌症人群或情况，或者相关数据缺失。这属于信息不完整，而非风险不存在。\n*  ",
+      "review_focus": "risk_fields",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "missing_parent_identifiers",
+        "pipeline_count_diff"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 2,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "如果查询不到某个药的禁忌信息，是否表示该药没有禁忌？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 6,
+        "evidence_types": {
+          "json_neo4j_text_verified": 3,
+          "unknown": 3
+        },
+        "cited_ids": [
+          1,
+          2
+        ],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "reference_footer_blocks": 1,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 3,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "severity": "WARN",
+          "code": "pipeline_count_diff",
+          "description": "检索统计与历史证据卡数量不同，可能包含后续补检或旧数据格式",
+          "retained_reported": 3,
+          "evidence_cards": 6
+        }
+      ]
+    },
+    {
+      "case_id": "QA7006C5F04970D0FF",
+      "source_filename": "medical_trace_035.json",
+      "source_sha256": "7006c5f04970d0ffbc461ae2e8a6f03c9d12de652f93dc90cf1cccc75dafc1ca",
+      "question": "这些 Neo4j 的 DiseaseCandidate 是否已经是可靠的药物治疗疾病关系？",
+      "answer_excerpt": "当前检索到的知识库证据不足，无法可靠回答该问题。",
+      "review_focus": "medical_relation",
+      "unverified_disease_candidate_count": 0,
+      "engineering_status": "WARN",
+      "engineering_issue_codes": [
+        "no_body_citations",
+        "missing_parent_identifiers"
+      ],
+      "engineering_summary": {
+        "failures": 0,
+        "warnings": 2,
+        "checks": "工程引文/栏目覆盖/跨库 Section 身份，不包含临床疗效验证"
+      },
+      "metrics": {
+        "question": "这些 Neo4j 的 DiseaseCandidate 是否已经是可靠的药物治疗疾病关系？",
+        "answer_mode": "unspecified",
+        "evidence_cards": 3,
+        "evidence_types": {
+          "json_neo4j_text_verified": 3
+        },
+        "cited_ids": [],
+        "invalid_cited_ids": [],
+        "unused_evidence_ids": [
+          1,
+          2,
+          3
+        ],
+        "reference_footer_blocks": 0,
+        "repeat_section_groups": 0,
+        "same_quote_candidate_card_groups": 0,
+        "definite_section_duplicates": 0,
+        "reported_merged_evidence": 3,
+        "reported_neo4j_parent_verified": 3
+      },
+      "issues": [
+        {
+          "severity": "WARN",
+          "code": "no_body_citations",
+          "description": "答案正文没有使用本轮任何证据编号"
+        },
+        {
+          "severity": "WARN",
+          "code": "missing_parent_identifiers",
+          "description": "部分证据缺少 record_id/section_id，不能精确判定跨库重复",
+          "evidence_ids": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    }
+  ],
+  "invalid_files": []
+}

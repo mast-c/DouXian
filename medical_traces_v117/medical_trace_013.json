@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "question": "阿托伐他汀钙片与动脉粥样硬化有什么关联？",
+  "answer": "当前检索到的知识库证据不足，无法可靠回答该问题。",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "https://www.yaopinnet.com/huayao/hy1695u.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：阿托伐他汀钙片 疾病词条：动脉粥样硬化 原文证据：2．高胆固醇血症并有动脉粥样硬化危险的病人。 候选 ID：diseasecandidate_f82de7a777d09f1085e6e2d9 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semantic_review 来源链接：https…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：阿托伐他汀钙片\n疾病词条：动脉粥样硬化\n原文证据：2．高胆固醇血症并有动脉粥样硬化危险的病人。\n候选 ID：diseasecandidate_f82de7a777d09f1085e6e2d9\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy1695u.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy1695u.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "阿托伐他汀钙片",
+        "disease_term": "动脉粥样硬化",
+        "evidence_quote": "2．高胆固醇血症并有动脉粥样硬化危险的病人。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_e3eaa7b8ef9966530caa82fb",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "药品资料：阿托伐他汀钙片",
+        "section_path": "阿托伐他汀钙片 / 适应症 / indication",
+        "preview": "药品：阿托伐他汀钙片 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：1．原发性高胆固醇血症和混合性高脂血症，降低升高的TC、LDL-C、ApoB和TG水平。 2．高胆固醇血症并有动脉粥样硬化危险的病人。",
+        "content": "药品：阿托伐他汀钙片\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1．原发性高胆固醇血症和混合性高脂血症，降低升高的TC、LDL-C、ApoB和TG水平。 2．高胆固醇血症并有动脉粥样硬化危险的病人。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy1695u.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "阿托伐他汀钙片",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_e3eaa7b8ef9966530caa82fb",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 2,
+        "direct_sections": 1,
+        "candidate_cards": 1,
+        "raw_candidate_nodes": 1,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 2,
+        "retained": 1,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 1,
+        "indexed_chunks": 313,
+        "parent_verified": 1,
+        "parent_rejected": 0,
+        "section_not_relevant": 5,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 1,
+        "retained": 1
+      },
+      "merge": {
+        "unique_before_entity_filter": 3,
+        "after_entity_filter": 3,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 1,
+        "retained": 2,
+        "retained_neo4j_verified": 1,
+        "explicit_drugs": [
+          "阿托伐他汀钙片"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 1,
+        "section_count": 1,
+        "candidate_count": 1,
+        "raw_candidate_nodes": 1,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 2
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 1,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 6,
+          "skipped_section": 5,
+          "failed_provenance": 0,
+          "verified": 1,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "indication"
+          ],
+          "selected": 1
+        },
+        "hits_before_entity_gate": 1
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "阿托伐他汀钙片"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 3
+    },
+    "evidence_coverage": {
+      "decision": "refuse",
+      "aspects": [
+        {
+          "question": "阿托伐他汀钙片与动脉粥样硬化的具体临床关联是什么？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "证据仅提及适应症类别为‘有动脉粥样硬化危险的病人’，且明确标注未经医学权威核验，未说明具体作用机制或临床疗效关联。"
+        }
+      ],
+      "evidence_ids": [],
+      "answer_questions": [],
+      "refused_questions": [
+        "阿托伐他汀钙片与动脉粥样硬化的具体临床关联是什么？"
+      ],
+      "message": ""
+    },
+    "total_seconds": 41.97
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

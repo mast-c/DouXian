@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "question": "丁溴东莨菪碱注射液有哪些药物相互作用？",
+  "answer": "根据检索到的资料，丁溴东莨菪碱注射液的药物相互作用包括 [2]：\n\n1.  **增加毒性**：与其他抗胆碱能药、吩噻嗪类等药物合用时会增加毒性。\n2.  **拮抗促胃肠动力作用**：可拮抗甲氧氯普胺、多潘立酮等的促胃肠动力作用。\n3.  **增强抗胆碱能效应（需谨慎）**某些抗心律失常药（如奎尼丁、丙吡胺等）与本品合用要谨慎，因前者具有阻滞迷走神经作用，故能增强本品的抗胆碱能效应，导致口干、视力模糊、排尿困难，老年人尤当注意。\n4.  **增强止吐作用但加剧口干**：本品与拟肾上腺素能药物合用（如：右旋苯丙胺5mg），可增强止吐作用，减少本品的嗜睡作用，但口干更显著。\n5.  **禁止合用（副作用加剧）**：与三环类抗抑郁药（阿米替林等）合用时，两者均具有抗胆碱能效应，口干、便秘、视力模糊等副作用加剧，可使老年患者发生尿潴留，诱发急性青光眼及麻痹性肠梗阻等，故而禁止这两种药物合用。\n6.  **增加吸收**：本品分别与地高辛、呋喃妥因、维生素B2等合用时，会明显增加后者的吸收。\n7.  **影响硝酸甘油吸收**：应用本品或其他抗胆碱能药物期间，舌下含化硝酸甘油预防或治疗心绞痛时，因唾液减少使后者崩解减慢，从而影响其吸收，作用有可能推迟及（或）减弱。\n\n\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[2] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy7191b.htm) · 丁溴东莨菪碱注射液 / 药物相互作用 / drug_interactions · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料 · 丁溴东莨菪碱注射液",
+        "section_path": "Neo4j / 药品资料 / 适应症（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丁溴东莨菪碱注射液 栏目：适应症 原文：1.用于胃、十二指肠、结肠内窥镜检查的术前准备，内镜逆行胰胆管造影，和胃、十二指肠、结肠的气钡低张造影或腹部CT扫描的术前准备，可减少或抑制胃肠道蠕动；2.用于各种病因引起的胃肠道痉挛、胆绞痛、肾绞痛或胃肠道蠕动亢进等。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丁溴东莨菪碱注射液\n栏目：适应症\n原文：1.用于胃、十二指肠、结肠内窥镜检查的术前准备，内镜逆行胰胆管造影，和胃、十二指肠、结肠的气钡低张造影或腹部CT扫描的术前准备，可减少或抑制胃肠道蠕动；2.用于各种病因引起的胃肠道痉挛、胆绞痛、肾绞痛或胃肠道蠕动亢进等。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy7191b.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丁溴东莨菪碱注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_ce1991029adf1b6508995568",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_3887f35834911cbea4345730",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "药品资料：丁溴东莨菪碱注射液",
+        "section_path": "丁溴东莨菪碱注射液 / 药物相互作用 / drug_interactions",
+        "preview": "药品：丁溴东莨菪碱注射液 栏目：药物相互作用 资料状态：第三方来源尚未完成医学权威核验 证据原文：1.与其他抗胆碱能药、吩噻嗪类等药物合用时会增加毒性；2.可拮抗甲氧氯普胺、多潘立酮等的促胃肠动力作用；3.某些抗心律失常药（如奎尼丁、丙吡胺等）与本品合用要谨慎，因前者具有阻滞迷走神经作用，故能增强本品的抗胆碱能效应，导致口干、视力模糊、排尿困难，老年人尤当注意；4.本品与拟肾上腺素能药物合用（如：右旋苯丙胺5mg），可增强止吐作用，减少本品的嗜睡作用，但口干更显著；5.与三环…",
+        "content": "药品：丁溴东莨菪碱注射液\n栏目：药物相互作用\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1.与其他抗胆碱能药、吩噻嗪类等药物合用时会增加毒性；2.可拮抗甲氧氯普胺、多潘立酮等的促胃肠动力作用；3.某些抗心律失常药（如奎尼丁、丙吡胺等）与本品合用要谨慎，因前者具有阻滞迷走神经作用，故能增强本品的抗胆碱能效应，导致口干、视力模糊、排尿困难，老年人尤当注意；4.本品与拟肾上腺素能药物合用（如：右旋苯丙胺5mg），可增强止吐作用，减少本品的嗜睡作用，但口干更显著；5.与三环类抗抑郁药（阿米替林等）合用时，两者均具有抗胆碱能效应，口干、便秘、视力模糊等副作用加剧，可使老年患者发生尿潴留，诱发急性青光眼及麻痹性肠梗阻等，故而禁止这两种药物合用；6.本品分别与地高辛、呋喃妥因、维生素B2等合用时，会明显增加后者的吸收；7.应用本品或其他抗胆碱能药物期间，舌下含化硝酸甘油预防或治疗心绞痛时，因唾液减少使后者崩解减慢，从而影响其吸收，作用有可能推迟及（或）减弱。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy7191b.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "丁溴东莨菪碱注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_ce1991029adf1b6508995568",
+        "section_field": "drug_interactions",
+        "candidate_id": "",
+        "section_id": "section_56fbb3708311c1883d22d792",
+        "parent_verified": true
+      },
+      {
+        "id": 3,
+        "source": "药品资料：丁溴东莨菪碱注射液",
+        "section_path": "丁溴东莨菪碱注射液 / 注意事项 / warnings",
+        "preview": "药品：丁溴东莨菪碱注射液 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：1.本品应用出现过敏反应时应停药；2.对于血压偏低者应用本品时，应注意防止产生体位性低血压；3.皮下或肌注时要注意避开神经与血管，如需反复注射应不在同一部位，宜左右交替注射；4.禁与碱、碘及鞣酸配伍。 可出现口渴、视力调节障碍、嗜睡、心悸、面部潮红、恶心、呕吐、眩晕、头痛等反应。 尚不明确。 婴幼儿、小儿慎用。 老年人用药前应除外心脏病和前列腺肥大等病史。 如过量可引起谵妄、激动不安…",
+        "content": "药品：丁溴东莨菪碱注射液\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1.本品应用出现过敏反应时应停药；2.对于血压偏低者应用本品时，应注意防止产生体位性低血压；3.皮下或肌注时要注意避开神经与血管，如需反复注射应不在同一部位，宜左右交替注射；4.禁与碱、碘及鞣酸配伍。\n可出现口渴、视力调节障碍、嗜睡、心悸、面部潮红、恶心、呕吐、眩晕、头痛等反应。\n尚不明确。\n婴幼儿、小儿慎用。\n老年人用药前应除外心脏病和前列腺肥大等病史。\n如过量可引起谵妄、激动不安甚至惊厥、呼吸衰竭乃至死亡，可用拟胆碱药和其他对症处理进行抢救。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy7191b.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "丁溴东莨菪碱注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_ce1991029adf1b6508995568",
+        "section_field": "warnings",
+        "candidate_id": "",
+        "section_id": "section_23e982a33f198ab376c0481f",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 3,
+        "direct_sections": 3,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 3,
+        "retained": 1,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 2,
+        "indexed_chunks": 313,
+        "parent_verified": 2,
+        "parent_rejected": 0,
+        "section_not_relevant": 3,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 2,
+        "retained": 2
+      },
+      "merge": {
+        "unique_before_entity_filter": 5,
+        "after_entity_filter": 5,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 2,
+        "retained": 3,
+        "retained_neo4j_verified": 2,
+        "explicit_drugs": [
+          "丁溴东莨菪碱注射液"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 1,
+        "section_count": 3,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": true,
+        "selected_drugs": [],
+        "supplement_fields": [
+          "warnings",
+          "drug_interactions"
+        ],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 3
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 2,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 5,
+          "skipped_section": 3,
+          "failed_provenance": 0,
+          "verified": 2,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "drug_interactions",
+            "warnings"
+          ],
+          "selected": 2
+        },
+        "hits_before_entity_gate": 2
+      }
+    },
+    "multi_drug_scope": {
+      "listed_drugs": [],
+      "supplement_fields": [
+        "warnings",
+        "drug_interactions"
+      ],
+      "max_listed_drugs": 4,
+      "removed_off_scope": 0,
+      "scope_note": "这是数据库匹配的部分疾病提及候选，不是完整治疗药品清单或官方临床推荐。"
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "丁溴东莨菪碱注射液"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 5
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "丁溴东莨菪碱注射液有哪些药物相互作用？",
+          "status": "supported",
+          "evidence_ids": [
+            2
+          ],
+          "quotes": [
+            {
+              "id": 2,
+              "quote": "1.与其他抗胆碱能药、吩噻嗪类等药物合用时会增加毒性；2.可拮抗甲氧氯普胺、多潘立酮等的促胃肠动力作用；3.某些抗心律失常药（如奎尼丁、丙吡胺等）与本品合用要谨慎，因前者具有阻滞迷走神经作用，故能增强本品的抗胆碱能效应，导致口干、视力模糊、排尿困难，老年人尤当注意；4.本品与拟肾上腺素能药物合用（如：右旋苯丙胺5mg），可增强止吐作用，减少本品的嗜睡作用，但口干更显著；5.与三环类抗抑郁药（阿米替林等）合用时，两者均具有抗胆碱能效应，口干、便秘、视力模糊等副作用加剧，可使老年患者发生尿潴留，诱发"
+            }
+          ],
+          "reason": "证据2完整列出了该药与抗胆碱能药、促胃肠动力药、抗心律失常药、拟肾上腺素能药物、三环类抗抑郁药及其他药物的具体相互作用表现及合用禁忌，可直接支撑回答。"
+        }
+      ],
+      "evidence_ids": [
+        2
+      ],
+      "answer_questions": [
+        "丁溴东莨菪碱注射液有哪些药物相互作用？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "skipped",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 35.99
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

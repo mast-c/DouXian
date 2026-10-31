@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "question": "扁桃体化脓并发烧，我能只吃一清胶囊不去医院吗？",
+  "answer": "**结论：不能。**\n\n根据检索到的资料，一清胶囊的注意事项中明确规定：“扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊” [1]。因此，当出现扁桃体化脓并发烧（特别是体温超过38.5℃）时，仅服用该药而不就医不符合说明书的安全警示要求。\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/zhongyao/zy3985h.htm) · 一清胶囊 / 注意事项 / warnings · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料：一清胶囊",
+        "section_path": "一清胶囊 / 注意事项 / warnings",
+        "preview": "药品：一清胶囊 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。服药后大便次数每日2到3次者，应减量；每日3次以上者，应停用并向医师咨询。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用…",
+        "content": "药品：一清胶囊\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。服药后大便次数每日2到3次者，应减量；每日3次以上者，应停用并向医师咨询。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用量服用，本品不宜长期服用。 8.服药3天症状无缓解，应去医院就诊。 9.对本品过敏者禁用，过敏体质者慎用。 10.本品性状发生改变时禁止使用。 11.儿童必须在成人监护下使用。 12.请将本品放在儿童不能接触的地方。 13.如正在使用其他药品，使用本品前请咨询医师或药师。 14.本品易吸潮，开袋取药后应密闭保存，注意防潮。 15.如因保存不当，导致本品出现吸潮结块等性状改变，请勿继续使用。 16.请将本品放在儿童不能看见的地方。\n偶见皮疹，恶心，腹泻，腹痛。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_cab267e035fa92e45fd92f68",
+        "section_field": "warnings",
+        "candidate_id": "",
+        "section_id": "section_64214f7b014a8162928c676d",
+        "parent_verified": true
+      },
+      {
+        "id": 2,
+        "source": "药品资料：一清胶囊",
+        "section_path": "一清胶囊 / 适应症 / indication",
+        "preview": "药品：一清胶囊 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：清热泻火解毒， 化淤凉血止血。用于火毒血热所致的身热烦躁、目赤口疮、咽喉牙跟肿痛、大便秘结、吐血、咯血、衄血、痔血；咽炎、扁桃体炎、牙跟炎见上述证候者。",
+        "content": "药品：一清胶囊\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：清热泻火解毒， 化淤凉血止血。用于火毒血热所致的身热烦躁、目赤口疮、咽喉牙跟肿痛、大便秘结、吐血、咯血、衄血、痔血；咽炎、扁桃体炎、牙跟炎见上述证候者。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_cab267e035fa92e45fd92f68",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_7532cbf18177d134069bf281",
+        "parent_verified": true
+      },
+      {
+        "id": 3,
+        "source": "药品资料：一清胶囊",
+        "section_path": "一清胶囊 / 不良反应 / adverse_reactions",
+        "preview": "药品：一清胶囊 栏目：不良反应 资料状态：第三方来源尚未完成医学权威核验 证据原文：偶见皮疹，恶心，腹泻，腹痛。",
+        "content": "药品：一清胶囊\n栏目：不良反应\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：偶见皮疹，恶心，腹泻，腹痛。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3985h.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清胶囊",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_cab267e035fa92e45fd92f68",
+        "section_field": "adverse_reactions",
+        "candidate_id": "",
+        "section_id": "section_56cbb42d62f21155882ca30f",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 1,
+        "direct_sections": 1,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 1,
+        "retained": 0,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 3,
+        "retained": 3
+      },
+      "merge": {
+        "unique_before_entity_filter": 4,
+        "after_entity_filter": 4,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 1,
+        "retained": 3,
+        "retained_neo4j_verified": 3,
+        "explicit_drugs": [
+          "一清胶囊"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 0,
+        "section_count": 1,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 1
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 3,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "一清胶囊"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 4
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "扁桃体化脓并发烧时，能否仅服用一清胶囊而不去医院？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。"
+            }
+          ],
+          "reason": "证据原文明确规定扁桃体化脓或发热超38.5℃应去医院就诊，直接否定了仅服药即可的处理方式。"
+        }
+      ],
+      "evidence_ids": [
+        1
+      ],
+      "answer_questions": [
+        "扁桃体化脓并发烧时，能否仅服用一清胶囊而不去医院？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "skipped",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 27.78
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

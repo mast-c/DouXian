@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "status": "INCOMPLETE_OR_NEEDS_ATTENTION",
+  "question_plan_sha256": "2c919a59a5fd43f88c5c4dcdf8d10158b1ee21de1c56637aa9ffafc308f74bf4",
+  "expected_unique_questions": 20,
+  "covered_unique_questions": 19,
+  "missing_questions": [
+    {
+      "id": "QA20",
+      "question": "10%、20%、30%脂肪乳注射液对婴儿和儿童有哪些特别注意？30%制剂可以直接用于儿童吗？"
+    }
+  ],
+  "repeated_question_files": {},
+  "unexpected_questions": [
+    {
+      "file": "medical_trace_042.json",
+      "question": "10%、20%、30%脂肪乳注射液对婴儿和儿童有哪些特别注意？30%制剂可以直接用于儿童吗"
+    }
+  ],
+  "invalid_files": [],
+  "duplicate_export_bytes": [],
+  "chroma_count_snapshots_observed": [
+    313
+  ],
+  "snapshot_warning": "",
+  "cases": {
+    "QA01": [
+      {
+        "file": "medical_trace_001 (1).json",
+        "sha256": "49843fc4c644b340c7ce12b406ad59b7d555a6d499b4ac0ff03cbe33d0a5ba45",
+        "evidence_cards": 12,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "structured_source_display",
+        "self_rag_status": null,
+        "safety_notice_applied": null,
+        "total_seconds": 25.33
+      }
+    ],
+    "QA02": [
+      {
+        "file": "medical_trace_004.json",
+        "sha256": "b4dd008e06855dc46ac16f29dbd8429abf1b9266f045daaf89baab71bf57ed9e",
+        "evidence_cards": 2,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 24.94
+      }
+    ],
+    "QA03": [
+      {
+        "file": "medical_trace_006.json",
+        "sha256": "c0c5190bb6b1fe8bc5886ffceb8a2b7b1f434b01e0877f595df3707c9ec19b48",
+        "evidence_cards": 1,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 27.68
+      }
+    ],
+    "QA04": [
+      {
+        "file": "medical_trace_008.json",
+        "sha256": "d460bab618dcf83399675add6bace76ba89d0695408f908d524e355523abe9f9",
+        "evidence_cards": 1,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "partial",
+        "self_rag_status": "no_new_evidence",
+        "safety_notice_applied": false,
+        "total_seconds": 40.14
+      }
+    ],
+    "QA05": [
+      {
+        "file": "medical_trace_012.json",
+        "sha256": "b683d0024e8669df00a966e46abe037bd84f7ac7b6e27a66f4bddb5d120f3c3a",
+        "evidence_cards": 2,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 23.52
+      }
+    ],
+    "QA06": [
+      {
+        "file": "medical_trace_014.json",
+        "sha256": "2bfd000fb89c841e4e805a3e1181fbe7ad666dc2814e4b131a78e35e65a56433",
+        "evidence_cards": 2,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 58.99
+      }
+    ],
+    "QA07": [
+      {
+        "file": "medical_trace_016.json",
+        "sha256": "d097afd6f5f9f648cae2e6948a2f8892b6234a7edfacbf822565551432230ffa",
+        "evidence_cards": 2,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "partial",
+        "self_rag_status": "no_new_evidence",
+        "safety_notice_applied": false,
+        "total_seconds": 42.34
+      }
+    ],
+    "QA08": [
+      {
+        "file": "medical_trace_018.json",
+        "sha256": "6d4f23c3fe2bf8e204ca75279bcf860cfaf2f3225e13c5d1ef5295d84a194c3a",
+        "evidence_cards": 7,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 37.34
+      }
+    ],
+    "QA09": [
+      {
+        "file": "medical_trace_020.json",
+        "sha256": "87607dcd55819970a6761c809c03feca1c9685d70f00ce62e242f585f4cafc58",
+        "evidence_cards": 1,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 26.09
+      }
+    ],
+    "QA10": [
+      {
+        "file": "medical_trace_022.json",
+        "sha256": "68105c94c30805d5f48f50e99d6ae4fcda79b9e1d08297e2683cf35fca92e7e4",
+        "evidence_cards": 8,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "structured_source_display",
+        "self_rag_status": null,
+        "safety_notice_applied": null,
+        "total_seconds": 22.37
+      }
+    ],
+    "QA11": [
+      {
+        "file": "medical_trace_024.json",
+        "sha256": "2a5f1771c6f1d4751611d1a63d39b93e3ee3be3a4fa93dc0c73c55590b515791",
+        "evidence_cards": 10,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 36.82
+      }
+    ],
+    "QA12": [
+      {
+        "file": "medical_trace_026.json",
+        "sha256": "d0b5594cad6581dab5f937f10dc40bc801159e8cdc7c431f1e842345f39fc931",
+        "evidence_cards": 2,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "refuse",
+        "self_rag_status": "no_new_evidence",
+        "safety_notice_applied": false,
+        "total_seconds": 45.44
+      }
+    ],
+    "QA13": [
+      {
+        "file": "medical_trace_028.json",
+        "sha256": "c04b1816d63fbda932d8771a8d5335eeef8359c8ddb81c978bd7fb427e39a180",
+        "evidence_cards": 5,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "partial",
+        "self_rag_status": "no_new_evidence",
+        "safety_notice_applied": true,
+        "total_seconds": 42.28
+      }
+    ],
+    "QA14": [
+      {
+        "file": "medical_trace_030.json",
+        "sha256": "c22201177cbce403a586de9b358140695e5fec7070b54ddd699af5809abf511f",
+        "evidence_cards": 3,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 27.78
+      }
+    ],
+    "QA15": [
+      {
+        "file": "medical_trace_032.json",
+        "sha256": "102e67d72ffcb721ad5c9bcc1fd62b6c86d9cf505c45e81c275302aa00443214",
+        "evidence_cards": 2,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 22.79
+      }
+    ],
+    "QA16": [
+      {
+        "file": "medical_trace_034.json",
+        "sha256": "557e3783693df4c86956b988bdd47a63a1031b104660a3f6d1278dd8619558f2",
+        "evidence_cards": 3,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 35.99
+      }
+    ],
+    "QA17": [
+      {
+        "file": "medical_trace_036.json",
+        "sha256": "6bbf24ce09f08d6f7b4cbd4c837c7d1c8c85f82b43a2789c162ac0d2bf199149",
+        "evidence_cards": 5,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "improved",
+        "safety_notice_applied": false,
+        "total_seconds": 85.06
+      }
+    ],
+    "QA18": [
+      {
+        "file": "medical_trace_038.json",
+        "sha256": "b4a546fa1d82c2d07e945dc0cd817b185f4335e393d248819fb9d87f1e5b9c44",
+        "evidence_cards": 3,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "refuse",
+        "self_rag_status": "unchanged",
+        "safety_notice_applied": false,
+        "total_seconds": 54.66
+      }
+    ],
+    "QA19": [
+      {
+        "file": "medical_trace_040.json",
+        "sha256": "43b810f251f6ddc6145b0df6abca34f7b3fa56a52ca7b26474a1462af0cb5a45",
+        "evidence_cards": 2,
+        "engineering_status": "未在此脚本评估，请执行V1.17原版collect",
+        "guard_decision": "answer",
+        "self_rag_status": "skipped",
+        "safety_notice_applied": false,
+        "total_seconds": 53.4
+      }
+    ]
+  },
+  "note": "此脚本只核对新批次 trace 与固定题集，不评审医学内容。请继续执行 medical_quality_campaign.py collect 和人工审核/score。"
+}

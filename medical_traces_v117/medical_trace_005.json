@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "question": "丙酸交沙霉素颗粒的注意事项有哪些？",
+  "answer": "根据检索到的资料，丙酸交沙霉素颗粒的注意事项主要包括以下几点 [1]：\n\n1. **过敏与交叉反应**：若患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受，对其他大环内酯类药物（包括本品）也可能过敏或不能耐受。\n2. **疗程要求**：溶血性链球菌感染患者治疗时至少需持续10日，以防止急性风湿热的发生。\n3. **特殊人群用药**：肾功能减退患者一般无需减少用量；但肝病患者和严重肾功能损害者的剂量应适当减少。\n4. **监测要求**：服用期间宜定期随访肝功能。\n5. **实验室检查干扰**：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺测定值假性增高；血清碱性磷酸酶、胆红素、丙氨酸氨基转移酶和门冬氨酸氨基转移酶的测定值均可能增高。\n6. **药敏测定**：因不同细菌对本品的敏感性存在差异，宜作药敏测定。\n7. **不良反应警示**：\n    *   **胃肠道反应**：常见腹泻、恶心、呕吐、中上腹痛等，发生率与剂量有关，且明显低于红霉素。\n    *   **肝毒性**：少见乏力、恶心、呕吐、腹痛、发热及肝功能异常，偶见黄疸。\n    *   **听力影响**：大剂量服用可能引起听力减退，停药后大多可恢复。\n    *   **其他**：偶见过敏反应（药物热、皮疹、嗜酸性粒细胞增多）、心律失常、口腔或阴道念珠菌感染。\n\n*注：以上为第三方资料原文摘录，未经医学权威核验，具体用药请遵医嘱。*\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy31890.htm) · Neo4j / 药品资料 / 注意事项（来源待核验） · Neo4j 原文 Section",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料 · 丙酸交沙霉素颗粒",
+        "section_path": "Neo4j / 药品资料 / 注意事项（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：丙酸交沙霉素颗粒 栏目：注意事项 原文：1．患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。2．溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。3．肾功能减退患者一般无需减少用量。4．服用本品期间宜定期随访肝功能。肝病患者和严重肾功能损害者的剂量应适当减少。5．对实验室检查指标的干扰：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值…",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：注意事项\n原文：1．患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。2．溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。3．肾功能减退患者一般无需减少用量。4．服用本品期间宜定期随访肝功能。肝病患者和严重肾功能损害者的剂量应适当减少。5．对实验室检查指标的干扰：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值出现假性增高。血清碱性磷酸酶、胆红素、丙氨酸氨基转移酶和门冬氨酸氨基转移酶的测定值均可能增高。6．因不同细菌对本品的敏感性存在一定差异，故宜作药敏测定。\n1．胃肠道反应有腹泻、恶心、呕吐、中上腹痛、口舌疼痛、胃纳减退等，发生率与剂量有关。本品的胃肠道反应发生率明显低于红霉素。2．乏力、恶心、呕吐、腹痛、发热及肝功能异常等肝毒性症状少见，偶见黄疸等。3．大剂量服用本品，可能引起听力减退，停药后大多可恢复。4．偶见过敏反应，表现为药物热、皮疹、嗜酸性粒细胞增多等。5．偶有心律失常、口腔或阴道念珠菌感染。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy31890.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_544a97aa8694dc332a004c06",
+        "parent_verified": false
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 1,
+        "direct_sections": 1,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 1,
+        "retained": 1,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 0,
+        "retained": 0
+      },
+      "merge": {
+        "unique_before_entity_filter": 4,
+        "after_entity_filter": 1,
+        "removed_by_entity_filter": 3,
+        "removed_by_dedup": 0,
+        "retained": 1,
+        "retained_neo4j_verified": 0,
+        "explicit_drugs": [
+          "丙酸交沙霉素颗粒"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 1,
+        "section_count": 1,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 1
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 0,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "warnings"
+          ],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "丙酸交沙霉素颗粒"
+      ],
+      "removed_other_drugs": 3,
+      "removed_unattributed": 0,
+      "kept": 1
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "丙酸交沙霉素颗粒的注意事项有哪些？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "1．患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受时，对其他大环内酯类药物（如本品）也可过敏或不能耐受。2．溶血性链球菌感染患者用本品治疗时至少需持续10日，以防止急性风湿热的发生。3．肾功能减退患者一般无需减少用量。4．服用本品期间宜定期随访肝功能。肝病患者和严重肾功能损害者的剂量应适当减少。5．对实验室检查指标的干扰：本品可干扰Higerty法的荧光测定，使尿儿茶酚胺的测定值出现假性增高。血清碱性磷酸酶、胆红素、丙氨酸氨基转移酶和门冬氨酸氨基转移酶的测定值均可能增高。6．因不同细菌对本"
+            }
+          ],
+          "reason": "证据明确列出注意事项栏目的六项具体内容，涵盖过敏交叉、疗程要求、肝肾功能调整、实验室检查干扰及药敏测定，可直接完整回答用户问题。"
+        }
+      ],
+      "evidence_ids": [
+        1
+      ],
+      "answer_questions": [
+        "丙酸交沙霉素颗粒的注意事项有哪些？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "total_seconds": 24.95
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

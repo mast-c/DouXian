@@ -1,0 +1,124 @@
+﻿case_id,source_filename,source_sha256,question,answer_excerpt,engineering_status,engineering_issue_codes,unverified_disease_candidate_count,review_focus,review_status,evidence_support,relation_safety,medical_safety,source_authority,reviewer,review_note
+QA006D573276E28DA8,medical_trace_001.json,006d573276e28da8732f034f28f57dee24e506cef93819da97a025da97f1aefd,治疗扁桃体炎的药物有哪些？药物有没有不良反应和注意事项？,"**本轮资料中与“扁桃体炎”有关的药品提及候选：4 种。**
+
+以下按药品逐项列出数据库中的疾病提及和说明书栏目原文。**这不是完整的治疗药物清单，也不代表已经确认的获批适应症或处方推荐。**
+
+
+### 一清胶囊
+
+**疾病关联原文（待人工审核）**：咽炎、扁桃体炎、牙跟炎见上述证候者。 [1]
+
+- **不良反应（原文节选）**：偶见皮疹，恶心，腹泻，腹痛。 [5]
+
+- **注意事项（原文节",PASS,,4,disease_drug_scope|risk_fields|medical_relation|unreviewed_candidate,reviewed,supported,adequately_caveated,acceptable,third_party_unverified,人工复核,四种药品的疾病提及分别对应[1]-[4]，不良反应、注意事项分别对应[5]-[12]，药品与栏目引用匹配。回答已限定为本轮候选和资料节选，并保留尚不明确不等于无风险的提示。中药原文含“见上述证候者”，临床适用必须同时考虑证候，不能将扁桃体炎病名作为单独用药依据。丙酸交沙霉素的病原限制已保留。上述内容可作为资料摘要，不能据此形成完整处方或获批治疗清单。
+QA81855CE8F6411119,medical_trace_003.json,81855ce8f6411119379370a3f0e6c53bd5d7b7513d4cda3fdab6ea918034b289,一清胶囊与一清颗粒的不良反应有什么不同？,"根据本轮检索到的原文证据，**一清胶囊与一清颗粒的不良反应没有不同**。
+
+两者在资料中记载的不良反应完全一致，均为“偶见皮疹，恶心，腹泻，腹痛” [1]、[2]。
+
+参考资料（同一来源的不同片段合并显示）：
+
+[1] [查看药品资料来源](https://www.yaopinnet.com/zhongyao/zy3985h.htm) · 一清胶囊 / 不良反应 / adverse_reactio",WARN,missing_parent_identifiers,0,risk_fields,reviewed,supported,not_applicable,acceptable,third_party_unverified,人工复核,[1]与[2]分别属于一清胶囊和一清颗粒，所载不良反应文字均为偶见皮疹、恶心、腹泻、腹痛，回答有对应引证。该结论仅能表述为本轮资料记载相同，不能据此证明不同剂型、厂家、辅料或给药条件下的实际发生率及严重程度一致。建议将“没有不同”改为“本轮所引不良反应条目相同”。
+QA7EE767942DEFC572,medical_trace_005.json,7ee767942defc57211dd70ad656e7643ae3c889994bcf886fc89a9f69bb39f0c,丙酸交沙霉素颗粒的注意事项有哪些？,"根据检索到的资料，丙酸交沙霉素颗粒的注意事项主要包括以下几点 [1]：
+
+1. **过敏与交叉反应**：若患者对大环内酯类中一种药物（如红霉素）过敏或不能耐受，对其他大环内酯类药物（包括本品）也可能过敏或不能耐受。
+2. **疗程要求**：溶血性链球菌感染患者治疗时至少需持续10日，以防止急性风湿热的发生。
+3. **特殊人群用药**：肾功能减退患者一般无需减少用量；但肝病患者和严重肾功能损害者的",WARN,missing_parent_identifiers,0,risk_fields,reviewed,partially_supported,not_applicable,acceptable,third_party_unverified,人工复核,注意事项[1]支持大环内酯交叉过敏、溶血性链球菌感染疗程、肝功能随访、肝病及严重肾损害剂量调整、检验干扰和药敏测定等内容，未发生栏目缺失误判。胃肠道反应被表述为“常见”，但所引原文未给出此频率等级，应改为“可出现”。疗程和剂量调整应限定为原文资料介绍，不能替代病原判断及医师处方。
+QACAB4F5861B6D3AFD,medical_trace_007.json,cab4f5861b6d3afdebae714e7e983fdd55813584fea6b69d1422c8c2cc1f58a9,万通炎康片的不良反应写着“尚不明确”，是不是没有不良反应？,当前检索到的知识库证据不足，无法可靠回答该问题。,WARN,no_body_citations|missing_parent_identifiers,0,risk_fields,reviewed,partially_supported,not_applicable,acceptable,third_party_unverified,人工复核,本轮已有万通炎康片不良反应[1]，原文为“尚不明确”，回答却只作证据不足的拒答，未引用或解释已有信息，答题不完整。尚不明确不等于不会发生不良反应，也不能作为排除过敏或其他风险的依据。回答没有作无风险承诺，未见直接危险用药建议，但应补充上述区别及发生疑似不良反应时咨询医师或药师的提示。
+QA19628D738E0FB41E,medical_trace_009.json,19628d738e0fb41e2b60eb6d6f1891eacf9c6c8bfa6a7809419ab2c4a0f0a903,一清颗粒的不良反应和注意事项是什么？,"根据检索到的资料，一清颗粒的不良反应和注意事项如下：
+
+**不良反应**
+偶见皮疹、恶心、腹泻、腹痛 [2]。
+
+**注意事项**
+1. 饮食禁忌：忌烟、酒及辛辣食物 [1]。
+2. 药物相互作用：不宜在服药期间同时服用滋补性中药 [1]。
+3. 特殊人群用药：糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用；儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用；",WARN,missing_parent_identifiers,0,risk_fields,reviewed,supported,not_applicable,acceptable,third_party_unverified,人工复核,不良反应引自同药[2]，注意事项引自同药[1]，药品、剂型与栏目对应正确。特殊人群需医师指导、过敏者禁用、化脓或高热就医、不宜长期服用等限制均有保留，未将信息不全解释为没有风险。作为来源摘要可以接受。应补充第三方来源及版本尚待核验，并区分注意事项中的饮食限制与药品禁忌栏目。
+QA4AD4DC35F567AD9E,medical_trace_011.json,4ad4dc35f567ad9eab83dd6524a9e36696d270deccb7b9cdb53bdd45218baaeb,阿托伐他汀钙片与10%、20%、30%脂肪乳注射液的适应症有何不同？,"根据检索到的资料，两种药物的适应症及核心区别如下：
+
+### 1. 阿托伐他汀钙片的适应症
+主要用于调节血脂和降低心血管风险 [1]：
+*   **原发性高胆固醇血症和混合性高脂血症**：用于降低升高的总胆固醇（TC）、低密度脂蛋白胆固醇（LDL-C）、载脂蛋白B（ApoB）和甘油三酯（TG）水平。
+*   **动脉粥样硬化高危人群**：适用于患有高胆固醇血症并有动脉粥样硬化危险的病人。
+
+###",WARN,missing_parent_identifiers,0,medical_relation,reviewed,partially_supported,overstated,needs_correction,third_party_unverified,人工复核,[1]支持高胆固醇血症、混合性高脂血症及相关危险人群的资料表述，[2]支持脂肪乳的胃肠外营养用途。回答正确区分营养制剂与卵磷脂成分叙述，但将危险人群描述扩展为预防相关心血管事件，超出本轮引文的临床结局证据。不能由此确认对应产品的获批预防适应症，应补充可追溯依据或删去该扩展结论，避免将营养支持与降脂治疗混为一谈。
+QA0F9A4E0AD277F4BE,medical_trace_013.json,0f9a4e0ad277f4be6222e6dcd940970a16612a5e3be8e1d10d4a02e0e219e49c,阿托伐他汀钙片与动脉粥样硬化有什么关联？,当前检索到的知识库证据不足，无法可靠回答该问题。,WARN,no_body_citations|missing_parent_identifiers,1,unreviewed_candidate,reviewed,partially_supported,adequately_caveated,acceptable,third_party_unverified,人工复核,本轮[1]为动脉粥样硬化相关候选，[2]为阿托伐他汀钙片适应症文本，已有“高胆固醇血症并有动脉粥样硬化危险的病人”的记载。回答仅拒答，遗漏可说明的风险人群关联，未充分利用证据。应说明原文描述的是伴相应危险的高胆固醇血症人群，不能单凭疾病词条推出对所有动脉粥样硬化患者的治疗关系。现有拒答未造成治疗关系夸大或具体处方风险。
+QAF5647B4425C62F81,medical_trace_015.json,f5647b4425c62f81cdea6ca4c15d44c8caa61f0afb70434a55f3c20b56759b31,脂肪乳注射液中卵磷脂的描述是否意味着脂肪乳可直接治疗动脉粥样硬化？,"根据检索到的资料，针对您提出的四个方面回答如下：
+
+### 1. 脂肪乳注射液的实际临床适应症
+根据药品资料原文，10%、20%、30%脂肪乳注射液的获批/标示适应症为**静脉营养的组成部分** [5]。具体包括：
+*   为机体提供能量和必需脂肪酸；
+*   用于胃肠外营养补充能量及必需脂肪酸；
+*   预防和治疗人体必需脂肪酸缺乏症；
+*   为经口服途径不能维持和恢复正常必需脂肪酸水平的病人",WARN,missing_parent_identifiers,4,medical_relation|unreviewed_candidate,reviewed,partially_supported,overstated,needs_correction,third_party_unverified,人工复核,否定将卵磷脂的成分描述直接推及脂肪乳整剂治疗动脉粥样硬化，符合证据边界。[5]仅为第三方用途资料，不能支持“获批”这一监管结论，应改为资料记载的用途。[6]列有特定禁忌，回答不应进一步概括所有动脉粥样硬化患者使用均会加重病情。应区分治疗该病与因其他原因接受营养支持两种情境，按具体制剂、脂质代谢状态及相关禁忌评估。
+QAAF2006C3CF0EB7FB,medical_trace_017.json,af2006c3cf0eb7fbdb4929c0322c3beafce53b98dd6808bb137a816d2329933d,七味解痛口服液与扁桃体炎有明确的适应症依据吗？,"针对您提出的关于“七味解痛口服液”的两个方面，依据本轮检索到的证据 [1] 回答如下：
+
+### 1. 需纠正错误前提：是否有针对“扁桃体炎”的明确适应症？
+**没有。** 当前知识库证据不支持该药用于“扁桃体炎”。
+*   **纠正说明**：在提供的药品资料原文中，仅提及了“胃脘痛”和“原发性痛经”，**未出现**“扁桃体炎”字样。不能仅凭关键词匹配或相邻实体推断其具有治疗扁桃体炎的作用。
+* ",WARN,missing_parent_identifiers,0,medical_relation,reviewed,supported,adequately_caveated,acceptable,third_party_unverified,人工复核,[1]仅记载气滞血瘀证所致胃脘痛、原发性痛经症状缓解，未见扁桃体炎依据。回答没有根据相似注意事项或相邻疾病词条建立治疗关系，且保留第三方资料的来源限制。应将开头“没有”统一表述为“本轮资料未见明确依据”，避免把有限检索范围内未见证据误读为对全部产品与版本的监管结论。
+QA83D5A91251071D35,medical_trace_019.json,83d5a91251071d35326c22aa5cd2af94e40d4b97e3f5807f3daf38e415c98566,治疗扁桃体炎的药物及各自禁忌有哪些？,"**本轮资料中与“扁桃体炎”有关的药品提及候选：4 种。**
+
+以下按药品逐项列出数据库中的疾病提及和说明书栏目原文。**这不是完整的治疗药物清单，也不代表已经确认的获批适应症或处方推荐。**
+
+
+### 一清胶囊
+
+**疾病关联原文（待人工审核）**：咽炎、扁桃体炎、牙跟炎见上述证候者。 [1]
+
+- **禁忌**：资料原文为“尚不明确”；这不等于已确认没有相关风险。[5]
+
+
+### 一清颗粒",PASS,,4,disease_drug_scope|risk_fields|medical_relation|unreviewed_candidate,reviewed,supported,adequately_caveated,acceptable,third_party_unverified,人工复核,四种候选与禁忌分别对应[1]-[4]及[5]-[8]，药品身份和引文匹配。一清胶囊、一清颗粒、万通炎康片的禁忌栏均记载尚不明确，回答已提示不等于无风险；丙酸交沙霉素的大环内酯过敏禁用与原文一致。该表述可作为禁忌栏摘要，不能据此忽略其他栏目中明确的过敏禁用或特殊人群限制，也不能将候选清单当作临床治疗推荐。
+QA899A1582164409C2,medical_trace_021.json,899a1582164409c223c8edd0c731d3bc89272666212a27fcbdba9248ca97610c,请列出数据库中所有治疗扁桃体炎的药品并保证没有遗漏。,"根据检索到的证据 [1]，**所列药品（一清胶囊）尚未获得权威医学验证或官方核准的治疗依据。**
+
+资料明确标注该来源为“Neo4j 疾病提及候选”，且临床验证状态为“not_validated”（未验证），审核状态为“pending_human_review”（待人工审核）。这仅证明文档中提到了该疾病词条，不代表该药已获监管机构批准用于治疗扁桃体炎。
+
+**当前知识库证据不足，暂无法可靠回答：*",WARN,missing_parent_identifiers|non_structured_multi_drug,4,disease_drug_scope|medical_relation|unreviewed_candidate,reviewed,partially_supported,adequately_caveated,acceptable,third_party_unverified,人工复核,拒绝保证药品清单无遗漏是恰当的，但本轮[1]-[4]已有四种相关候选，回答只呈现一清胶囊，未完成可提供的有限资料汇总。应分别列出四种候选及原文条件，同时说明检索覆盖和来源核验限制。“尚未获得官方核准的治疗依据”应改为“本轮未取得可核验的官方核准依据”，避免将缺少核验材料误判为该药未获批准。
+QA116A549125BC0CB0,medical_trace_023.json,116a549125bc0cb0f3250d8688227667e2bd198380c519f198a0232aaa32c8d1,丙酸交沙霉素颗粒是否经监管机构正式批准用于扁桃体炎？,"根据本轮提供的证据 [1]，关于丙酸交沙霉素颗粒适应症信息的权威性与来源性质如下：
+
+**1. 来源性质：第三方非官方资料**
+该信息来源于“药品资料”中的第三方数据集，并非上市产品的最新版官方核准说明书。证据明确标注为“数据集中保存的第三方资料文本”，仅描述资料如何陈述，不等同于官方核准内容。
+
+**2. 权威性与审核状态：待核验/未权威认证**
+*   **章节状态**：所属章节标记为“来源待",WARN,missing_parent_identifiers,1,unreviewed_candidate,reviewed,supported,adequately_caveated,acceptable,third_party_unverified,人工复核,[1]为未完成权威核验的第三方适应症文本，[2]为待审核疾病提及候选，两者均不能独立证明监管批准状态。回答正确区分原文记载与官方核准，没有把来源一致或候选存在当作批准证据。应保持“目前无法核实”的结论；如需确认，应核对具体厂家、批准文号、剂型规格及相应版本官方说明书，不应直接作已获批或未获批判断。
+QA53FABAC9853FBC95,medical_trace_025.json,53fabac9853fbc95ab0bb43775e7dadbf7efa4a770b167b93bb704b6f19efb25,儿童扁桃体炎可以自己服用丙酸交沙霉素颗粒吗？,"根据检索到的资料，丙酸交沙霉素颗粒**适用于治疗扁桃体炎**。
+
+具体依据如下：
+1.  **明确适应症描述**：资料原文指出“本品适用于化脓性链球菌引起的咽炎及**扁桃体炎**” [1]。
+2.  **适用条件**：该药针对的是由**化脓性链球菌**引起的扁桃体炎。
+3.  **证据局限性说明**：此信息来源于第三方资料，且标注为“来源待核验”、“未完成医学权威核验”。这仅表示资料中如此陈述，不",WARN,missing_parent_identifiers,1,unreviewed_candidate,reviewed,partially_supported,overstated,needs_correction,third_party_unverified,人工复核,[1]只提供化脓性链球菌所致扁桃体炎等用途，不能直接回答某名儿童能否自行服用。回答后文虽保留病原条件、来源限制及遵医嘱要求，但开头笼统肯定适用于扁桃体炎，且未先明确儿童不应自行使用抗菌药，存在误导空间。应首先建议医师评估，再结合年龄、体重、病原可能性、过敏史、肝肾功能及对应产品儿童用药资料确定是否适用，不能据现有片段给出剂量或疗程。
+QA9A76F747F0F4CB7D,medical_trace_027.json,9a76f747f0f4cb7d4d44fd4212e4c03d843ea192d92409ac7cd8fe0f39c20cf1,扁桃体化脓并发烧，我能只吃一清胶囊不去医院吗？,"根据检索到的资料，扁桃体化脓并发烧时，**不能仅服用一清胶囊而不去医院**。
+
+依据药品注意事项原文第5条明确规定：“扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊” [1]。这意味着出现上述症状时，自行服药是不符合用药安全规范的，必须寻求专业医疗帮助。
+
+*注：该资料来源于第三方来源，尚未完成医学权威核验。*
+
+
+
+参考资料（同一来源的不同片段合并显示）：
+
+[1] [查看药品资料来源]",WARN,missing_parent_identifiers,0,citation_grounding,reviewed,supported,not_applicable,acceptable,third_party_unverified,人工复核,就医建议与一清胶囊注意事项[1]第5条一致。原文为扁桃体有化脓“或”体温超过38.5℃应就医，不能误解为两项必须同时出现。回答明确不应仅依赖一清胶囊而延误就诊，未给出替代诊断或具体处方，安全处理恰当。若需补充严重症状的急诊分流，应另有相应依据，不宜从该药品片段扩写成完整诊疗方案。
+QA91A709EDF2904C01,medical_trace_029.json,91a709edf2904c016e0ba3a2dc4934f166fbdcff77570f6042dba02a369cd744,丁苯酞软胶囊的适应症和不良反应有哪些？,"根据检索到的资料，丁苯酞软胶囊的适应症和相关信息如下：
+
+**1. 适应症**
+主要用于治疗轻、中度急性缺血性脑卒中 [1]。
+
+**2. 不良反应**
+本品不良反应较少，主要情况包括：
+*   **常见表现**主要为转氨酶轻度升高（停药后可恢复正常）；偶见恶心、腹部不适、皮疹及精神症状等 [2]。
+*   **临床研究数据**：在丁苯酞Ⅱ、Ⅲ期临床研究中，记录了与药物相关的不良反应发生率对比表（",WARN,missing_parent_identifiers,0,risk_fields|medical_relation,reviewed,partially_supported,adequately_caveated,acceptable,third_party_unverified,人工复核,同药适应症[1]支持轻、中度急性缺血性脑卒中的资料表述，不良反应[2]支持轻度转氨酶升高及偶见其他症状。回答未编造残缺表格的发生率，但“主要为”不能直接改写成频率等级“常见”；停药后恢复的描述须保留原文“根据部分随访观察的病例”的限定，不能暗示所有患者均恢复。现有文字未给出个体治疗方案，主要问题为证据表述不够严谨。
+QA7A15A37AB7B5D7CE,medical_trace_031.json,7a15a37ab7b5d7ce211d904ec1a393c1898319205339fa0fcd3fa2a01c843005,丁溴东莨菪碱注射液有哪些药物相互作用？,"根据检索到的资料 [2]，丁溴东莨菪碱注射液的药物相互作用及具体表现如下：
+
+### 1. 存在相互作用的药物或类别
+*   **其他抗胆碱能药、吩噻嗪类药物** [2]。
+*   **促胃肠动力药**（如甲氧氯普胺、多潘立酮） [2]。
+*   **某些抗心律失常药**（如奎尼丁、丙吡胺等） [2]。
+*   **拟肾上腺素能药物**（如右旋苯丙胺） [2]。
+*   **三环类抗抑郁药**（如",WARN,missing_parent_identifiers,0,disease_drug_scope|risk_fields,reviewed,supported,not_applicable,acceptable,third_party_unverified,人工复核,七类相互作用及相关表现均可对应同药药物相互作用[2]，没有把其他药或适应症[1]作为合用依据。抗胆碱能效应叠加、老年患者尿潴留等风险以及原文禁合用表述均有呈现。按第三方资料摘要评价可以接受，但不能仅凭引文一致认定临床合用安全或危险程度已获权威核实；实际应用需核对具体注射剂说明书、合用药给药途径及患者情况。
+QA3ED83B0CD187AA04,medical_trace_033.json,3ed83b0cd187aa048591e7fbc72ee0795550e59fde72076cedc3b10699fc133b,如果查询不到某个药的禁忌信息，是否表示该药没有禁忌？,"根据检索到的资料 [1]、[2]，针对您提出的两个方面回答如下：
+
+### 1. 需纠正错误前提：“尚不明确”是否意味着该药绝对没有禁忌？
+**不是。** “尚不明确”绝不等于该药没有禁忌。
+*   **纠正说明**：在药品说明书中，“尚不明确”通常表示在该药品的临床试验或上市后监测阶段，尚未收集到充分的证据来明确具体的禁忌症人群或情况，或者相关数据缺失。这属于信息不完整，而非风险不存在。
+*  ",WARN,missing_parent_identifiers|pipeline_count_diff,0,risk_fields,reviewed,partially_supported,not_applicable,needs_correction,third_party_unverified,人工复核,检索不到禁忌不等于没有禁忌，回答的安全方向正确。但本轮[1][2]仅为“尚不明确”，不能支持所述注意事项、脾胃虚寒者慎用或临床试验及上市后监测解释。需严格区分未检索到、原文记载尚不明确、来源尚未核验三种状态，并区分慎用与禁用。应删除未引证的具体药品限制，补充核对完整说明书及咨询医师或药师的路径，避免凭空扩大或缩小禁忌人群。
+QA7006C5F04970D0FF,medical_trace_035.json,7006c5f04970d0ffbc461ae2e8a6f03c9d12de652f93dc90cf1cccc75dafc1ca,这些 Neo4j 的 DiseaseCandidate 是否已经是可靠的药物治疗疾病关系？,当前检索到的知识库证据不足，无法可靠回答该问题。,WARN,no_body_citations|missing_parent_identifiers,0,medical_relation,reviewed,uncertain,adequately_caveated,acceptable,third_party_unverified,人工复核,本轮[1]-[3]是无关药品章节，未提供所问DiseaseCandidate的原始语境、候选状态及验证记录，无法据此核验具体治疗关系。回答保守拒答，未错误确认关系，也未形成用药建议，但缺少候选语义说明。应取得对应记录后区分疾病词语提及、适用人群、风险因素、治疗与预防等关系，未经审核的候选不能直接作为可靠治疗事实。

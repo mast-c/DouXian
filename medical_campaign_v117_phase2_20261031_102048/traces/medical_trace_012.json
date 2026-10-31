@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "question": "一清颗粒的不良反应和注意事项是什么？",
+  "answer": "根据检索到的资料，一清颗粒的不良反应和注意事项如下：\n\n**1. 不良反应**\n偶见皮疹、恶心、腹泻、腹痛 [2]。\n\n**2. 注意事项**\n*   **饮食与用药禁忌**：忌烟、酒及辛辣食物；不宜在服药期间同时服用滋补性中药；对本品过敏者禁用，过敏体质者慎用 [1]。\n*   **特殊人群指导**：糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用；儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用；儿童必须在成人监护下使用 [1]。\n*   **症状监测与停药指征**：出现腹泻时可酌情减量（每日2-3次减量，3次以上停用并咨询医师）；扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊；服药3天症状无缓解，应去医院就诊 [1]。\n*   **其他要求**：严格按用法用量服用，本品不宜长期服用；本品性状发生改变时禁止使用；请将本品放在儿童不能接触的地方；如正在使用其他药品，使用本品前请咨询医师或药师 [1]。\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1]、[2] [查看药品资料来源](https://www.yaopinnet.com/zhongyao/zy3986s.htm) · 一清颗粒 / 注意事项 / warnings · Chroma Hybrid 召回，Neo4j Section 原文核对；一清颗粒 / 不良反应 / adverse_reactions · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料：一清颗粒",
+        "section_path": "一清颗粒 / 注意事项 / warnings",
+        "preview": "药品：一清颗粒 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用量服用，本品不宜长期服用。 8.服药3天症状无缓解，应去医院就诊。 9.对…",
+        "content": "药品：一清颗粒\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：1.忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。 4.出现腹泻时可酌情减量。 5.扁桃体有化脓或发热体温超过38.5℃的患者应去医院就诊。 6.儿童、孕妇、哺乳期妇女、年老体弱及脾虚便溏者应在医师指导下服用。 7.严格按用法用量服用，本品不宜长期服用。 8.服药3天症状无缓解，应去医院就诊。 9.对本品过敏者禁用，过敏体质者慎用。 10.本品性状发生改变时禁止使用。 11.儿童必须在成人监护下使用。 12.请将本品放在儿童不能接触的地方。 13.如正在使用其他药品，使用本品前请咨询医师或药师。\n偶见皮疹，恶心，腹泻，腹痛。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3986s.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_a45291e1a2736c34f4bb8fec",
+        "section_field": "warnings",
+        "candidate_id": "",
+        "section_id": "section_17a5569c523148ca53c0615e",
+        "parent_verified": true
+      },
+      {
+        "id": 2,
+        "source": "药品资料：一清颗粒",
+        "section_path": "一清颗粒 / 不良反应 / adverse_reactions",
+        "preview": "药品：一清颗粒 栏目：不良反应 资料状态：第三方来源尚未完成医学权威核验 证据原文：偶见皮疹，恶心，腹泻，腹痛。",
+        "content": "药品：一清颗粒\n栏目：不良反应\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：偶见皮疹，恶心，腹泻，腹痛。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy3986s.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "一清颗粒",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_a45291e1a2736c34f4bb8fec",
+        "section_field": "adverse_reactions",
+        "candidate_id": "",
+        "section_id": "section_3f86e2d96ce4a99978d71eaa",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 2,
+        "direct_sections": 2,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 2,
+        "retained": 0,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 2,
+        "indexed_chunks": 313,
+        "parent_verified": 2,
+        "parent_rejected": 0,
+        "section_not_relevant": 2,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 2,
+        "retained": 2
+      },
+      "merge": {
+        "unique_before_entity_filter": 4,
+        "after_entity_filter": 4,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 2,
+        "retained": 2,
+        "retained_neo4j_verified": 2,
+        "explicit_drugs": [
+          "一清颗粒"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 0,
+        "section_count": 2,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 2
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 2,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 4,
+          "skipped_section": 2,
+          "failed_provenance": 0,
+          "verified": 2,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "adverse_reactions",
+            "warnings"
+          ],
+          "selected": 2
+        },
+        "hits_before_entity_gate": 2
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "一清颗粒"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 4
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "一清颗粒的不良反应是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            2
+          ],
+          "quotes": [
+            {
+              "id": 2,
+              "quote": "偶见皮疹，恶心，腹泻，腹痛。"
+            }
+          ],
+          "reason": "证据2在不良反应栏目下明确列出该药品偶见的不良反应症状，可直接回答。"
+        },
+        {
+          "question": "一清颗粒的注意事项是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "忌烟、酒及辛辣食物。 2.不宜在服药期间同时服用滋补性中药。 3.糖尿病患者及有高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。"
+            }
+          ],
+          "reason": "证据1在注意事项栏目下逐条列出了饮食禁忌、特殊人群用药指导及用法用量要求等内容，可完整回答。"
+        }
+      ],
+      "evidence_ids": [
+        1,
+        2
+      ],
+      "answer_questions": [
+        "一清颗粒的不良反应是什么？",
+        "一清颗粒的注意事项是什么？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "skipped",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 23.52
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

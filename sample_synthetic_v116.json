@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "question": "治疗扁桃体炎的药物有哪些？药物有没有不良反应和注意事项？",
+  "answer": "**本轮资料中与“扁桃体炎”有关的药品提及候选：4 种。**\n\n以下按药品逐项列出数据库中的疾病提及和说明书栏目原文。**这不是完整的治疗药物清单，也不代表已经确认的获批适应症或处方推荐。**\n\n\n### 一清胶囊\n\n**疾病关联原文（待人工审核）**：药品资料中的扁桃体炎提及：一清胶囊，见上述证候者。 [1]\n\n- **不良反应（原文节选）**：偶见皮疹，恶心，腹泻，腹痛。 [5]\n\n- **注意事项（原文节选）**：1.忌烟、酒及辛辣食物。2.扁桃体有化脓或发热应就诊。 [9]\n\n\n### 一清颗粒\n\n**疾病关联原文（待人工审核）**：药品资料中的扁桃体炎提及：一清颗粒，见上述证候者。 [2]\n\n- **不良反应（原文节选）**：偶见皮疹，恶心，腹泻，腹痛。 [6]\n\n- **注意事项（原文节选）**：1.忌烟、酒及辛辣食物。2.特殊人群应遵医嘱。 [12]\n\n\n### 万通炎康片\n\n**疾病关联原文（待人工审核）**：药品资料中的扁桃体炎提及：万通炎康片，见上述证候者。 [3]\n\n- **不良反应**：资料原文为“尚不明确。”；这不等于已确认没有相关风险。[7]\n\n- **注意事项（原文节选）**：1.忌辛辣。2.服药3天症状无缓解，应去医院就诊。 [10]\n\n\n### 丙酸交沙霉素颗粒\n\n**疾病关联原文（待人工审核）**：药品资料中的扁桃体炎提及：丙酸交沙霉素颗粒，见上述证候者。 [4]\n\n- **不良反应（原文节选）**：1．胃肠道反应有腹泻、恶心、呕吐。2．少见肝毒性症状。3．大剂量可能引起听力减退。 [8]\n\n- **注意事项（原文节选）**：1．对大环内酯类过敏者也可能不耐受本品。2．用药期间宜随访肝功能。 [11]\n\n\n*来源说明：以上为本地第三方资料的原文提及与栏目摘录，仍需结合实际制剂、病因及最新版权威说明书核对；具体用药由医师或药师判断。长原文请展开对应编号的证据卡。*\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1]、[5]、[9] [查看原文](https://example.org/一清胶囊) · Neo4j / 适应症语料 / 疾病提及候选（未审核）；一清胶囊 / adverse_reactions；一清胶囊 / warnings\n\n[2]、[6]、[12] [查看原文](https://example.org/一清颗粒) · Neo4j / 适应症语料 / 疾病提及候选（未审核）；一清颗粒 / adverse_reactions；一清颗粒 / warnings\n\n[3]、[7]、[10] [查看原文](https://example.org/万通炎康片) · Neo4j / 适应症语料 / 疾病提及候选（未审核）；万通炎康片 / adverse_reactions；万通炎康片 / warnings\n\n[4]、[8]、[11] [查看原文](https://example.org/丙酸交沙霉素颗粒) · Neo4j / 适应症语料 / 疾病提及候选（未审核）；丙酸交沙霉素颗粒 / adverse_reactions；丙酸交沙霉素颗粒 / warnings",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "https://example.org/1",
+        "source_url": "https://example.org/1",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "drug_name": "一清胶囊",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "药品资料中的扁桃体炎提及：一清胶囊，见上述证候者。",
+        "content": "【Neo4j 疾病提及候选】\n药品：一清胶囊\n疾病词条：扁桃体炎",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "record_id": "r1",
+        "section_id": "s1"
+      },
+      {
+        "id": 2,
+        "source": "https://example.org/2",
+        "source_url": "https://example.org/2",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "drug_name": "一清颗粒",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "药品资料中的扁桃体炎提及：一清颗粒，见上述证候者。",
+        "content": "【Neo4j 疾病提及候选】\n药品：一清颗粒\n疾病词条：扁桃体炎",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "record_id": "r2",
+        "section_id": "s2"
+      },
+      {
+        "id": 3,
+        "source": "https://example.org/3",
+        "source_url": "https://example.org/3",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "drug_name": "万通炎康片",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "药品资料中的扁桃体炎提及：万通炎康片，见上述证候者。",
+        "content": "【Neo4j 疾病提及候选】\n药品：万通炎康片\n疾病词条：扁桃体炎",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "record_id": "r3",
+        "section_id": "s3"
+      },
+      {
+        "id": 4,
+        "source": "https://example.org/4",
+        "source_url": "https://example.org/4",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "drug_name": "丙酸交沙霉素颗粒",
+        "disease_term": "扁桃体炎",
+        "evidence_quote": "药品资料中的扁桃体炎提及：丙酸交沙霉素颗粒，见上述证候者。",
+        "content": "【Neo4j 疾病提及候选】\n药品：丙酸交沙霉素颗粒\n疾病词条：扁桃体炎",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "record_id": "r4",
+        "section_id": "s4"
+      },
+      {
+        "id": 5,
+        "drug_name": "一清胶囊",
+        "source": "药品资料：一清胶囊",
+        "source_url": "https://example.org/一清胶囊",
+        "section_path": "一清胶囊 / adverse_reactions",
+        "section_field": "adverse_reactions",
+        "record_id": "r5",
+        "section_id": "s5",
+        "evidence_type": "unverified_drug_source_section",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：一清胶囊\n栏目：adverse_reactions\n原文：偶见皮疹，恶心，腹泻，腹痛。\n重要：资料未经医学权威核验。",
+        "source_status": "third_party_unverified",
+        "parent_verified": false
+      },
+      {
+        "id": 6,
+        "drug_name": "一清颗粒",
+        "source": "药品资料：一清颗粒",
+        "source_url": "https://example.org/一清颗粒",
+        "section_path": "一清颗粒 / adverse_reactions",
+        "section_field": "adverse_reactions",
+        "record_id": "r6",
+        "section_id": "s6",
+        "evidence_type": "unverified_drug_source_section",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：一清颗粒\n栏目：adverse_reactions\n原文：偶见皮疹，恶心，腹泻，腹痛。\n重要：资料未经医学权威核验。",
+        "source_status": "third_party_unverified",
+        "parent_verified": false
+      },
+      {
+        "id": 7,
+        "drug_name": "万通炎康片",
+        "source": "药品资料：万通炎康片",
+        "source_url": "https://example.org/万通炎康片",
+        "section_path": "万通炎康片 / adverse_reactions",
+        "section_field": "adverse_reactions",
+        "record_id": "r7",
+        "section_id": "s7",
+        "evidence_type": "unverified_drug_source_section",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：万通炎康片\n栏目：adverse_reactions\n原文：尚不明确。\n重要：资料未经医学权威核验。",
+        "source_status": "third_party_unverified",
+        "parent_verified": false
+      },
+      {
+        "id": 8,
+        "drug_name": "丙酸交沙霉素颗粒",
+        "source": "药品资料：丙酸交沙霉素颗粒",
+        "source_url": "https://example.org/丙酸交沙霉素颗粒",
+        "section_path": "丙酸交沙霉素颗粒 / adverse_reactions",
+        "section_field": "adverse_reactions",
+        "record_id": "r8",
+        "section_id": "s8",
+        "evidence_type": "unverified_drug_source_section",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：adverse_reactions\n原文：1．胃肠道反应有腹泻、恶心、呕吐。2．少见肝毒性症状。3．大剂量可能引起听力减退。\n重要：资料未经医学权威核验。",
+        "source_status": "third_party_unverified",
+        "parent_verified": false
+      },
+      {
+        "id": 9,
+        "drug_name": "一清胶囊",
+        "source": "药品资料：一清胶囊",
+        "source_url": "https://example.org/一清胶囊",
+        "section_path": "一清胶囊 / warnings",
+        "section_field": "warnings",
+        "record_id": "r9",
+        "section_id": "s9",
+        "evidence_type": "unverified_drug_source_section",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：一清胶囊\n栏目：warnings\n原文：1.忌烟、酒及辛辣食物。2.扁桃体有化脓或发热应就诊。\n重要：资料未经医学权威核验。",
+        "source_status": "third_party_unverified",
+        "parent_verified": false
+      },
+      {
+        "id": 10,
+        "drug_name": "万通炎康片",
+        "source": "药品资料：万通炎康片",
+        "source_url": "https://example.org/万通炎康片",
+        "section_path": "万通炎康片 / warnings",
+        "section_field": "warnings",
+        "record_id": "r10",
+        "section_id": "s10",
+        "evidence_type": "unverified_drug_source_section",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：万通炎康片\n栏目：warnings\n原文：1.忌辛辣。2.服药3天症状无缓解，应去医院就诊。\n重要：资料未经医学权威核验。",
+        "source_status": "third_party_unverified",
+        "parent_verified": false
+      },
+      {
+        "id": 11,
+        "drug_name": "丙酸交沙霉素颗粒",
+        "source": "药品资料：丙酸交沙霉素颗粒",
+        "source_url": "https://example.org/丙酸交沙霉素颗粒",
+        "section_path": "丙酸交沙霉素颗粒 / warnings",
+        "section_field": "warnings",
+        "record_id": "r11",
+        "section_id": "s11",
+        "evidence_type": "unverified_drug_source_section",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：丙酸交沙霉素颗粒\n栏目：warnings\n原文：1．对大环内酯类过敏者也可能不耐受本品。2．用药期间宜随访肝功能。\n重要：资料未经医学权威核验。",
+        "source_status": "third_party_unverified",
+        "parent_verified": false
+      },
+      {
+        "id": 12,
+        "drug_name": "一清颗粒",
+        "source": "药品资料：一清颗粒",
+        "source_url": "https://example.org/一清颗粒",
+        "section_path": "一清颗粒 / warnings",
+        "section_field": "warnings",
+        "record_id": "r12",
+        "section_id": "s12",
+        "evidence_type": "json_neo4j_text_verified",
+        "content": "药品：一清颗粒\n栏目：warnings\n证据原文：1.忌烟、酒及辛辣食物。2.特殊人群应遵医嘱。",
+        "source_status": "third_party_unverified",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "chroma_hybrid": {
+        "parent_verified": 2,
+        "returned": 2
+      },
+      "neo4j_direct": {
+        "returned": 12
+      },
+      "merge": {
+        "retained": 12,
+        "removed_by_entity_filter": 1,
+        "removed_by_dedup": 1
+      }
+    },
+    "multi_drug_scope": {
+      "listed_drugs": [
+        "一清胶囊",
+        "一清颗粒",
+        "万通炎康片",
+        "丙酸交沙霉素颗粒"
+      ],
+      "supplement_fields": [
+        "adverse_reactions",
+        "warnings"
+      ],
+      "max_listed_drugs": 4,
+      "removed_off_scope": 1
+    },
+    "multi_drug_coverage": {
+      "listed_drugs": [
+        "一清胶囊",
+        "一清颗粒",
+        "万通炎康片",
+        "丙酸交沙霉素颗粒"
+      ],
+      "supported_cells": 8,
+      "missing_cells": 0,
+      "by_drug": [
+        {
+          "drug_name": "一清胶囊",
+          "candidate_present": true,
+          "found_fields": [
+            "adverse_reactions",
+            "warnings"
+          ],
+          "missing_fields": []
+        },
+        {
+          "drug_name": "一清颗粒",
+          "candidate_present": true,
+          "found_fields": [
+            "adverse_reactions",
+            "warnings"
+          ],
+          "missing_fields": []
+        },
+        {
+          "drug_name": "万通炎康片",
+          "candidate_present": true,
+          "found_fields": [
+            "adverse_reactions",
+            "warnings"
+          ],
+          "missing_fields": []
+        },
+        {
+          "drug_name": "丙酸交沙霉素颗粒",
+          "candidate_present": true,
+          "found_fields": [
+            "adverse_reactions",
+            "warnings"
+          ],
+          "missing_fields": []
+        }
+      ],
+      "mode": "deterministic_source_excerpts_no_llm"
+    },
+    "medical_answer_mode": "structured_disease_drug_source_overview"
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。",
+  "demo_warning": "完全模拟的离线验收样例，使用 example.org 假来源；不是你本机 Neo4j/Chroma 的实测报告，也不是医学证据。"
+}

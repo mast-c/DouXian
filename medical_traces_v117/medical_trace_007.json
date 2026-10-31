@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "question": "万通炎康片的不良反应写着“尚不明确”，是不是没有不良反应？",
+  "answer": "当前检索到的知识库证据不足，无法可靠回答该问题。",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料 · 万通炎康片",
+        "section_path": "Neo4j / 药品资料 / 不良反应（来源待核验）",
+        "preview": "【药品资料原文章节｜来源未完成医学权威核验】 药品：万通炎康片 栏目：不良反应 原文：尚不明确。 重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "content": "【药品资料原文章节｜来源未完成医学权威核验】\n药品：万通炎康片\n栏目：不良反应\n原文：尚不明确。\n重要：这是数据集中保存的第三方资料文本；仅能描述资料如何陈述，不等同于某个上市产品的最新版官方核准说明书。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy4503z.htm",
+        "evidence_type": "unverified_drug_source_section",
+        "drug_name": "万通炎康片",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_d3b44924abeffc7724fccc63",
+        "parent_verified": false
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 1,
+        "direct_sections": 1,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 1,
+        "retained": 1,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 0,
+        "retained": 0
+      },
+      "merge": {
+        "unique_before_entity_filter": 4,
+        "after_entity_filter": 1,
+        "removed_by_entity_filter": 3,
+        "removed_by_dedup": 0,
+        "retained": 1,
+        "retained_neo4j_verified": 0,
+        "explicit_drugs": [
+          "万通炎康片"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 1,
+        "section_count": 1,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 1
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 0,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "adverse_reactions"
+          ],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "万通炎康片"
+      ],
+      "removed_other_drugs": 3,
+      "removed_unattributed": 0,
+      "kept": 1
+    },
+    "evidence_coverage": {
+      "decision": "refuse",
+      "aspects": [
+        {
+          "question": "不良反应标注为“尚不明确”是否意味着该药没有任何不良反应？",
+          "status": "insufficient",
+          "evidence_ids": [],
+          "quotes": [],
+          "reason": "证据仅记录原文表述及免责声明，未解释“尚不明确”在药品规范中的实际定义与临床意义，无法判断其是否等同于无不良反应。"
+        }
+      ],
+      "evidence_ids": [],
+      "answer_questions": [],
+      "refused_questions": [
+        "不良反应标注为“尚不明确”是否意味着该药没有任何不良反应？"
+      ],
+      "message": ""
+    },
+    "total_seconds": 36.15
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

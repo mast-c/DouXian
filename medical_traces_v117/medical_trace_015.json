@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "question": "脂肪乳注射液中卵磷脂的描述是否意味着脂肪乳可直接治疗动脉粥样硬化？",
+  "answer": "根据检索到的资料，针对您提出的四个方面回答如下：\n\n### 1. 脂肪乳注射液的实际临床适应症\n根据药品资料原文，10%、20%、30%脂肪乳注射液的获批/标示适应症为**静脉营养的组成部分** [5]。具体包括：\n*   为机体提供能量和必需脂肪酸；\n*   用于胃肠外营养补充能量及必需脂肪酸；\n*   预防和治疗人体必需脂肪酸缺乏症；\n*   为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供必需脂肪酸；\n*   其中30％脂肪乳注射液更适合输液量受限制和能量需求高度增加的病人 [5]。\n\n### 2. 证据中如何界定脂肪乳中卵磷脂的功能定位\n在提供的资料片段中，卵磷脂被明确界定为**药用辅料** [5]。其功能定位为：\n*   **制剂内作用**：作增溶剂、乳化剂及油脂类的抗氧化剂 [5]。\n*   **辅助治疗提及**：原文提到“卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症” [5]。但这属于对辅料成分功能的描述，并非整支脂肪乳注射液的直接治疗适应症。\n\n### 3. 需纠正错误前提：现有证据是否支持脂肪乳可直接治疗动脉粥样硬化？\n**不支持。** 现有证据不支持将脂肪乳注射液作为治疗动脉粥样硬化的药物。\n*   **区分成分与制剂**：虽然资料中提到“卵磷脂”（脂肪乳中的辅料）可辅助治疗动脉粥样硬化，但这不等于含有该辅料的脂肪乳注射液本身具有治疗该病的获批适应症 [5]。\n*   **禁忌提示**：相反，资料明确指出“严重脂质代谢紊乱(如高脂血症)血栓患者禁用” [6]。动脉粥样硬化常伴随脂质代谢异常，使用脂肪乳可能加重病情或存在风险，因此不能将其视为治疗药物。\n\n### 4. 证据中对该疾病关联声明的验证级别为何？\n对于“脂肪乳注射液与动脉粥样硬化”的关联声明，证据显示其验证级别极低，仅为**候选提及**：\n*   **审核状态**：pending_human_review（待人工审核） [1]。\n*   **临床验证状态**：not_validated（未验证） [1]。\n*   **来源核验状态**：third_party_unverified（第三方来源未核实） [1]。\n*   **重要说明**：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准 [1]。\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1]、[5]、[6] [查看药品资料来源](https://www.yaopinnet.com/huayao/hy2536r.htm) · Neo4j / 适应症语料 / 疾病提及候选（未审核） · Neo4j 疾病提及候选（未经医学验证）；10%、20%、30%脂肪乳注射液 / 适应症 / indication · Chroma Hybrid 召回，Neo4j Section 原文核对；10%、20%、30%脂肪乳注射液 / 禁忌 / contraindications[0] · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：10%、20%、30%脂肪乳注射液 疾病词条：动脉粥样硬化 原文证据：卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。 候选 ID：diseasecandidate_4d3ecf31ac9e4d6ce3086184 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semant…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：10%、20%、30%脂肪乳注射液\n疾病词条：动脉粥样硬化\n原文证据：卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。\n候选 ID：diseasecandidate_4d3ecf31ac9e4d6ce3086184\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy2536r.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "动脉粥样硬化",
+        "evidence_quote": "卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_1277b916e2c0b4316802175a",
+        "parent_verified": false
+      },
+      {
+        "id": 2,
+        "source": "https://www.yaopinnet.com/huayao/hy7094e.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：中/长链脂肪乳注射液 疾病词条：动脉粥样硬化 原文证据：卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。 候选 ID：diseasecandidate_0b540cd6f73757f42d69640c 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semantic_revi…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：中/长链脂肪乳注射液\n疾病词条：动脉粥样硬化\n原文证据：卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。\n候选 ID：diseasecandidate_0b540cd6f73757f42d69640c\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy7094e.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy7094e.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "中/长链脂肪乳注射液",
+        "disease_term": "动脉粥样硬化",
+        "evidence_quote": "卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_647b4db63d4ef500e0165baf",
+        "parent_verified": false
+      },
+      {
+        "id": 3,
+        "source": "https://www.yaopinnet.com/huayao/hy5353f.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：亚油酸维生素E胶丸/二维芦丁片 疾病词条：动脉粥样硬化 原文证据：用于高胆固醇血症及动脉粥样硬化。 候选 ID：diseasecandidate_4098b72d58361c096b8857a8 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semantic_review 来源链接：htt…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：亚油酸维生素E胶丸/二维芦丁片\n疾病词条：动脉粥样硬化\n原文证据：用于高胆固醇血症及动脉粥样硬化。\n候选 ID：diseasecandidate_4098b72d58361c096b8857a8\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy5353f.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy5353f.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "亚油酸维生素E胶丸/二维芦丁片",
+        "disease_term": "动脉粥样硬化",
+        "evidence_quote": "用于高胆固醇血症及动脉粥样硬化。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_4c9eec7bfc6738903d3be70c",
+        "parent_verified": false
+      },
+      {
+        "id": 4,
+        "source": "https://www.yaopinnet.com/huayao/hy4552a.htm",
+        "section_path": "Neo4j / 适应症语料 / 疾病提及候选（未审核）",
+        "preview": "【Neo4j 疾病提及候选｜未经医学验证】 药品：亚油酸胶丸 疾病词条：动脉粥样硬化 原文证据：用于降低血胆固醇及血脂，防治动脉粥样硬化症。 候选 ID：diseasecandidate_6d951a4c32cabcc94e335988 候选审核状态：pending_human_review 临床验证状态：not_validated 来源核验状态：third_party_unverified 语义复核标记：manual_semantic_review 来源链接：https:/…",
+        "content": "【Neo4j 疾病提及候选｜未经医学验证】\n药品：亚油酸胶丸\n疾病词条：动脉粥样硬化\n原文证据：用于降低血胆固醇及血脂，防治动脉粥样硬化症。\n候选 ID：diseasecandidate_6d951a4c32cabcc94e335988\n候选审核状态：pending_human_review\n临床验证状态：not_validated\n来源核验状态：third_party_unverified\n语义复核标记：manual_semantic_review\n来源链接：https://www.yaopinnet.com/huayao/hy4552a.htm\n重要：这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。须核对全文上下文及权威说明书。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy4552a.htm",
+        "evidence_type": "unverified_drug_disease_candidate",
+        "drug_name": "亚油酸胶丸",
+        "disease_term": "动脉粥样硬化",
+        "evidence_quote": "用于降低血胆固醇及血脂，防治动脉粥样硬化症。",
+        "candidate_status": "pending_human_review",
+        "clinical_status": "not_validated",
+        "source_status": "third_party_unverified",
+        "section_id": "section_4c0c12cbc5ec032ceaec512d",
+        "parent_verified": false
+      },
+      {
+        "id": 5,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 适应症 / indication",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症，也为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供必需脂肪酸。30％脂肪乳注射液更适合输液量受限制和能量需求高度增加的病人。卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。在药用辅料中作增溶剂、乳化剂及油脂类的抗…",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症，也为经口服途径不能维持和恢复正常必需脂肪酸水平的病人提供必需脂肪酸。30％脂肪乳注射液更适合输液量受限制和能量需求高度增加的病人。卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。在药用辅料中作增溶剂、乳化剂及油脂类的抗氧化剂。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_1277b916e2c0b4316802175a",
+        "parent_verified": true
+      },
+      {
+        "id": 6,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 禁忌 / contraindications[0]",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：禁忌 资料状态：第三方来源尚未完成医学权威核验 证据原文：休克和严重脂质代谢紊乱(如高脂血症)血栓患者禁用",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：禁忌\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：休克和严重脂质代谢紊乱(如高脂血症)血栓患者禁用",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_e36172418984ad9232b54bc3",
+        "parent_verified": true
+      },
+      {
+        "id": 7,
+        "source": "药品资料：10%、20%、30%脂肪乳注射液",
+        "section_path": "10%、20%、30%脂肪乳注射液 / 注意事项 / warnings",
+        "preview": "药品：10%、20%、30%脂肪乳注射液 栏目：注意事项 资料状态：第三方来源尚未完成医学权威核验 证据原文：本品慎用于脂肪代谢功能减退的患者，如肝、肾功能不全，糖尿病酮中毒、胰腺炎、甲状腺机能低下(伴有高脂血症)以及败血症患者慎用。这些患者输注本品时，应密切观察血清甘油三酯浓度，连续使用一周以上的患者，应检查患者的脂肪廓清能力。对大豆蛋白过敏者慎用本品，使用前必须做过敏试验。新生儿和未成熟儿伴有高胆红素血症或可疑肺动脉高压者应谨慎使用本品。新生儿，特别是未成熟儿，长期使用本…",
+        "content": "药品：10%、20%、30%脂肪乳注射液\n栏目：注意事项\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：本品慎用于脂肪代谢功能减退的患者，如肝、肾功能不全，糖尿病酮中毒、胰腺炎、甲状腺机能低下(伴有高脂血症)以及败血症患者慎用。这些患者输注本品时，应密切观察血清甘油三酯浓度，连续使用一周以上的患者，应检查患者的脂肪廓清能力。对大豆蛋白过敏者慎用本品，使用前必须做过敏试验。新生儿和未成熟儿伴有高胆红素血症或可疑肺动脉高压者应谨慎使用本品。新生儿，特别是未成熟儿，长期使用本品必须监测血小板数目、肝功能试验和血清甘油三酯浓度。采血时，如本品还没有从血流中完全清除，则将干扰其它实验室检测项目(如胆红素、乳酸脱氢酶、氧饱和度、血红蛋白等)。绝大多数病人在本品输注后5～6小时，即可被完全清除。孕妇：已有报道表明妊娠妇女使用10％和20％脂肪乳注射液是安全和成功的。理论上30％与10％和20％脂肪乳注射液一样，也能用于妊娠妇女，但尚缺乏动物生殖研究的证据。婴儿与儿童：因缺乏30％脂肪乳注射液用于婴儿和儿童的经验，所以暂不推荐给婴儿和儿童使用。使用本品一周以上必须做脂肪廓清试验。具体操作如下：输注前采血样，离心，如果血浆呈乳状，则原定的输注计划应延期实施(此法不适用于高脂血症的患者)；当发现病人脂肪廓清能力降低时，最好再查血清甘油三酯。对于婴儿和儿童，监测脂肪廓请能力的最可靠的办法是定期测定血清甘油三酯水平。本品开瓶后一次未使用完的药液应予丢弃，不得再次使用。\n可引起体温升高，偶见发冷畏寒以及恶心、呕吐。其它副作用比较罕见，包括：1．即刻和早期副作用：高过敏反应(过敏反应、皮疹、荨麻疹)，呼吸影响(如呼吸急促)以及循环影响(如高血压／低血压)。溶血、网状红细胞增多、腹痛、头痛、疲倦、阴茎异常勃起等。2．迟发副作用：长期输注本品，婴儿可能发生血小板减少。另外，长期静脉营养时即使不用本品也会有短暂的肝功能指标的异常。偶可发生静脉炎，血管痛及出血倾向。3．病人脂肪廓清能力减退时，尽管输注速度正常仍可能导致脂肪超载综合征。脂肪超载综合征偶尔也可发生于肾功能障碍和感染患者。脂肪超载综合征表现为：高脂血症、发热、脂肪浸润、脏器功能紊乱等，但一般只要停止输注，上述症状即可消退。",
+        "source_url": "https://www.yaopinnet.com/huayao/hy2536r.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "10%、20%、30%脂肪乳注射液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "section_id": "section_b63f07f5103525275d332ee1",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 4,
+        "direct_sections": 0,
+        "candidate_cards": 4,
+        "raw_candidate_nodes": 6,
+        "grouped_same_quote_nodes": 2,
+        "after_entity_filter": 4,
+        "retained": 4,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 3,
+        "indexed_chunks": 313,
+        "parent_verified": 3,
+        "parent_rejected": 0,
+        "section_not_relevant": 0,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 3,
+        "retained": 3
+      },
+      "merge": {
+        "unique_before_entity_filter": 7,
+        "after_entity_filter": 7,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 0,
+        "retained": 7,
+        "retained_neo4j_verified": 3,
+        "explicit_drugs": []
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 4,
+        "section_count": 0,
+        "candidate_count": 4,
+        "raw_candidate_nodes": 6,
+        "grouped_same_quote_nodes": 2,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 4
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 3,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 3,
+          "skipped_section": 0,
+          "failed_provenance": 0,
+          "verified": 3,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [],
+          "selected": 3
+        },
+        "hits_before_entity_gate": 3
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "unrestricted",
+      "explicit_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 7
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "脂肪乳注射液的实际临床适应症是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            5
+          ],
+          "quotes": [
+            {
+              "id": 5,
+              "quote": "能量补充药。本品是静脉营养的组成部分之一，为机体提供能量和必需脂肪酸，用于胃肠外营养补充能量及必需脂肪酸，预防和治疗人体必需脂肪酸缺乏症"
+            }
+          ],
+          "reason": "证据5明确界定其核心用途为静脉营养补充能量及必需脂肪酸，非治疗特定疾病。"
+        },
+        {
+          "question": "证据中如何界定脂肪乳中卵磷脂的功能定位？",
+          "status": "supported",
+          "evidence_ids": [
+            5
+          ],
+          "quotes": [
+            {
+              "id": 5,
+              "quote": "卵磷脂可辅助治疗动脉粥样硬化，脂肪肝，以及小儿湿疹，神经衰弱症。在药用辅料中作增溶剂、乳化剂及油脂类的抗氧化剂。"
+            }
+          ],
+          "reason": "证据5原文直接说明卵磷脂在该制剂中仅作药用辅料，并附带提及辅助治疗作用。"
+        },
+        {
+          "question": "现有证据是否支持脂肪乳可直接治疗动脉粥样硬化？",
+          "status": "refuted",
+          "evidence_ids": [
+            6
+          ],
+          "quotes": [
+            {
+              "id": 6,
+              "quote": "休克和严重脂质代谢紊乱(如高脂血症)血栓患者禁用"
+            }
+          ],
+          "reason": "证据6明确指出严重脂质代谢紊乱者禁用，结合其营养补充定位，直接反驳了直接治疗该病的说法。"
+        },
+        {
+          "question": "证据中对该疾病关联声明的验证级别为何？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "这仅证明文档中提到了该疾病词条，不代表该药治疗/预防该疾病，更不代表已获监管机构批准。"
+            }
+          ],
+          "reason": "证据1至4元数据统一标注临床验证状态为未核实，并明确提示不可视为获批治疗依据。"
+        }
+      ],
+      "evidence_ids": [
+        1,
+        5,
+        6
+      ],
+      "answer_questions": [
+        "脂肪乳注射液的实际临床适应症是什么？",
+        "证据中如何界定脂肪乳中卵磷脂的功能定位？",
+        "现有证据是否支持脂肪乳可直接治疗动脉粥样硬化？",
+        "证据中对该疾病关联声明的验证级别为何？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "total_seconds": 37.92
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}

@@ -1,0 +1,12 @@
+{"id": "EX01", "question": "丁二酸洛沙平胶囊的适应症是什么？", "target_drugs": ["丁二酸洛沙平胶囊"], "expected_field": "indication", "category": "indication", "annotation_status": "unreviewed"}
+{"id": "EX02", "question": "丁二酸洛沙平胶囊有哪些禁忌？", "target_drugs": ["丁二酸洛沙平胶囊"], "expected_field": "contraindications", "category": "contraindications", "annotation_status": "unreviewed"}
+{"id": "EX03", "question": "丁桂儿脐贴的不良反应有哪些？", "target_drugs": ["丁桂儿脐贴"], "expected_field": "adverse_reactions", "category": "adverse_reactions", "annotation_status": "unreviewed"}
+{"id": "EX04", "question": "丁溴东莨菪碱注射液有哪些药物相互作用？", "target_drugs": ["丁溴东莨菪碱注射液"], "expected_field": "drug_interactions", "category": "interactions", "annotation_status": "unreviewed"}
+{"id": "EX05", "question": "丁溴东莨菪碱胶囊的禁忌是什么？", "target_drugs": ["丁溴东莨菪碱胶囊"], "expected_field": "contraindications", "category": "contraindications", "annotation_status": "unreviewed"}
+{"id": "EX06", "question": "丁苯酞软胶囊的适应症是什么？", "target_drugs": ["丁苯酞软胶囊"], "expected_field": "indication", "category": "indication", "annotation_status": "unreviewed"}
+{"id": "EX07", "question": "丁苯酞软胶囊有哪些不良反应？", "target_drugs": ["丁苯酞软胶囊"], "expected_field": "adverse_reactions", "category": "adverse_reactions", "annotation_status": "unreviewed"}
+{"id": "EX08", "question": "丁酸氢化可的松乳膏的注意事项有哪些？", "target_drugs": ["丁酸氢化可的松乳膏"], "expected_field": "warnings", "category": "warnings", "annotation_status": "unreviewed"}
+{"id": "EX09", "question": "七叶皂苷钠片有哪些禁忌？", "target_drugs": ["七叶皂苷钠片"], "expected_field": "contraindications", "category": "contraindications", "annotation_status": "unreviewed"}
+{"id": "EX10", "question": "七生静片是否有药物相互作用信息？", "target_drugs": ["七生静片"], "expected_field": "drug_interactions", "category": "interactions", "annotation_status": "unreviewed"}
+{"id": "EX11", "question": "丁苯羟酸乳膏的适应症是什么？", "target_drugs": ["丁苯羟酸乳膏"], "expected_field": "indication", "category": "indication", "annotation_status": "unreviewed"}
+{"id": "EX12", "question": "七珠健胃茶的适应症是什么？", "target_drugs": ["七珠健胃茶"], "expected_field": "indication", "category": "indication", "annotation_status": "unreviewed"}

@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "campaign_version": "V1.17",
+  "quality_status": "REVIEW_AND_FIX",
+  "engineering_status_counts": {
+    "PASS": 16,
+    "WARN": 4,
+    "FAIL": 0
+  },
+  "review_counts": {
+    "all_valid_cases": 20,
+    "reviewed": 20,
+    "reviewed_unique_questions": 20,
+    "repeated_reviewed_question_runs": 0,
+    "unreviewed": 0,
+    "excluded": 0,
+    "minimum_distinct_questions_for_baseline": 20
+  },
+  "human_review_rates": {
+    "fully_supported_fraction": 0.65,
+    "unsupported_fraction": 0.0,
+    "partially_supported_fraction": 0.3,
+    "overstated_relation_fraction": 0.1,
+    "medical_needs_correction_fraction": 0.2,
+    "third_party_only_fraction": 1.0
+  },
+  "annotation_counts": {
+    "evidence_support": {
+      "supported": 13,
+      "partially_supported": 6,
+      "uncertain": 1
+    },
+    "relation_safety": {
+      "adequately_caveated": 9,
+      "not_applicable": 9,
+      "overstated": 2
+    },
+    "medical_safety": {
+      "acceptable": 16,
+      "needs_correction": 4
+    },
+    "source_authority": {
+      "third_party_unverified": 20
+    }
+  },
+  "critical_cases": [
+    {
+      "case_id": "QAD460BAB618DCF833",
+      "evidence_support": "partially_supported",
+      "relation_safety": "not_applicable",
+      "medical_safety": "acceptable"
+    },
+    {
+      "case_id": "QAB683D0024E8669DF",
+      "evidence_support": "partially_supported",
+      "relation_safety": "not_applicable",
+      "medical_safety": "needs_correction"
+    },
+    {
+      "case_id": "QA2BFD000FB89C841E",
+      "evidence_support": "partially_supported",
+      "relation_safety": "overstated",
+      "medical_safety": "needs_correction"
+    },
+    {
+      "case_id": "QA6D4F23C3FE2BF8E2",
+      "evidence_support": "partially_supported",
+      "relation_safety": "overstated",
+      "medical_safety": "needs_correction"
+    },
+    {
+      "case_id": "QA2A5F1771C6F1D475",
+      "evidence_support": "partially_supported",
+      "relation_safety": "adequately_caveated",
+      "medical_safety": "needs_correction"
+    },
+    {
+      "case_id": "QA102E67D72FFCB721",
+      "evidence_support": "partially_supported",
+      "relation_safety": "adequately_caveated",
+      "medical_safety": "acceptable"
+    }
+  ],
+  "unresolved_case_ids": [
+    "QAB4A546FA1D82C2D0"
+  ],
+  "case_ids": [
+    "QA49843FC4C644B340",
+    "QAB4DD008E06855DC4",
+    "QAC0C5190BB6B1FE8B",
+    "QAD460BAB618DCF833",
+    "QAB683D0024E8669DF",
+    "QA2BFD000FB89C841E",
+    "QAD097AFD6F5F9F648",
+    "QA6D4F23C3FE2BF8E2",
+    "QA87607DCD55819970",
+    "QA68105C94C30805D5",
+    "QA2A5F1771C6F1D475",
+    "QAD0B5594CAD6581DA",
+    "QAC04B1816D63FBDA9",
+    "QAC22201177CBCE403",
+    "QA102E67D72FFCB721",
+    "QA557E3783693DF4C8",
+    "QA6BBF24CE09F08D6F",
+    "QAB4A546FA1D82C2D0",
+    "QA43B810F251F6DDC6",
+    "QA9A7A9DEFEBD6FBF7"
+  ],
+  "notes": [
+    "评分分母仅为 reviewed 的人工评测运行，不包括待审核与排除；达到正式最小样本量还要求足够数量的不同问题，同一题重复运行不能充当多道不同题。",
+    "工程状态 PASS 并非医学审核通过；临床或药监核准状态需独立确认。",
+    "BASELINE_RECORDED 只表示达到了本轮最低人工样本量且未标出关键错误，不代表系统安全性通过临床验证。"
+  ]
+}

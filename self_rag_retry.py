@@ -262,6 +262,19 @@ def retry_insufficient_evidence(
                 "section_path": str(metadata.get("section_path") or "未标注章节"),
                 "chunk_id": str(metadata.get("chunk_id") or ""),
                 "content": content,
+                "source_url": str(metadata.get("source_url") or ""),
+                "drug_name": str(metadata.get("drug_name") or ""),
+                "drug_id": str(metadata.get("drug_id") or ""),
+                "evidence_type": str(metadata.get("evidence_type") or ""),
+                "source_status": str(metadata.get("source_status") or ""),
+                "record_id": str(metadata.get("record_id") or ""),
+                "section_id": str(metadata.get("section_id") or ""),
+                "section_field": str(metadata.get("section_field") or ""),
+                "parent_verified": bool(
+                    metadata.get("provenance_verified")
+                    or metadata.get("parent_verified")
+                    or False
+                ),
             })
             if len(added) >= capacity:
                 break

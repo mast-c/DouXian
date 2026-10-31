@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "question": "七味解痛口服液与扁桃体炎有明确的适应症依据吗？",
+  "answer": "根据检索到的资料，针对您的提问回答如下：\n\n### 1. 七味解痛口服液的明确适应症范围\n根据资料原文，该药的适应症为：**行气活血，调经止痛。适用于由气滞血瘀证引起的胃脘痛，原发性痛经症状的缓解。** [1]\n\n### 2. 关于“对扁桃体炎是否有明确适应症依据”的前提纠正\n**需要纠正错误前提：当前知识库证据不支持该药用于扁桃体炎。**\n*   **证据显示**：在检索到的适应症原文中，仅提及了“胃脘痛”和“原发性痛经”，**未提及**扁桃体炎。\n*   **结论**：基于本轮提供的证据，无法得出该药对扁桃体炎有明确适应症依据的结论；相反，其说明书限定适应症为上述两种情况。\n\n***\n\n**说明**：以上信息基于本轮提供的第三方来源资料，尚未完成医学权威核验。具体用药请遵医嘱。\n\n\n\n参考资料（同一来源的不同片段合并显示）：\n\n[1] [查看药品资料来源](https://www.yaopinnet.com/zhongyao/zy2496q.htm) · 七味解痛口服液 / 适应症 / indication · Chroma Hybrid 召回，Neo4j Section 原文核对",
+  "trace": {
+    "knowledge_evidence": [
+      {
+        "id": 1,
+        "source": "药品资料：七味解痛口服液",
+        "section_path": "七味解痛口服液 / 适应症 / indication",
+        "preview": "药品：七味解痛口服液 栏目：适应症 资料状态：第三方来源尚未完成医学权威核验 证据原文：行气活血，调经止痛。适用于由气滞血瘀证引起的胃脘痛，原发性痛经症状的缓解。",
+        "content": "药品：七味解痛口服液\n栏目：适应症\n资料状态：第三方来源尚未完成医学权威核验\n证据原文：行气活血，调经止痛。适用于由气滞血瘀证引起的胃脘痛，原发性痛经症状的缓解。",
+        "source_url": "https://www.yaopinnet.com/zhongyao/zy2496q.htm",
+        "evidence_type": "json_neo4j_text_verified",
+        "drug_name": "七味解痛口服液",
+        "disease_term": "",
+        "evidence_quote": "",
+        "candidate_status": "",
+        "clinical_status": "",
+        "source_status": "third_party_unverified",
+        "record_id": "sourcerecord_6ff4efff1419ef153edd7ea3",
+        "section_field": "indication",
+        "candidate_id": "",
+        "section_id": "section_39ca43afadcb02c9fc59215a",
+        "parent_verified": true
+      }
+    ],
+    "retrieval_pipeline": {
+      "schema_version": 1,
+      "neo4j_direct": {
+        "status": "ok",
+        "returned": 1,
+        "direct_sections": 1,
+        "candidate_cards": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "after_entity_filter": 1,
+        "retained": 0,
+        "had_partial_error": false
+      },
+      "chroma_hybrid": {
+        "status": "ok",
+        "returned": 1,
+        "indexed_chunks": 313,
+        "parent_verified": 1,
+        "parent_rejected": 0,
+        "section_not_relevant": 5,
+        "legacy_not_verified": 0,
+        "after_entity_filter": 1,
+        "retained": 1
+      },
+      "merge": {
+        "unique_before_entity_filter": 2,
+        "after_entity_filter": 2,
+        "removed_by_entity_filter": 0,
+        "removed_by_dedup": 1,
+        "retained": 1,
+        "retained_neo4j_verified": 1,
+        "explicit_drugs": [
+          "七味解痛口服液"
+        ]
+      }
+    },
+    "retrieval_summary": {
+      "search_drug_graph": {
+        "status": "ok",
+        "hits": 0,
+        "section_count": 1,
+        "candidate_count": 0,
+        "raw_candidate_nodes": 0,
+        "grouped_same_quote_nodes": 0,
+        "partial_error": false,
+        "disease_drug_overview": false,
+        "selected_drugs": [],
+        "supplement_fields": [],
+        "supplemented_sections": 0,
+        "hits_before_entity_gate": 1
+      },
+      "search_knowledge_base": {
+        "status": "ok",
+        "hits": 1,
+        "chroma_chunks": 313,
+        "medical_validation": {
+          "considered": 6,
+          "skipped_section": 5,
+          "failed_provenance": 0,
+          "verified": 1,
+          "legacy_unverified": 0,
+          "reasons": {},
+          "section_gate": [
+            "indication"
+          ],
+          "selected": 1
+        },
+        "hits_before_entity_gate": 1
+      }
+    },
+    "graph_drug_scope": {
+      "applied": false,
+      "retrieved_drugs": [],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0
+    },
+    "evidence_entity_gate": {
+      "mode": "explicit_drugs",
+      "explicit_drugs": [
+        "七味解痛口服液"
+      ],
+      "removed_other_drugs": 0,
+      "removed_unattributed": 0,
+      "kept": 2
+    },
+    "evidence_coverage": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "七味解痛口服液的明确适应症范围是什么？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "适用于由气滞血瘀证引起的胃脘痛，原发性痛经症状的缓解。"
+            }
+          ],
+          "reason": "证据原文直接列出了该药品的具体适应症，明确涵盖胃脘痛与原发性痛经。"
+        },
+        {
+          "question": "七味解痛口服液对扁桃体炎是否有明确的适应症依据？",
+          "status": "refuted",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "适用于由气滞血瘀证引起的胃脘痛，原发性痛经症状的缓解。"
+            }
+          ],
+          "reason": "证据已明确限定适应症仅为胃脘痛及原发性痛经，未提及扁桃体炎，足以纠正用户关于该病存在适应症的前提。"
+        }
+      ],
+      "evidence_ids": [
+        1
+      ],
+      "answer_questions": [
+        "七味解痛口服液的明确适应症范围是什么？",
+        "七味解痛口服液对扁桃体炎是否有明确的适应症依据？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    },
+    "self_rag_retry": {
+      "status": "skipped",
+      "queries": [],
+      "new_chunks": 0,
+      "final_decision": "answer"
+    },
+    "medical_safety_guidance": {
+      "applied": false,
+      "category": "",
+      "source_type": ""
+    },
+    "total_seconds": 26.09
+  },
+  "scope_notice": "此文件包含本轮用户问题、模型回答及检索的第三方药品原文。它用于本地工程验收，并非权威临床审核证明。"
+}
