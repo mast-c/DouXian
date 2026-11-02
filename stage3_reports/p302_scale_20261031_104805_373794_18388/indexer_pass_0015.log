@@ -1,0 +1,827 @@
+=== 医疗批量增量索引 ===
+JSON 文件: E:\VsCode_Project\DockerTest_Agent\RAG_project\data\data\raw\drug_db\MedGraphRAG-Drug-DB\drug_db_v2_cleaned.json
+JSON 药品数: 11953
+JSON 结构优先切分参数: chunk_size=1000, overlap=200
+来源：JSON / Neo4j Section（第三方资料，未经医学权威核验）
+Chroma: E:\VsCode_Project\DockerTest_Agent\RAG_project\data\chroma_db / rag
+模式: 受控写入
+[CHROMA] 初始 Chunk 数量: 43757
+[PLAN] 选中药品=200，模式=apply，Collection=rag
+[1/200] 蒙脱石分散片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[2/200] 蒙脱石散
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[3/200] 蒲公英冲剂
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[4/200] 蒲公英片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[5/200] 蒲公英颗粒
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[6/200] 蒲地蓝消炎片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[7/200] 蒲郁胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[8/200] 蒲黄片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[9/200] 蒿甲醚注射液
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[10/200] 蒿甲醚片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[11/200] 蒿甲醚胶丸
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[12/200] 蒿甲醚胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[13/200] 蓉仙口服液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[14/200] 蓉杞参胶囊
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[15/200] 蓉芝益肾合剂
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[16/200] 蓉蛾益肾口服液
+  [VERIFY] 8/8 原文精确匹配，图谱 Section=5
+    [EMBED] 8/8 Chunk
+  [DONE] 总 Chunk=8，新增=8，复用=0
+[17/200] 蓝芩口服液
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[18/200] 蓝芷安脑胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[19/200] 蓝蒲解毒片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[20/200] 蔗糖铁注射液
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[21/200] 蕲蛇药酒
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[22/200] 蕲蛇追风酒
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[23/200] 蕲蛇酶注射液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[24/200] 蕲蛇风湿酒
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[25/200] 薄芝片
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[26/200] 薄芝糖肽注射液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[27/200] 薄荷六一散
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[28/200] 薄荷尿素贴膏
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[29/200] 薄荷桉油含片（Ⅰ）
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[30/200] 薄荷止痒酊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[31/200] 薄荷茴桉苯甲酸钠含片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[32/200] 薄荷通吸入剂
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[33/200] 薄荷锭
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[34/200] 薄荷麝香草脑搽剂
+  [EMPTY] 所选字段均无有效原文
+[35/200] 薄荷麝香草酚搽剂
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[36/200] 薏芽健脾凝胶
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[37/200] 薯莨片（红孩儿片）
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[38/200] 薯蓣丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[39/200] 薯蓣皂甙片
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[40/200] 薯蓣皂苷片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[41/200] 藏茄流浸膏
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[42/200] 藏茵陈胶囊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[43/200] 藏青果冲剂（西青果冲剂）
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[44/200] 藏青果喉片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[45/200] 藏青果喉片（西青果喉片）
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[46/200] 藏青果颗粒
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[47/200] 藤黄健骨丸
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[48/200] 藻酸双脂钠片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[49/200] 藻酸双酯钠氯化钠注射液
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[50/200] 藻酸双酯钠注射液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[51/200] 藻酸双酯钠片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[52/200] 藿参补肾酒
+  [VERIFY] 7/7 原文精确匹配，图谱 Section=5
+    [EMBED] 7/7 Chunk
+  [DONE] 总 Chunk=7，新增=7，复用=0
+[53/200] 藿胆丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[54/200] 藿胆滴丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[55/200] 藿胆片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[56/200] 藿胆鼻炎胶囊
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[57/200] 藿蓉补肾颗粒
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[58/200] 藿香万应散
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[59/200] 藿香正气丸
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[60/200] 藿香正气冲剂
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[61/200] 藿香正气口服液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[62/200] 藿香正气合剂
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[63/200] 藿香正气水
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[64/200] 藿香正气滴丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[65/200] 藿香正气片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[66/200] 藿香正气胶囊
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[67/200] 藿香正气软胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[68/200] 藿香正气颗粒
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[69/200] 藿香水
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[70/200] 藿香清胃片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[71/200] 藿香祛暑水
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[72/200] 藿香祛暑软胶囊
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[73/200] 藿鹿补肾胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[74/200] 藿龙补肾口服液
+  [VERIFY] 7/7 原文精确匹配，图谱 Section=5
+    [EMBED] 7/7 Chunk
+  [DONE] 总 Chunk=7，新增=7，复用=0
+[75/200] 虎力散
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[76/200] 虎力胶囊
+  [EMPTY] 所选字段均无有效原文
+[77/200] 虎参软膏
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[78/200] 虎杖伤痛酊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[79/200] 虎杖矾石搽剂
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[80/200] 虎标万金油
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[81/200] 虎梅含片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[82/200] 虎驹乙肝胶囊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[83/200] 虎骨木瓜丸
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[84/200] 虎骨追风酒
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[85/200] 虚寒胃痛胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[86/200] 虚寒胃痛颗粒
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[87/200] 虚汗停颗粒
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[88/200] 虫草五味颗粒
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[89/200] 虫草参芪口服液
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[90/200] 虫草参芪膏
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[91/200] 虫草双参酒
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[92/200] 虫草头孢菌胶囊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[93/200] 虫草川贝止咳膏
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[94/200] 虫草川贝膏
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[95/200] 虫草杞芝颗粒
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[96/200] 虫草洋参胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[97/200] 虫草清肺胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[98/200] 虫草菌粉参芍酒
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[99/200] 蚁红通络口服液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[100/200] 蚁陈固涩口服液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[101/200] 蚁黄通络胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[102/200] 蚂蚁双参通痹丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[103/200] 蚓激酶肠溶片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[104/200] 蚓激酶肠溶胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[105/200] 蚓激酶胶囊
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[106/200] 蚕参健脾颗粒
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[107/200] 蚕茧眼药
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[108/200] 蚕蛹补肾胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[109/200] 蚕蛾公补片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[110/200] 蚕鹿口服液
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[111/200] 蚝贝钙咀嚼片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[112/200] 蛇伤解毒片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[113/200] 蛇咬丸
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[114/200] 蛇毒血凝酶注射液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[115/200] 蛇犬化毒散
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[116/200] 蛇胆半夏散
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[117/200] 蛇胆半夏片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[118/200] 蛇胆南星散
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[119/200] 蛇胆南星片
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[120/200] 蛇胆姜粒
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[121/200] 蛇胆川贝含片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[122/200] 蛇胆川贝散
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[123/200] 蛇胆川贝枇杷膏
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[124/200] 蛇胆川贝液
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[125/200] 蛇胆川贝胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[126/200] 蛇胆川贝软胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[127/200] 蛇胆贝母散
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[128/200] 蛇胆贝母片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[129/200] 蛇胆追风丸
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[130/200] 蛇胆陈皮化痰散
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[131/200] 蛇胆陈皮口服液
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[132/200] 蛇胆陈皮散
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[133/200] 蛇胆陈皮液
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[134/200] 蛇胆陈皮片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[135/200] 蛇胆陈皮胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[136/200] 蛇连川贝散
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[137/200] 蛇黄栓
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[138/200] 蛋氨酸片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[139/200] 蛋氨酸重酒石酸胆碱片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[140/200] 蛋白琥珀酸铁口服溶液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[141/200] 蛤杞白术胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[142/200] 蛤蚧党参膏
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[143/200] 蛤蚧养肺丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[144/200] 蛤蚧在补丸（胶囊）
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[145/200] 蛤蚧大补丸（胶囊）
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[146/200] 蛤蚧定喘丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[147/200] 蛤蚧定喘胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[148/200] 蛤蚧治痨丸
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[149/200] 蛤蚧补肾胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[150/200] 蛮龙液
+  [VERIFY] 7/7 原文精确匹配，图谱 Section=5
+    [EMBED] 7/7 Chunk
+  [DONE] 总 Chunk=7，新增=7，复用=0
+[151/200] 蛲虫药膏
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[152/200] 蛹油a-亚麻酸乙酯胶丸
+  [EMPTY] 所选字段均无有效原文
+[153/200] 蛹油α-亚麻酸乙酯胶丸
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[154/200] 蛹虫草菌粉胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[155/200] 蛾苓丸
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[156/200] 蛾贞胶丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[157/200] 蜂参益气锭
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[158/200] 蜂毒注射液
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[159/200] 蜂皇胎片
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[160/200] 蜂胶口腔膜
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[161/200] 蜂胶牙痛酊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[162/200] 蜂蜡素胶囊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[163/200] 蜈蚣追风膏
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[164/200] 蜜炼川贝枇杷膏
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[165/200] 蜡样芽胞杆菌片
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[166/200] 螺内酯片
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[167/200] 螺内酯胶囊
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=5
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[168/200] 螺旋藻片
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[169/200] 螺旋藻胶囊
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[170/200] 螺旋霉素片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[171/200] 螺旋霉素胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[172/200] 蟾酥锭
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[173/200] 蟾酥镇痛膏
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[174/200] 蟾麝救心丸
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[175/200] 蟾龙定喘合剂
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[176/200] 蠲哮片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[177/200] 蠲痹抗生丸
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[178/200] 血再生片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[179/200] 血卟啉注射液
+  [VERIFY] 7/7 原文精确匹配，图谱 Section=5
+    [EMBED] 7/7 Chunk
+  [DONE] 总 Chunk=7，新增=7，复用=0
+[180/200] 血压平片
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[181/200] 血塞通注射液
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[182/200] 血塞通片
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[183/200] 血塞通胶囊
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=4
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[184/200] 血塞通颗粒
+  [VERIFY] 6/6 原文精确匹配，图谱 Section=4
+    [EMBED] 6/6 Chunk
+  [DONE] 总 Chunk=6，新增=6，复用=0
+[185/200] 血复生片
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[186/200] 血宁冲剂
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[187/200] 血宁片
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[188/200] 血宁糖浆
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[189/200] 血宁胶囊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[190/200] 血安胶囊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[191/200] 血宝胶囊
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[192/200] 血尿胶囊
+  [VERIFY] 2/2 原文精确匹配，图谱 Section=2
+    [EMBED] 2/2 Chunk
+  [DONE] 总 Chunk=2，新增=2，复用=0
+[193/200] 血府逐瘀丸
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[194/200] 血府逐瘀胶囊
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=4
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[195/200] 血康口服液
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[196/200] 血栓心脉宁
+  [VERIFY] 3/3 原文精确匹配，图谱 Section=3
+    [EMBED] 3/3 Chunk
+  [DONE] 总 Chunk=3，新增=3，复用=0
+[197/200] 血栓心脉宁胶囊
+  [VERIFY] 4/4 原文精确匹配，图谱 Section=4
+    [EMBED] 4/4 Chunk
+  [DONE] 总 Chunk=4，新增=4，复用=0
+[198/200] 血栓通注射液
+  [VERIFY] 5/5 原文精确匹配，图谱 Section=5
+    [EMBED] 5/5 Chunk
+  [DONE] 总 Chunk=5，新增=5，复用=0
+[199/200] 血液保养液Ⅲ
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+[200/200] 血液保存液
+  [VERIFY] 1/1 原文精确匹配，图谱 Section=1
+    [EMBED] 1/1 Chunk
+  [DONE] 总 Chunk=1，新增=1，复用=0
+
+=== 本次汇总 ===
+{
+  "mode": "apply",
+  "selected_drugs": 200,
+  "completed_drugs": 197,
+  "no_chunks": 3,
+  "failed_drugs": 0,
+  "skipped_existing_chunks": 0,
+  "added_chunks": 793,
+  "planned_chunks": 793,
+  "forced_cuts": 0,
+  "embedding_characters": 86048,
+  "stopped_by_budget": false,
+  "checkpoint": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_bulk_state.sqlite3",
+  "checkpoint_counts": {
+    "alignment_failed": 8,
+    "data_error": 1,
+    "done": 9883,
+    "no_chunks": 308
+  },
+  "chroma_count_after": 44550
+}
+[REPORT] E:\VsCode_Project\DockerTest_Agent\RAG_project\data\stage3_reports\p302_scale_20261031_104805_373794_18388\indexer_pass_0015.json

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "stage": "P3-02.2",
+  "mode": "growth_provenance_audit",
+  "created_utc": "2026-10-31T11:47:49+00:00",
+  "status": "PASS_FULL_PROVENANCE",
+  "plan_id": "970bc7823251c7c1239d",
+  "chroma_count": 52104,
+  "old_chunk_count": 313,
+  "old_chunks_unchanged": 313,
+  "new_chunks_since_plan": 51791,
+  "audit_is_full": true,
+  "new_chunks_checked": 51791,
+  "verified": 51791,
+  "failed": 0,
+  "failure_reasons": {},
+  "failure_examples": [],
+  "disclaimer": "仅技术性原文溯源；不能证明药品批准适应症、临床证据或第三方来源权威性"
+}

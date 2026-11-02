@@ -307,7 +307,7 @@ def final_verify(session,snapshot,expected):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command",choices=["attach","inspect"])
-    parser.add_argument("--in-dir",default="kg_output_clean_v2_import_fixed")
+    parser.add_argument("--in-dir",default="kg_output_clean_v2")
     parser.add_argument(
         "--candidates",default="kg_output_clean_v2/disease_candidates_full.csv"
     )

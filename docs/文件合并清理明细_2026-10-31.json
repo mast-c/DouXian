@@ -1,0 +1,1122 @@
+{
+  "executed_at": "2026-10-31T15:41:46.52311+08:00",
+  "status": "completed",
+  "bytes_saved": 103535004.0,
+  "mib_saved": 98.739,
+  "duplicate_files_removed": 11,
+  "unique_reports_preserved": 2,
+  "cache_files_removed": 93,
+  "protected_files": [
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\豆馅.py",
+      "sha256": "e5a1a700982f03ec07b78e18750f6e698a9e8c74a48b6ae6b739d3fb670c7c38"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\app_file_uploader.py",
+      "sha256": "03c498a89407c5c907f72bda35421508f1cf0e433aecfafa9daf5783ac5fba88"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\benchmark_v26.py",
+      "sha256": "5127996dea04fef43959ea384c926c6301f7a966961b6c241a92fb49a6544c21"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\chat_store.py",
+      "sha256": "e3d7c4fc2c2a33ce6a0f02b920bfd2fe2e48280e48a7b3e973266a90ff7cc7e8"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\config_data.py",
+      "sha256": "c52fc558573220908744ad1f8a7a78956e34edba324f3e6e891f81260300bb69"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\conversation_store.py",
+      "sha256": "5cebdc7d83c7e8554e30a65c303a5414a9516d516276f85a932a5a90ea8aee58"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\diagnose_chroma.py",
+      "sha256": "40347e8eb1761bc1bb8f968a7aac8015047b978bcb39d90ed3e39d36fa829430"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\drug_graph_retriever.py",
+      "sha256": "e27980045a81c00505f768d6d3958c58874a9c29780fa4758d4c661acaa94fc7"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\evaluate_holdout.py",
+      "sha256": "6ac01003534bbae10e42716cadfb0c8072754d65abf06df2bca8947b002c0c06"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\evidence_guard.py",
+      "sha256": "86effc2bd8c23222e9962a9f16927fd6569907906829eaab4212ab8ff6f69f46"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\file_history_store.py",
+      "sha256": "7bfc4fce333ee983ef7071791067c51a490ed34eff36e48970ec8b0b4078e681"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\graph_answer_view.py",
+      "sha256": "ff42192bfa76154cbd08ac78969c4aeeb082143c9793fc11b3ed4b013b7d3eb9"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\guard_ab_probe.py",
+      "sha256": "e955c1929cbf584acb5937aab89832f637d675dd74b81744e4149699f8e441a1"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\knowledge_base.py",
+      "sha256": "93d864fd38d01d4df33a51b20f1c9895c6f408355f33c012a85099213255c630"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_answer_quality.py",
+      "sha256": "1e5e027d640b0215160aa6147cd3d0bb31c413b436864a0ea56d66333c417c24"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_chroma_acceptance.py",
+      "sha256": "1b664f0c876077c657181a74c6acbb1b1c10b94b72565827d2a2179263a941b9"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_entity_gate.py",
+      "sha256": "9db50eed1c4ec573fb872fbfb6062ac7e5507cc2660fa66325bcc0cc89aa59e5"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_eval_workbench.py",
+      "sha256": "d4ffbcc3dabd9d5bb8ddc5178b4a295c76a78da5b7e5fe88c684bfffb5482098"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_evidence_bridge.py",
+      "sha256": "2bf6033eaa60f884bdbff73565a8683020fff93023973d8b5c50710389e2e9a1"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_expand_batch.py",
+      "sha256": "64a806b52f0c7489d80782c35e5745bea808e815126c81e71ada44556a9fc7cb"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_hybrid_probe.py",
+      "sha256": "0a9833306ac7bb7377eee8fa14a2ac174c11811fc92df6ce0810cddf7c8146e6"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_json_bulk_index.py",
+      "sha256": "2768bd33e8e847a19386d5b3d1016f078ed7314f5cc90918f2928c02222915eb"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_json_chunker.py",
+      "sha256": "2dc518adbc2f4e82bed352808d6647e620e4a0b75a82bf95405038ef2c141ffd"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_json_index.py",
+      "sha256": "42fff65cf2e2b432b23ceb14de85c8baf88cc80e937fe88b5623bef82dd0d28e"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_overview_answer.py",
+      "sha256": "05a3dae7c6c427670c60c1123b387055f73c584c52f4362851fc5ce2113d4d9c"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_quality_acceptance.py",
+      "sha256": "b2603f7abf41dcbbb28d95b82207709a91ff34d51bcd5746def21fc9bfef3432"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_quality_campaign.py",
+      "sha256": "94c7957432b12326203453bc3695276b68175c6ccc1871fc102df8a54d07b5aa"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_retrieval_eval.py",
+      "sha256": "17518acee07865b20f2b354769e8d23179def59531af68b47fe1305a22620f44"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_retrieval_status.py",
+      "sha256": "bb984af0d0dfcfb4503ae7df73343b7afd278c016060bf35f9ac202c8cf2177d"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_safety_response.py",
+      "sha256": "d10889c51d50495f5a153fa03a76478754b4d38d527adc153f091dea1be3a7cd"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\preview_query_plan.py",
+      "sha256": "e2262a23840654e51229f6fdfdc5cad40161f355fe2717c6722eb01b8e053730"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\query_planner.py",
+      "sha256": "ec3626fd2c4ccb0468c67026e02dd80f7c7b7e11156d6c52f1200a125946a275"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\rag.py",
+      "sha256": "927c37b6d0760442aae59e53809ab2b828cb32c42a1b22584fa3f9132c033328"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\search_tool.py",
+      "sha256": "73f605d1880a4b1002d3ec59787e1f42faaf36ed349a7da80252ca473516d27e"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\seed_medical_chroma.py",
+      "sha256": "eadb6d501f165f1c36d3d40a6f444b9b4b13679e51ee8b75506dbba401aa47c2"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\self_rag_retry.py",
+      "sha256": "8d11cf95f6051d06b88d3b09c7584dd85e6f54b2ae58a879b5cb36a107c8e3b4"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\v117_phase2_regression.py",
+      "sha256": "88beae54bfe2079a23402d1e799d9e7685bddd1f19b2cc9214d229280a8d77ce"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\vector_stores.py",
+      "sha256": "c940f9d4b6d467ec6ceacd9aa1bfbd95a7d0631ae73863855c533d3a5914e2c7"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\build_report.json",
+      "sha256": "fe57097a68e374443ae303f46650f73bdf047504330024a39e708be87122d564"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\chunks.jsonl",
+      "sha256": "a6851e11da365b1cde56d1715f92f27cbe9113ba2dbee355d01cd72455ca928b"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\drugs.jsonl",
+      "sha256": "3b2266bf42691b49809817e1685c6bc00eec072c2725eddd54f306dbaaa997cf"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\integrity_report.json",
+      "sha256": "7ad26bcc5afadcdf9a40820a46259ecd68fa95667569b9abb4e02def257693ba"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\interaction_candidates.jsonl",
+      "sha256": "776663139062e5bdf916350b658b43144602dd2be84dcceeaac92a4919fcda29"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\mentions.jsonl",
+      "sha256": "8fcd559384a4c23e533f8e826e1325ae3ba9b134d2e05c90f81fa984f462da18"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\name_cleaning_report.json",
+      "sha256": "8c775f3bce20c10a502887bb725db5eb839cc604056795310616772de8d439a5"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\sections.jsonl",
+      "sha256": "4e63b52105b4486c50d54d4b3e87bb3aae5c96866274e5bf8ea2029e5019c941"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output\\source_records.jsonl",
+      "sha256": "a459c5c1f00b11846dc9a098b8d4c233bd2039cd5c3eeebcd6faa3d20d245c2a"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_campaign_v117\\manual_review_v117.csv",
+      "sha256": "2a86897e98c672b16f308dbc17e1cdeb6dd00079b372999bb6e9d0346c8eb1d1"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_campaign_v117_phase2_20261031_102048\\engineering\\manual_review_v117.csv",
+      "sha256": "dc4778dd3b60fbed2b33b1f0ae70f968623ea058ce1f2164f82d4c4536e78d49"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\review\\reviewer_A_21_blind.csv",
+      "sha256": "37b00e8e46e3fe8bf240e97bb585cb5fa23011de71cb0a2b58bfb876432af3d1"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\review\\reviewer_B_21_blind.csv",
+      "sha256": "37b00e8e46e3fe8bf240e97bb585cb5fa23011de71cb0a2b58bfb876432af3d1"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\configs\\freeze_v31_engineering.json",
+      "sha256": "230101d8c2ef0a0059862634fb2bd7dfe81b105a66788eb3f70a6ab3efae7434"
+    },
+    {
+      "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\prompts\\indication_semantic_review_v31_checkpoint.md",
+      "sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8"
+    }
+  ],
+  "removed_directories": [
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed",
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__",
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__",
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\tests\\__pycache__"
+  ],
+  "actions": [
+    {
+      "action": "preserved_report",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\attach_candidates_result.json",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\attach_candidates_result.json",
+      "bytes": 346,
+      "sha256": "e7a3fa2b9a8a5e4e35fb3e9edb278572229f9447b53be2accd0523973e4a01cf",
+      "saved_bytes": 0
+    },
+    {
+      "action": "preserved_report",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\build_report.json",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\build_report_import_fixed.json",
+      "bytes": 1866,
+      "sha256": "f478007cf6b4b31bd6116e562704939b0ad7ca4f9674810c064c45806a8ecbc9",
+      "saved_bytes": 0
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\chunks.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\chunks.jsonl",
+      "bytes": 39475492,
+      "sha256": "a6851e11da365b1cde56d1715f92f27cbe9113ba2dbee355d01cd72455ca928b",
+      "saved_bytes": 39475492
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\drug_aliases.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\drug_aliases.jsonl",
+      "bytes": 116027,
+      "sha256": "97c64010a9d7ae2bcd0c16c3b9c27cf03b79b0cd9ec05bff89b1d153965dfcd8",
+      "saved_bytes": 116027
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\drugs.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\drugs.jsonl",
+      "bytes": 2248653,
+      "sha256": "3b2266bf42691b49809817e1685c6bc00eec072c2725eddd54f306dbaaa997cf",
+      "saved_bytes": 2248653
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\interaction_candidates.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\interaction_candidates.jsonl",
+      "bytes": 10134453,
+      "sha256": "776663139062e5bdf916350b658b43144602dd2be84dcceeaac92a4919fcda29",
+      "saved_bytes": 10134453
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\mentions.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\mentions.jsonl",
+      "bytes": 959227,
+      "sha256": "8fcd559384a4c23e533f8e826e1325ae3ba9b134d2e05c90f81fa984f462da18",
+      "saved_bytes": 959227
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\name_provenance_audit.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\name_provenance_audit.jsonl",
+      "bytes": 40245,
+      "sha256": "341386a66baad730bc97a954688ae6011892633dde1b3ba14ed8f1a6ccedace6",
+      "saved_bytes": 40245
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\name_redirects_audit.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\name_redirects_audit.jsonl",
+      "bytes": 77772,
+      "sha256": "466d361060180fd8acda554b46be745a04ecf4c48560814df434168009c82938",
+      "saved_bytes": 77772
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\sections.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\sections.jsonl",
+      "bytes": 42188404,
+      "sha256": "4e63b52105b4486c50d54d4b3e87bb3aae5c96866274e5bf8ea2029e5019c941",
+      "saved_bytes": 42188404
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2_import_fixed\\source_records.jsonl",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2\\source_records.jsonl",
+      "bytes": 6052324,
+      "sha256": "0c4e5caad2dd2edb2dc0e650b0ac55f6cd2a59cab0961c4050f140442cfec883",
+      "saved_bytes": 6052324
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\requirements-drugkg-import.txt",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\requirements-kg.txt",
+      "bytes": 37,
+      "sha256": "171dd8adde444aa2f7b030e922a97a31a95fc232c7d1ddf9d6e169b444d1582a",
+      "saved_bytes": 37
+    },
+    {
+      "action": "removed_duplicate",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\prompts\\indication_semantic_review_v31_anchor.md",
+      "canonical": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\prompts\\indication_semantic_review_v31_checkpoint.md",
+      "bytes": 5533,
+      "sha256": "d69c13d97c8acf6e4b0bc2d62e0c4da185a28009a0a782eb20baac9f127b52b8",
+      "saved_bytes": 5533
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\_fix_math.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 9195,
+      "sha256": "980f26be4a1a68976a6efb6888a6c8f411f5df2c54e6793eebd9072f051220f7",
+      "saved_bytes": 9195
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\config_data.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 423,
+      "sha256": "21dd57ff21c07bddbc9a7a62351de4aa5f570a874518ef1d76f971bc6f7a392e",
+      "saved_bytes": 423
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\conversation_store.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 20726,
+      "sha256": "729c584151b0d089f420feab23a5f2744ba1c74a9fd2346f932f1a462e94eb16",
+      "saved_bytes": 20726
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\diagnose_graph_sections_v2111.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 5644,
+      "sha256": "138a5dd7d7b941fd2901078371bcc2b1cf63a17cae8b08962ef69295510ac7ad",
+      "saved_bytes": 5644
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\document_chunks.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 4317,
+      "sha256": "5d49466a34b9b3ef295fb99e86d6a74fbca36f9a1e4f039613462ed9109db5ff",
+      "saved_bytes": 4317
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\document_utils.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 6215,
+      "sha256": "74976c8e770b8790098841eaf4d2b974a7af08018e3488555e70a539baeec616",
+      "saved_bytes": 6215
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\drug_graph_retriever.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 29776,
+      "sha256": "151583678189e5a412eb5197f52d85d1ae53b7b11ae3c7b019562df88452c1a4",
+      "saved_bytes": 29776
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_chunk_graph_v30.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 55327,
+      "sha256": "bcab9f33a77cc3c213141b530f1dabd7edaff58b17fc55d9b879a224002c6431",
+      "saved_bytes": 55327
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_dynamic_graph_v32.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 27115,
+      "sha256": "2d74396de347daa77a2d4435845e14691434e81a7e418094211e389e6eae22e8",
+      "saved_bytes": 27115
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_dynamic_graph_v32.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 22874,
+      "sha256": "766f9d4aebcc2956f04b8245c8ab607ef7d30d57abb000f636716510b5483623",
+      "saved_bytes": 22874
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_graph_pipeline_v33.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 28919,
+      "sha256": "14065494f3289bad0f8b959da1bd5250d3a471d41bc1f7901e8c14c5d0af52d1",
+      "saved_bytes": 28919
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_graph_pipeline_v33.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 24164,
+      "sha256": "c0888aa375558966b5f580170a5486fbeb380a18fb45abb6d7710889504fa364",
+      "saved_bytes": 24164
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_graph_pipeline_v331.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 28380,
+      "sha256": "6f3123eb71b0aa286906379d4bfa4a479e2c4d7f63c341645332eb94c9d39e73",
+      "saved_bytes": 28380
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_graph_pipeline_v331.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 23803,
+      "sha256": "42b510c1f6c2a4014afe98bdd14cb977435a78a112fb53d40cb1348eec70fe15",
+      "saved_bytes": 23803
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_graph_pipeline_v35_patched.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 28927,
+      "sha256": "3a59f0eb0477c4ef033b1ec9a04fbfedf7109df685e0b5367abccfb73ecc12bd",
+      "saved_bytes": 28927
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_graph_pipeline_v35_patched.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 24172,
+      "sha256": "67870c0874626e0666bb52ef75cf53e8e33201e5534b01ca61d34c183ea459f6",
+      "saved_bytes": 24172
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_semantic_paths_v31.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 38726,
+      "sha256": "b1c4378b12b5a4599dfcd72bc17f51f3022145acec97cefb57d45d8c11873fc2",
+      "saved_bytes": 38726
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_semantic_paths_v31.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 32349,
+      "sha256": "80bb04d7b4d343d67d045971174e38bf07bf033b1153ea1e72d50681f7949404",
+      "saved_bytes": 32349
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_unified_graph_v35.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 40110,
+      "sha256": "e820b20b54613ff670213f1dacce88f64a920068779efaa6e4882188278ac771",
+      "saved_bytes": 40110
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_unified_graph_v35.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 33227,
+      "sha256": "3948c382e983f146b8fad00b175e3816c4174bbba2adc7b3cd5b49872ec0d992",
+      "saved_bytes": 33227
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_v32_upgrade.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 20443,
+      "sha256": "c743ada3fea21dfecc3a79d10961a140b1d10954707f7435ef939b267cee05ae",
+      "saved_bytes": 20443
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_v33_install.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 16330,
+      "sha256": "7047d9148602d0700b2268b322985e49db343776a65225729e2ebcc578492c61",
+      "saved_bytes": 16330
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_v33_install.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 14039,
+      "sha256": "9208c860268880db9b595e5940de6d3a57b41ad275231c8165aebea0026727b8",
+      "saved_bytes": 14039
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_v34_supplement.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 45873,
+      "sha256": "5cbb6f6bec14c9afdda51468bdb5365ca2b2a7b143de9507b07b5d1eb68f0efb",
+      "saved_bytes": 45873
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\dx_v34_supplement.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 38758,
+      "sha256": "cafdbbb8e57eb74184e563dc36ced8a439623b8156a63a617ef7857e0115f797",
+      "saved_bytes": 38758
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\evidence_guard.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 26463,
+      "sha256": "517c38c76fc300dea23c455bc9f21e279619190084d24e5ce4afd8b61476f53a",
+      "saved_bytes": 26463
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\fast_component_planner_v29.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 3306,
+      "sha256": "648ed35af6d2f802305e9ad6321ffb9e270efcc55b4ec5f5c30d485ba3966fa8",
+      "saved_bytes": 3306
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\file_history_store.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 4644,
+      "sha256": "5ebf029636b45e7b20f5330d71cd07814ef4ffb108eee0efa49543997c60c856",
+      "saved_bytes": 4644
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\graph_answer_view.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 8641,
+      "sha256": "7f9123808207a826a5f711b8cd931dd75debbd427d4deda444225075e3b01090",
+      "saved_bytes": 8641
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\graph_assist_v28.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 11195,
+      "sha256": "6f71c05ece5c93bc123c764dc7c5aa6dd91ba394e0656f027a52d1cf9a03e726",
+      "saved_bytes": 11195
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\graph_chunk_linker_v211.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 25639,
+      "sha256": "250f1b3ad4659b4bef2f596d077d30955523a68295765193ac45270eb6250a1e",
+      "saved_bytes": 25639
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\graph_expand_v212.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 61730,
+      "sha256": "0416f063c44690dfbe0d01b7ab16c787bb9313a90b8c7cfa872449851c47992e",
+      "saved_bytes": 61730
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\knowledge_base.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 26172,
+      "sha256": "54484d26afd17c7b740fa5daf323739a6a6d990d332be82eca52a467a3bac902",
+      "saved_bytes": 26172
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\knowledge_base.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 18866,
+      "sha256": "5274b470bc86a7d0c9ee2f4823f15fa54354915c2b790f049f2726241a8a2612",
+      "saved_bytes": 18866
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\knowledge_base.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 22519,
+      "sha256": "eaefeab7c795d667c8cf09d10a39a7ad01d60ed937d2d90d0b3b0f18444c0979",
+      "saved_bytes": 22519
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\knowledge_graph_v27.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 25919,
+      "sha256": "13977a0f7cc839abc2ed8c4f175ee9785d209dd0e931538d3ff2a26b8446065c",
+      "saved_bytes": 25919
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_answer_quality.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 11426,
+      "sha256": "431299f44427b81195c7c1f50770f837e825f028e8953d81f275149605e2caa4",
+      "saved_bytes": 11426
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_entity_gate.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 8359,
+      "sha256": "7418d56bc0b18bfd62b9acc93e14398569bcb613a886f1023b03686ae7145e7d",
+      "saved_bytes": 8359
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_eval_workbench.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 53097,
+      "sha256": "4e7789a0f2f120a1503c434d917e973c737b65dd2b1cd5f76ad00b2608fa7f7f",
+      "saved_bytes": 53097
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_evidence_bridge.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 10605,
+      "sha256": "06d9955ce9de5ef0e048550ea5b480b230126dc47e08baee02f57289ad09e582",
+      "saved_bytes": 10605
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_json_bulk_index.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 44425,
+      "sha256": "bcfc3372a10514af54c01b95e42c59a4f041f6084595e1f16cf246ffa73160fa",
+      "saved_bytes": 44425
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_json_chunker.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 14319,
+      "sha256": "6cea8eb17517989b7e17b65c60c78ee5bfb83ae9a39001bd2475af2fc190893c",
+      "saved_bytes": 14319
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_overview_answer.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 14268,
+      "sha256": "0983e3c341196632cd10dc97c9fd50822286d5f11620048fe9a56f66921c381f",
+      "saved_bytes": 14268
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_quality_acceptance.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 36236,
+      "sha256": "49ff457e7facaff57e748a89c4e344ca40986f6be654268e16c88c7144be9249",
+      "saved_bytes": 36236
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_quality_campaign.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 46102,
+      "sha256": "e94c4924a07e0767a273ab6ae5f2cf611696a14e1e7d2464e8e73e0375b96b7f",
+      "saved_bytes": 46102
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_retrieval_status.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 15222,
+      "sha256": "0a684f47c47ccdd2660bc3b38a7796d3918bc2c980db76af5019b415aee1e8fb",
+      "saved_bytes": 15222
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\medical_safety_response.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 3519,
+      "sha256": "3a80c48a33a949401d093e52c4d7358d2017a37f79bcfe4637553ecc1b0af4cf",
+      "saved_bytes": 3519
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\query_planner.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 3164,
+      "sha256": "6a962bafe2969448139590618a9acb7b98cb53500f01c0152a24c1a8142a2b05",
+      "saved_bytes": 3164
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\rag.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 118645,
+      "sha256": "8d9195d27087693f7b01dab9702f27444058ea966ba4863826eed47cb9413319",
+      "saved_bytes": 118645
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\rag.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 37344,
+      "sha256": "32e88231381b116fb5ecc4500197fd10151eaaad29ffd821f1076f5c525c0dad",
+      "saved_bytes": 37344
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\search_tool.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 14637,
+      "sha256": "34d3eb20ddcc1573cc446d142857839a8574e4bab0cd0c009102673261d1c499",
+      "saved_bytes": 14637
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\self_rag_retry.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 20318,
+      "sha256": "51ae5c0f47a9c3f097f6b1cf68de3eddfc2755e29489dbb52f26a766f9a8c4bb",
+      "saved_bytes": 20318
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_dx_v32.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 30851,
+      "sha256": "869ab03894e53a52cef960739edb1f7235914bc504748331df51e56db575111a",
+      "saved_bytes": 30851
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_dx_v33.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 39823,
+      "sha256": "edad603b1e5d5af3434dc67c710b026a1f872f779cc9dd6fa6e8bc0528fd2a9c",
+      "saved_bytes": 39823
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_dx_v331.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 53506,
+      "sha256": "ddbcbb2697342cd2ab21fbb49fda2238db5765695e17c13c506d889a9dddc246",
+      "saved_bytes": 53506
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_dx_v331.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 44544,
+      "sha256": "bae67fab25bac6a9557f577cb0661473c62c498b7faa39155d6a223d53142794",
+      "saved_bytes": 44544
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_dx_v35.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 42065,
+      "sha256": "0d4063e8d425e5b26d28ce014010b3715409ce5e19ed30562278b6a398eda40f",
+      "saved_bytes": 42065
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_dx_v35.cpython-313.pyc",
+      "canonical": null,
+      "bytes": 35321,
+      "sha256": "942c46f1a511b3b16ef3300cfa1c5330c3d257562a948a8f2fd1676d9e51cd3b",
+      "saved_bytes": 35321
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_kb_fast_strict_v24.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 15075,
+      "sha256": "43982c295acc017fc5d790bbc5d9eeb2b11befdda7bcab94b7b8ea4b263da813",
+      "saved_bytes": 15075
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\test_v2170_citation_inventory.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 15967,
+      "sha256": "318f4678e4b7e2a42671eb90e9048ee6027e28efee89fa564ec0c2fe710d4618",
+      "saved_bytes": 15967
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\ui_components.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 7633,
+      "sha256": "75c80ea20d6af8312e9f158e169ffc1ed9730fad1d69c1553bb2ad153be50964",
+      "saved_bytes": 7633
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\ui_theme.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 7992,
+      "sha256": "76510fde0b7ae0bb1ee89476326412389b8adce38ed4739452356cf51027329f",
+      "saved_bytes": 7992
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\v2170_citation_inventory.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 34508,
+      "sha256": "dbfe6998d58b3df61c9dc6da83794c1025667b6c147f5c94296f7400a5cba5f4",
+      "saved_bytes": 34508
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\vector_stores.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 1726,
+      "sha256": "22f1fc40e3489bfa874a21fcd67b8504cdb2965ce8407d8d4957c1dfb02eacff",
+      "saved_bytes": 1726
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\__pycache__\\weather_tool.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 8992,
+      "sha256": "544b2d7d882af180a0ce94978e16e53061dde857ae5bc094e655cb864990cee1",
+      "saved_bytes": 8992
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\__init__.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 281,
+      "sha256": "88b90a6568b4143069ab5c1149048e9a3cc91f5caaa0f1c334eb9ea8a88cd77d",
+      "saved_bytes": 281
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\__init__.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 272,
+      "sha256": "d53467003a0de3af2af421153f33a1851644a980c407943bb26d1b084affb099",
+      "saved_bytes": 272
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\build.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 20879,
+      "sha256": "41edb1b16285c0e2a21b5fb8c3c38a00195692d53fea64017cc25d9ca525952d",
+      "saved_bytes": 20879
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\build.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 17846,
+      "sha256": "22b82cf8b4f6aa9360a14021ed7c6ca303e03436d1d8f48aa671b26aeab95bd7",
+      "saved_bytes": 17846
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\clean_names.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 18366,
+      "sha256": "7f3d3092a020f917380b3a9f44f9105e6a76a80568d2cb692a6c217889739392",
+      "saved_bytes": 18366
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\clean_names.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 15189,
+      "sha256": "176bb0724c5ddc1e5ca911b3ec18c72f3683eac09e095b9c16a5d69ff83fae03",
+      "saved_bytes": 15189
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\disease_stage3.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 41824,
+      "sha256": "0fe988c92ef144c9e2f8b7c4848f67c0c910bbe9beb03d684fe5584713f48813",
+      "saved_bytes": 41824
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\disease_stage3.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 35423,
+      "sha256": "929181aea7615b49d30aecb4f9b379b98655340458cfc9f502962af46b479b12",
+      "saved_bytes": 35423
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\import_cleaned_aliases.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 9152,
+      "sha256": "d6e08e405b0edce3d78c1ebc4ab0905b4a2b6fab095af5539cecfd362c368d3f",
+      "saved_bytes": 9152
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\indication_v3.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 44333,
+      "sha256": "d3386016bcfc51b1e908872d01f2c86e053a2cdfda473aaa560da1074cb42701",
+      "saved_bytes": 44333
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\indication_v31_checkpoint.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 51254,
+      "sha256": "98708e1e1079f23a75e3ea0f41375d6558c5f846abba4f3bcc3ae4f941d4f481",
+      "saved_bytes": 51254
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\indication_v31.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 38208,
+      "sha256": "c52ed2c1dd10525bf27fbf602bc8ce7219b209b981c3f052653b5a07e71aa629",
+      "saved_bytes": 38208
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\neo4j_drug_graph.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 47052,
+      "sha256": "00926ebb3d4ace4012c16d140b041b6a84363cabc9f2b6001b9766532604cecd",
+      "saved_bytes": 47052
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\neo4j_existing_candidates.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 21670,
+      "sha256": "f299ef5bb0387d84681d4a2890fe7255b934b4392eec0af03197320fc12d3182",
+      "saved_bytes": 21670
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\neo4j_import.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 11747,
+      "sha256": "40f1bdc8fcea7f4cd454df669039324de876c724473ee29c1a7c515f4e0c0807",
+      "saved_bytes": 11747
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\neo4j_import.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 10518,
+      "sha256": "bfae31704573e116d2adc74a1add48876600c2688ef55a23c9c2ffb05b99d21b",
+      "saved_bytes": 10518
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\prepare_cleaned_v2.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 13019,
+      "sha256": "9ef18146ab947d0b01c2beb80e9663da615955e2f0e7b29af146be71f78b182c",
+      "saved_bytes": 13019
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\repair_residuals.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 23676,
+      "sha256": "46aa5470f8bfdeb7c94b3f24e80a5f57a7db570c2f11c1f1eaf7b2a5961a8029",
+      "saved_bytes": 23676
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\review_context_v2.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 28544,
+      "sha256": "5d5633477ca2b0a06000b67d3a97bc070bd47aaf9184e07f405c5a899d2a9b01",
+      "saved_bytes": 28544
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\review_context_v2.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 23996,
+      "sha256": "7fd46e55d36ed4e3f72d96a54b640932c6a2317b6f38ea6b0d5c0a723d0e9648",
+      "saved_bytes": 23996
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\review_indications.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 5221,
+      "sha256": "faacbafc2320e586155225c31f2df3d4fdf862c2d87be3d000bb7dea06542c21",
+      "saved_bytes": 5221
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\sync_cleaned_v2.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 22278,
+      "sha256": "11c326a31710e6323ad71727e2a3f6bb8649b89c7941b8120e1ade3f00c83ceb",
+      "saved_bytes": 22278
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg\\__pycache__\\validate.cpython-312.pyc",
+      "canonical": null,
+      "bytes": 8581,
+      "sha256": "bf4b335646224c5eb376e1578306d23fa60f84bef3baa4822495b4b22c9bd5ab",
+      "saved_bytes": 8581
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\tests\\__pycache__\\test_v117_campaign.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 45957,
+      "sha256": "d3466278c7d247cd3d11fec354b0f312eb66cd4b32295b49384ad39ba088d5aa",
+      "saved_bytes": 45957
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\tests\\__pycache__\\test_v117_guard_trace_regression.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 11295,
+      "sha256": "3acfeaf1151e694cb97341cc98c40c266d5927e6170745d86823fa0e455028d7",
+      "saved_bytes": 11295
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\tests\\__pycache__\\test_v117_pediatric_field_route.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 6365,
+      "sha256": "3d3de02cb36ad8c70b08c07906f15b1c351929a70a96d86ece86071672219315",
+      "saved_bytes": 6365
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\tests\\__pycache__\\test_v117_pediatric_safety.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 5846,
+      "sha256": "1702c766f88392215a2ba8b93b3f1bf1d46b663c9b19a33b56ba90693c8e2e21",
+      "saved_bytes": 5846
+    },
+    {
+      "action": "removed_cache",
+      "source": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\tests\\__pycache__\\test_v117_phase2_prompt_overview.cpython-311.pyc",
+      "canonical": null,
+      "bytes": 13430,
+      "sha256": "ba3757cad8cb69b8084a4f38ad3ca277c785e98519168360d52804d4455c6d45",
+      "saved_bytes": 13430
+    }
+  ],
+  "finished_at": "2026-10-31T15:43:22.7872849+08:00",
+  "protected_files_verified": true,
+  "validation": {
+    "canonical_paths_and_hashes": "passed",
+    "protected_files": "passed",
+    "local_preflight": {
+      "status": "PREFLIGHT_PASS",
+      "snapshot_sha256": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+      "build_report_sha256": "0bb3a49af75fec2f8f038a69de713431955caa63029a9ccd68376776bd51fe7f",
+      "source_graph_counts": {
+        "drugs": 11953,
+        "source_records": 11960,
+        "sections": 106445,
+        "chunks": 107787,
+        "drug_aliases": 343,
+        "disease_candidates": 19685,
+        "disease_terms": 1150,
+        "model_assessments": 60
+      },
+      "candidate_count": 19685,
+      "source_url_authority": "third_party_unverified",
+      "candidate_relationship_status": "unvalidated_mentions_only",
+      "candidate_csv_sha256": "cf964a386878ed92d7aeae7d5d5cc7574f8db3b5b1e8abb9f2e5e3fd8bf02315",
+      "candidate_report_present": true,
+      "pilot_assessment_sha256": "75c55ab3615632371a65e42f10144d0c079972c56a1bfc966dc777eb89b60f3d",
+      "pilot_report_sha256": "bfd6439f8df10e2eb20a3e08ed238fc57ccc1c0286081d46ee37772187bbf7b4",
+      "out_of_scope": [
+        "FDA/NMPA label approval",
+        "clinical validation",
+        "ontology normalization",
+        "therapy claims"
+      ],
+      "elapsed_seconds": 2.0,
+      "graph_writes": 0
+    },
+    "freeze_hashes": "passed",
+    "regression": {
+      "tests_run": 135,
+      "skipped": 1,
+      "errors": 1,
+      "error": "Existing test class references missing _fast_plan_paired_methods in rag.py; neither file changed during cleanup."
+    }
+  }
+}

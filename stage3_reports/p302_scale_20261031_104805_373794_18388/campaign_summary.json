@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "stage": "P3-02.2",
+  "project_version": "V1.17",
+  "created_utc": "2026-10-31T10:48:05+00:00",
+  "status": "STARTED",
+  "plan_id": "970bc7823251c7c1239d",
+  "execute": true,
+  "target_drugs_this_campaign": 11953,
+  "limits": {
+    "per_pass_drugs": 200,
+    "max_new_chunks_per_pass": 5000,
+    "max_embed_chars_per_pass": 5000000,
+    "max_total_new_chunks": 300000,
+    "max_total_embed_chars": 300000000,
+    "max_nonwrite_failures_per_pass": 5
+  },
+  "processed_drugs": 4600,
+  "added_chunks": 20458,
+  "embedding_characters": 3101951,
+  "failures": 4,
+  "passes": [
+    {
+      "pass": 1,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 875,
+      "embedding_characters": 125851,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0001.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0001.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 2,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 841,
+      "embedding_characters": 112049,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0002.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0002.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 3,
+      "processed_drugs": 200,
+      "failed_drugs": 1,
+      "new_chunks": 886,
+      "embedding_characters": 127899,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0003.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0003.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 4,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 1046,
+      "embedding_characters": 222272,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0004.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0004.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 5,
+      "processed_drugs": 200,
+      "failed_drugs": 3,
+      "new_chunks": 1100,
+      "embedding_characters": 227261,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0005.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0005.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 6,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 1054,
+      "embedding_characters": 183198,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0006.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0006.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 7,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 974,
+      "embedding_characters": 197873,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0007.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0007.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 8,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 906,
+      "embedding_characters": 157321,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0008.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0008.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 9,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 905,
+      "embedding_characters": 134590,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0009.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0009.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 10,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 853,
+      "embedding_characters": 123938,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0010.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0010.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 11,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 794,
+      "embedding_characters": 82928,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0011.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0011.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 12,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 800,
+      "embedding_characters": 85681,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0012.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0012.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 13,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 867,
+      "embedding_characters": 114637,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0013.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0013.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 14,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 862,
+      "embedding_characters": 114168,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0014.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0014.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 15,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 793,
+      "embedding_characters": 86048,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0015.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0015.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 16,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 835,
+      "embedding_characters": 114903,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0016.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0016.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 17,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 809,
+      "embedding_characters": 111860,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0017.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0017.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 18,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 980,
+      "embedding_characters": 173089,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0018.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0018.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 19,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 805,
+      "embedding_characters": 97298,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0019.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0019.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 20,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 957,
+      "embedding_characters": 161650,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0020.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0020.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 21,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 868,
+      "embedding_characters": 132640,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0021.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0021.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 22,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 872,
+      "embedding_characters": 131609,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0022.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0022.log",
+      "pass_state": "CONTINUE"
+    },
+    {
+      "pass": 23,
+      "processed_drugs": 200,
+      "failed_drugs": 0,
+      "new_chunks": 776,
+      "embedding_characters": 83188,
+      "stopped_by_budget": false,
+      "report": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0023.json",
+      "log": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388\\indexer_pass_0023.log",
+      "pass_state": "CONTINUE"
+    }
+  ],
+  "starting_chroma": {
+    "collection_count": 30994,
+    "old_chunks_verified": 313,
+    "persist_directory": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\chroma_db"
+  },
+  "report_directory": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\stage3_reports\\p302_scale_20261031_104805_373794_18388"
+}

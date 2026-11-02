@@ -1,4 +1,5 @@
-﻿E:\VsCode_Project\DockerTest_Agent\RAG_project\data\__pycache__
+﻿# 历史候选路径快照，清理已执行；当前状态见同目录《文件合并清理结果_2026-10-31.md》，请勿作为待删除列表执行。
+E:\VsCode_Project\DockerTest_Agent\RAG_project\data\__pycache__
 E:\VsCode_Project\DockerTest_Agent\RAG_project\data\kg\__pycache__
 E:\VsCode_Project\DockerTest_Agent\RAG_project\data\tests\__pycache__
 E:\VsCode_Project\DockerTest_Agent\RAG_project\data\drug_graph_retriever.py.bak

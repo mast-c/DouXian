@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "project_version": "V1.17",
+  "stage": "P3-01",
+  "audit_utc": "2026-10-31T08:40:32+00:00",
+  "read_only_application_calls": true,
+  "notes": [
+    "不会调用模型、embedding 或批量索引写入接口",
+    "本报告仅用于工程扩容前盘点；不等于医学权威来源核验",
+    "扫描期间不要并发修改 Chroma；如需文件系统级只读，请先对数据目录做备份副本",
+    "只生成新报告，不修改或覆盖已有 checkpoint"
+  ],
+  "chroma": {
+    "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\chroma_db",
+    "collection": "rag",
+    "sdk_version": "1.5.9",
+    "record_count_before": 313,
+    "record_count_after": 313,
+    "scanned_records": 313,
+    "scan_complete": true,
+    "scan_requested": 313,
+    "scan_seconds": 0.041,
+    "unique_drug_ids_in_scanned_metadata": 69,
+    "unique_drug_names_in_scanned_metadata": 69,
+    "origin_counts": {
+      "json_matched_to_neo4j_section": 313
+    },
+    "section_field_counts": {
+      "contraindications": 75,
+      "indication": 69,
+      "warnings": 67,
+      "adverse_reactions": 56,
+      "drug_interactions": 46
+    },
+    "source_status_counts": {
+      "third_party_unverified": 313
+    },
+    "json_bound_chunks": 313,
+    "json_bound_metadata_complete": 313,
+    "json_binding_missing_counts": {},
+    "duplicate_json_quote_coordinates": 0,
+    "repeated_chunk_ids_across_pages": 0,
+    "sampled_json_chunk_ids_count": 30
+  },
+  "checkpoint": {
+    "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_bulk_state.sqlite3",
+    "tables": {
+      "drug_progress": {
+        "rows": 70,
+        "columns": [
+          "drug_name",
+          "status",
+          "chunks",
+          "new_chunks",
+          "reused",
+          "detail",
+          "updated_at"
+        ],
+        "status_column": "status",
+        "status_counts": {
+          "done": 68,
+          "no_chunks": 2
+        }
+      },
+      "manifest": {
+        "rows": 1,
+        "columns": [
+          "key",
+          "value"
+        ]
+      }
+    },
+    "tables_found": 2
+  },
+  "neo4j": {
+    "database": "neo4j",
+    "node_counts": {
+      "Drug": 11953,
+      "SourceRecord": 11960,
+      "Section": 106445,
+      "Chunk": 107787,
+      "DrugAlias": 343,
+      "DiseaseTerm": 1150,
+      "DiseaseCandidate": 19685,
+      "ModelAssessment": 60
+    },
+    "read_seconds": 2.482
+  },
+  "crossstore_sample": {
+    "requested": 30,
+    "verified": 30,
+    "failed": 0,
+    "reasons": {},
+    "complete": true
+  },
+  "gates": {
+    "status": "PASS_PRECHECK",
+    "blockers": [],
+    "missing_checks": [],
+    "interpretation": "即便 PASS_PRECHECK，也仅完成只读数据检查；正式扩容仍需备份、预算、权限和批处理干运行确认"
+  }
+}

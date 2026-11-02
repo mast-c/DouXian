@@ -1,0 +1,21 @@
+{
+  "mode": "apply",
+  "selected_drugs": 200,
+  "completed_drugs": 197,
+  "no_chunks": 3,
+  "failed_drugs": 0,
+  "skipped_existing_chunks": 0,
+  "added_chunks": 843,
+  "planned_chunks": 843,
+  "forced_cuts": 0,
+  "embedding_characters": 109857,
+  "stopped_by_budget": false,
+  "checkpoint": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_bulk_state.sqlite3",
+  "checkpoint_counts": {
+    "alignment_failed": 3,
+    "data_error": 1,
+    "done": 6919,
+    "no_chunks": 224
+  },
+  "chroma_count_after": 30800
+}

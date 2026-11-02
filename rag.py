@@ -52,6 +52,9 @@ from medical_overview_answer import (
 from medical_evidence_bridge import (
     prepare_medical_documents, collapse_duplicate_parent_sections,
 )
+from medical_p303b_disease_runtime_v117 import (
+    choose_links_file, resolve_disease_links, merge_disease_evidence,
+)
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
@@ -582,6 +585,8 @@ def _reference_label(item: dict, source: str) -> str:
 def _medical_reference_section(item: dict[str, Any], section: str) -> str:
     """让用户知道来源是 Hybrid 召回还是图谱直接查得，避免误认两份来源。"""
     kind = str(item.get("evidence_type") or "")
+    if kind == "json_neo4j_text_verified" and item.get("disease_link_verified"):
+        return section + " · 疾病候选直连 Chroma ID，Neo4j Section 原文核对（非临床验证）"
     if kind == "json_neo4j_text_verified" and item.get("parent_verified"):
         return section + " · Chroma Hybrid 召回，Neo4j Section 原文核对"
     if kind == "unverified_drug_source_section":
@@ -1313,6 +1318,63 @@ class RagService:
                     for subquery in data.get("subqueries") or []:
                         if isinstance(subquery, str) and subquery not in subqueries:
                             subqueries.append(subquery)
+                # P3-03B: 在既有 Graph + Hybrid 合流处，把疾病提及候选按
+                # P3-03A 精确映射直连 Chroma Chunk ID，并逐条复核 Neo4j 原文。
+                # 不调用 Embedding、不修改旧检索算法、不创建治疗关系。
+                _disease_candidates = [
+                    item for item in merged_excerpts
+                    if item.get("evidence_type") == "unverified_drug_disease_candidate"
+                ]
+                if _disease_candidates:
+                    try:
+                        _link_file = choose_links_file(Path(__file__).resolve().parent)
+                        _native_chroma = getattr(
+                            getattr(self.knowledge_service, "chroma", None),
+                            "_collection", None
+                        )
+                        if _link_file is None:
+                            trace["disease_leaflet_links"] = {
+                                "status": (
+                                    "DISABLED" if os.getenv(
+                                        "MEDICAL_DISEASE_LINKS_ENABLED", "1"
+                                    ).strip().lower() in ("0", "false", "no", "off")
+                                    else "NO_AUDIT_LINK_FILE"
+                                ),
+                            }
+                        elif _native_chroma is None:
+                            trace["disease_leaflet_links"] = {
+                                "status": "CHROMA_NOT_READY",
+                            }
+                        else:
+                            _direct_docs, _link_trace = resolve_disease_links(
+                                _disease_candidates,
+                                links_path=_link_file,
+                                native_chroma=_native_chroma,
+                                fetch_parent=self._get_medical_parent_section,
+                                max_documents=min(
+                                    4 if overview_question else 2, evidence_cap
+                                ),
+                            )
+                            merged_excerpts, _merge_trace = merge_disease_evidence(
+                                merged_excerpts, _direct_docs, cap=evidence_cap,
+                            )
+                            trace["disease_leaflet_links"] = {
+                                **_link_trace, **_merge_trace,
+                                "source_file": _link_file.name,
+                            }
+                    except Exception as _link_exc:
+                        # Fail closed: 不把映射文件异常当作已验证证据；
+                        # 其余 Neo4j/Hybrid 现有路径保持可用。
+                        trace["disease_leaflet_links"] = {
+                            "status": "LINKAGE_REJECTED",
+                            "reason_type": type(_link_exc).__name__,
+                        }
+                        print("[P3-03B] 直连校验未通过：", type(_link_exc).__name__)
+                else:
+                    trace["disease_leaflet_links"] = {
+                        "status": "NO_DISEASE_CANDIDATES",
+                    }
+
                 # Chroma 中已逐字回溯到父级 Section 的内容，
                 # 优先于同一父级 Section 的 Neo4j 冗余完整章节片段；
                 # 图谱 DiseaseCandidate 仍作为候选关系单独保留。
@@ -1434,6 +1496,19 @@ class RagService:
                         "record_id": str(item.get("record_id") or ""),
                         "candidate_id": str(item.get("candidate_id") or ""),
                         "parent_verified": bool(item.get("parent_verified") or False),
+                        "disease_link_verified": bool(
+                            item.get("disease_link_verified") or False
+                        ),
+                        "disease_association_type": str(
+                            item.get("association_type") or ""
+                        ),
+                        "linked_candidate_ids": [
+                            str(v) for v in item.get("linked_candidate_ids", [])
+                            if isinstance(v, str)
+                        ][:10],
+                        "link_retrieval_route": str(
+                            item.get("link_retrieval_route") or ""
+                        ),
                     }
                     for item in merged_excerpts
                 ]
@@ -1780,6 +1855,19 @@ class RagService:
                                 "candidate_id": str(item.get("candidate_id") or ""),
                                 "section_id": str(item.get("section_id") or ""),
                                 "parent_verified": bool(item.get("parent_verified") or False),
+                                "disease_link_verified": bool(
+                                    item.get("disease_link_verified") or False
+                                ),
+                                "disease_association_type": str(
+                                    item.get("association_type") or ""
+                                ),
+                                "linked_candidate_ids": [
+                                    str(v) for v in item.get("linked_candidate_ids", [])
+                                    if isinstance(v, str)
+                                ][:10],
+                                "link_retrieval_route": str(
+                                    item.get("link_retrieval_route") or ""
+                                ),
                             })
                         trace["knowledge_evidence"] = ui_evidence
                         # END SELF_RAG_RETRY_V1_5
