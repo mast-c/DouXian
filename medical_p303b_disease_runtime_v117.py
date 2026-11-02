@@ -411,7 +411,7 @@ def merge_disease_evidence(
     cap: int
 ) -> tuple[list[dict], dict]:
     """保留候选，优先插入直连原文；重复原文只保留一条；不超过既有 cap。"""
-    if not 1 <= cap <= 32:
+    if not 1 <= cap <= 128:
         raise ValueError("evidence cap 越界")
     if not verified_chunks:
         return list(excerpts[:cap]), {

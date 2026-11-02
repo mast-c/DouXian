@@ -1,0 +1,119 @@
+{
+  "mode": "guideline_and_common_use",
+  "status": "ranked",
+  "requested_count": 10,
+  "candidate_nodes": 360,
+  "candidate_drugs": 291,
+  "guideline_status": "search_summary_only",
+  "guideline_sources": [
+    {
+      "url": "https://www.scdc.sh.cn/shjk/gxy-gfzn/20241011/9843.html",
+      "title": "www.scdc.sh.cn"
+    },
+    {
+      "url": "https://bookcafe.yuntsg.com/ueditor/jsp/upload/file/20251003/1759482019584069121.pdf",
+      "title": "bookcafe.yuntsg.com"
+    },
+    {
+      "url": "https://guide.medlive.cn/",
+      "title": "guide.medlive.cn"
+    },
+    {
+      "url": "https://www.huasan.net/wp-content/uploads/2025/12/%E3%80%8A%E4%B8%AD%E5%9B%BD%E9%AB%98%E8%A1%80%E5%8E%8B%E9%98%B2%E6%B2%BB%E6%8C%87%E5%8D%972024%E5%B9%B4%E4%BF%AE%E8%AE%A2%E7%89%88%E3%80%8B%E4%BA%AE%E7%82%B9%E3%80%81%E8%A6%81%E7%82%B9%E8%A7%A3%E8%AF%BB.pdf",
+      "title": "www.huasan.net"
+    },
+    {
+      "url": "https://csc.cma.org.cn/art/2020/5/8/art_619_34440.html",
+      "title": "csc.cma.org.cn"
+    }
+  ],
+  "guideline_summary": "根据检索结果，我整理了中国最新高血压临床指南的核心药物治疗信息：\n\n---\n\n## 一、主要指南来源\n\n| 人群 | 指南名称 | 发布机构 | 年份 |\n|------|---------|---------|------|\n| 成人 | 中国高血压防治指南（2024年修订版） | 中国高血压防治指南修订委员会、中华医学会心血管病学分会、高血压联盟（中国） | 2024 |\n| 基层 | 国家基层高血压防治管理指南 | 国家卫健委 | 2025 |\n| 老年 | 中国老年高血压管理指南 | 中华医学会老年医学分会等 | 2023 |\n| 儿童青少年 | 儿童和青少年高血压专家共识 | 相关儿科学会 | 2022 |\n| 妊娠期 | 妊娠期高血压疾病诊治指南 | 中华医学会妇产科学分会 | 2020 |\n| 急救 | 高血压急症的问题中国专家共识 | 相关专家委员会 | 2020 |\n\n来源：[1][2][11][17][34][58]\n\n---\n\n## 二、成人高血压（≥18岁）\n\n### 【一线用药】（无合并症高血压）\n\n| 通用名 | 适用条件 | 指南来源 |\n|--------|---------|---------|\n| **钙通道阻滞剂（CCB）**：氨氯地平、硝苯地平控释/缓释片、非洛地平 | 一线初始降压药，尤其适合老年、单纯收缩期高血压 | 《中国高血压防治指南2024》[30][32] |\n| **ACEI**：依那普利、贝那普利、培哚普利 | 一线用药，适合合并糖尿病、心衰、慢性肾病 | 《中国高血压防治指南2024》[32] |\n| **ARB**：缬沙坦、氯沙坦、厄贝沙坦、奥美沙坦 | 一线用药，ACEI不耐受时替代 | 《中国高血压防治指南2024》[32] |\n| **噻嗪类利尿剂**：氢氯噻嗪、吲达帕胺 | 一线用药，适合老年、盐敏感性高血压 | 《中国高血压防治指南2024》[30][32] |\n\n来源：[30][32]\n\n### 【特殊合并症用药】\n\n| 合并症 | 优选药物 | 说明 |\n|--------|---------|------|\n| 高血压合并心绞痛/心梗后 | **β受体阻滞剂**：美托洛尔、比索洛尔 | 首选 |\n| 高血压合并糖尿病 | **ACEI/ARB** | 单药起始优选，肾脏保护 |\n| 高血压合并心衰 | **ACEI/ARB/ARNI**（沙库巴曲缬沙坦）+ β受体阻滞剂 + 利尿剂 | 新推荐ARNI类 |\n| 高血压合并慢性肾病 | **ACEI/ARB** | 减少蛋白尿 |\n\n来源：[32][42][47]\n\n### 【不推荐/禁忌】\n\n- **ACEI/ARB**：妊娠期禁用（致胎儿畸形）[51]\n- 短效硝苯地平片：不推荐长期降压使用（血压波动大）\n\n---\n\n## 三、老年高血压（≥65岁）\n\n### 【一线用药】\n\n| 通用名 | 适用条件 |\n|--------|---------|\n| **CCB**（氨氯地平、非洛地平） | 老年首选，尤其单纯收缩期高血压 |\n| **利尿剂**（吲达帕胺、氢氯噻嗪） | 适合老年盐敏感性高血压 |\n| **ACEI/ARB** | 合并糖尿病、心衰、肾病时优选 |\n\n来源：《中国老年高血压管理指南2023》[41][44]\n\n### 【注意事项】\n- 起始剂量宜小，缓慢降压\n- 避免体位性低血压\n\n---\n\n## 四、儿童及青少年高血压（<18岁）\n\n### 【药物治疗适应证】\n- 2级高血压\n- 有症状或靶器官损害\n- 合并糖尿病\n- 继发性高血压\n- 生活方式干预6个月后血压仍不达标\n\n来源：《2022儿童和青少年高血压专家共识》[34][38]\n\n### 【可用药物】（需使用儿童获批制剂）\n\n| 通用名 | 说明 |\n|--------|------|\n| **ACEI**（如依那普利） | 常用一线 |\n| **ARB** | ACEI不耐受时替代 |\n| **CCB**（氨氯地平） | 常用 |\n| **β受体阻滞剂** | 特定情况使用 |\n| **噻嗪类利尿剂** | 可联合使用 |\n\n来源：[34][40]\n\n---\n\n## 五、妊娠期高血压\n\n### 【推荐用药】（相对安全）\n\n| 通用名 | 适用条件 | 来源 |\n|--------|---------|------|\n| **拉贝洛尔** | 首选口服降压药 | 《妊娠期高血压疾病诊治指南2020》[49][54] |\n| **硝苯地平**（缓释/控释） | 首选，尤其重度高血压 | [49][52] |\n| **甲基多巴** | 可用（国内暂未上市） | [49][50] |\n\n### 【急救用药】（重度高血压≥160/110mmHg）\n\n| 通用名 | 说明 |\n|--------|------|\n| **拉贝洛尔**（静脉） | 一线急救 |\n| **乌拉地尔**（静脉） | 可选 |\n| **尼卡地平** | 可选 |\n\n### 【禁忌/不推荐】\n\n| 药物 | 原因 |\n|------|------|\n| **ACEI/ARB** | 致胎儿畸形，妊娠期禁用 |\n| **硝普钠** | 增加胎儿氰化物中毒风险，除非其他药物无效 |\n\n来源：[49][51][56]\n\n---\n\n## 六、高血压急症（急救用药）\n\n### 【静脉急救药物】\n\n| 通用名 | 适用情况 | 来源 |\n|--------|---------|------|\n| **硝普钠** | 高血压急症一线，尤其合并急性心衰、主动脉损害 | 《高血压急症中国专家共识》[58][63] |\n| **乌拉地尔** | 广泛适用，常备药物 | [58][59] |\n| **尼卡地平** | 常备药物，安全用于各类高血压急症 | [58] |\n| **拉贝洛尔**（静脉） | 常备药物 | [58][60] |\n| **硝酸甘油** | 合并心脏/主动脉损害时优选 | [58] |\n| **艾司洛尔** | 短效β阻滞剂，用于特定情况 | [60] |\n\n来源：[57][58][60][63]\n\n---\n\n## 七、主要参考来源链接\n\n1. **中国高血压防治指南（2024年修订版）**：[上海疾控中心](https://www.scdc.sh.cn/shjk/gxy-gfzn/20241011/9843.html)\n2. **国家基层高血压防治管理指南2025版**：[PDF链接](https://bookcafe.yuntsg.com/ueditor/jsp/upload/file/20251003/1759482019584069121.pdf)\n3. **中国老年高血压管理指南2023**：[PDF链接](https://medtion-image.medtion.com/uploads/1/file/public/202312/20231222151125_hjo32b9lsf.pdf)\n4. **2022儿童和青少年高血压专家共识**：[PDF链接](https://xadxyylib.yuntsg.com/ueditor/jsp/upload/file/20240322/1711076020358081243.pdf)\n5. **妊娠期高血压疾病诊治指南（2020）**：[医脉通](https://cmab.yiigle.com/uploads/guide_html/%E5%A6%8A%E5%A8%A0%E6%9C%9F%E9%AB%98%E8%A1%80%E5%8E%8B%E7%96%BE%E7%97%85%E8%AF%8A%E6%B2%BB%E6%8C%87%E5%8D%97%EF%BC%882020%EF%BC%89.html)\n6. **高血压急症中国专家共识**：[相关解读](https://apps.medtrib.cn/media/phone/post/app/2523973/4d7a1775-b277-460a-819f-36d2105ff6cd.html)\n\n---\n\n**声明**：以上信息整理自公开指南文献，仅供医学专业人士参考，不构成个人处方建议。具体用药需由执业医师根据患者情况决定。",
+  "selected_count": 10,
+  "clinical_validation": false,
+  "rejected_proposals": 0,
+  "shortfall": 0,
+  "shortlisted_drugs": 23,
+  "pool": {
+    "truncated": false,
+    "row_limit_per_disease": 5000,
+    "diseases": [
+      "高血压"
+    ],
+    "candidate_nodes": 360
+  },
+  "question": "治疗高血压的药物，列出不少于10个",
+  "elapsed_seconds": 318.21,
+  "smoke_test_only": true,
+  "selected": [
+    {
+      "drug_name": "L-门冬氨酸氨氯地平片",
+      "candidate_id": "diseasecandidate_0f311c7fe7e4b032f3fa274b",
+      "ranking_basis": "guideline_search",
+      "support_quote": "本品可单独或联合其它抗高压药物治疗高血压。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy5996u.htm"
+    },
+    {
+      "drug_name": "硝苯地平控释片",
+      "candidate_id": "diseasecandidate_8462bd40143254e384f4bd3c",
+      "ranking_basis": "guideline_search",
+      "support_quote": "用以治疗高血压和心绞痛。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy28970.htm"
+    },
+    {
+      "drug_name": "非洛地平缓释胶囊",
+      "candidate_id": "diseasecandidate_4559b44ca22f9f4897985c47",
+      "ranking_basis": "guideline_search",
+      "support_quote": "高血压（可单独使用或与其他抗高血压药物合并使用）。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy4320h.htm"
+    },
+    {
+      "drug_name": "盐酸贝那普利片",
+      "candidate_id": "diseasecandidate_01637a3703a8637bee95f8b2",
+      "ranking_basis": "guideline_search",
+      "support_quote": "1.高血压（可单独应用或与其他降压药如利尿药合用）2.心功能不全（可单独应用或与强心药利尿药同用）",
+      "source_url": "https://www.yaopinnet.com/huayao/hy2666f.htm"
+    },
+    {
+      "drug_name": "培哚普利片",
+      "candidate_id": "diseasecandidate_c534c97a5c273ce09c1f073d",
+      "ranking_basis": "guideline_search",
+      "support_quote": "高血压与充血性心力衰竭。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy4988v.htm"
+    },
+    {
+      "drug_name": "缬沙坦胶囊",
+      "candidate_id": "diseasecandidate_326de473c15a937e6a783396",
+      "ranking_basis": "guideline_search",
+      "support_quote": "缬沙坦适用于各类轻至中度高血压，尤其适用于对ACE抑制剂不耐受的患者。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy2130l.htm"
+    },
+    {
+      "drug_name": "厄贝沙坦片",
+      "candidate_id": "diseasecandidate_2ec4ea2b6e3185c422ce254f",
+      "ranking_basis": "guideline_search",
+      "support_quote": "合并高血压的2型糖尿病肾病的治疗。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy2248p.htm"
+    },
+    {
+      "drug_name": "氢氯噻嗪片",
+      "candidate_id": "diseasecandidate_a9b76bad56791ebd0a423992",
+      "ranking_basis": "guideline_search",
+      "support_quote": "2.高血压可单独或与其他降压药联合应用，主要用于治疗原发性高血压。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy31507.htm"
+    },
+    {
+      "drug_name": "吲达帕胺片",
+      "candidate_id": "diseasecandidate_3f5110943d301a68dd1eda75",
+      "ranking_basis": "guideline_search",
+      "support_quote": "用于治疗高血压。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy6690o.htm"
+    },
+    {
+      "drug_name": "酒石酸美托洛尔片",
+      "candidate_id": "diseasecandidate_c3b52251c9f39eb1bfc673f3",
+      "ranking_basis": "guideline_search",
+      "support_quote": "用于治疗高血压、心绞痛、心肌梗死、肥厚型心肌病、主动脉夹层、心律失常、甲状腺机能亢进、心脏神经官能症等。",
+      "source_url": "https://www.yaopinnet.com/huayao/hy3005t.htm"
+    }
+  ]
+}

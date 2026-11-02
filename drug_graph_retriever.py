@@ -179,7 +179,7 @@ def fields_for_question(question: str) -> list[str]:
     found: set[str] = set()
     patterns = (
         (r"治疗|哪些药|什么药|药物有哪些|有哪些药物|适应症|适应证|用于什么|预防", ("indication",)),
-        (r"禁忌|禁用|不宜|不能用|过敏", ("contraindications",)),
+        (r"禁忌|禁用|不宜|不能用|过敏史|过敏体质|药物过敏|过敏反应|对.{1,20}过敏", ("contraindications",)),
         (r"不良反应|副作用|不适反应|毒性|安全性", ("adverse_reactions",)),
         (r"注意事项|警告|慎用|注意什么", ("warnings",)),
         (r"相互作用|药物联用|合用|一起吃|配伍", ("drug_interactions", "warnings")),
@@ -374,6 +374,35 @@ class DrugGraphRetriever:
                 lambda tx: [row.data() for row in tx.run(cypher, **parameters)]
             )
 
+    def search_disease_drug_pool(self, question: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+        """先取疾病候选池，再交模型选药；行数边界透明记录，不按前四药截断。"""
+        text = " ".join(str(question).split())[:500]
+        drugs = self._run(_DRUG_IDENTIFY, question=text)
+        disease_text = text
+        for drug in drugs:
+            disease_text = disease_text.replace(str(drug.get("name") or ""), " ")
+        terms = self._run(_TERM_IDENTIFY, question=disease_text)
+        result, seen = [], set()
+        truncated = False
+        # 复用已核对的证据查询结构，先约束显式药名，再限制候选行数。
+        query = _TERM_CANDIDATES.replace(
+            "OPTIONAL MATCH (c)-[:FROM_RECORD]",
+            "WITH d, c, t WHERE size($drug_ids) = 0 OR d.id IN $drug_ids\n"
+            "OPTIONAL MATCH (c)-[:FROM_RECORD]", 1,
+        )
+        for term in terms:
+            records = self._run(query, id=term["id"], limit=5000,
+                                drug_ids=[d["id"] for d in drugs if d.get("id")])
+            truncated = truncated or len(records) >= 5000
+            for record in records:
+                item = format_candidate(record)
+                if item and item["candidate_id"] not in seen:
+                    seen.add(item["candidate_id"])
+                    result.append(item)
+        return result, {"truncated": truncated, "row_limit_per_disease": 5000,
+                        "diseases": [t.get("name") for t in terms],
+                        "candidate_nodes": len(result)}
+
     def search(self, question: str, limit: int = 5, *,
                explicit_disease_only: bool = False) -> list[dict[str, Any]]:
         """以用户完整问题匹配图谱中的明确药品/疾病名称，避免错误模糊关联。"""
@@ -487,7 +516,7 @@ class DrugGraphRetriever:
         只使用 Drug.name 精确匹配和固定字段白名单；每药每栏目最多一段原文。
         结果只是第三方数据集中的原文，不证明临床有效性。
         """
-        if not (1 <= max_drugs <= 6 and 1 <= max_sections <= 16):
+        if not (1 <= max_drugs <= 30 and 1 <= max_sections <= 60):
             raise ValueError("max_drugs/max_sections 超出受控范围")
         distinct = list(dict.fromkeys(
             name.strip() for name in drug_names

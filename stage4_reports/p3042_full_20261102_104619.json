@@ -1,0 +1,2590 @@
+{
+  "stage": "P3-04.2",
+  "mode": "separate_chroma_disease_import",
+  "status": "ALL_IMPORTED_NEEDS_FULL_AUDIT",
+  "timestamp_utc": "2026-11-02T05:38:01+00:00",
+  "disease_collection": "disease_knowledge",
+  "drug_collection": "rag",
+  "drug_collection_unchanged_fingerprint": {
+    "count": 52104,
+    "document_metadata_sha256": "82636a4483c838136ebd79fd8a9b2f27fab122304fa752ad83887715224efb7c"
+  },
+  "source_sha256": "01aaf5de1304ea6f4ed84e9802b600b729b9f797284234f2d86d77e55f8dfc49",
+  "staging_sha256": "054b14946410cebff2a52f003a786440f1cde8a81c49b7b5570b41c5b88d16c0",
+  "embedding_model": "qwen3.7-text-embedding-flash",
+  "total_planned": 39443,
+  "checkpoint_status": {
+    "done": 39443
+  },
+  "collection_count": 39443,
+  "this_run_new_chunks": 39395,
+  "this_run_reused_chunks": 0,
+  "this_run_selected_chunks": 39395,
+  "passes": [
+    {
+      "pass_number": 1,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 69018,
+      "checkpoint_status": {
+        "done": 248
+      },
+      "disease_collection_count": 248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:47:21+00:00"
+    },
+    {
+      "pass_number": 2,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 67642,
+      "checkpoint_status": {
+        "done": 448
+      },
+      "disease_collection_count": 448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:48:03+00:00"
+    },
+    {
+      "pass_number": 3,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62126,
+      "checkpoint_status": {
+        "done": 648
+      },
+      "disease_collection_count": 648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:48:45+00:00"
+    },
+    {
+      "pass_number": 4,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 80889,
+      "checkpoint_status": {
+        "done": 848
+      },
+      "disease_collection_count": 848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:49:29+00:00"
+    },
+    {
+      "pass_number": 5,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 61666,
+      "checkpoint_status": {
+        "done": 1048
+      },
+      "disease_collection_count": 1048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:50:13+00:00"
+    },
+    {
+      "pass_number": 6,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52931,
+      "checkpoint_status": {
+        "done": 1248
+      },
+      "disease_collection_count": 1248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:50:53+00:00"
+    },
+    {
+      "pass_number": 7,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 41348,
+      "checkpoint_status": {
+        "done": 1448
+      },
+      "disease_collection_count": 1448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:51:33+00:00"
+    },
+    {
+      "pass_number": 8,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54327,
+      "checkpoint_status": {
+        "done": 1648
+      },
+      "disease_collection_count": 1648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:52:16+00:00"
+    },
+    {
+      "pass_number": 9,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 72625,
+      "checkpoint_status": {
+        "done": 1848
+      },
+      "disease_collection_count": 1848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:53:01+00:00"
+    },
+    {
+      "pass_number": 10,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49347,
+      "checkpoint_status": {
+        "done": 2048
+      },
+      "disease_collection_count": 2048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:53:45+00:00"
+    },
+    {
+      "pass_number": 11,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50467,
+      "checkpoint_status": {
+        "done": 2248
+      },
+      "disease_collection_count": 2248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:54:24+00:00"
+    },
+    {
+      "pass_number": 12,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54589,
+      "checkpoint_status": {
+        "done": 2448
+      },
+      "disease_collection_count": 2448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:55:06+00:00"
+    },
+    {
+      "pass_number": 13,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62465,
+      "checkpoint_status": {
+        "done": 2648
+      },
+      "disease_collection_count": 2648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:55:48+00:00"
+    },
+    {
+      "pass_number": 14,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 69156,
+      "checkpoint_status": {
+        "done": 2848
+      },
+      "disease_collection_count": 2848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:56:32+00:00"
+    },
+    {
+      "pass_number": 15,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 82331,
+      "checkpoint_status": {
+        "done": 3048
+      },
+      "disease_collection_count": 3048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:57:16+00:00"
+    },
+    {
+      "pass_number": 16,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 73692,
+      "checkpoint_status": {
+        "done": 3248
+      },
+      "disease_collection_count": 3248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:57:57+00:00"
+    },
+    {
+      "pass_number": 17,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49845,
+      "checkpoint_status": {
+        "done": 3448
+      },
+      "disease_collection_count": 3448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:58:38+00:00"
+    },
+    {
+      "pass_number": 18,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57969,
+      "checkpoint_status": {
+        "done": 3648
+      },
+      "disease_collection_count": 3648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T02:59:20+00:00"
+    },
+    {
+      "pass_number": 19,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 51867,
+      "checkpoint_status": {
+        "done": 3848
+      },
+      "disease_collection_count": 3848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:00:05+00:00"
+    },
+    {
+      "pass_number": 20,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59768,
+      "checkpoint_status": {
+        "done": 4048
+      },
+      "disease_collection_count": 4048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:00:56+00:00"
+    },
+    {
+      "pass_number": 21,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 56164,
+      "checkpoint_status": {
+        "done": 4248
+      },
+      "disease_collection_count": 4248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:01:54+00:00"
+    },
+    {
+      "pass_number": 22,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59802,
+      "checkpoint_status": {
+        "done": 4448
+      },
+      "disease_collection_count": 4448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:02:51+00:00"
+    },
+    {
+      "pass_number": 23,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54793,
+      "checkpoint_status": {
+        "done": 4648
+      },
+      "disease_collection_count": 4648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:03:51+00:00"
+    },
+    {
+      "pass_number": 24,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57943,
+      "checkpoint_status": {
+        "done": 4848
+      },
+      "disease_collection_count": 4848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:04:50+00:00"
+    },
+    {
+      "pass_number": 25,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48057,
+      "checkpoint_status": {
+        "done": 5048
+      },
+      "disease_collection_count": 5048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:05:50+00:00"
+    },
+    {
+      "pass_number": 26,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 51966,
+      "checkpoint_status": {
+        "done": 5248
+      },
+      "disease_collection_count": 5248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:06:52+00:00"
+    },
+    {
+      "pass_number": 27,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48942,
+      "checkpoint_status": {
+        "done": 5448
+      },
+      "disease_collection_count": 5448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:08:05+00:00"
+    },
+    {
+      "pass_number": 28,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57166,
+      "checkpoint_status": {
+        "done": 5648
+      },
+      "disease_collection_count": 5648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:09:18+00:00"
+    },
+    {
+      "pass_number": 29,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50282,
+      "checkpoint_status": {
+        "done": 5848
+      },
+      "disease_collection_count": 5848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:10:33+00:00"
+    },
+    {
+      "pass_number": 30,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 40419,
+      "checkpoint_status": {
+        "done": 6048
+      },
+      "disease_collection_count": 6048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:11:49+00:00"
+    },
+    {
+      "pass_number": 31,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 43586,
+      "checkpoint_status": {
+        "done": 6248
+      },
+      "disease_collection_count": 6248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:13:00+00:00"
+    },
+    {
+      "pass_number": 32,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48656,
+      "checkpoint_status": {
+        "done": 6448
+      },
+      "disease_collection_count": 6448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:14:14+00:00"
+    },
+    {
+      "pass_number": 33,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 43119,
+      "checkpoint_status": {
+        "done": 6648
+      },
+      "disease_collection_count": 6648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:15:28+00:00"
+    },
+    {
+      "pass_number": 34,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 35455,
+      "checkpoint_status": {
+        "done": 6848
+      },
+      "disease_collection_count": 6848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:16:33+00:00"
+    },
+    {
+      "pass_number": 35,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 41116,
+      "checkpoint_status": {
+        "done": 7048
+      },
+      "disease_collection_count": 7048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:17:17+00:00"
+    },
+    {
+      "pass_number": 36,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54805,
+      "checkpoint_status": {
+        "done": 7248
+      },
+      "disease_collection_count": 7248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:17:59+00:00"
+    },
+    {
+      "pass_number": 37,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53555,
+      "checkpoint_status": {
+        "done": 7448
+      },
+      "disease_collection_count": 7448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:18:42+00:00"
+    },
+    {
+      "pass_number": 38,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 51282,
+      "checkpoint_status": {
+        "done": 7648
+      },
+      "disease_collection_count": 7648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:19:52+00:00"
+    },
+    {
+      "pass_number": 39,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 72931,
+      "checkpoint_status": {
+        "done": 7848
+      },
+      "disease_collection_count": 7848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:21:07+00:00"
+    },
+    {
+      "pass_number": 40,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62165,
+      "checkpoint_status": {
+        "done": 8048
+      },
+      "disease_collection_count": 8048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:22:25+00:00"
+    },
+    {
+      "pass_number": 41,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 56741,
+      "checkpoint_status": {
+        "done": 8248
+      },
+      "disease_collection_count": 8248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:23:38+00:00"
+    },
+    {
+      "pass_number": 42,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49970,
+      "checkpoint_status": {
+        "done": 8448
+      },
+      "disease_collection_count": 8448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:24:53+00:00"
+    },
+    {
+      "pass_number": 43,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50997,
+      "checkpoint_status": {
+        "done": 8648
+      },
+      "disease_collection_count": 8648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:26:06+00:00"
+    },
+    {
+      "pass_number": 44,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 43090,
+      "checkpoint_status": {
+        "done": 8848
+      },
+      "disease_collection_count": 8848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:27:21+00:00"
+    },
+    {
+      "pass_number": 45,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 36634,
+      "checkpoint_status": {
+        "done": 9048
+      },
+      "disease_collection_count": 9048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:28:38+00:00"
+    },
+    {
+      "pass_number": 46,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 37506,
+      "checkpoint_status": {
+        "done": 9248
+      },
+      "disease_collection_count": 9248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:29:53+00:00"
+    },
+    {
+      "pass_number": 47,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 36880,
+      "checkpoint_status": {
+        "done": 9448
+      },
+      "disease_collection_count": 9448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:30:51+00:00"
+    },
+    {
+      "pass_number": 48,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 47948,
+      "checkpoint_status": {
+        "done": 9648
+      },
+      "disease_collection_count": 9648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:31:33+00:00"
+    },
+    {
+      "pass_number": 49,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59252,
+      "checkpoint_status": {
+        "done": 9848
+      },
+      "disease_collection_count": 9848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:32:17+00:00"
+    },
+    {
+      "pass_number": 50,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 70853,
+      "checkpoint_status": {
+        "done": 10048
+      },
+      "disease_collection_count": 10048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:33:01+00:00"
+    },
+    {
+      "pass_number": 51,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50169,
+      "checkpoint_status": {
+        "done": 10248
+      },
+      "disease_collection_count": 10248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:33:58+00:00"
+    },
+    {
+      "pass_number": 52,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58011,
+      "checkpoint_status": {
+        "done": 10448
+      },
+      "disease_collection_count": 10448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:35:11+00:00"
+    },
+    {
+      "pass_number": 53,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60844,
+      "checkpoint_status": {
+        "done": 10648
+      },
+      "disease_collection_count": 10648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:36:25+00:00"
+    },
+    {
+      "pass_number": 54,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55526,
+      "checkpoint_status": {
+        "done": 10848
+      },
+      "disease_collection_count": 10848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:37:47+00:00"
+    },
+    {
+      "pass_number": 55,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55384,
+      "checkpoint_status": {
+        "done": 11048
+      },
+      "disease_collection_count": 11048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:39:03+00:00"
+    },
+    {
+      "pass_number": 56,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60985,
+      "checkpoint_status": {
+        "done": 11248
+      },
+      "disease_collection_count": 11248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:40:15+00:00"
+    },
+    {
+      "pass_number": 57,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58769,
+      "checkpoint_status": {
+        "done": 11448
+      },
+      "disease_collection_count": 11448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:41:29+00:00"
+    },
+    {
+      "pass_number": 58,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 64456,
+      "checkpoint_status": {
+        "done": 11648
+      },
+      "disease_collection_count": 11648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:42:41+00:00"
+    },
+    {
+      "pass_number": 59,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57178,
+      "checkpoint_status": {
+        "done": 11848
+      },
+      "disease_collection_count": 11848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:43:57+00:00"
+    },
+    {
+      "pass_number": 60,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53812,
+      "checkpoint_status": {
+        "done": 12048
+      },
+      "disease_collection_count": 12048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:45:16+00:00"
+    },
+    {
+      "pass_number": 61,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 61622,
+      "checkpoint_status": {
+        "done": 12248
+      },
+      "disease_collection_count": 12248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:46:26+00:00"
+    },
+    {
+      "pass_number": 62,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58664,
+      "checkpoint_status": {
+        "done": 12448
+      },
+      "disease_collection_count": 12448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:47:09+00:00"
+    },
+    {
+      "pass_number": 63,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60037,
+      "checkpoint_status": {
+        "done": 12648
+      },
+      "disease_collection_count": 12648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:47:53+00:00"
+    },
+    {
+      "pass_number": 64,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 51597,
+      "checkpoint_status": {
+        "done": 12848
+      },
+      "disease_collection_count": 12848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:48:51+00:00"
+    },
+    {
+      "pass_number": 65,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 43438,
+      "checkpoint_status": {
+        "done": 13048
+      },
+      "disease_collection_count": 13048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:49:39+00:00"
+    },
+    {
+      "pass_number": 66,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53826,
+      "checkpoint_status": {
+        "done": 13248
+      },
+      "disease_collection_count": 13248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:50:24+00:00"
+    },
+    {
+      "pass_number": 67,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 47956,
+      "checkpoint_status": {
+        "done": 13448
+      },
+      "disease_collection_count": 13448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:51:09+00:00"
+    },
+    {
+      "pass_number": 68,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 51383,
+      "checkpoint_status": {
+        "done": 13648
+      },
+      "disease_collection_count": 13648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:51:55+00:00"
+    },
+    {
+      "pass_number": 69,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52277,
+      "checkpoint_status": {
+        "done": 13848
+      },
+      "disease_collection_count": 13848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:52:41+00:00"
+    },
+    {
+      "pass_number": 70,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 61755,
+      "checkpoint_status": {
+        "done": 14048
+      },
+      "disease_collection_count": 14048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:53:46+00:00"
+    },
+    {
+      "pass_number": 71,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48553,
+      "checkpoint_status": {
+        "done": 14248
+      },
+      "disease_collection_count": 14248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:54:57+00:00"
+    },
+    {
+      "pass_number": 72,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 65588,
+      "checkpoint_status": {
+        "done": 14448
+      },
+      "disease_collection_count": 14448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:56:09+00:00"
+    },
+    {
+      "pass_number": 73,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 67940,
+      "checkpoint_status": {
+        "done": 14648
+      },
+      "disease_collection_count": 14648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:57:27+00:00"
+    },
+    {
+      "pass_number": 74,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54758,
+      "checkpoint_status": {
+        "done": 14848
+      },
+      "disease_collection_count": 14848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:58:42+00:00"
+    },
+    {
+      "pass_number": 75,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 68530,
+      "checkpoint_status": {
+        "done": 15048
+      },
+      "disease_collection_count": 15048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T03:59:58+00:00"
+    },
+    {
+      "pass_number": 76,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 56776,
+      "checkpoint_status": {
+        "done": 15248
+      },
+      "disease_collection_count": 15248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:01:09+00:00"
+    },
+    {
+      "pass_number": 77,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 61894,
+      "checkpoint_status": {
+        "done": 15448
+      },
+      "disease_collection_count": 15448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:02:23+00:00"
+    },
+    {
+      "pass_number": 78,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59464,
+      "checkpoint_status": {
+        "done": 15648
+      },
+      "disease_collection_count": 15648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:03:30+00:00"
+    },
+    {
+      "pass_number": 79,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58922,
+      "checkpoint_status": {
+        "done": 15848
+      },
+      "disease_collection_count": 15848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:04:14+00:00"
+    },
+    {
+      "pass_number": 80,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62227,
+      "checkpoint_status": {
+        "done": 16048
+      },
+      "disease_collection_count": 16048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:04:59+00:00"
+    },
+    {
+      "pass_number": 81,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52906,
+      "checkpoint_status": {
+        "done": 16248
+      },
+      "disease_collection_count": 16248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:05:39+00:00"
+    },
+    {
+      "pass_number": 82,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58669,
+      "checkpoint_status": {
+        "done": 16448
+      },
+      "disease_collection_count": 16448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:06:20+00:00"
+    },
+    {
+      "pass_number": 83,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50452,
+      "checkpoint_status": {
+        "done": 16648
+      },
+      "disease_collection_count": 16648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:07:06+00:00"
+    },
+    {
+      "pass_number": 84,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 61762,
+      "checkpoint_status": {
+        "done": 16848
+      },
+      "disease_collection_count": 16848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:07:57+00:00"
+    },
+    {
+      "pass_number": 85,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 45293,
+      "checkpoint_status": {
+        "done": 17048
+      },
+      "disease_collection_count": 17048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:08:41+00:00"
+    },
+    {
+      "pass_number": 86,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58995,
+      "checkpoint_status": {
+        "done": 17248
+      },
+      "disease_collection_count": 17248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:09:22+00:00"
+    },
+    {
+      "pass_number": 87,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60082,
+      "checkpoint_status": {
+        "done": 17448
+      },
+      "disease_collection_count": 17448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:10:04+00:00"
+    },
+    {
+      "pass_number": 88,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55812,
+      "checkpoint_status": {
+        "done": 17648
+      },
+      "disease_collection_count": 17648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:10:46+00:00"
+    },
+    {
+      "pass_number": 89,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59381,
+      "checkpoint_status": {
+        "done": 17848
+      },
+      "disease_collection_count": 17848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:11:30+00:00"
+    },
+    {
+      "pass_number": 90,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57307,
+      "checkpoint_status": {
+        "done": 18048
+      },
+      "disease_collection_count": 18048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:12:14+00:00"
+    },
+    {
+      "pass_number": 91,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 61633,
+      "checkpoint_status": {
+        "done": 18248
+      },
+      "disease_collection_count": 18248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:12:54+00:00"
+    },
+    {
+      "pass_number": 92,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 56990,
+      "checkpoint_status": {
+        "done": 18448
+      },
+      "disease_collection_count": 18448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:13:35+00:00"
+    },
+    {
+      "pass_number": 93,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49198,
+      "checkpoint_status": {
+        "done": 18648
+      },
+      "disease_collection_count": 18648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:14:18+00:00"
+    },
+    {
+      "pass_number": 94,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54744,
+      "checkpoint_status": {
+        "done": 18848
+      },
+      "disease_collection_count": 18848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:15:02+00:00"
+    },
+    {
+      "pass_number": 95,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 67722,
+      "checkpoint_status": {
+        "done": 19048
+      },
+      "disease_collection_count": 19048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:15:46+00:00"
+    },
+    {
+      "pass_number": 96,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52877,
+      "checkpoint_status": {
+        "done": 19248
+      },
+      "disease_collection_count": 19248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:16:27+00:00"
+    },
+    {
+      "pass_number": 97,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57380,
+      "checkpoint_status": {
+        "done": 19448
+      },
+      "disease_collection_count": 19448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:17:08+00:00"
+    },
+    {
+      "pass_number": 98,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 66942,
+      "checkpoint_status": {
+        "done": 19648
+      },
+      "disease_collection_count": 19648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:17:51+00:00"
+    },
+    {
+      "pass_number": 99,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 63841,
+      "checkpoint_status": {
+        "done": 19848
+      },
+      "disease_collection_count": 19848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:18:36+00:00"
+    },
+    {
+      "pass_number": 100,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48949,
+      "checkpoint_status": {
+        "done": 20048
+      },
+      "disease_collection_count": 20048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:19:19+00:00"
+    },
+    {
+      "pass_number": 101,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53640,
+      "checkpoint_status": {
+        "done": 20248
+      },
+      "disease_collection_count": 20248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:19:59+00:00"
+    },
+    {
+      "pass_number": 102,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57699,
+      "checkpoint_status": {
+        "done": 20448
+      },
+      "disease_collection_count": 20448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:20:41+00:00"
+    },
+    {
+      "pass_number": 103,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60540,
+      "checkpoint_status": {
+        "done": 20648
+      },
+      "disease_collection_count": 20648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:21:24+00:00"
+    },
+    {
+      "pass_number": 104,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49812,
+      "checkpoint_status": {
+        "done": 20848
+      },
+      "disease_collection_count": 20848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:22:08+00:00"
+    },
+    {
+      "pass_number": 105,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53087,
+      "checkpoint_status": {
+        "done": 21048
+      },
+      "disease_collection_count": 21048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:22:52+00:00"
+    },
+    {
+      "pass_number": 106,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58395,
+      "checkpoint_status": {
+        "done": 21248
+      },
+      "disease_collection_count": 21248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:23:33+00:00"
+    },
+    {
+      "pass_number": 107,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52156,
+      "checkpoint_status": {
+        "done": 21448
+      },
+      "disease_collection_count": 21448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:24:14+00:00"
+    },
+    {
+      "pass_number": 108,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55968,
+      "checkpoint_status": {
+        "done": 21648
+      },
+      "disease_collection_count": 21648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:24:56+00:00"
+    },
+    {
+      "pass_number": 109,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 67600,
+      "checkpoint_status": {
+        "done": 21848
+      },
+      "disease_collection_count": 21848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:25:40+00:00"
+    },
+    {
+      "pass_number": 110,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62086,
+      "checkpoint_status": {
+        "done": 22048
+      },
+      "disease_collection_count": 22048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:26:25+00:00"
+    },
+    {
+      "pass_number": 111,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62333,
+      "checkpoint_status": {
+        "done": 22248
+      },
+      "disease_collection_count": 22248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:27:04+00:00"
+    },
+    {
+      "pass_number": 112,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 63457,
+      "checkpoint_status": {
+        "done": 22448
+      },
+      "disease_collection_count": 22448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:27:45+00:00"
+    },
+    {
+      "pass_number": 113,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59924,
+      "checkpoint_status": {
+        "done": 22648
+      },
+      "disease_collection_count": 22648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:28:28+00:00"
+    },
+    {
+      "pass_number": 114,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55680,
+      "checkpoint_status": {
+        "done": 22848
+      },
+      "disease_collection_count": 22848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:29:22+00:00"
+    },
+    {
+      "pass_number": 115,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 61406,
+      "checkpoint_status": {
+        "done": 23048
+      },
+      "disease_collection_count": 23048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:30:36+00:00"
+    },
+    {
+      "pass_number": 116,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53037,
+      "checkpoint_status": {
+        "done": 23248
+      },
+      "disease_collection_count": 23248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:31:46+00:00"
+    },
+    {
+      "pass_number": 117,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 51227,
+      "checkpoint_status": {
+        "done": 23448
+      },
+      "disease_collection_count": 23448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:32:56+00:00"
+    },
+    {
+      "pass_number": 118,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55831,
+      "checkpoint_status": {
+        "done": 23648
+      },
+      "disease_collection_count": 23648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:34:08+00:00"
+    },
+    {
+      "pass_number": 119,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54743,
+      "checkpoint_status": {
+        "done": 23848
+      },
+      "disease_collection_count": 23848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:35:23+00:00"
+    },
+    {
+      "pass_number": 120,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57174,
+      "checkpoint_status": {
+        "done": 24048
+      },
+      "disease_collection_count": 24048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:36:36+00:00"
+    },
+    {
+      "pass_number": 121,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 51188,
+      "checkpoint_status": {
+        "done": 24248
+      },
+      "disease_collection_count": 24248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:37:46+00:00"
+    },
+    {
+      "pass_number": 122,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50007,
+      "checkpoint_status": {
+        "done": 24448
+      },
+      "disease_collection_count": 24448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:38:57+00:00"
+    },
+    {
+      "pass_number": 123,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 65958,
+      "checkpoint_status": {
+        "done": 24648
+      },
+      "disease_collection_count": 24648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:40:09+00:00"
+    },
+    {
+      "pass_number": 124,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 46771,
+      "checkpoint_status": {
+        "done": 24848
+      },
+      "disease_collection_count": 24848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:41:23+00:00"
+    },
+    {
+      "pass_number": 125,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 43435,
+      "checkpoint_status": {
+        "done": 25048
+      },
+      "disease_collection_count": 25048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:42:36+00:00"
+    },
+    {
+      "pass_number": 126,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52622,
+      "checkpoint_status": {
+        "done": 25248
+      },
+      "disease_collection_count": 25248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:43:46+00:00"
+    },
+    {
+      "pass_number": 127,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57167,
+      "checkpoint_status": {
+        "done": 25448
+      },
+      "disease_collection_count": 25448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:44:58+00:00"
+    },
+    {
+      "pass_number": 128,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 64889,
+      "checkpoint_status": {
+        "done": 25648
+      },
+      "disease_collection_count": 25648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:46:14+00:00"
+    },
+    {
+      "pass_number": 129,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52460,
+      "checkpoint_status": {
+        "done": 25848
+      },
+      "disease_collection_count": 25848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:47:28+00:00"
+    },
+    {
+      "pass_number": 130,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49644,
+      "checkpoint_status": {
+        "done": 26048
+      },
+      "disease_collection_count": 26048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:48:30+00:00"
+    },
+    {
+      "pass_number": 131,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49447,
+      "checkpoint_status": {
+        "done": 26248
+      },
+      "disease_collection_count": 26248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:49:10+00:00"
+    },
+    {
+      "pass_number": 132,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52801,
+      "checkpoint_status": {
+        "done": 26448
+      },
+      "disease_collection_count": 26448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:49:51+00:00"
+    },
+    {
+      "pass_number": 133,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 46806,
+      "checkpoint_status": {
+        "done": 26648
+      },
+      "disease_collection_count": 26648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:50:33+00:00"
+    },
+    {
+      "pass_number": 134,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50658,
+      "checkpoint_status": {
+        "done": 26848
+      },
+      "disease_collection_count": 26848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:51:15+00:00"
+    },
+    {
+      "pass_number": 135,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55773,
+      "checkpoint_status": {
+        "done": 27048
+      },
+      "disease_collection_count": 27048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:51:59+00:00"
+    },
+    {
+      "pass_number": 136,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 63464,
+      "checkpoint_status": {
+        "done": 27248
+      },
+      "disease_collection_count": 27248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:52:38+00:00"
+    },
+    {
+      "pass_number": 137,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55804,
+      "checkpoint_status": {
+        "done": 27448
+      },
+      "disease_collection_count": 27448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:53:21+00:00"
+    },
+    {
+      "pass_number": 138,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60434,
+      "checkpoint_status": {
+        "done": 27648
+      },
+      "disease_collection_count": 27648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:54:04+00:00"
+    },
+    {
+      "pass_number": 139,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59029,
+      "checkpoint_status": {
+        "done": 27848
+      },
+      "disease_collection_count": 27848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:54:47+00:00"
+    },
+    {
+      "pass_number": 140,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58602,
+      "checkpoint_status": {
+        "done": 28048
+      },
+      "disease_collection_count": 28048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:55:31+00:00"
+    },
+    {
+      "pass_number": 141,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48227,
+      "checkpoint_status": {
+        "done": 28248
+      },
+      "disease_collection_count": 28248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:56:10+00:00"
+    },
+    {
+      "pass_number": 142,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52007,
+      "checkpoint_status": {
+        "done": 28448
+      },
+      "disease_collection_count": 28448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:56:54+00:00"
+    },
+    {
+      "pass_number": 143,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 66760,
+      "checkpoint_status": {
+        "done": 28648
+      },
+      "disease_collection_count": 28648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:57:39+00:00"
+    },
+    {
+      "pass_number": 144,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 63575,
+      "checkpoint_status": {
+        "done": 28848
+      },
+      "disease_collection_count": 28848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:58:24+00:00"
+    },
+    {
+      "pass_number": 145,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60971,
+      "checkpoint_status": {
+        "done": 29048
+      },
+      "disease_collection_count": 29048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:59:08+00:00"
+    },
+    {
+      "pass_number": 146,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59383,
+      "checkpoint_status": {
+        "done": 29248
+      },
+      "disease_collection_count": 29248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T04:59:50+00:00"
+    },
+    {
+      "pass_number": 147,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 56426,
+      "checkpoint_status": {
+        "done": 29448
+      },
+      "disease_collection_count": 29448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:00:34+00:00"
+    },
+    {
+      "pass_number": 148,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 71019,
+      "checkpoint_status": {
+        "done": 29648
+      },
+      "disease_collection_count": 29648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:01:17+00:00"
+    },
+    {
+      "pass_number": 149,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62473,
+      "checkpoint_status": {
+        "done": 29848
+      },
+      "disease_collection_count": 29848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:02:02+00:00"
+    },
+    {
+      "pass_number": 150,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 63136,
+      "checkpoint_status": {
+        "done": 30048
+      },
+      "disease_collection_count": 30048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:02:49+00:00"
+    },
+    {
+      "pass_number": 151,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 76884,
+      "checkpoint_status": {
+        "done": 30248
+      },
+      "disease_collection_count": 30248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:03:29+00:00"
+    },
+    {
+      "pass_number": 152,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 64836,
+      "checkpoint_status": {
+        "done": 30448
+      },
+      "disease_collection_count": 30448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:04:11+00:00"
+    },
+    {
+      "pass_number": 153,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59208,
+      "checkpoint_status": {
+        "done": 30648
+      },
+      "disease_collection_count": 30648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:04:54+00:00"
+    },
+    {
+      "pass_number": 154,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60228,
+      "checkpoint_status": {
+        "done": 30848
+      },
+      "disease_collection_count": 30848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:05:38+00:00"
+    },
+    {
+      "pass_number": 155,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59498,
+      "checkpoint_status": {
+        "done": 31048
+      },
+      "disease_collection_count": 31048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:06:22+00:00"
+    },
+    {
+      "pass_number": 156,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59951,
+      "checkpoint_status": {
+        "done": 31248
+      },
+      "disease_collection_count": 31248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:07:02+00:00"
+    },
+    {
+      "pass_number": 157,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60126,
+      "checkpoint_status": {
+        "done": 31448
+      },
+      "disease_collection_count": 31448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:07:43+00:00"
+    },
+    {
+      "pass_number": 158,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53463,
+      "checkpoint_status": {
+        "done": 31648
+      },
+      "disease_collection_count": 31648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:08:27+00:00"
+    },
+    {
+      "pass_number": 159,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 53639,
+      "checkpoint_status": {
+        "done": 31848
+      },
+      "disease_collection_count": 31848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:09:10+00:00"
+    },
+    {
+      "pass_number": 160,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 62386,
+      "checkpoint_status": {
+        "done": 32048
+      },
+      "disease_collection_count": 32048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:09:54+00:00"
+    },
+    {
+      "pass_number": 161,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 46982,
+      "checkpoint_status": {
+        "done": 32248
+      },
+      "disease_collection_count": 32248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:10:33+00:00"
+    },
+    {
+      "pass_number": 162,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50272,
+      "checkpoint_status": {
+        "done": 32448
+      },
+      "disease_collection_count": 32448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:11:15+00:00"
+    },
+    {
+      "pass_number": 163,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 47254,
+      "checkpoint_status": {
+        "done": 32648
+      },
+      "disease_collection_count": 32648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:11:56+00:00"
+    },
+    {
+      "pass_number": 164,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49003,
+      "checkpoint_status": {
+        "done": 32848
+      },
+      "disease_collection_count": 32848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:12:39+00:00"
+    },
+    {
+      "pass_number": 165,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 39680,
+      "checkpoint_status": {
+        "done": 33048
+      },
+      "disease_collection_count": 33048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:13:23+00:00"
+    },
+    {
+      "pass_number": 166,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48775,
+      "checkpoint_status": {
+        "done": 33248
+      },
+      "disease_collection_count": 33248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:14:02+00:00"
+    },
+    {
+      "pass_number": 167,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 42308,
+      "checkpoint_status": {
+        "done": 33448
+      },
+      "disease_collection_count": 33448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:14:43+00:00"
+    },
+    {
+      "pass_number": 168,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 46598,
+      "checkpoint_status": {
+        "done": 33648
+      },
+      "disease_collection_count": 33648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:15:25+00:00"
+    },
+    {
+      "pass_number": 169,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 57379,
+      "checkpoint_status": {
+        "done": 33848
+      },
+      "disease_collection_count": 33848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:16:09+00:00"
+    },
+    {
+      "pass_number": 170,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 43597,
+      "checkpoint_status": {
+        "done": 34048
+      },
+      "disease_collection_count": 34048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:16:52+00:00"
+    },
+    {
+      "pass_number": 171,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50948,
+      "checkpoint_status": {
+        "done": 34248
+      },
+      "disease_collection_count": 34248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:17:32+00:00"
+    },
+    {
+      "pass_number": 172,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 47969,
+      "checkpoint_status": {
+        "done": 34448
+      },
+      "disease_collection_count": 34448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:18:14+00:00"
+    },
+    {
+      "pass_number": 173,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 49258,
+      "checkpoint_status": {
+        "done": 34648
+      },
+      "disease_collection_count": 34648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:18:56+00:00"
+    },
+    {
+      "pass_number": 174,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 44419,
+      "checkpoint_status": {
+        "done": 34848
+      },
+      "disease_collection_count": 34848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:19:39+00:00"
+    },
+    {
+      "pass_number": 175,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 44111,
+      "checkpoint_status": {
+        "done": 35048
+      },
+      "disease_collection_count": 35048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:20:22+00:00"
+    },
+    {
+      "pass_number": 176,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 45838,
+      "checkpoint_status": {
+        "done": 35248
+      },
+      "disease_collection_count": 35248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:21:02+00:00"
+    },
+    {
+      "pass_number": 177,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 50302,
+      "checkpoint_status": {
+        "done": 35448
+      },
+      "disease_collection_count": 35448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:21:43+00:00"
+    },
+    {
+      "pass_number": 178,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 42486,
+      "checkpoint_status": {
+        "done": 35648
+      },
+      "disease_collection_count": 35648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:22:24+00:00"
+    },
+    {
+      "pass_number": 179,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 41714,
+      "checkpoint_status": {
+        "done": 35848
+      },
+      "disease_collection_count": 35848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:23:08+00:00"
+    },
+    {
+      "pass_number": 180,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54371,
+      "checkpoint_status": {
+        "done": 36048
+      },
+      "disease_collection_count": 36048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:23:52+00:00"
+    },
+    {
+      "pass_number": 181,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 40767,
+      "checkpoint_status": {
+        "done": 36248
+      },
+      "disease_collection_count": 36248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:24:31+00:00"
+    },
+    {
+      "pass_number": 182,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 55917,
+      "checkpoint_status": {
+        "done": 36448
+      },
+      "disease_collection_count": 36448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:25:12+00:00"
+    },
+    {
+      "pass_number": 183,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 59028,
+      "checkpoint_status": {
+        "done": 36648
+      },
+      "disease_collection_count": 36648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:25:54+00:00"
+    },
+    {
+      "pass_number": 184,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 58335,
+      "checkpoint_status": {
+        "done": 36848
+      },
+      "disease_collection_count": 36848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:26:38+00:00"
+    },
+    {
+      "pass_number": 185,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 60399,
+      "checkpoint_status": {
+        "done": 37048
+      },
+      "disease_collection_count": 37048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:27:22+00:00"
+    },
+    {
+      "pass_number": 186,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 44877,
+      "checkpoint_status": {
+        "done": 37248
+      },
+      "disease_collection_count": 37248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:28:02+00:00"
+    },
+    {
+      "pass_number": 187,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 46490,
+      "checkpoint_status": {
+        "done": 37448
+      },
+      "disease_collection_count": 37448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:28:43+00:00"
+    },
+    {
+      "pass_number": 188,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48734,
+      "checkpoint_status": {
+        "done": 37648
+      },
+      "disease_collection_count": 37648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:29:26+00:00"
+    },
+    {
+      "pass_number": 189,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54024,
+      "checkpoint_status": {
+        "done": 37848
+      },
+      "disease_collection_count": 37848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:30:09+00:00"
+    },
+    {
+      "pass_number": 190,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 54336,
+      "checkpoint_status": {
+        "done": 38048
+      },
+      "disease_collection_count": 38048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:30:53+00:00"
+    },
+    {
+      "pass_number": 191,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 52518,
+      "checkpoint_status": {
+        "done": 38248
+      },
+      "disease_collection_count": 38248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:31:34+00:00"
+    },
+    {
+      "pass_number": 192,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 44676,
+      "checkpoint_status": {
+        "done": 38448
+      },
+      "disease_collection_count": 38448,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:32:15+00:00"
+    },
+    {
+      "pass_number": 193,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 45429,
+      "checkpoint_status": {
+        "done": 38648
+      },
+      "disease_collection_count": 38648,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:32:57+00:00"
+    },
+    {
+      "pass_number": 194,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 38487,
+      "checkpoint_status": {
+        "done": 38848
+      },
+      "disease_collection_count": 38848,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:33:56+00:00"
+    },
+    {
+      "pass_number": 195,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 40797,
+      "checkpoint_status": {
+        "done": 39048
+      },
+      "disease_collection_count": 39048,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:35:10+00:00"
+    },
+    {
+      "pass_number": 196,
+      "selected": 200,
+      "new_chunks": 200,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 48483,
+      "checkpoint_status": {
+        "done": 39248
+      },
+      "disease_collection_count": 39248,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:36:21+00:00"
+    },
+    {
+      "pass_number": 197,
+      "selected": 195,
+      "new_chunks": 195,
+      "reused_exact_chunks": 0,
+      "embedding_characters_selected": 67827,
+      "checkpoint_status": {
+        "done": 39443
+      },
+      "disease_collection_count": 39443,
+      "rag_count_unchanged": 52104,
+      "timestamp_utc": "2026-11-02T05:37:32+00:00"
+    }
+  ],
+  "source_status": "third_party_unverified",
+  "clinical_verified": false,
+  "neo4j_disease_term_linked": false,
+  "online_qa_connected": false
+}

@@ -1,0 +1,21 @@
+{
+  "stage": "P3-04.1",
+  "mode": "read_only_all_chunk_source_verification",
+  "status": "PASS_ALL_SOURCE_ALIGNED",
+  "timestamp_utc": "2026-11-02T02:06:15+00:00",
+  "verified_source_records": 8807,
+  "verified_source_fields": 35114,
+  "verified_chunk_ids": 39443,
+  "verified_sections": {
+    "chunks_cause": 12541,
+    "chunks_desc": 8813,
+    "chunks_prevent": 9344,
+    "chunks_symptom": 8745
+  },
+  "source_file_sha256": "01aaf5de1304ea6f4ed84e9802b600b729b9f797284234f2d86d77e55f8dfc49",
+  "staging_sha256": "054b14946410cebff2a52f003a786440f1cde8a81c49b7b5570b41c5b88d16c0",
+  "medical_validation": "NOT_PERFORMED",
+  "publisher_and_rights_review": "NOT_PERFORMED",
+  "neo4j_disease_term_matching": "NOT_PERFORMED",
+  "chroma_import": "NOT_PERFORMED"
+}

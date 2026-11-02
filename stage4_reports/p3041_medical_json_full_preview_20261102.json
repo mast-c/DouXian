@@ -1,0 +1,184 @@
+{
+  "stage": "P3-04.1",
+  "mode": "local_disease_encyclopedia_prepare_no_db",
+  "status": "PREVIEW_ONLY",
+  "timestamp_utc": "2026-11-02T02:04:31+00:00",
+  "source_path": "/mnt/data/medical.json",
+  "source_file_sha256": "01aaf5de1304ea6f4ed84e9802b600b729b9f797284234f2d86d77e55f8dfc49",
+  "source_file_bytes": 45901706,
+  "data_format": "JSON Lines despite .json suffix",
+  "source_records_processed": 8807,
+  "distinct_disease_names": 8806,
+  "duplicate_disease_names": [
+    {
+      "name": "胎膜早破",
+      "first_record_oid": "5bb578c7831b973a137e45b0",
+      "repeated_record_oid": "5bb57901831b973a137e6128"
+    }
+  ],
+  "distinct_source_record_oids": 8807,
+  "chunk_size": 850,
+  "index_ready_records": 39443,
+  "embedding_characters_estimated": 10876968,
+  "field_counts": {
+    "nonempty_desc": 8807,
+    "nonempty_cause": 8791,
+    "nonempty_prevent": 8771,
+    "nonempty_symptom": 8745,
+    "chunks_desc": 8813,
+    "chunks_cause": 12541,
+    "chunks_prevent": 9344,
+    "chunks_symptom": 8745,
+    "empty_fields": 114
+  },
+  "truncated_symptoms_skipped": 996,
+  "truncated_symptoms_examples": [
+    {
+      "record_oid": "5bb578b6831b973a137e3ee9",
+      "disease_name": "喘息样支气管炎",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3ef0",
+      "disease_name": "肺-胸膜阿米巴病",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3ef1",
+      "disease_name": "肺出血－肾炎综合征",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3ef3",
+      "disease_name": "肺泡蛋白沉着症",
+      "excluded_symptom_items": 2
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3ef7",
+      "disease_name": "肺大疱",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3ef8",
+      "disease_name": "肺炎球菌肺炎",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3ef9",
+      "disease_name": "肺气肿",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3efa",
+      "disease_name": "肺炎杆菌肺炎",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3efb",
+      "disease_name": "肺脓肿",
+      "excluded_symptom_items": 2
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f03",
+      "disease_name": "肺隐球菌病",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f04",
+      "disease_name": "肺癌",
+      "excluded_symptom_items": 2
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f05",
+      "disease_name": "镉中毒",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f07",
+      "disease_name": "感染性休克",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f09",
+      "disease_name": "Goodpasture综合征",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f0c",
+      "disease_name": "呼吸道异物",
+      "excluded_symptom_items": 2
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f0e",
+      "disease_name": "呼吸衰竭",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f0f",
+      "disease_name": "呼吸道合胞病毒肺炎",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b6831b973a137e3f12",
+      "disease_name": "急性肺脓肿",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b7831b973a137e3f1c",
+      "disease_name": "老年肺炎",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b7831b973a137e3f23",
+      "disease_name": "球孢子菌病",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b7831b973a137e3f2a",
+      "disease_name": "热带性肺嗜酸粒细胞浸润症",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b7831b973a137e3f2b",
+      "disease_name": "手术后和创伤后肺炎",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b7831b973a137e3f2f",
+      "disease_name": "特发性阻塞性细支气管炎伴机化性肺炎",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b7831b973a137e3f3e",
+      "disease_name": "哮喘",
+      "excluded_symptom_items": 1
+    },
+    {
+      "record_oid": "5bb578b7831b973a137e3f55",
+      "disease_name": "病态窦房结综合征",
+      "excluded_symptom_items": 1
+    }
+  ],
+  "unsplittable_section_count": 0,
+  "unsplittable_section_examples": [],
+  "records_with_high_risk_fields": 8807,
+  "high_risk_fields_excluded_from_embeddings": [
+    "recommand_drug",
+    "common_drug",
+    "drug_detail",
+    "cured_prob",
+    "get_prob",
+    "cure_lasttime",
+    "cost_money",
+    "cure_way",
+    "do_eat",
+    "not_eat",
+    "recommand_eat"
+  ],
+  "source_provenance_status": "third_party_unverified",
+  "source_publication_and_rights": "UNKNOWN_REQUIRE_REVIEW",
+  "disease_term_link_status": "NOT_MATCHED_TO_NEO4J",
+  "output_chunks_path": null,
+  "output_chunks_sha256": null,
+  "safety": "仅本地标准化准备，药品推荐/治愈率/费用/患病率不索引；来源身份和使用授权均未核验；疾病术语尚未和 Neo4j 链接；没有对 Chroma/Neo4j/SQLite 进行任何写操作"
+}

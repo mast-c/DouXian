@@ -1,0 +1,50 @@
+{
+  "stage": "P3-04.4A",
+  "mode": "strict_read_only_graph_link_plan",
+  "readiness": "READY_FOR_HUMAN_REVIEW_NO_WRITES",
+  "created_utc": "2026-11-02T08:45:38+00:00",
+  "source_file_sha256": "01aaf5de1304ea6f4ed84e9802b600b729b9f797284234f2d86d77e55f8dfc49",
+  "source_file_bytes": 45901706,
+  "chroma_collection": "disease_knowledge",
+  "chroma_audit_file": "p3042_final_audit_20261102_134326.json",
+  "chroma_audit_staging_sha256": "054b14946410cebff2a52f003a786440f1cde8a81c49b7b5570b41c5b88d16c0",
+  "chroma_audited_chunk_count": 39443,
+  "original_disease_records": 8807,
+  "unique_disease_names": 8806,
+  "aligned_records_in_review_plan": 1150,
+  "aligned_unique_names": 1150,
+  "alignment_link_hash_mode": "WINDOWS_CRLF_EQUIVALENT",
+  "prior_alignment_counts": {
+    "unmatched_names": 7656,
+    "matched_exact_unique_names": 1150,
+    "source_records": 8807,
+    "unique_source_names": 8806,
+    "matched_source_records": 1150,
+    "duplicate_name_source_records": 1,
+    "neo4j_total_disease_term_nodes": 1150
+  },
+  "review_record_status_counts": {
+    "UNRESOLVED_NO_UNIQUE_EXACT_MAPPING": 7657,
+    "EXACT_NAME_CANDIDATE_UNREVIEWED": 1150
+  },
+  "graph_recheck": {
+    "live_verified": true,
+    "neo4j_term_count": 1150,
+    "rechecked_names": 8806,
+    "exact_matched_names": 1150,
+    "document_id_conflict_count": 0,
+    "document_id_conflict_examples": []
+  },
+  "relation_type_proposed": "EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA",
+  "source_status": "third_party_unverified",
+  "clinical_verified": false,
+  "source_rights_verified": false,
+  "human_review_done": false,
+  "new_neo4j_nodes": 0,
+  "new_neo4j_relationships": 0,
+  "drug_treatment_relationships_created": 0,
+  "note": "本文件仅提出严格同名的未核验疾病百科来源候选关系，不意味着确认疾病同义、获批治疗用途或资料拥有合法使用许可。所有图谱写入必须另行实施经审核的 P3-04.4B。",
+  "plan_sha256": "c2010f693a0d2d37e7efd930d973cdd87750ad08a72b43c20a6d25b2a26dc731",
+  "review_csv_sha256": "8d095646ee9287b8d2693f8969e53c346f61876fa40d817d8959f8834aa18360",
+  "planned_document_links": 1150
+}

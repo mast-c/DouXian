@@ -130,9 +130,8 @@ def render_compact_references(
             sections = "；".join(values["sections"][:3])
             if len(values["sections"]) > 3:
                 sections += " 等"
-            lines.append(f"{nums} {source}" + (f" · {sections}" if sections else ""))
-        blocks.append("参考资料（同一来源的不同片段合并显示）：\n\n"
-                      + "\n\n".join(lines))
+            lines.append(f"- {nums} {source}" + (f" · {sections}" if sections else ""))
+        blocks.append("**参考资料**\n\n" + "\n".join(lines))
     if invalid:
         blocks.append("引用核对提醒："
                       + "、".join(f"[{num}]" for num in invalid)

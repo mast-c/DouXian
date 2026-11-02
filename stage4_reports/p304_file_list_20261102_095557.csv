@@ -1,0 +1,11 @@
+﻿path,classification,extension,bytes,sha256,metadata_status,publisher,source_url,document_version,rights,retrieved_at,sampled_rows,disease_shaped_sample_rows,drug_shaped_sample_rows,example_disease_names,note
+data/raw/drug_db/MedGraphRAG-Drug-DB/NOTICE.md,DRUG_RECORDS_NOT_DISEASE_CORPUS,.md,520,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/README.md,DRUG_RECORDS_NOT_DISEASE_CORPUS,.md,2897,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/drug.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,14605884,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_chinese.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,128639,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,173655,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/drug_db.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,33135124,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/drug_db_v2.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,32110639,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/drug_db_v2_cleaned.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,32188086,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/drug_db_v2_name_repair_report.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,403781,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科
+data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json,DRUG_RECORDS_NOT_DISEASE_CORPUS,.json,45901706,,NOT_REGISTERED,,,,,,0,0,0,,按文件名/目录排除药品资料；避免当作疾病百科

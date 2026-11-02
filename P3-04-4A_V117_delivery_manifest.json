@@ -1,0 +1,22 @@
+{
+  "stage": "P3-04.4A",
+  "name": "read_only_disease_ontology_link_readiness_and_audit",
+  "created_utc": "2026-11-02",
+  "existing_source_records": 8807,
+  "existing_distinct_disease_names": 8806,
+  "previously_audited_disease_chunks": 39443,
+  "neo4j_writes": 0,
+  "chroma_writes": 0,
+  "sqlite_writes": 0,
+  "embedding_calls": 0,
+  "user_local_graph_alignment": "NOT_RUN_HERE",
+  "medical_provenance_status": "third_party_unverified",
+  "offline_tests_passed": 22,
+  "files_sha256": {
+    "medical_p3044_disease_graph_link_plan_v117.py": "fb3ba0e1c3c8ce984c74c9d7a58bc9caefd54fd2690b1a8e33c67c5f4e16ee89",
+    "test_medical_p3044_v117.py": "8f5cba0df889374c0ca18119c5dd7e7b39e899b23faae03512905dfb1ff83fea",
+    "medical_p3043_disease_neo4j_align_v117.py": "71f1e67ca37790d027d23fc751faedcda9a6daf52443c5d9a416086dc78521ed",
+    "medical_p3041_medical_json_prepare_v117.py": "13d7a74f491ae68841391b99b6eea5813d00691adacf8305ba5b01f945c85b03",
+    "README_P3-04-4A_V117_disease_term_graph_alignment.md": "0f4543bd72593b9cbdb32dbaf345f3c46b69f8c170573391279e2b4074c6b101"
+  }
+}

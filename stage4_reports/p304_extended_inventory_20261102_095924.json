@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "stage": "P3-04.0",
+  "created_utc": "2026-11-02T01:59:25+00:00",
+  "mode": "local_source_inventory_only",
+  "readiness": "CANDIDATE_SOURCES_REQUIRE_PROVENANCE_REVIEW",
+  "project_root": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data",
+  "scanned_roots": [
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\data\\raw",
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\docs",
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg",
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output",
+    "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\kg_output_clean_v2"
+  ],
+  "manifest_file": null,
+  "files_scanned": 99,
+  "candidate_source_files": 4,
+  "candidate_structured_source_files": 1,
+  "disease_shaped_sample_rows": 1,
+  "classifications": {
+    "DRUG_RECORDS_NOT_DISEASE_CORPUS": 34,
+    "POSSIBLE_INDEPENDENT_DISEASE_DOCUMENTS": 1,
+    "POSSIBLE_UNSTRUCTURED_DISEASE_SOURCE": 3,
+    "SCHEMA_UNKNOWN": 54,
+    "UNSTRUCTURED_NEEDS_REVIEW": 7
+  },
+  "extensions": {
+    ".csv": 29,
+    ".json": 41,
+    ".jsonl": 17,
+    ".md": 11,
+    ".txt": 1
+  },
+  "candidates": [
+    {
+      "path": "docs/medical文件用途与清理建议_2026-10-30.md",
+      "classification": "POSSIBLE_UNSTRUCTURED_DISEASE_SOURCE",
+      "sample_names": [],
+      "metadata_status": "NOT_REGISTERED",
+      "sha256": "485c4f1e643ae823dfaba7ddbafa4e9cdfef3d45a50321015f185fc8e7593eb9"
+    },
+    {
+      "path": "docs/图谱实体与关系说明.md",
+      "classification": "POSSIBLE_UNSTRUCTURED_DISEASE_SOURCE",
+      "sample_names": [],
+      "metadata_status": "NOT_REGISTERED",
+      "sha256": "50d5b9f88374ef80954bbd4d0c4d4e666747cc40fff4a7f4d33f0508c402737d"
+    },
+    {
+      "path": "docs/文件清理清单_V117完善后_2026-10-31.md",
+      "classification": "POSSIBLE_UNSTRUCTURED_DISEASE_SOURCE",
+      "sample_names": [],
+      "metadata_status": "NOT_REGISTERED",
+      "sha256": "cb8bbdf253bb11257bb482997faf5f225872cfd44cd5a13f48bd4d6a8bfc02dc"
+    },
+    {
+      "path": "kg_output_clean_v2/pilot_review_v2/pilot_review_report.json",
+      "classification": "POSSIBLE_INDEPENDENT_DISEASE_DOCUMENTS",
+      "sample_names": [
+        "relation_types"
+      ],
+      "metadata_status": "NOT_REGISTERED",
+      "sha256": "425ffd463015497857caab90cd4fd74de2893cb63298a9c68c2fb21d77727a56"
+    }
+  ],
+  "warnings": [],
+  "next_step": "核对来源、版本、版权/授权与独立疾病正文；准备疾病标准化 JSONL 后单独建立 Chroma disease_knowledge collection。不可直接将 1150 DiseaseTerm 或药品说明书提及批量冒充疾病百科。",
+  "safety_note": "本报告只评估来源文件形状和元数据，绝不证明临床正确性或合法授权；没有读写 Neo4j/Chroma/SQLite，也没有调用云端模型。"
+}

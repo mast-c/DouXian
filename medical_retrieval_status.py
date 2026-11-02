@@ -13,6 +13,7 @@ from typing import Any
 SCHEMA_VERSION = 1
 
 STATUS_TEXT = {
+    "skipped_list_only": "清单已有原文，省略重复检索",
     "ok": "已完成",
     "no_match": "未命中",
     "empty_collection": "向量库为空",

@@ -26,7 +26,7 @@ from evidence_guard import assess_evidence
 from self_rag_retry import retry_insufficient_evidence, reassess_fixed_aspects
 import config_data as config  # noqa: F401: 加载项目 .env
 from file_history_store import get_history
-from search_tool import DISPLAY_SOURCE_LIMIT, web_search
+from search_tool import DISPLAY_SOURCE_LIMIT, web_search, search_guideline_summary
 from vector_stores import VectorStoreService
 from drug_graph_retriever import (
     DrugGraphRetriever, compact_same_quote_candidates,
@@ -49,8 +49,12 @@ from medical_retrieval_status import build_retrieval_pipeline
 from medical_overview_answer import (
     scope_graph_discovered_drugs, build_multi_drug_source_answer,
 )
+from medical_drug_ranking import requested_drug_count, rank_drug_candidates
 from medical_evidence_bridge import (
     prepare_medical_documents, collapse_duplicate_parent_sections,
+)
+from medical_p3043_disease_encyclopedia_runtime_v117 import (
+    search_disease_encyclopedia, merge_into_kb,
 )
 from medical_p303b_disease_runtime_v117 import (
     choose_links_file, resolve_disease_links, merge_disease_evidence,
@@ -567,6 +571,7 @@ def _fast_plan_medical_fields(question: str) -> list[str]:
 
 def _reference_label(item: dict, source: str) -> str:
     """将图谱的真实来源 URL 展示为短链接（引用编号仍来自真实命中的证据）。"""
+    import html
     from urllib.parse import urlsplit, quote
     raw = str(item.get("source_url") or "").strip()
     if len(raw) > 2048:
@@ -575,7 +580,12 @@ def _reference_label(item: dict, source: str) -> str:
         parts = urlsplit(raw)
         if parts.scheme in ("https", "http") and parts.netloc:
             safe_url = quote(raw, safe=":/?#[]@!$&'*+,;=%-._~")
-            return f"[查看药品资料来源]({safe_url})"
+            drug = " ".join(str(item.get("drug_name") or "").split())[:120]
+            label = html.escape(drug, quote=False) if drug else "药品资料"
+            for char, entity in (("[", "&#91;"), ("]", "&#93;"), ("*", "&#42;"),
+                                 ("_", "&#95;"), ("`", "&#96;"), ("|", "&#124;")):
+                label = label.replace(char, entity)
+            return f"[{label} · 来源]({safe_url})"
     except ValueError:
         pass
     return source
@@ -583,16 +593,13 @@ def _reference_label(item: dict, source: str) -> str:
 
 
 def _medical_reference_section(item: dict[str, Any], section: str) -> str:
-    """让用户知道来源是 Hybrid 召回还是图谱直接查得，避免误认两份来源。"""
+    """医疗参考列表仅展示药名和链接；检索路径、核验状态保留在证据卡。"""
     kind = str(item.get("evidence_type") or "")
-    if kind == "json_neo4j_text_verified" and item.get("disease_link_verified"):
-        return section + " · 疾病候选直连 Chroma ID，Neo4j Section 原文核对（非临床验证）"
-    if kind == "json_neo4j_text_verified" and item.get("parent_verified"):
-        return section + " · Chroma Hybrid 召回，Neo4j Section 原文核对"
-    if kind == "unverified_drug_source_section":
-        return section + " · Neo4j 原文 Section"
-    if kind == "unverified_drug_disease_candidate":
-        return section + " · Neo4j 疾病提及候选（未经医学验证）"
+    if kind == "unverified_disease_encyclopedia":
+        return section + " · 第三方疾病百科原文（技术回溯通过，未经医学审核）"
+    if kind in ("json_neo4j_text_verified", "unverified_drug_source_section",
+                "unverified_drug_disease_candidate"):
+        return ""
     return section
 
 
@@ -870,37 +877,53 @@ class RagService:
                 r"疾病提及|提及.{0,12}疾病",
                 question,
             ))
-            # 疾病→药品列表属于开放式查询：图谱中的前几条只表示资料提及，
-            # 不能作为完整的治疗药品清单。对其中最多4种药物分别读取
-            # 不良反应和注意事项 Section，而不是只命中某一个药品的栏目。
+            # 疾病查药先扩大候选池，再按原文用途与常用程度排序。
             disease_drug_overview = is_disease_drug_list_question(question)
+            requested_count = requested_drug_count(question)
+            ranking_report = {}
             candidates = []
             raw_candidates = []
+            grouped_candidates = []
             sections = []
             notes = []
             selected_drugs = []
             extra_fields = []
             supplements = []
             try:
-                raw_candidates = self.graph_retriever.search(
-                    question,
-                    limit=(10 if (candidate_discovery or disease_drug_overview) else 6),
-                    explicit_disease_only=not candidate_discovery,
-                )
+                if disease_drug_overview:
+                    raw_candidates, pool_report = self.graph_retriever.search_disease_drug_pool(question)
+                else:
+                    raw_candidates = self.graph_retriever.search(
+                        question, limit=(10 if candidate_discovery else 6),
+                        explicit_disease_only=not candidate_discovery,
+                    )
                 grouped_candidates = compact_same_quote_candidates(raw_candidates)
                 if disease_drug_overview:
-                    # 开放式疾病搜索中的“前4种药品”，而非“前4个候选节点”。
-                    # 同一药品可能含多个来源候选，不能因此挤掉其他药品。
-                    candidates = []
-                    seen_drugs = set()
-                    for candidate in grouped_candidates:
-                        name = str(candidate.get("drug_name") or "")
-                        if not name or name in seen_drugs:
-                            continue
-                        seen_drugs.add(name)
-                        candidates.append(candidate)
-                        if len(candidates) >= 4:
-                            break
+                    def ask_ranker(system, payload):
+                        # model_copy 不会重建 SDK 客户端；超时/重试必须同时设在客户端上。
+                        client = self.chat_model.root_client.with_options(timeout=40, max_retries=0)
+                        options = {
+                            "request_timeout": 40, "max_retries": 0,
+                            "max_tokens": min(12000, requested_count * 300 + 1000),
+                            "root_client": client, "client": client.chat.completions,
+                        }
+                        if "qwen" in str(getattr(self.chat_model, "model_name", "")).lower():
+                            options["extra_body"] = {
+                                **(getattr(self.chat_model, "extra_body", None) or {}),
+                                "enable_thinking": False,
+                            }
+                        return _plain_content(self.chat_model.model_copy(update=options).invoke([
+                            SystemMessage(content=system),
+                            HumanMessage(content=json.dumps(payload, ensure_ascii=False)),
+                        ]).content)
+
+                    candidates, ranking_report = rank_drug_candidates(
+                        question, raw_candidates, ask=ask_ranker,
+                        search=search_guideline_summary
+                        if os.getenv("MEDICAL_DRUG_GUIDELINE_SEARCH", "0") == "1" else None,
+                        limit=requested_count,
+                    )
+                    ranking_report["pool"] = pool_report
                     selected_drugs = [item["drug_name"] for item in candidates]
                 else:
                     candidates = grouped_candidates[:4]
@@ -908,20 +931,19 @@ class RagService:
                     extra_fields = [
                         field for field in fields_for_question(question)
                         if field in ("adverse_reactions", "warnings",
-                                     "contraindications", "drug_interactions")
-                    ][:2]
+                                     "contraindications", "drug_interactions", "dosage", "composition")
+                    ]
             except Exception as exc:
                 notes.append(f"候选关系查询失败：{type(exc).__name__}")
                 print("[Neo4j] 候选查询异常：", type(exc).__name__)
             try:
                 sections = self.graph_retriever.search_sections(question, limit=4)
                 if disease_drug_overview and selected_drugs:
-                    if not extra_fields:
-                        extra_fields = ["indication"]
                     supplements = self.graph_retriever.search_fields_for_drugs(
                         selected_drugs, extra_fields,
-                        max_drugs=4, max_sections=8,
-                    )
+                        max_drugs=requested_count,
+                        max_sections=min(60, requested_count * len(extra_fields)),
+                    ) if extra_fields else []
                     sections.extend(supplements)
             except Exception as exc:
                 notes.append(f"药品章节查询失败：{type(exc).__name__}")
@@ -929,7 +951,7 @@ class RagService:
             if notes and not candidates and not sections:
                 raise RuntimeError("Neo4j 查询失败，请在终端查看详情")
             matches = (
-                (candidates + sections)[:12]
+                (candidates + sections)[:min(128, requested_count * (1 + len(extra_fields)) + 4)]
                 if disease_drug_overview else
                 (sections + candidates)[:8]
             )
@@ -946,12 +968,13 @@ class RagService:
                 "notes": notes,
                 "candidate_count": len(candidates),
                 "raw_candidate_nodes": len(raw_candidates),
-                "grouped_same_quote_nodes": len(raw_candidates) - len(candidates),
+                "grouped_same_quote_nodes": len(raw_candidates) - len(grouped_candidates),
                 "section_count": len(sections),
                 "disease_drug_overview": disease_drug_overview,
                 "selected_drugs": selected_drugs,
                 "supplement_fields": extra_fields,
                 "supplemented_sections": len(supplements),
+                "drug_ranking": ranking_report,
             }, ensure_ascii=False)
 
         # 保留原 Agent 的工具集合，GraphRAG 由页面明确选择，避免
@@ -1245,17 +1268,65 @@ class RagService:
                 # 知识库即联合检索：Neo4j 图谱+原文章节，以及 Chroma Hybrid。
                 # GraphRAG 仅作旧页面/历史调用别名；两种入口走同一条路径。
                 # 任意一路失败仍可返回另一路真实证据，不静默伪造命中。
-                names = ["search_drug_graph", "search_knowledge_base"]
+                # P3-04.3: independently audited disease encyclopedia.
+                # Only Chunk IDs/metadata, zero query Embedding calls.
+                # P3-03B drug leaflet retrieval path remains intact.
+                _disease_excerpts = []
+                _disease_report = {
+                    "route": "NONE", "status": "SKIPPED",
+                    "returned_chunks": 0
+                }
+                try:
+                    _disease_excerpts, _disease_report = search_disease_encyclopedia(
+                        question,
+                        project_root=Path(__file__).resolve().parent,
+                        max_documents=4,
+                    )
+                except Exception as _disease_exc:
+                    _disease_report = {
+                        "route": "ERROR",
+                        "status": "SOURCE_VERIFICATION_BLOCKED",
+                        "reason_type": type(_disease_exc).__name__,
+                        "returned_chunks": 0,
+                    }
+                    print(
+                        "[P3-04.3] 疾病百科未通过来源核验：",
+                        type(_disease_exc).__name__,
+                    )
+                trace["disease_encyclopedia"] = _disease_report
+                _disease_only = (
+                    bool(_disease_excerpts)
+                    and _disease_report.get("route") == "DISEASE_ONLY"
+                )
+                # Only skip drug-oriented tools when the independent
+                # encyclopedia has verified source evidence for this question.
+                names = (
+                    [] if _disease_only
+                    else ["search_drug_graph", "search_knowledge_base"]
+                )
                 merged_excerpts = []
-                # 4个疾病候选 + 最多8条对应药品的不良反应/注意事项 +
-                # 部分 Chroma 证据。普通问题仍保持之前的8条上限。
+                # 按请求的药品数量预留候选和补充栏目的配额。
                 overview_question = is_disease_drug_list_question(question)
-                evidence_cap = 16 if overview_question else 8
+                evidence_cap = min(128, requested_drug_count(question) * (
+                    1 + len([f for f in fields_for_question(question) if f != "indication"])
+                ) + 8) if overview_question else 8
                 merged_sources = []
                 subqueries = []
                 seen_excerpts = set()
                 tool_reports = {}
                 for tool_name in names:
+                    # 只列疾病药品时已有带原文的图谱候选，不重复走 Hybrid 和重排。
+                    graph_result = tool_reports.get("search_drug_graph", {})
+                    if (tool_name == "search_knowledge_base" and overview_question
+                            and graph_result.get("selected_drugs")
+                            and not graph_result.get("supplement_fields")
+                            and fields_for_question(question) == ["indication"]
+                            and not re.search(r"机制|原理|病因|区别|比较|对比|诊断|检查|疗程", question)):
+                        tool_reports[tool_name] = {
+                            "status": "skipped_list_only", "hits": 0,
+                            "reason": "图谱清单已包含原文引用，省略重复混合检索",
+                        }
+                        continue
                     result, ok = self._call_tool(
                         tool_name, {"question": question}, trace, progress
                     )
@@ -1293,6 +1364,7 @@ class RagService:
                             "selected_drugs": data.get("selected_drugs", []),
                             "supplement_fields": data.get("supplement_fields", []),
                             "supplemented_sections": data.get("supplemented_sections", 0),
+                            "drug_ranking": data.get("drug_ranking", {}),
                         })
                     if not data.get("found"):
                         continue
@@ -1382,10 +1454,23 @@ class RagService:
                 # “阿托伐他汀钙片”问答被疾病共现的脂肪乳注射液污染。
                 # 只对用户明确点名的药品做过滤；疾病-only 查询不限制药品。
                 pre_entity_excerpts = list(merged_excerpts)
-                merged_excerpts, entity_report = filter_evidence_for_query(
-                    question, merged_excerpts,
-                )
+                if _disease_only:
+                    # Independent disease documents are not drug references;
+                    # do not pass them through the drug-name evidence filter.
+                    merged_excerpts = []
+                    entity_report = {
+                        "mode": "independent_disease_only",
+                        "explicit_drugs": [],
+                        "removed_other_drugs": 0,
+                        "removed_unattributed": 0,
+                        "kept": 0,
+                    }
+                else:
+                    merged_excerpts, entity_report = filter_evidence_for_query(
+                        question, merged_excerpts,
+                    )
                 graph_report = tool_reports.get("search_drug_graph", {})
+                trace["drug_ranking"] = graph_report.get("drug_ranking", {})
                 listed_graph_drugs = (
                     graph_report.get("selected_drugs", [])
                     if isinstance(graph_report, dict) else []
@@ -1415,6 +1500,22 @@ class RagService:
                 trace["graph_drug_scope"] = graph_drug_scope
                 post_entity_excerpts = list(merged_excerpts)
                 merged_excerpts = collapse_duplicate_parent_sections(merged_excerpts)
+                if _disease_excerpts:
+                    merged_excerpts = merge_into_kb(
+                        merged_excerpts,
+                        _disease_excerpts,
+                        route=str(_disease_report.get("route") or ""),
+                        cap=evidence_cap,
+                    )
+                    if isinstance(entity_report, dict):
+                        entity_report["independent_disease_evidence"] = sum(
+                            row.get("evidence_type") ==
+                            "unverified_disease_encyclopedia"
+                            for row in merged_excerpts
+                        )
+                if (not _disease_excerpts
+                        and _disease_report.get("route") == "DISEASE_ONLY"):
+                    trace["disease_encyclopedia"]["no_source_answer"] = True
                 merged_sources = list(dict.fromkeys(
                     str(item.get("source") or "")
                     for item in merged_excerpts
@@ -1463,7 +1564,7 @@ class RagService:
                         "supplement_fields": tool_reports.get("search_drug_graph", {}).get(
                             "supplement_fields", []
                         ),
-                        "max_listed_drugs": 4,
+                        "max_listed_drugs": requested_drug_count(question),
                         "removed_off_scope": (
                             graph_drug_scope["removed_other_drugs"]
                             + graph_drug_scope["removed_unattributed"]
@@ -1495,6 +1596,9 @@ class RagService:
                         # 缺少 record_id 时不能仅按相同药名/文字误判同一来源。
                         "record_id": str(item.get("record_id") or ""),
                         "candidate_id": str(item.get("candidate_id") or ""),
+                        "ranking_basis": str(item.get("ranking_basis") or ""),
+                        "ranking_group": str(item.get("ranking_group") or ""),
+                        "ranking_support_quote": str(item.get("ranking_support_quote") or ""),
                         "parent_verified": bool(item.get("parent_verified") or False),
                         "disease_link_verified": bool(
                             item.get("disease_link_verified") or False
@@ -1527,13 +1631,15 @@ class RagService:
                 requested_details = [
                     field for field in graph_report.get("supplement_fields", [])
                     if field in ("adverse_reactions", "warnings",
-                                 "contraindications", "drug_interactions")
+                                 "contraindications", "drug_interactions", "dosage", "composition")
                 ] if isinstance(graph_report, dict) else []
-                if (overview_question and listed_graph_drugs
-                        and trace["graph_candidates_found"]):
+                ranking_report = graph_report.get("drug_ranking", {})
+                if ((overview_question and (listed_graph_drugs or ranking_report)
+                        and (trace["graph_candidates_found"] or ranking_report)) and not _disease_excerpts):
                     reply, overview_report = build_multi_drug_source_answer(
                         question, merged_excerpts,
                         listed_graph_drugs, requested_details,
+                        ranking_report=ranking_report,
                     )
                     if reply:
                         references = {}
@@ -1556,7 +1662,7 @@ class RagService:
                         trace["multi_drug_coverage"] = overview_report
                         trace["evidence_coverage"] = {
                             "decision": "structured_source_display",
-                            "note": "仅从原文组织证据，未运行临床专家审查或 LLM 判断",
+                            "note": "模型辅助原文筛选与排序；原文组织引用，未完成临床专家核验",
                         }
                         complete_reply = reply + footer
                         answer_parts.append(complete_reply)
@@ -1723,13 +1829,15 @@ class RagService:
                             )
                         # BEGIN SELF_RAG_RETRY_V1_5
                         # 只在第一轮审核为 partial/refuse 时，尝试补检一次。
-                        if fast_kb_mode or self.knowledge_service is None:
+                        if (fast_kb_mode or self.knowledge_service is None
+                                or _disease_only):
                             retry_result = {
                                 "coverage": coverage,
                                 "excerpts": guard_excerpts,
                                 "retry_queries": [],
                                 "new_chunks": 0,
                                 "status": ("skipped_fast_mode" if fast_kb_mode
+                                           else "skipped_disease_source_isolated" if _disease_only
                                            else "skipped_no_vector_index"),
                             }
                             print("[Self-RAG V1.5] skipped (fast mode or no Chroma index)")

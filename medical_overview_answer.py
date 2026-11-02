@@ -10,6 +10,7 @@ from __future__ import annotations
 import html
 import re
 from typing import Any, Iterable
+from medical_drug_ranking import MAX_LIST_DRUGS
 
 CANDIDATE = "unverified_drug_disease_candidate"
 SECTION_TYPES = {"unverified_drug_source_section", "json_neo4j_text_verified"}
@@ -19,6 +20,8 @@ FIELDS = {
     "warnings": "注意事项",
     "contraindications": "禁忌",
     "drug_interactions": "药物相互作用",
+    "dosage": "用法用量",
+    "composition": "成分",
 }
 UNKNOWN_STATEMENTS = {"尚不明确", "尚不清楚", "不详", "未明确", "暂无资料"}
 
@@ -67,12 +70,12 @@ def scope_graph_discovered_drugs(
     """疾病-only 问题对 Chroma 进行图谱候选药名约束，排除共词但无关药。
 
     与用户显式药名 Entity Gate 区分：这些名称来自图谱候选，
-    而不是声称用户亲自说出了四个药名。
+    而不是声称用户亲自说出了这些药名。
     """
     allowed_list = list(dict.fromkeys(
         name.strip() for name in drug_names
         if isinstance(name, str) and name.strip()
-    ))[:4]
+    ))[:MAX_LIST_DRUGS]
     if not allowed_list:
         return list(items), {
             "applied": False, "retrieved_drugs": [],
@@ -139,6 +142,7 @@ def build_multi_drug_source_answer(
     evidence: list[dict[str, Any]],
     selected_drugs: list[str],
     requested_fields: list[str],
+    *, ranking_report: dict[str, Any] | None = None,
 ) -> tuple[str, dict[str, Any]]:
     """只从当前证据逐药组织引用；不生成医学推荐或虚构缺失栏目。
 
@@ -148,9 +152,22 @@ def build_multi_drug_source_answer(
     names = list(dict.fromkeys(
         n.strip() for n in selected_drugs
         if isinstance(n, str) and n.strip()
-    ))[:4]
+    ))[:MAX_LIST_DRUGS]
+    # 只展示当前仍有引用依据的药品，避免后续过滤导致悬空药名。
+    available = {item.get("drug_name") for item in evidence if item.get("evidence_type") == CANDIDATE}
+    names = [name for name in names if name in available]
+    ranking = ranking_report or {}
     fields = [f for f in dict.fromkeys(requested_fields) if f in FIELDS and f != "indication"]
     if not names:
+        if ranking:
+            failure = ranking.get("status") == "ranking_failed"
+            return (
+                "本轮常用药筛选未完成，请稍后重试。未将未排序候选冒充常用治疗药物。"
+                if failure else
+                "本轮没有筛选出原文足以支持所问治疗用途的药品；不能为凑数量补列药品。",
+                {"listed_drugs": [], "supported_cells": 0, "missing_cells": 0,
+                 "ranking": ranking},
+            )
         return "", {"listed_drugs": [], "supported_cells": 0, "missing_cells": 0}
 
     candidates = [_candidate(evidence, name) for name in names]
@@ -167,6 +184,13 @@ def build_multi_drug_source_answer(
         )
         + "**这不是完整的治疗药物清单，也不代表已经确认的获批适应症或处方推荐。**",
     ]
+    if ranking:
+        requested = int(ranking.get("requested_count", len(names)))
+        if len(names) < requested:
+            lines.append(f"你要求 {requested} 种，本轮仅筛选并保留 {len(names)} 种有原文依据的药品，"
+                         "不足部分不以其他疾病提及凑数。")
+        if ranking.get("pool", {}).get("truncated"):
+            lines.append("候选召回达到本轮数量上限，本清单不能代表全库覆盖。")
     covered = missing = 0
     by_drug: list[dict[str, Any]] = []
 
@@ -175,7 +199,8 @@ def build_multi_drug_source_answer(
         candidate = _candidate(evidence, drug)
         lines.append(f"\n### {name}")
         if candidate and candidate.get("id"):
-            quote = limit_quote(candidate.get("evidence_quote"), max_chars=115)
+            quote = (_safe_text(candidate.get("ranking_support_quote")) if ranking
+                     else limit_quote(candidate.get("evidence_quote"), max_chars=115))
             lines.append(f"**疾病关联原文（待人工审核）**：{quote} [{candidate['id']}]")
         else:
             lines.append("**疾病关联**：本轮未找到可引用的疾病提及原文，不能据此判断治疗关系。")
@@ -189,6 +214,8 @@ def build_multi_drug_source_answer(
                 missing += 1
                 missing_fields.append(field)
                 lines.append(
+                    "- **用法用量**：本轮未获得该药的用法用量原文，不能据此推断剂量或服用方法。"
+                    if field == "dosage" else
                     f"- **{label}**：本轮没有获得该药对应栏目的可引用原文；"
                     "不能据此认定该药没有相关风险或限制。"
                 )
@@ -199,11 +226,15 @@ def build_multi_drug_source_answer(
             if source.strip().rstrip("。；;：: ") in UNKNOWN_STATEMENTS:
                 lines.append(
                     f"- **{label}**：资料原文为“{_safe_text(source)}”；"
-                    f"这不等于已确认没有相关风险。[{item['id']}]"
+                    + ("不能据此推断剂量或服用方法。" if field == "dosage"
+                       else "这不等于已确认没有相关风险。")
+                    + f"[{item['id']}]"
                 )
             else:
+                # 剂量、人群和频次条件应一起展示，不能在 170 字处截断。
+                quote = _safe_text(source) if field == "dosage" else _source_quote(item, max_chars=170)
                 lines.append(
-                    f"- **{label}（原文节选）**：{_source_quote(item, max_chars=170)} "
+                    f"- **{label}（原文节选）**：{quote} "
                     f"[{item['id']}]"
                 )
         by_drug.append({
@@ -222,4 +253,5 @@ def build_multi_drug_source_answer(
         "missing_cells": missing,
         "by_drug": by_drug,
         "mode": "deterministic_source_excerpts_no_llm",
+        "ranking": ranking,
     }

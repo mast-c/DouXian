@@ -1,0 +1,15 @@
+{
+  "registry_version": 1,
+  "purpose": "For P3-04.0 source inventory only; placeholders are NOT validation or approval",
+  "sources": [
+    {
+      "path": "data/raw/disease_knowledge/disease_documents_sample.jsonl",
+      "publisher": "",
+      "source_url": "",
+      "document_version": "",
+      "rights": "",
+      "retrieved_at": "",
+      "sha256": ""
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "checked_date": "2026-11-02",
+  "source_report": "medical_drug_ranking_smoke_authorized.json",
+  "requested_count": 10,
+  "returned_count": 10,
+  "distinct_drug_names": 10,
+  "technical_checks_passed": true,
+  "checks": [
+    {
+      "drug_name": "L-门冬氨酸氨氯地平片",
+      "candidate_id": "diseasecandidate_0f311c7fe7e4b032f3fa274b",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "硝苯地平控释片",
+      "candidate_id": "diseasecandidate_8462bd40143254e384f4bd3c",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "非洛地平缓释胶囊",
+      "candidate_id": "diseasecandidate_4559b44ca22f9f4897985c47",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "盐酸贝那普利片",
+      "candidate_id": "diseasecandidate_01637a3703a8637bee95f8b2",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "培哚普利片",
+      "candidate_id": "diseasecandidate_c534c97a5c273ce09c1f073d",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "缬沙坦胶囊",
+      "candidate_id": "diseasecandidate_326de473c15a937e6a783396",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "厄贝沙坦片",
+      "candidate_id": "diseasecandidate_2ec4ea2b6e3185c422ce254f",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "氢氯噻嗪片",
+      "candidate_id": "diseasecandidate_a9b76bad56791ebd0a423992",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "吲达帕胺片",
+      "candidate_id": "diseasecandidate_3f5110943d301a68dd1eda75",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "酒石酸美托洛尔片",
+      "candidate_id": "diseasecandidate_c3b52251c9f39eb1bfc673f3",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    }
+  ],
+  "clinical_validation": false,
+  "guideline_full_text_verified": false,
+  "review_notes": [
+    "厄贝沙坦入选原文限定合并高血压的2型糖尿病肾病，不应省略条件解读为普通高血压用途。",
+    "指南检索摘要不等于指南原文独立核验。",
+    "完整短适应症的长度校验修正仅跑了离线回归，未额外重跑云端测试。"
+  ]
+}

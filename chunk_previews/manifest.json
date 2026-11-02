@@ -1,0 +1,55 @@
+{
+  "status": "completed",
+  "exported_at": "2026-11-02T10:36:13+08:00",
+  "neo4j": {
+    "database": "neo4j",
+    "source": "live_read_query",
+    "chunks": 107787,
+    "sample_chunks": 31,
+    "field_counts": {
+      "drug_interactions": 7599,
+      "storage": 9465,
+      "dosage": 11285,
+      "adverse_reactions": 8379,
+      "warnings": 11514,
+      "approval_numbers": 11960,
+      "indication": 11581,
+      "contraindications": 8420,
+      "validity": 7040,
+      "manufacturers": 9505,
+      "composition": 11039
+    }
+  },
+  "chroma": {
+    "database_file": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\chroma_db\\chroma.sqlite3",
+    "collection": "rag",
+    "source": "sqlite_read_only_snapshot",
+    "chunks": 52104,
+    "sample_chunks": 30,
+    "field_counts": {
+      "indication": 11562,
+      "contraindications": 13494,
+      "adverse_reactions": 8328,
+      "warnings": 11184,
+      "drug_interactions": 7536
+    }
+  },
+  "files": {
+    "chroma_chunks.jsonl": {
+      "bytes": 77382904,
+      "sha256": "4890fef35a68a08f7ed2764c0f8adb608fb734b88e209b81e04600645a3db08b"
+    },
+    "chroma_preview.md": {
+      "bytes": 43426,
+      "sha256": "84cf4a74ae2cd18a1199b355a9d7176f32fd2404358d61da7de67301c36881da"
+    },
+    "neo4j_chunks.jsonl": {
+      "bytes": 101037171,
+      "sha256": "887b5549f9fb49051a5e752eabfb4d4e54d62c972542d3ed5bd53c9ea14ede6e"
+    },
+    "neo4j_preview.md": {
+      "bytes": 54377,
+      "sha256": "4922074b5e5fc4216cdd633b497ae008c6278b934fc1ec5614e63588c74abb1b"
+    }
+  }
+}

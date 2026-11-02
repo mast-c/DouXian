@@ -1,0 +1,58 @@
+{
+  "checked_date": "2026-11-02",
+  "source_report": "medical_drug_ranking_smoke_fast5_final.json",
+  "technical_checks_passed": true,
+  "returned_count": 5,
+  "rendered_drugs": [
+    "苯磺酸氨氯地平片",
+    "氢氯噻嗪片",
+    "盐酸贝那普利片",
+    "缬沙坦胶囊",
+    "富马酸比索洛尔片"
+  ],
+  "elapsed_seconds": 7.56,
+  "scope": "Neo4j query plus candidate ranking; not full UI",
+  "clinical_validation": false,
+  "checks": [
+    {
+      "drug_name": "苯磺酸氨氯地平片",
+      "candidate_id": "diseasecandidate_088735b23439e5e2e04dcc84",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "氢氯噻嗪片",
+      "candidate_id": "diseasecandidate_a9b76bad56791ebd0a423992",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "盐酸贝那普利片",
+      "candidate_id": "diseasecandidate_01637a3703a8637bee95f8b2",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "缬沙坦胶囊",
+      "candidate_id": "diseasecandidate_326de473c15a937e6a783396",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    },
+    {
+      "drug_name": "富马酸比索洛尔片",
+      "candidate_id": "diseasecandidate_76a3284ad53f438e0d661625",
+      "candidate_exists": true,
+      "exact_quote": true,
+      "drug_name_matches": true,
+      "source_matches": true
+    }
+  ]
+}

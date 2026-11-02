@@ -188,6 +188,15 @@ def _response(ok=False, answer="", sources=None, search_calls=0, sources_total=0
 @tool("web_search")
 def web_search(query: str) -> str:
     """联网检索最新新闻、政策、行情等公开信息，返回实际搜索证据和来源。"""
+    return _run_web_search(query)
+
+
+def search_guideline_summary(query: str) -> str:
+    """疾病查药的可选短检索：短超时、不重试、限制输出。"""
+    return _run_web_search(query, timeout=20.0, max_retries=0, max_output_tokens=1800)
+
+
+def _run_web_search(query: str, *, timeout=60.0, max_retries=2, max_output_tokens=None) -> str:
     query = str(query or "").strip()
     if not query:
         return _response(answer="缺少搜索关键词。")
@@ -207,14 +216,16 @@ def web_search(query: str) -> str:
         )
 
     try:
-        client = OpenAI(api_key=api_key, base_url=base_url, timeout=60.0)
+        client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout, max_retries=max_retries)
         if not hasattr(client, "responses"):
             return _response(answer="当前 openai Python SDK 版本过旧，不支持 Responses API；请升级 openai。")
+        output_options = {"max_output_tokens": max_output_tokens} if max_output_tokens else {}
         response = client.responses.create(
             model=model,
             input=(query + "\n\n请精简检索：优先核实官方或高可信来源，"
                    "尽量只选最相关的 3 至 5 篇资料用于回答，避免重复搜索。"),
             tools=[{"type": "web_search"}],
+            **output_options,
         )
         answer = _response_text(response)
         sources, calls, completed, queries = _collect_search_sources(response)

@@ -1,0 +1,22 @@
+{
+  "stage": "P3-04.4B",
+  "purpose": "research_only_automatic_exact_name_graph_provenance_links",
+  "graph_write_status": "NOT_EXECUTED_ON_USER_NEO4J",
+  "real_medical_json_source_sha256": "01aaf5de1304ea6f4ed84e9802b600b729b9f797284234f2d86d77e55f8dfc49",
+  "real_p3044a_candidate_count": 1150,
+  "real_p3044a_plan_sha256": "c2010f693a0d2d37e7efd930d973cdd87750ad08a72b43c20a6d25b2a26dc731",
+  "offline_unit_tests_passed": 28,
+  "real_source_to_candidate_line_hash_consistency": "1150_of_1150_PASSED",
+  "neo4j_simulated_pilot": 20,
+  "neo4j_simulated_remaining_after_pilot": 1130,
+  "neo4j_simulated_full_links": 1150,
+  "neo4j_simulated_idempotent_replay_new_links": 0,
+  "clinical_verified": false,
+  "source_rights_verified": false,
+  "no_treatment_relation_created": true,
+  "files_sha256": {
+    "medical_p3044b_research_auto_link_v117.py": "65a1ca605329e75d8cb05b07a0c43310a271d0a5fe4367b552c6720df0c01d43",
+    "test_medical_p3044b_research_auto_link_v117.py": "5f2b06d25939ed337e96e85f91eaa3610e13b8775af5df2c71d342410db1451b",
+    "README_P3-04-4B_V117_research_auto_link.md": "3585414f50ff475728cc85dd85af2fe22f619916a3dfff43e060052866819175"
+  }
+}

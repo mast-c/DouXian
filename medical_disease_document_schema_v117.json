@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/douxian/graph-rag/v117/disease-document.schema.json",
+  "title": "DouXian GraphRAG V1.17: Independent Disease Evidence Document",
+  "description": "Disease knowledge documents ONLY; not drug disease mentions or automatically validated treatment edges. Validate provenance, review source rights and stable IDs before ingest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "document_id",
+    "disease_name",
+    "source",
+    "sections"
+  ],
+  "properties": {
+    "document_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "disease_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "disease_term_id": {
+      "description": "OPTIONAL and only populate after exact/human-reviewed Neo4j DiseaseTerm matching; do not invent IDs.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publisher",
+        "title",
+        "url",
+        "version",
+        "retrieved_at",
+        "rights",
+        "source_status"
+      ],
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "rights": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_status": {
+          "type": "string",
+          "enum": [
+            "third_party_unverified",
+            "source_identified",
+            "independently_verified"
+          ]
+        },
+        "file_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "language": {
+          "type": "string",
+          "default": "zh-CN"
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "section_id",
+          "section_type",
+          "text"
+        ],
+        "properties": {
+          "section_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "section_type": {
+            "type": "string",
+            "enum": [
+              "overview",
+              "symptoms",
+              "causes",
+              "risk_factors",
+              "diagnosis",
+              "treatment_principles",
+              "complications",
+              "prevention",
+              "prognosis",
+              "other"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "original_offset_start": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "original_offset_end": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          }
+        }
+      }
+    }
+  }
+}
