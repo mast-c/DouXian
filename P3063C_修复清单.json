@@ -1,0 +1,20 @@
+{
+  "stage": "P3-06.3C",
+  "purpose": "Fix missing re import causing saved-trace NameError; disable extra Streamlit multipage navigation",
+  "fix_to_existing_user_file": "minimal atomic import re injection with backup",
+  "legacy_page": "pages/06_Multihop_Evidence.py",
+  "legacy_page_backup": "disabled_streamlit_pages/06_Multihop_Evidence_TIMESTAMP.py.bak",
+  "keeps_inline_evidence_paths": true,
+  "keeps_5_6_7_8_hop_graph_support": true,
+  "actual_db_access_during_install": false,
+  "rag_py_modified": false,
+  "automatic_rollback_on_error": true,
+  "offline_tests_13_plus_16": 29,
+  "files_sha256": {
+    "fix_douxian_re_sidebar_v117.py": "f004295862ea915a336bd7f9c8adcd30be493d265312a61b22e37e1fd4c64e2e",
+    "修复文件/豆馅.py": "477fbc0b7a65ae706d1bcd284573e28cf794a637a38b9c3ac47db1e3eb964a44",
+    "test_douxian_re_sidebar_v117.py": "651c11dd5aaaa788d8eb52943b45e38809a03dc15288c22b091c9743f20621e9",
+    "test_douxian_multihop_fix_v117.py": "437b7d9e83abdbab72859ecc64d0fea6fbe7143af456753a6d36c45cecc1511e",
+    "README_修复说明.txt": "346b628d7accb6ca9fbe9b66ca6edc0f962c509e3fe1a8d6a14757a8026c7053"
+  }
+}

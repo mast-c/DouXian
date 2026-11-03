@@ -1,0 +1,20 @@
+{
+  "stage": "P3-06.3 Frontend Inline Path",
+  "original_uploaded_filename": "豆馅.py",
+  "replacement_filename": "豆馅.py",
+  "source_uploaded_sha256": "2f6ab92d96f3f85b93a662b831943a417ba161353c114eafe5ca976013908696",
+  "modified_sha256": "f98d27914491dcf25b96582b8bfc004ee8e513bde24caa804798aa14b2f30894",
+  "original_source_lines": 1780,
+  "modified_source_lines": 2341,
+  "tests_passed": 20,
+  "tested_8_hop_synthetic_report": true,
+  "validated_real_neo4j": "not accessible here; user provided 4 successful 8-hop paths in earlier log",
+  "display_slot": "inside existing trace_details_html after knowledge_evidence cards",
+  "citation_count_unchanged": true,
+  "generates_only_display_path_cards": true,
+  "read_only_database_queries": true,
+  "rag_py_modified": false,
+  "db_data_modified": false,
+  "source_status": "third_party_unverified",
+  "clinical_verified": false
+}
