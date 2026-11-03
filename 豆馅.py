@@ -2,6 +2,11 @@ import html
 import hashlib
 import logging
 import os
+import re
+from medical_p3072_interaction_ui_v117 import (
+    prepare_full_corpus_interaction_trace, interaction_full_corpus_html
+)
+from medical_p3071_interaction_ui_v117 import (prepare_interaction_trace_for_display, interaction_evidence_html)
 from pathlib import Path
 import uuid
 import time
@@ -1980,7 +1985,9 @@ def trace_details_html(trace):
             if not isinstance(item, dict):
                 continue
             # 图谱路径在下方独立区域展示，不能被算作原始引用证据。
-            if item.get("evidence_type") == _MH_CARD_TYPE:
+            if item.get("evidence_type") in (
+                _MH_CARD_TYPE, "evidence_backed_semantic_graph_path",
+            ):
                 continue
             index = item.get("id")
             index = str(index) if type(index) is int and index > 0 else "?"
@@ -2041,15 +2048,31 @@ def trace_details_html(trace):
             content.append(
                 '<div class="trace-step-title">'
                 '<span class="trace-step-icon" aria-hidden="true">⌕</span>'
-                f'<span>实际命中的知识库证据（{len(cards)} 条）</span></div>'
+                f'<span>实际命中的原文章节证据（{len(cards)} 条）</span></div>'
             )
             content.append('<div class="kb-evidence-list">' + "".join(cards) + '</div>')
+
+    # Evidence-backed typed paths are retrieved before generation and have cite bindings.
+    from medical_semantic_retrieval import semantic_graph_html
+    content.append(semantic_graph_html(trace))
 
     # P3-06.3：紧贴原文证据列表之后，在同一个 trace 折叠 HTML 里渲染
     # 多条 Neo4j 路径；不增加上方“真实知识库证据”或原文引用计数。
     multihop_html = multihop_path_evidence_html(trace)
     if multihop_html:
         content.append(multihop_html)
+
+    # P3-07.2：全库双药安全来源链只显示在同一个原文证据HTML区域。
+    # 未验证的来源关联绝不增加生成引用计数或 Neo4j 关系数量。
+    p3072_html = interaction_full_corpus_html(trace)
+    if p3072_html:
+        content.append(p3072_html)
+
+    # P3-07.1：华法林×布洛芬的来源链，紧接原文证据和多跳路径。
+    # 与知识库命中/生成引用的医学证据统计彻底隔离。
+    p3071_html = interaction_evidence_html(trace)
+    if p3071_html:
+        content.append(p3071_html)
 
     # V1.11 独立来源检索 ≠ Chroma 使用 Neo4j 校验父级 Section。
     # 两种角色在同一个统计区分开展示；历史 trace 不会被强制迁移。
@@ -2400,6 +2423,13 @@ if pending:
     # P3-06.3：在落盘之前为本轮原文证据准备多跳路径展示。
     # 不改变模型输出；Neo4j 查询为只读，失败时保留原有结果。
     populate_multihop_trace_for_display(trace, pending)
+    prepare_full_corpus_interaction_trace(
+        trace, pending, root=Path(__file__).resolve().parent
+    )
+    # P3-07.1：仅在最终回答生成后缓存可追溯双药来源链。
+    prepare_interaction_trace_for_display(
+        trace, pending, project_root=Path(__file__).resolve().parent
+    )
 
     total_seconds = time.perf_counter() - started
     think_seconds = (

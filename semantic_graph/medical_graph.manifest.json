@@ -1,0 +1,55 @@
+{
+  "version": "semantic-graph-1",
+  "created_at": "2026-11-03T09:12:36.682709+00:00",
+  "builder_sha256": "1fba8ad0b684d2b765bb6738f8e7a3db92b2d16e20e86c4039f636a89129ebb0",
+  "inputs": {
+    "kg_output_clean_v2/drugs.jsonl": {
+      "size": 2248653,
+      "sha256": "3b2266bf42691b49809817e1685c6bc00eec072c2725eddd54f306dbaaa997cf"
+    },
+    "kg_output_clean_v2/source_records.jsonl": {
+      "size": 6052324,
+      "sha256": "0c4e5caad2dd2edb2dc0e650b0ac55f6cd2a59cab0961c4050f140442cfec883"
+    },
+    "kg_output_clean_v2/sections.jsonl": {
+      "size": 42188404,
+      "sha256": "4e63b52105b4486c50d54d4b3e87bb3aae5c96866274e5bf8ea2029e5019c941"
+    },
+    "kg_output_clean_v2/disease_candidates_full.csv": {
+      "size": 7147334,
+      "sha256": "cf964a386878ed92d7aeae7d5d5cc7574f8db3b5b1e8abb9f2e5e3fd8bf02315"
+    },
+    "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json": {
+      "size": 45901706,
+      "sha256": "01aaf5de1304ea6f4ed84e9802b600b729b9f797284234f2d86d77e55f8dfc49"
+    }
+  },
+  "counts": {
+    "ADVERSE_REACTION_MENTION": 46345,
+    "CAUTION_MENTION": 90667,
+    "CONTRAINDICATION_MENTION": 12022,
+    "HAS_INGREDIENT": 62079,
+    "HAS_SYMPTOM": 54042,
+    "INDICATION_MENTION": 19679,
+    "INTERACTION_MENTION": 8902,
+    "class_substring_interactions_omitted": 591,
+    "composition_sections_unparsed": 779,
+    "entities_Condition": 1046,
+    "entities_Disease": 8806,
+    "entities_Drug": 11951,
+    "entities_Ingredient": 7506,
+    "entities_Population": 7,
+    "entities_Symptom": 5977,
+    "invalid_indication_candidates_omitted": 6,
+    "self_ingredient_interaction_mentions_omitted": 847
+  },
+  "nodes": 35293,
+  "edges": 293736,
+  "sources": 110019,
+  "clinical_validation": false,
+  "storage": "local_sqlite_property_graph_from_source_exports",
+  "index": {
+    "size": 249552896,
+    "sha256": "915d35191c0882a1fcfc9e33887c52695a5987dd609995a543da18380e114e9d"
+  }
+}

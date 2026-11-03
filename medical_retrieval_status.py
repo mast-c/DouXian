@@ -110,6 +110,11 @@ def build_retrieval_pipeline(
     }
     return {
         "schema_version": SCHEMA_VERSION,
+        "semantic_graph": {
+            "status": str(_part(reports, "search_semantic_graph").get("status") or "not_run"),
+            "retained": _origin_count(after_dedup, "search_semantic_graph"),
+            "multi_relation_paths": _count(_part(reports, "search_semantic_graph").get("multi_relation_paths")),
+        },
         "neo4j_direct": graph_stage,
         "chroma_hybrid": chroma_stage,
         "merge": merge,
@@ -139,6 +144,9 @@ def retrieval_heading(trace: Any) -> str | None:
         label += f" · Neo4j 直查 {_count(graph['returned'])} 条"
     if errors:
         label += "（部分通道异常）"
+    typed = _part(pipeline, "semantic_graph")
+    if _count(typed.get("retained")):
+        label += f" · 多关系路径 {_count(typed['retained'])} 条"
     return label
 
 
@@ -195,6 +203,12 @@ def retrieval_status_html(trace: Any) -> str:
             f"药品实体过滤 {_number(merge.get('removed_by_entity_filter'))}"
         ),
     ]
+    typed = _part(pipeline, "semantic_graph")
+    if typed.get("status") and typed["status"] != "not_run":
+        cards.insert(0, metric(
+            "多关系图路径", typed.get("retained"),
+            f"其中多类关系 {_number(typed.get('multi_relation_paths'))} · 独立派生图索引",
+        ))
     notes: list[str] = []
     g_returned = _count(graph.get("returned"))
     g_kept = _count(graph.get("retained"))

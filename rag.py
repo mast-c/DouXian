@@ -66,6 +66,10 @@ from medical_p3061_multihop_graph_v117 import (
 from medical_p303b_disease_runtime_v117 import (
     choose_links_file, resolve_disease_links, merge_disease_evidence,
 )
+from medical_semantic_retrieval import (
+    GRAPH_PROMPT, graph_intent, graph_metadata, mark_graph_usage,
+    merge_graph_evidence, search_semantic_graph,
+)
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
@@ -1273,7 +1277,9 @@ class RagService:
                     reply = f"⚠️ 当前无法核实实时资讯。{result}"
                 answer_parts.append(reply)
                 yield reply
-            elif mode in ("知识库", "GraphRAG"):
+            elif mode in ("知识库", "GraphRAG") or (
+                mode == "自动" and graph_intent(question, Path(__file__).resolve().parent)
+            ):
                 # 知识库即联合检索：Neo4j 图谱+原文章节，以及 Chroma Hybrid。
                 # GraphRAG 仅作旧页面/历史调用别名；两种入口走同一条路径。
                 # 任意一路失败仍可返回另一路真实证据，不静默伪造命中。
@@ -1525,6 +1531,20 @@ class RagService:
                 if (not _disease_excerpts
                         and _disease_report.get("route") == "DISEASE_ONLY"):
                     trace["disease_encyclopedia"]["no_source_answer"] = True
+                # Actual typed graph retrieval happens before Evidence Guard/generation.
+                # Its own anchor/record constraints preserve cross-drug proof paths;
+                # the single-drug chunk filter must not split those paths afterwards.
+                _semantic_excerpts, _semantic_report = search_semantic_graph(
+                    question, project_root=Path(__file__).resolve().parent,
+                )
+                trace["semantic_graph"] = _semantic_report
+                merged_excerpts = merge_graph_evidence(
+                    merged_excerpts, _semantic_excerpts, evidence_cap,
+                )
+                tool_reports["search_semantic_graph"] = {
+                    "status": _semantic_report["status"], "hits": len(_semantic_excerpts),
+                    "multi_relation_paths": _semantic_report.get("multi_relation_paths", 0),
+                }
                 merged_sources = list(dict.fromkeys(
                     str(item.get("source") or "")
                     for item in merged_excerpts
@@ -1585,6 +1605,7 @@ class RagService:
                     }
                 trace["knowledge_evidence"] = [
                     {
+                        **graph_metadata(item),
                         "id": item["id"],
                         "source": str(item.get("source") or "未知文件")[:180],
                         "section_path": str(item.get("section_path") or "未标注章节")[:240],
@@ -1648,7 +1669,8 @@ class RagService:
                 ] if isinstance(graph_report, dict) else []
                 ranking_report = graph_report.get("drug_ranking", {})
                 if ((overview_question and (listed_graph_drugs or ranking_report)
-                        and (trace["graph_candidates_found"] or ranking_report)) and not _disease_excerpts):
+                        and (trace["graph_candidates_found"] or ranking_report))
+                        and not _disease_excerpts and not _semantic_excerpts):
                     reply, overview_report = build_multi_drug_source_answer(
                         question, merged_excerpts,
                         listed_graph_drugs, requested_details,
@@ -1790,6 +1812,7 @@ class RagService:
                             if not isinstance(original_content, str) or not original_content.strip():
                                 continue
                             guard_excerpts.append({
+                                **graph_metadata(original_item),
                                 "id": len(guard_excerpts) + 1,
                                 "source": original_item.get("source", ""),
                                 "section_path": original_item.get("section_path", ""),
@@ -1843,13 +1866,14 @@ class RagService:
                         # BEGIN SELF_RAG_RETRY_V1_5
                         # 只在第一轮审核为 partial/refuse 时，尝试补检一次。
                         if (fast_kb_mode or self.knowledge_service is None
-                                or _disease_only):
+                                or _disease_only or _semantic_excerpts):
                             retry_result = {
                                 "coverage": coverage,
                                 "excerpts": guard_excerpts,
                                 "retry_queries": [],
                                 "new_chunks": 0,
                                 "status": ("skipped_fast_mode" if fast_kb_mode
+                                            else "skipped_atomic_graph_proofs" if _semantic_excerpts
                                            else "skipped_disease_source_isolated" if _disease_only
                                            else "skipped_no_vector_index"),
                             }
@@ -1958,6 +1982,7 @@ class RagService:
                             if len(preview_text) > 240:
                                 preview_text = preview_text[:240].rstrip() + "…"
                             ui_evidence.append({
+                                **graph_metadata(item),
                                 "id": idx,
                                 "source": source,
                                 "section_path": section,
@@ -1997,6 +2022,7 @@ class RagService:
                         )
                         # END SELF_RAG_RETRY_V1_5
                         trace["evidence_coverage"] = coverage
+                        mark_graph_usage(trace, guard_excerpts, coverage.get("evidence_ids", []))
                         # 与 Evidence Guard 结论分离：仅追加一般安全提醒，
                         # 不把未获证据支持的自行用药“升级”为 supported。
                         safety_notice = pediatric_antibiotic_selfmedication_notice(
@@ -2130,6 +2156,7 @@ class RagService:
                                 content=(
                                     SYSTEM_PROMPT + "\n" + MEDICAL_KB_ANSWER_PROMPT
                                     + "\n" + coverage_prompt + _fast_quality_prompt
+                                    + ("\n" + GRAPH_PROMPT if _semantic_excerpts else "")
                                 )
                             ),
                             *history,
@@ -2299,6 +2326,10 @@ class RagService:
                             yield unchecked_note
 
                         # 3. 模型回答结束后，只生成一次参考资料
+                        mark_graph_usage(
+                            trace, guard_excerpts, coverage.get("evidence_ids", []),
+                            "".join(answer_parts),
+                        )
                         footer = render_kb_references(
                             "".join(answer_parts),
                             reference_map,

@@ -1,0 +1,3397 @@
+{
+  "validation": "local_source_path_checks_no_live_model_calls",
+  "queries": [
+    {
+      "question": "阿司匹林肠溶片与布洛芬片的成分与相互作用",
+      "report": {
+        "status": "ok",
+        "paths": [
+          {
+            "id": "path_695cf62257b20bd62c2c7dd2",
+            "nodes": [
+              {
+                "id": "ingredient_4569e75e32ba30bc9106e864",
+                "kind": "Ingredient",
+                "name": "阿司匹林"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                "kind": "Ingredient",
+                "name": "布洛芬"
+              },
+              {
+                "id": "drug_5a79a5405650bb813493fba6",
+                "kind": "Drug",
+                "name": "布洛芬片"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_1cf6ba78380a073e5c37581819f16484",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_4569e75e32ba30bc9106e864",
+                  "kind": "Ingredient",
+                  "name": "阿司匹林"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_44a78149b20ab5922aeb9f4b",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "25d8bbea67adbcb9ea4757ddfb1607105b5a3d253e3a73d4b1b7fcf612d93dca",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 5,
+                "quote": "阿司匹林。",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_3c8f1576a995192f4203b65d88d880ca",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 462,
+                "quote_end": 540,
+                "quote": " - NSAIDs：同时使用(同一天)某些NSAIDs(阿司匹林除外)，如布洛芬或萘普生会减弱阿司匹林的不可逆抗血小板作用。该相互作用的临床相关性尚不明确。",
+                "mention_start": 499,
+                "mention_end": 502,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_7ac2b16c499bcb8da1a0c191b0c86d8c",
+                "src": {
+                  "id": "drug_5a79a5405650bb813493fba6",
+                  "kind": "Drug",
+                  "name": "布洛芬片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_d40d947420825f491eb7947e",
+                "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "cfdcbf5713605b8fa3b09bb568c0cf623215357024aed39a87768862bfbf7a76",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 9,
+                "quote": "本品主要成分布洛芬",
+                "mention_start": 6,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_INGREDIENT",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_f2281c19cc0bdc2e140e7ba9",
+            "nodes": [
+              {
+                "id": "drug_5a79a5405650bb813493fba6",
+                "kind": "Drug",
+                "name": "布洛芬片"
+              },
+              {
+                "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                "kind": "Ingredient",
+                "name": "布洛芬"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_7ac2b16c499bcb8da1a0c191b0c86d8c",
+                "src": {
+                  "id": "drug_5a79a5405650bb813493fba6",
+                  "kind": "Drug",
+                  "name": "布洛芬片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_d40d947420825f491eb7947e",
+                "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "cfdcbf5713605b8fa3b09bb568c0cf623215357024aed39a87768862bfbf7a76",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 9,
+                "quote": "本品主要成分布洛芬",
+                "mention_start": 6,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 540,
+                "quote_end": 597,
+                "quote": "心血管风险增加的患者使用某些NSAIDs，例如布洛芬或萘普生可能使阿司匹林的心血管保护作用降低(见[药理毒理])。",
+                "mention_start": 563,
+                "mention_end": 566,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 2,
+            "relations": [
+              "HAS_INGREDIENT",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_04c7fb9f47b40af307983852",
+            "nodes": [
+              {
+                "id": "drug_5a79a5405650bb813493fba6",
+                "kind": "Drug",
+                "name": "布洛芬片"
+              },
+              {
+                "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                "kind": "Ingredient",
+                "name": "布洛芬"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_7ac2b16c499bcb8da1a0c191b0c86d8c",
+                "src": {
+                  "id": "drug_5a79a5405650bb813493fba6",
+                  "kind": "Drug",
+                  "name": "布洛芬片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_d40d947420825f491eb7947e",
+                "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "cfdcbf5713605b8fa3b09bb568c0cf623215357024aed39a87768862bfbf7a76",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 9,
+                "quote": "本品主要成分布洛芬",
+                "mention_start": 6,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_3c8f1576a995192f4203b65d88d880ca",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 462,
+                "quote_end": 540,
+                "quote": " - NSAIDs：同时使用(同一天)某些NSAIDs(阿司匹林除外)，如布洛芬或萘普生会减弱阿司匹林的不可逆抗血小板作用。该相互作用的临床相关性尚不明确。",
+                "mention_start": 499,
+                "mention_end": 502,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 2,
+            "relations": [
+              "HAS_INGREDIENT",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_7bc7fe5befc7dc26aecdc323",
+            "nodes": [
+              {
+                "id": "ingredient_4569e75e32ba30bc9106e864",
+                "kind": "Ingredient",
+                "name": "阿司匹林"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                "kind": "Ingredient",
+                "name": "布洛芬"
+              },
+              {
+                "id": "drug_5a79a5405650bb813493fba6",
+                "kind": "Drug",
+                "name": "布洛芬片"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_1cf6ba78380a073e5c37581819f16484",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_4569e75e32ba30bc9106e864",
+                  "kind": "Ingredient",
+                  "name": "阿司匹林"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_44a78149b20ab5922aeb9f4b",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "25d8bbea67adbcb9ea4757ddfb1607105b5a3d253e3a73d4b1b7fcf612d93dca",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 5,
+                "quote": "阿司匹林。",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 540,
+                "quote_end": 597,
+                "quote": "心血管风险增加的患者使用某些NSAIDs，例如布洛芬或萘普生可能使阿司匹林的心血管保护作用降低(见[药理毒理])。",
+                "mention_start": 563,
+                "mention_end": 566,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_7ac2b16c499bcb8da1a0c191b0c86d8c",
+                "src": {
+                  "id": "drug_5a79a5405650bb813493fba6",
+                  "kind": "Drug",
+                  "name": "布洛芬片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_d40d947420825f491eb7947e",
+                "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "cfdcbf5713605b8fa3b09bb568c0cf623215357024aed39a87768862bfbf7a76",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 9,
+                "quote": "本品主要成分布洛芬",
+                "mention_start": 6,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_INGREDIENT",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          }
+        ],
+        "storage": "local_derived_property_graph",
+        "generation_evidence": true,
+        "clinical_validation": false,
+        "snapshot_created_at": "2026-11-03T09:12:36.682709+00:00",
+        "plan": {
+          "anchors": [
+            {
+              "surface": "阿司匹林肠溶片",
+              "node_ids": [
+                "drug_5f145f046b1163232f6bb38d"
+              ],
+              "start": 0,
+              "end": 7,
+              "kinds": [
+                "Drug"
+              ],
+              "ambiguous": false
+            },
+            {
+              "surface": "布洛芬片",
+              "node_ids": [
+                "drug_5a79a5405650bb813493fba6"
+              ],
+              "start": 8,
+              "end": 12,
+              "kinds": [
+                "Drug"
+              ],
+              "ambiguous": false
+            }
+          ],
+          "requested_relations": [
+            "HAS_INGREDIENT",
+            "INTERACTION_MENTION"
+          ],
+          "max_hops": 5,
+          "requires_connected_anchors": true,
+          "interaction_question": true,
+          "drug_discovery": false,
+          "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence"
+        },
+        "stats": {
+          "expanded_states": 74,
+          "fanout_truncations": 7,
+          "expansion_budget_exhausted": false,
+          "candidate_paths": 4
+        },
+        "returned_paths": 4,
+        "multi_relation_paths": 4,
+        "source_verified_count": 3,
+        "truncated": true,
+        "missing_requested_relations": [],
+        "seconds": 0.6421
+      }
+    },
+    {
+      "question": "阿莫西林胶囊的成分、禁忌和相互作用有哪些？",
+      "report": {
+        "status": "ok",
+        "paths": [
+          {
+            "id": "path_59e5d3e7ff6640d120bf140a",
+            "nodes": [
+              {
+                "id": "ingredient_1aca17ff048a10d872178b2e",
+                "kind": "Ingredient",
+                "name": "氯霉素"
+              },
+              {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              {
+                "id": "condition_ace753cc47b107359dd362fa",
+                "kind": "Condition",
+                "name": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_26d9f1b03ad18277a5582d84bb39e910",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "ingredient_1aca17ff048a10d872178b2e",
+                  "kind": "Ingredient",
+                  "name": "氯霉素"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_97c765abc22a5eeeab4a5bc8",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "ff2a96b5458ed133de2b54ddc32c56767f2ee07eb36f80b58ebf4928a3920059",
+                "section_field": "drug_interactions",
+                "quote_start": 45,
+                "quote_end": 91,
+                "quote": "2．氯霉素、大环内酯类、磺胺类和四环素类药物在体外干扰阿莫西林的抗菌作用，但其临床意义不明。",
+                "mention_start": 47,
+                "mention_end": 50,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_a81aa977382501584fd3a8eeb805f937",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "condition_ace753cc47b107359dd362fa",
+                  "kind": "Condition",
+                  "name": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_3246772afc7eb75e61dc4752",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "12256be64fab40439333a767c6b397f8c61e5831e23dc884a6d04cac65bb3982",
+                "section_field": "contraindications",
+                "quote_start": 20,
+                "quote_end": 72,
+                "quote": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用",
+                "mention_start": 20,
+                "mention_end": 72,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 2,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_e798385f84464bf25f42bc82",
+            "nodes": [
+              {
+                "id": "ingredient_b34b3279328aa59497d0d15e",
+                "kind": "Ingredient",
+                "name": "阿莫西林"
+              },
+              {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              {
+                "id": "condition_70c5ff07f0199c239c56d1c6",
+                "kind": "Condition",
+                "name": "青霉素过敏及青霉素皮肤试验阳性患者禁用"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_f9dcf0718eedbd4ab8a46aaad701f8b7",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "ingredient_b34b3279328aa59497d0d15e",
+                  "kind": "Ingredient",
+                  "name": "阿莫西林"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_01c5dd23c5c471d33e6651d5",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "117badbe786aae2ae7a49a3d625212a82b6a9e7a83fba957c01fe4505f1117e0",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 4,
+                "quote": "阿莫西林",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_fecd9e06c9b9d7d2caa9815f8427c45e",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "condition_70c5ff07f0199c239c56d1c6",
+                  "kind": "Condition",
+                  "name": "青霉素过敏及青霉素皮肤试验阳性患者禁用"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_3246772afc7eb75e61dc4752",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "12256be64fab40439333a767c6b397f8c61e5831e23dc884a6d04cac65bb3982",
+                "section_field": "contraindications",
+                "quote_start": 0,
+                "quote_end": 19,
+                "quote": "青霉素过敏及青霉素皮肤试验阳性患者禁用",
+                "mention_start": 0,
+                "mention_end": 19,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 2,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "HAS_INGREDIENT"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_140ecad3587b95f4270c5974",
+            "nodes": [
+              {
+                "id": "ingredient_1aca17ff048a10d872178b2e",
+                "kind": "Ingredient",
+                "name": "氯霉素"
+              },
+              {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              {
+                "id": "ingredient_b34b3279328aa59497d0d15e",
+                "kind": "Ingredient",
+                "name": "阿莫西林"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_26d9f1b03ad18277a5582d84bb39e910",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "ingredient_1aca17ff048a10d872178b2e",
+                  "kind": "Ingredient",
+                  "name": "氯霉素"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_97c765abc22a5eeeab4a5bc8",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "ff2a96b5458ed133de2b54ddc32c56767f2ee07eb36f80b58ebf4928a3920059",
+                "section_field": "drug_interactions",
+                "quote_start": 45,
+                "quote_end": 91,
+                "quote": "2．氯霉素、大环内酯类、磺胺类和四环素类药物在体外干扰阿莫西林的抗菌作用，但其临床意义不明。",
+                "mention_start": 47,
+                "mention_end": 50,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_f9dcf0718eedbd4ab8a46aaad701f8b7",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "ingredient_b34b3279328aa59497d0d15e",
+                  "kind": "Ingredient",
+                  "name": "阿莫西林"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_01c5dd23c5c471d33e6651d5",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "117badbe786aae2ae7a49a3d625212a82b6a9e7a83fba957c01fe4505f1117e0",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 4,
+                "quote": "阿莫西林",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 2,
+            "relations": [
+              "HAS_INGREDIENT",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_1be2a8cefc062b4730e4873c",
+            "nodes": [
+              {
+                "id": "condition_ace753cc47b107359dd362fa",
+                "kind": "Condition",
+                "name": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用"
+              },
+              {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              {
+                "id": "ingredient_b34b3279328aa59497d0d15e",
+                "kind": "Ingredient",
+                "name": "阿莫西林"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_a81aa977382501584fd3a8eeb805f937",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "condition_ace753cc47b107359dd362fa",
+                  "kind": "Condition",
+                  "name": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_3246772afc7eb75e61dc4752",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "12256be64fab40439333a767c6b397f8c61e5831e23dc884a6d04cac65bb3982",
+                "section_field": "contraindications",
+                "quote_start": 20,
+                "quote_end": 72,
+                "quote": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用",
+                "mention_start": 20,
+                "mention_end": 72,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_f9dcf0718eedbd4ab8a46aaad701f8b7",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "ingredient_b34b3279328aa59497d0d15e",
+                  "kind": "Ingredient",
+                  "name": "阿莫西林"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_01c5dd23c5c471d33e6651d5",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "117badbe786aae2ae7a49a3d625212a82b6a9e7a83fba957c01fe4505f1117e0",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 4,
+                "quote": "阿莫西林",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 2,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "HAS_INGREDIENT"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_21d9881ed49a3bae81028072",
+            "nodes": [
+              {
+                "id": "ingredient_1aca17ff048a10d872178b2e",
+                "kind": "Ingredient",
+                "name": "氯霉素"
+              },
+              {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              {
+                "id": "condition_70c5ff07f0199c239c56d1c6",
+                "kind": "Condition",
+                "name": "青霉素过敏及青霉素皮肤试验阳性患者禁用"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_26d9f1b03ad18277a5582d84bb39e910",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "ingredient_1aca17ff048a10d872178b2e",
+                  "kind": "Ingredient",
+                  "name": "氯霉素"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_97c765abc22a5eeeab4a5bc8",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "ff2a96b5458ed133de2b54ddc32c56767f2ee07eb36f80b58ebf4928a3920059",
+                "section_field": "drug_interactions",
+                "quote_start": 45,
+                "quote_end": 91,
+                "quote": "2．氯霉素、大环内酯类、磺胺类和四环素类药物在体外干扰阿莫西林的抗菌作用，但其临床意义不明。",
+                "mention_start": 47,
+                "mention_end": 50,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_fecd9e06c9b9d7d2caa9815f8427c45e",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "condition_70c5ff07f0199c239c56d1c6",
+                  "kind": "Condition",
+                  "name": "青霉素过敏及青霉素皮肤试验阳性患者禁用"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_3246772afc7eb75e61dc4752",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "12256be64fab40439333a767c6b397f8c61e5831e23dc884a6d04cac65bb3982",
+                "section_field": "contraindications",
+                "quote_start": 0,
+                "quote_end": 19,
+                "quote": "青霉素过敏及青霉素皮肤试验阳性患者禁用",
+                "mention_start": 0,
+                "mention_end": 19,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 2,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_3723fa971d2537a957c1c41c",
+            "nodes": [
+              {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              {
+                "id": "ingredient_b34b3279328aa59497d0d15e",
+                "kind": "Ingredient",
+                "name": "阿莫西林"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_f9dcf0718eedbd4ab8a46aaad701f8b7",
+                "src": {
+                  "id": "drug_9a84c0e39432de10ec7889a9",
+                  "kind": "Drug",
+                  "name": "阿莫西林胶囊"
+                },
+                "dst": {
+                  "id": "ingredient_b34b3279328aa59497d0d15e",
+                  "kind": "Ingredient",
+                  "name": "阿莫西林"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_01c5dd23c5c471d33e6651d5",
+                "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "117badbe786aae2ae7a49a3d625212a82b6a9e7a83fba957c01fe4505f1117e0",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 4,
+                "quote": "阿莫西林",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 1,
+            "relations": [
+              "HAS_INGREDIENT"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          }
+        ],
+        "storage": "local_derived_property_graph",
+        "generation_evidence": true,
+        "clinical_validation": false,
+        "snapshot_created_at": "2026-11-03T09:12:36.682709+00:00",
+        "plan": {
+          "anchors": [
+            {
+              "surface": "阿莫西林胶囊",
+              "node_ids": [
+                "drug_9a84c0e39432de10ec7889a9"
+              ],
+              "start": 0,
+              "end": 6,
+              "kinds": [
+                "Drug"
+              ],
+              "ambiguous": false
+            }
+          ],
+          "requested_relations": [
+            "HAS_INGREDIENT",
+            "CONTRAINDICATION_MENTION",
+            "INTERACTION_MENTION"
+          ],
+          "max_hops": 5,
+          "requires_connected_anchors": false,
+          "interaction_question": true,
+          "drug_discovery": false,
+          "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence"
+        },
+        "stats": {
+          "expanded_states": 21,
+          "fanout_truncations": 1,
+          "expansion_budget_exhausted": false,
+          "candidate_paths": 10
+        },
+        "returned_paths": 6,
+        "multi_relation_paths": 5,
+        "source_verified_count": 3,
+        "truncated": true,
+        "missing_requested_relations": [],
+        "seconds": 0.0353
+      }
+    },
+    {
+      "question": "哮喘患者使用布洛芬片有什么禁忌？",
+      "report": {
+        "status": "ok",
+        "paths": [
+          {
+            "id": "path_61ab716d05429640e428ba67",
+            "nodes": [
+              {
+                "id": "drug_5a79a5405650bb813493fba6",
+                "kind": "Drug",
+                "name": "布洛芬片"
+              },
+              {
+                "id": "disease_b74936dd84a661c77bebd095",
+                "kind": "Disease",
+                "name": "哮喘"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_70afb32d452cc8dcdb7e2df28902c83b",
+                "src": {
+                  "id": "drug_5a79a5405650bb813493fba6",
+                  "kind": "Drug",
+                  "name": "布洛芬片"
+                },
+                "dst": {
+                  "id": "disease_b74936dd84a661c77bebd095",
+                  "kind": "Disease",
+                  "name": "哮喘"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_83f69d1deeed635fb67e68f0",
+                "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "0ab7d0bd46a4a41c266ea138d4d22c1c71b16d540e56878673927fcc8130fbaa",
+                "section_field": "contraindications",
+                "quote_start": 26,
+                "quote_end": 40,
+                "quote": "对阿司匹林过敏的哮喘患者禁用",
+                "mention_start": 34,
+                "mention_end": 36,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 1,
+            "relations": [
+              "CONTRAINDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          }
+        ],
+        "storage": "local_derived_property_graph",
+        "generation_evidence": true,
+        "clinical_validation": false,
+        "snapshot_created_at": "2026-11-03T09:12:36.682709+00:00",
+        "plan": {
+          "anchors": [
+            {
+              "surface": "哮喘",
+              "node_ids": [
+                "disease_b74936dd84a661c77bebd095"
+              ],
+              "start": 0,
+              "end": 2,
+              "kinds": [
+                "Disease"
+              ],
+              "ambiguous": false
+            },
+            {
+              "surface": "布洛芬片",
+              "node_ids": [
+                "drug_5a79a5405650bb813493fba6"
+              ],
+              "start": 6,
+              "end": 10,
+              "kinds": [
+                "Drug"
+              ],
+              "ambiguous": false
+            }
+          ],
+          "requested_relations": [
+            "CONTRAINDICATION_MENTION"
+          ],
+          "max_hops": 5,
+          "requires_connected_anchors": true,
+          "interaction_question": false,
+          "drug_discovery": false,
+          "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence"
+        },
+        "stats": {
+          "expanded_states": 9,
+          "fanout_truncations": 6,
+          "expansion_budget_exhausted": false,
+          "candidate_paths": 1
+        },
+        "returned_paths": 1,
+        "multi_relation_paths": 0,
+        "source_verified_count": 1,
+        "truncated": true,
+        "missing_requested_relations": [],
+        "seconds": 0.1258
+      }
+    },
+    {
+      "question": "胸痛相关疾病有哪些症状和相关药品成分、禁忌？",
+      "report": {
+        "status": "ok",
+        "paths": [
+          {
+            "id": "path_bae0414a9a04cac1ad6476f4",
+            "nodes": [
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              },
+              {
+                "id": "disease_0e22390b792c256b45ed5796",
+                "kind": "Disease",
+                "name": "心绞痛"
+              },
+              {
+                "id": "drug_904a5ff3fb798b29833970e1",
+                "kind": "Drug",
+                "name": "心力丸"
+              },
+              {
+                "id": "ingredient_96f408489a5e771651f13b33",
+                "kind": "Ingredient",
+                "name": "附片"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_0c613faeb2d29906b159dd0c164bf516",
+                "src": {
+                  "id": "disease_0e22390b792c256b45ed5796",
+                  "kind": "Disease",
+                  "name": "心绞痛"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_78cca455b66c8b0990cb8af9",
+                "record_id": "5bb578b8831b973a137e3f97",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "bd473f6587ad9dc0332ba7bf43434d38aab1aaa4e42e95c79b05ad969e6257a8",
+                "section_field": "symptom",
+                "quote_start": 13,
+                "quote_end": 15,
+                "quote": "胸痛",
+                "mention_start": 13,
+                "mention_end": 15,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_00b82f67c9d2fac090485003ad318559",
+                "src": {
+                  "id": "drug_904a5ff3fb798b29833970e1",
+                  "kind": "Drug",
+                  "name": "心力丸"
+                },
+                "dst": {
+                  "id": "disease_0e22390b792c256b45ed5796",
+                  "kind": "Disease",
+                  "name": "心绞痛"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_8229f88c17ff9f24ced1ba76",
+                "record_id": "sourcerecord_24b9b5727dc6b94b16b013f1",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/zhongyao/zy76796.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "46dfec6e98a19ee2999a93337d6d1f9800fb6b9094a399283fa382c2d91b2564",
+                "section_field": "indication",
+                "quote_start": 10,
+                "quote_end": 48,
+                "quote": "用于心阳不振、气滞血瘀所致的胸痹心痛、胸闷气短、心悸怔仲、冠心病、心绞痛等。",
+                "mention_start": 43,
+                "mention_end": 46,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_29c8081915f1ef4d6935eebe2e326c44",
+                "src": {
+                  "id": "drug_904a5ff3fb798b29833970e1",
+                  "kind": "Drug",
+                  "name": "心力丸"
+                },
+                "dst": {
+                  "id": "ingredient_96f408489a5e771651f13b33",
+                  "kind": "Ingredient",
+                  "name": "附片"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_181a95d4d03a2229a5596d68",
+                "record_id": "sourcerecord_24b9b5727dc6b94b16b013f1",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/zhongyao/zy76796.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "b68b769cdf86c671ada37012d27ff3afc1d99aca0a840c9c3ff2a974b11bfdeb",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 26,
+                "quote": "人参、附片、蟾酥麝香、红花、冰片灵芝、珍珠、人工牛黄",
+                "mention_start": 3,
+                "mention_end": 5,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_INGREDIENT",
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_6738f9ff945b2a4f373f873b",
+            "nodes": [
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              },
+              {
+                "id": "disease_f9ca8b603cc26cdd7164bbd9",
+                "kind": "Disease",
+                "name": "窦性心动过速"
+              },
+              {
+                "id": "drug_8fc15e5d1d572f11785cbb6a",
+                "kind": "Drug",
+                "name": "酒石酸美托洛尔注射液"
+              },
+              {
+                "id": "disease_95defe346d4b76aeb3e908a3",
+                "kind": "Disease",
+                "name": "房室传导阻滞"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_3715cfab4fa4ca8b4f4bc46d71113362",
+                "src": {
+                  "id": "disease_f9ca8b603cc26cdd7164bbd9",
+                  "kind": "Disease",
+                  "name": "窦性心动过速"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_2b443e4e434042b8484011cc",
+                "record_id": "5bb578b7831b973a137e3f5e",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "200c38c74725eab8a76967abe23adbef09e49f5aeac4cd765eebd380d5c180ff",
+                "section_field": "symptom",
+                "quote_start": 0,
+                "quote_end": 2,
+                "quote": "胸痛",
+                "mention_start": 0,
+                "mention_end": 2,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_2dd4592de2e6812e8d440ccf00a02e1e",
+                "src": {
+                  "id": "drug_8fc15e5d1d572f11785cbb6a",
+                  "kind": "Drug",
+                  "name": "酒石酸美托洛尔注射液"
+                },
+                "dst": {
+                  "id": "disease_f9ca8b603cc26cdd7164bbd9",
+                  "kind": "Disease",
+                  "name": "窦性心动过速"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_8116102e457c9ddc0c647ad3",
+                "record_id": "sourcerecord_083d115122c0c9c347191966",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy1198a.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "d43d845e25f7fc8c44068bce8240c78ac97cd25bea9bd8a93197464ba4e66d2a",
+                "section_field": "indication",
+                "quote_start": 27,
+                "quote_end": 49,
+                "quote": " 2.诱导麻醉或麻醉期间出现的窦性心动过速。",
+                "mention_start": 42,
+                "mention_end": 48,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_07981487f00bfb67d8cd531a1b583503",
+                "src": {
+                  "id": "drug_8fc15e5d1d572f11785cbb6a",
+                  "kind": "Drug",
+                  "name": "酒石酸美托洛尔注射液"
+                },
+                "dst": {
+                  "id": "disease_95defe346d4b76aeb3e908a3",
+                  "kind": "Disease",
+                  "name": "房室传导阻滞"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_5f2574d6f46bb0bdb8fc3af4",
+                "record_id": "sourcerecord_083d115122c0c9c347191966",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy1198a.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "1866c1379412054dd3707a9420700b371debd020d90cbd8a0ce008bcbc51fb01",
+                "section_field": "contraindications",
+                "quote_start": 0,
+                "quote_end": 68,
+                "quote": "Ⅱ°或Ⅲ°房室传导阻滞，心源性休克，严重心动过缓（心率小于60次/分）收缩期血压小于12kpa，心功能不全，病态窦房结综合症及孕妇禁用\n",
+                "mention_start": 5,
+                "mention_end": 11,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_f1616d043ef2ac33a4484061",
+            "nodes": [
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              },
+              {
+                "id": "disease_c7f54e272b8637a972e0052d",
+                "kind": "Disease",
+                "name": "军团菌肺炎"
+              },
+              {
+                "id": "drug_e965ebc1bbc58f9268e8e9b4",
+                "kind": "Drug",
+                "name": "红霉素肠溶散剂"
+              },
+              {
+                "id": "condition_2c98ea92d3aede4a8575145a",
+                "kind": "Condition",
+                "name": "对本品过敏者禁用"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_3d22d8550e76192d5a44f05e8b3c323e",
+                "src": {
+                  "id": "disease_c7f54e272b8637a972e0052d",
+                  "kind": "Disease",
+                  "name": "军团菌肺炎"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_eddd56800ebcd234409bbf9b",
+                "record_id": "5bb578ca831b973a137e4763",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "44f28ee6cb4843739145e14000b9e9094a4f1bd8501f2604bfd4fda2e1c0005e",
+                "section_field": "symptom",
+                "quote_start": 0,
+                "quote_end": 2,
+                "quote": "胸痛",
+                "mention_start": 0,
+                "mention_end": 2,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_c1b6563bcd6646badb3999b2cfbd87f2",
+                "src": {
+                  "id": "drug_e965ebc1bbc58f9268e8e9b4",
+                  "kind": "Drug",
+                  "name": "红霉素肠溶散剂"
+                },
+                "dst": {
+                  "id": "disease_c7f54e272b8637a972e0052d",
+                  "kind": "Disease",
+                  "name": "军团菌肺炎"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_a5ca1c8cf797ab56fb3ce1b4",
+                "record_id": "sourcerecord_382ec0fbc6a9a41e20b1c922",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy1303a.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "73103b028b9af5e835173d67155e75ee03f0962e3a3f92d79e45da6ee854ad82",
+                "section_field": "indication",
+                "quote_start": 51,
+                "quote_end": 69,
+                "quote": "为军团菌肺炎和支原体肺炎的首选药物。",
+                "mention_start": 52,
+                "mention_end": 57,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_9a502d50cdb000c332791c9a4360f396",
+                "src": {
+                  "id": "drug_e965ebc1bbc58f9268e8e9b4",
+                  "kind": "Drug",
+                  "name": "红霉素肠溶散剂"
+                },
+                "dst": {
+                  "id": "condition_2c98ea92d3aede4a8575145a",
+                  "kind": "Condition",
+                  "name": "对本品过敏者禁用"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_f819137ce41a0dce0d1c226c",
+                "record_id": "sourcerecord_382ec0fbc6a9a41e20b1c922",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy1303a.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "5f56820214babeceba99e652dedc98a9d24bbd45f2d58fc0bb276f23322f44d1",
+                "section_field": "contraindications",
+                "quote_start": 0,
+                "quote_end": 8,
+                "quote": "对本品过敏者禁用",
+                "mention_start": 0,
+                "mention_end": 8,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_c6116dc5fd6de718b7c602de",
+            "nodes": [
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              },
+              {
+                "id": "disease_0aef17238527d082560bad4b",
+                "kind": "Disease",
+                "name": "稳定型心绞痛"
+              },
+              {
+                "id": "drug_375423a33d8f22cbd040b0cd",
+                "kind": "Drug",
+                "name": "盐酸苄普地尔片"
+              },
+              {
+                "id": "disease_75404277c0e6c3b9d3ccb014",
+                "kind": "Disease",
+                "name": "心律失常"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_470bc5b9069d4d925f84727fa1d9afaf",
+                "src": {
+                  "id": "disease_0aef17238527d082560bad4b",
+                  "kind": "Disease",
+                  "name": "稳定型心绞痛"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_d555f46919759cd0d2f074dc",
+                "record_id": "5bb578f5831b973a137e5ad3",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "ed91ffc26e7a8367dfd3c5e2c2983e80c755b28b873d03087150afb8415e1199",
+                "section_field": "symptom",
+                "quote_start": 3,
+                "quote_end": 5,
+                "quote": "胸痛",
+                "mention_start": 3,
+                "mention_end": 5,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_5a1688aa9f0dd34b5cee826fc930585c",
+                "src": {
+                  "id": "drug_375423a33d8f22cbd040b0cd",
+                  "kind": "Drug",
+                  "name": "盐酸苄普地尔片"
+                },
+                "dst": {
+                  "id": "disease_0aef17238527d082560bad4b",
+                  "kind": "Disease",
+                  "name": "稳定型心绞痛"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_abceb61162b84f84938c655c",
+                "record_id": "sourcerecord_9c211042d8a24c7960ec5967",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy64154.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "2946f49ffcffd132caec6f01eaf22140546b6f5c5b469829d55dbc5a6e4254c7",
+                "section_field": "indication",
+                "quote_start": 0,
+                "quote_end": 33,
+                "quote": "盐酸苄普地尔片适用于慢性稳定型心绞痛（典型的劳累型心绞痛）的治疗。",
+                "mention_start": 12,
+                "mention_end": 18,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_06ed7969f2c34803f428bdcec121e254",
+                "src": {
+                  "id": "drug_375423a33d8f22cbd040b0cd",
+                  "kind": "Drug",
+                  "name": "盐酸苄普地尔片"
+                },
+                "dst": {
+                  "id": "disease_75404277c0e6c3b9d3ccb014",
+                  "kind": "Disease",
+                  "name": "心律失常"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_4c20d3dabd97ae4e53a37e8a",
+                "record_id": "sourcerecord_9c211042d8a24c7960ec5967",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy64154.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "2a7f60171190e4ed758407efff63ffa6167b77401097601b7c88f18b1920a7aa",
+                "section_field": "contraindications",
+                "quote_start": 188,
+                "quote_end": 259,
+                "quote": "警告： 诱发新的严重心律失常的危险： 盐酸苄普地尔具有Ⅰ类抗心律失常药的特性，能引起新的心律失常，包括室性心动过速（VT）或心室颤动（VF）\n",
+                "mention_start": 198,
+                "mention_end": 202,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_826717abf854f066a3a583b3",
+            "nodes": [
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              },
+              {
+                "id": "disease_92a8dfcfdc42089e177ffc50",
+                "kind": "Disease",
+                "name": "急性心肌梗死"
+              },
+              {
+                "id": "drug_a865be793c3286fb9e06b0b7",
+                "kind": "Drug",
+                "name": "盐酸索他洛尔片"
+              },
+              {
+                "id": "symptom_81dc47f90de3fa7afab1dfc8",
+                "kind": "Symptom",
+                "name": "心动过缓"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_47f8c6718a0d12fd34f4a247451dbadb",
+                "src": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_75b4c70606f7201da87c54ae",
+                "record_id": "5bb578b8831b973a137e3f78",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "e8ed13ae297ac8ef5a61de1d997a7a63fe7ba93722acc409801080ea4910d690",
+                "section_field": "symptom",
+                "quote_start": 7,
+                "quote_end": 9,
+                "quote": "胸痛",
+                "mention_start": 7,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_0723f7038fc18ad194410e2006e2fcfc",
+                "src": {
+                  "id": "drug_a865be793c3286fb9e06b0b7",
+                  "kind": "Drug",
+                  "name": "盐酸索他洛尔片"
+                },
+                "dst": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_930cdff84a86338528cf4642",
+                "record_id": "sourcerecord_ee1c11b3439b9216b4671c48",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy34690.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "d8e724fc2f49141f6e5c8a7b2c31d977464c5e4cc5eb1e70de8001d1df376a80",
+                "section_field": "indication",
+                "quote_start": 91,
+                "quote_end": 108,
+                "quote": "4．急性心肌梗死并发严重心律失常。",
+                "mention_start": 93,
+                "mention_end": 99,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_1ba39ab481e09043fc5d27b597a111c4",
+                "src": {
+                  "id": "drug_a865be793c3286fb9e06b0b7",
+                  "kind": "Drug",
+                  "name": "盐酸索他洛尔片"
+                },
+                "dst": {
+                  "id": "symptom_81dc47f90de3fa7afab1dfc8",
+                  "kind": "Symptom",
+                  "name": "心动过缓"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_f59782cfe391b7b11995f1cf",
+                "record_id": "sourcerecord_ee1c11b3439b9216b4671c48",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy34690.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "48d5f9171686703ba5c72630c234f4932ab83f07bf002f42a30a8d07c1b16de7",
+                "section_field": "contraindications",
+                "quote_start": 0,
+                "quote_end": 7,
+                "quote": "心动过缓，心率",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_bebe2ba12e3e6193701a588a",
+            "nodes": [
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              },
+              {
+                "id": "disease_fb20c343a9903f17a5ecefea",
+                "kind": "Disease",
+                "name": "心血瘀阻"
+              },
+              {
+                "id": "drug_ed02e0aee2292521f31051f3",
+                "kind": "Drug",
+                "name": "吉如心片"
+              },
+              {
+                "id": "population_8985663bee1873908bec8c2a",
+                "kind": "Population",
+                "name": "孕妇"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_50b7cefc7294899a0db5549349eb071a",
+                "src": {
+                  "id": "disease_fb20c343a9903f17a5ecefea",
+                  "kind": "Disease",
+                  "name": "心血瘀阻"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_ad051a95cc824591ccdac099",
+                "record_id": "5bb578ff831b973a137e601f",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "fc0a6ed997c58ddf33b78e2f023529e8229ff52f7a7edb2c0292f195e36c3eee",
+                "section_field": "symptom",
+                "quote_start": 8,
+                "quote_end": 10,
+                "quote": "胸痛",
+                "mention_start": 8,
+                "mention_end": 10,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_0d5506d9ce50029c5605d3a1f26d4cae",
+                "src": {
+                  "id": "drug_ed02e0aee2292521f31051f3",
+                  "kind": "Drug",
+                  "name": "吉如心片"
+                },
+                "dst": {
+                  "id": "disease_fb20c343a9903f17a5ecefea",
+                  "kind": "Disease",
+                  "name": "心血瘀阻"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_db3e60e9d62e1500ce3cad88",
+                "record_id": "sourcerecord_2b2f1d37e5d078d688802acf",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/zhongyao/zy4493y.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "8faa11ce969b29f750c3822b8f6355411f6f0062ca06f18dac8e9bd9e41f9343",
+                "section_field": "indication",
+                "quote_start": 10,
+                "quote_end": 45,
+                "quote": "用于心血瘀阻型胸痹，症见胸部刺痛、绞痛或胸部闷痛，胸闷憋气，心悸等症；",
+                "mention_start": 12,
+                "mention_end": 16,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_63a2d3fd6751534ac33cc76dc11c7dd1",
+                "src": {
+                  "id": "drug_ed02e0aee2292521f31051f3",
+                  "kind": "Drug",
+                  "name": "吉如心片"
+                },
+                "dst": {
+                  "id": "population_8985663bee1873908bec8c2a",
+                  "kind": "Population",
+                  "name": "孕妇"
+                },
+                "relation": "CONTRAINDICATION_MENTION",
+                "relation_label": "禁忌章节提及（保留原文条件）",
+                "source_id": "section_c6103f6be1c7a69a9b90889f",
+                "record_id": "sourcerecord_2b2f1d37e5d078d688802acf",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/zhongyao/zy4493y.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "fb6a8e5b3f0656ea758b80f5f0ae3f5bf1b60ba1c29fda65f2a041e74dafa0b4",
+                "section_field": "contraindications",
+                "quote_start": 0,
+                "quote_end": 4,
+                "quote": "孕妇禁用",
+                "mention_start": 0,
+                "mention_end": 2,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": true,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "CONTRAINDICATION_MENTION",
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          }
+        ],
+        "storage": "local_derived_property_graph",
+        "generation_evidence": true,
+        "clinical_validation": false,
+        "snapshot_created_at": "2026-11-03T09:12:36.682709+00:00",
+        "plan": {
+          "anchors": [
+            {
+              "surface": "胸痛",
+              "node_ids": [
+                "symptom_92376b5368b3bd0f7aafdd9a"
+              ],
+              "start": 0,
+              "end": 2,
+              "kinds": [
+                "Symptom"
+              ],
+              "ambiguous": false
+            }
+          ],
+          "requested_relations": [
+            "HAS_SYMPTOM",
+            "HAS_INGREDIENT",
+            "CONTRAINDICATION_MENTION",
+            "INDICATION_MENTION"
+          ],
+          "max_hops": 5,
+          "requires_connected_anchors": false,
+          "interaction_question": false,
+          "drug_discovery": true,
+          "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence"
+        },
+        "stats": {
+          "fanout_truncations": 168,
+          "expanded_states": 2400,
+          "expansion_budget_exhausted": true,
+          "candidate_paths": 2528
+        },
+        "returned_paths": 6,
+        "multi_relation_paths": 6,
+        "source_verified_count": 18,
+        "truncated": true,
+        "missing_requested_relations": [],
+        "seconds": 2.0426
+      }
+    },
+    {
+      "question": "华法林钠片与布洛芬片合用有什么风险？",
+      "report": {
+        "status": "no_connected_evidence_path",
+        "paths": [],
+        "storage": "local_derived_property_graph",
+        "generation_evidence": true,
+        "clinical_validation": false,
+        "snapshot_created_at": "2026-11-03T09:12:36.682709+00:00",
+        "plan": {
+          "anchors": [
+            {
+              "surface": "华法林钠片",
+              "node_ids": [
+                "drug_085e9a8b4942ca501921100b"
+              ],
+              "start": 0,
+              "end": 5,
+              "kinds": [
+                "Drug"
+              ],
+              "ambiguous": false
+            },
+            {
+              "surface": "布洛芬片",
+              "node_ids": [
+                "drug_5a79a5405650bb813493fba6"
+              ],
+              "start": 6,
+              "end": 10,
+              "kinds": [
+                "Drug"
+              ],
+              "ambiguous": false
+            }
+          ],
+          "requested_relations": [
+            "INTERACTION_MENTION"
+          ],
+          "max_hops": 5,
+          "requires_connected_anchors": true,
+          "interaction_question": true,
+          "drug_discovery": false,
+          "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence"
+        },
+        "stats": {
+          "expanded_states": 31,
+          "fanout_truncations": 14,
+          "expansion_budget_exhausted": false,
+          "candidate_paths": 0
+        },
+        "returned_paths": 0,
+        "multi_relation_paths": 0,
+        "source_verified_count": 0,
+        "truncated": true,
+        "missing_requested_relations": [
+          "INTERACTION_MENTION"
+        ],
+        "seconds": 0.1337
+      }
+    },
+    {
+      "question": "肺泡蛋白质沉积症有哪些症状？",
+      "report": {
+        "status": "ok",
+        "paths": [
+          {
+            "id": "path_d1b611a7e07641335d4885c8",
+            "nodes": [
+              {
+                "id": "disease_99f02f1ec4acfe1a372d315b",
+                "kind": "Disease",
+                "name": "肺泡蛋白质沉积症"
+              },
+              {
+                "id": "symptom_b7dccf00c7310be6df345d77",
+                "kind": "Symptom",
+                "name": "紫绀"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_1423169ac55d5e2e7fdf3cf6178a8d0f",
+                "src": {
+                  "id": "disease_99f02f1ec4acfe1a372d315b",
+                  "kind": "Disease",
+                  "name": "肺泡蛋白质沉积症"
+                },
+                "dst": {
+                  "id": "symptom_b7dccf00c7310be6df345d77",
+                  "kind": "Symptom",
+                  "name": "紫绀"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_ee2a4a4a232aa819d41221e2",
+                "record_id": "5bb578b6831b973a137e3ee6",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "db33aa55778cb0d7057d66c3286741478d89976ec629586a312d1eead2550f49",
+                "section_field": "symptom",
+                "quote_start": 0,
+                "quote_end": 2,
+                "quote": "紫绀",
+                "mention_start": 0,
+                "mention_end": 2,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 1,
+            "relations": [
+              "HAS_SYMPTOM"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_db5113adebd56832560970b6",
+            "nodes": [
+              {
+                "id": "disease_99f02f1ec4acfe1a372d315b",
+                "kind": "Disease",
+                "name": "肺泡蛋白质沉积症"
+              },
+              {
+                "id": "symptom_03e1afdf5df5cf4d27ec6f8b",
+                "kind": "Symptom",
+                "name": "乏力"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_5eb2c84d67b1e8e7a58a6d5cba48372e",
+                "src": {
+                  "id": "disease_99f02f1ec4acfe1a372d315b",
+                  "kind": "Disease",
+                  "name": "肺泡蛋白质沉积症"
+                },
+                "dst": {
+                  "id": "symptom_03e1afdf5df5cf4d27ec6f8b",
+                  "kind": "Symptom",
+                  "name": "乏力"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_ee2a4a4a232aa819d41221e2",
+                "record_id": "5bb578b6831b973a137e3ee6",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "db33aa55778cb0d7057d66c3286741478d89976ec629586a312d1eead2550f49",
+                "section_field": "symptom",
+                "quote_start": 11,
+                "quote_end": 13,
+                "quote": "乏力",
+                "mention_start": 11,
+                "mention_end": 13,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 1,
+            "relations": [
+              "HAS_SYMPTOM"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_21059fa318fb6ead0b531425",
+            "nodes": [
+              {
+                "id": "disease_99f02f1ec4acfe1a372d315b",
+                "kind": "Disease",
+                "name": "肺泡蛋白质沉积症"
+              },
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_80e66c01169e9abed37911c1ba727777",
+                "src": {
+                  "id": "disease_99f02f1ec4acfe1a372d315b",
+                  "kind": "Disease",
+                  "name": "肺泡蛋白质沉积症"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_ee2a4a4a232aa819d41221e2",
+                "record_id": "5bb578b6831b973a137e3ee6",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "db33aa55778cb0d7057d66c3286741478d89976ec629586a312d1eead2550f49",
+                "section_field": "symptom",
+                "quote_start": 3,
+                "quote_end": 5,
+                "quote": "胸痛",
+                "mention_start": 3,
+                "mention_end": 5,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 1,
+            "relations": [
+              "HAS_SYMPTOM"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_c34b316590a628dbd12d61ac",
+            "nodes": [
+              {
+                "id": "disease_99f02f1ec4acfe1a372d315b",
+                "kind": "Disease",
+                "name": "肺泡蛋白质沉积症"
+              },
+              {
+                "id": "symptom_7180e21d009c711e196fa285",
+                "kind": "Symptom",
+                "name": "呼吸困难"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_9518d480900fd70696aacfabeecb30d8",
+                "src": {
+                  "id": "disease_99f02f1ec4acfe1a372d315b",
+                  "kind": "Disease",
+                  "name": "肺泡蛋白质沉积症"
+                },
+                "dst": {
+                  "id": "symptom_7180e21d009c711e196fa285",
+                  "kind": "Symptom",
+                  "name": "呼吸困难"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_ee2a4a4a232aa819d41221e2",
+                "record_id": "5bb578b6831b973a137e3ee6",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "db33aa55778cb0d7057d66c3286741478d89976ec629586a312d1eead2550f49",
+                "section_field": "symptom",
+                "quote_start": 6,
+                "quote_end": 10,
+                "quote": "呼吸困难",
+                "mention_start": 6,
+                "mention_end": 10,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 1,
+            "relations": [
+              "HAS_SYMPTOM"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          }
+        ],
+        "storage": "local_derived_property_graph",
+        "generation_evidence": true,
+        "clinical_validation": false,
+        "snapshot_created_at": "2026-11-03T09:12:36.682709+00:00",
+        "plan": {
+          "anchors": [
+            {
+              "surface": "肺泡蛋白质沉积症",
+              "node_ids": [
+                "disease_99f02f1ec4acfe1a372d315b"
+              ],
+              "start": 0,
+              "end": 8,
+              "kinds": [
+                "Disease"
+              ],
+              "ambiguous": false
+            }
+          ],
+          "requested_relations": [
+            "HAS_SYMPTOM"
+          ],
+          "max_hops": 5,
+          "requires_connected_anchors": false,
+          "interaction_question": false,
+          "drug_discovery": false,
+          "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence"
+        },
+        "stats": {
+          "expanded_states": 1,
+          "expansion_budget_exhausted": false,
+          "candidate_paths": 4
+        },
+        "returned_paths": 4,
+        "multi_relation_paths": 0,
+        "source_verified_count": 1,
+        "truncated": false,
+        "missing_requested_relations": [],
+        "seconds": 0.0113
+      }
+    },
+    {
+      "question": "胸痛相关药品与阿司匹林肠溶片的成分和相互作用有哪些？",
+      "report": {
+        "status": "ok",
+        "paths": [
+          {
+            "id": "path_9f5288ce0a58c4e4ae549d7a",
+            "nodes": [
+              {
+                "id": "ingredient_c347a8cc2322cec8158c8da2",
+                "kind": "Ingredient",
+                "name": "苯溴马隆"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "disease_0e22390b792c256b45ed5796",
+                "kind": "Disease",
+                "name": "心绞痛"
+              },
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_007ea8484e3a76fe0384ff90451f95c8",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_c347a8cc2322cec8158c8da2",
+                  "kind": "Ingredient",
+                  "name": "苯溴马隆"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 438,
+                "quote_end": 462,
+                "quote": " - 排尿酸剂(如丙磺舒、苯溴马隆、苯磺唑酮)。",
+                "mention_start": 451,
+                "mention_end": 455,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_b7fac02e460c30005cef5126b4755b1e",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "disease_0e22390b792c256b45ed5796",
+                  "kind": "Disease",
+                  "name": "心绞痛"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_5e87b1c4e12d0f469d719c66",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "79df9e7b228915ea9e1a844fdee362070e5a6931a804c23f4ca709666722b3e6",
+                "section_field": "indication",
+                "quote_start": 0,
+                "quote_end": 20,
+                "quote": "- 不稳定性心绞痛(标准治疗的一部分)；",
+                "mention_start": 6,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_0c613faeb2d29906b159dd0c164bf516",
+                "src": {
+                  "id": "disease_0e22390b792c256b45ed5796",
+                  "kind": "Disease",
+                  "name": "心绞痛"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_78cca455b66c8b0990cb8af9",
+                "record_id": "5bb578b8831b973a137e3f97",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "bd473f6587ad9dc0332ba7bf43434d38aab1aaa4e42e95c79b05ad969e6257a8",
+                "section_field": "symptom",
+                "quote_start": 13,
+                "quote_end": 15,
+                "quote": "胸痛",
+                "mention_start": 13,
+                "mention_end": 15,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_8fca19a56d6d10a93922019f",
+            "nodes": [
+              {
+                "id": "ingredient_4569e75e32ba30bc9106e864",
+                "kind": "Ingredient",
+                "name": "阿司匹林"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "disease_e864e416563c5f7c89624d20",
+                "kind": "Disease",
+                "name": "心肌梗死"
+              },
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_1cf6ba78380a073e5c37581819f16484",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_4569e75e32ba30bc9106e864",
+                  "kind": "Ingredient",
+                  "name": "阿司匹林"
+                },
+                "relation": "HAS_INGREDIENT",
+                "relation_label": "成分原文记载",
+                "source_id": "section_44a78149b20ab5922aeb9f4b",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "25d8bbea67adbcb9ea4757ddfb1607105b5a3d253e3a73d4b1b7fcf612d93dca",
+                "section_field": "composition",
+                "quote_start": 0,
+                "quote_end": 5,
+                "quote": "阿司匹林。",
+                "mention_start": 0,
+                "mention_end": 4,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              },
+              {
+                "id": "edge_e99ff640459dffb163f1d6266f265295",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "disease_e864e416563c5f7c89624d20",
+                  "kind": "Disease",
+                  "name": "心肌梗死"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_5e87b1c4e12d0f469d719c66",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "79df9e7b228915ea9e1a844fdee362070e5a6931a804c23f4ca709666722b3e6",
+                "section_field": "indication",
+                "quote_start": 40,
+                "quote_end": 52,
+                "quote": " - 预防心肌梗死复发；",
+                "mention_start": 45,
+                "mention_end": 49,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_a5d930336fefb677e24f41202900c79a",
+                "src": {
+                  "id": "disease_e864e416563c5f7c89624d20",
+                  "kind": "Disease",
+                  "name": "心肌梗死"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_6a5089a89f8cc48c56e05a82",
+                "record_id": "5bb578b8831b973a137e3f9a",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "fd7b39a6fbeda9c1a1a9e3b476412bfdb23a79d8b14c39febcea841ee92d4bee",
+                "section_field": "symptom",
+                "quote_start": 20,
+                "quote_end": 22,
+                "quote": "胸痛",
+                "mention_start": 20,
+                "mention_end": 22,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_INGREDIENT",
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_0102a6891fbc709ad1ab2af5",
+            "nodes": [
+              {
+                "id": "ingredient_d09219bce9d645bc89b83e42",
+                "kind": "Ingredient",
+                "name": "安乃近"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "disease_92a8dfcfdc42089e177ffc50",
+                "kind": "Disease",
+                "name": "急性心肌梗死"
+              },
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_088ed4ec6797f851889a3f5c9d7f4dea",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_d09219bce9d645bc89b83e42",
+                  "kind": "Ingredient",
+                  "name": "安乃近"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 597,
+                "quote_end": 627,
+                "quote": "如果同时服用安乃近，可能会降低乙酰水杨酸对血小板聚集的影响。",
+                "mention_start": 603,
+                "mention_end": 606,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_fe651c778bbd024ec2dba84271da8dff",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_5e87b1c4e12d0f469d719c66",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "79df9e7b228915ea9e1a844fdee362070e5a6931a804c23f4ca709666722b3e6",
+                "section_field": "indication",
+                "quote_start": 20,
+                "quote_end": 40,
+                "quote": " - 急性心肌梗死(标准治疗的一部分)；",
+                "mention_start": 23,
+                "mention_end": 29,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_47f8c6718a0d12fd34f4a247451dbadb",
+                "src": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_75b4c70606f7201da87c54ae",
+                "record_id": "5bb578b8831b973a137e3f78",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "e8ed13ae297ac8ef5a61de1d997a7a63fe7ba93722acc409801080ea4910d690",
+                "section_field": "symptom",
+                "quote_start": 7,
+                "quote_end": 9,
+                "quote": "胸痛",
+                "mention_start": 7,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_6b541d5f2c09378e67a311a8",
+            "nodes": [
+              {
+                "id": "ingredient_b3a8bd1cfc16d2486eb221d3",
+                "kind": "Ingredient",
+                "name": "甲氨蝶呤"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "disease_92a8dfcfdc42089e177ffc50",
+                "kind": "Disease",
+                "name": "急性心肌梗死"
+              },
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_229d5353e389766238b3c91410c4fa6e",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_b3a8bd1cfc16d2486eb221d3",
+                  "kind": "Ingredient",
+                  "name": "甲氨蝶呤"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 268,
+                "quote_end": 297,
+                "quote": " - 甲氨蝶呤：降低消除，在蛋白结合位点上被水杨酸盐替代。",
+                "mention_start": 271,
+                "mention_end": 275,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_fe651c778bbd024ec2dba84271da8dff",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_5e87b1c4e12d0f469d719c66",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "79df9e7b228915ea9e1a844fdee362070e5a6931a804c23f4ca709666722b3e6",
+                "section_field": "indication",
+                "quote_start": 20,
+                "quote_end": 40,
+                "quote": " - 急性心肌梗死(标准治疗的一部分)；",
+                "mention_start": 23,
+                "mention_end": 29,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_47f8c6718a0d12fd34f4a247451dbadb",
+                "src": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_75b4c70606f7201da87c54ae",
+                "record_id": "5bb578b8831b973a137e3f78",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "e8ed13ae297ac8ef5a61de1d997a7a63fe7ba93722acc409801080ea4910d690",
+                "section_field": "symptom",
+                "quote_start": 7,
+                "quote_end": 9,
+                "quote": "胸痛",
+                "mention_start": 7,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_f908f18dbd4e418b0e692eac",
+            "nodes": [
+              {
+                "id": "ingredient_9f4551e4b0860183ba252da3",
+                "kind": "Ingredient",
+                "name": "萘普生"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "disease_92a8dfcfdc42089e177ffc50",
+                "kind": "Disease",
+                "name": "急性心肌梗死"
+              },
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_317a56db6889506e212ccb1b32c4d125",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_9f4551e4b0860183ba252da3",
+                  "kind": "Ingredient",
+                  "name": "萘普生"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 540,
+                "quote_end": 597,
+                "quote": "心血管风险增加的患者使用某些NSAIDs，例如布洛芬或萘普生可能使阿司匹林的心血管保护作用降低(见[药理毒理])。",
+                "mention_start": 567,
+                "mention_end": 570,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": true,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_fe651c778bbd024ec2dba84271da8dff",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_5e87b1c4e12d0f469d719c66",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "79df9e7b228915ea9e1a844fdee362070e5a6931a804c23f4ca709666722b3e6",
+                "section_field": "indication",
+                "quote_start": 20,
+                "quote_end": 40,
+                "quote": " - 急性心肌梗死(标准治疗的一部分)；",
+                "mention_start": 23,
+                "mention_end": 29,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_47f8c6718a0d12fd34f4a247451dbadb",
+                "src": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_75b4c70606f7201da87c54ae",
+                "record_id": "5bb578b8831b973a137e3f78",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "e8ed13ae297ac8ef5a61de1d997a7a63fe7ba93722acc409801080ea4910d690",
+                "section_field": "symptom",
+                "quote_start": 7,
+                "quote_end": 9,
+                "quote": "胸痛",
+                "mention_start": 7,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          },
+          {
+            "id": "path_b12893d83a7779cc080f4808",
+            "nodes": [
+              {
+                "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                "kind": "Ingredient",
+                "name": "布洛芬"
+              },
+              {
+                "id": "drug_5f145f046b1163232f6bb38d",
+                "kind": "Drug",
+                "name": "阿司匹林肠溶片"
+              },
+              {
+                "id": "disease_92a8dfcfdc42089e177ffc50",
+                "kind": "Disease",
+                "name": "急性心肌梗死"
+              },
+              {
+                "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                "kind": "Symptom",
+                "name": "胸痛"
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge_3c8f1576a995192f4203b65d88d880ca",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "ingredient_9cfb00bc1a39d0bfa22ae676",
+                  "kind": "Ingredient",
+                  "name": "布洛芬"
+                },
+                "relation": "INTERACTION_MENTION",
+                "relation_label": "相互作用章节提及（非自动确认风险）",
+                "source_id": "section_89d97269530577ddfdc1f701",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "63baa939587e8b89cfd471f3db42cbaa0db846aaa3673e100738da3c21899b37",
+                "section_field": "drug_interactions",
+                "quote_start": 462,
+                "quote_end": 540,
+                "quote": " - NSAIDs：同时使用(同一天)某些NSAIDs(阿司匹林除外)，如布洛芬或萘普生会减弱阿司匹林的不可逆抗血小板作用。该相互作用的临床相关性尚不明确。",
+                "mention_start": 499,
+                "mention_end": 502,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": true
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_fe651c778bbd024ec2dba84271da8dff",
+                "src": {
+                  "id": "drug_5f145f046b1163232f6bb38d",
+                  "kind": "Drug",
+                  "name": "阿司匹林肠溶片"
+                },
+                "dst": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "relation": "INDICATION_MENTION",
+                "relation_label": "用途章节提及（非确证治疗）",
+                "source_id": "section_5e87b1c4e12d0f469d719c66",
+                "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                "source_file": "kg_output_clean_v2/sections.jsonl",
+                "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                "source_status": "third_party_unverified",
+                "source_sha256": "79df9e7b228915ea9e1a844fdee362070e5a6931a804c23f4ca709666722b3e6",
+                "section_field": "indication",
+                "quote_start": 20,
+                "quote_end": 40,
+                "quote": " - 急性心肌梗死(标准治疗的一部分)；",
+                "mention_start": 23,
+                "mention_end": 29,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "literal_mention_not_clinically_validated"
+              },
+              {
+                "id": "edge_47f8c6718a0d12fd34f4a247451dbadb",
+                "src": {
+                  "id": "disease_92a8dfcfdc42089e177ffc50",
+                  "kind": "Disease",
+                  "name": "急性心肌梗死"
+                },
+                "dst": {
+                  "id": "symptom_92376b5368b3bd0f7aafdd9a",
+                  "kind": "Symptom",
+                  "name": "胸痛"
+                },
+                "relation": "HAS_SYMPTOM",
+                "relation_label": "资料列出的症状",
+                "source_id": "disease_symptoms_75b4c70606f7201da87c54ae",
+                "record_id": "5bb578b8831b973a137e3f78",
+                "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+                "source_url": "",
+                "source_status": "third_party_unverified",
+                "source_sha256": "e8ed13ae297ac8ef5a61de1d997a7a63fe7ba93722acc409801080ea4910d690",
+                "section_field": "symptom",
+                "quote_start": 7,
+                "quote_end": 9,
+                "quote": "胸痛",
+                "mention_start": 7,
+                "mention_end": 9,
+                "qualifiers": {
+                  "caution": false,
+                  "conditional": false,
+                  "negative_or_absent": false,
+                  "prohibition": false,
+                  "uncertain": false
+                },
+                "status": "source_assertion_unverified"
+              }
+            ],
+            "hops": 3,
+            "relations": [
+              "HAS_SYMPTOM",
+              "INDICATION_MENTION",
+              "INTERACTION_MENTION"
+            ],
+            "verified_against_original": true,
+            "clinical_validation": false
+          }
+        ],
+        "storage": "local_derived_property_graph",
+        "generation_evidence": true,
+        "clinical_validation": false,
+        "snapshot_created_at": "2026-11-03T09:12:36.682709+00:00",
+        "plan": {
+          "anchors": [
+            {
+              "surface": "胸痛",
+              "node_ids": [
+                "symptom_92376b5368b3bd0f7aafdd9a"
+              ],
+              "start": 0,
+              "end": 2,
+              "kinds": [
+                "Symptom"
+              ],
+              "ambiguous": false
+            },
+            {
+              "surface": "阿司匹林肠溶片",
+              "node_ids": [
+                "drug_5f145f046b1163232f6bb38d"
+              ],
+              "start": 7,
+              "end": 14,
+              "kinds": [
+                "Drug"
+              ],
+              "ambiguous": false
+            }
+          ],
+          "requested_relations": [
+            "HAS_INGREDIENT",
+            "INTERACTION_MENTION",
+            "INDICATION_MENTION"
+          ],
+          "max_hops": 5,
+          "requires_connected_anchors": true,
+          "interaction_question": true,
+          "drug_discovery": true,
+          "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence"
+        },
+        "stats": {
+          "fanout_truncations": 90,
+          "expanded_states": 2400,
+          "source_record_conflicts_rejected": 10,
+          "expansion_budget_exhausted": true,
+          "candidate_paths": 60
+        },
+        "returned_paths": 6,
+        "multi_relation_paths": 6,
+        "source_verified_count": 6,
+        "truncated": true,
+        "missing_requested_relations": [],
+        "seconds": 1.0693
+      }
+    }
+  ]
+}

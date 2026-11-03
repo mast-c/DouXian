@@ -1,0 +1,10 @@
+# Rebuildable local property graph; retain the manifest and readable examples.
+medical_graph.sqlite
+medical_graph.sqlite-*
+medical_graph_build_*.sqlite
+*.tmp
+browser_preview_profile/
+edge_preview_profile/
+path_preview.html
+path_preview.png
+path_preview_excerpt.png

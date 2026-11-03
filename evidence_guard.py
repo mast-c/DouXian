@@ -53,6 +53,12 @@ GUARD_SYSTEM_PROMPT = """
     “必须证明具体作用机制或已确认疗效”。
 17. 候选状态、来源免责声明与系统提示不能替代医学原文；
     已完成技术原文回溯也不等于权威医学审核。
+18. 多关系图路径中的每条边只表示标注的来源记载或提及；不得把路径连通当作因果、治疗或诊断证明。
+    引用图路径时，quote 必须取自逐边“原文”，不能引用程序生成的关系标签或解释边界。
+    需要多条边才能回答的方面应逐边给出必要引文，可重复使用同一个路径证据编号。
+    HAS_SYMPTOM/HAS_INGREDIENT 的完整结构化原文短于8字时，允许逐字引用2至7字的完整字段。
+    对成分边，可引用原文中逐字出现的完整成分实体名（至少2字），例如“本品主要成分布洛芬”中的“布洛芬”。
+    否定、剂量、人群、尚不明确必须保持；第三种药物的共同提及不证明两药存在相互作用。
 输出格式：
 {
   "aspects": [
@@ -228,16 +234,30 @@ def _is_complete_short_section_quote(item: dict, quote: str) -> bool:
     不把药品名称、栏目标签、系统免责声明拼接成伪造的长引文；
     仅放宽字数校验，不放宽医学语义的真实性判断。
     """
+    if item.get("evidence_type") == "evidence_backed_semantic_graph_path":
+        path = item.get("graph_path") or {}
+        return bool(path.get("verified_against_original")) and any(
+            edge.get("relation") in ("HAS_SYMPTOM", "HAS_INGREDIENT")
+            and 2 <= len(_compact(quote)) < 8
+            and (
+                _compact(str(edge.get("quote") or "")) == _compact(quote)
+                or (
+                    _compact(str(edge.get("dst", {}).get("name") or "")) == _compact(quote)
+                    and _compact(quote) in _compact(str(edge.get("quote") or ""))
+                )
+            )
+            for edge in path.get("edges", []) if isinstance(edge, dict)
+        )
     if item.get("evidence_type") not in _SHORT_MEDICAL_SECTION_TYPES:
         return False
     content = item.get("content")
     if not isinstance(content, str):
         return False
-    for marker in ("\\n证据原文：", "\\n原文："):
+    for marker in ("\n证据原文：", "\n原文：", "\\n证据原文：", "\\n原文："):
         if marker not in content:
             continue
         original = content.split(marker, 1)[1]
-        for end_marker in ("\\n重要：", "\\n资料状态：", "\\n来源核验状态："):
+        for end_marker in ("\n重要：", "\n资料状态：", "\n来源核验状态：", "\\n重要：", "\\n资料状态：", "\\n来源核验状态："):
             original = original.split(end_marker, 1)[0]
         literal = _compact(original.strip())
         return 3 <= len(literal) < 8 and literal == _compact(quote.strip())
@@ -323,6 +343,15 @@ def validate_judge_output(
                 continue
 
             quote = quote.strip()
+            metadata = evidence_meta_by_id.get(evidence_id, {})
+            if metadata.get("evidence_type") == "evidence_backed_semantic_graph_path":
+                # Generated path labels are never a substitute for source quotations.
+                path = metadata.get("graph_path") or {}
+                if not path.get("verified_against_original") or not any(
+                    _compact(quote) in _compact(str(edge.get("quote") or ""))
+                    for edge in path.get("edges", []) if isinstance(edge, dict)
+                ):
+                    continue
             # 引文必须有一定长度，而且确实逐字出现于原始 Chunk。
             if len(_compact(quote)) < 8 and not _is_complete_short_section_quote(
                 evidence_meta_by_id.get(evidence_id, {}), quote
@@ -372,6 +401,11 @@ def validate_judge_output(
             for evidence_id in aspect["evidence_ids"]
         }
 
+    # A complete, verified composition edge directly answers a narrowly worded
+    # composition-field question. This is a data lookup, not clinical reasoning.
+    # Do not let a model's missed/short quote incorrectly erase that field.
+    verified_aspects = _restore_literal_composition(verified_aspects, excerpts)
+    allowed_ids = {i for a in verified_aspects if a["status"] in ("supported", "refuted") for i in a["evidence_ids"]}
     accepted = [
         aspect["question"]
         for aspect in verified_aspects
@@ -398,6 +432,57 @@ def validate_judge_output(
         "refused_questions": refused,
         "message": "",
     }
+
+
+def _restore_literal_composition(aspects: list[dict], excerpts: list[dict]) -> list[dict]:
+    facts = {}
+    for item in excerpts:
+        if item.get("evidence_type") != "evidence_backed_semantic_graph_path" or not item.get("graph_verified"):
+            continue
+        path = item.get("graph_path") or {}
+        if not path.get("verified_against_original"):
+            continue
+        for edge in path.get("edges", []):
+            if (edge.get("relation") != "HAS_INGREDIENT" or edge.get("section_field") != "composition"
+                    or edge.get("src", {}).get("kind") != "Drug" or edge.get("dst", {}).get("kind") != "Ingredient"):
+                continue
+            quote = str(edge.get("quote") or "")
+            drug = str(edge["src"].get("name") or "")
+            ingredient = str(edge["dst"].get("name") or "")
+            if not drug or len(ingredient) < 2 or ingredient not in quote or quote not in item.get("content", ""):
+                continue
+            facts.setdefault(drug, {}).setdefault(edge.get("record_id"), []).append((item["id"], quote, ingredient))
+    result = []
+    for aspect in aspects:
+        if aspect["status"] != "insufficient":
+            result.append(aspect)
+            continue
+        q = str(aspect["question"]).strip().rstrip("？?。.")
+        matched = []
+        for drug, records in facts.items():
+            # No dosage, mechanism, safety, comparison or other aspect may pass here.
+            if not re.fullmatch(re.escape(drug) + r"的?(?:(?:主要|活性)?成分|组成成分)(?:原文)?(?:如何描述|是什么|有哪些|有什么|如何记载)?", q):
+                continue
+            # More than one record or contradictory composition is left to audit.
+            if len(records) != 1:
+                continue
+            rows = next(iter(records.values()))
+            quotes = {(eid, text) for eid, text, _ in rows}
+            source_texts = {text for _, text, _ in rows}
+            if len(source_texts) != 1:
+                continue
+            # Prefer one whole source quote rather than scattered ingredient tokens.
+            eid, quote = min(quotes, key=lambda v: v[0])
+            matched.append((eid, quote))
+        if len(matched) == 1:
+            eid, quote = matched[0]
+            result.append({**aspect, "status": "supported", "evidence_ids": [eid],
+                           "quotes": [{"id": eid, "quote": quote}],
+                           "reason": "同一制剂来源的成分字段已逐边核对，可直接描述原文，不涉及临床推断",
+                           "validation_method": "verified_composition_field_lookup"})
+        else:
+            result.append(aspect)
+    return result
 
 
 def assess_evidence(
@@ -430,6 +515,8 @@ def assess_evidence(
         if index <= 0 or not isinstance(content, str) or not content.strip():
             continue
         safe_excerpts.append({
+            **({"graph_path": item["graph_path"]} if item.get("graph_path") else {}),
+            "graph_verified": bool(item.get("graph_verified")),
             "id": index,
             "source": str(item.get("source", ""))[:180],
             "section_path": str(item.get("section_path", ""))[:220],
