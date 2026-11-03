@@ -1,0 +1,41 @@
+{
+  "indexed_chunks": 313,
+  "collection_fingerprint": "774fa5b086eca3380c65e08b8afe52c05550501b292c0ede93e444bcc8f6f13b",
+  "structured_json_chunks": 313,
+  "legacy_or_other_chunks": 0,
+  "drugs_covered": 69,
+  "parent_sections": 295,
+  "source_records": 69,
+  "source_urls": 69,
+  "chunks_by_field": {
+    "adverse_reactions": 56,
+    "contraindications": 75,
+    "drug_interactions": 46,
+    "indication": 69,
+    "warnings": 67
+  },
+  "drugs_by_field": {
+    "adverse_reactions": 56,
+    "contraindications": 57,
+    "drug_interactions": 46,
+    "indication": 69,
+    "warnings": 67
+  },
+  "data_origins": {
+    "json_matched_to_neo4j_section": 313
+  },
+  "empty_documents": 0,
+  "duplicate_chunk_ids": 0,
+  "metadata_issues": 0,
+  "metadata_issue_examples": [],
+  "caution": "统计是索引覆盖和元数据检查，不代表临床适应症有效性或权威来源通过。",
+  "collection": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\chroma_db / rag",
+  "checkpoint": {
+    "present": true,
+    "path": "E:\\VsCode_Project\\DockerTest_Agent\\RAG_project\\data\\medical_bulk_state.sqlite3",
+    "statuses": {
+      "done": 68,
+      "no_chunks": 2
+    }
+  }
+}

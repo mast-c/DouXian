@@ -1,4 +1,8 @@
 import html
+import hashlib
+import logging
+import os
+from pathlib import Path
 import uuid
 import time
 import json
@@ -12,7 +16,6 @@ from medical_retrieval_status import retrieval_heading, retrieval_status_html
 from medical_quality_acceptance import make_export_payload
 from search_tool import DISPLAY_SOURCE_LIMIT
 import config_data as config
-
 
 st.set_page_config(
     page_title="豆馅",
@@ -986,6 +989,138 @@ footer,
 }
 .kb-graph-source:hover{text-decoration:underline;color:#173c92;}
 
+
+/* P3-06.3 · 同一「实际命中的知识库证据」区域内的多跳路径，可横向滚动 */
+.kb-mh-group{
+  margin:14px 0 16px 21px;
+  border-top:1px solid #e5ebf5;
+  padding-top:13px;
+}
+.kb-mh-group-title{
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  font-size:13.2px;font-weight:650;color:#3c557c;margin-bottom:7px;
+}
+.kb-mh-group-title .kb-mh-count{
+  font-size:11px;font-weight:600;color:#4566a0;
+  background:#edf3ff;border-radius:99px;padding:2px 8px;
+}
+.kb-mh-group-note{
+  color:#8a95a5;font-size:11.8px;line-height:1.8;margin:0 0 11px;
+}
+.kb-mh-cards{display:grid;gap:11px;}
+.kb-mh-card{
+  border:1px solid #dee8f7;border-left:3px solid #7b9fdf;
+  border-radius:11px;background:#fcfdff;overflow:hidden;
+}
+.kb-mh-card > summary{
+  display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+  cursor:pointer;padding:12px 15px;
+  color:#354969;list-style:none;outline-offset:-3px;
+}
+.kb-mh-card > summary::-webkit-details-marker{display:none}
+.kb-mh-card > summary::marker{content:""}
+.kb-mh-card > summary::after{
+  content:"▾";font-size:14px;color:#8497b7;margin-left:auto;
+  transition:transform .15s ease;
+}
+.kb-mh-card[open] > summary::after{transform:rotate(180deg)}
+.kb-mh-card > summary:focus-visible{outline:2px solid #86a5e6}
+.kb-mh-index{
+  flex:none;color:#365c9e;background:#eaf1ff;border-radius:7px;
+  font-size:11px;font-weight:700;padding:4px 7px;
+}
+.kb-mh-depth{
+  flex:none;color:#8b591a;background:#fff1db;border-radius:99px;
+  font-size:11px;font-weight:650;padding:3px 9px;
+}
+.kb-mh-headline{
+  flex:1;min-width:170px;font-size:12.8px;font-weight:650;
+  overflow-wrap:anywhere;
+}
+.kb-mh-id-chip{
+  color:#8493a9;font-size:10.5px;font-weight:500;
+  font-family:Consolas,"Cascadia Code",monospace;
+}
+.kb-mh-body{border-top:1px solid #edf1f7;padding:13px 15px 14px;}
+.kb-mh-path-note{
+  font-size:11.5px;color:#78899e;margin-bottom:10px;line-height:1.75;
+}
+.kb-mh-flow{
+  overflow-x:auto;overflow-y:hidden;border-radius:9px;
+  background:#f5f8fc;border:1px solid #e5ebf4;
+  padding:12px 10px;scrollbar-width:thin;
+}
+.kb-mh-chain{
+  display:flex;align-items:stretch;gap:0;
+  width:max-content;min-width:100%;
+}
+.kb-mh-node{
+  box-sizing:border-box;flex:none;width:124px;min-height:84px;
+  border:1px solid #d4dfea;border-radius:9px;padding:10px 8px;
+  background:#fff;display:flex;flex-direction:column;justify-content:center;
+  gap:7px;text-align:center;box-shadow:0 1px 3px rgba(38,60,90,.04);
+}
+.kb-mh-node .kb-mh-node-type{
+  color:#61758d;font-weight:700;font-size:10.5px;line-height:1.3;
+  overflow-wrap:anywhere;
+}
+.kb-mh-node .kb-mh-node-name{
+  color:#2e4662;font-weight:650;font-size:11.2px;line-height:1.4;
+  overflow-wrap:anywhere;
+}
+.kb-mh-node-type-DiseaseDocument{background:#e7f5f1}
+.kb-mh-node-type-DiseaseTerm{background:#eaf1fb}
+.kb-mh-node-type-DiseaseCandidate{background:#fff5e8}
+.kb-mh-node-type-Drug{background:#ffece3}
+.kb-mh-node-type-SourceRecord{background:#f0f2f5}
+.kb-mh-node-type-Section{background:#f3ecff}
+.kb-mh-edge{
+  display:flex;flex:none;width:113px;align-items:center;
+  justify-content:center;gap:3px;flex-direction:column;text-align:center;
+  padding:4px 5px;box-sizing:border-box;min-width:0;
+}
+.kb-mh-edge-arrow{font-size:23px;line-height:1;color:#5c7ec0;font-weight:600}
+.kb-mh-edge-relation{
+  color:#63778d;font-size:9px;font-weight:600;
+  line-height:1.35;overflow-wrap:anywhere;max-width:108px;
+}
+.kb-mh-subline{margin-top:9px;color:#8492a5;font-size:11.5px;line-height:1.8}
+.kb-mh-subline code{
+  padding:1px 5px;border-radius:4px;color:#516d9d;background:#edf2fa;
+  overflow-wrap:anywhere;
+}
+.kb-mh-quote{
+  margin:10px 0 0;padding:8px 10px;border-left:2px solid #bbcdea;
+  background:#f8faff;color:#61758f;font-size:12px;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.kb-mh-steps{
+  margin-top:10px;color:#526b93;font-size:12px;line-height:1.8;
+}
+.kb-mh-steps > summary{cursor:pointer;list-style:none;font-weight:600}
+.kb-mh-steps > summary::-webkit-details-marker{display:none}
+.kb-mh-steps > summary::before{content:"▸ ";color:#7396d0}
+.kb-mh-steps[open] > summary::before{content:"▾ "}
+.kb-mh-step-list{
+  margin:10px 0 2px;padding-left:19px;color:#5e7189;
+}
+.kb-mh-step-list li{padding:3px 0;overflow-wrap:anywhere}
+.kb-mh-step-list code{font-size:10.8px;overflow-wrap:anywhere}
+.kb-mh-disclaimer{
+  color:#966c34;font-size:11.5px;line-height:1.75;
+  margin-top:12px;border-top:1px dashed #e6e4de;padding-top:9px;
+}
+@media(max-width:780px){
+  .kb-mh-group{margin-left:0}
+  .kb-mh-card > summary{padding:11px 10px}
+  .kb-mh-body{padding:11px 10px}
+  .kb-mh-node{width:112px;min-height:78px}
+  .kb-mh-edge{width:94px}
+}
+@media(prefers-reduced-motion:reduce){
+  .kb-mh-card > summary::after{transition:none}
+}
+
 /* 只调整运行时状态行，已保存的搜索思考记录样式不受影响。 */
 .st-key-douxian-live-progress .trace-live{
   margin:2px 0 0;
@@ -1107,7 +1242,11 @@ def trace_heading(trace):
             label = f"已检索药品图谱 · {trace.get('graph_candidates_found', 0)} 条候选证据"
         else:
             excerpts = trace.get("knowledge_evidence")
-            count = len(excerpts) if isinstance(excerpts, list) else 0
+            count = sum(
+                isinstance(item, dict)
+                and item.get("evidence_type") != _MH_CARD_TYPE
+                for item in excerpts
+            ) if isinstance(excerpts, list) else 0
             label = f"已完成知识库检索 · {count} 条证据" if count else "已完成知识库检索"
         return label + ("（部分操作未成功）" if failure else "")
     if failure:
@@ -1249,6 +1388,503 @@ def graph_evidence_html(item, index):
     )
 
 
+
+# =========================
+# P3-06.3 · 把真实多跳来源路径展示在现有 HTML 证据折叠区
+#
+# 注意：这里不是 Streamlit 原生 st.expander/st.graphviz_chart。
+# 原有证据区由 trace_details_html() 一次性生成 <details> HTML，
+# 因此用 HTML/CSS 绘制同区域路径，防止路径图跑到折叠区外面。
+# 图谱路径是来源追踪，不参加医学答案引用和原文检索计数。
+# =========================
+
+_MH_PATH_LABELS = {
+    5: ("DiseaseDocument", "DiseaseTerm", "DiseaseCandidate", "Drug",
+        "SourceRecord", "Section"),
+    6: ("DiseaseDocument", "DiseaseTerm", "DiseaseCandidate", "Drug",
+        "DiseaseCandidate", "DiseaseTerm", "DiseaseDocument"),
+    7: ("DiseaseDocument", "DiseaseTerm", "DiseaseCandidate", "Drug",
+        "DiseaseCandidate", "DiseaseTerm", "DiseaseCandidate", "Drug"),
+    8: ("DiseaseDocument", "DiseaseTerm", "DiseaseCandidate", "Drug",
+        "SourceRecord", "Section", "DiseaseCandidate", "DiseaseTerm",
+        "DiseaseDocument"),
+}
+_MH_PATH_RELS = {
+    5: ("EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA",
+        "MENTIONS_TERM", "HAS_CANDIDATE", "HAS_RECORD", "HAS_SECTION"),
+    6: ("EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA",
+        "MENTIONS_TERM", "HAS_CANDIDATE", "HAS_CANDIDATE",
+        "MENTIONS_TERM", "EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA"),
+    7: ("EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA",
+        "MENTIONS_TERM", "HAS_CANDIDATE", "HAS_CANDIDATE",
+        "MENTIONS_TERM", "MENTIONS_TERM", "HAS_CANDIDATE"),
+    8: ("EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA",
+        "MENTIONS_TERM", "HAS_CANDIDATE", "HAS_RECORD", "HAS_SECTION",
+        "SUPPORTED_BY", "MENTIONS_TERM",
+        "EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA"),
+}
+_MH_EDGE_DIRECTIONS = {
+    5: ("←", "←", "←", "→", "→"),
+    6: ("←", "←", "←", "→", "→", "→"),
+    7: ("←", "←", "←", "→", "→", "←", "←"),
+    8: ("←", "←", "←", "→", "→", "←", "→", "→"),
+}
+_MH_CARD_TYPE = "unverified_multihop_path_display_only"
+_MH_MAX_PATHS = 16
+
+
+def _mh_safe(value, max_chars=140):
+    """HTML 和属性统一转义；不直接执行 Neo4j / JSON 里的文本。"""
+    if value is None:
+        return ""
+    text = " ".join(str(value).split())
+    return html.escape(text[:max_chars], quote=True)
+
+
+def _mh_structurally_valid(path):
+    """拒绝伪造跳数、重复节点、临床权威标记和非白名单关系。"""
+    if not isinstance(path, dict):
+        return False
+    depth = path.get("hop_count")
+    if type(depth) is not int or depth not in _MH_PATH_LABELS:
+        return False
+    node_ids = path.get("node_ids")
+    node_labels = path.get("node_labels")
+    edges = path.get("relationship_types")
+    if not (
+        isinstance(node_ids, list)
+        and len(node_ids) == depth + 1
+        and all(isinstance(x, str) and 0 < len(x) < 1024 for x in node_ids)
+        and len(set(node_ids)) == depth + 1
+        and isinstance(node_labels, list)
+        and len(node_labels) == depth + 1
+        and isinstance(edges, list)
+        and tuple(edges) == _MH_PATH_RELS[depth]
+    ):
+        return False
+    for idx, value in enumerate(node_labels):
+        expected = _MH_PATH_LABELS[depth][idx]
+        if value != expected and not (
+            isinstance(value, list) and expected in value
+        ):
+            return False
+    if (
+        path.get("clinical_verified") is True
+        or path.get("clinical_truth_verified") is True
+        or path.get("treatment_relation") is True
+        or path.get("graph_relationships_verified") is False
+        or path.get("source_status", "third_party_unverified")
+        != "third_party_unverified"
+    ):
+        return False
+    return True
+
+
+
+def _mh_display_config(trace=None):
+    """Same depth/limit settings as the user-selected P3-06.3 query budget.
+
+    Historical traces obey the current frontend view filter. The GraphRAG
+    path sources are read-only and no DB is queried in this function.
+    """
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(Path(__file__).resolve().parent / ".env",override=False)
+    except ImportError:
+        pass
+
+    def bounded(name,default,lo,hi):
+        try:
+            n=int(os.getenv(name,str(default)))
+        except (ValueError,TypeError):
+            n=default
+        return max(lo,min(hi,n))
+
+    minimum=bounded("MEDICAL_P3063_PATH_MIN_HOPS",8,5,8)
+    maximum=max(minimum,bounded("MEDICAL_P3063_PATH_MAX_HOPS",8,5,8))
+    cap=bounded("MEDICAL_P3063_PATH_MAX_PATHS",4,1,16)
+    question=""
+    if isinstance(trace,dict):
+        metadata=trace.get("p3063_multihop_path_cards")
+        if isinstance(metadata,dict):
+            question=str(metadata.get("frontend_question") or "")
+    # A single-depth 8-hop request overrides an older 5-8 .env setting.
+    explicitly_eight=bool(re.search(r"8\s*跳|八跳",question))
+    explicitly_range=bool(re.search(
+        r"5\s*[~～—-]\s*8|5\s*到\s*8|五\s*到\s*八",question
+    ))
+    if explicitly_eight and not explicitly_range:
+        minimum=maximum=8
+    return minimum,maximum,cap
+
+
+def _mh_one_source_name(trace):
+    """Use graph-matched names only, never infer a 'verified' disease from the user question."""
+    if not isinstance(trace,dict):
+        return None
+    disease=trace.get("disease_encyclopedia")
+    if not isinstance(disease,dict):
+        return None
+    graph=disease.get("multi_hop_graph")
+    sets=[]
+    if isinstance(graph,dict):
+        sets.append(graph.get("matched_diseases"))
+    sets.append(disease.get("matched_disease_names"))
+    for values in sets:
+        if isinstance(values,list) and len(values)==1 and isinstance(values[0],str):
+            return values[0]
+    return None
+
+
+def _mh_paths_from_trace(trace):
+    """Merge known validated path traces, filter depth, dedupe graph paths.
+
+    Priority: a dedicated P3-06.3 path retrieval has more metadata than
+    the compact P3-06.1 query trace; never show other hop depths just
+    because the older online wrapper also emitted paths.
+    """
+    if not isinstance(trace,dict):
+        return []
+    min_hops,max_hops,max_paths=_mh_display_config(trace)
+    candidates=[]
+    cache=trace.get("p3063_multihop_path_cards")
+    if isinstance(cache,dict) and isinstance(cache.get("paths"),list):
+        candidates.extend(cache["paths"])
+    disease=trace.get("disease_encyclopedia")
+    if isinstance(disease,dict):
+        mh=disease.get("multi_hop_graph")
+        if isinstance(mh,dict) and isinstance(mh.get("verified_paths"),list):
+            candidates.extend(mh["verified_paths"])
+    originals=trace.get("knowledge_evidence")
+    if isinstance(originals,list):
+        candidates.extend(
+            item for item in originals
+            if isinstance(item,dict)
+            and item.get("evidence_type")==_MH_CARD_TYPE
+        )
+
+    matched_name=_mh_one_source_name(trace)
+    paths,seen=[],set()
+    for candidate in candidates:
+        if not isinstance(candidate,dict):
+            continue
+        if type(candidate.get("hop_count")) is not int or not (
+            min_hops<=candidate["hop_count"]<=max_hops
+        ):
+            continue
+        item=dict(candidate)
+        if not item.get("disease_name") and matched_name:
+            # Name comes from P3-06.1's matched graph anchor, not a guess.
+            item["disease_name"]=matched_name
+        if not _mh_structurally_valid(item):
+            continue
+        identity=(
+            tuple(item["node_ids"]),
+            tuple(item["relationship_types"]),
+        )
+        if identity in seen:
+            continue
+        seen.add(identity)
+        if not isinstance(item.get("path_id"),str) or not item["path_id"]:
+            serial=json.dumps(identity,ensure_ascii=False)
+            item["path_id"]=hashlib.sha256(
+                serial.encode("utf-8")
+            ).hexdigest()[:20]
+        paths.append(item)
+        if len(paths)>=max_paths:
+            break
+    return paths
+
+
+def _mh_node_name(path, position):
+    """为每个图谱节点加上可读的疾病、药品或来源章节名称。"""
+    depth = path["hop_count"]
+    kind = _MH_PATH_LABELS[depth][position]
+    if position in (0, 1):
+        return path.get("disease_name") or "名称未随 trace 保存"
+    if position == 3:
+        return path.get("drug_name") or "药品资料"
+    if kind == "DiseaseDocument" or kind == "DiseaseTerm":
+        return path.get("related_disease_name") or "关联疾病"
+    if kind == "Drug":
+        return path.get("related_drug_name") or "另一药品"
+    if kind == "Section":
+        return path.get("section_field") or "原文栏目"
+    if kind == "SourceRecord":
+        return path.get("record_id") or path["node_ids"][position]
+    if kind == "DiseaseCandidate":
+        return path["node_ids"][position]
+    return ""
+
+
+def _mh_one_path_html(path, sequence):
+    """单独可展开的一条完整路径：节点图 + 逐边关系 + 来源限制。"""
+    depth = path["hop_count"]
+    source_name = path.get("drug_name") or "药品资料"
+    disease = path.get("disease_name") or "DiseaseDocument（名称未随 trace 保存）"
+    target = path.get("related_disease_name") or "药品原文 Section"
+    path_id = path["path_id"]
+    summary = (
+        _mh_safe(disease, 42)
+        + " → " + _mh_safe(source_name, 64)
+        + " → " + _mh_safe(target, 44)
+    )
+
+    flow_parts = []
+    step_rows = []
+    for pos, node_type in enumerate(_MH_PATH_LABELS[depth]):
+        node_name = _mh_node_name(path, pos)
+        node_id = path["node_ids"][pos]
+        flow_parts.append(
+            '<div class="kb-mh-node kb-mh-node-type-' + node_type + '"'
+            ' title="' + _mh_safe(node_id, 230) + '">'
+            '<span class="kb-mh-node-type">' + node_type + '</span>'
+            '<span class="kb-mh-node-name">' + _mh_safe(node_name, 50) + '</span>'
+            '</div>'
+        )
+        if pos < depth:
+            rel = _MH_PATH_RELS[depth][pos]
+            direction = _MH_EDGE_DIRECTIONS[depth][pos]
+            flow_parts.append(
+                '<div class="kb-mh-edge" title="' + _mh_safe(rel, 110) + '">'
+                '<span class="kb-mh-edge-arrow">' + direction + '</span>'
+                '<span class="kb-mh-edge-relation">' + _mh_safe(rel, 90) + '</span>'
+                '</div>'
+            )
+            next_type = _MH_PATH_LABELS[depth][pos + 1]
+            step_rows.append(
+                '<li><strong>' + _mh_safe(str(pos + 1), 2) + '. '
+                + node_type + ' ' + direction + ' '
+                + _mh_safe(rel, 110) + ' ' + next_type + '</strong>'
+                '<div>起点 ID：<code>' + _mh_safe(node_id, 170)
+                + '</code></div><div>终点 ID：<code>'
+                + _mh_safe(path["node_ids"][pos + 1], 170)
+                + '</code></div></li>'
+            )
+    quote = path.get("candidate_quote") or path.get("candidate_quote_preview")
+    quote_html = (
+        '<div class="kb-mh-quote">说明书提及候选片段（非疗效证明）：'
+        + _mh_safe(quote, 380) + '</div>'
+    ) if quote else ""
+    section = path.get("section_id")
+    section_html = (
+        ' · Section ID：<code>' + _mh_safe(section, 140) + '</code>'
+    ) if section else ""
+    # 展示保存后的固定路径；不把它冒充当下新运行的临床审查。
+    return (
+        '<details class="kb-mh-card"' + (' open' if sequence == 1 else '') + '>'
+        '<summary>'
+        '<span class="kb-mh-index">路径 P' + f'{sequence:02d}' + '</span> · '
+        '<span class="kb-mh-depth">' + str(depth) + ' 跳</span> · '
+        '<span class="kb-mh-headline">' + summary + '</span> · '
+        '<span class="kb-mh-id-chip">ID '
+        + _mh_safe(path_id, 12) + '</span>'
+        '</summary>'
+        '<div class="kb-mh-body">'
+        '<div class="kb-mh-path-note">路径由 '
+        + _mh_safe(disease,40) + ' 出发，经过 '
+        + _mh_safe(source_name,55)
+        + '，关联到 ' + _mh_safe(target,45)
+        + '；下方是 ' + str(depth) + ' 条真实关系边和 '
+        + str(depth+1) + ' 个节点的类型链（非治疗因果路径）。'
+        '可左右滚动查看完整节点图。</div>'
+        '<div class="kb-mh-flow"><div class="kb-mh-chain">'
+        + "".join(flow_parts) + '</div></div>'
+        '<div class="kb-mh-subline">Path ID：<code>'
+        + _mh_safe(path_id, 120) + '</code>' + section_html + '</div>'
+        + quote_html
+        + '<details class="kb-mh-steps"><summary>查看 '
+        + str(depth) + ' 跳完整关系与节点 ID</summary>'
+        '<ol class="kb-mh-step-list">' + "".join(step_rows)
+        + '</ol></details>'
+        '<div class="kb-mh-disclaimer">'
+        '来源性质：第三方未经临床核验。疾病术语共同提及或多跳连通'
+        '不代表药物治疗作用、获批适应症、医学因果或专家审核。'
+        '本路径不计入原文证据条数，也不参与模型答案引用。'
+        '</div></div></details>'
+    )
+
+
+def multihop_path_evidence_html(trace):
+    """复用原 trace-panel HTML，在原文证据后直接绘制多条路径。"""
+    paths = _mh_paths_from_trace(trace)
+    if not paths:
+        return ""
+    depths = "、".join(
+        str(n) for n in sorted({path["hop_count"] for path in paths})
+    )
+    return (
+        '<section class="kb-mh-group" aria-label="图谱多跳来源路径">'
+        '<div class="kb-mh-group-title">'
+        '<span aria-hidden="true">🔗</span>'
+        '<span>多跳图谱来源路径</span>'
+        '<span class="kb-mh-count">' + str(len(paths))
+        + ' 条 · ' + depths + ' 跳</span></div>'
+        '<p class="kb-mh-group-note">'
+        '路径与上方原文证据分开展示；每一条均可展开查看节点与关系。'
+        '不计入原文检索命中数和答案引用编号。</p>'
+        '<div class="kb-mh-cards">'
+        + "".join(_mh_one_path_html(item, i)
+                  for i, item in enumerate(paths, 1))
+        + '</div></section>'
+    )
+
+
+
+def _mh_trace_for_evidence_export(trace):
+    """评测导出仅保留原文证据；路径卡仍保存在本轮来源路径元数据中。"""
+    if not isinstance(trace, dict):
+        return trace
+    evidence = trace.get("knowledge_evidence")
+    if not isinstance(evidence, list):
+        return trace
+    if not any(
+        isinstance(item, dict) and item.get("evidence_type") == _MH_CARD_TYPE
+        for item in evidence
+    ):
+        return trace
+    clean_trace = dict(trace)
+    clean_trace["knowledge_evidence"] = [
+        item for item in evidence
+        if not (
+            isinstance(item, dict)
+            and item.get("evidence_type") == _MH_CARD_TYPE
+        )
+    ]
+    return clean_trace
+
+
+
+def populate_multihop_trace_for_display(trace,question):
+    """Retain actual 8-hop paths for the HTML evidence panel, post-generation.
+
+    1. Old P3-06.3 backend may have performed a dedicated 8-hop query;
+       reuse it. 2. Compact P3-06.1 paths may be mixed 5-8 and top-capped;
+       if the user explicitly requested 8 hops, run ONE dedicated read-only
+       8-hop template rather than treating a partial mixed list as complete.
+    3. Never insert graph routes into LLM prompt or medical evidence scoring.
+    """
+    if not isinstance(trace,dict) or not isinstance(question,str):
+        return
+    root=Path(__file__).resolve().parent
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(root/".env",override=False)
+    except ImportError:
+        pass
+    if str(os.getenv("MEDICAL_P3063_INLINE_PATH_CARDS","0")).lower().strip() not in (
+        "1","true","on","yes"
+    ):
+        return
+
+    cached=trace.get("p3063_multihop_path_cards")
+    if not isinstance(cached,dict):
+        cached={}
+        trace["p3063_multihop_path_cards"]=cached
+    cached["frontend_question"]=question[:500]
+
+    try:
+        from medical_p3063_inline_path_evidence_v117 import (
+            attach_multihop_path_cards
+        )
+        attach_multihop_path_cards(trace,question,project_root=root)
+    except ImportError:
+        pass
+    except Exception as exc:
+        logging.getLogger(__name__).warning(
+            "P3-06.3 旧路径适配器调用失败，原证据保持原样：%s",exc
+        )
+
+    # The old hook may replace the cache dictionary; reacquire it.
+    metadata=trace.get("p3063_multihop_path_cards")
+    if not isinstance(metadata,dict):
+        metadata={}
+        trace["p3063_multihop_path_cards"]=metadata
+    metadata["frontend_question"]=question[:500]
+
+    low,high,cap=_mh_display_config(trace)
+    existing=_mh_paths_from_trace(trace)
+    if len(existing)>=cap:
+        return
+
+    status=str(metadata.get("status") or "")
+    if status in (
+        "PATH_QUERY_BLOCKED_KEEP_ORIGINAL_EVIDENCE",
+        "MULTIHOP_BLOCKED_P3045_FALLBACK",
+    ):
+        return
+    # A full dedicated query is not repeated just to try filling the UI.
+    graph_trace=metadata.get("graph_trace")
+    scan_depths=graph_trace.get("requested_hops") if isinstance(graph_trace,dict) else None
+    if scan_depths==list(range(low,high+1)) and status not in (
+        "SKIPPED_NO_DISEASE_ROUTE","SKIPPED_NO_EVIDENCE_LIST"
+    ):
+        return
+    scan_depths=metadata.get("requested_hops")
+    if scan_depths==list(range(low,high+1)) and status in (
+        "MULTIHOP_PATH_CARDS_APPENDED",
+        "MULTIHOP_PATHS_READY_FOR_RICH_UI",
+        "NO_VERIFIED_PATHS",
+        "MULTIHOP_PATH_CARDS_READY",
+    ):
+        return
+    # Don't override the answer to treatment/clinical questions.
+    source_question=(
+        any(x in question for x in ("说明书","药品资料","药物资料"))
+        and any(x in question for x in ("提到","提及","涉及","记载",
+                                       "出现","包含","多跳","路径"))
+    )
+    if not source_question:
+        return
+
+    try:
+        from medical_p3061_multihop_graph_v117 import retrieve_multihop
+        # We always ask for exactly the requested depths. The result is
+        # independent of old P3-06.1 mixed-depth top-N reservation.
+        per_template=max(1,min(6,int(os.getenv(
+            "MEDICAL_P3063_PATH_PER_TEMPLATE","4"
+        ))))
+        paths,new_trace=retrieve_multihop(
+            question,project_root=root,
+            min_hops=low,max_hops=high,
+            max_paths=cap,per_template=per_template,
+            require_enabled=False
+        )
+        safe=[]
+        for item in paths:
+            if not _mh_structurally_valid(item):
+                continue
+            clean={k:v for k,v in item.items() if k!="section_text"}
+            if isinstance(clean.get("candidate_quote"),str):
+                clean["candidate_quote"]=clean["candidate_quote"][:500]
+            safe.append(clean)
+        if safe:
+            metadata.update({
+                "status":"MULTIHOP_SOURCE_PATHS_VERIFIED_FOR_DISPLAY",
+                "paths":safe,
+                "path_cards_count":len(safe),
+                "requested_hops":list(range(low,high+1)),
+                "graph_trace":{
+                    "status":new_trace.get("status"),
+                    "requested_hops":list(range(low,high+1)),
+                    "query_count":new_trace.get("query_count"),
+                    "found_per_hops":new_trace.get("found_per_hops"),
+                },
+                "display_only":True,
+                "excluded_from_generation":True,
+                "excluded_from_citation_scoring":True,
+                "graph_writes":0,"chroma_writes":0,
+            })
+        else:
+            metadata.setdefault("display_preflight_status",
+                                "NO_VERIFIED_PATHS_FOR_REQUESTED_DEPTHS")
+    except (OSError,ImportError,RuntimeError,TypeError,ValueError) as exc:
+        logging.getLogger(__name__).warning(
+            "P3-06.3 指定跳数独立只读查询未通过，原证据保留：%s",exc
+        )
+
+
+
 def trace_details_html(trace):
     """医疗检索的折叠区：同一回答中的所有可引用证据均能展开核对。"""
     if not isinstance(trace, dict) or not trace:
@@ -1343,6 +1979,9 @@ def trace_details_html(trace):
         for item in knowledge_evidence:
             if not isinstance(item, dict):
                 continue
+            # 图谱路径在下方独立区域展示，不能被算作原始引用证据。
+            if item.get("evidence_type") == _MH_CARD_TYPE:
+                continue
             index = item.get("id")
             index = str(index) if type(index) is int and index > 0 else "?"
             if item.get("evidence_type") == "unverified_drug_disease_candidate":
@@ -1405,6 +2044,12 @@ def trace_details_html(trace):
                 f'<span>实际命中的知识库证据（{len(cards)} 条）</span></div>'
             )
             content.append('<div class="kb-evidence-list">' + "".join(cards) + '</div>')
+
+    # P3-06.3：紧贴原文证据列表之后，在同一个 trace 折叠 HTML 里渲染
+    # 多条 Neo4j 路径；不增加上方“真实知识库证据”或原文引用计数。
+    multihop_html = multihop_path_evidence_html(trace)
+    if multihop_html:
+        content.append(multihop_html)
 
     # V1.11 独立来源检索 ≠ Chroma 使用 Neo4j 校验父级 Section。
     # 两种角色在同一个统计区分开展示；历史 trace 不会被强制迁移。
@@ -1608,7 +2253,7 @@ for message_index, msg in enumerate(messages):
                 export_data = make_export_payload(
                     last_question_for_acceptance,
                     str(msg.get("content") or ""),
-                    current_trace,
+                    _mh_trace_for_evidence_export(current_trace),
                 )
                 st.download_button(
                     "导出本轮证据验收 JSON",
@@ -1751,6 +2396,10 @@ if pending:
         # 不伪造回答，也不把失败记录写成成功的历史消息。
         st.error("AI 回答过程中发生错误，请检查服务日志后重试。")
         st.stop()
+
+    # P3-06.3：在落盘之前为本轮原文证据准备多跳路径展示。
+    # 不改变模型输出；Neo4j 查询为只读，失败时保留原有结果。
+    populate_multihop_trace_for_display(trace, pending)
 
     total_seconds = time.perf_counter() - started
     think_seconds = (

@@ -1,0 +1,12 @@
+{
+  "design": "additive existing DB candidate graph",
+  "requires_kg_snapshot_on_existing_drugs": false,
+  "source_local_snapshot": "1850511ebf1a243be1bd6360d3606c71d7d8326b5de98700c50d72f5c2196937",
+  "local_preflight": "PREFLIGHT_PASS",
+  "local_candidates_payload": 19685,
+  "local_assessments_payload": 60,
+  "offline_tests": 10,
+  "writes_to_user_db_performed": false,
+  "writes_to_existing_base_labels": false,
+  "requires_full_id_and_evidence_path_database_validation": true
+}

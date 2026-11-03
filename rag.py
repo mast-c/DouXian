@@ -56,6 +56,13 @@ from medical_evidence_bridge import (
 from medical_p3043_disease_encyclopedia_runtime_v117 import (
     search_disease_encyclopedia, merge_into_kb,
 )
+from medical_p3045_graph_disease_retrieval_v117 import (
+    search_graph_enhanced_disease_encyclopedia,
+)
+from medical_p3063_inline_path_evidence_v117 import attach_multihop_path_cards as _p3063_attach_multihop_path_cards
+from medical_p3061_multihop_graph_v117 import (
+    search_multihop_enhanced_disease_encyclopedia,
+)
 from medical_p303b_disease_runtime_v117 import (
     choose_links_file, resolve_disease_links, merge_disease_evidence,
 )
@@ -595,6 +602,8 @@ def _reference_label(item: dict, source: str) -> str:
 def _medical_reference_section(item: dict[str, Any], section: str) -> str:
     """医疗参考列表仅展示药名和链接；检索路径、核验状态保留在证据卡。"""
     kind = str(item.get("evidence_type") or "")
+    if kind == "unverified_disease_encyclopedia" and item.get("graph_link_verified"):
+        return section + " · Neo4j 疾病实体 → Chroma 原文 OID （仅同名来源关联，未经医学审核）"
     if kind == "unverified_disease_encyclopedia":
         return section + " · 第三方疾病百科原文（技术回溯通过，未经医学审核）"
     if kind in ("json_neo4j_text_verified", "unverified_drug_source_section",
@@ -1277,7 +1286,7 @@ class RagService:
                     "returned_chunks": 0
                 }
                 try:
-                    _disease_excerpts, _disease_report = search_disease_encyclopedia(
+                    _disease_excerpts, _disease_report = search_multihop_enhanced_disease_encyclopedia(
                         question,
                         project_root=Path(__file__).resolve().parent,
                         max_documents=4,
@@ -1616,6 +1625,10 @@ class RagService:
                     }
                     for item in merged_excerpts
                 ]
+                _p3063_attach_multihop_path_cards(
+                    trace, question,
+                    project_root=Path(__file__).resolve().parent,
+                )
                 graph_candidate_only = any(
                     item.get("evidence_type") == "unverified_drug_disease_candidate"
                     for item in merged_excerpts
@@ -1978,6 +1991,10 @@ class RagService:
                                 ),
                             })
                         trace["knowledge_evidence"] = ui_evidence
+                        _p3063_attach_multihop_path_cards(
+                            trace, question,
+                            project_root=Path(__file__).resolve().parent,
+                        )
                         # END SELF_RAG_RETRY_V1_5
                         trace["evidence_coverage"] = coverage
                         # 与 Evidence Guard 结论分离：仅追加一般安全提醒，
