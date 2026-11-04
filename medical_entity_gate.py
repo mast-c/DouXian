@@ -66,9 +66,11 @@ def filter_evidence_for_query(
     evidence: list[dict[str, Any]],
     *,
     known_drugs: Iterable[str] = (),
+    resolved_candidates: Iterable[str] = (),
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """返回保留的证据及报告。编号由该函数重新从 1 顺序分配。"""
-    scope = query_drug_names(question, evidence, known_drugs)
+    candidates = tuple(dict.fromkeys(resolved_candidates))
+    scope = candidates or query_drug_names(question, evidence, known_drugs)
     if not scope:
         items = [{**item, "id": i + 1} for i, item in enumerate(evidence)]
         return items, {
@@ -88,7 +90,9 @@ def filter_evidence_for_query(
         else:
             missing += 1
     return selected, {
-        "mode": "explicit_drugs", "explicit_drugs": list(scope),
+        "mode": "query_candidate_scope" if candidates else "explicit_drugs",
+        "explicit_drugs": [] if candidates else list(scope),
+        "candidate_drugs": list(candidates),
         "removed_other_drugs": other,
         "removed_unattributed": missing,
         "kept": len(selected),

@@ -67,7 +67,7 @@ from medical_p303b_disease_runtime_v117 import (
     choose_links_file, resolve_disease_links, merge_disease_evidence,
 )
 from medical_semantic_retrieval import (
-    GRAPH_PROMPT, graph_intent, graph_metadata, mark_graph_usage,
+    GRAPH_PROMPT, graph_intent, graph_metadata, graph_insufficiency_message, mark_graph_usage,
     merge_graph_evidence, search_semantic_graph,
 )
 
@@ -679,7 +679,7 @@ class RagService:
                 print(
                     "[RAG耗时] BM25 索引构建："
                     f"{time.perf_counter() - _phase_started:.2f}s "
-                    f"({count} chunks)"
+                    f"({count} chunks, cache={service.bm25_cache_status})"
                 )
                 self.chroma_index_chunks = count
                 if count <= 0:
@@ -1280,6 +1280,35 @@ class RagService:
             elif mode in ("知识库", "GraphRAG") or (
                 mode == "自动" and graph_intent(question, Path(__file__).resolve().parent)
             ):
+                # Resolve patient wording before incidental diseases fan out.
+                _semantic_excerpts, _semantic_report = search_semantic_graph(
+                    question, project_root=Path(__file__).resolve().parent,
+                )
+                trace["semantic_graph"] = _semantic_report
+                _patient_query = _semantic_report.get("query_understanding", {})
+                _candidate_scope = list(dict.fromkeys(
+                    name for group in _patient_query.get("medicines", [])
+                    for name in group["candidate_drug_names"]
+                ))
+                if _semantic_report.get("status") in ("needs_medication_clarification", "unresolved_named_entity"):
+                    reply = graph_insufficiency_message(_semantic_report)
+                    trace["query_clarification"] = {"required": True, "reason": _semantic_report.get("reason"), "message": reply}
+                    answer_parts.append(reply)
+                    yield reply
+                    finished = True
+                    return
+                _retrieval_question = question
+                if _candidate_scope:
+                    # Balanced query candidates, never a patient product claim.
+                    groups = _patient_query["medicines"]
+                    names_for_search = [g["candidate_drug_names"][i] for i in range(2)
+                                        for g in groups if len(g["candidate_drug_names"]) > i]
+                    _retrieval_question += "\n检索候选制剂（实际服用产品尚需核对）：" + "、".join(names_for_search)
+                    if _patient_query.get("intent", {}).get("interaction_question"):
+                        _retrieval_question += "；核对药物相互作用原文。"
+                _context_terms = list(dict.fromkeys(t for c in _patient_query.get("patient_context", []) for t in c["retrieval_terms"]))
+                if _context_terms:
+                    _retrieval_question += "\n口语检索词（不作诊断）：" + "、".join(_context_terms)
                 # 知识库即联合检索：Neo4j 图谱+原文章节，以及 Chroma Hybrid。
                 # GraphRAG 仅作旧页面/历史调用别名；两种入口走同一条路径。
                 # 任意一路失败仍可返回另一路真实证据，不静默伪造命中。
@@ -1312,7 +1341,10 @@ class RagService:
                 _disease_only = (
                     bool(_disease_excerpts)
                     and _disease_report.get("route") == "DISEASE_ONLY"
+                    and not _patient_query.get("medicines")
                 )
+                if _patient_query.get("medicines"):
+                    _disease_excerpts = []
                 # Only skip drug-oriented tools when the independent
                 # encyclopedia has verified source evidence for this question.
                 names = (
@@ -1343,7 +1375,7 @@ class RagService:
                         }
                         continue
                     result, ok = self._call_tool(
-                        tool_name, {"question": question}, trace, progress
+                        tool_name, {"question": _retrieval_question}, trace, progress
                     )
                     if not ok:
                         tool_reports[tool_name] = {"status": "error", "hits": 0}
@@ -1383,6 +1415,7 @@ class RagService:
                         })
                     if not data.get("found"):
                         continue
+                    _tool_accepted = 0
                     for item in data.get("excerpts") or []:
                         if not isinstance(item, dict):
                             continue
@@ -1397,7 +1430,8 @@ class RagService:
                             **item, "id": len(merged_excerpts) + 1,
                             "_retrieval_tool": tool_name,
                         })
-                        if len(merged_excerpts) >= evidence_cap:
+                        _tool_accepted += 1
+                        if _tool_accepted >= evidence_cap:
                             break
                     for source in data.get("sources") or []:
                         if isinstance(source, str) and source not in merged_sources:
@@ -1483,6 +1517,7 @@ class RagService:
                 else:
                     merged_excerpts, entity_report = filter_evidence_for_query(
                         question, merged_excerpts,
+                        resolved_candidates=_candidate_scope,
                     )
                 graph_report = tool_reports.get("search_drug_graph", {})
                 trace["drug_ranking"] = graph_report.get("drug_ranking", {})
@@ -1534,10 +1569,6 @@ class RagService:
                 # Actual typed graph retrieval happens before Evidence Guard/generation.
                 # Its own anchor/record constraints preserve cross-drug proof paths;
                 # the single-drug chunk filter must not split those paths afterwards.
-                _semantic_excerpts, _semantic_report = search_semantic_graph(
-                    question, project_root=Path(__file__).resolve().parent,
-                )
-                trace["semantic_graph"] = _semantic_report
                 merged_excerpts = merge_graph_evidence(
                     merged_excerpts, _semantic_excerpts, evidence_cap,
                 )
@@ -1676,6 +1707,9 @@ class RagService:
                         listed_graph_drugs, requested_details,
                         ranking_report=ranking_report,
                     )
+                    if overview_report.get("mode") == "defer_to_evidence_guard":
+                        trace["multi_drug_coverage"] = overview_report
+                        trace["medical_answer_mode"] = "source_review_after_empty_drug_ranking"
                     if reply:
                         references = {}
                         for item in merged_excerpts:
@@ -1863,17 +1897,23 @@ class RagService:
                                 f"{time.perf_counter() - _guard_started:.2f}s "
                                 f"(decision={coverage.get('decision')})"
                             )
+                            if coverage.get("decision") == "error":
+                                print(
+                                    "[Evidence Guard] 失败诊断："
+                                    f"stage={coverage.get('error_stage', 'unknown')} "
+                                    f"type={coverage.get('error_type', 'unknown')} "
+                                    f"message={coverage.get('message', '')}"
+                                )
                         # BEGIN SELF_RAG_RETRY_V1_5
                         # 只在第一轮审核为 partial/refuse 时，尝试补检一次。
                         if (fast_kb_mode or self.knowledge_service is None
-                                or _disease_only or _semantic_excerpts):
+                                or _disease_only):
                             retry_result = {
                                 "coverage": coverage,
                                 "excerpts": guard_excerpts,
                                 "retry_queries": [],
                                 "new_chunks": 0,
                                 "status": ("skipped_fast_mode" if fast_kb_mode
-                                            else "skipped_atomic_graph_proofs" if _semantic_excerpts
                                            else "skipped_disease_source_isolated" if _disease_only
                                            else "skipped_no_vector_index"),
                             }
@@ -1899,7 +1939,7 @@ class RagService:
                                                 fetch_parent=self._get_medical_parent_section,
                                                 limit=2,
                                             )[0],
-                                            entity_report["explicit_drugs"],
+                                            _candidate_scope or entity_report["explicit_drugs"],
                                         )
                                     ),
                                     judge_fn=lambda **params: reassess_fixed_aspects(
@@ -1908,7 +1948,7 @@ class RagService:
                                     ),
                                     max_queries=2,
                                     max_new_chunks=3,
-                                    max_total_chunks=8,
+                                    max_total_chunks=max(8, len(guard_excerpts) + 3),
                                 )
                             except Exception as retry_exc:
                                 # Self-RAG 出错：保留 V1 的第一次审核结果，绝不绕过它。
@@ -2043,6 +2083,13 @@ class RagService:
                             "\n========== 证据充分性校验 ==========",
                             coverage["decision"],
                         )
+                        if coverage.get("decision") == "error":
+                            print(
+                                "失败诊断：",
+                                coverage.get("error_stage", "unknown"),
+                                coverage.get("error_type", "unknown"),
+                                coverage.get("message", ""),
+                            )
                         for aspect in coverage["aspects"]:
                             print(
                                 aspect["status"],
@@ -2061,6 +2108,9 @@ class RagService:
                                     "当前检索到的知识库证据不足，"
                                     "无法可靠回答该问题。"
                                 )
+                                reply = graph_insufficiency_message(
+                                    trace.get("semantic_graph", {}),
+                                ) or reply
                             if safety_notice:
                                 notice_text = safety_notice + "\n\n"
                                 answer_parts.append(notice_text)
@@ -2156,7 +2206,7 @@ class RagService:
                                 content=(
                                     SYSTEM_PROMPT + "\n" + MEDICAL_KB_ANSWER_PROMPT
                                     + "\n" + coverage_prompt + _fast_quality_prompt
-                                    + ("\n" + GRAPH_PROMPT if _semantic_excerpts else "")
+                                    + ("\n" + GRAPH_PROMPT if _semantic_excerpts or _patient_query.get("medicines") else "")
                                 )
                             ),
                             *history,

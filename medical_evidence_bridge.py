@@ -18,7 +18,8 @@ _MEDICAL_KEYWORDS: tuple[tuple[str, tuple[str, ...]], ...] = (
     (r"适应症|适应证|适用于|治疗什么|治什么|能治|预防|"
      r"用于什么病|哪些疾病|什么疾病|什么病|与.{0,35}(?:疾病|病症|症状|"
      r"动脉粥样硬化).{0,20}(?:关系|关联)|"
-     r"关联|有何关系|有什么关系|有何关联|有什么关联|疗效",
+     r"关联|有何关系|有什么关系|有何关联|有什么关联|疗效|"
+     r"什么药|哪些药|哪种药|哪类药|药物有哪些|药品有哪些",
      ("indication",)),
     (r"禁忌|禁用|不宜|不能用|过敏", ("contraindications",)),
     (r"慎用|注意事项|警告|监测|风险提示", ("warnings",)),
@@ -107,6 +108,24 @@ def prepare_medical_documents(
         "verified": 0, "legacy_unverified": 0, "reasons": {},
         "section_gate": sorted(fields) if fields else [],
     }
+    documents = list(documents)
+    if fields and len(fields) > 1:
+        # 单查询也可能同时问用途和风险，不能让前几条注意事项占满配额，
+        # 再把候选池里已有的适应症过滤掉。只重排已有候选，不认定其适用。
+        priorities = ("indication", "contraindications", "warnings",
+                      "adverse_reactions", "drug_interactions", "dosage", "composition")
+        buckets = {field: [] for field in priorities if field in fields}
+        other = []
+        for doc in documents:
+            meta = getattr(doc, "metadata", None)
+            field = str(meta.get("section_field") or "").lower() if isinstance(meta, dict) else ""
+            (buckets[field] if field in buckets else other).append(doc)
+        groups = [group for group in buckets.values() if group]
+        documents = [
+            group[index]
+            for index in range(max((len(group) for group in groups), default=0))
+            for group in groups if index < len(group)
+        ] + other
     for doc in documents:
         if len(selected) >= limit:
             break

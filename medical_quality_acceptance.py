@@ -38,6 +38,7 @@ FIELDS_CN = {
 }
 EXPORTED_TRACE_KEYS = (
     "semantic_graph",
+    "query_clarification",
     "knowledge_evidence", "retrieval_pipeline", "retrieval_summary",
     "multi_drug_scope", "multi_drug_coverage", "medical_answer_mode",
     "graph_drug_scope", "evidence_entity_gate",

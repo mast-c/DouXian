@@ -189,6 +189,11 @@ def fields_for_question(question: str) -> list[str]:
     for pattern, fields in patterns:
         if re.search(pattern, text):
             found.update(fields)
+    from medical_query_understanding import patient_intent
+    # Without a resolved medication count, colloquial risk still warrants
+    # checking the interaction section rather than defaulting to indications.
+    patient = patient_intent(text, medicine_count=2)
+    found.update(patient["fields"])
 
     # V1.17 阶段 2：儿童适用性/自行用药问题需同时核对说明书的安全栏目。
     # 只调整只读 Neo4j Section 检索范围，不据此批准自行用药或推荐剂量。

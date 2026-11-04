@@ -1,0 +1,2535 @@
+{
+  "question": "糖尿病用的药跟过敏性鼻炎用的药有药物相互作用吗？",
+  "report": {
+    "status": "ok",
+    "paths": [
+      {
+        "id": "path_23230c1fe49878af912a5f0e",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_1af55fc8befd153255f7de2b",
+            "kind": "Drug",
+            "name": "格列吡嗪胶囊"
+          },
+          {
+            "id": "ingredient_b275c95f9839ccc22e6cca33",
+            "kind": "Ingredient",
+            "name": "格列吡嗪"
+          },
+          {
+            "id": "drug_9dc51bc6455052637417f37a",
+            "kind": "Drug",
+            "name": "盐酸西替利嗪滴剂"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_4cd0295299bfe2eaa603e0eb4f7d3555",
+            "src": {
+              "id": "drug_1af55fc8befd153255f7de2b",
+              "kind": "Drug",
+              "name": "格列吡嗪胶囊"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_92dc44b6e29265417eb5421d",
+            "record_id": "sourcerecord_b8bbc4750869b4afa021d327",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy28009.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "4e962577c430fede49e34626cec2fee3177ca6035c259348867ed7e7ccfed3b2",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 31,
+            "quote": "适用于经饮食控制及体育锻炼疗效不满意的轻、中度2型糖尿病患者。",
+            "mention_start": 25,
+            "mention_end": 28,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_c32b6c5ab41ef737c238a62f1be8a76f",
+            "src": {
+              "id": "drug_1af55fc8befd153255f7de2b",
+              "kind": "Drug",
+              "name": "格列吡嗪胶囊"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_fb903e9018f23c74c1852b55",
+            "record_id": "sourcerecord_b8bbc4750869b4afa021d327",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy28009.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "b399987159d6987f09fe1bf6fcc30c408b78098652768e2855759b350ea2032a",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 4,
+            "quote": "格列吡嗪",
+            "mention_start": 0,
+            "mention_end": 4,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_25adbfd738832090ddbe9b3c6c9cb90c",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_14f3baa66042c2136fa5631d",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "de64497e53a220a4b38000554f3a60e1eb7e62ec091c7091b0bd06bd70765d0a",
+            "section_field": "drug_interactions",
+            "quote_start": 401,
+            "quote_end": 437,
+            "quote": " 同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。",
+            "mention_start": 421,
+            "mention_end": 425,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_0d5da44124a07afa694ab48a35781d90",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_b68972d26d186d182e624c60",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "836e69782e802f4b9e5ce5e4287259461557ae09ec3957027a55abf79face6da",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 42,
+            "quote": "治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。",
+            "mention_start": 11,
+            "mention_end": 16,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      {
+        "id": "path_8d8004b66d28fbaaa345f25e",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_2549c736dc79d41adf769584",
+            "kind": "Drug",
+            "name": "格列吡嗪分散片"
+          },
+          {
+            "id": "ingredient_b275c95f9839ccc22e6cca33",
+            "kind": "Ingredient",
+            "name": "格列吡嗪"
+          },
+          {
+            "id": "drug_9dc51bc6455052637417f37a",
+            "kind": "Drug",
+            "name": "盐酸西替利嗪滴剂"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_7a0345f75ffe46d2bb52947bbceda5c5",
+            "src": {
+              "id": "drug_2549c736dc79d41adf769584",
+              "kind": "Drug",
+              "name": "格列吡嗪分散片"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_18f62256d904de970b17c498",
+            "record_id": "sourcerecord_144c32ee58b1278d18fd4a7a",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy47205.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "e5c65e1fe62b8f04e09628dd230ab3215ee02fe4f7de2eebb94ae3f1a830ca8c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 62,
+            "quote": "适用于经饮食控制及体育锻炼2～3个月疗效不满意的轻、中度2型糖尿病患者，这类糖尿病患者的胰岛β细胞需有一定的分泌胰岛素功能。",
+            "mention_start": 38,
+            "mention_end": 41,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_7f599989010800af7b4582a12cd5e57b",
+            "src": {
+              "id": "drug_2549c736dc79d41adf769584",
+              "kind": "Drug",
+              "name": "格列吡嗪分散片"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_b0a5a863725ce1c9a5e01df2",
+            "record_id": "sourcerecord_144c32ee58b1278d18fd4a7a",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy47205.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "81e23f41cf48d4aba31330ca2dedcb9a71a2c00630766d224eb370a5b9aa3c47",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 53,
+            "quote": "格列吡嗪。化学名称：5-甲基-N-[2-[4-[（环已氨基）羰基]氨基]磺酰基]苯基]乙基]-吡嗪甲酰胺。",
+            "mention_start": 0,
+            "mention_end": 4,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_25adbfd738832090ddbe9b3c6c9cb90c",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_14f3baa66042c2136fa5631d",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "de64497e53a220a4b38000554f3a60e1eb7e62ec091c7091b0bd06bd70765d0a",
+            "section_field": "drug_interactions",
+            "quote_start": 401,
+            "quote_end": 437,
+            "quote": " 同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。",
+            "mention_start": 421,
+            "mention_end": 425,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_0d5da44124a07afa694ab48a35781d90",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_b68972d26d186d182e624c60",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "836e69782e802f4b9e5ce5e4287259461557ae09ec3957027a55abf79face6da",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 42,
+            "quote": "治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。",
+            "mention_start": 11,
+            "mention_end": 16,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      {
+        "id": "path_e77e6d24dddae7e3e8a4cf2a",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_3d3e4a14f084e48e05054adb",
+            "kind": "Drug",
+            "name": "罗格列酮片"
+          },
+          {
+            "id": "ingredient_62f17b38b5023162ccf5beba",
+            "kind": "Ingredient",
+            "name": "罗格列酮"
+          },
+          {
+            "id": "drug_cd239433cfdfe97e0494caa7",
+            "kind": "Drug",
+            "name": "孟鲁司特钠咀嚼片"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_ecf5474e3387110c4a6a7bdb055c1a1b",
+            "src": {
+              "id": "drug_3d3e4a14f084e48e05054adb",
+              "kind": "Drug",
+              "name": "罗格列酮片"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_e8afc2b53376092211c797eb",
+            "record_id": "sourcerecord_cb44137d1e13588ac6d95278",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy44569.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "00d047729de56b7783ad81484ae9733bdbe42d56381fe937ebfd9304a3f7ff5b",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 10,
+            "quote": "本品用于2型糖尿病。",
+            "mention_start": 6,
+            "mention_end": 9,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_65b1c7b38ac892722f341bd1fb53f6eb",
+            "src": {
+              "id": "drug_3d3e4a14f084e48e05054adb",
+              "kind": "Drug",
+              "name": "罗格列酮片"
+            },
+            "dst": {
+              "id": "ingredient_62f17b38b5023162ccf5beba",
+              "kind": "Ingredient",
+              "name": "罗格列酮"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_3cb6cd877f6a3cede816e391",
+            "record_id": "sourcerecord_cb44137d1e13588ac6d95278",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy44569.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "540d7a957a67dfdef8d17ae3f29628cf159331b35c5ddcf43b8d454d72622f85",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 4,
+            "quote": "罗格列酮",
+            "mention_start": 0,
+            "mention_end": 4,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_b2572d2f01410558b991aa0c6fbbd766",
+            "src": {
+              "id": "drug_cd239433cfdfe97e0494caa7",
+              "kind": "Drug",
+              "name": "孟鲁司特钠咀嚼片"
+            },
+            "dst": {
+              "id": "ingredient_62f17b38b5023162ccf5beba",
+              "kind": "Ingredient",
+              "name": "罗格列酮"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_15cd6747af55798390348d50",
+            "record_id": "sourcerecord_2c00f405cd550edb1aa503ad",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy54681.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "3c82acfa1ac7611f06d934807de994655797265e2fae22f30122cbec001a6dcc",
+            "section_field": "drug_interactions",
+            "quote_start": 202,
+            "quote_end": 278,
+            "quote": "然而，一项关于孟鲁司特和罗格列酮（一种主要通过CYP28代谢的典型探测底物）药物相互作用的临床研究数据表明， 孟鲁司特钠在体内对CYP28没有抑制作用。",
+            "mention_start": 214,
+            "mention_end": 218,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": true,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_1682ca7fbe9520c59b9e9bd89c036737",
+            "src": {
+              "id": "drug_cd239433cfdfe97e0494caa7",
+              "kind": "Drug",
+              "name": "孟鲁司特钠咀嚼片"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_fe4e255e677283cc7c5c46e6",
+            "record_id": "sourcerecord_2c00f405cd550edb1aa503ad",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy54681.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "7eedca6c896375aac573b6b08c900cce7eeef870d9b7897c1b11e15591906184",
+            "section_field": "indication",
+            "quote_start": 67,
+            "quote_end": 118,
+            "quote": "本品适用于减轻季节性过敏性鼻炎引起的症状（2岁至14岁儿童以减轻季节性过敏性鼻炎和常年性过敏性鼻炎）。",
+            "mention_start": 111,
+            "mention_end": 116,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      {
+        "id": "path_19f41edb3048549d17fa617e",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_452e53192ca6ceb531c3e4da",
+            "kind": "Drug",
+            "name": "中性胰岛素注射液"
+          },
+          {
+            "id": "ingredient_30c4071eccd47cff40a1ff8d",
+            "kind": "Ingredient",
+            "name": "胰岛素"
+          },
+          {
+            "id": "drug_56927d012326a5af9417cdd3",
+            "kind": "Drug",
+            "name": "丙酸倍氯米松气雾剂"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_644f9a66dc94dfee04671c2f1c5b1531",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_1530e7b529615d3d19913e0b",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56adde6c08984f6a63f9e4621e0ba4ccaf49dd315991a60950e326791ee5250c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 8,
+            "quote": "1.Ⅰ型糖尿病；",
+            "mention_start": 4,
+            "mention_end": 7,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_8a0a5fcd528dd7a1503827db6662845c",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_d5dfe2275ea912cf6c5d7096",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "1f0cb6ae09ac867c24243745ee772d2f0d3d23a672b4c54ea2cbdbee7d4b536c",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 47,
+            "quote": "胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。",
+            "mention_start": 0,
+            "mention_end": 3,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_f49037f21cefbec1947c4fdc52b7a3e1",
+            "src": {
+              "id": "drug_56927d012326a5af9417cdd3",
+              "kind": "Drug",
+              "name": "丙酸倍氯米松气雾剂"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_7bb9395cf8015f5a40bdc559",
+            "record_id": "sourcerecord_ff0ccc185ec6bfb618467768",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy24822.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "ec12e5c007cf76fc1c3c5c99370fc9ae7286367553cacc559c2e555982efb019",
+            "section_field": "drug_interactions",
+            "quote_start": 27,
+            "quote_end": 57,
+            "quote": "2．胰岛素能与本品产生拮抗作用，糖尿病者应注意调整用药剂量。",
+            "mention_start": 29,
+            "mention_end": 32,
+            "qualifiers": {
+              "caution": true,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_6a1e0f1463728d571a434f507f09610e",
+            "src": {
+              "id": "drug_56927d012326a5af9417cdd3",
+              "kind": "Drug",
+              "name": "丙酸倍氯米松气雾剂"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_d9072caea9682613fe9b7be8",
+            "record_id": "sourcerecord_ff0ccc185ec6bfb618467768",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy24822.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "49c5d0b15403c17e25cf3f36aade9b96d3f9629f671ae184f9f6ecce89c34a87",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 51,
+            "quote": "因本品局部用于肺无明显全身作用，可用气雾吸入法以缓解哮喘症状和过敏性鼻炎的治疗，本品有治疗和预防作用。",
+            "mention_start": 31,
+            "mention_end": 36,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": true,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      {
+        "id": "path_98329b77190ad56ae8400c99",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_452e53192ca6ceb531c3e4da",
+            "kind": "Drug",
+            "name": "中性胰岛素注射液"
+          },
+          {
+            "id": "ingredient_30c4071eccd47cff40a1ff8d",
+            "kind": "Ingredient",
+            "name": "胰岛素"
+          },
+          {
+            "id": "drug_9ace46dee5d0f30e24a4e408",
+            "kind": "Drug",
+            "name": "醋酸曲安奈德注射液"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_644f9a66dc94dfee04671c2f1c5b1531",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_1530e7b529615d3d19913e0b",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56adde6c08984f6a63f9e4621e0ba4ccaf49dd315991a60950e326791ee5250c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 8,
+            "quote": "1.Ⅰ型糖尿病；",
+            "mention_start": 4,
+            "mention_end": 7,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_8a0a5fcd528dd7a1503827db6662845c",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_d5dfe2275ea912cf6c5d7096",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "1f0cb6ae09ac867c24243745ee772d2f0d3d23a672b4c54ea2cbdbee7d4b536c",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 47,
+            "quote": "胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。",
+            "mention_start": 0,
+            "mention_end": 3,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_eafddbc447b9cbe5475814a3ae203cb5",
+            "src": {
+              "id": "drug_9ace46dee5d0f30e24a4e408",
+              "kind": "Drug",
+              "name": "醋酸曲安奈德注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_cba190b9523b5799982ab01b",
+            "record_id": "sourcerecord_cd731e5619649e0138f9c363",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy3125l.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "bede5073bfc84db8c3ced571bdc3fa8afb7f29dfed52e3608025ed9747d570cc",
+            "section_field": "drug_interactions",
+            "quote_start": 159,
+            "quote_end": 196,
+            "quote": "⑺与降糖药如胰岛素合用时，因可使糖尿病患者血糖升高，应适当调整降糖药剂量。",
+            "mention_start": 165,
+            "mention_end": 168,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_bdd505889e6e78034200fd6fc9f70a54",
+            "src": {
+              "id": "drug_9ace46dee5d0f30e24a4e408",
+              "kind": "Drug",
+              "name": "醋酸曲安奈德注射液"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_0e66609b4c5d8e58dc6dc239",
+            "record_id": "sourcerecord_cd731e5619649e0138f9c363",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy3125l.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56c47468db4df021eadcd8a819b2285cf969bdf4122d46dc69e221e30b170a27",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 51,
+            "quote": "适用于各种皮肤病、过敏性鼻炎、关节痛、支气管哮喘、肩周炎、腱鞘炎、滑膜炎、急性扭伤、类风湿性关节炎等。",
+            "mention_start": 9,
+            "mention_end": 14,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      {
+        "id": "path_c59978638aff8f9d5352487f",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_452e53192ca6ceb531c3e4da",
+            "kind": "Drug",
+            "name": "中性胰岛素注射液"
+          },
+          {
+            "id": "ingredient_30c4071eccd47cff40a1ff8d",
+            "kind": "Ingredient",
+            "name": "胰岛素"
+          },
+          {
+            "id": "drug_c1cd7b8c2d30b68e1f895d36",
+            "kind": "Drug",
+            "name": "甲泼尼龙片"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_644f9a66dc94dfee04671c2f1c5b1531",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_1530e7b529615d3d19913e0b",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56adde6c08984f6a63f9e4621e0ba4ccaf49dd315991a60950e326791ee5250c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 8,
+            "quote": "1.Ⅰ型糖尿病；",
+            "mention_start": 4,
+            "mention_end": 7,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_8a0a5fcd528dd7a1503827db6662845c",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_d5dfe2275ea912cf6c5d7096",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "1f0cb6ae09ac867c24243745ee772d2f0d3d23a672b4c54ea2cbdbee7d4b536c",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 47,
+            "quote": "胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。",
+            "mention_start": 0,
+            "mention_end": 3,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_ebbc87744bd5d73d43528f7f41b6f210",
+            "src": {
+              "id": "drug_c1cd7b8c2d30b68e1f895d36",
+              "kind": "Drug",
+              "name": "甲泼尼龙片"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_b1de3c1e92ed0a68663d6cdb",
+            "record_id": "sourcerecord_f33692c0d07f2e78aefa9b6b",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy4186o.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "e93ee26792522c9a58dbf24492c882666d30253b9a94d49dfcb5c22d850c1e41",
+            "section_field": "drug_interactions",
+            "quote_start": 250,
+            "quote_end": 280,
+            "quote": " － 糖皮质激素会增加糖尿病患者对胰岛素和口服降糖药的需求。",
+            "mention_start": 267,
+            "mention_end": 270,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_ffae01069ac6cf8f88c57f51c06a66b8",
+            "src": {
+              "id": "drug_c1cd7b8c2d30b68e1f895d36",
+              "kind": "Drug",
+              "name": "甲泼尼龙片"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_bec599ba5dd27a7b573cc426",
+            "record_id": "sourcerecord_f33692c0d07f2e78aefa9b6b",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy4186o.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "89bba741a03e96b28aa153c3cdae8df74ce8a1e54f688666fbcc304ff0bbb573",
+            "section_field": "indication",
+            "quote_start": 321,
+            "quote_end": 621,
+            "quote": "teven-Johnson 综合征） ⑷剥脱性皮炎 ⑸覃样真菌病 ⑹严重的银屑病 ⑺严重的脂溢性皮炎 4.过敏性疾病 用于控制如下以足量常规治疗疗效不佳的严重或损伤机能的过敏性疾病： ⑴季节性或全年性过敏性鼻炎 ⑵血清病 ⑶支气管哮喘 ⑷药物过敏反应 ⑸接触性皮炎 ⑹异位性皮炎 5.眼部疾病 眼部及其附件严重的急慢性过敏和炎症反应，例如： ⑴过敏性角膜边缘溃疡 ⑵眼部带状疱疹 ⑶前视网膜炎 ⑷扩散性后房色素层炎和脉络膜炎 ⑸交感性眼炎 ⑹过敏性结膜炎 ⑺角膜炎 ⑻脉络膜视网膜炎 ⑼视神经炎 ⑽虹膜炎、虹膜睫状体炎 6.呼吸道疾病 ⑴有症状的肺部肉芽肿 ⑵其它方法不能控制的吕弗勒氏综合征(Loe",
+            "mention_start": 421,
+            "mention_end": 426,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      }
+    ],
+    "storage": "local_derived_property_graph",
+    "generation_evidence": true,
+    "clinical_validation": false,
+    "snapshot_created_at": "2026-11-03T10:54:10.789555+00:00",
+    "plan": {
+      "anchors": [
+        {
+          "surface": "糖尿病",
+          "node_ids": [
+            "disease_779b75cfda0f6b563b0cd4d8"
+          ],
+          "start": 0,
+          "end": 3,
+          "kinds": [
+            "Disease"
+          ],
+          "ambiguous": false
+        },
+        {
+          "surface": "过敏性鼻炎",
+          "node_ids": [
+            "disease_6cbdb5843b9360f1bfdc18b0"
+          ],
+          "start": 7,
+          "end": 12,
+          "kinds": [
+            "Disease"
+          ],
+          "ambiguous": false
+        }
+      ],
+      "requested_relations": [
+        "INTERACTION_MENTION",
+        "INDICATION_MENTION"
+      ],
+      "max_hops": 5,
+      "requires_connected_anchors": true,
+      "interaction_question": true,
+      "drug_discovery": true,
+      "disease_pair_interaction": true,
+      "resolution": "exact_literal_names_only_no_salt_or_formulation_equivalence",
+      "disease_pair_search": {
+        "route": "two_disease_drug_cohort_join",
+        "cohorts": [
+          {
+            "disease": "糖尿病",
+            "candidate_drugs_available": 138,
+            "candidate_records_available": 138,
+            "candidate_records_searched": 72,
+            "candidate_drugs_searched": 72,
+            "excluded_ambiguous_or_background_records": 66,
+            "admission": "same_record_direct_use_wording_or_standalone_indication_item_not_approved_treatment",
+            "sample_drugs": [
+              "消糖灵胶囊",
+              "格列美脲滴丸",
+              "格列本脲胶囊",
+              "玉液消渴冲剂",
+              "格列美脲片",
+              "马来酸罗格列酮片",
+              "低精蛋白锌胰岛素注射液",
+              "肠内营养混悬液(TP)",
+              "格列吡嗪胶囊",
+              "肠内营养混悬液",
+              "双瓜糖安胶囊",
+              "格列吡嗪分散片"
+            ]
+          },
+          {
+            "disease": "过敏性鼻炎",
+            "candidate_drugs_available": 119,
+            "candidate_records_available": 119,
+            "candidate_records_searched": 100,
+            "candidate_drugs_searched": 100,
+            "excluded_ambiguous_or_background_records": 19,
+            "admission": "same_record_direct_use_wording_or_standalone_indication_item_not_approved_treatment",
+            "sample_drugs": [
+              "鼻舒适片",
+              "鼻宁喷雾剂",
+              "盐酸塞洛唑啉滴鼻液",
+              "小儿盐酸异丙嗪片",
+              "富马酸酮替芬片",
+              "复方鼻炎膏",
+              "五维甘草那敏胶囊",
+              "阿司咪唑片",
+              "富马酸酮替芬滴鼻液",
+              "藿胆鼻炎胶囊",
+              "复方氨酚肾素片",
+              "丙酸倍氯米松鼻喷雾剂"
+            ]
+          }
+        ],
+        "coverage_complete": false,
+        "class_membership_policy": "explicit_same_product_source_assertion_only_no_synonyms",
+        "missing_links": [
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "钙通道阻滞剂",
+            "mentioning_drug": "精蛋白锌胰岛素注射液(30%)",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_ef0fbf258f3cb2cc2cf23fc4"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "非甾体抗炎药",
+            "mentioning_drug": "格列齐特胶囊",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_eb6a725cd9911b74735c8b0c"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "噻嗪类利尿剂",
+            "mentioning_drug": "格列吡嗪缓释片",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_f2d3a7c08946faeb53ce686b"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "糖皮质类固醇",
+            "mentioning_drug": "胰岛素注射液",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_789996b1f654c265ab1737cf"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "糖皮质激素",
+            "mentioning_drug": "阿卡波糖胶囊",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_261ad7ad68c5ea4fe33e5ed7"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "口服降糖药",
+            "mentioning_drug": "胰岛素注射液",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_789996b1f654c265ab1737cf"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "皮质激素",
+            "mentioning_drug": "瑞格列奈片",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_a1ed6542b5f49aed1bb68cb2"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "抗凝血药",
+            "mentioning_drug": "中性胰岛素注射液",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_f7194c958d4cf9744b4bb499"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "磺胺类药物",
+            "mentioning_drug": "复方二甲双胍格列吡嗪胶囊",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_75189c373718757cb136843d"
+          },
+          {
+            "type": "class_membership_not_proven_for_other_cohort",
+            "class_name": "非甾体类抗炎药",
+            "mentioning_drug": "那格列奈胶囊",
+            "other_disease": "过敏性鼻炎",
+            "source_id": "section_15968f68edc71589a89cb0ab"
+          }
+        ],
+        "truncated": false,
+        "matched_drug_pairs": 12,
+        "searched_snapshot_exhausted": true
+      }
+    },
+    "stats": {
+      "scanned_bridge_edges": 890,
+      "expanded_states": 441,
+      "candidate_paths": 17,
+      "expansion_budget_exhausted": false
+    },
+    "returned_paths": 6,
+    "multi_relation_paths": 6,
+    "source_verified_count": 18,
+    "truncated": true,
+    "missing_requested_relations": [],
+    "seconds": 0.5679,
+    "offline_guard_source_validation": {
+      "decision": "answer",
+      "aspects": [
+        {
+          "question": "糖尿病用的药跟过敏性鼻炎用的药有药物相互作用吗？",
+          "status": "supported",
+          "evidence_ids": [
+            1
+          ],
+          "quotes": [
+            {
+              "id": 1,
+              "quote": "适用于经饮食控制及体育锻炼疗效不满意的轻、中度2型糖尿病患者。"
+            },
+            {
+              "id": 1,
+              "quote": "格列吡嗪"
+            },
+            {
+              "id": 1,
+              "quote": "同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。"
+            },
+            {
+              "id": 1,
+              "quote": "治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。"
+            }
+          ],
+          "reason": "仅描述对应制剂的来源示例，不推论整体或个人安全"
+        }
+      ],
+      "evidence_ids": [
+        1
+      ],
+      "answer_questions": [
+        "糖尿病用的药跟过敏性鼻炎用的药有药物相互作用吗？"
+      ],
+      "refused_questions": [],
+      "message": ""
+    }
+  },
+  "excerpts": [
+    {
+      "id": 1,
+      "source": "多关系图路径 path_23230c1fe49878af912a5f0e",
+      "section_path": "成分原文记载 / 用途章节提及（非确证治疗） / 相互作用章节提及（非自动确认风险）",
+      "content": "双疾病相关药品检索：以下仅是资料中用途章节提及这两种疾病的具体制剂组合示例，不是全部治疗药品清单，也不是所有组合均相互作用的结论。给药途径及局部/全身作用以原文为准。\n多关系图检索路径（来源原文已逐边回查，尚未临床核验）。\n边1：格列吡嗪胶囊 —用途章节提及（非确证治疗）→ 糖尿病\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_b8bbc4750869b4afa021d327；章节：indication；原文位置：0:31。\n来源网址：https://www.yaopinnet.com/huayao/hy28009.htm\n原文：适用于经饮食控制及体育锻炼疗效不满意的轻、中度2型糖尿病患者。\n边2：格列吡嗪胶囊 —成分原文记载→ 格列吡嗪\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_b8bbc4750869b4afa021d327；章节：composition；原文位置：0:4。\n来源网址：https://www.yaopinnet.com/huayao/hy28009.htm\n原文：格列吡嗪\n边3：盐酸西替利嗪滴剂 —相互作用章节提及（非自动确认风险）→ 格列吡嗪\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_9b5e9887a4ccaa253be251cb；章节：drug_interactions；原文位置：401:437。\n来源网址：https://www.yaopinnet.com/huayao/hy21665.htm\n原文： 同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。\n边4：盐酸西替利嗪滴剂 —用途章节提及（非确证治疗）→ 过敏性鼻炎\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_9b5e9887a4ccaa253be251cb；章节：indication；原文位置：0:42。\n来源网址：https://www.yaopinnet.com/huayao/hy21665.htm\n原文：治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。\n解释边界：仅连接资料中的陈述；提及不等于治疗，症状不用于确诊，共享成分不等于可替代；未命中不表示安全。否定、剂量、人群和条件以逐边原文为准。",
+      "evidence_type": "evidence_backed_semantic_graph_path",
+      "source_url": "",
+      "source_urls": [
+        "https://www.yaopinnet.com/huayao/hy28009.htm",
+        "https://www.yaopinnet.com/huayao/hy21665.htm"
+      ],
+      "source_ids": [
+        "section_92dc44b6e29265417eb5421d",
+        "section_fb903e9018f23c74c1852b55",
+        "section_14f3baa66042c2136fa5631d",
+        "section_b68972d26d186d182e624c60"
+      ],
+      "source_status": "third_party_unverified",
+      "clinical_status": "not_validated",
+      "graph_path": {
+        "id": "path_23230c1fe49878af912a5f0e",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_1af55fc8befd153255f7de2b",
+            "kind": "Drug",
+            "name": "格列吡嗪胶囊"
+          },
+          {
+            "id": "ingredient_b275c95f9839ccc22e6cca33",
+            "kind": "Ingredient",
+            "name": "格列吡嗪"
+          },
+          {
+            "id": "drug_9dc51bc6455052637417f37a",
+            "kind": "Drug",
+            "name": "盐酸西替利嗪滴剂"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_4cd0295299bfe2eaa603e0eb4f7d3555",
+            "src": {
+              "id": "drug_1af55fc8befd153255f7de2b",
+              "kind": "Drug",
+              "name": "格列吡嗪胶囊"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_92dc44b6e29265417eb5421d",
+            "record_id": "sourcerecord_b8bbc4750869b4afa021d327",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy28009.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "4e962577c430fede49e34626cec2fee3177ca6035c259348867ed7e7ccfed3b2",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 31,
+            "quote": "适用于经饮食控制及体育锻炼疗效不满意的轻、中度2型糖尿病患者。",
+            "mention_start": 25,
+            "mention_end": 28,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_c32b6c5ab41ef737c238a62f1be8a76f",
+            "src": {
+              "id": "drug_1af55fc8befd153255f7de2b",
+              "kind": "Drug",
+              "name": "格列吡嗪胶囊"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_fb903e9018f23c74c1852b55",
+            "record_id": "sourcerecord_b8bbc4750869b4afa021d327",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy28009.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "b399987159d6987f09fe1bf6fcc30c408b78098652768e2855759b350ea2032a",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 4,
+            "quote": "格列吡嗪",
+            "mention_start": 0,
+            "mention_end": 4,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_25adbfd738832090ddbe9b3c6c9cb90c",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_14f3baa66042c2136fa5631d",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "de64497e53a220a4b38000554f3a60e1eb7e62ec091c7091b0bd06bd70765d0a",
+            "section_field": "drug_interactions",
+            "quote_start": 401,
+            "quote_end": 437,
+            "quote": " 同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。",
+            "mention_start": 421,
+            "mention_end": 425,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_0d5da44124a07afa694ab48a35781d90",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_b68972d26d186d182e624c60",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "836e69782e802f4b9e5ce5e4287259461557ae09ec3957027a55abf79face6da",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 42,
+            "quote": "治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。",
+            "mention_start": 11,
+            "mention_end": 16,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      "graph_verified": true,
+      "graph_snapshot_version": "semantic-graph-1",
+      "parent_verified": false,
+      "_retrieval_tool": "search_semantic_graph"
+    },
+    {
+      "id": 2,
+      "source": "多关系图路径 path_8d8004b66d28fbaaa345f25e",
+      "section_path": "成分原文记载 / 用途章节提及（非确证治疗） / 相互作用章节提及（非自动确认风险）",
+      "content": "双疾病相关药品检索：以下仅是资料中用途章节提及这两种疾病的具体制剂组合示例，不是全部治疗药品清单，也不是所有组合均相互作用的结论。给药途径及局部/全身作用以原文为准。\n多关系图检索路径（来源原文已逐边回查，尚未临床核验）。\n边1：格列吡嗪分散片 —用途章节提及（非确证治疗）→ 糖尿病\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_144c32ee58b1278d18fd4a7a；章节：indication；原文位置：0:62。\n来源网址：https://www.yaopinnet.com/huayao/hy47205.htm\n原文：适用于经饮食控制及体育锻炼2～3个月疗效不满意的轻、中度2型糖尿病患者，这类糖尿病患者的胰岛β细胞需有一定的分泌胰岛素功能。\n边2：格列吡嗪分散片 —成分原文记载→ 格列吡嗪\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_144c32ee58b1278d18fd4a7a；章节：composition；原文位置：0:53。\n来源网址：https://www.yaopinnet.com/huayao/hy47205.htm\n原文：格列吡嗪。化学名称：5-甲基-N-[2-[4-[（环已氨基）羰基]氨基]磺酰基]苯基]乙基]-吡嗪甲酰胺。\n边3：盐酸西替利嗪滴剂 —相互作用章节提及（非自动确认风险）→ 格列吡嗪\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_9b5e9887a4ccaa253be251cb；章节：drug_interactions；原文位置：401:437。\n来源网址：https://www.yaopinnet.com/huayao/hy21665.htm\n原文： 同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。\n边4：盐酸西替利嗪滴剂 —用途章节提及（非确证治疗）→ 过敏性鼻炎\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_9b5e9887a4ccaa253be251cb；章节：indication；原文位置：0:42。\n来源网址：https://www.yaopinnet.com/huayao/hy21665.htm\n原文：治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。\n解释边界：仅连接资料中的陈述；提及不等于治疗，症状不用于确诊，共享成分不等于可替代；未命中不表示安全。否定、剂量、人群和条件以逐边原文为准。",
+      "evidence_type": "evidence_backed_semantic_graph_path",
+      "source_url": "",
+      "source_urls": [
+        "https://www.yaopinnet.com/huayao/hy47205.htm",
+        "https://www.yaopinnet.com/huayao/hy21665.htm"
+      ],
+      "source_ids": [
+        "section_18f62256d904de970b17c498",
+        "section_b0a5a863725ce1c9a5e01df2",
+        "section_14f3baa66042c2136fa5631d",
+        "section_b68972d26d186d182e624c60"
+      ],
+      "source_status": "third_party_unverified",
+      "clinical_status": "not_validated",
+      "graph_path": {
+        "id": "path_8d8004b66d28fbaaa345f25e",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_2549c736dc79d41adf769584",
+            "kind": "Drug",
+            "name": "格列吡嗪分散片"
+          },
+          {
+            "id": "ingredient_b275c95f9839ccc22e6cca33",
+            "kind": "Ingredient",
+            "name": "格列吡嗪"
+          },
+          {
+            "id": "drug_9dc51bc6455052637417f37a",
+            "kind": "Drug",
+            "name": "盐酸西替利嗪滴剂"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_7a0345f75ffe46d2bb52947bbceda5c5",
+            "src": {
+              "id": "drug_2549c736dc79d41adf769584",
+              "kind": "Drug",
+              "name": "格列吡嗪分散片"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_18f62256d904de970b17c498",
+            "record_id": "sourcerecord_144c32ee58b1278d18fd4a7a",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy47205.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "e5c65e1fe62b8f04e09628dd230ab3215ee02fe4f7de2eebb94ae3f1a830ca8c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 62,
+            "quote": "适用于经饮食控制及体育锻炼2～3个月疗效不满意的轻、中度2型糖尿病患者，这类糖尿病患者的胰岛β细胞需有一定的分泌胰岛素功能。",
+            "mention_start": 38,
+            "mention_end": 41,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_7f599989010800af7b4582a12cd5e57b",
+            "src": {
+              "id": "drug_2549c736dc79d41adf769584",
+              "kind": "Drug",
+              "name": "格列吡嗪分散片"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_b0a5a863725ce1c9a5e01df2",
+            "record_id": "sourcerecord_144c32ee58b1278d18fd4a7a",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy47205.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "81e23f41cf48d4aba31330ca2dedcb9a71a2c00630766d224eb370a5b9aa3c47",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 53,
+            "quote": "格列吡嗪。化学名称：5-甲基-N-[2-[4-[（环已氨基）羰基]氨基]磺酰基]苯基]乙基]-吡嗪甲酰胺。",
+            "mention_start": 0,
+            "mention_end": 4,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_25adbfd738832090ddbe9b3c6c9cb90c",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "ingredient_b275c95f9839ccc22e6cca33",
+              "kind": "Ingredient",
+              "name": "格列吡嗪"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_14f3baa66042c2136fa5631d",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "de64497e53a220a4b38000554f3a60e1eb7e62ec091c7091b0bd06bd70765d0a",
+            "section_field": "drug_interactions",
+            "quote_start": 401,
+            "quote_end": 437,
+            "quote": " 同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。",
+            "mention_start": 421,
+            "mention_end": 425,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_0d5da44124a07afa694ab48a35781d90",
+            "src": {
+              "id": "drug_9dc51bc6455052637417f37a",
+              "kind": "Drug",
+              "name": "盐酸西替利嗪滴剂"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_b68972d26d186d182e624c60",
+            "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "836e69782e802f4b9e5ce5e4287259461557ae09ec3957027a55abf79face6da",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 42,
+            "quote": "治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。",
+            "mention_start": 11,
+            "mention_end": 16,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      "graph_verified": true,
+      "graph_snapshot_version": "semantic-graph-1",
+      "parent_verified": false,
+      "_retrieval_tool": "search_semantic_graph"
+    },
+    {
+      "id": 3,
+      "source": "多关系图路径 path_e77e6d24dddae7e3e8a4cf2a",
+      "section_path": "成分原文记载 / 用途章节提及（非确证治疗） / 相互作用章节提及（非自动确认风险）",
+      "content": "双疾病相关药品检索：以下仅是资料中用途章节提及这两种疾病的具体制剂组合示例，不是全部治疗药品清单，也不是所有组合均相互作用的结论。给药途径及局部/全身作用以原文为准。\n多关系图检索路径（来源原文已逐边回查，尚未临床核验）。\n边1：罗格列酮片 —用途章节提及（非确证治疗）→ 糖尿病\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_cb44137d1e13588ac6d95278；章节：indication；原文位置：0:10。\n来源网址：https://www.yaopinnet.com/huayao/hy44569.htm\n原文：本品用于2型糖尿病。\n边2：罗格列酮片 —成分原文记载→ 罗格列酮\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_cb44137d1e13588ac6d95278；章节：composition；原文位置：0:4。\n来源网址：https://www.yaopinnet.com/huayao/hy44569.htm\n原文：罗格列酮\n边3：孟鲁司特钠咀嚼片 —相互作用章节提及（非自动确认风险）→ 罗格列酮\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_2c00f405cd550edb1aa503ad；章节：drug_interactions；原文位置：202:278。\n来源网址：https://www.yaopinnet.com/huayao/hy54681.htm\n原文：然而，一项关于孟鲁司特和罗格列酮（一种主要通过CYP28代谢的典型探测底物）药物相互作用的临床研究数据表明， 孟鲁司特钠在体内对CYP28没有抑制作用。\n边4：孟鲁司特钠咀嚼片 —用途章节提及（非确证治疗）→ 过敏性鼻炎\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_2c00f405cd550edb1aa503ad；章节：indication；原文位置：67:118。\n来源网址：https://www.yaopinnet.com/huayao/hy54681.htm\n原文：本品适用于减轻季节性过敏性鼻炎引起的症状（2岁至14岁儿童以减轻季节性过敏性鼻炎和常年性过敏性鼻炎）。\n解释边界：仅连接资料中的陈述；提及不等于治疗，症状不用于确诊，共享成分不等于可替代；未命中不表示安全。否定、剂量、人群和条件以逐边原文为准。",
+      "evidence_type": "evidence_backed_semantic_graph_path",
+      "source_url": "",
+      "source_urls": [
+        "https://www.yaopinnet.com/huayao/hy44569.htm",
+        "https://www.yaopinnet.com/huayao/hy54681.htm"
+      ],
+      "source_ids": [
+        "section_e8afc2b53376092211c797eb",
+        "section_3cb6cd877f6a3cede816e391",
+        "section_15cd6747af55798390348d50",
+        "section_fe4e255e677283cc7c5c46e6"
+      ],
+      "source_status": "third_party_unverified",
+      "clinical_status": "not_validated",
+      "graph_path": {
+        "id": "path_e77e6d24dddae7e3e8a4cf2a",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_3d3e4a14f084e48e05054adb",
+            "kind": "Drug",
+            "name": "罗格列酮片"
+          },
+          {
+            "id": "ingredient_62f17b38b5023162ccf5beba",
+            "kind": "Ingredient",
+            "name": "罗格列酮"
+          },
+          {
+            "id": "drug_cd239433cfdfe97e0494caa7",
+            "kind": "Drug",
+            "name": "孟鲁司特钠咀嚼片"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_ecf5474e3387110c4a6a7bdb055c1a1b",
+            "src": {
+              "id": "drug_3d3e4a14f084e48e05054adb",
+              "kind": "Drug",
+              "name": "罗格列酮片"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_e8afc2b53376092211c797eb",
+            "record_id": "sourcerecord_cb44137d1e13588ac6d95278",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy44569.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "00d047729de56b7783ad81484ae9733bdbe42d56381fe937ebfd9304a3f7ff5b",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 10,
+            "quote": "本品用于2型糖尿病。",
+            "mention_start": 6,
+            "mention_end": 9,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_65b1c7b38ac892722f341bd1fb53f6eb",
+            "src": {
+              "id": "drug_3d3e4a14f084e48e05054adb",
+              "kind": "Drug",
+              "name": "罗格列酮片"
+            },
+            "dst": {
+              "id": "ingredient_62f17b38b5023162ccf5beba",
+              "kind": "Ingredient",
+              "name": "罗格列酮"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_3cb6cd877f6a3cede816e391",
+            "record_id": "sourcerecord_cb44137d1e13588ac6d95278",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy44569.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "540d7a957a67dfdef8d17ae3f29628cf159331b35c5ddcf43b8d454d72622f85",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 4,
+            "quote": "罗格列酮",
+            "mention_start": 0,
+            "mention_end": 4,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_b2572d2f01410558b991aa0c6fbbd766",
+            "src": {
+              "id": "drug_cd239433cfdfe97e0494caa7",
+              "kind": "Drug",
+              "name": "孟鲁司特钠咀嚼片"
+            },
+            "dst": {
+              "id": "ingredient_62f17b38b5023162ccf5beba",
+              "kind": "Ingredient",
+              "name": "罗格列酮"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_15cd6747af55798390348d50",
+            "record_id": "sourcerecord_2c00f405cd550edb1aa503ad",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy54681.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "3c82acfa1ac7611f06d934807de994655797265e2fae22f30122cbec001a6dcc",
+            "section_field": "drug_interactions",
+            "quote_start": 202,
+            "quote_end": 278,
+            "quote": "然而，一项关于孟鲁司特和罗格列酮（一种主要通过CYP28代谢的典型探测底物）药物相互作用的临床研究数据表明， 孟鲁司特钠在体内对CYP28没有抑制作用。",
+            "mention_start": 214,
+            "mention_end": 218,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": true,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_1682ca7fbe9520c59b9e9bd89c036737",
+            "src": {
+              "id": "drug_cd239433cfdfe97e0494caa7",
+              "kind": "Drug",
+              "name": "孟鲁司特钠咀嚼片"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_fe4e255e677283cc7c5c46e6",
+            "record_id": "sourcerecord_2c00f405cd550edb1aa503ad",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy54681.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "7eedca6c896375aac573b6b08c900cce7eeef870d9b7897c1b11e15591906184",
+            "section_field": "indication",
+            "quote_start": 67,
+            "quote_end": 118,
+            "quote": "本品适用于减轻季节性过敏性鼻炎引起的症状（2岁至14岁儿童以减轻季节性过敏性鼻炎和常年性过敏性鼻炎）。",
+            "mention_start": 111,
+            "mention_end": 116,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      "graph_verified": true,
+      "graph_snapshot_version": "semantic-graph-1",
+      "parent_verified": false,
+      "_retrieval_tool": "search_semantic_graph"
+    },
+    {
+      "id": 4,
+      "source": "多关系图路径 path_19f41edb3048549d17fa617e",
+      "section_path": "成分原文记载 / 用途章节提及（非确证治疗） / 相互作用章节提及（非自动确认风险）",
+      "content": "双疾病相关药品检索：以下仅是资料中用途章节提及这两种疾病的具体制剂组合示例，不是全部治疗药品清单，也不是所有组合均相互作用的结论。给药途径及局部/全身作用以原文为准。\n多关系图检索路径（来源原文已逐边回查，尚未临床核验）。\n边1：中性胰岛素注射液 —用途章节提及（非确证治疗）→ 糖尿病\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ec5f55102cea52368bba7d3d；章节：indication；原文位置：0:8。\n来源网址：https://www.yaopinnet.com/huayao/hy1592q.htm\n原文：1.Ⅰ型糖尿病；\n边2：中性胰岛素注射液 —成分原文记载→ 胰岛素\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ec5f55102cea52368bba7d3d；章节：composition；原文位置：0:47。\n来源网址：https://www.yaopinnet.com/huayao/hy1592q.htm\n原文：胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。\n边3：丙酸倍氯米松气雾剂 —相互作用章节提及（非自动确认风险）→ 胰岛素\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ff0ccc185ec6bfb618467768；章节：drug_interactions；原文位置：27:57。\n来源网址：https://www.yaopinnet.com/huayao/hy24822.htm\n原文：2．胰岛素能与本品产生拮抗作用，糖尿病者应注意调整用药剂量。\n边4：丙酸倍氯米松气雾剂 —用途章节提及（非确证治疗）→ 过敏性鼻炎\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ff0ccc185ec6bfb618467768；章节：indication；原文位置：0:51。\n来源网址：https://www.yaopinnet.com/huayao/hy24822.htm\n原文：因本品局部用于肺无明显全身作用，可用气雾吸入法以缓解哮喘症状和过敏性鼻炎的治疗，本品有治疗和预防作用。\n解释边界：仅连接资料中的陈述；提及不等于治疗，症状不用于确诊，共享成分不等于可替代；未命中不表示安全。否定、剂量、人群和条件以逐边原文为准。",
+      "evidence_type": "evidence_backed_semantic_graph_path",
+      "source_url": "",
+      "source_urls": [
+        "https://www.yaopinnet.com/huayao/hy1592q.htm",
+        "https://www.yaopinnet.com/huayao/hy24822.htm"
+      ],
+      "source_ids": [
+        "section_1530e7b529615d3d19913e0b",
+        "section_d5dfe2275ea912cf6c5d7096",
+        "section_7bb9395cf8015f5a40bdc559",
+        "section_d9072caea9682613fe9b7be8"
+      ],
+      "source_status": "third_party_unverified",
+      "clinical_status": "not_validated",
+      "graph_path": {
+        "id": "path_19f41edb3048549d17fa617e",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_452e53192ca6ceb531c3e4da",
+            "kind": "Drug",
+            "name": "中性胰岛素注射液"
+          },
+          {
+            "id": "ingredient_30c4071eccd47cff40a1ff8d",
+            "kind": "Ingredient",
+            "name": "胰岛素"
+          },
+          {
+            "id": "drug_56927d012326a5af9417cdd3",
+            "kind": "Drug",
+            "name": "丙酸倍氯米松气雾剂"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_644f9a66dc94dfee04671c2f1c5b1531",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_1530e7b529615d3d19913e0b",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56adde6c08984f6a63f9e4621e0ba4ccaf49dd315991a60950e326791ee5250c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 8,
+            "quote": "1.Ⅰ型糖尿病；",
+            "mention_start": 4,
+            "mention_end": 7,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_8a0a5fcd528dd7a1503827db6662845c",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_d5dfe2275ea912cf6c5d7096",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "1f0cb6ae09ac867c24243745ee772d2f0d3d23a672b4c54ea2cbdbee7d4b536c",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 47,
+            "quote": "胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。",
+            "mention_start": 0,
+            "mention_end": 3,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_f49037f21cefbec1947c4fdc52b7a3e1",
+            "src": {
+              "id": "drug_56927d012326a5af9417cdd3",
+              "kind": "Drug",
+              "name": "丙酸倍氯米松气雾剂"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_7bb9395cf8015f5a40bdc559",
+            "record_id": "sourcerecord_ff0ccc185ec6bfb618467768",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy24822.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "ec12e5c007cf76fc1c3c5c99370fc9ae7286367553cacc559c2e555982efb019",
+            "section_field": "drug_interactions",
+            "quote_start": 27,
+            "quote_end": 57,
+            "quote": "2．胰岛素能与本品产生拮抗作用，糖尿病者应注意调整用药剂量。",
+            "mention_start": 29,
+            "mention_end": 32,
+            "qualifiers": {
+              "caution": true,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_6a1e0f1463728d571a434f507f09610e",
+            "src": {
+              "id": "drug_56927d012326a5af9417cdd3",
+              "kind": "Drug",
+              "name": "丙酸倍氯米松气雾剂"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_d9072caea9682613fe9b7be8",
+            "record_id": "sourcerecord_ff0ccc185ec6bfb618467768",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy24822.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "49c5d0b15403c17e25cf3f36aade9b96d3f9629f671ae184f9f6ecce89c34a87",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 51,
+            "quote": "因本品局部用于肺无明显全身作用，可用气雾吸入法以缓解哮喘症状和过敏性鼻炎的治疗，本品有治疗和预防作用。",
+            "mention_start": 31,
+            "mention_end": 36,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": true,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      "graph_verified": true,
+      "graph_snapshot_version": "semantic-graph-1",
+      "parent_verified": false,
+      "_retrieval_tool": "search_semantic_graph"
+    },
+    {
+      "id": 5,
+      "source": "多关系图路径 path_98329b77190ad56ae8400c99",
+      "section_path": "成分原文记载 / 用途章节提及（非确证治疗） / 相互作用章节提及（非自动确认风险）",
+      "content": "双疾病相关药品检索：以下仅是资料中用途章节提及这两种疾病的具体制剂组合示例，不是全部治疗药品清单，也不是所有组合均相互作用的结论。给药途径及局部/全身作用以原文为准。\n多关系图检索路径（来源原文已逐边回查，尚未临床核验）。\n边1：中性胰岛素注射液 —用途章节提及（非确证治疗）→ 糖尿病\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ec5f55102cea52368bba7d3d；章节：indication；原文位置：0:8。\n来源网址：https://www.yaopinnet.com/huayao/hy1592q.htm\n原文：1.Ⅰ型糖尿病；\n边2：中性胰岛素注射液 —成分原文记载→ 胰岛素\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ec5f55102cea52368bba7d3d；章节：composition；原文位置：0:47。\n来源网址：https://www.yaopinnet.com/huayao/hy1592q.htm\n原文：胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。\n边3：醋酸曲安奈德注射液 —相互作用章节提及（非自动确认风险）→ 胰岛素\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_cd731e5619649e0138f9c363；章节：drug_interactions；原文位置：159:196。\n来源网址：https://www.yaopinnet.com/huayao/hy3125l.htm\n原文：⑺与降糖药如胰岛素合用时，因可使糖尿病患者血糖升高，应适当调整降糖药剂量。\n边4：醋酸曲安奈德注射液 —用途章节提及（非确证治疗）→ 过敏性鼻炎\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_cd731e5619649e0138f9c363；章节：indication；原文位置：0:51。\n来源网址：https://www.yaopinnet.com/huayao/hy3125l.htm\n原文：适用于各种皮肤病、过敏性鼻炎、关节痛、支气管哮喘、肩周炎、腱鞘炎、滑膜炎、急性扭伤、类风湿性关节炎等。\n解释边界：仅连接资料中的陈述；提及不等于治疗，症状不用于确诊，共享成分不等于可替代；未命中不表示安全。否定、剂量、人群和条件以逐边原文为准。",
+      "evidence_type": "evidence_backed_semantic_graph_path",
+      "source_url": "",
+      "source_urls": [
+        "https://www.yaopinnet.com/huayao/hy1592q.htm",
+        "https://www.yaopinnet.com/huayao/hy3125l.htm"
+      ],
+      "source_ids": [
+        "section_1530e7b529615d3d19913e0b",
+        "section_d5dfe2275ea912cf6c5d7096",
+        "section_cba190b9523b5799982ab01b",
+        "section_0e66609b4c5d8e58dc6dc239"
+      ],
+      "source_status": "third_party_unverified",
+      "clinical_status": "not_validated",
+      "graph_path": {
+        "id": "path_98329b77190ad56ae8400c99",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_452e53192ca6ceb531c3e4da",
+            "kind": "Drug",
+            "name": "中性胰岛素注射液"
+          },
+          {
+            "id": "ingredient_30c4071eccd47cff40a1ff8d",
+            "kind": "Ingredient",
+            "name": "胰岛素"
+          },
+          {
+            "id": "drug_9ace46dee5d0f30e24a4e408",
+            "kind": "Drug",
+            "name": "醋酸曲安奈德注射液"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_644f9a66dc94dfee04671c2f1c5b1531",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_1530e7b529615d3d19913e0b",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56adde6c08984f6a63f9e4621e0ba4ccaf49dd315991a60950e326791ee5250c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 8,
+            "quote": "1.Ⅰ型糖尿病；",
+            "mention_start": 4,
+            "mention_end": 7,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_8a0a5fcd528dd7a1503827db6662845c",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_d5dfe2275ea912cf6c5d7096",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "1f0cb6ae09ac867c24243745ee772d2f0d3d23a672b4c54ea2cbdbee7d4b536c",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 47,
+            "quote": "胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。",
+            "mention_start": 0,
+            "mention_end": 3,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_eafddbc447b9cbe5475814a3ae203cb5",
+            "src": {
+              "id": "drug_9ace46dee5d0f30e24a4e408",
+              "kind": "Drug",
+              "name": "醋酸曲安奈德注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_cba190b9523b5799982ab01b",
+            "record_id": "sourcerecord_cd731e5619649e0138f9c363",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy3125l.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "bede5073bfc84db8c3ced571bdc3fa8afb7f29dfed52e3608025ed9747d570cc",
+            "section_field": "drug_interactions",
+            "quote_start": 159,
+            "quote_end": 196,
+            "quote": "⑺与降糖药如胰岛素合用时，因可使糖尿病患者血糖升高，应适当调整降糖药剂量。",
+            "mention_start": 165,
+            "mention_end": 168,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_bdd505889e6e78034200fd6fc9f70a54",
+            "src": {
+              "id": "drug_9ace46dee5d0f30e24a4e408",
+              "kind": "Drug",
+              "name": "醋酸曲安奈德注射液"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_0e66609b4c5d8e58dc6dc239",
+            "record_id": "sourcerecord_cd731e5619649e0138f9c363",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy3125l.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56c47468db4df021eadcd8a819b2285cf969bdf4122d46dc69e221e30b170a27",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 51,
+            "quote": "适用于各种皮肤病、过敏性鼻炎、关节痛、支气管哮喘、肩周炎、腱鞘炎、滑膜炎、急性扭伤、类风湿性关节炎等。",
+            "mention_start": 9,
+            "mention_end": 14,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      "graph_verified": true,
+      "graph_snapshot_version": "semantic-graph-1",
+      "parent_verified": false,
+      "_retrieval_tool": "search_semantic_graph"
+    },
+    {
+      "id": 6,
+      "source": "多关系图路径 path_c59978638aff8f9d5352487f",
+      "section_path": "成分原文记载 / 用途章节提及（非确证治疗） / 相互作用章节提及（非自动确认风险）",
+      "content": "双疾病相关药品检索：以下仅是资料中用途章节提及这两种疾病的具体制剂组合示例，不是全部治疗药品清单，也不是所有组合均相互作用的结论。给药途径及局部/全身作用以原文为准。\n多关系图检索路径（来源原文已逐边回查，尚未临床核验）。\n边1：中性胰岛素注射液 —用途章节提及（非确证治疗）→ 糖尿病\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ec5f55102cea52368bba7d3d；章节：indication；原文位置：0:8。\n来源网址：https://www.yaopinnet.com/huayao/hy1592q.htm\n原文：1.Ⅰ型糖尿病；\n边2：中性胰岛素注射液 —成分原文记载→ 胰岛素\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_ec5f55102cea52368bba7d3d；章节：composition；原文位置：0:47。\n来源网址：https://www.yaopinnet.com/huayao/hy1592q.htm\n原文：胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。\n边3：甲泼尼龙片 —相互作用章节提及（非自动确认风险）→ 胰岛素\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_f33692c0d07f2e78aefa9b6b；章节：drug_interactions；原文位置：250:280。\n来源网址：https://www.yaopinnet.com/huayao/hy4186o.htm\n原文： － 糖皮质激素会增加糖尿病患者对胰岛素和口服降糖药的需求。\n边4：甲泼尼龙片 —用途章节提及（非确证治疗）→ 过敏性鼻炎\n来源：kg_output_clean_v2/sections.jsonl；记录：sourcerecord_f33692c0d07f2e78aefa9b6b；章节：indication；原文位置：321:621。\n来源网址：https://www.yaopinnet.com/huayao/hy4186o.htm\n原文：teven-Johnson 综合征） ⑷剥脱性皮炎 ⑸覃样真菌病 ⑹严重的银屑病 ⑺严重的脂溢性皮炎 4.过敏性疾病 用于控制如下以足量常规治疗疗效不佳的严重或损伤机能的过敏性疾病： ⑴季节性或全年性过敏性鼻炎 ⑵血清病 ⑶支气管哮喘 ⑷药物过敏反应 ⑸接触性皮炎 ⑹异位性皮炎 5.眼部疾病 眼部及其附件严重的急慢性过敏和炎症反应，例如： ⑴过敏性角膜边缘溃疡 ⑵眼部带状疱疹 ⑶前视网膜炎 ⑷扩散性后房色素层炎和脉络膜炎 ⑸交感性眼炎 ⑹过敏性结膜炎 ⑺角膜炎 ⑻脉络膜视网膜炎 ⑼视神经炎 ⑽虹膜炎、虹膜睫状体炎 6.呼吸道疾病 ⑴有症状的肺部肉芽肿 ⑵其它方法不能控制的吕弗勒氏综合征(Loe\n解释边界：仅连接资料中的陈述；提及不等于治疗，症状不用于确诊，共享成分不等于可替代；未命中不表示安全。否定、剂量、人群和条件以逐边原文为准。",
+      "evidence_type": "evidence_backed_semantic_graph_path",
+      "source_url": "",
+      "source_urls": [
+        "https://www.yaopinnet.com/huayao/hy1592q.htm",
+        "https://www.yaopinnet.com/huayao/hy4186o.htm"
+      ],
+      "source_ids": [
+        "section_1530e7b529615d3d19913e0b",
+        "section_d5dfe2275ea912cf6c5d7096",
+        "section_b1de3c1e92ed0a68663d6cdb",
+        "section_bec599ba5dd27a7b573cc426"
+      ],
+      "source_status": "third_party_unverified",
+      "clinical_status": "not_validated",
+      "graph_path": {
+        "id": "path_c59978638aff8f9d5352487f",
+        "nodes": [
+          {
+            "id": "disease_779b75cfda0f6b563b0cd4d8",
+            "kind": "Disease",
+            "name": "糖尿病"
+          },
+          {
+            "id": "drug_452e53192ca6ceb531c3e4da",
+            "kind": "Drug",
+            "name": "中性胰岛素注射液"
+          },
+          {
+            "id": "ingredient_30c4071eccd47cff40a1ff8d",
+            "kind": "Ingredient",
+            "name": "胰岛素"
+          },
+          {
+            "id": "drug_c1cd7b8c2d30b68e1f895d36",
+            "kind": "Drug",
+            "name": "甲泼尼龙片"
+          },
+          {
+            "id": "disease_6cbdb5843b9360f1bfdc18b0",
+            "kind": "Disease",
+            "name": "过敏性鼻炎"
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge_644f9a66dc94dfee04671c2f1c5b1531",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "disease_779b75cfda0f6b563b0cd4d8",
+              "kind": "Disease",
+              "name": "糖尿病"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_1530e7b529615d3d19913e0b",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "56adde6c08984f6a63f9e4621e0ba4ccaf49dd315991a60950e326791ee5250c",
+            "section_field": "indication",
+            "quote_start": 0,
+            "quote_end": 8,
+            "quote": "1.Ⅰ型糖尿病；",
+            "mention_start": 4,
+            "mention_end": 7,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_8a0a5fcd528dd7a1503827db6662845c",
+            "src": {
+              "id": "drug_452e53192ca6ceb531c3e4da",
+              "kind": "Drug",
+              "name": "中性胰岛素注射液"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "HAS_INGREDIENT",
+            "relation_label": "成分原文记载",
+            "source_id": "section_d5dfe2275ea912cf6c5d7096",
+            "record_id": "sourcerecord_ec5f55102cea52368bba7d3d",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy1592q.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "1f0cb6ae09ac867c24243745ee772d2f0d3d23a672b4c54ea2cbdbee7d4b536c",
+            "section_field": "composition",
+            "quote_start": 0,
+            "quote_end": 47,
+            "quote": "胰岛素（猪或牛）的灭菌水溶液。每100 ml 中可含甘氨酸1.4～1.6g与间甲酚0.22g。",
+            "mention_start": 0,
+            "mention_end": 3,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "source_assertion_unverified"
+          },
+          {
+            "id": "edge_ebbc87744bd5d73d43528f7f41b6f210",
+            "src": {
+              "id": "drug_c1cd7b8c2d30b68e1f895d36",
+              "kind": "Drug",
+              "name": "甲泼尼龙片"
+            },
+            "dst": {
+              "id": "ingredient_30c4071eccd47cff40a1ff8d",
+              "kind": "Ingredient",
+              "name": "胰岛素"
+            },
+            "relation": "INTERACTION_MENTION",
+            "relation_label": "相互作用章节提及（非自动确认风险）",
+            "source_id": "section_b1de3c1e92ed0a68663d6cdb",
+            "record_id": "sourcerecord_f33692c0d07f2e78aefa9b6b",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy4186o.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "e93ee26792522c9a58dbf24492c882666d30253b9a94d49dfcb5c22d850c1e41",
+            "section_field": "drug_interactions",
+            "quote_start": 250,
+            "quote_end": 280,
+            "quote": " － 糖皮质激素会增加糖尿病患者对胰岛素和口服降糖药的需求。",
+            "mention_start": 267,
+            "mention_end": 270,
+            "qualifiers": {
+              "caution": false,
+              "conditional": true,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          },
+          {
+            "id": "edge_ffae01069ac6cf8f88c57f51c06a66b8",
+            "src": {
+              "id": "drug_c1cd7b8c2d30b68e1f895d36",
+              "kind": "Drug",
+              "name": "甲泼尼龙片"
+            },
+            "dst": {
+              "id": "disease_6cbdb5843b9360f1bfdc18b0",
+              "kind": "Disease",
+              "name": "过敏性鼻炎"
+            },
+            "relation": "INDICATION_MENTION",
+            "relation_label": "用途章节提及（非确证治疗）",
+            "source_id": "section_bec599ba5dd27a7b573cc426",
+            "record_id": "sourcerecord_f33692c0d07f2e78aefa9b6b",
+            "source_file": "kg_output_clean_v2/sections.jsonl",
+            "source_url": "https://www.yaopinnet.com/huayao/hy4186o.htm",
+            "source_status": "third_party_unverified",
+            "source_sha256": "89bba741a03e96b28aa153c3cdae8df74ce8a1e54f688666fbcc304ff0bbb573",
+            "section_field": "indication",
+            "quote_start": 321,
+            "quote_end": 621,
+            "quote": "teven-Johnson 综合征） ⑷剥脱性皮炎 ⑸覃样真菌病 ⑹严重的银屑病 ⑺严重的脂溢性皮炎 4.过敏性疾病 用于控制如下以足量常规治疗疗效不佳的严重或损伤机能的过敏性疾病： ⑴季节性或全年性过敏性鼻炎 ⑵血清病 ⑶支气管哮喘 ⑷药物过敏反应 ⑸接触性皮炎 ⑹异位性皮炎 5.眼部疾病 眼部及其附件严重的急慢性过敏和炎症反应，例如： ⑴过敏性角膜边缘溃疡 ⑵眼部带状疱疹 ⑶前视网膜炎 ⑷扩散性后房色素层炎和脉络膜炎 ⑸交感性眼炎 ⑹过敏性结膜炎 ⑺角膜炎 ⑻脉络膜视网膜炎 ⑼视神经炎 ⑽虹膜炎、虹膜睫状体炎 6.呼吸道疾病 ⑴有症状的肺部肉芽肿 ⑵其它方法不能控制的吕弗勒氏综合征(Loe",
+            "mention_start": 421,
+            "mention_end": 426,
+            "qualifiers": {
+              "caution": false,
+              "conditional": false,
+              "negative_or_absent": false,
+              "prohibition": false,
+              "uncertain": false
+            },
+            "status": "literal_mention_not_clinically_validated"
+          }
+        ],
+        "hops": 4,
+        "relations": [
+          "HAS_INGREDIENT",
+          "INDICATION_MENTION",
+          "INTERACTION_MENTION"
+        ],
+        "verified_against_original": true,
+        "clinical_validation": false
+      },
+      "graph_verified": true,
+      "graph_snapshot_version": "semantic-graph-1",
+      "parent_verified": false,
+      "_retrieval_tool": "search_semantic_graph"
+    }
+  ]
+}

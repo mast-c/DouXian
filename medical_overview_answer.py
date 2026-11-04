@@ -159,6 +159,18 @@ def build_multi_drug_source_answer(
     ranking = ranking_report or {}
     fields = [f for f in dict.fromkeys(requested_fields) if f in FIELDS and f != "indication"]
     if not names:
+        # 没有 DiseaseCandidate 不代表 Chroma 没有可回答的原文。
+        # 交回正常审核分别判断用途与注意事项，不把召回药名当用药推荐。
+        if any(
+            item.get("id") and item.get("evidence_type") in SECTION_TYPES
+            and original_section_text(item)
+            for item in evidence
+        ):
+            return "", {
+                "listed_drugs": [], "supported_cells": 0, "missing_cells": 0,
+                "ranking": ranking, "mode": "defer_to_evidence_guard",
+                "reason": "no_ranked_candidates_with_source_sections",
+            }
         if ranking:
             failure = ranking.get("status") == "ranking_failed"
             return (

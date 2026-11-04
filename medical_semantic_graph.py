@@ -24,6 +24,7 @@ DEFAULT_INDEX = "semantic_graph/medical_graph.sqlite"
 SOURCE_DIR = "kg_output_clean_v2"
 DISEASE_FILE = "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json"
 RELATIONS = {
+    "CLASS_MEMBERSHIP_ASSERTION": "原文明确的药品类别记载（未临床核验）",
     "HAS_SYMPTOM": "资料列出的症状",
     "HAS_INGREDIENT": "成分原文记载",
     "INDICATION_MENTION": "用途章节提及（非确证治疗）",
@@ -39,6 +40,14 @@ FIELD_RELATIONS = {
     "adverse_reactions": "ADVERSE_REACTION_MENTION",
 }
 POPULATIONS = ("孕妇", "妊娠期", "哺乳期妇女", "哺乳期", "儿童", "新生儿", "老年人")
+# Literal vocabulary, NOT a drug-to-class lookup or synonym map. Membership
+# requires an explicit self-classification sentence in the same product record.
+DRUG_CLASS_TERMS = (
+    "糖皮质类固醇", "糖皮质激素", "皮质类固醇", "皮质激素", "非甾体抗炎药",
+    "非甾体类抗炎药", "抗组胺药", "抗凝血药", "抗凝药", "抗血小板药",
+    "噻嗪类利尿剂", "β受体阻滞剂", "β-受体阻滞剂", "钙通道阻滞剂",
+    "大环内酯类抗生素", "四环素类药物", "磺胺类药物", "口服降糖药",
+)
 GENERIC_TERMS = {"其他", "疾病", "患者", "症状", "疼痛", "不适", "药物", "本品", "无", "尚不明确"}
 MAX_TEXT = 24_000
 
@@ -137,6 +146,12 @@ def ingredient_spans(text: str) -> list[tuple[str, int, int]]:
     for match in re.finditer(r"[^、，,；;。\n和及与]+", body[start:]):
         segment = match.group()
         token = segment.strip()
+        # A literal ingredient followed by source-origin and formulation prose:
+        # "胰岛素（猪或牛）的灭菌水溶液" states insulin explicitly. Preserve the
+        # entire original composition as the edge quote, including origin.
+        formulation = re.fullmatch(r"([\u4e00-\u9fffA-Za-zα-ωΑ-Ω·\-]+)(?:[（(][^（）()]{1,16}[）)])?的灭菌(?:水溶液|混悬液)", token)
+        if formulation:
+            token = formulation.group(1)
         # An explicit quantity can follow a literal ingredient in a simple list.
         token = re.sub(r"\s*\d+(?:\.\d+)?\s*(?:mg|g|ml|毫克|克|毫升|%|％).*$", "", token, flags=re.I).strip()
         if not 2 <= len(token) <= 28 or not re.fullmatch(r"[\u4e00-\u9fffA-Za-zα-ωΑ-Ω·\-（）() ]+", token):
@@ -151,7 +166,7 @@ def ingredient_spans(text: str) -> list[tuple[str, int, int]]:
 def qualifiers(text: str) -> dict:
     # Multiple flags may coexist. Full source context, not these flags, governs meaning.
     return {
-        "negative_or_absent": bool(re.search(r"尚未见|未发现|无明显|无不良|无相互作用|不发生", text)),
+        "negative_or_absent": bool(re.search(r"尚未见|未发现|无明显|无不良|无相互作用|不发生|没有抑制作用|无抑制作用|无显著.*相互作用", text)),
         "uncertain": bool(re.search(r"尚不明确|尚不清楚|临床意义不明|相关性尚不明确|可能|据报", text)),
         "prohibition": bool(re.search(r"禁用|禁忌|禁止|不得|不应合用", text)),
         "caution": bool(re.search(r"慎用|谨慎|监测|注意", text)),
@@ -181,13 +196,26 @@ def literal_entity_boundary(text: str, start: int, end: int, *, query: bool = Fa
     before = r"(?:对|有|与|及|或|和|如|为|于|伴|出现|导致|引起|包括|发生|患|的|用|含|本品|严重|急性|慢性|活动性)"
     after = r"(?:患者|病人|者|时|及|或|和|与|的|等|伴|可|合|同|有|会|能|应|禁|慎|药物|类药|类|史|倾向|降低|增加|血|被|不)"
     if query:
-        before = r"(?:" + before + r"|请问|介绍|解释|分析|关于|使用|服用|比较|知道|一下|查询|查查|查找|列出|查|问)"
-        after = r"(?:" + after + r"|是|是否|有何|什么|怎么|如何|相关|之间)"
+        before = r"(?:" + before + r"|请问|介绍|解释|分析|关于|使用|服用|比较|知道|一下|查询|查查|查找|列出|查|问|跟|以及|治|治疗|用于治疗|治疗了)"
+        after = r"(?:" + after + r"|是|是否|有何|什么|怎么|如何|相关|之间|用的药|用药|常用药|所用药|治疗药|药跟|药和)"
     if start and han(text[start-1]) and not re.search(before + "$", text[:start]):
         return False
     if end < len(text) and han(text[end]) and not re.match(after, text[end:]):
         return False
     return True
+
+
+def class_assertion_spans(text: str):
+    """Only explicit self-classifications; mentions/comparisons are not membership."""
+    lexicon = Lexicon(DRUG_CLASS_TERMS)
+    for name, start, end in lexicon.find(text):
+        qs, qe = clause_span(text, start, end)
+        before = text[qs:start]
+        # Anchored to the current product and affirmative identity grammar.
+        # Reject "本品与...", "本品不是...", "本品可能为...", other drugs,
+        # withdrawn treatment and adverse-effect descriptions.
+        if re.fullmatch(r"\s*(?:\d+[.、．]\s*)?本品(?:是|为|属于)(?:一种|一类)?(?:吸入用|吸入型|鼻用|局部用|口服|合成|长效|短效|选择性|非镇静性|强效|中效|弱效|的)*", before):
+            yield name, qs, qe, start, end
 
 
 def _schema(conn):
@@ -268,7 +296,7 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
             inserted = conn.execute("INSERT OR IGNORE INTO edges VALUES(?,?,?,?,?,?,?,?,?,?,?)", (
                 identity, src, dst, relation, source_id, start, end, ms, me,
                 json.dumps(qualifiers(text[start:end]), ensure_ascii=False, sort_keys=True),
-                "source_assertion_unverified" if relation in ("HAS_INGREDIENT", "HAS_SYMPTOM") else "literal_mention_not_clinically_validated",
+                "source_assertion_unverified" if relation in ("HAS_INGREDIENT", "HAS_SYMPTOM", "CLASS_MEMBERSHIP_ASSERTION") else "literal_mention_not_clinically_validated",
             )).rowcount
             stats[relation] += inserted
 
@@ -342,14 +370,25 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
                     stats["invalid_indication_candidates_omitted"] += 1
         for population in POPULATIONS:
             entity("Population", population)
+        for sid, (drug, field, text) in sections.items():
+            if field not in ("indication", "warnings", "composition"):
+                continue
+            for name, start, end, ms, me in class_assertion_spans(text):
+                edge(drug, entity("DrugClass", name), "CLASS_MEMBERSHIP_ASSERTION", sid, start, end, ms, me)
         clinical = {name: [] for name in disease_names | symptom_names | set(POPULATIONS)}
         for (kind, name), identity in entities.items():
             if kind in ("Disease", "Symptom", "Population") and name in clinical:
                 clinical[name].append(identity)
         medicines = {}
         for (kind, name), identity in entities.items():
-            if kind in ("Drug", "Ingredient"):
+            if kind in ("Drug", "Ingredient", "DrugClass"):
                 medicines.setdefault(name, []).append(identity)
+        # Also retain unlinked class mentions as explicit missing-link leads.
+        # Creating a class node does not assert membership for any drug.
+        for name in DRUG_CLASS_TERMS:
+            identity = entity("DrugClass", name)
+            if identity not in medicines.setdefault(name, []):
+                medicines[name].append(identity)
         clinical_lexicon, medicine_lexicon = Lexicon(clinical), Lexicon(medicines)
         own_ingredients = {}
         for drug_id, record_id, ingredient in conn.execute("""SELECT e.src,s.record_id,e.dst FROM edges e
@@ -366,7 +405,8 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
             for name, ms, me in hits:
                 start, end = clause_span(text, ms, me)
                 for destination in targets[name]:
-                    if field == "drug_interactions" and text[me:].lstrip().startswith("类"):
+                    if (field == "drug_interactions" and text[me:].lstrip().startswith("类")
+                            and destination != entities.get(("DrugClass", name))):
                         # "四环素类" is a class reference, not exact tetracycline.
                         # No unreviewed taxonomy may silently bridge that gap.
                         stats["class_substring_interactions_omitted"] += 1

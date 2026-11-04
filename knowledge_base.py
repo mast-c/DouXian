@@ -1,6 +1,8 @@
 import os
 import re
 import hashlib
+import pickle
+import tempfile
 from datetime import datetime
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -69,6 +71,8 @@ def _prepare_rerank_document(doc: Document, max_chars: int) -> str:
 
 
 class KnowledgeBaseService:
+
+    _BM25_CACHE_VERSION = 1
 
     def __init__(self):
         os.makedirs(config.persist_directory, exist_ok=True)
@@ -384,11 +388,57 @@ class KnowledgeBaseService:
             f"删除失效 Chunk：{len(stale_ids)}"
         )
 
-    def build_bm25_index(self, batch_size: int = 200) -> int:
-        """从 Chroma 中读取已有 Chunk，构建内存 BM25 索引。"""
+    def _bm25_cache_file(self) -> str:
+        cache_name = f"{config.collection_name}.bm25.v{self._BM25_CACHE_VERSION}.pkl"
+        return os.path.join(config.persist_directory, cache_name)
+
+    def _bm25_collection_fingerprint(self, batch_size: int) -> tuple[int, str]:
+        """Hash stable Chroma IDs; content changes get new IDs in the ingestion pipeline."""
+        ids = []
+        offset = 0
+        while True:
+            batch = self.chroma.get(include=[], limit=batch_size, offset=offset)
+            batch_ids = batch.get("ids") or []
+            if not batch_ids:
+                break
+            ids.extend(str(item) for item in batch_ids)
+            offset += len(batch_ids)
+            if len(batch_ids) < batch_size:
+                break
+
+        digest = hashlib.sha256()
+        for chunk_id in sorted(ids):
+            digest.update(chunk_id.encode("utf-8"))
+            digest.update(b"\n")
+        return len(ids), digest.hexdigest()
+
+    def build_bm25_index(self, batch_size: int = 2000) -> int:
+        """Load a validated local BM25 cache or rebuild it from Chroma."""
 
         if batch_size < 1:
             raise ValueError("batch_size 必须大于 0")
+
+        count, fingerprint = self._bm25_collection_fingerprint(batch_size)
+        cache_path = self._bm25_cache_file()
+        try:
+            with open(cache_path, "rb") as cache_file:
+                cached = pickle.load(cache_file)
+            if (
+                isinstance(cached, dict)
+                and cached.get("version") == self._BM25_CACHE_VERSION
+                and cached.get("collection") == config.collection_name
+                and cached.get("source_count") == count
+                and cached.get("fingerprint") == fingerprint
+                and isinstance(cached.get("indexed_count"), int)
+                and "retriever" in cached
+            ):
+                self.bm25_retriever = cached["retriever"]
+                self.bm25_cache_status = "hit"
+                print(f"[BM25] 已加载缓存：{count} chunks")
+                return cached["indexed_count"]
+        except Exception:
+            # A corrupt, stale, or incompatible local cache falls back to rebuild.
+            pass
 
         documents = []
         offset = 0
@@ -434,6 +484,33 @@ class KnowledgeBaseService:
             )
             if documents else None
         )
+
+        self.bm25_cache_status = "rebuilt"
+        cache_payload = {
+            "version": self._BM25_CACHE_VERSION,
+            "collection": config.collection_name,
+            "count": len(documents),
+            "indexed_count": len(documents),
+            "source_count": count,
+            "fingerprint": fingerprint,
+            "retriever": self.bm25_retriever,
+        }
+        temp_path = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                mode="wb", dir=config.persist_directory,
+                prefix=".bm25-", suffix=".tmp", delete=False,
+            ) as cache_file:
+                temp_path = cache_file.name
+                pickle.dump(cache_payload, cache_file, protocol=pickle.HIGHEST_PROTOCOL)
+            os.replace(temp_path, cache_path)
+        except (OSError, pickle.PickleError, TypeError, AttributeError) as exc:
+            print(f"[BM25] 缓存写入失败，将使用内存索引：{type(exc).__name__}: {exc}")
+            if temp_path and os.path.exists(temp_path):
+                try:
+                    os.remove(temp_path)
+                except OSError:
+                    pass
 
         return len(documents)
 

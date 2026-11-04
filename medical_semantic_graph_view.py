@@ -20,6 +20,7 @@ CSS = """
 .kb-sg-node{flex:0 0 140px;width:140px;min-height:76px;border:1px solid #d5e2ee;border-radius:11px;background:#f0f6fc;padding:10px 12px;text-align:center}
 .kb-sg-node-drug{background:#edf5fc;border-color:#c5dcef}
 .kb-sg-node-ingredient{background:#edf7f2;border-color:#cbe3d4}
+.kb-sg-node-drugclass{background:#f8f3e9;border-color:#e9dbbd}
 .kb-sg-node-disease{background:#f5f0fc;border-color:#ded2ee}
 .kb-sg-node-symptom{background:#fff7eb;border-color:#efdebe}
 .kb-sg-node-population,.kb-sg-node-condition{background:#fff1ef;border-color:#ebd3ce}
@@ -45,8 +46,9 @@ CSS = """
 @media(max-width:780px){.kb-sg-node{width:120px;flex-basis:120px}.kb-sg-edge{width:96px;flex-basis:96px}.kb-sg-chain{justify-content:flex-start}}
 """
 
-KINDS = {"Drug": "药品", "Ingredient": "成分", "Disease": "疾病", "Symptom": "症状", "Population": "人群", "Condition": "原文条件"}
+KINDS = {"Drug": "药品", "Ingredient": "成分", "DrugClass": "药物类别", "Disease": "疾病", "Symptom": "症状", "Population": "人群", "Condition": "原文条件"}
 SHORT_RELATIONS = {
+    "CLASS_MEMBERSHIP_ASSERTION": "原文类别归属",
     "HAS_INGREDIENT": "成分记载", "HAS_SYMPTOM": "症状记载",
     "INDICATION_MENTION": "用途章节提及", "CONTRAINDICATION_MENTION": "禁忌章节提及",
     "CAUTION_MENTION": "注意事项提及", "INTERACTION_MENTION": "相互作用提及",
@@ -58,6 +60,8 @@ STATUS_LABELS = {
     "unresolved_named_entity": "部分制剂名称未收录或未解析", "question_too_long": "问题过长，请拆分查询",
     "source_verification_blocked": "来源或索引校验失败，请重建索引", "index_missing": "尚未构建关系图索引",
     "disabled": "关系图检索已关闭",
+    "needs_medication_clarification": "请补充药盒名称或成分，以便核对具体产品",
+    "not_graph_relation_question": "本问题使用药品原文章节检索",
 }
 
 
@@ -94,7 +98,22 @@ def semantic_graph_html(trace) -> str:
               '<div class="kb-sg-title">多关系图路径 · ' + str(len(paths)) + ' 条</div>',
               '<div class="kb-sg-note">' + safe(STATUS_LABELS.get(report.get("status"), "未执行"))
               + '。箭头表示原文关系方向；路径连接资料陈述，不代表临床因果。横向滑动可查看完整路径。</div>']
+    patient = report.get("query_understanding", {})
+    labels = [g["surface"] + ' → ' + ('已点名制剂' if g["actual_patient_product_known"] else f"{g['candidate_count']} 个检索候选，实际产品待核对") for g in patient.get("medicines", [])]
+    if labels:
+        pieces.append('<div class="kb-sg-note">' + safe('；'.join(labels)) + '。候选名称仅用于查资料。</div>')
     bindings = {v["path_id"]: v for v in report.get("evidence_bindings", []) if isinstance(v, dict) and v.get("path_id")}
+    cohort = report.get("plan", {}).get("disease_pair_search", {})
+    if cohort:
+        labels = [f"{s['disease']}：检索 {s['candidate_drugs_searched']} 种候选制剂，排除 {s.get('excluded_ambiguous_or_background_records', 0)} 条背景或含糊记录"
+                  for s in cohort.get("cohorts", [])]
+        pieces.append('<div class="kb-sg-note">' + safe('；'.join(labels))
+                      + '。候选来自用途章节提及，不是完整治疗用药清单。</div>')
+        missing_classes = sorted({v["class_name"] for v in cohort.get("missing_links", []) if v.get("class_name")})
+        if missing_classes:
+            pieces.append('<details class="kb-sg-proof"><summary>尚缺证据的类别连接</summary><div class="kb-sg-note">'
+                          + safe('、'.join(missing_classes))
+                          + '：相互作用资料有类别提及，但未取得另一组具体制剂的同来源类别归属。未将其补成关系边。</div></details>')
     for number, path in enumerate(paths, 1):
         edges, nodes = path.get("edges", []), path.get("nodes", [])
         if len(nodes) != len(edges) + 1 or not edges:

@@ -59,6 +59,19 @@ GUARD_SYSTEM_PROMPT = """
     HAS_SYMPTOM/HAS_INGREDIENT 的完整结构化原文短于8字时，允许逐字引用2至7字的完整字段。
     对成分边，可引用原文中逐字出现的完整成分实体名（至少2字），例如“本品主要成分布洛芬”中的“布洛芬”。
     否定、剂量、人群、尚不明确必须保持；第三种药物的共同提及不证明两药存在相互作用。
+19. 用户未给具体药名而询问两种疾病的用药是否相互作用时，可以用完整图路径回答
+    “本轮资料有哪些具体组合示例及各自记载”，无需证明两种疾病所有药品之间的关系。
+    路径须含两端疾病、各自用途原文、同来源制剂身份和相互作用原文。只找到这些示例时，
+    将示例事实标为 supported，同时限制为对应剂型、途径及人群；不能声称全部组合均有或均无相互作用。
+    缺少明确类别归属时不能用模型常识补边；“未显示抑制”“无显著相互作用”也是可如实描述的资料事实。
+20. 用户同时问“用什么药”和“注意事项”时，须分别审核。只召回注意事项不能证明该药
+    适合所述症状，但可以说明已检索药品原文记载的注意事项，明确这不构成适用性结论。
+    未识别出疾病名或没有图谱候选，不得直接否定其他原文证据；也不得把症状擅自诊断为疾病。
+21. 患者可能只说通用名、简称，或问“吃了这两种药会不会有事”。药名解析得到的候选制剂
+    只是检索范围，不是患者实际产品鉴定，也不是盐型、品牌或剂型等价证明。若候选原文
+    明确提到两种药物，可以 supported 描述该具体资料记载的相互作用及条件；同时将患者
+    实际剂型、剂量、人群适用性或是否可安全合用的未确认部分列为 insufficient，提示核对。
+    不得仅因患者未说完整制剂名就抹去直接相互作用原文，也不能据此给出个体化调药剂量。
 输出格式：
 {
   "aspects": [
@@ -210,7 +223,19 @@ def _compact(text: str) -> str:
     return re.sub(r"\s+", "", text)
 
 
-def _error_report(message: str) -> dict:
+def _safe_error_detail(value: Any, limit: int = 240) -> str:
+    """Return a short diagnostic without credentials or multiline payloads."""
+    detail = " ".join(str(value).split())
+    detail = re.sub(
+        r"(?i)(api[_-]?key|authorization|token|password|secret)(\s*[:=]\s*)(?:bearer\s+)?([^\s,;]+)",
+        r"\1\2[REDACTED]",
+        detail,
+    )
+    detail = re.sub(r"(?i)bearer\s+[^\s,;]+", "Bearer [REDACTED]", detail)
+    return detail[:limit]
+
+
+def _error_report(message: str, *, stage: str = "validation", error_type: str = "") -> dict:
     """失败关闭：校验失败时禁止绕过校验继续生成。"""
     return {
         "decision": "error",
@@ -219,6 +244,8 @@ def _error_report(message: str) -> dict:
         "answer_questions": [],
         "refused_questions": [],
         "message": message[:200],
+        "error_stage": stage,
+        "error_type": error_type[:100],
     }
 
 
@@ -593,13 +620,18 @@ def assess_evidence(
             ])
             raw = _plain_content(response.content)
 
-        return validate_judge_output(
+        report = validate_judge_output(
             raw, safe_excerpts, required_aspects=fixed_aspects
         )
+        if report.get("decision") == "error":
+            report["error_stage"] = "judge_output_validation"
+            report["error_type"] = "InvalidJudgeOutput"
+        return report
     except Exception as exc:
-        # 生产环境建议额外将完整异常写入服务端日志。
-        print(
-            "[Evidence Guard] 校验服务异常："
-            f"{type(exc).__name__}: {exc}"
+        detail = _safe_error_detail(exc)
+        print(f"[Evidence Guard] model_call_failed: {type(exc).__name__}: {detail}")
+        return _error_report(
+            f"证据充分性校验服务暂不可用（{type(exc).__name__}：{detail}）",
+            stage="model_call",
+            error_type=type(exc).__name__,
         )
-        return _error_report("证据充分性校验服务暂不可用")
