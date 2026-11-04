@@ -1,0 +1,299 @@
+[
+  {
+    "input_file": "medical_trace_015 (1).json",
+    "question": "患者有严重的青光眼，同时正在服用西替利嗪（或弗雷他定），因为鼻炎鼻塞严重，能不能加上布地奈德喷雾剂？",
+    "old_status": "no_connected_evidence_path",
+    "status": "needs_medication_clarification",
+    "path_count": 0,
+    "multi_relation_paths": 0,
+    "seconds": 0.838,
+    "understanding": {
+      "medicines": [
+        {
+          "surface": "西替利嗪",
+          "start": 16,
+          "end": 20,
+          "ingredient_ids": [],
+          "candidate_drug_ids": [
+            "drug_0f451952d47ac2f4b052111b",
+            "drug_65d8b9434bcf7dee249670b2",
+            "drug_9dc51bc6455052637417f37a",
+            "drug_a284661ef246dc611946bbca",
+            "drug_d1a880ab3c73ccbe4f7fd314",
+            "drug_37541b18e0a5c0453a70921f"
+          ],
+          "candidate_drug_names": [
+            "盐酸西替利嗪分散片",
+            "盐酸西替利嗪口服溶液",
+            "盐酸西替利嗪滴剂",
+            "盐酸西替利嗪片",
+            "盐酸西替利嗪糖浆",
+            "盐酸西替利嗪胶囊"
+          ],
+          "candidate_count": 6,
+          "candidates_truncated": false,
+          "basis": "generic_search_scope",
+          "match_bases": [
+            "salt_name_search_candidate"
+          ],
+          "actual_patient_product_known": false,
+          "clinical_equivalence_asserted": false,
+          "route_hint": "oral",
+          "route_excluded_candidates": [],
+          "role": "current",
+          "assertion": "user_reported",
+          "role_basis": "explicit_patient_wording",
+          "mentions": [
+            {
+              "surface": "西替利嗪",
+              "start": 16,
+              "end": 20,
+              "role": "current",
+              "assertion": "user_reported",
+              "role_basis": "explicit_patient_wording"
+            }
+          ]
+        },
+        {
+          "surface": "布地奈德喷雾剂",
+          "start": 42,
+          "end": 49,
+          "ingredient_ids": [],
+          "candidate_drug_ids": [
+            "drug_4a77b1a2a9b5d2388961ddee"
+          ],
+          "candidate_drug_names": [
+            "布地奈德鼻喷雾剂"
+          ],
+          "candidate_count": 1,
+          "candidates_truncated": false,
+          "basis": "generic_search_scope",
+          "match_bases": [
+            "partial_form_search_candidate"
+          ],
+          "actual_patient_product_known": false,
+          "clinical_equivalence_asserted": false,
+          "route_hint": "",
+          "route_excluded_candidates": [],
+          "role": "proposed",
+          "assertion": "hypothetical",
+          "role_basis": "explicit_patient_wording",
+          "mentions": [
+            {
+              "surface": "布地奈德喷雾剂",
+              "start": 42,
+              "end": 49,
+              "role": "proposed",
+              "assertion": "hypothetical",
+              "role_basis": "explicit_patient_wording"
+            }
+          ]
+        }
+      ],
+      "intent": {
+        "interaction_question": true,
+        "risk_question": true,
+        "adverse_event_question": false,
+        "efficacy_question": false,
+        "drug_causality_asserted": false,
+        "medication_context": true,
+        "fields": [
+          "drug_interactions",
+          "warnings",
+          "contraindications",
+          "adverse_reactions"
+        ],
+        "basis": "patient_language_rules_no_clinical_inference"
+      },
+      "vague_medicines": [],
+      "schema_version": 2,
+      "normalized_question": "患者有严重的青光眼,同时正在服用西替利嗪(或弗雷他定),因为鼻炎鼻塞严重,能不能加上布地奈德喷雾剂?",
+      "offset_basis": "normalized_question",
+      "timing": [],
+      "alternative_medication_mentions": [],
+      "patient_context": [
+        {
+          "surface": "鼻塞",
+          "start": 32,
+          "end": 34,
+          "kind": "symptom_word",
+          "retrieval_terms": [
+            "鼻塞"
+          ],
+          "assertion": "user_reported",
+          "diagnosis_asserted": false,
+          "drug_causality_asserted": false
+        },
+        {
+          "surface": "青光眼",
+          "start": 6,
+          "end": 9,
+          "kind": "disease_mention",
+          "retrieval_terms": [
+            "青光眼"
+          ],
+          "assertion": "user_reported",
+          "diagnosis_asserted": false
+        },
+        {
+          "surface": "鼻炎",
+          "start": 30,
+          "end": 32,
+          "kind": "disease_mention",
+          "retrieval_terms": [
+            "鼻炎"
+          ],
+          "assertion": "user_reported",
+          "diagnosis_asserted": false
+        }
+      ],
+      "unresolved_medication_mentions": [
+        {
+          "surface": "弗雷他定",
+          "start": 22,
+          "end": 26,
+          "suggestions": [
+            "氯雷他定"
+          ],
+          "automatic_correction": false,
+          "role": "alternative",
+          "assertion": "alternative_not_confirmed",
+          "role_basis": "explicit_patient_wording"
+        }
+      ],
+      "ambiguous_aliases": [],
+      "route_conflicts": [],
+      "needs_product_details": true,
+      "requested_details": [
+        "药盒上的名称或成分",
+        "剂型（普通片、缓释片、胶囊、针剂等）"
+      ],
+      "policy": "query_expansion_only_not_patient_product_identification"
+    },
+    "clarification": "为了查到对应资料，请按药盒填写名称或成分，以及剂型（如普通片、缓释片、胶囊）。“弗雷他定”暂未识别。是否指“氯雷他定”？请核对，当前未自动替换。",
+    "clinical_validation": false,
+    "validation_scope": "Offline understanding and source-verified graph retrieval only; no live Neo4j, Chroma, model audit or answer generation."
+  },
+  {
+    "input_file": "medical_trace_019.json",
+    "question": "我喷了布地奈德鼻喷雾剂好几天了，鼻子还是堵，而且今天鼻子里好像有点疼，这是药不管用还是我有其他问题",
+    "old_status": "no_exact_entity",
+    "status": "ok",
+    "path_count": 6,
+    "multi_relation_paths": 6,
+    "seconds": 0.487,
+    "understanding": {
+      "medicines": [
+        {
+          "surface": "布地奈德鼻喷雾剂",
+          "start": 3,
+          "end": 11,
+          "ingredient_ids": [],
+          "candidate_drug_ids": [
+            "drug_4a77b1a2a9b5d2388961ddee"
+          ],
+          "candidate_drug_names": [
+            "布地奈德鼻喷雾剂"
+          ],
+          "candidate_count": 1,
+          "candidates_truncated": false,
+          "basis": "exact_product",
+          "match_bases": [
+            "exact_product"
+          ],
+          "actual_patient_product_known": true,
+          "clinical_equivalence_asserted": false,
+          "route_hint": "spray",
+          "route_excluded_candidates": [],
+          "role": "taken",
+          "assertion": "user_reported",
+          "role_basis": "explicit_patient_wording",
+          "mentions": [
+            {
+              "surface": "布地奈德鼻喷雾剂",
+              "start": 3,
+              "end": 11,
+              "role": "taken",
+              "assertion": "user_reported",
+              "role_basis": "explicit_patient_wording"
+            }
+          ]
+        }
+      ],
+      "intent": {
+        "interaction_question": false,
+        "risk_question": false,
+        "adverse_event_question": true,
+        "efficacy_question": true,
+        "drug_causality_asserted": false,
+        "medication_context": true,
+        "fields": [
+          "adverse_reactions",
+          "warnings",
+          "indication",
+          "dosage"
+        ],
+        "basis": "patient_language_rules_no_clinical_inference"
+      },
+      "vague_medicines": [],
+      "schema_version": 2,
+      "normalized_question": "我喷了布地奈德鼻喷雾剂好几天了,鼻子还是堵,而且今天鼻子里好像有点疼,这是药不管用还是我有其他问题",
+      "offset_basis": "normalized_question",
+      "timing": [
+        {
+          "surface": "好几天",
+          "start": 11,
+          "end": 14,
+          "medicine_surface": "布地奈德鼻喷雾剂",
+          "exact_duration_known": false
+        },
+        {
+          "surface": "今天",
+          "start": 24,
+          "end": 26,
+          "medicine_surface": null,
+          "exact_duration_known": false
+        }
+      ],
+      "alternative_medication_mentions": [],
+      "patient_context": [
+        {
+          "surface": "鼻子还是堵",
+          "start": 16,
+          "end": 21,
+          "kind": "symptom_word",
+          "retrieval_terms": [
+            "鼻塞"
+          ],
+          "assertion": "user_reported",
+          "diagnosis_asserted": false,
+          "drug_causality_asserted": false
+        },
+        {
+          "surface": "鼻子里好像有点疼",
+          "start": 26,
+          "end": 34,
+          "kind": "symptom_word",
+          "retrieval_terms": [
+            "鼻腔疼痛"
+          ],
+          "assertion": "user_reported",
+          "diagnosis_asserted": false,
+          "drug_causality_asserted": false
+        }
+      ],
+      "unresolved_medication_mentions": [],
+      "ambiguous_aliases": [],
+      "route_conflicts": [],
+      "needs_product_details": false,
+      "requested_details": [
+        "药盒上的名称或成分",
+        "剂型（普通片、缓释片、胶囊、针剂等）"
+      ],
+      "policy": "query_expansion_only_not_patient_product_identification"
+    },
+    "clarification": "",
+    "clinical_validation": false,
+    "validation_scope": "Offline understanding and source-verified graph retrieval only; no live Neo4j, Chroma, model audit or answer generation."
+  }
+]

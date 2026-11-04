@@ -11,6 +11,7 @@ from functools import lru_cache
 import html
 import json
 import os
+import sqlite3
 from pathlib import Path
 import re
 import time
@@ -20,6 +21,7 @@ from medical_semantic_graph import (
     class_assertion_spans, index_path, ingredient_spans, literal_entity_boundary, open_graph, qualifiers, verify_source,
 )
 from medical_query_understanding import understand_question, active_anchors
+from medical_query_plan import build_retrieval_plan
 
 TRACE_KEY = "semantic_graph"
 EVIDENCE_TYPE = "evidence_backed_semantic_graph_path"
@@ -79,7 +81,7 @@ def recognize(question: str, surfaces: dict, lexicon: Lexicon, nodes: dict) -> l
     return groups
 
 
-def query_plan(question: str, groups: list[dict], max_hops: int, patient_query: dict | None = None) -> dict:
+def query_plan(question: str, groups: list[dict], max_hops: int, patient_query: dict | None = None, retrieval_plan: dict | None = None) -> dict:
     desired = []
     for pattern, relations in (
         (r"症状|表现", ["HAS_SYMPTOM"]),
@@ -100,6 +102,8 @@ def query_plan(question: str, groups: list[dict], max_hops: int, patient_query: 
             relation = FIELD_RELATIONS.get(field)
             if relation and relation not in desired:
                 desired.append(relation)
+    if retrieval_plan:
+        desired = list(dict.fromkeys(desired + retrieval_plan.get("graph_relations", [])))
     disease_pair = (
         len(groups) == 2 and all(g["kinds"] == ["Disease"] and not g["ambiguous"] for g in groups)
         and "INTERACTION_MENTION" in desired
@@ -114,8 +118,26 @@ def query_plan(question: str, groups: list[dict], max_hops: int, patient_query: 
         "drug_discovery": disease_pair or bool(re.search(r"哪些.{0,8}(?:药|制剂)|什么药|相关药|(?:药品|药物)有哪些|相同成分.*药|重复用药", question)),
         "disease_pair_interaction": disease_pair,
         "patient_query": patient_query or {},
+        "retrieval_plan_id": (retrieval_plan or {}).get("plan_id"),
         "resolution": "source_catalog_and_morphology_search_scope_no_clinical_equivalence",
     }
+
+
+def plan_medical_question(question: str, root: Path | str) -> dict | None:
+    """Plan a direct text-tool call without traversing the graph again."""
+    conn = None
+    try:
+        root = Path(root).resolve()
+        conn, _ = open_graph(root)
+        target = index_path(root)
+        stat = target.stat()
+        nodes, _, _ = _catalog(str(target), stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+        return build_retrieval_plan(question, understand_question(question, root=root, nodes=nodes))
+    except (OSError, ValueError, KeyError):
+        return None
+    finally:
+        if conn is not None:
+            conn.close()
 
 
 def graph_intent(question: str, root: Path | str) -> bool:
@@ -221,6 +243,9 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
             records = {edge["drug_id"]: edge["record_id"]} if edge["drug_id"] else {}
             queue.append(([other, start], [edge], records))
     while queue and stats["expanded_states"] < max_expansions:
+        if time.monotonic() >= plan.get("_deadline", float("inf")):
+            stats["time_budget_exhausted"] = 1
+            break
         node_ids, edges, records = queue.popleft()
         stats["expanded_states"] += 1
         if len(edges) >= plan["max_hops"]:
@@ -391,7 +416,8 @@ def path_text(proof: dict) -> str:
 
 def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
                           max_hops: int = 5, max_paths: int = 6,
-                          max_expansions: int = 2400, max_neighbors: int = 64) -> tuple[list[dict], dict]:
+                          max_expansions: int = 2400, max_neighbors: int = 64,
+                          max_seconds: float = 3.0) -> tuple[list[dict], dict]:
     started = time.perf_counter()
     root = Path(project_root).resolve()
     report = {"status": "not_run", "paths": [], "storage": "local_derived_property_graph",
@@ -409,11 +435,15 @@ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
         groups = recognize(question, surfaces, lexicon, nodes)
         patient_query = understand_question(question, root=root, nodes=nodes)
         report["query_understanding"] = patient_query
+        retrieval_plan = build_retrieval_plan(question, patient_query)
+        report["retrieval_plan"] = retrieval_plan
         report["context_entities"] = groups
         if patient_query["vague_medicines"]:
             return [], {**report, "status": "needs_medication_clarification", "reason": "仅凭药物用途或大类不能确定成分，请补充药盒名称或成分"}
         if patient_query["unresolved_medication_mentions"] or patient_query["ambiguous_aliases"] or patient_query["route_conflicts"]:
             return [], {**report, "status": "needs_medication_clarification", "reason": "存在未确认的药名或有歧义的商品名，需要补充药盒名称或成分"}
+        if patient_query.get("alternative_medication_mentions") and patient_query["intent"]["interaction_question"]:
+            return [], {**report, "status": "needs_medication_clarification", "reason": "问题包含备选药物，需先确认实际使用的药，不能当作全部同时服用"}
         # Explicit discovery through symptoms/diseases must keep those anchors.
         discovery = bool(re.search(r"相关药|哪些.{0,8}药|什么药|药品有哪些|药物有哪些", question))
         groups = active_anchors(groups, patient_query, nodes) if not discovery else groups
@@ -436,13 +466,26 @@ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
             return [], {**report, "status": "ambiguous_or_too_many_entities", "anchors": groups}
         if len(patient_query["medicines"]) > 2 and patient_query["intent"]["interaction_question"]:
             return [], {**report, "status": "needs_medication_clarification", "reason": "识别到三种以上药物，请先逐对核对，避免遗漏药名"}
-        plan = query_plan(question, groups, max_hops, patient_query)
+        plan = query_plan(question, groups, max_hops, patient_query, retrieval_plan)
         plan["patient_pair_interaction"] = len(patient_query["medicines"]) == 2 and plan["interaction_question"] and not discovery
         report["plan"] = plan
         if patient_query["intent"]["fields"] == ["dosage"] and not plan["requested_relations"]:
             return [], {**report, "status": "not_graph_relation_question", "reason": "用法用量交由对应制剂原文章节检索，不用无关关系路径代替"}
-        candidates, stats = _traverse(conn, nodes, plan, max_paths=max_paths,
-                                      max_expansions=max_expansions, max_neighbors=max_neighbors)
+        deadline = time.monotonic() + max(0.01, min(10, max_seconds))
+        plan["_deadline"] = deadline
+        conn.set_progress_handler(lambda: int(time.monotonic() >= deadline), 2000)
+        try:
+            candidates, stats = _traverse(conn, nodes, plan, max_paths=max_paths,
+                                          max_expansions=max_expansions, max_neighbors=max_neighbors)
+        except sqlite3.OperationalError as exc:
+            if "interrupted" not in str(exc).lower():
+                raise
+            candidates, stats = [], {"time_budget_exhausted": 1}
+        finally:
+            conn.set_progress_handler(None, 0)
+            plan.pop("_deadline", None)
+        report["execution"] = {"traversals": 1, "plan_id": retrieval_plan["plan_id"],
+                               "traversal_budget_seconds": max(0.01, min(10, max_seconds))}
         excerpts, verified_sources = [], {}
         total_chars = 0
         for candidate in candidates:
@@ -477,13 +520,19 @@ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
             excerpts.append(excerpt)
             if len(excerpts) >= max_paths:
                 break
-        report.update({"status": "ok" if excerpts else "no_connected_evidence_path",
+        report.update({"status": "ok" if excerpts else "retrieval_timeout" if stats.get("time_budget_exhausted") else "no_connected_evidence_path",
                        "paths": [v["graph_path"] for v in excerpts], "stats": stats,
                        "returned_paths": len(excerpts),
                        "multi_relation_paths": sum(len(v["graph_path"]["relations"]) > 1 for v in excerpts),
                        "source_verified_count": len(verified_sources),
-                       "truncated": bool(len(candidates) > len(excerpts) or stats.get("fanout_truncations") or stats.get("expansion_budget_exhausted") or stats.get("evidence_budget_omitted")),
+                       "truncated": bool(len(candidates) > len(excerpts) or stats.get("fanout_truncations") or stats.get("expansion_budget_exhausted") or stats.get("evidence_budget_omitted") or stats.get("time_budget_exhausted")),
                        "missing_requested_relations": sorted(set(plan["requested_relations"]) - {r for v in excerpts for r in v["graph_path"]["relations"]})})
+        report["task_coverage"] = [
+            {"id": task["id"], "requested_relations": task["graph_relations"],
+             "covered_relations": sorted(set(task["graph_relations"]) & {rel for e in excerpts for rel in e["graph_path"]["relations"]}),
+             "text_only_fields": [field for field in task["fields"] if field == "dosage"]}
+            for task in retrieval_plan["tasks"]
+        ]
         return excerpts, report
     except FileNotFoundError:
         report.update(status="index_missing", reason="需先运行 medical_semantic_graph_cli.py build")
@@ -523,6 +572,8 @@ def merge_graph_evidence(existing: list[dict], graph: list[dict], cap: int) -> l
 def graph_insufficiency_message(report: dict) -> str:
     """Explain actual failed joins instead of a bare 'insufficient' response."""
     patient = report.get("query_understanding", {})
+    if report.get("status") == "retrieval_timeout":
+        return "本轮图检索达到时间预算，尚未获得可引用路径。不能据此判断不存在相关关系；可补充具体药名或缩小问题范围后再检索。"
     if report.get("status") in ("needs_medication_clarification", "unresolved_named_entity"):
         text = "为了查到对应资料，请按药盒填写名称或成分，以及剂型（如普通片、缓释片、胶囊）。"
         if report.get("unresolved_names"):
@@ -533,6 +584,8 @@ def graph_insufficiency_message(report: dict) -> str:
             text = "“" + "、".join(patient["ambiguous_aliases"]) + "”在资料中对应不同药名，需要确认药盒成分。" + text
         if len(patient.get("medicines", [])) > 2:
             text = "已识别到三种以上药物。请先指定要核对的两种药；我会逐对查找对应资料。"
+        if patient.get("alternative_medication_mentions"):
+            text = "问题中包含备选药名“" + "、".join(patient["alternative_medication_mentions"]) + "”。请确认实际正在使用哪一种，以及准备加用哪一种；备选药不会当作全部同时使用。"
         if patient.get("vague_medicines"):
             text = "“" + "、".join(patient["vague_medicines"]) + "”包含多种不同成分，仅凭这类称呼无法判断合用影响。" + text
         for mention in patient.get("unresolved_medication_mentions", []):

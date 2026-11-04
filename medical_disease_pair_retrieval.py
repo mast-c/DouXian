@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 import json
 import re
+import time
 
 
 def direct_use_context(edge, disease: str) -> bool:
@@ -160,6 +161,10 @@ def disease_pair_paths(conn, nodes, plan, *, max_paths, max_expansions, max_neig
 
     for side in (0, 1):
         for interaction in interactions[side]:
+            if time.monotonic() >= plan.get("_deadline", float("inf")):
+                report["truncated"] = True
+                stats["time_budget_exhausted"] = 1
+                break
             stats["expanded_states"] += 1
             if stats["expanded_states"] > max_expansions:
                 report["truncated"] = True
@@ -180,7 +185,7 @@ def disease_pair_paths(conn, nodes, plan, *, max_paths, max_expansions, max_neig
                         admit(side, interaction, identity["src"], identity["record_id"], identity)
             if target_kind == "DrugClass" and not found:
                 missing_classes.append((side, target, interaction))
-        if stats["expanded_states"] >= max_expansions:
+        if stats["expanded_states"] >= max_expansions or stats.get("time_budget_exhausted"):
             break
     # A useful report of unsupported taxonomy joins, never invented membership.
     seen_missing = set()

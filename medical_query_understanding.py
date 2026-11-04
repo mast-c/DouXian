@@ -13,6 +13,10 @@ import re
 import unicodedata
 
 from medical_semantic_graph import Lexicon, literal_entity_boundary, SOURCE_DIR
+from medical_patient_context import (
+    DURATION, EFFICACY, MEDICATION_ACTION, context_assertion,
+    mention_role, symptom_mentions, timing_mentions,
+)
 
 FORMS = tuple(sorted((
     "缓释胶囊", "肠溶胶囊", "软胶囊", "分散片", "缓释片", "肠溶片", "咀嚼片", "控释片",
@@ -51,12 +55,25 @@ def patient_intent(question: str, medicine_count: int = 0) -> dict:
     if re.search(r"怎么吃|怎么用|怎么服|一天几次|吃多少|一次几片|饭前|饭后|剂量|用量", q):
         fields += ["dosage"]
     adverse = bool(re.search(r"副作用|不良反应|吃(?:了|完|药后).{0,16}(?:恶心|头晕|难受|拉肚子|起疹|不舒服|心慌|吐)|(?:越吃|吃完).{0,8}(?:疼|痛|痒)", q))
+    reported_symptoms = [item for item in symptom_mentions(q) if item["assertion"] != "negated"]
+    if medicine_count and reported_symptoms and (
+        re.search(r"(?:吃|服|用|喷|涂|擦|滴|喝|打)(?:了|完|后)|服用后|用药后|之后|以后", q)
+        or re.search(r"出现|开始|今天|昨天|最近|这两天|后来", q) and re.search(MEDICATION_ACTION, q)
+    ):
+        adverse = True
+    if symptom_mentions(q) and not reported_symptoms and not re.search(r"副作用|不良反应", q):
+        adverse = False
+    efficacy = bool(medication and re.search(EFFICACY, q))
     if adverse:
         fields += ["adverse_reactions", "warnings"]
     if re.search(r"干什么的|干嘛的|治什么|管什么|有什么用", q):
         fields += ["indication"]
+    if efficacy:
+        fields += ["indication", "dosage", "warnings"]
     return {"interaction_question": interaction, "risk_question": risk,
-            "adverse_event_question": adverse, "medication_context": medication, "fields": list(dict.fromkeys(fields)),
+            "adverse_event_question": adverse, "efficacy_question": efficacy,
+            "drug_causality_asserted": False,
+            "medication_context": medication, "fields": list(dict.fromkeys(fields)),
             "basis": "patient_language_rules_no_clinical_inference"}
 
 
@@ -81,9 +98,15 @@ def patient_boundary(text: str, start: int, end: int) -> bool:
     """Do not require professional grammar around a known drug name."""
     han = lambda c: bool(c) and "\u4e00" <= c <= "\u9fff"
     before_ok = not start or not han(text[start-1]) or bool(re.search(
-        r"(?:吃|吃了|吃着|吃过|服|服了|服用|用了|用着|使用|喝|喝了|打|打了|喷|喷了|涂|涂了|加|加了|换成|换了|是|叫|叫做|买了|买的|药是|包括|和|与|跟|及|还有|以及|配|配了|搭配|一起|然后|再|同时|拿了|开了|比较|对比|介绍|请问|咨询|关于|查一下|想问|在用|用的|吃的|用|我|我的)$", text[:start]))
+        r"(?:吃|吃了|吃着|吃过|服|服了|服用|用了|用着|使用|喝|喝了|打|打了|喷|喷了|涂|涂了|加|加了|加上|加用|换用|换成|换了|停了|是|叫|叫做|买了|买的|药是|包括|和|与|跟|及|还有|以及|配|配了|搭配|一起|然后|再|同时|拿了|开了|比较|对比|介绍|请问|咨询|关于|查一下|想问|在用|用的|吃的|用|我|我的|或|或者|还是)$", text[:start]))
     after_ok = end == len(text) or not han(text[end]) or bool(re.match(
         r"(?:的|是|和|与|跟|及|还|一块|同时|一起|能|可以|可不可以|会|有|没|是否|要|行|不|又|再|以后|后|之前|前|怎么|用|吃|服|吗|多久|一天|一日|每次|干什么|干嘛|治什么|管什么|安全吗|相克)", text[end:]))
+    if re.search(r"(?:想了解|想知道|了解一下|了解|查询|介绍一下)$", text[:start]):
+        before_ok = True
+    if re.match(r"(?:已经|大概|约)?" + DURATION + r"(?:了|后|以后|以来|，|,|。|$)", text[end:]):
+        after_ok = True
+    if re.match(r"(?:没效果|不管用|不见效|效果|好像|似乎|到底|是不是|怎么样|如何)", text[end:]):
+        after_ok = True
     return before_ok and after_ok
 
 
@@ -112,6 +135,11 @@ def _name_catalog(root: str, export_size: int, export_mtime: int, node_signature
             stem = formulation_stem(node["name"])
             if stem != node["name"] and not stem.startswith("复方"):
                 put(stem, node["id"], "formulation_search_candidate")
+                if node["name"].endswith("鼻喷雾剂"):
+                    # A shortened formulation is a search candidate, never an
+                    # assertion that nasal and other spray routes are equivalent.
+                    for form in ("喷雾剂", "喷雾", "喷剂", "鼻喷剂", "鼻喷"):
+                        put(stem + form, node["id"], "partial_form_search_candidate")
                 core = core_candidate(stem)
                 if core != stem:
                     put(core, node["id"], "salt_name_search_candidate")
@@ -137,7 +165,7 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     # Query offsets only; Unicode normalization is never applied to source text.
     q = unicodedata.normalize("NFKC", str(question))
     groups = []
-    priority = {"exact_product": 0, "source_catalog_alias": 1, "exact_ingredient": 2,
+    priority = {"exact_product": 0, "source_catalog_alias": 1, "exact_ingredient": 2, "partial_form_search_candidate": 3,
                 "formulation_search_candidate": 3, "salt_name_search_candidate": 4}
     for token, start, end in lexicon.find(q[:600]):
         if not patient_boundary(q, start, end):
@@ -155,6 +183,8 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
             route = "injection"
         elif re.search(r"(?:涂|擦)(?:了|的)?$", prefix):
             route = "topical"
+        elif re.search(r"(?:喷|喷了|喷着)$", prefix):
+            route = "spray"
         elif re.search(r"一起吃|一起服|口服", q):
             route = "oral"
         excluded_routes = []
@@ -164,13 +194,17 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
                 name = catalog_nodes[entry[0]]["name"]
                 injection = "注射" in name or "粉针" in name
                 topical = any(s in name for s in ("滴眼", "滴耳", "滴鼻", "软膏", "乳膏", "凝胶", "喷雾", "气雾", "栓", "外用"))
-                if (route == "oral" and (injection or topical)) or (route == "injection" and not injection) or (route == "topical" and not topical):
+                spray = any(s in name for s in ("喷雾", "气雾"))
+                if (route == "oral" and (injection or topical)) or (route == "injection" and not injection) or (route == "topical" and not topical) or (route == "spray" and not spray):
                     excluded_routes.append(name)
                 else:
                     selected.append(entry)
             candidates = selected
         candidate_ids = list(dict.fromkeys(v[0] for v in candidates))
-        if any(g["surface"] == token for g in groups):
+        existing = next((g for g in groups if g["surface"] == token), None)
+        mention = {"surface": token, "start": start, "end": end, **mention_role(q, start, end)}
+        if existing:
+            existing["mentions"].append(mention)
             continue
         groups.append({
             "surface": token, "start": start, "end": end, "ingredient_ids": ingredient_ids,
@@ -181,12 +215,33 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
             "actual_patient_product_known": bool(exact),
             "clinical_equivalence_asserted": False,
             "route_hint": route, "route_excluded_candidates": excluded_routes,
+            **mention_role(q, start, end),
+            "mentions": [mention],
         })
     intent = patient_intent(q, len(groups))
+    for previous, current in zip(groups, groups[1:]):
+        if (current["role"] == "mentioned"
+                and previous["role"] in ("current", "taken", "proposed", "not_taken", "stopped")
+                and re.fullmatch(r"(?:和|与|跟|及|以及|、)", q[previous["end"]:current["start"]])):
+            for key in ("role", "assertion"):
+                current[key] = previous[key]
+                current["mentions"][0][key] = previous[key]
+            current["role_basis"] = "shared_medication_action"
+            current["mentions"][0]["role_basis"] = "shared_medication_action"
     context = [{"surface": match.group(), "kind": kind, "retrieval_terms": synonyms,
+                "assertion": context_assertion(q, match.start()),
                 "diagnosis_asserted": False}
                for pattern, kind, synonyms in PATIENT_TERMS for match in re.finditer(pattern, q)]
-    if groups and intent["risk_question"] and any(c["kind"] != "symptom_word" for c in context):
+    context.extend(symptom_mentions(q))
+    clinical_names = tuple(sorted({node["name"] for node in nodes.values() if node["kind"] == "Disease"}))
+    for name, start, end in _clinical_lexicon(clinical_names).find(q[:600]):
+        if any(m["start"] < end and start < m["end"] for m in groups):
+            continue
+        context.append({"surface": name, "start": start, "end": end, "kind": "disease_mention",
+                        "retrieval_terms": [name], "assertion": context_assertion(q, start),
+                        "diagnosis_asserted": False})
+    context = list({(c["surface"], c["kind"], c.get("start")): c for c in context}.values())
+    if groups and intent["risk_question"] and any(c["kind"] != "symptom_word" and c.get("assertion") != "negated" for c in context):
         intent["fields"] = list(dict.fromkeys(intent["fields"] + ["warnings", "contraindications"]))
     occupied = [(g["start"], g["end"]) for g in groups]
     vague = [term for term in VAGUE_MEDICINES if any(
@@ -196,8 +251,8 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     unresolved = []
     # Only inspect explicit medication slots. Suggestions require confirmation;
     # they are never injected into the graph or silently corrected.
-    for match in re.finditer(r"(?:吃了|吃着|吃|服用|服了|用了|用着|喝了|药叫|药是|打了)([\u4e00-\u9fffA-Za-z0-9·-]{2,20})", q):
-        token = re.split(r"又|然后|以后|之后|会不|会有|能不|还能|还可|可以|每天|一天|每次|一次|已经|因为|但是|有点|感觉|后|和|跟|与", match.group(1))[0]
+    for match in re.finditer(r"(?:吃了|吃着|吃|服用|服了|用了|用着|喝了|药叫|药是|打了|喷了|加上|加用|换成|换用|[(（](?:或者|或))([\u4e00-\u9fffA-Za-z0-9·-]{2,24})", q):
+        token = re.split(r"又|然后|以后|之后|会不|会有|能不|还能|还可|可以|每天|一天|每次|一次|已经|因为|但是|有点|感觉|好几天|几天|后|和|跟|与", match.group(1))[0]
         begin, end = match.start(1), match.start(1) + len(token)
         if len(token) < 2 or any(a < end and begin < b for a,b in occupied) or any(v in token for v in vague):
             continue
@@ -207,16 +262,27 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
         if not (groups or intent["risk_question"] or intent["interaction_question"] or "药" in q
                 or any(token.endswith(form) for form in FORMS) or suggestions):
             continue
-        unresolved.append({"surface": token, "suggestions": suggestions, "automatic_correction": False})
+        unresolved.append({"surface": token, "start": begin, "end": end,
+                           "suggestions": suggestions, "automatic_correction": False,
+                           **mention_role(q, begin, end)})
     alias_ambiguities = [g["surface"] for g in groups if g["basis"] == "source_catalog_alias" and len({core_candidate(formulation_stem(catalog_nodes[v]["name"])) for v in g["candidate_drug_ids"]}) > 1]
     route_conflicts = [g["surface"] for g in groups if g["route_hint"] and not g["candidate_drug_ids"] and g["route_excluded_candidates"]]
     return {"medicines": groups, "intent": intent, "vague_medicines": vague,
+            "schema_version": 2, "normalized_question": q,
+            "offset_basis": "normalized_question",
+            "timing": timing_mentions(q, groups),
+            "alternative_medication_mentions": [g["surface"] for g in groups if g["role"] == "alternative"],
             "patient_context": context,
             "unresolved_medication_mentions": unresolved, "ambiguous_aliases": alias_ambiguities,
             "route_conflicts": route_conflicts,
             "needs_product_details": any(not g["actual_patient_product_known"] for g in groups),
             "requested_details": ["药盒上的名称或成分", "剂型（普通片、缓释片、胶囊、针剂等）"],
             "policy": "query_expansion_only_not_patient_product_identification"}
+
+
+@lru_cache(maxsize=4)
+def _clinical_lexicon(names: tuple):
+    return Lexicon(names)
 
 
 def active_anchors(exact_groups: list[dict], understanding: dict, nodes: dict) -> list[dict]:

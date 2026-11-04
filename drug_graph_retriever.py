@@ -365,6 +365,7 @@ class DrugGraphRetriever:
             from neo4j import GraphDatabase
             driver = GraphDatabase.driver(
                 uri, auth=(username, password), connection_timeout=5.0,
+                connection_acquisition_timeout=5.0, max_transaction_retry_time=0,
             )
         self.driver = driver
 

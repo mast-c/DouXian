@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_community.embeddings import DashScopeEmbeddings
-import re
 import jieba
 from langchain_community.retrievers import BM25Retriever
 from langchain_classic.retrievers import EnsembleRetriever  # RRF
@@ -21,6 +20,19 @@ import dashscope
 from http import HTTPStatus
 from collections import defaultdict, deque
 load_dotenv()
+
+
+class QueryTimeoutEmbeddings(DashScopeEmbeddings):
+    """Bound interactive query embedding; document ingestion keeps its existing path."""
+
+    def embed_query(self, text: str) -> list[float]:
+        response = self.client.call(
+            model=self.model, input=text, text_type="query",
+            api_key=self.dashscope_api_key, timeout=8,
+        )
+        if response.status_code != HTTPStatus.OK:
+            raise RuntimeError(f"Query embedding failed: {response.status_code} {response.code}")
+        return response.output["embeddings"][0]["embedding"]
 
 
 def tokenize_for_bm25(text: str) -> list[str]:
@@ -49,13 +61,13 @@ def _prepare_rerank_document(doc: Document, max_chars: int) -> str:
         return original
 
     # Markdown 图片 URL 很长，对文本相关性判断通常没有直接贡献。
-    text = re.sub(r"!\\[[^\\]]*\\]\\([^)]*\\)", " [图片] ", original)
-    text = re.sub(r"https?://[^\\s)>]+", " ", text)
-    text = re.sub(r"\\s+", " ", text).strip()
+    text = re.sub(r"!\[[^\]]*\]\([^)]*\)", " [图片] ", original)
+    text = re.sub(r"https?://[^\s)>]+", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
 
     metadata = doc.metadata if isinstance(doc.metadata, dict) else {}
     section = str(metadata.get("section_path") or "").strip()
-    header = f"章节：{section[-min(130, max_chars // 4):]}\\n" if section else ""
+    header = f"章节：{section[-min(130, max_chars // 4):]}\n" if section else ""
     room = max(0, max_chars - len(header))
 
     # 保留正文开头 + 尾部，防止重要算法步骤刚好位于后半段。
@@ -79,7 +91,7 @@ class KnowledgeBaseService:
 
         self.chroma = Chroma(
             collection_name=config.collection_name,
-            embedding_function=DashScopeEmbeddings(
+            embedding_function=QueryTimeoutEmbeddings(
                 model=os.getenv("DASHSCOPE_EMBEDDING_MODEL"),
                 dashscope_api_key=os.getenv("DASHSCOPE_API_KEY"),
             ),
@@ -576,6 +588,16 @@ class KnowledgeBaseService:
         if not candidates:
             return []
 
+        return self.rerank_documents(query, candidates, top_n=top_n)
+
+    def rerank_documents(
+        self, query: str, candidates: list[Document], *, top_n: int = 8,
+        timeout: float = 10, max_chars: int | None = None,
+    ) -> list[Document]:
+        """Rerank a deduplicated pool once; full source documents stay unchanged."""
+        if not candidates or top_n < 1:
+            return []
+
         api_key = os.getenv("DASHSCOPE_API_KEY")
         if not api_key:
             raise RuntimeError("Missing DASHSCOPE_API_KEY")
@@ -585,10 +607,11 @@ class KnowledgeBaseService:
 
         # 默认全文重排；实验时 RERANK_DOC_CHARS=600，只压缩送去排序的文本。
         # 结果仍用 candidates[idx] 的完整 page_content，不影响最终引用。
-        try:
-            max_chars = int(os.getenv("RERANK_DOC_CHARS", "0"))
-        except ValueError:
-            max_chars = 0
+        if max_chars is None:
+            try:
+                max_chars = int(os.getenv("RERANK_DOC_CHARS", "0"))
+            except ValueError:
+                max_chars = 0
         if 0 < max_chars < 300:
             raise ValueError("RERANK_DOC_CHARS 只能为 0，或至少 300")
 
@@ -602,6 +625,7 @@ class KnowledgeBaseService:
             query=query,
             documents=rerank_texts,
             top_n=min(top_n, len(candidates)),
+            timeout=max(0.1, min(10, timeout)),
         )
         if response.status_code != HTTPStatus.OK:
             raise RuntimeError(

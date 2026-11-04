@@ -37,6 +37,7 @@ FIELDS_CN = {
     "drug_interactions": "药物相互作用",
 }
 EXPORTED_TRACE_KEYS = (
+    "patient_query_understanding", "query_plan", "query_execution",
     "semantic_graph",
     "query_clarification",
     "knowledge_evidence", "retrieval_pipeline", "retrieval_summary",

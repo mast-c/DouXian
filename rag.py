@@ -69,7 +69,11 @@ from medical_p303b_disease_runtime_v117 import (
 from medical_semantic_retrieval import (
     GRAPH_PROMPT, graph_intent, graph_metadata, graph_insufficiency_message, mark_graph_usage,
     merge_graph_evidence, search_semantic_graph,
+    plan_medical_question,
 )
+from medical_patient_context import patient_context_summary
+from medical_query_plan import section_routing_question
+from medical_query_execution import execute_retrieval_plan
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
@@ -649,7 +653,7 @@ class RagService:
         self.chroma_index_chunks = None
 
         @tool("search_knowledge_base")
-        def search_knowledge_base(question: str) -> str:
+        def search_knowledge_base(question: str, retrieval_plan: dict | None = None) -> str:
             """在本地知识库中执行混合检索和 Reranker 精排。"""
 
             empty_result = {
@@ -662,6 +666,10 @@ class RagService:
 
             if not isinstance(question, str) or not question.strip():
                 return json.dumps(empty_result, ensure_ascii=False)
+
+            retrieval_plan = retrieval_plan or plan_medical_question(question, Path(__file__).resolve().parent)
+            if retrieval_plan and retrieval_plan.get("status") == "needs_clarification":
+                return json.dumps({**empty_result, "status": "needs_medication_clarification"}, ensure_ascii=False)
 
             # Performance tracing: timings only, no change to search strategy.
             _kb_search_started = time.perf_counter()
@@ -701,7 +709,7 @@ class RagService:
             # 每次请求都需要执行查询分解和检索，不能放在首次初始化条件内。
             # 1. 判断是否需要拆分问题
             _phase_started = time.perf_counter()
-            queries = self.decompose_queries(question)
+            queries = self.decompose_queries(question, retrieval_plan=retrieval_plan)
             print(
                 "[RAG耗时] 查询分解（规则/Qwen）："
                 f"{time.perf_counter() - _phase_started:.2f}s "
@@ -712,61 +720,22 @@ class RagService:
             for i, subquery in enumerate(queries, 1):
                 print(f"子问题 {i}: {subquery}")
 
-            # 2. 普通问题：保留原来的检索流程
-            # 检索阶段多取候选，之后按医学栏目和原文校验缩减证据；
-            # BM25/RRF 和 Reranker 算法本身完全保留。
-            if len(queries) == 1:
-                _phase_started = time.perf_counter()
-                documents = self.knowledge_service.search_with_rerank(
-                    query=queries[0],
-                    recall_k=10,
-                    top_n=8,
-                )
-                print(
-                    "[RAG耗时] 单问题 Hybrid+Rerank："
-                    f"{time.perf_counter() - _phase_started:.2f}s"
-                )
-
-            # 3. 复合问题：每个子查询扩容候选池，仍使用原来的 Reranker。
-            else:
-                groups = []
-
-                for _subquery_index, subquery in enumerate(queries, 1):
-                    _phase_started = time.perf_counter()
-                    docs = self.knowledge_service.search_with_rerank(
-                        query=subquery,
-                        recall_k=20,
-                        top_n=10,
-                    )
-                    print(
-                        f"[RAG耗时] 子问题 {_subquery_index} Hybrid+Rerank："
-                        f"{time.perf_counter() - _phase_started:.2f}s "
-                        f"(返回 {len(docs)} 条)"
-                    )
-                    groups.append(docs)
-
-                    print(f"\\n子查询：{subquery}")
-                    for rank, doc in enumerate(docs, 1):
-                        metadata = doc.metadata if isinstance(doc.metadata, dict) else {}
-                        print(
-                            f"重排候选 {rank}:",
-                            metadata.get("section_path", ""),
-                            "score=", metadata.get("rerank_score", ""),
-                        )
-
-                # 每组最多10条只是候选；最终仍只保留最多5条真实证据。
-                _phase_started = time.perf_counter()
-                documents = _select_diverse_documents(
-                    groups, max_documents=8, subqueries=queries
-                )
-                print(
-                    "[RAG耗时] 候选证据合并："
-                    f"{time.perf_counter() - _phase_started:.2f}s"
-                )
-                print(
-                    "多查询候选总数：", sum(len(group) for group in groups),
-                    "最终去重/多样性选择：", len(documents),
-                )
+            execution_plan = retrieval_plan if retrieval_plan and retrieval_plan.get("status") == "planned" else {
+                "original_question": question,
+                "tasks": [{"id": f"query_{i}", "query": query, "fields": []} for i, query in enumerate(queries)],
+            }
+            documents, execution_report = execute_retrieval_plan(
+                execution_plan, search=self.knowledge_service.search_hybrid,
+                rerank=self.knowledge_service.rerank_documents, top_n=8,
+            )
+            print(
+                "[Query Planner] "
+                f"plan={execution_report.get('plan_id')} "
+                f"召回={execution_report['recall_calls']} 精排={execution_report['rerank_calls']} "
+                f"耗时={execution_report['seconds']:.2f}s "
+                f"timeout={execution_report['timed_out']} "
+                f"未覆盖目标={execution_report['uncovered_tasks']}"
+            )
 
             # 先按问题中的精确药名过滤跨药品候选，再做父级 Section 回溯。
             # 不改变 Hybrid + Reranker 的算法，只防止名为 X 的问题拿 Y 的
@@ -785,10 +754,16 @@ class RagService:
                 )
             documents, medical_report = prepare_medical_documents(
                 documents,
-                question,
+                section_routing_question(question, retrieval_plan),
                 fetch_parent=self._get_medical_parent_section,
                 limit=(3 if len(queries) == 1 else 5),
             )
+            execution_report["after_provenance_selected"] = len(documents)
+            execution_report["after_provenance_fields"] = sorted({doc.metadata.get("section_field", "") for doc in documents})
+            execution_report["after_provenance_uncovered_tasks"] = [
+                task["id"] for task in execution_plan["tasks"]
+                if not any(task["id"] in doc.metadata.get("retrieval_task_ids", []) for doc in documents)
+            ]
             print(
                 "[医疗证据门控] "
                 f"最终={medical_report['selected']} "
@@ -814,10 +789,12 @@ class RagService:
                         **empty_result,
                         "status": (
                             "provenance_rejected" if medical_report["failed_provenance"]
+                            else "retrieval_timeout" if execution_report["timed_out"]
                             else "no_relevant_sections"
                         ),
                         "chroma_chunks": self.chroma_index_chunks,
                         "medical_validation": medical_report,
+                        "query_execution": execution_report,
                     },
                     ensure_ascii=False,
                 )
@@ -868,6 +845,7 @@ class RagService:
                 "status": "ok",
                 "chroma_chunks": self.chroma_index_chunks,
                 "medical_validation": medical_report,
+                "query_execution": execution_report,
             }, ensure_ascii=False)
 
         @tool("search_drug_graph")
@@ -1003,13 +981,16 @@ class RagService:
             self.graph_retriever = DrugGraphRetriever()
         return self.graph_retriever.fetch_parent_section(metadata)
 
-    def decompose_queries(self, question: str) -> list[str]:
-        """明确的医学多栏目提问走规则规划；其余复合问题保留 Qwen 分解。"""
+    def decompose_queries(self, question: str, retrieval_plan: dict | None = None) -> list[str]:
+        """Share patient-intent goals across lanes; bound legacy decomposition."""
+        if retrieval_plan and retrieval_plan.get("status") == "planned":
+            print(f"[Query Planner] shared_plan={retrieval_plan.get('plan_id')}, skipped Qwen")
+            return [task["query"] for task in retrieval_plan["tasks"][:3]]
         if os.getenv("DOUXIAN_FAST_QUERY_PLAN", "1") != "0":
             fast_queries = _fast_plan_medical_fields(question)
             if fast_queries:
                 print("[Query Planner] fast_path=on, skipped Qwen")
-                return fast_queries
+                return fast_queries[:2] + [" ".join(fast_queries[2:])] if len(fast_queries) > 3 else fast_queries
 
 
             
@@ -1036,9 +1017,15 @@ class RagService:
         system_prompt = MEDICAL_QUERY_DECOMPOSITION_PROMPT
 
         try:
-            response = self.chat_model.bind(
-                temperature=0
-            ).invoke([
+            model = self.chat_model
+            if getattr(model, "root_client", None) is not None:
+                client = model.root_client.with_options(timeout=5, max_retries=0)
+                model = model.model_copy(update={"request_timeout": 5, "max_retries": 0,
+                                                 "root_client": client, "client": client.chat.completions})
+            options = {"temperature": 0, "max_tokens": 800}
+            if "qwen" in str(getattr(model, "model_name", "")).lower():
+                options["extra_body"] = {**(getattr(model, "extra_body", None) or {}), "enable_thinking": False}
+            response = model.bind(**options).invoke([
                 SystemMessage(content=system_prompt),
                 HumanMessage(content=question),
             ])
@@ -1069,7 +1056,7 @@ class RagService:
                 if 4 <= len(text) <= 180 and text not in queries:
                     queries.append(text)
 
-                if len(queries) >= 4:
+                if len(queries) >= 3:
                     break
 
             # 拆分不成功，回退到原来的单次检索
@@ -1286,6 +1273,12 @@ class RagService:
                 )
                 trace["semantic_graph"] = _semantic_report
                 _patient_query = _semantic_report.get("query_understanding", {})
+                trace["patient_query_understanding"] = _patient_query
+                _retrieval_plan = _semantic_report.get("retrieval_plan")
+                if _retrieval_plan:
+                    trace["query_plan"] = _retrieval_plan
+                if _semantic_report.get("execution"):
+                    trace.setdefault("query_execution", {})["graph"] = _semantic_report["execution"]
                 _candidate_scope = list(dict.fromkeys(
                     name for group in _patient_query.get("medicines", [])
                     for name in group["candidate_drug_names"]
@@ -1306,9 +1299,14 @@ class RagService:
                     _retrieval_question += "\n检索候选制剂（实际服用产品尚需核对）：" + "、".join(names_for_search)
                     if _patient_query.get("intent", {}).get("interaction_question"):
                         _retrieval_question += "；核对药物相互作用原文。"
-                _context_terms = list(dict.fromkeys(t for c in _patient_query.get("patient_context", []) for t in c["retrieval_terms"]))
+                _context_terms = list(dict.fromkeys(
+                    t for c in _patient_query.get("patient_context", [])
+                    if c.get("assertion") not in ("negated", "other_person")
+                    for t in c["retrieval_terms"]
+                ))
                 if _context_terms:
                     _retrieval_question += "\n口语检索词（不作诊断）：" + "、".join(_context_terms)
+                _retrieval_question = section_routing_question(_retrieval_question, _retrieval_plan)
                 # 知识库即联合检索：Neo4j 图谱+原文章节，以及 Chroma Hybrid。
                 # GraphRAG 仅作旧页面/历史调用别名；两种入口走同一条路径。
                 # 任意一路失败仍可返回另一路真实证据，不静默伪造命中。
@@ -1374,9 +1372,10 @@ class RagService:
                             "reason": "图谱清单已包含原文引用，省略重复混合检索",
                         }
                         continue
-                    result, ok = self._call_tool(
-                        tool_name, {"question": _retrieval_question}, trace, progress
-                    )
+                    tool_args = {"question": _retrieval_question}
+                    if tool_name == "search_knowledge_base" and _retrieval_plan and _retrieval_plan.get("status") == "planned":
+                        tool_args["retrieval_plan"] = _retrieval_plan
+                    result, ok = self._call_tool(tool_name, tool_args, trace, progress)
                     if not ok:
                         tool_reports[tool_name] = {"status": "error", "hits": 0}
                         continue
@@ -1394,6 +1393,8 @@ class RagService:
                         "hits": len(data.get("excerpts") or []),
                     }
                     if tool_name == "search_knowledge_base":
+                        if data.get("query_execution"):
+                            trace.setdefault("query_execution", {})["chroma"] = data["query_execution"]
                         tool_reports[tool_name]["chroma_chunks"] = data.get("chroma_chunks")
                         tool_reports[tool_name]["medical_validation"] = (
                             data.get("medical_validation") or {}
@@ -2212,7 +2213,10 @@ class RagService:
                             *history,
                             HumanMessage(
                                 content=(
-                                    prompt_intro
+                                    "用户原问题：" + question + "\n\n"
+                                    + "患者表述解析（不作为知识库证据）：\n"
+                                    + json.dumps(patient_context_summary(_patient_query), ensure_ascii=False)
+                                    + "\n\n" + prompt_intro
                                     + "\n".join(f"- {q}" for q in approved)
                                     + "\n\n"
                                     f"知识库证据：\n{kb_text}"

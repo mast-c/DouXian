@@ -5,6 +5,7 @@ assertions for a concrete product and record, with no invented salt equivalence.
 """
 from collections import defaultdict
 import json
+import time
 
 
 def patient_pair_paths(conn, nodes, plan, *, max_paths, max_expansions):
@@ -38,6 +39,9 @@ def patient_pair_paths(conn, nodes, plan, *, max_paths, max_expansions):
     paths, seen, expanded = [], set(), 0
     for side in (0, 1):
         for interaction in interactions[side]:
+            if time.monotonic() >= plan.get("_deadline", float("inf")):
+                truncated = True
+                break
             expanded += 1
             if expanded > max_expansions:
                 truncated = True
@@ -71,7 +75,7 @@ def patient_pair_paths(conn, nodes, plan, *, max_paths, max_expansions):
                     score -= 20
                 paths.append({"node_ids": path_ids, "edges": edges, "relations": sorted({e["relation"] for e in edges}),
                               "score": score, "covered_anchors": [0, 1]})
-        if expanded >= max_expansions:
+        if expanded >= max_expansions or time.monotonic() >= plan.get("_deadline", float("inf")):
             break
     if "HAS_INGREDIENT" in plan["requested_relations"]:
         extended = []
@@ -105,4 +109,5 @@ def patient_pair_paths(conn, nodes, plan, *, max_paths, max_expansions):
                                    "truncated": truncated}
     return distinct[:max_paths*3], {"expanded_states": min(expanded,max_expansions),
         "candidate_paths": len(paths), "fanout_truncations": int(truncated),
+        "time_budget_exhausted": time.monotonic() >= plan.get("_deadline", float("inf")),
         "expansion_budget_exhausted": expanded > max_expansions}

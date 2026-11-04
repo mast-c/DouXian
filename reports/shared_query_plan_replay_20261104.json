@@ -1,0 +1,243 @@
+{
+  "generated_at": "2026-11-04T08:02:57.463742+00:00",
+  "scope": "real_local_graph_replay_and_offline_callback_call_count_only",
+  "live_chroma_or_cloud_latency_measured": false,
+  "whole_answer_latency_measured": false,
+  "graph_replays": [
+    {
+      "reference_trace": "medical_trace_019.json",
+      "question": "我喷了布地奈德鼻喷雾剂好几天了，鼻子还是堵，而且今天鼻子里好像有点疼，这是药不管用还是我有其他问题",
+      "graph_status": "ok",
+      "graph_seconds": 1.5123,
+      "path_count": 6,
+      "all_paths_source_verified": true,
+      "retrieval_plan": {
+        "version": 1,
+        "original_question": "我喷了布地奈德鼻喷雾剂好几天了，鼻子还是堵，而且今天鼻子里好像有点疼，这是药不管用还是我有其他问题",
+        "strategy": "local_patient_intents",
+        "status": "planned",
+        "tasks": [
+          {
+            "id": "adverse_event",
+            "fields": [
+              "adverse_reactions",
+              "warnings"
+            ],
+            "query": "布地奈德鼻喷雾剂；用户描述（不作诊断）：鼻塞、鼻腔疼痛。原文检索目标：用药后新不适相关的不良反应、注意事项和就医条件，不预设药物因果。",
+            "graph_relations": [
+              "ADVERSE_REACTION_MENTION",
+              "CAUTION_MENTION"
+            ],
+            "requires_connected_medicines": false
+          },
+          {
+            "id": "efficacy",
+            "fields": [
+              "indication",
+              "warnings"
+            ],
+            "query": "布地奈德鼻喷雾剂；用户描述（不作诊断）：鼻塞、鼻腔疼痛。原文检索目标：症状未改善时的注意事项、适应症及资料明确的时间条件；用户用药时间为“好几天”，不可擅自换算。",
+            "graph_relations": [
+              "INDICATION_MENTION",
+              "CAUTION_MENTION"
+            ],
+            "requires_connected_medicines": false
+          },
+          {
+            "id": "administration",
+            "fields": [
+              "dosage",
+              "warnings"
+            ],
+            "query": "布地奈德鼻喷雾剂。原文检索目标：用法用量、给药途径及使用方法注意事项，不生成个体化调药建议。",
+            "graph_relations": [
+              "CAUTION_MENTION"
+            ],
+            "requires_connected_medicines": false
+          }
+        ],
+        "fields": [
+          "adverse_reactions",
+          "warnings",
+          "indication",
+          "dosage"
+        ],
+        "graph_relations": [
+          "ADVERSE_REACTION_MENTION",
+          "CAUTION_MENTION",
+          "INDICATION_MENTION"
+        ],
+        "medicine_surfaces": [
+          "布地奈德鼻喷雾剂"
+        ],
+        "candidate_drug_names": [
+          "布地奈德鼻喷雾剂"
+        ],
+        "context": [
+          "鼻塞",
+          "鼻腔疼痛"
+        ],
+        "planning_model_calls": 0,
+        "limits": {
+          "max_queries": 3,
+          "recall_workers": 2,
+          "recall_per_query": 12,
+          "max_candidates": 36,
+          "rerank_calls": 1,
+          "recall_seconds": 12,
+          "rerank_seconds": 10,
+          "total_seconds": 24
+        },
+        "policy": "retrieval_goals_only_not_clinical_claims",
+        "plan_id": "6f02f5f393c902091da1"
+      },
+      "graph_execution": {
+        "traversals": 1,
+        "plan_id": "6f02f5f393c902091da1",
+        "traversal_budget_seconds": 3.0
+      },
+      "task_coverage": [
+        {
+          "id": "adverse_event",
+          "requested_relations": [
+            "ADVERSE_REACTION_MENTION",
+            "CAUTION_MENTION"
+          ],
+          "covered_relations": [
+            "ADVERSE_REACTION_MENTION",
+            "CAUTION_MENTION"
+          ],
+          "text_only_fields": []
+        },
+        {
+          "id": "efficacy",
+          "requested_relations": [
+            "INDICATION_MENTION",
+            "CAUTION_MENTION"
+          ],
+          "covered_relations": [
+            "CAUTION_MENTION",
+            "INDICATION_MENTION"
+          ],
+          "text_only_fields": []
+        },
+        {
+          "id": "administration",
+          "requested_relations": [
+            "CAUTION_MENTION"
+          ],
+          "covered_relations": [
+            "CAUTION_MENTION"
+          ],
+          "text_only_fields": [
+            "dosage"
+          ]
+        }
+      ],
+      "truncated": true,
+      "stats": {
+        "expanded_states": 1201,
+        "fanout_truncations": 13,
+        "expansion_budget_exhausted": false,
+        "candidate_paths": 600
+      }
+    },
+    {
+      "reference_trace": "medical_trace_015 (1).json",
+      "question": "患者有严重的青光眼，同时正在服用西替利嗪（或弗雷他定），因为鼻炎鼻塞严重，能不能加上布地奈德喷雾剂？",
+      "graph_status": "needs_medication_clarification",
+      "graph_seconds": null,
+      "path_count": 0,
+      "all_paths_source_verified": false,
+      "retrieval_plan": {
+        "version": 1,
+        "original_question": "患者有严重的青光眼，同时正在服用西替利嗪（或弗雷他定），因为鼻炎鼻塞严重，能不能加上布地奈德喷雾剂？",
+        "strategy": "local_patient_intents",
+        "status": "needs_clarification",
+        "tasks": [],
+        "fields": [
+          "drug_interactions",
+          "warnings",
+          "contraindications",
+          "adverse_reactions"
+        ],
+        "graph_relations": [],
+        "medicine_surfaces": [
+          "西替利嗪",
+          "布地奈德喷雾剂"
+        ],
+        "candidate_drug_names": [
+          "盐酸西替利嗪分散片",
+          "盐酸西替利嗪口服溶液",
+          "盐酸西替利嗪滴剂",
+          "盐酸西替利嗪片",
+          "盐酸西替利嗪糖浆",
+          "盐酸西替利嗪胶囊",
+          "布地奈德鼻喷雾剂"
+        ],
+        "context": [
+          "鼻塞",
+          "青光眼",
+          "鼻炎"
+        ],
+        "planning_model_calls": 0,
+        "limits": {
+          "max_queries": 3,
+          "recall_workers": 2,
+          "recall_per_query": 12,
+          "max_candidates": 36,
+          "rerank_calls": 1,
+          "recall_seconds": 12,
+          "rerank_seconds": 10,
+          "total_seconds": 24
+        },
+        "policy": "retrieval_goals_only_not_clinical_claims",
+        "plan_id": "a7418c9c8cdae2049880"
+      },
+      "graph_execution": null,
+      "task_coverage": null,
+      "truncated": null,
+      "stats": null
+    }
+  ],
+  "offline_text_execution": {
+    "calls": {
+      "recall": 3,
+      "rerank": 1
+    },
+    "execution": {
+      "plan_id": "6f02f5f393c902091da1",
+      "planning_model_calls": 0,
+      "recall_calls": 3,
+      "rerank_calls": 1,
+      "tasks": [
+        {
+          "id": "adverse_event",
+          "status": "ok",
+          "candidates": 1
+        },
+        {
+          "id": "efficacy",
+          "status": "ok",
+          "candidates": 1
+        },
+        {
+          "id": "administration",
+          "status": "ok",
+          "candidates": 1
+        }
+      ],
+      "timed_out": false,
+      "recall_seconds": 0.0017,
+      "unique_candidates": 3,
+      "rerank_status": "ok",
+      "rerank_seconds": 0.0004,
+      "seconds": 0.0022,
+      "selected": 3,
+      "coverage_scope": "candidate_task_coverage_not_evidence_sufficiency",
+      "uncovered_tasks": [],
+      "scope": "recall_and_rerank_only_excludes_initialization_provenance_and_generation"
+    },
+    "note": "召回与重排回调为虚构候选；仅验证调用次数与覆盖诊断，不用于召回质量或云端速度结论。"
+  }
+}
