@@ -133,7 +133,7 @@ def reassess_fixed_aspects(
         HumanMessage(content=payload),
     ])
     raw = _plain_content(response.content)
-    return validate_judge_output(raw, excerpts)
+    return validate_judge_output(raw, excerpts, required_aspects=required)
 
 
 def retry_insufficient_evidence(

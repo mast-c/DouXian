@@ -1,0 +1,1201 @@
+{
+  "generated_at": "2026-11-04T09:28:34.324018+00:00",
+  "scope": "real_local_sources_and_graph_no_cloud_model_calls",
+  "live_chroma_tested": false,
+  "clinical_category_correctness_validated": false,
+  "category_index": {
+    "version": "dataset-category-1",
+    "signature": "1d7390dbf680b083e33ce838ad978dc51004ec9e5e1db560c67831b78ecf27b0",
+    "files": {
+      "drug_categories_western.json": {
+        "size": 173655,
+        "sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347"
+      },
+      "drug_categories_chinese.json": {
+        "size": 128639,
+        "sha256": "803115ef485bd625fd213255c38a01e2836088712f8b9a181b8287ca53f0f670"
+      }
+    },
+    "matched_memberships": 7287,
+    "unmatched_memberships": 1762,
+    "nodes": 8957,
+    "edges": 9316,
+    "clinical_validation": false,
+    "pharmacological_class_equivalence": false,
+    "index": {
+      "size": 5652480,
+      "sha256": "8922a013661040a18b5cc312e9e8cb851d027f2c16b2c91db73f1d4f60e82d7e"
+    }
+  },
+  "replays": [
+    {
+      "question": "阿莫西林胶囊属于什么类药物",
+      "status": "ok",
+      "seconds": 1.1239,
+      "reason": null,
+      "route": "dataset_category_source_display",
+      "recognized_medicines": [
+        "阿莫西林胶囊"
+      ],
+      "paths": [
+        {
+          "id": "categorypath_53a08ceca23cbf8430861a6d",
+          "nodes": [
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_29b4a7486f8f5b9d961d7644",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/0",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/0",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/0",
+              "section_field": "dataset_category",
+              "quote": "\"阿莫西林胶囊\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_a2b98027b39ee75d2a8b6783",
+              "src": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类",
+              "section_field": "dataset_category",
+              "quote": "\"青霉素类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 2,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_category_structure_only"
+        }
+      ],
+      "answer": "本地西药分类文件将 **阿莫西林胶囊** 列在 **抗生素药物 → 青霉素类** 下[1]。\n\n这是本地数据集的分类记载，尚未核验为权威药理分类。\n\n\n**来源**\n- [1] 本地分类文件 · drug_categories_western.json，JSON路径：`/categories/抗生素药物/青霉素类/0`"
+    },
+    {
+      "question": "阿莫西林胶囊通常什么时候吃",
+      "status": "ok",
+      "seconds": 2.8159,
+      "reason": null,
+      "route": null,
+      "recognized_medicines": [
+        "阿莫西林胶囊"
+      ],
+      "paths": [
+        {
+          "id": "path_6f4faa4ca2f38be52fd71b50",
+          "nodes": [
+            {
+              "id": "disease_0dd274ab995ea684916daa40",
+              "kind": "Disease",
+              "name": "中耳炎"
+            },
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "disease_ad47fbd6e6bc71736fa826c4",
+              "kind": "Disease",
+              "name": "失眠"
+            },
+            {
+              "id": "symptom_55807f69d204a564847e31cf",
+              "kind": "Symptom",
+              "name": "噩梦"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_0a7eefc0b0ce299cf4e4417164ddcfa6",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "disease_0dd274ab995ea684916daa40",
+                "kind": "Disease",
+                "name": "中耳炎"
+              },
+              "relation": "INDICATION_MENTION",
+              "relation_label": "用途章节提及（非确证治疗）",
+              "source_id": "section_5b5778effbb299ff77980e6e",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "c0cfd44d3f714dff0e0a6b3dea1e6962efeb5142eb15b1189ea71a589b4bbd60",
+              "section_field": "indication",
+              "quote_start": 0,
+              "quote_end": 79,
+              "quote": "阿莫西林适用于敏感菌（不产β内酰胺酶菌株）所致的下列感染：1．溶血链球菌、肺炎链球菌、葡萄球菌或流感嗜血杆菌所致中耳炎、鼻窦炎、咽炎、扁桃体炎等上呼吸道感染。",
+              "mention_start": 56,
+              "mention_end": 59,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_21b06052cd2293363b0d3547f6a12afb",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "disease_ad47fbd6e6bc71736fa826c4",
+                "kind": "Disease",
+                "name": "失眠"
+              },
+              "relation": "CAUTION_MENTION",
+              "relation_label": "注意事项提及",
+              "source_id": "section_b377bd8653dbce2d9d98c090",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "ef55d7b75e28ec5fcc6a4c72c1b313b3b2a270da3ee8318573c0f11ed4e1dadd",
+              "section_field": "warnings",
+              "quote_start": 346,
+              "quote_end": 377,
+              "quote": "6．偶见兴奋、焦虑、失眠、头晕以及行为异常等中枢神经系统症状。",
+              "mention_start": 356,
+              "mention_end": 358,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_08e5cc3b567f426b34839f0f379ee331",
+              "src": {
+                "id": "disease_ad47fbd6e6bc71736fa826c4",
+                "kind": "Disease",
+                "name": "失眠"
+              },
+              "dst": {
+                "id": "symptom_55807f69d204a564847e31cf",
+                "kind": "Symptom",
+                "name": "噩梦"
+              },
+              "relation": "HAS_SYMPTOM",
+              "relation_label": "资料列出的症状",
+              "source_id": "disease_symptoms_b39ae3dcacc35d8e16d541b2",
+              "record_id": "5bb578ff831b973a137e602c",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+              "source_url": "",
+              "source_status": "third_party_unverified",
+              "source_sha256": "5b2a45cae68a48e106bbe877f8c759307cf5462c0927167c1a5440663473fd53",
+              "section_field": "symptom",
+              "quote_start": 47,
+              "quote_end": 49,
+              "quote": "噩梦",
+              "mention_start": 47,
+              "mention_end": 49,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            }
+          ],
+          "hops": 3,
+          "relations": [
+            "CAUTION_MENTION",
+            "HAS_SYMPTOM",
+            "INDICATION_MENTION"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false
+        },
+        {
+          "id": "path_80fb85c861c675b2d005dca4",
+          "nodes": [
+            {
+              "id": "symptom_efbb170c2e1742bf99188193",
+              "kind": "Symptom",
+              "name": "呕吐"
+            },
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "disease_bdc0fccfd873e02f996fd230",
+              "kind": "Disease",
+              "name": "枯草热"
+            },
+            {
+              "id": "symptom_7d2e433d9fd3976013b0ada6",
+              "kind": "Symptom",
+              "name": "鼻塞及反射性头痛"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_1cf9923eccbaafa7bc9c552a62cac654",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "symptom_efbb170c2e1742bf99188193",
+                "kind": "Symptom",
+                "name": "呕吐"
+              },
+              "relation": "ADVERSE_REACTION_MENTION",
+              "relation_label": "不良反应章节提及",
+              "source_id": "section_01f0a028686c0e4991ca347d",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "0fe99edad1432a364e67974f88e93f37136d725431ecf1bae133fb5d48e7f540",
+              "section_field": "adverse_reactions",
+              "quote_start": 0,
+              "quote_end": 23,
+              "quote": "1．恶心、呕吐、腹泻及假膜性肠炎等胃肠道反应。",
+              "mention_start": 5,
+              "mention_end": 7,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_2d39c146e88f4a0941dc85ec955e04dd",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "disease_bdc0fccfd873e02f996fd230",
+                "kind": "Disease",
+                "name": "枯草热"
+              },
+              "relation": "CAUTION_MENTION",
+              "relation_label": "注意事项提及",
+              "source_id": "section_b377bd8653dbce2d9d98c090",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "ef55d7b75e28ec5fcc6a4c72c1b313b3b2a270da3ee8318573c0f11ed4e1dadd",
+              "section_field": "warnings",
+              "quote_start": 199,
+              "quote_end": 228,
+              "quote": "5．下列情况应慎用：(1)有哮喘、枯草热等过敏性疾病史者。",
+              "mention_start": 216,
+              "mention_end": 219,
+              "qualifiers": {
+                "caution": true,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_03582609789967f4ca0ef551e77f65d7",
+              "src": {
+                "id": "disease_bdc0fccfd873e02f996fd230",
+                "kind": "Disease",
+                "name": "枯草热"
+              },
+              "dst": {
+                "id": "symptom_7d2e433d9fd3976013b0ada6",
+                "kind": "Symptom",
+                "name": "鼻塞及反射性头痛"
+              },
+              "relation": "HAS_SYMPTOM",
+              "relation_label": "资料列出的症状",
+              "source_id": "disease_symptoms_665dc0cb345995d2e7996f09",
+              "record_id": "5bb578c1831b973a137e42c9",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+              "source_url": "",
+              "source_status": "third_party_unverified",
+              "source_sha256": "9b1b17bf53f13496fd39f9a86187fab3a751f97ebb6ad525d3adaa3bda03e9d9",
+              "section_field": "symptom",
+              "quote_start": 0,
+              "quote_end": 8,
+              "quote": "鼻塞及反射性头痛",
+              "mention_start": 0,
+              "mention_end": 8,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            }
+          ],
+          "hops": 3,
+          "relations": [
+            "ADVERSE_REACTION_MENTION",
+            "CAUTION_MENTION",
+            "HAS_SYMPTOM"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false
+        },
+        {
+          "id": "path_ef7adeee24959bbf121b4314",
+          "nodes": [
+            {
+              "id": "ingredient_1aca17ff048a10d872178b2e",
+              "kind": "Ingredient",
+              "name": "氯霉素"
+            },
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "symptom_56c829408de65a1cf633e7c2",
+              "kind": "Symptom",
+              "name": "失眠"
+            },
+            {
+              "id": "disease_be8a0eaab23658db32897d11",
+              "kind": "Disease",
+              "name": "网瘾"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_26d9f1b03ad18277a5582d84bb39e910",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "ingredient_1aca17ff048a10d872178b2e",
+                "kind": "Ingredient",
+                "name": "氯霉素"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_97c765abc22a5eeeab4a5bc8",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "ff2a96b5458ed133de2b54ddc32c56767f2ee07eb36f80b58ebf4928a3920059",
+              "section_field": "drug_interactions",
+              "quote_start": 45,
+              "quote_end": 91,
+              "quote": "2．氯霉素、大环内酯类、磺胺类和四环素类药物在体外干扰阿莫西林的抗菌作用，但其临床意义不明。",
+              "mention_start": 47,
+              "mention_end": 50,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": true
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_27638abc2d1a6e5eaee024cb24648d58",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "symptom_56c829408de65a1cf633e7c2",
+                "kind": "Symptom",
+                "name": "失眠"
+              },
+              "relation": "ADVERSE_REACTION_MENTION",
+              "relation_label": "不良反应章节提及",
+              "source_id": "section_01f0a028686c0e4991ca347d",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "0fe99edad1432a364e67974f88e93f37136d725431ecf1bae133fb5d48e7f540",
+              "section_field": "adverse_reactions",
+              "quote_start": 94,
+              "quote_end": 125,
+              "quote": "6．偶见兴奋、焦虑、失眠、头晕以及行为异常等中枢神经系统症状。",
+              "mention_start": 104,
+              "mention_end": 106,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_005719322ebee3d9bcf1f38ea9e17514",
+              "src": {
+                "id": "disease_be8a0eaab23658db32897d11",
+                "kind": "Disease",
+                "name": "网瘾"
+              },
+              "dst": {
+                "id": "symptom_56c829408de65a1cf633e7c2",
+                "kind": "Symptom",
+                "name": "失眠"
+              },
+              "relation": "HAS_SYMPTOM",
+              "relation_label": "资料列出的症状",
+              "source_id": "disease_symptoms_8149140738cd89a1a112da91",
+              "record_id": "5bb578dd831b973a137e4fcd",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+              "source_url": "",
+              "source_status": "third_party_unverified",
+              "source_sha256": "7f8e35145daecf267dc244427c5040698997582bf5c0d6b896bdd80e2592f654",
+              "section_field": "symptom",
+              "quote_start": 0,
+              "quote_end": 2,
+              "quote": "失眠",
+              "mention_start": 0,
+              "mention_end": 2,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            }
+          ],
+          "hops": 3,
+          "relations": [
+            "ADVERSE_REACTION_MENTION",
+            "HAS_SYMPTOM",
+            "INTERACTION_MENTION"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false
+        },
+        {
+          "id": "path_d056882e9508de2c7cb050e6",
+          "nodes": [
+            {
+              "id": "condition_ace753cc47b107359dd362fa",
+              "kind": "Condition",
+              "name": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用"
+            },
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "disease_9b5904b3ab0a4101b169fd3f",
+              "kind": "Disease",
+              "name": "支气管炎"
+            },
+            {
+              "id": "symptom_808354cc4ed359e9b6d5ae6f",
+              "kind": "Symptom",
+              "name": "咳嗽伴哮鸣音"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_a81aa977382501584fd3a8eeb805f937",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "condition_ace753cc47b107359dd362fa",
+                "kind": "Condition",
+                "name": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用"
+              },
+              "relation": "CONTRAINDICATION_MENTION",
+              "relation_label": "禁忌章节提及（保留原文条件）",
+              "source_id": "section_3246772afc7eb75e61dc4752",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "12256be64fab40439333a767c6b397f8c61e5831e23dc884a6d04cac65bb3982",
+              "section_field": "contraindications",
+              "quote_start": 20,
+              "quote_end": 72,
+              "quote": "对其他β-内酰胺剂（如头孢菌素、碳青霉烯类、单环β-内酰胺类）有严重的速发型超敏反应（如过敏反应）者禁用",
+              "mention_start": 20,
+              "mention_end": 72,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": true,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_35ccd6f28c095d0538488e4589c7c91d",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "disease_9b5904b3ab0a4101b169fd3f",
+                "kind": "Disease",
+                "name": "支气管炎"
+              },
+              "relation": "INDICATION_MENTION",
+              "relation_label": "用途章节提及（非确证治疗）",
+              "source_id": "section_5b5778effbb299ff77980e6e",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "c0cfd44d3f714dff0e0a6b3dea1e6962efeb5142eb15b1189ea71a589b4bbd60",
+              "section_field": "indication",
+              "quote_start": 138,
+              "quote_end": 182,
+              "quote": "4．溶血链球菌、肺炎链球菌、葡萄球菌或流感嗜血杆菌所致急性支气管炎、肺炎等下呼吸道感染。",
+              "mention_start": 167,
+              "mention_end": 171,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_1a3b84b42896348121c5fc40612e95e3",
+              "src": {
+                "id": "disease_9b5904b3ab0a4101b169fd3f",
+                "kind": "Disease",
+                "name": "支气管炎"
+              },
+              "dst": {
+                "id": "symptom_808354cc4ed359e9b6d5ae6f",
+                "kind": "Symptom",
+                "name": "咳嗽伴哮鸣音"
+              },
+              "relation": "HAS_SYMPTOM",
+              "relation_label": "资料列出的症状",
+              "source_id": "disease_symptoms_32d8cc868043d4982afa0239",
+              "record_id": "5bb578cb831b973a137e47b4",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+              "source_url": "",
+              "source_status": "third_party_unverified",
+              "source_sha256": "ecdcd287dfbeb22303651e34c35f406b07eaa65a4368903615d7c5b1b9c863e8",
+              "section_field": "symptom",
+              "quote_start": 14,
+              "quote_end": 20,
+              "quote": "咳嗽伴哮鸣音",
+              "mention_start": 14,
+              "mention_end": 20,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            }
+          ],
+          "hops": 3,
+          "relations": [
+            "CONTRAINDICATION_MENTION",
+            "HAS_SYMPTOM",
+            "INDICATION_MENTION"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false
+        },
+        {
+          "id": "path_ca3f0e7ddadc0182ff4bde30",
+          "nodes": [
+            {
+              "id": "ingredient_b34b3279328aa59497d0d15e",
+              "kind": "Ingredient",
+              "name": "阿莫西林"
+            },
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "disease_7aa15d355deb6137501ab76a",
+              "kind": "Disease",
+              "name": "假膜性肠炎"
+            },
+            {
+              "id": "symptom_a4cf8223e122f0d747c452b0",
+              "kind": "Symptom",
+              "name": "中毒性巨结肠"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_f9dcf0718eedbd4ab8a46aaad701f8b7",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "ingredient_b34b3279328aa59497d0d15e",
+                "kind": "Ingredient",
+                "name": "阿莫西林"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_01c5dd23c5c471d33e6651d5",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "117badbe786aae2ae7a49a3d625212a82b6a9e7a83fba957c01fe4505f1117e0",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 4,
+              "quote": "阿莫西林",
+              "mention_start": 0,
+              "mention_end": 4,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_2f54c9455d46cfc0b0e0d76cd6c16cd9",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "disease_7aa15d355deb6137501ab76a",
+                "kind": "Disease",
+                "name": "假膜性肠炎"
+              },
+              "relation": "ADVERSE_REACTION_MENTION",
+              "relation_label": "不良反应章节提及",
+              "source_id": "section_01f0a028686c0e4991ca347d",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "0fe99edad1432a364e67974f88e93f37136d725431ecf1bae133fb5d48e7f540",
+              "section_field": "adverse_reactions",
+              "quote_start": 0,
+              "quote_end": 23,
+              "quote": "1．恶心、呕吐、腹泻及假膜性肠炎等胃肠道反应。",
+              "mention_start": 11,
+              "mention_end": 16,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_0ac99bfd61e0c9af5e4baf6c628b1526",
+              "src": {
+                "id": "disease_7aa15d355deb6137501ab76a",
+                "kind": "Disease",
+                "name": "假膜性肠炎"
+              },
+              "dst": {
+                "id": "symptom_a4cf8223e122f0d747c452b0",
+                "kind": "Symptom",
+                "name": "中毒性巨结肠"
+              },
+              "relation": "HAS_SYMPTOM",
+              "relation_label": "资料列出的症状",
+              "source_id": "disease_symptoms_2e267a8c6e53d10c5424d29d",
+              "record_id": "5bb578ba831b973a137e405f",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+              "source_url": "",
+              "source_status": "third_party_unverified",
+              "source_sha256": "61fd04f76f45874dc6031aec9c0634c426279300dbae3308d6a9bc215934ee0a",
+              "section_field": "symptom",
+              "quote_start": 40,
+              "quote_end": 46,
+              "quote": "中毒性巨结肠",
+              "mention_start": 40,
+              "mention_end": 46,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            }
+          ],
+          "hops": 3,
+          "relations": [
+            "ADVERSE_REACTION_MENTION",
+            "HAS_INGREDIENT",
+            "HAS_SYMPTOM"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false
+        },
+        {
+          "id": "path_2522ca10c42c5e32e535c647",
+          "nodes": [
+            {
+              "id": "condition_70c5ff07f0199c239c56d1c6",
+              "kind": "Condition",
+              "name": "青霉素过敏及青霉素皮肤试验阳性患者禁用"
+            },
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "disease_b74936dd84a661c77bebd095",
+              "kind": "Disease",
+              "name": "哮喘"
+            },
+            {
+              "id": "symptom_6c19b3ed39325dc2f61869f1",
+              "kind": "Symptom",
+              "name": "肺过度充气"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_fecd9e06c9b9d7d2caa9815f8427c45e",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "condition_70c5ff07f0199c239c56d1c6",
+                "kind": "Condition",
+                "name": "青霉素过敏及青霉素皮肤试验阳性患者禁用"
+              },
+              "relation": "CONTRAINDICATION_MENTION",
+              "relation_label": "禁忌章节提及（保留原文条件）",
+              "source_id": "section_3246772afc7eb75e61dc4752",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "12256be64fab40439333a767c6b397f8c61e5831e23dc884a6d04cac65bb3982",
+              "section_field": "contraindications",
+              "quote_start": 0,
+              "quote_end": 19,
+              "quote": "青霉素过敏及青霉素皮肤试验阳性患者禁用",
+              "mention_start": 0,
+              "mention_end": 19,
+              "qualifiers": {
+                "caution": false,
+                "conditional": true,
+                "negative_or_absent": false,
+                "prohibition": true,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_30289c992902b7ba08a3468d5c31143d",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "disease_b74936dd84a661c77bebd095",
+                "kind": "Disease",
+                "name": "哮喘"
+              },
+              "relation": "CAUTION_MENTION",
+              "relation_label": "注意事项提及",
+              "source_id": "section_b377bd8653dbce2d9d98c090",
+              "record_id": "sourcerecord_d1df94acdc49b3f61cb13549",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy19205.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "ef55d7b75e28ec5fcc6a4c72c1b313b3b2a270da3ee8318573c0f11ed4e1dadd",
+              "section_field": "warnings",
+              "quote_start": 199,
+              "quote_end": 228,
+              "quote": "5．下列情况应慎用：(1)有哮喘、枯草热等过敏性疾病史者。",
+              "mention_start": 213,
+              "mention_end": 215,
+              "qualifiers": {
+                "caution": true,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_05c71600c5761d10b2361be9a8b48f64",
+              "src": {
+                "id": "disease_b74936dd84a661c77bebd095",
+                "kind": "Disease",
+                "name": "哮喘"
+              },
+              "dst": {
+                "id": "symptom_6c19b3ed39325dc2f61869f1",
+                "kind": "Symptom",
+                "name": "肺过度充气"
+              },
+              "relation": "HAS_SYMPTOM",
+              "relation_label": "资料列出的症状",
+              "source_id": "disease_symptoms_775d866ec0aa125901d51796",
+              "record_id": "5bb578b7831b973a137e3f3e",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json",
+              "source_url": "",
+              "source_status": "third_party_unverified",
+              "source_sha256": "6228f873bdab2625c94965ab84738171c7d54ab29f657af306f5402e6fdf9711",
+              "section_field": "symptom",
+              "quote_start": 11,
+              "quote_end": 16,
+              "quote": "肺过度充气",
+              "mention_start": 11,
+              "mention_end": 16,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            }
+          ],
+          "hops": 3,
+          "relations": [
+            "CAUTION_MENTION",
+            "CONTRAINDICATION_MENTION",
+            "HAS_SYMPTOM"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false
+        }
+      ],
+      "answer": null
+    },
+    {
+      "question": "阿奇霉素分散片属于什么类别",
+      "status": "ok",
+      "seconds": 0.1369,
+      "reason": null,
+      "route": "dataset_category_source_display",
+      "recognized_medicines": [
+        "阿奇霉素分散片"
+      ],
+      "paths": [
+        {
+          "id": "categorypath_0d478a1033245f69f1d2f260",
+          "nodes": [
+            {
+              "id": "drug_1931ab6d4d53c43e74ae38fb",
+              "kind": "Drug",
+              "name": "阿奇霉素分散片"
+            },
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_fb28c1b9f9a2a21283f51fdb",
+              "src": {
+                "id": "drug_1931ab6d4d53c43e74ae38fb",
+                "kind": "Drug",
+                "name": "阿奇霉素分散片"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/2",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/2",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/2",
+              "section_field": "dataset_category",
+              "quote": "\"阿奇霉素分散片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_a2b98027b39ee75d2a8b6783",
+              "src": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类",
+              "section_field": "dataset_category",
+              "quote": "\"青霉素类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 2,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_category_structure_only"
+        }
+      ],
+      "answer": "本地西药分类文件将 **阿奇霉素分散片** 列在 **抗生素药物 → 青霉素类** 下[1]。\n\n这是本地数据集的分类记载，尚未核验为权威药理分类。\n\n\n**来源**\n- [1] 本地分类文件 · drug_categories_western.json，JSON路径：`/categories/抗生素药物/青霉素类/2`"
+    },
+    {
+      "question": "复方丹参片属于什么类别",
+      "status": "ok",
+      "seconds": 0.0721,
+      "reason": null,
+      "route": "dataset_category_source_display",
+      "recognized_medicines": [
+        "复方丹参片"
+      ],
+      "paths": [
+        {
+          "id": "categorypath_802b26d1650b9e3e730530b1",
+          "nodes": [
+            {
+              "id": "catalogdrug_e5d5639b247704527f51c406",
+              "kind": "CatalogDrug",
+              "name": "复方丹参片"
+            },
+            {
+              "id": "datasetcategory_2a942e450b98a936efeca29e",
+              "kind": "DatasetCategory",
+              "name": "心血管科（循环系统疾病）"
+            },
+            {
+              "id": "datasetcategory_4fe066dcdfecea471058fbb9",
+              "kind": "DatasetCategory",
+              "name": "内科用药"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_1ff4b82ab5d2eb8e36166c2f",
+              "src": {
+                "id": "catalogdrug_e5d5639b247704527f51c406",
+                "kind": "CatalogDrug",
+                "name": "复方丹参片"
+              },
+              "dst": {
+                "id": "datasetcategory_2a942e450b98a936efeca29e",
+                "kind": "DatasetCategory",
+                "name": "心血管科（循环系统疾病）"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_chinese.json",
+              "json_pointer": "/categories/内科用药/心血管科（循环系统疾病）/10",
+              "source_sha256": "803115ef485bd625fd213255c38a01e2836088712f8b9a181b8287ca53f0f670",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_chinese.json:/categories/内科用药/心血管科（循环系统疾病）/10",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_chinese.json",
+              "source_url": "",
+              "record_id": "/categories/内科用药/心血管科（循环系统疾病）/10",
+              "section_field": "dataset_category",
+              "quote": "\"复方丹参片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_cb4b32068a73394f8a5cc8fb",
+              "src": {
+                "id": "datasetcategory_2a942e450b98a936efeca29e",
+                "kind": "DatasetCategory",
+                "name": "心血管科（循环系统疾病）"
+              },
+              "dst": {
+                "id": "datasetcategory_4fe066dcdfecea471058fbb9",
+                "kind": "DatasetCategory",
+                "name": "内科用药"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_chinese.json",
+              "json_pointer": "/categories/内科用药/心血管科（循环系统疾病）",
+              "source_sha256": "803115ef485bd625fd213255c38a01e2836088712f8b9a181b8287ca53f0f670",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_chinese.json:/categories/内科用药/心血管科（循环系统疾病）",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_chinese.json",
+              "source_url": "",
+              "record_id": "/categories/内科用药/心血管科（循环系统疾病）",
+              "section_field": "dataset_category",
+              "quote": "\"心血管科（循环系统疾病）\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 2,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_category_structure_only"
+        }
+      ],
+      "answer": "本地中药分类文件将 **复方丹参片** 列在 **内科用药 → 心血管科（循环系统疾病）** 下[1]。\n\n这是本地数据集的分类记载，尚未核验为权威药理分类。\n\n\n**来源**\n- [1] 本地分类文件 · drug_categories_chinese.json，JSON路径：`/categories/内科用药/心血管科（循环系统疾病）/10`"
+    },
+    {
+      "question": "阿莫西林胶囊属于什么类药，能和布洛芬片一起吃吗",
+      "status": "no_connected_evidence_path",
+      "seconds": 0.0239,
+      "reason": null,
+      "route": null,
+      "recognized_medicines": [
+        "阿莫西林胶囊",
+        "布洛芬片"
+      ],
+      "paths": [],
+      "answer": null
+    }
+  ]
+}

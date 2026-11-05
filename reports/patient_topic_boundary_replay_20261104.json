@@ -1,0 +1,207 @@
+{
+  "question": "氯雷他定分散片我已经吃了，鼻塞还是好不了，医生开的布地奈德鼻喷雾剂可以两个一起用吗？还是说必须停掉一个？",
+  "scope": "real_local_graph_and_patient_understanding_only",
+  "live_chroma_or_generation_tested": false,
+  "previous_status": "unresolved_named_entity",
+  "status": "no_connected_evidence_path",
+  "paths": 0,
+  "query_understanding": {
+    "medicines": [
+      {
+        "surface": "氯雷他定分散片",
+        "start": 0,
+        "end": 7,
+        "ingredient_ids": [],
+        "candidate_drug_ids": [
+          "drug_9b4df6c9b2ab8899e03f0f80"
+        ],
+        "candidate_drug_names": [
+          "氯雷他定分散片"
+        ],
+        "candidate_count": 1,
+        "candidates_truncated": false,
+        "basis": "exact_product",
+        "match_bases": [
+          "exact_product"
+        ],
+        "actual_patient_product_known": true,
+        "clinical_equivalence_asserted": false,
+        "route_hint": "",
+        "route_excluded_candidates": [],
+        "role": "taken",
+        "assertion": "user_reported",
+        "role_basis": "postposed_medication_action",
+        "mentions": [
+          {
+            "surface": "氯雷他定分散片",
+            "start": 0,
+            "end": 7,
+            "role": "taken",
+            "assertion": "user_reported",
+            "role_basis": "postposed_medication_action"
+          }
+        ]
+      },
+      {
+        "surface": "布地奈德鼻喷雾剂",
+        "start": 25,
+        "end": 33,
+        "ingredient_ids": [],
+        "candidate_drug_ids": [
+          "drug_4a77b1a2a9b5d2388961ddee"
+        ],
+        "candidate_drug_names": [
+          "布地奈德鼻喷雾剂"
+        ],
+        "candidate_count": 1,
+        "candidates_truncated": false,
+        "basis": "exact_product",
+        "match_bases": [
+          "exact_product"
+        ],
+        "actual_patient_product_known": true,
+        "clinical_equivalence_asserted": false,
+        "route_hint": "",
+        "route_excluded_candidates": [],
+        "role": "proposed",
+        "assertion": "hypothetical",
+        "role_basis": "explicit_patient_wording",
+        "mentions": [
+          {
+            "surface": "布地奈德鼻喷雾剂",
+            "start": 25,
+            "end": 33,
+            "role": "proposed",
+            "assertion": "hypothetical",
+            "role_basis": "explicit_patient_wording"
+          }
+        ]
+      }
+    ],
+    "intent": {
+      "interaction_question": true,
+      "risk_question": false,
+      "adverse_event_question": false,
+      "efficacy_question": true,
+      "drug_causality_asserted": false,
+      "medication_context": true,
+      "fields": [
+        "drug_interactions",
+        "warnings",
+        "indication",
+        "dosage"
+      ],
+      "basis": "patient_language_rules_no_clinical_inference"
+    },
+    "vague_medicines": [],
+    "schema_version": 2,
+    "normalized_question": "氯雷他定分散片我已经吃了,鼻塞还是好不了,医生开的布地奈德鼻喷雾剂可以两个一起用吗?还是说必须停掉一个?",
+    "offset_basis": "normalized_question",
+    "timing": [],
+    "alternative_medication_mentions": [],
+    "patient_context": [
+      {
+        "surface": "鼻塞",
+        "start": 13,
+        "end": 15,
+        "kind": "symptom_word",
+        "retrieval_terms": [
+          "鼻塞"
+        ],
+        "assertion": "user_reported",
+        "diagnosis_asserted": false,
+        "drug_causality_asserted": false
+      }
+    ],
+    "unresolved_medication_mentions": [],
+    "ambiguous_aliases": [],
+    "route_conflicts": [],
+    "needs_product_details": false,
+    "requested_details": [
+      "药盒上的名称或成分",
+      "剂型（普通片、缓释片、胶囊、针剂等）"
+    ],
+    "policy": "query_expansion_only_not_patient_product_identification"
+  },
+  "query_plan": {
+    "version": 1,
+    "original_question": "氯雷他定分散片我已经吃了，鼻塞还是好不了，医生开的布地奈德鼻喷雾剂可以两个一起用吗？还是说必须停掉一个？",
+    "strategy": "local_patient_intents",
+    "status": "planned",
+    "tasks": [
+      {
+        "id": "interaction",
+        "fields": [
+          "drug_interactions",
+          "warnings"
+        ],
+        "query": "氯雷他定分散片；布地奈德鼻喷雾剂；用户描述（不作诊断）：鼻塞。原文检索目标：对应制剂的药物相互作用及合用条件。",
+        "graph_relations": [
+          "INTERACTION_MENTION",
+          "CAUTION_MENTION"
+        ],
+        "requires_connected_medicines": true
+      },
+      {
+        "id": "efficacy",
+        "fields": [
+          "indication",
+          "warnings"
+        ],
+        "query": "氯雷他定分散片；布地奈德鼻喷雾剂；用户描述（不作诊断）：鼻塞。原文检索目标：症状未改善时的注意事项、适应症及资料明确的时间条件。",
+        "graph_relations": [
+          "INDICATION_MENTION",
+          "CAUTION_MENTION"
+        ],
+        "requires_connected_medicines": false
+      },
+      {
+        "id": "administration",
+        "fields": [
+          "dosage",
+          "warnings"
+        ],
+        "query": "氯雷他定分散片；布地奈德鼻喷雾剂。原文检索目标：用法用量、给药途径及使用方法注意事项，不生成个体化调药建议。",
+        "graph_relations": [
+          "CAUTION_MENTION"
+        ],
+        "requires_connected_medicines": false
+      }
+    ],
+    "fields": [
+      "drug_interactions",
+      "warnings",
+      "indication",
+      "dosage"
+    ],
+    "graph_relations": [
+      "INTERACTION_MENTION",
+      "CAUTION_MENTION",
+      "INDICATION_MENTION"
+    ],
+    "medicine_surfaces": [
+      "氯雷他定分散片",
+      "布地奈德鼻喷雾剂"
+    ],
+    "candidate_drug_names": [
+      "氯雷他定分散片",
+      "布地奈德鼻喷雾剂"
+    ],
+    "context": [
+      "鼻塞"
+    ],
+    "planning_model_calls": 0,
+    "limits": {
+      "max_queries": 3,
+      "recall_workers": 2,
+      "recall_per_query": 12,
+      "max_candidates": 36,
+      "rerank_calls": 1,
+      "recall_seconds": 12,
+      "rerank_seconds": 10,
+      "total_seconds": 24
+    },
+    "policy": "retrieval_goals_only_not_clinical_claims",
+    "plan_id": "f86125e828bf132d3495"
+  }
+}

@@ -14,11 +14,17 @@ FIELD_RELATIONS = {
     "warnings": "CAUTION_MENTION", "contraindications": "CONTRAINDICATION_MENTION",
     "adverse_reactions": "ADVERSE_REACTION_MENTION", "drug_interactions": "INTERACTION_MENTION",
 }
+MECHANISM_RELATIONS = [
+    "MECHANISM_MENTION", "METABOLISM_MENTION", "ENZYME_MODULATION_MENTION",
+    "EXPOSURE_CHANGE_MENTION", "TRANSPORT_MENTION", "MECHANISM_OUTCOME_MENTION",
+]
 
 
 def build_retrieval_plan(question: str, understanding: dict) -> dict:
     """Plan evidence lookups; questions and candidate formulations are not facts."""
     medicines = understanding.get("medicines", [])
+    from medical_category_discovery import category_discovery_plan
+    discovery = category_discovery_plan(question, understanding)
     intent = understanding.get("intent", {})
     fields = list(dict.fromkeys(intent.get("fields", []) + [
         field for field, label in FIELD_LABELS.items()
@@ -47,14 +53,30 @@ def build_retrieval_plan(question: str, understanding: dict) -> dict:
                       "requires_connected_medicines": key == "interaction"})
 
     if medicines and not blocked:
-        if intent.get("interaction_question"):
+        if discovery:
+            add("category_candidates", [], "按指定层级查起始药分类，展开同类具体药物并应用排除条件")
+            tasks[-1]["graph_relations"] = ["DATASET_CATEGORY_MEMBERSHIP", "DATASET_CATEGORY_PARENT"]
+            add("candidate_sources", discovery["fields"], "将上一步候选传入具体制剂原文检索，独立核对关系，不将起始药结论推广到同类药")
+            tasks[-1]["depends_on"] = "category_candidates"
+            if discovery["other_category"]:
+                add("partner_category", [], "核对相互作用对象的分类，按指定的对方分类层级与起始药分类比较")
+                tasks[-1]["depends_on"] = "candidate_sources"
+                tasks[-1]["graph_relations"] = ["DATASET_CATEGORY_MEMBERSHIP", "DATASET_CATEGORY_PARENT"]
+        if not discovery and intent.get("classification_question"):
+            add("classification", [], "对应制剂在本地分类文件中的分类路径及来源，不等同权威药理分类")
+            tasks[-1]["graph_relations"] = ["DATASET_CATEGORY_MEMBERSHIP", "DATASET_CATEGORY_PARENT", "CLASS_MEMBERSHIP_ASSERTION"]
+        if not discovery and intent.get("interaction_question"):
             add("interaction", ["drug_interactions", "warnings"], "对应制剂的药物相互作用及合用条件")
-        if intent.get("adverse_event_question"):
+        if not discovery and intent.get("mechanism_question"):
+            add("mechanism", ["drug_interactions", "warnings"],
+                "检索原文明确记载的药理机制、代谢/转运、酶调节、药物暴露变化及相关结果", clinical_context=False)
+            tasks[-1]["graph_relations"] = list(MECHANISM_RELATIONS)
+        if not discovery and intent.get("adverse_event_question"):
             add("adverse_event", ["adverse_reactions", "warnings"], "用药后新不适相关的不良反应、注意事项和就医条件，不预设药物因果")
-        if intent.get("efficacy_question"):
+        if not discovery and intent.get("efficacy_question"):
             add("efficacy", ["indication", "warnings"], "症状未改善时的注意事项、适应症及资料明确的时间条件"
                 + ("；用户用药时间为“" + time_text + "”，不可擅自换算" if time_text else ""))
-        if intent.get("risk_question") and not intent.get("adverse_event_question"):
+        if not discovery and intent.get("risk_question") and not intent.get("adverse_event_question"):
             add("patient_safety", ["contraindications", "warnings"], "患者所述条件相关的禁忌及注意事项")
         remaining = [f for f in fields if not any(f in task["fields"] for task in tasks)]
         # Dosage belongs to a source lookup, not a graph relation or a prescription.
@@ -62,7 +84,7 @@ def build_retrieval_plan(question: str, understanding: dict) -> dict:
             add("administration", ["dosage", "warnings"] if intent.get("efficacy_question") else ["dosage"],
                 "用法用量、给药途径及使用方法注意事项，不生成个体化调药建议", clinical_context=False)
             remaining = [f for f in remaining if f not in ("dosage", "warnings")]
-        if remaining:
+        if remaining and not discovery:
             add("source_fields", remaining, "、".join(FIELD_LABELS[f] for f in remaining if f in FIELD_LABELS))
         if not tasks:
             add("original", fields, "用户原问题对应资料：" + question)
@@ -87,6 +109,9 @@ def build_retrieval_plan(question: str, understanding: dict) -> dict:
                    "rerank_seconds": 10, "total_seconds": 24},
         "policy": "retrieval_goals_only_not_clinical_claims",
     }
+    if discovery:
+        plan["category_discovery"] = discovery
+        plan["strategy"] = "bounded_dependent_category_discovery"
     plan["plan_id"] = hashlib.sha256(json.dumps(plan, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:20]
     return plan
 

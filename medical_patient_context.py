@@ -6,7 +6,7 @@ import re
 
 DURATION = r"(?:好几|几|数|[一二三四五六七八九十两半\d]+)(?:个)?(?:小时|分钟|星期|个月|天|周|月|年)(?:多|左右)?"
 MEDICATION_ACTION = r"(?:吃|服用|服|使用|用|喷|涂|擦|滴|喝|打针|注射)(?:了|着|过|完)?"
-EFFICACY = r"不管用|不见效|没(?:有)?效果|没(?:有)?好转|(?:仍|还|一直).{0,5}(?:堵|疼|痛|痒|难受)|(?:症状|鼻塞).{0,8}(?:未|没)(?:改善|缓解)"
+EFFICACY = r"不管用|不见效|没(?:有)?效果|没(?:有)?好转|(?:仍|还|一直).{0,5}(?:堵|疼|痛|痒|难受|好不了|没好)|(?:症状|鼻塞).{0,8}(?:未|没)(?:改善|缓解)"
 
 
 def local_prefix(text: str, start: int) -> str:
@@ -16,6 +16,19 @@ def local_prefix(text: str, start: int) -> str:
 def mention_role(text: str, start: int, end: int) -> dict:
     before = local_prefix(text, start)
     after = text[end:end + 20]
+    # A postposed subject belongs to this medicine only, stopping at punctuation.
+    post = re.split(r"[，,。；;！？!?\n]", text[end:])[0][:24]
+    post_subject = re.match(r"(?:我|我们|他|她|患者|病人)", post)
+    if post_subject:
+        action = post[post_subject.end():]
+        if re.match(r"(?:已经|之前|现在|也|还|已)?(?:没有|从未|没)(?:吃|服用|服|使用|用|喷|涂)", action):
+            return {"role": "not_taken", "assertion": "negated", "role_basis": "postposed_medication_action"}
+        if re.match(r"(?:已经|之前|现在|也|已)?(?:停用|停服|停了|不再吃|不再用)", action):
+            return {"role": "stopped", "assertion": "user_reported", "role_basis": "postposed_medication_action"}
+        if re.match(r"(?:正在|一直|还在)(?:吃|服用|服|使用|用|喷|涂)", action):
+            return {"role": "current", "assertion": "user_reported", "role_basis": "postposed_medication_action"}
+        if re.match(r"(?:已经|刚刚|之前|现在|早就|也|还|已|刚){0,3}" + MEDICATION_ACTION, action):
+            return {"role": "taken", "assertion": "user_reported", "role_basis": "postposed_medication_action"}
     role, assertion = "mentioned", "unspecified"
     if re.search(r"(?:或(?:者)?|还是)$", before):
         role, assertion = "alternative", "alternative_not_confirmed"

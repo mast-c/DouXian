@@ -1,0 +1,997 @@
+{
+  "generated_at": "2026-11-04T08:30:01.287564+00:00",
+  "scope": "real_source_backed_graph_and_offline_review_omission_replay",
+  "live_cloud_review_or_generation_tested": false,
+  "live_chroma_tested": false,
+  "replays": [
+    {
+      "question": "阿司匹林肠溶片与布洛芬片的成分和相互作用",
+      "real_graph_status": "ok",
+      "real_graph_seconds": 0.862,
+      "path_count": 4,
+      "all_paths_verified": true,
+      "required_source_aspects": [
+        "阿司匹林肠溶片与布洛芬片的药物相互作用原文如何描述？",
+        "阿司匹林肠溶片的成分原文如何描述？",
+        "布洛芬片的成分原文如何描述？"
+      ],
+      "source_coverage": [
+        {
+          "target": "阿司匹林肠溶片与布洛芬片的药物相互作用",
+          "evidence_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "scope": "source_candidates_only_requires_semantic_review"
+        },
+        {
+          "target": "阿司匹林肠溶片的注意事项",
+          "evidence_ids": [],
+          "scope": "source_candidates_only_requires_semantic_review"
+        },
+        {
+          "target": "布洛芬片的注意事项",
+          "evidence_ids": [],
+          "scope": "source_candidates_only_requires_semantic_review"
+        },
+        {
+          "target": "阿司匹林肠溶片的成分",
+          "evidence_ids": [
+            1,
+            2
+          ],
+          "scope": "source_candidates_only_requires_semantic_review"
+        },
+        {
+          "target": "布洛芬片的成分",
+          "evidence_ids": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "scope": "source_candidates_only_requires_semantic_review"
+        }
+      ],
+      "clinical_question_remains_dynamic": false,
+      "offline_missing_composition_review": {
+        "decision": "partial",
+        "aspects": [
+          {
+            "question": "阿司匹林肠溶片与布洛芬片的药物相互作用原文如何描述？",
+            "status": "insufficient",
+            "evidence_ids": [],
+            "quotes": [],
+            "reason": "离线测试故意模拟审核漏认资料，不是真实模型输出"
+          },
+          {
+            "question": "阿司匹林肠溶片的成分原文如何描述？",
+            "status": "supported",
+            "evidence_ids": [
+              1
+            ],
+            "quotes": [
+              {
+                "id": 1,
+                "quote": "阿司匹林。"
+              }
+            ],
+            "reason": "同一制剂来源的成分字段已逐边核对，可直接描述原文，不涉及临床推断",
+            "validation_method": "verified_composition_field_lookup"
+          },
+          {
+            "question": "布洛芬片的成分原文如何描述？",
+            "status": "supported",
+            "evidence_ids": [
+              1
+            ],
+            "quotes": [
+              {
+                "id": 1,
+                "quote": "本品主要成分布洛芬"
+              }
+            ],
+            "reason": "同一制剂来源的成分字段已逐边核对，可直接描述原文，不涉及临床推断",
+            "validation_method": "verified_composition_field_lookup"
+          }
+        ],
+        "evidence_ids": [
+          1
+        ],
+        "answer_questions": [
+          "阿司匹林肠溶片的成分原文如何描述？",
+          "布洛芬片的成分原文如何描述？"
+        ],
+        "refused_questions": [
+          "阿司匹林肠溶片与布洛芬片的药物相互作用原文如何描述？"
+        ],
+        "message": ""
+      },
+      "evidence_flow": {
+        "version": 1,
+        "scope": "source_coverage_not_clinical_sufficiency",
+        "targets": [
+          {
+            "id": "target_1",
+            "field": "drug_interactions",
+            "label": "阿司匹林肠溶片与布洛芬片的药物相互作用",
+            "medicines": [
+              {
+                "surface": "阿司匹林肠溶片",
+                "names": [
+                  "阿司匹林肠溶片"
+                ],
+                "product_known": true
+              },
+              {
+                "surface": "布洛芬片",
+                "names": [
+                  "布洛芬片"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": true
+          },
+          {
+            "id": "target_2",
+            "field": "warnings",
+            "label": "阿司匹林肠溶片的注意事项",
+            "medicines": [
+              {
+                "surface": "阿司匹林肠溶片",
+                "names": [
+                  "阿司匹林肠溶片"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          },
+          {
+            "id": "target_3",
+            "field": "warnings",
+            "label": "布洛芬片的注意事项",
+            "medicines": [
+              {
+                "surface": "布洛芬片",
+                "names": [
+                  "布洛芬片"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          },
+          {
+            "id": "target_4",
+            "field": "composition",
+            "label": "阿司匹林肠溶片的成分",
+            "medicines": [
+              {
+                "surface": "阿司匹林肠溶片",
+                "names": [
+                  "阿司匹林肠溶片"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          },
+          {
+            "id": "target_5",
+            "field": "composition",
+            "label": "布洛芬片的成分",
+            "medicines": [
+              {
+                "surface": "布洛芬片",
+                "names": [
+                  "布洛芬片"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          }
+        ],
+        "stages": [
+          {
+            "name": "retrieved_sources",
+            "evidence": [
+              {
+                "key": "c0b0889c1a7feffa2df99d48",
+                "id": 1,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa"
+                    ]
+                  },
+                  {
+                    "target_id": "target_4",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_1cf6ba78380a073e5c37581819f16484"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "ebc028fb8015c2c0a707dc2c",
+                "id": 2,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_3c8f1576a995192f4203b65d88d880ca"
+                    ]
+                  },
+                  {
+                    "target_id": "target_4",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_1cf6ba78380a073e5c37581819f16484"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "bbc4d3618afe05ed8e5c8ee6",
+                "id": 3,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "1d7bb7a1b2d85f3c29df5eab",
+                "id": 4,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_3c8f1576a995192f4203b65d88d880ca"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uncovered_targets": [
+              "target_2",
+              "target_3"
+            ]
+          },
+          {
+            "name": "merged_for_review",
+            "evidence": [
+              {
+                "key": "c0b0889c1a7feffa2df99d48",
+                "id": 1,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa"
+                    ]
+                  },
+                  {
+                    "target_id": "target_4",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_1cf6ba78380a073e5c37581819f16484"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "ebc028fb8015c2c0a707dc2c",
+                "id": 2,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_3c8f1576a995192f4203b65d88d880ca"
+                    ]
+                  },
+                  {
+                    "target_id": "target_4",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_1cf6ba78380a073e5c37581819f16484"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "bbc4d3618afe05ed8e5c8ee6",
+                "id": 3,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "1d7bb7a1b2d85f3c29df5eab",
+                "id": 4,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_3c8f1576a995192f4203b65d88d880ca"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uncovered_targets": [
+              "target_2",
+              "target_3"
+            ]
+          },
+          {
+            "name": "generation_input",
+            "evidence": [
+              {
+                "key": "c0b0889c1a7feffa2df99d48",
+                "id": 1,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa"
+                    ]
+                  },
+                  {
+                    "target_id": "target_4",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_1cf6ba78380a073e5c37581819f16484"
+                    ]
+                  },
+                  {
+                    "target_id": "target_5",
+                    "source_verified": true,
+                    "scope": "composition_source",
+                    "edge_ids": [
+                      "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uncovered_targets": [
+              "target_2",
+              "target_3"
+            ]
+          }
+        ],
+        "transitions": [
+          {
+            "from": "retrieved_sources",
+            "to": "merged_for_review",
+            "excluded": []
+          },
+          {
+            "from": "merged_for_review",
+            "to": "generation_input",
+            "excluded": [
+              {
+                "key": "ebc028fb8015c2c0a707dc2c",
+                "previous_id": 2,
+                "target_ids": [
+                  "target_1",
+                  "target_4",
+                  "target_5"
+                ],
+                "reason": "not approved by simulated review"
+              },
+              {
+                "key": "bbc4d3618afe05ed8e5c8ee6",
+                "previous_id": 3,
+                "target_ids": [
+                  "target_1",
+                  "target_5"
+                ],
+                "reason": "not approved by simulated review"
+              },
+              {
+                "key": "1d7bb7a1b2d85f3c29df5eab",
+                "previous_id": 4,
+                "target_ids": [
+                  "target_1",
+                  "target_5"
+                ],
+                "reason": "not approved by simulated review"
+              }
+            ]
+          }
+        ],
+        "review": [
+          {
+            "target_id": "target_1",
+            "candidate_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "generation_evidence_ids": [
+              1
+            ],
+            "status": "reviewed",
+            "note": "证据进入生成不代表该证据涉及的所有目标均获审核支持"
+          },
+          {
+            "target_id": "target_2",
+            "candidate_ids": [],
+            "generation_evidence_ids": [],
+            "status": "reviewed",
+            "note": "证据进入生成不代表该证据涉及的所有目标均获审核支持"
+          },
+          {
+            "target_id": "target_3",
+            "candidate_ids": [],
+            "generation_evidence_ids": [],
+            "status": "reviewed",
+            "note": "证据进入生成不代表该证据涉及的所有目标均获审核支持"
+          },
+          {
+            "target_id": "target_4",
+            "candidate_ids": [
+              1,
+              2
+            ],
+            "generation_evidence_ids": [
+              1
+            ],
+            "status": "reviewed",
+            "note": "证据进入生成不代表该证据涉及的所有目标均获审核支持"
+          },
+          {
+            "target_id": "target_5",
+            "candidate_ids": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "generation_evidence_ids": [
+              1
+            ],
+            "status": "reviewed",
+            "note": "证据进入生成不代表该证据涉及的所有目标均获审核支持"
+          }
+        ],
+        "answer": [],
+        "aspects": [
+          {
+            "question": "阿司匹林肠溶片与布洛芬片的药物相互作用原文如何描述？",
+            "status": "insufficient",
+            "evidence_ids": [],
+            "reason": "离线测试故意模拟审核漏认资料，不是真实模型输出",
+            "validation_method": null
+          },
+          {
+            "question": "阿司匹林肠溶片的成分原文如何描述？",
+            "status": "supported",
+            "evidence_ids": [
+              1
+            ],
+            "reason": "同一制剂来源的成分字段已逐边核对，可直接描述原文，不涉及临床推断",
+            "validation_method": "verified_composition_field_lookup"
+          },
+          {
+            "question": "布洛芬片的成分原文如何描述？",
+            "status": "supported",
+            "evidence_ids": [
+              1
+            ],
+            "reason": "同一制剂来源的成分字段已逐边核对，可直接描述原文，不涉及临床推断",
+            "validation_method": "verified_composition_field_lookup"
+          }
+        ]
+      }
+    },
+    {
+      "question": "我喷了布地奈德鼻喷雾剂好几天了，鼻子还是堵，而且今天鼻子里好像有点疼，这是药不管用还是我有其他问题",
+      "real_graph_status": "ok",
+      "real_graph_seconds": 0.6657,
+      "path_count": 6,
+      "all_paths_verified": true,
+      "required_source_aspects": [],
+      "source_coverage": [
+        {
+          "target": "布地奈德鼻喷雾剂的不良反应",
+          "evidence_ids": [
+            1,
+            3,
+            4,
+            5,
+            6
+          ],
+          "scope": "source_candidates_only_requires_semantic_review"
+        },
+        {
+          "target": "布地奈德鼻喷雾剂的注意事项",
+          "evidence_ids": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "scope": "source_candidates_only_requires_semantic_review"
+        },
+        {
+          "target": "布地奈德鼻喷雾剂的适应症",
+          "evidence_ids": [
+            2
+          ],
+          "scope": "source_candidates_only_requires_semantic_review"
+        },
+        {
+          "target": "布地奈德鼻喷雾剂的用法用量",
+          "evidence_ids": [],
+          "scope": "source_candidates_only_requires_semantic_review"
+        }
+      ],
+      "clinical_question_remains_dynamic": true,
+      "evidence_flow": {
+        "version": 1,
+        "scope": "source_coverage_not_clinical_sufficiency",
+        "targets": [
+          {
+            "id": "target_1",
+            "field": "adverse_reactions",
+            "label": "布地奈德鼻喷雾剂的不良反应",
+            "medicines": [
+              {
+                "surface": "布地奈德鼻喷雾剂",
+                "names": [
+                  "布地奈德鼻喷雾剂"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          },
+          {
+            "id": "target_2",
+            "field": "warnings",
+            "label": "布地奈德鼻喷雾剂的注意事项",
+            "medicines": [
+              {
+                "surface": "布地奈德鼻喷雾剂",
+                "names": [
+                  "布地奈德鼻喷雾剂"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          },
+          {
+            "id": "target_3",
+            "field": "indication",
+            "label": "布地奈德鼻喷雾剂的适应症",
+            "medicines": [
+              {
+                "surface": "布地奈德鼻喷雾剂",
+                "names": [
+                  "布地奈德鼻喷雾剂"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          },
+          {
+            "id": "target_4",
+            "field": "dosage",
+            "label": "布地奈德鼻喷雾剂的用法用量",
+            "medicines": [
+              {
+                "surface": "布地奈德鼻喷雾剂",
+                "names": [
+                  "布地奈德鼻喷雾剂"
+                ],
+                "product_known": true
+              }
+            ],
+            "pair": false
+          }
+        ],
+        "stages": [
+          {
+            "name": "retrieved_sources",
+            "evidence": [
+              {
+                "key": "9dd84c9c1bbf4ef4578e4948",
+                "id": 1,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_0e572d0a66213f39f60834994f98d31b"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_018358194f339f4e8945e2860721dec8"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "528a987bd3f4a90f8d4dde6e",
+                "id": 2,
+                "bindings": [
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_0a60698b55e168a830b37841040aab12"
+                    ]
+                  },
+                  {
+                    "target_id": "target_3",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_f61d093c99d097749360d0b60ff62094"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "8badc1dadd5f53f3af83b243",
+                "id": 3,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_28a68f38699230bff849da398af2b9b1"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_1009438eaecc741829891fec2a06f716"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "4136660f7d323dd9f9f507e0",
+                "id": 4,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_42fc51587c6dc852610d695422ad9c8f"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_332d47fe9e7de8395187b016bfda27e1"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "15d743e50a15646621d5325f",
+                "id": 5,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_46db099a17343c73c3e83d47dcc65e0f"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_38641bc9a67c30e962235900fa25bc31"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "f54b4e1b26771d6967707f9d",
+                "id": 6,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_5abd3a81b513cb11db81aea03d7dc9d4"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_502b1ab5d66598f733cbb4fe18099a40"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uncovered_targets": [
+              "target_4"
+            ]
+          },
+          {
+            "name": "merged_for_review",
+            "evidence": [
+              {
+                "key": "9dd84c9c1bbf4ef4578e4948",
+                "id": 1,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_0e572d0a66213f39f60834994f98d31b"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_018358194f339f4e8945e2860721dec8"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "528a987bd3f4a90f8d4dde6e",
+                "id": 2,
+                "bindings": [
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_0a60698b55e168a830b37841040aab12"
+                    ]
+                  },
+                  {
+                    "target_id": "target_3",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_f61d093c99d097749360d0b60ff62094"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "8badc1dadd5f53f3af83b243",
+                "id": 3,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_28a68f38699230bff849da398af2b9b1"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_1009438eaecc741829891fec2a06f716"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "4136660f7d323dd9f9f507e0",
+                "id": 4,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_42fc51587c6dc852610d695422ad9c8f"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_332d47fe9e7de8395187b016bfda27e1"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "15d743e50a15646621d5325f",
+                "id": 5,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_46db099a17343c73c3e83d47dcc65e0f"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_38641bc9a67c30e962235900fa25bc31"
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "f54b4e1b26771d6967707f9d",
+                "id": 6,
+                "bindings": [
+                  {
+                    "target_id": "target_1",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_5abd3a81b513cb11db81aea03d7dc9d4"
+                    ]
+                  },
+                  {
+                    "target_id": "target_2",
+                    "source_verified": true,
+                    "scope": "source_mention_not_clinical_conclusion",
+                    "edge_ids": [
+                      "edge_502b1ab5d66598f733cbb4fe18099a40"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uncovered_targets": [
+              "target_4"
+            ]
+          }
+        ],
+        "transitions": [
+          {
+            "from": "retrieved_sources",
+            "to": "merged_for_review",
+            "excluded": []
+          }
+        ],
+        "review": [],
+        "answer": []
+      }
+    }
+  ]
+}

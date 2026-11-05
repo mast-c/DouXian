@@ -261,7 +261,7 @@ def _is_complete_short_section_quote(item: dict, quote: str) -> bool:
     不把药品名称、栏目标签、系统免责声明拼接成伪造的长引文；
     仅放宽字数校验，不放宽医学语义的真实性判断。
     """
-    if item.get("evidence_type") == "evidence_backed_semantic_graph_path":
+    if item.get("evidence_type") in ("evidence_backed_semantic_graph_path", "category_discovery_source_path"):
         path = item.get("graph_path") or {}
         return bool(path.get("verified_against_original")) and any(
             edge.get("relation") in ("HAS_SYMPTOM", "HAS_INGREDIENT")
@@ -371,7 +371,7 @@ def validate_judge_output(
 
             quote = quote.strip()
             metadata = evidence_meta_by_id.get(evidence_id, {})
-            if metadata.get("evidence_type") == "evidence_backed_semantic_graph_path":
+            if metadata.get("evidence_type") in ("evidence_backed_semantic_graph_path", "category_discovery_source_path"):
                 # Generated path labels are never a substitute for source quotations.
                 path = metadata.get("graph_path") or {}
                 if not path.get("verified_against_original") or not any(
@@ -520,6 +520,7 @@ def assess_evidence(
     *,
     ask_fn: Callable[[str, str], Any] | None = None,
     required_aspects: list[str] | None = None,
+    source_coverage: list[dict] | None = None,
 ) -> dict:
     """进行一次审核模型调用，返回 answer / partial / refuse / error。
 
@@ -593,6 +594,7 @@ def assess_evidence(
 
     payload = json.dumps({
         "required_aspects": fixed_aspects,
+        "source_coverage_index_not_sufficiency": source_coverage or [],
         "original_question": question,
         "retrieval_queries_for_context_only": (
             retrieval_queries if isinstance(retrieval_queries, list) else []

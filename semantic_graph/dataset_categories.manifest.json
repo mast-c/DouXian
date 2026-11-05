@@ -1,0 +1,24 @@
+{
+  "version": "dataset-category-1",
+  "signature": "d6b2cfaf2c1b69a6e0dffc6d09f18464fb113f402d232769b2b123319d114f7c",
+  "files": {
+    "drug_categories_western.json": {
+      "size": 173655,
+      "sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347"
+    },
+    "drug_categories_chinese.json": {
+      "size": 128639,
+      "sha256": "803115ef485bd625fd213255c38a01e2836088712f8b9a181b8287ca53f0f670"
+    }
+  },
+  "matched_memberships": 7287,
+  "unmatched_memberships": 1762,
+  "nodes": 8957,
+  "edges": 9316,
+  "clinical_validation": false,
+  "pharmacological_class_equivalence": false,
+  "index": {
+    "size": 5652480,
+    "sha256": "8922a013661040a18b5cc312e9e8cb851d027f2c16b2c91db73f1d4f60e82d7e"
+  }
+}

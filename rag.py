@@ -74,6 +74,12 @@ from medical_semantic_retrieval import (
 from medical_patient_context import patient_context_summary
 from medical_query_plan import section_routing_question
 from medical_query_execution import execute_retrieval_plan
+from medical_evidence_coverage import (
+    build_answer_targets, required_source_aspects, start_evidence_flow,
+    record_evidence_stage, record_review, record_answer_usage, coverage_hint,
+)
+from medical_targeted_retry import retry_targeted_evidence
+from medical_category_graph import category_source_answer
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
@@ -1279,10 +1285,21 @@ class RagService:
                     trace["query_plan"] = _retrieval_plan
                 if _semantic_report.get("execution"):
                     trace.setdefault("query_execution", {})["graph"] = _semantic_report["execution"]
+                _answer_targets = build_answer_targets(question, _patient_query, _retrieval_plan)
+                if _semantic_report.get("category_discovery"):
+                    discovered = set(_semantic_report["category_discovery"].get("candidate_names", []))
+                    for _target in _answer_targets:
+                        if _target.get("id") == "target_discovered_sources":
+                            _target["candidate_names"] = sorted(discovered)
+                _evidence_flow = start_evidence_flow(_answer_targets)
+                trace["evidence_flow"] = _evidence_flow
                 _candidate_scope = list(dict.fromkeys(
                     name for group in _patient_query.get("medicines", [])
                     for name in group["candidate_drug_names"]
                 ))
+                if _semantic_report.get("category_discovery"):
+                    _category_candidates = _semantic_report["category_discovery"].get("candidate_names", [])
+                    _candidate_scope = list(dict.fromkeys([*_candidate_scope, *_category_candidates]))
                 if _semantic_report.get("status") in ("needs_medication_clarification", "unresolved_named_entity"):
                     reply = graph_insufficiency_message(_semantic_report)
                     trace["query_clarification"] = {"required": True, "reason": _semantic_report.get("reason"), "message": reply}
@@ -1290,12 +1307,38 @@ class RagService:
                     yield reply
                     finished = True
                     return
+                if _semantic_report.get("answer_route") == "dataset_category_source_display":
+                    # Structural dataset facts are displayed literally, with no
+                    # clinical inference or unnecessary vector/model requests.
+                    trace["knowledge_evidence"] = [
+                        {**item, "preview": item["content"][:240]} for item in _semantic_excerpts
+                    ]
+                    trace["knowledge_sources"] = list(dict.fromkeys(i["source"] for i in _semantic_excerpts))
+                    trace["medical_answer_mode"] = _semantic_report["answer_route"]
+                    trace["evidence_coverage"] = {"decision": "structured_source_display",
+                        "scope": "verified_source_display_not_clinical_review"}
+                    record_evidence_stage(_evidence_flow, "category_source_display", _semantic_excerpts)
+                    reply = category_source_answer(_semantic_excerpts)
+                    mark_graph_usage(trace, _semantic_excerpts, [i["id"] for i in _semantic_excerpts], reply)
+                    answer_parts.append(reply)
+                    yield reply
+                    finished = True
+                    return
+                if _semantic_report.get("answer_route") == "category_discovery_source_display":
+                    # Keep the dependent category paths as an additional local
+                    # retrieval lane, while still running the established
+                    # Neo4j, Chroma, parent-Section verification and review flow.
+                    trace["medical_answer_mode"] = "category_discovery_with_standard_retrieval"
+                    record_evidence_stage(_evidence_flow, "category_candidate_paths", _semantic_excerpts)
                 _retrieval_question = question
                 if _candidate_scope:
                     # Balanced query candidates, never a patient product claim.
                     groups = _patient_query["medicines"]
-                    names_for_search = [g["candidate_drug_names"][i] for i in range(2)
-                                        for g in groups if len(g["candidate_drug_names"]) > i]
+                    names_for_search = list(dict.fromkeys(
+                        [g["candidate_drug_names"][i] for i in range(2)
+                         for g in groups if len(g["candidate_drug_names"]) > i]
+                        + (_semantic_report.get("category_discovery", {}).get("candidate_names", [])[:24])
+                    ))
                     _retrieval_question += "\n检索候选制剂（实际服用产品尚需核对）：" + "、".join(names_for_search)
                     if _patient_query.get("intent", {}).get("interaction_question"):
                         _retrieval_question += "；核对药物相互作用原文。"
@@ -1550,7 +1593,12 @@ class RagService:
                     entity_report["kept"] = len(merged_excerpts)
                 trace["graph_drug_scope"] = graph_drug_scope
                 post_entity_excerpts = list(merged_excerpts)
+                record_evidence_stage(_evidence_flow, "retrieved_sources", [*pre_entity_excerpts, *_semantic_excerpts])
+                record_evidence_stage(_evidence_flow, "entity_filtered", [*post_entity_excerpts, *_semantic_excerpts],
+                                      reason="药品实体或疾病候选范围不匹配")
                 merged_excerpts = collapse_duplicate_parent_sections(merged_excerpts)
+                record_evidence_stage(_evidence_flow, "source_deduplicated", [*merged_excerpts, *_semantic_excerpts],
+                                      reason="同一来源父章节已由原文核验片段替代")
                 if _disease_excerpts:
                     merged_excerpts = merge_into_kb(
                         merged_excerpts,
@@ -1571,8 +1619,10 @@ class RagService:
                 # Its own anchor/record constraints preserve cross-drug proof paths;
                 # the single-drug chunk filter must not split those paths afterwards.
                 merged_excerpts = merge_graph_evidence(
-                    merged_excerpts, _semantic_excerpts, evidence_cap,
+                    merged_excerpts, _semantic_excerpts, evidence_cap, targets=_answer_targets,
                 )
+                record_evidence_stage(_evidence_flow, "merged_for_review", merged_excerpts,
+                                      reason="合并名额限制；按回答目标覆盖优先保留")
                 tool_reports["search_semantic_graph"] = {
                     "status": _semantic_report["status"], "hits": len(_semantic_excerpts),
                     "multi_relation_paths": _semantic_report.get("multi_relation_paths", 0),
@@ -1863,6 +1913,7 @@ class RagService:
                                 "section_id": original_item.get("section_id", ""),
                                 "record_id": original_item.get("record_id", ""),
                                 "section_field": original_item.get("section_field", ""),
+                                "chunk_id": original_item.get("chunk_id", ""),
                                 "parent_verified": original_item.get("parent_verified", False),
                             })
 
@@ -1892,6 +1943,8 @@ class RagService:
                                 question=question,
                                 excerpts=guard_excerpts,
                                 retrieval_queries=kb_data.get("subqueries"),
+                                required_aspects=(required_source_aspects(question, _patient_query, _answer_targets) or None),
+                                source_coverage=coverage_hint(_answer_targets, guard_excerpts),
                             )
                             print(
                                 "[RAG耗时] 首轮 Evidence Guard："
@@ -1906,6 +1959,8 @@ class RagService:
                                     f"message={coverage.get('message', '')}"
                                 )
                         # BEGIN SELF_RAG_RETRY_V1_5
+                        record_review(_evidence_flow, guard_excerpts, coverage)
+                        _evidence_flow["initial_review"] = _evidence_flow.get("aspects", [])
                         # 只在第一轮审核为 partial/refuse 时，尝试补检一次。
                         if (fast_kb_mode or self.knowledge_service is None
                                 or _disease_only):
@@ -1922,35 +1977,47 @@ class RagService:
                         else:
                             _retry_started = time.perf_counter()
                             try:
-                                retry_result = retry_insufficient_evidence(
-                                    model=self.chat_model,
-                                    question=question,
-                                    excerpts=guard_excerpts,
-                                    coverage=coverage,
-                                    original_queries=kb_data.get("subqueries"),
-                                    search_fn=lambda subquery: (
-                                        filter_documents_for_drugs(
-                                            prepare_medical_documents(
-                                                self.knowledge_service.search_with_rerank(
-                                                    query=subquery,
-                                                    recall_k=10,
-                                                    top_n=8,
-                                                ),
-                                                question,
-                                                fetch_parent=self._get_medical_parent_section,
-                                                limit=2,
-                                            )[0],
-                                            _candidate_scope or entity_report["explicit_drugs"],
-                                        )
-                                    ),
-                                    judge_fn=lambda **params: reassess_fixed_aspects(
-                                        original_coverage=coverage,
-                                        **params,
-                                    ),
-                                    max_queries=2,
-                                    max_new_chunks=3,
-                                    max_total_chunks=max(8, len(guard_excerpts) + 3),
-                                )
+                                if _answer_targets:
+                                    retry_result = retry_targeted_evidence(
+                                        model=self.chat_model, question=question, targets=_answer_targets,
+                                        excerpts=guard_excerpts, coverage=coverage,
+                                        original_queries=kb_data.get("subqueries"),
+                                        search=self.knowledge_service.search_hybrid,
+                                        verify=lambda docs, routing: prepare_medical_documents(
+                                            docs, routing, fetch_parent=self._get_medical_parent_section, limit=3,
+                                        ),
+                                        judge=lambda **params: reassess_fixed_aspects(original_coverage=coverage, **params),
+                                    )
+                                else:
+                                    retry_result = retry_insufficient_evidence(
+                                        model=self.chat_model,
+                                        question=question,
+                                        excerpts=guard_excerpts,
+                                        coverage=coverage,
+                                        original_queries=kb_data.get("subqueries"),
+                                        search_fn=lambda subquery: (
+                                            filter_documents_for_drugs(
+                                                prepare_medical_documents(
+                                                    self.knowledge_service.search_with_rerank(
+                                                        query=subquery,
+                                                        recall_k=10,
+                                                        top_n=8,
+                                                    ),
+                                                    question,
+                                                    fetch_parent=self._get_medical_parent_section,
+                                                    limit=2,
+                                                )[0],
+                                                _candidate_scope or entity_report["explicit_drugs"],
+                                            )
+                                        ),
+                                        judge_fn=lambda **params: reassess_fixed_aspects(
+                                            original_coverage=coverage,
+                                            **params,
+                                        ),
+                                        max_queries=1,
+                                        max_new_chunks=3,
+                                        max_total_chunks=max(8, len(guard_excerpts) + 3),
+                                    )
                             except Exception as retry_exc:
                                 # Self-RAG 出错：保留 V1 的第一次审核结果，绝不绕过它。
                                 print(
@@ -1977,7 +2044,16 @@ class RagService:
                             "queries": retry_result["retry_queries"],
                             "new_chunks": retry_result["new_chunks"],
                             "final_decision": coverage["decision"],
+                            "execution": retry_result.get("execution", {}),
                         }
+                        if retry_result.get("execution"):
+                            trace.setdefault("query_execution", {})["source_gap"] = retry_result["execution"]
+                        record_evidence_stage(_evidence_flow, "after_gap_retry", guard_excerpts,
+                                              reason="补检未改善审核；保留原有证据和审核结果")
+                        record_review(_evidence_flow, guard_excerpts, coverage)
+                        record_evidence_stage(_evidence_flow, "generation_input", [
+                            item for item in guard_excerpts if item["id"] in coverage.get("evidence_ids", [])
+                        ], reason="审核未采用；详见 evidence_flow.aspects 中的状态与引文校验原因")
                         print(
                             "[Self-RAG V1.5]",
                             retry_result["status"],
@@ -2041,6 +2117,7 @@ class RagService:
                                 "section_field": str(item.get("section_field") or ""),
                                 "candidate_id": str(item.get("candidate_id") or ""),
                                 "section_id": str(item.get("section_id") or ""),
+                                "chunk_id": str(item.get("chunk_id") or ""),
                                 "parent_verified": bool(item.get("parent_verified") or False),
                                 "disease_link_verified": bool(
                                     item.get("disease_link_verified") or False
@@ -2155,6 +2232,12 @@ class RagService:
                                 + ", ".join(f"[{i}]" for i in coverage["evidence_ids"])
                                 + "。不要回答无证据的方面，也不要靠常识补充事实。"
                                 + "如果用户前提被证据反驳，请明确纠正。"
+                                + "\n逐项覆盖以下已通过的方面，保留药名与剂型；不能因其他方面不足而省略这些资料事实。"
+                                + "每项引句只支持审核指定的方面，不可扩展成新的诊断或安全结论：\n"
+                                + json.dumps([
+                                    {"question": a["question"], "evidence_ids": a["evidence_ids"], "quotes": a.get("quotes", [])}
+                                    for a in coverage["aspects"] if a["status"] in ("supported", "refuted")
+                                ], ensure_ascii=False)
                             )
                         if graph_candidate_only:
                             coverage_prompt += (
@@ -2384,6 +2467,7 @@ class RagService:
                             trace, guard_excerpts, coverage.get("evidence_ids", []),
                             "".join(answer_parts),
                         )
+                        record_answer_usage(_evidence_flow, "".join(answer_parts))
                         footer = render_kb_references(
                             "".join(answer_parts),
                             reference_map,

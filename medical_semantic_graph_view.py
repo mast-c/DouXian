@@ -42,19 +42,44 @@ CSS = """
 .kb-sg-quote{border-left:2px solid #c2d5e5;padding:7px 10px;margin:7px 0;color:#4c6076;background:#f4f8fc;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
 .kb-sg-source{font-size:10.5px;color:#8795a6;overflow-wrap:anywhere}
 .kb-sg-source a{color:#547a9c;text-decoration:none}
+.kb-sg-source-list{padding:4px 0 12px;border-top:1px solid #edf1f6}
+.kb-sg-source-item{padding:9px 0;color:#60758d;font-size:11.5px}
+.kb-sg-source-name{font-weight:600;color:#4d6884;margin-right:10px}
+.kb-sg-technical{margin-top:5px;color:#8795a6;font-size:10.5px;overflow-wrap:anywhere}
+.kb-sg-technical summary{cursor:pointer;color:#8795a6}
+.kb-sg-technical code{white-space:pre-wrap;overflow-wrap:anywhere;font:10.5px/1.7 ui-monospace,monospace}
 .kb-sg-warning{font-size:11px;color:#9b7646;margin-top:8px}
 @media(max-width:780px){.kb-sg-node{width:120px;flex-basis:120px}.kb-sg-edge{width:96px;flex-basis:96px}.kb-sg-chain{justify-content:flex-start}}
 """
 
-KINDS = {"Drug": "药品", "Ingredient": "成分", "DrugClass": "药物类别", "Disease": "疾病", "Symptom": "症状", "Population": "人群", "Condition": "原文条件"}
+KINDS = {"Drug": "药品", "Ingredient": "成分", "DrugClass": "药物类别", "DatasetCategory": "数据集分类", "CatalogDrug": "分类目录药名", "Disease": "疾病", "Symptom": "症状", "Population": "人群", "Condition": "原文条件"}
 SHORT_RELATIONS = {
+    "DATASET_CATEGORY_MEMBERSHIP": "数据集分类归属",
+    "DATASET_CATEGORY_PARENT": "数据集上级分类",
     "CLASS_MEMBERSHIP_ASSERTION": "原文类别归属",
     "HAS_INGREDIENT": "成分记载", "HAS_SYMPTOM": "症状记载",
     "INDICATION_MENTION": "用途章节提及", "CONTRAINDICATION_MENTION": "禁忌章节提及",
     "CAUTION_MENTION": "注意事项提及", "INTERACTION_MENTION": "相互作用提及",
     "ADVERSE_REACTION_MENTION": "不良反应提及",
+    "MECHANISM_MENTION": "机制原文提及",
+    "MECHANISM_STATEMENT_MENTION": "机制陈述原文记载",
+    "MECHANISM_PARTNER_MENTION": "机制陈述提及相关药物",
+    "MECHANISM_ENTITY_MENTION": "机制陈述提及机制概念",
+    "METABOLISM_MENTION": "代谢关系原文提及",
+    "ENZYME_MODULATION_MENTION": "酶调节关系原文提及",
+    "EXPOSURE_CHANGE_MENTION": "药物暴露变化原文提及",
+    "TRANSPORT_MENTION": "转运或排泄关系原文提及",
+    "MECHANISM_OUTCOME_MENTION": "机制相关结果原文提及",
 }
+
+
+def relation_label(relation: str) -> str:
+    """Keep unknown future relation IDs legible without implying a clinical claim."""
+    if relation in SHORT_RELATIONS:
+        return SHORT_RELATIONS[relation]
+    return relation.replace("_", " ").lower() + "（原文关系）"
 STATUS_LABELS = {
+    "partial": "已取得部分来源，后续连接仍有缺口", "no_discovery_evidence": "未取得符合分类约束的来源示例",
     "ok": "已逐边核对原文", "no_connected_evidence_path": "未取得连通的证据路径",
     "no_exact_entity": "未识别到实体全名", "ambiguous_or_too_many_entities": "实体存在歧义或数量过多",
     "unresolved_named_entity": "部分制剂名称未收录或未解析", "question_too_long": "问题过长，请拆分查询",
@@ -89,6 +114,22 @@ def _source_link(url):
     return "本地来源记录"
 
 
+def _source_key(edge):
+    # Group clinical sections by record; JSON membership/parent by file.
+    return (edge.get("source_file"), "" if edge.get("json_pointer") else edge.get("record_id"), edge.get("source_url"))
+
+
+def _source_name(edge):
+    file = str(edge.get("source_file") or "").replace("\\", "/").rsplit("/", 1)[-1]
+    if file == "drug_categories_western.json":
+        return "本地西药分类"
+    if file == "drug_categories_chinese.json":
+        return "本地中药分类"
+    if edge.get("src", {}).get("kind") == "Drug":
+        return str(edge["src"].get("name") or "药品资料")+" · 药品资料"
+    return "本地来源资料"
+
+
 def semantic_graph_html(trace) -> str:
     report = trace.get("semantic_graph") if isinstance(trace, dict) else None
     if not isinstance(report, dict):
@@ -103,6 +144,16 @@ def semantic_graph_html(trace) -> str:
     if labels:
         pieces.append('<div class="kb-sg-note">' + safe('；'.join(labels)) + '。候选名称仅用于查资料。</div>')
     bindings = {v["path_id"]: v for v in report.get("evidence_bindings", []) if isinstance(v, dict) and v.get("path_id")}
+    discovery = report.get("category_discovery")
+    if discovery:
+        from medical_category_discovery import MISSING_LABELS
+        plan = discovery["plan"]
+        pieces.append('<div class="kb-sg-note">' + safe(
+            f"分类展开：{plan['level_label']}；同类目录候选 {discovery['candidate_drugs_available']} 种，"
+            f"本轮检索 {discovery['candidate_drugs_searched']} 种。分类仅筛选候选，医疗关系逐条核对具体药物原文。") + '</div>')
+        if discovery.get("missing_links"):
+            pieces.append('<details class="kb-sg-proof"><summary>检索范围与未连接的候选</summary><div class="kb-sg-note">' + safe('；'.join(
+                MISSING_LABELS.get(k, k) for k in discovery["missing_links"])) + '</div></details>')
     cohort = report.get("plan", {}).get("disease_pair_search", {})
     if cohort:
         labels = [f"{s['disease']}：检索 {s['candidate_drugs_searched']} 种候选制剂，排除 {s.get('excluded_ambiguous_or_background_records', 0)} 条背景或含糊记录"
@@ -131,24 +182,48 @@ def semantic_graph_html(trace) -> str:
         for i, edge in enumerate(edges):
             forward = edge["src"]["id"] == nodes[i]["id"]
             direction, arrow = ("right", "→") if forward else ("left", "←")
-            relation = SHORT_RELATIONS.get(edge.get("relation"), "资料关系")
+            relation = relation_label(edge.get("relation", ""))
             pieces.append('<div class="kb-sg-edge" aria-label="' + safe(relation + ' ' + arrow) + '">'
                           '<div class="kb-sg-relation">' + safe(relation) + '</div>'
                           '<div class="kb-sg-arrow kb-sg-arrow-' + direction + '" aria-hidden="true"></div></div>'
                           + _node(nodes[i+1]))
-        pieces.append('</div></div><details class="kb-sg-proof"><summary>逐边原文与来源（' + str(len(edges)) + ' 条）</summary>')
+        sources = {}
+        for edge in edges:
+            sources.setdefault(_source_key(edge), []).append(edge)
+        source_numbers = {key: n for n,key in enumerate(sources, 1)}
+        pieces.append('</div></div><details class="kb-sg-proof"><summary>查看逐边原文与来源 · ' + str(len(sources)) + ' 个来源</summary>')
         for i, edge in enumerate(edges, 1):
-            label = f"{i}. {edge['src']['name']} → {SHORT_RELATIONS.get(edge.get('relation'), '资料关系')} → {edge['dst']['name']}"
+            label = f"{i}. {edge['src']['name']} → {relation_label(edge.get('relation', ''))} → {edge['dst']['name']}"
             pieces.append('<div class="kb-sg-proof-edge"><div class="kb-sg-proof-label">' + safe(label) + '</div>'
                           '<div class="kb-sg-quote">' + safe(edge.get("quote")) + '</div>'
-                          '<div class="kb-sg-source">' + _source_link(edge.get("source_url"))
-                          + ' · 原文位置 ' + safe(f"{edge.get('quote_start')}:{edge.get('quote_end')}")
-                          + ' · 记录 ' + safe(edge.get("record_id")) + '</div></div>')
+                          '<div class="kb-sg-source">来源 ' + str(source_numbers[_source_key(edge)]) + ' · '
+                          + safe(_source_name(edge)) + '</div></div>')
+        pieces.append('<div class="kb-sg-source-list">')
+        for key, group in sources.items():
+            edge = group[0]
+            fields = {"composition":"成分", "drug_interactions":"药物相互作用", "warnings":"注意事项",
+                      "contraindications":"禁忌", "indication":"适应症", "adverse_reactions":"不良反应"}
+            sections = list(dict.fromkeys(fields.get(e.get('section_field'), '') for e in group))
+            pieces.append('<div class="kb-sg-source-item"><span class="kb-sg-source-name">'
+                          + safe(f"来源 {source_numbers[key]} · {_source_name(edge)}") + '</span>'
+                          + _source_link(edge.get('source_url'))
+                          + (' · ' + safe(' / '.join(s for s in sections if s)) if any(sections) else ''))
+            # Preserve full provenance once per source, hidden behind a technical fold.
+            locations = list(dict.fromkeys(
+                'JSON路径：'+str(e['json_pointer']) if e.get('json_pointer') else
+                '原文位置：'+str(e.get('quote_start'))+':'+str(e.get('quote_end')) for e in group))
+            metadata = ['文件：'+str(edge.get('source_file') or ''), *locations]
+            if not edge.get('json_pointer'):
+                metadata.append('记录：'+str(edge.get('record_id') or ''))
+            metadata.extend('SHA256：'+str(sha) for sha in dict.fromkeys(e.get('source_sha256') for e in group) if sha)
+            pieces.append('<details class="kb-sg-technical"><summary>溯源详情</summary><code>'
+                          + safe('\n'.join(metadata)) + '</code></details></div>')
+        pieces.append('</div>')
         pieces.append('</details></div>')
     if report.get("truncated"):
         pieces.append('<div class="kb-sg-warning">本次达到检索预算，仅展示部分路径。</div>')
     if report.get("missing_requested_relations"):
-        missing = '、'.join(SHORT_RELATIONS.get(r, r) for r in report["missing_requested_relations"])
+        missing = '、'.join(relation_label(r) for r in report["missing_requested_relations"])
         pieces.append('<div class="kb-sg-warning">未取得的关系：' + safe(missing) + '。未命中不表示无风险。</div>')
     pieces.append('</section>')
     return ''.join(pieces)

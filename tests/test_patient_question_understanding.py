@@ -80,6 +80,28 @@ class PatientQuestionUnderstandingTests(unittest.TestCase):
                 self.assertEqual(result["medicines"][0]["surface"], "布地奈德鼻喷雾剂")
                 self.assertTrue(result["intent"]["efficacy_question"])
 
+    def test_topic_medicine_and_doctor_prescription_keep_both_products(self):
+        product = {"id":"screenshot_product", "name":"氯雷他定分散片", "aliases":[]}
+        self.nodes[product["id"]] = {**product, "kind":"Drug"}
+        with (self.root / "kg_output_clean_v2/drugs.jsonl").open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(product, ensure_ascii=False)+"\n")
+        q = "氯雷他定分散片我已经吃了，鼻塞还是好不了，医生开的布地奈德鼻喷雾剂可以两个一起用吗？还是说必须停掉一个？"
+        result = self.understand(q)
+        a, b = result["medicines"]
+        self.assertEqual((a["surface"], a["role"]), ("氯雷他定分散片", "taken"))
+        self.assertEqual((b["surface"], b["role"]), ("布地奈德鼻喷雾剂", "proposed"))
+        self.assertTrue(result["intent"]["interaction_question"])
+        self.assertFalse(result["unresolved_medication_mentions"])
+        self.assertTrue(result["intent"]["efficacy_question"])
+        self.assertFalse(result["intent"]["adverse_event_question"])
+
+    def test_postposed_patient_action_keeps_negation_and_stop_state(self):
+        for phrase, role in [("我没有吃过", "not_taken"), ("我已经停用了", "stopped"),
+                             ("我正在吃", "current"), ("我已经吃了", "taken")]:
+            with self.subTest(phrase=phrase):
+                result = self.understand("甲试药片"+phrase+"，可以加药吗")
+                self.assertEqual(result["medicines"][0]["role"], role)
+
     def test_colloquial_spray_forms_are_only_search_candidates(self):
         for suffix in ("喷雾剂", "喷雾", "喷剂", "鼻喷剂", "鼻喷"):
             with self.subTest(suffix=suffix):

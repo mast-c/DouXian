@@ -19,6 +19,8 @@ from medical_query_plan import build_retrieval_plan, section_routing_question
 from medical_query_execution import execute_retrieval_plan
 from medical_semantic_graph import build_graph
 from medical_semantic_retrieval import graph_insufficiency_message, search_semantic_graph
+from medical_semantic_graph_view import relation_label
+from medical_query_understanding import patient_intent
 from medical_quality_acceptance import make_export_payload
 from medical_evidence_bridge import expected_section_fields, prepare_medical_documents
 
@@ -93,6 +95,22 @@ class SharedPlanningTests(unittest.TestCase):
         plan = build_retrieval_plan("甲试鼻喷雾剂的成分是什么", p)
         self.assertEqual(len(plan["tasks"]), 1)
         self.assertEqual(plan["tasks"][0]["fields"], ["composition"])
+
+    def test_mechanism_language_creates_a_bounded_source_lookup(self):
+        intent = patient_intent("阿托伐他汀和克拉霉素合用的风险及背后药理机制是什么？", medicine_count=2)
+        self.assertTrue(intent["interaction_question"])
+        self.assertTrue(intent["mechanism_question"])
+        p = understanding()
+        p["medicines"] = [
+            {"surface": "阿托伐他汀", "actual_patient_product_known": False, "candidate_drug_names": []},
+            {"surface": "克拉霉素", "actual_patient_product_known": False, "candidate_drug_names": []},
+        ]
+        p["intent"].update(intent)
+        plan = build_retrieval_plan("阿托伐他汀和克拉霉素合用的风险及背后药理机制是什么？", p)
+        mechanism = next(task for task in plan["tasks"] if task["id"] == "mechanism")
+        self.assertIn("drug_interactions", mechanism["fields"])
+        self.assertIn("ENZYME_MODULATION_MENTION", mechanism["graph_relations"])
+        self.assertLessEqual(len(plan["tasks"]), 3)
 
     def test_dosage_has_no_fabricated_graph_relation(self):
         p = understanding()
@@ -223,6 +241,66 @@ class BoundedExecutionTests(unittest.TestCase):
 
 
 class GraphIntegrationTests(unittest.TestCase):
+    def test_mechanism_pair_path_joins_both_anchors_from_either_source_owner(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fixture(root)
+            export = root / "kg_output_clean_v2"
+            drugs_path = export / "drugs.jsonl"
+            drugs = [json.loads(line) for line in drugs_path.read_text(encoding="utf-8").splitlines()]
+            drugs.append({"id": "drug_b", "name": "乙试片", "aliases": []})
+            drugs_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in drugs), encoding="utf-8")
+            records_path = export / "source_records.jsonl"
+            records = [json.loads(line) for line in records_path.read_text(encoding="utf-8").splitlines()]
+            records.append({"id": "record_b", "drug_id": "drug_b", "source_url": "https://example.invalid/b"})
+            records_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in records), encoding="utf-8")
+            sections_path = export / "sections.jsonl"
+            sections = [json.loads(line) for line in sections_path.read_text(encoding="utf-8").splitlines()]
+            sections.extend([
+                {"id": "scomposition_b", "record_id": "record_b", "field": "composition", "text": "乙试成分。"},
+                {"id": "smechanism_b", "record_id": "record_b", "field": "drug_interactions",
+                 "text": "本品与甲试鼻喷雾剂合用时经CYP2C19代谢，导致活性代谢物减少，抗血小板作用减弱。"},
+            ])
+            sections_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in sections), encoding="utf-8")
+            build_graph(root)
+            question = "甲试鼻喷雾剂与乙试片合用为什么可能影响作用？药理机制是什么？"
+            excerpts, report = search_semantic_graph(question, project_root=root)
+            self.assertTrue(excerpts, report)
+            paired = [item for item in excerpts if any(
+                edge["relation"] == "MECHANISM_PARTNER_MENTION"
+                and edge["dst"]["name"] in {"甲试鼻喷雾剂", "乙试片"}
+                for edge in item["graph_path"]["edges"]
+            ) and len(item["graph_path"]["nodes"]) >= 3]
+            self.assertTrue(paired, report)
+            evidence = [edge for item in paired for edge in item["graph_path"]["edges"]]
+            self.assertTrue(any(edge["relation"] == "MECHANISM_PARTNER_MENTION" and edge["dst"]["name"] == "甲试鼻喷雾剂" for edge in evidence))
+            self.assertTrue(any(edge["relation"] == "HAS_INGREDIENT" and edge["dst"]["name"] == "甲试鼻喷雾剂" for edge in evidence) is False)
+            self.assertTrue(all(edge["quote"] == sections[-1]["text"] for edge in evidence))
+
+    def test_mechanism_relation_labels_are_specific_and_future_relations_are_legible(self):
+        self.assertEqual(relation_label("MECHANISM_PARTNER_MENTION"), "机制陈述提及相关药物")
+        self.assertEqual(relation_label("EXPOSURE_CHANGE_MENTION"), "药物暴露变化原文提及")
+        self.assertNotEqual(relation_label("FUTURE_RELATION"), "资料关系")
+
+    def test_mechanism_edges_are_built_and_verified_from_original_clause(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fixture(root)
+            export = root / "kg_output_clean_v2"
+            sections = [json.loads(line) for line in (export / "sections.jsonl").read_text(encoding="utf-8").splitlines()]
+            sections.append({"id": "smechanism", "record_id": "record_a", "field": "drug_interactions",
+                             "text": "本品经CYP3A4代谢，合用抑制剂后血药浓度升高。"})
+            (export / "sections.jsonl").write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in sections), encoding="utf-8")
+            build_graph(root)
+            excerpts, report = search_semantic_graph("甲试鼻喷雾剂的药理机制是什么", project_root=root)
+            self.assertTrue(excerpts, report)
+            proof_edges = [edge for item in excerpts for edge in item["graph_path"]["edges"]]
+            self.assertTrue(any(edge["relation"] == "METABOLISM_MENTION" and edge["dst"]["name"] == "CYP3A4" for edge in proof_edges))
+            self.assertTrue(any(edge["relation"] == "EXPOSURE_CHANGE_MENTION" and "血药浓度" in edge["quote"] for edge in proof_edges))
+            mechanism_edges = [edge for edge in proof_edges if edge["relation"].endswith("_MENTION") and edge["dst"]["kind"] == "Mechanism"]
+            self.assertTrue(mechanism_edges)
+            self.assertTrue(all(edge["quote"] == "本品经CYP3A4代谢，合用抑制剂后血药浓度升高。" for edge in mechanism_edges))
+
     def test_one_traversal_shares_plan_and_verifies_originals(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

@@ -19,7 +19,7 @@ import sqlite3
 import tempfile
 from urllib.parse import quote
 
-VERSION = "semantic-graph-1"
+VERSION = "semantic-graph-4"
 DEFAULT_INDEX = "semantic_graph/medical_graph.sqlite"
 SOURCE_DIR = "kg_output_clean_v2"
 DISEASE_FILE = "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json"
@@ -38,6 +38,48 @@ FIELD_RELATIONS = {
     "warnings": "CAUTION_MENTION",
     "drug_interactions": "INTERACTION_MENTION",
     "adverse_reactions": "ADVERSE_REACTION_MENTION",
+}
+MECHANISM_RELATIONS = {
+    "MECHANISM_MENTION": "机制原文提及",
+    "MECHANISM_STATEMENT_MENTION": "机制陈述原文记载",
+    "MECHANISM_PARTNER_MENTION": "机制陈述提及相关药物",
+    "MECHANISM_ENTITY_MENTION": "机制陈述提及机制概念",
+    "METABOLISM_MENTION": "代谢关系原文提及",
+    "ENZYME_MODULATION_MENTION": "酶抑制或诱导原文提及",
+    "EXPOSURE_CHANGE_MENTION": "药物暴露变化原文提及",
+    "TRANSPORT_MENTION": "转运或排泄关系原文提及",
+    "MECHANISM_OUTCOME_MENTION": "机制相关结果原文提及",
+}
+RELATIONS.update(MECHANISM_RELATIONS)
+# Exact terms and broad pharmacology concepts collected from source language.
+# These are searchable concepts, not a pre-built pharmacological ontology.
+MECHANISM_TERMS = (
+    "细胞色素P450", "细胞色素 P450", "CYP3A4", "CYP2C9", "CYP2C19", "CYP2D6", "CYP1A2",
+    "P-糖蛋白", "P-gp", "有机阴离子转运体", "有机阳离子转运体", "肾小管分泌", "肾脏排泄",
+    "肝脏代谢", "肠肝循环", "首过效应", "首过代谢", "药物代谢酶", "代谢酶", "酶活性",
+    "药理机制", "作用机制", "相互作用机制",
+    "血药浓度", "血浆浓度", "血清浓度", "药物暴露", "生物利用度", "清除率", "半衰期",
+    "吸收", "分布", "代谢", "排泄", "转运", "蛋白结合", "药效", "毒性", "肌病", "横纹肌溶解",
+    "肾毒性", "肝毒性", "耳毒性", "出血风险", "心律失常", "QT间期",
+)
+MECHANISM_CLAUSE = re.compile(
+    r"代谢|酶|底物|抑制|诱导|浓度|暴露|生物利用度|清除率|半衰期|吸收|分布|排泄|转运|"
+    r"蛋白结合|首过|毒性|肌病|横纹肌溶解|药效|相互作用机制|肾功能|肝功能|QT间期",
+    re.I,
+)
+MECHANISM_RELATION_RULES = (
+    ("ENZYME_MODULATION_MENTION", re.compile(r"酶|CYP|P-gp|P-糖蛋白|转运体|抑制|诱导", re.I)),
+    ("METABOLISM_MENTION", re.compile(r"代谢|底物|首过", re.I)),
+    ("EXPOSURE_CHANGE_MENTION", re.compile(r"血药浓度|血浆浓度|血清浓度|暴露|生物利用度|清除率|半衰期", re.I)),
+    ("TRANSPORT_MENTION", re.compile(r"吸收|分布|排泄|转运|肾小管分泌", re.I)),
+    ("MECHANISM_OUTCOME_MENTION", re.compile(r"毒性|肌病|横纹肌溶解|出血风险|心律失常|QT间期|药效", re.I)),
+)
+MECHANISM_TARGETS = {
+    "ENZYME_MODULATION_MENTION": re.compile(r"CYP|细胞色素|酶$|P-gp|P-糖蛋白|转运体|抑制剂$|诱导剂$", re.I),
+    "METABOLISM_MENTION": re.compile(r"代谢|底物|首过|CYP|细胞色素", re.I),
+    "EXPOSURE_CHANGE_MENTION": re.compile(r"浓度|暴露|生物利用度|清除率|半衰期"),
+    "TRANSPORT_MENTION": re.compile(r"吸收|分布|排泄|转运|肾小管分泌"),
+    "MECHANISM_OUTCOME_MENTION": re.compile(r"毒性|肌病|横纹肌溶解|出血风险|心律失常|QT间期|药效"),
 }
 POPULATIONS = ("孕妇", "妊娠期", "哺乳期妇女", "哺乳期", "儿童", "新生儿", "老年人")
 # Literal vocabulary, NOT a drug-to-class lookup or synonym map. Membership
@@ -193,8 +235,8 @@ def clause_span(text: str, start: int, end: int) -> tuple[int, int]:
 def literal_entity_boundary(text: str, start: int, end: int, *, query: bool = False) -> bool:
     """Conservatively reject substrings of unknown longer clinical/chemical names."""
     han = lambda c: bool(c) and "\u4e00" <= c <= "\u9fff"
-    before = r"(?:对|有|与|及|或|和|如|为|于|伴|出现|导致|引起|包括|发生|患|的|用|含|本品|严重|急性|慢性|活动性)"
-    after = r"(?:患者|病人|者|时|及|或|和|与|的|等|伴|可|合|同|有|会|能|应|禁|慎|药物|类药|类|史|倾向|降低|增加|血|被|不)"
+    before = r"(?:对|有|与|及|或|和|如|为|于|伴|出现|导致|引起|包括|发生|患|的|用|含|本品|严重|急性|慢性|活动性|经|由|后|使)"
+    after = r"(?:患者|病人|者|时|及|或|和|与|的|等|伴|可|合|同|有|会|能|应|禁|慎|药物|类药|类|史|倾向|降低|增加|升高|增高|下降|血|被|不|代谢|排泄|抑制|诱导|清除|浓度|水平)"
     if query:
         before = r"(?:" + before + r"|请问|介绍|解释|分析|关于|使用|服用|比较|知道|一下|查询|查查|查找|列出|查|问|跟|以及|治|治疗|用于治疗|治疗了)"
         after = r"(?:" + after + r"|是|是否|有何|什么|怎么|如何|相关|之间|用的药|用药|常用药|所用药|治疗药|药跟|药和)"
@@ -390,11 +432,56 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
             if identity not in medicines.setdefault(name, []):
                 medicines[name].append(identity)
         clinical_lexicon, medicine_lexicon = Lexicon(clinical), Lexicon(medicines)
+        mechanism_lexicon = Lexicon(MECHANISM_TERMS)
+        mechanism_partner_ids = {identity for (kind, _), identity in entities.items()
+                                 if kind in ("Drug", "Ingredient")}
         own_ingredients = {}
         for drug_id, record_id, ingredient in conn.execute("""SELECT e.src,s.record_id,e.dst FROM edges e
                 JOIN sources s ON s.id=e.source_id WHERE e.relation='HAS_INGREDIENT'"""):
             own_ingredients.setdefault((drug_id, record_id), set()).add(ingredient)
         for sid, (drug, field, text) in sections.items():
+            # Index explicit mechanism language across all source sections. Each edge
+            # points to a literal concept and retains the whole source clause.
+            for clause in re.finditer(r"[^。；;\n]+[。；;]?", text):
+                raw = clause.group()
+                if not MECHANISM_CLAUSE.search(raw):
+                    continue
+                qs = clause.start() + len(raw) - len(raw.lstrip())
+                qe = clause.start() + len(raw.rstrip())
+                if qe <= qs:
+                    continue
+                statement_text = text[qs:qe]
+                statement = entity("MechanismStatement", statement_text)
+                edge(drug, statement, "MECHANISM_STATEMENT_MENTION", sid, qs, qe, qs, qe)
+                concepts = list(mechanism_lexicon.find(raw))
+                concepts = [(name, a, b) for name, a, b in concepts
+                            if literal_entity_boundary(raw, a, b)]
+                if not concepts:
+                    generic = MECHANISM_CLAUSE.search(raw)
+                    concepts = [(generic.group(), generic.start(), generic.end())] if generic and len(generic.group()) >= 2 else []
+                    base_relation = "MECHANISM_MENTION"
+                else:
+                    base_relation = None
+                for name, a, b in concepts:
+                    ms, me = clause.start() + a, clause.start() + b
+                    context = raw[max(0, a - 32):min(len(raw), b + 32)]
+                    matched_relations = [rel for rel, pattern in MECHANISM_RELATION_RULES
+                                         if pattern.search(context) and MECHANISM_TARGETS[rel].search(name)]
+                    if not matched_relations:
+                        matched_relations = [base_relation or "MECHANISM_MENTION"]
+                    for relation in matched_relations:
+                        edge(statement, entity("Mechanism", name), "MECHANISM_ENTITY_MENTION", sid, qs, qe, ms, me)
+                        edge(drug, entity("Mechanism", name), relation, sid, qs, qe, ms, me)
+                for name, ms, me in medicine_lexicon.find(raw):
+                    if not literal_entity_boundary(raw, ms, me):
+                        continue
+                    for destination in medicines[name]:
+                        if destination not in mechanism_partner_ids:
+                            continue
+                        if destination == drug or destination in own_ingredients.get((drug, sources[sid][1]), set()):
+                            continue
+                        edge(statement, destination, "MECHANISM_PARTNER_MENTION", sid, qs, qe,
+                             clause.start() + ms, clause.start() + me)
             relation = FIELD_RELATIONS.get(field)
             if not relation:
                 continue

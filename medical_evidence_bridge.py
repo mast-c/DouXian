@@ -107,6 +107,7 @@ def prepare_medical_documents(
         "considered": 0, "skipped_section": 0, "failed_provenance": 0,
         "verified": 0, "legacy_unverified": 0, "reasons": {},
         "section_gate": sorted(fields) if fields else [],
+        "decisions": [],
     }
     documents = list(documents)
     if fields and len(fields) > 1:
@@ -127,17 +128,21 @@ def prepare_medical_documents(
             for group in groups if index < len(group)
         ] + other
     for doc in documents:
-        if len(selected) >= limit:
-            break
         meta = getattr(doc, "metadata", None)
         content = getattr(doc, "page_content", None)
         if not isinstance(meta, dict) or not isinstance(content, str) or not content.strip():
+            continue
+        decision = {"chunk_id": meta.get("chunk_id", ""), "drug_name": meta.get("drug_name", ""),
+                    "section_id": meta.get("section_id", ""), "field": meta.get("section_field", "")}
+        if len(selected) >= limit:
+            reports["decisions"].append({**decision, "reason": "selection_limit"})
             continue
         reports["considered"] += 1
 
         field = str(meta.get("section_field") or "").lower()
         if fields and field and field not in fields:
             reports["skipped_section"] += 1
+            reports["decisions"].append({**decision, "reason": "wrong_field"})
             continue
 
         if meta.get("data_origin") == _NEW_JSON_ORIGIN:
@@ -149,6 +154,7 @@ def prepare_medical_documents(
             if not ok:
                 reports["failed_provenance"] += 1
                 reports["reasons"][reason] = reports["reasons"].get(reason, 0) + 1
+                reports["decisions"].append({**decision, "reason": reason})
                 continue
 
             # 不将整个旧版 Section 塞给生成模型：其部分数据包含多个来源字段；
@@ -160,9 +166,11 @@ def prepare_medical_documents(
             }
             selected.append(type(doc)(page_content=content, metadata=enriched))
             reports["verified"] += 1
+            reports["decisions"].append({**decision, "reason": "text_verified"})
         else:
             selected.append(doc)
             reports["legacy_unverified"] += 1
+            reports["decisions"].append({**decision, "reason": "legacy_unverified"})
 
     reports["selected"] = len(selected)
     return selected, reports

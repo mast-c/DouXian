@@ -23,6 +23,8 @@ EXPORT_SCHEMA = 1
 MAX_FILE_BYTES = 15 * 1024 * 1024
 
 EVIDENCE_TYPES = {
+    "dataset_category_graph_path": "本地数据集分类结构路径",
+    "category_discovery_source_path": "分类筛选与独立原文连接路径",
     "evidence_backed_semantic_graph_path": "逐边原文核对的多关系图路径",
     "unverified_drug_disease_candidate": "疾病提及候选",
     "unverified_drug_source_section": "Neo4j 原文章节",
@@ -37,7 +39,7 @@ FIELDS_CN = {
     "drug_interactions": "药物相互作用",
 }
 EXPORTED_TRACE_KEYS = (
-    "patient_query_understanding", "query_plan", "query_execution",
+    "patient_query_understanding", "query_plan", "query_execution", "evidence_flow",
     "semantic_graph",
     "query_clarification",
     "knowledge_evidence", "retrieval_pipeline", "retrieval_summary",

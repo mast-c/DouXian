@@ -2,12 +2,19 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+from dataclasses import dataclass
 import hashlib
 import time
 
 # Shared cap prevents timed-out requests from creating unlimited active workers.
 _POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="medical-recall")
 _RERANK_POOL = ThreadPoolExecutor(max_workers=1, thread_name_prefix="medical-rerank")
+
+
+@dataclass(frozen=True)
+class RecallBatch:
+    documents: list
+    diagnostics: dict
 
 
 def document_key(doc):
@@ -54,7 +61,8 @@ def execute_retrieval_plan(plan, *, search, rerank, top_n=8, clock=time.monotoni
     rerank_seconds = min(10, max(0.01, float(limits.get("rerank_seconds", 10))))
     total_seconds = min(24, max(0.01, float(limits.get("total_seconds", 24))))
     report = {"plan_id": plan.get("plan_id"), "planning_model_calls": plan.get("planning_model_calls"),
-              "recall_calls": len(tasks), "rerank_calls": 0, "tasks": [], "timed_out": False}
+              "recall_calls": len(tasks), "rerank_calls": 0, "tasks": [], "timed_out": False,
+              "candidate_decisions": []}
     recall_end = min(started + recall_seconds, started + total_seconds)
     pending = {_POOL.submit(search, task["query"], k=12): (i, task) for i, task in enumerate(tasks)}
     groups = {}
@@ -69,14 +77,23 @@ def execute_retrieval_plan(plan, *, search, rerank, top_n=8, clock=time.monotoni
         for future in done:
             index, task = pending.pop(future)
             try:
-                docs = list(future.result())[:12]
+                result = future.result()
+                diagnostics = result.diagnostics if isinstance(result, RecallBatch) else {}
+                recalled = list(result.documents if isinstance(result, RecallBatch) else result)[:12]
+                docs = []
                 # Typed medical rows must match the task's requested columns.
-                docs = [doc for doc in docs if not doc.metadata.get("section_field")
-                        or not task.get("fields") or doc.metadata["section_field"] in task["fields"]]
-                docs = [doc for doc in docs if not candidate_drugs or not doc.metadata.get("drug_name")
-                        or doc.metadata["drug_name"] in candidate_drugs]
+                for doc in recalled:
+                    field, drug = doc.metadata.get("section_field"), doc.metadata.get("drug_name")
+                    reason = ("wrong_field" if field and task.get("fields") and field not in task["fields"]
+                              else "wrong_drug" if candidate_drugs and drug and drug not in candidate_drugs
+                              else "accepted_candidate")
+                    report["candidate_decisions"].append({"key": document_key(doc), "task_id": task["id"],
+                        "drug_name": drug, "field": field, "reason": reason})
+                    if reason == "accepted_candidate":
+                        docs.append(doc)
                 groups[index] = docs
-                report["tasks"].append({"id": task["id"], "status": "ok", "candidates": len(docs)})
+                report["tasks"].append({"id": task["id"], "status": "ok", "candidates": len(docs),
+                                        "diagnostics": diagnostics})
             except Exception as exc:
                 report["tasks"].append({"id": task["id"], "status": "error", "error_type": type(exc).__name__})
     for future, (_, task) in pending.items():
@@ -104,7 +121,7 @@ def execute_retrieval_plan(plan, *, search, rerank, top_n=8, clock=time.monotoni
     report["tasks"].sort(key=lambda item: next((i for i,t in enumerate(tasks) if t["id"] == item["id"]), 0))
     ranked = pool
     remaining = min(rerank_seconds, started + total_seconds - clock())
-    if pool and remaining > 0:
+    if pool and remaining > 0 and rerank is not None:
         report["rerank_calls"] = 1
         rerank_started = clock()
         future = _RERANK_POOL.submit(rerank, plan["original_question"], pool, top_n=len(pool), timeout=remaining, max_chars=1200)
@@ -126,10 +143,11 @@ def execute_retrieval_plan(plan, *, search, rerank, top_n=8, clock=time.monotoni
             report["timed_out"] |= isinstance(exc, TimeoutError)
         report["rerank_seconds"] = round(clock() - rerank_started, 4)
     else:
-        report["rerank_status"] = "skipped_empty" if not pool else "skipped_budget"
+        report["rerank_status"] = "skipped_empty" if not pool else "skipped_policy" if rerank is None else "skipped_budget"
     selected = select_coverage(ranked, tasks, top_n)
     report["seconds"] = round(clock() - started, 4)
     report["selected"] = len(selected)
+    report["selected_candidate_keys"] = [document_key(d) for d in selected]
     report["coverage_scope"] = "candidate_task_coverage_not_evidence_sufficiency"
     report["uncovered_tasks"] = [task["id"] for task in tasks
                                  if not any(task["id"] in d.metadata.get("retrieval_task_ids", []) for d in selected)]

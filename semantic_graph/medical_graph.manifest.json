@@ -1,7 +1,7 @@
 {
-  "version": "semantic-graph-1",
-  "created_at": "2026-11-03T10:54:10.789555+00:00",
-  "builder_sha256": "4587d0e29b3c44fdcf6cfd0191a97a85f8036cf642122f702886e2d9cb5a9a09",
+  "version": "semantic-graph-4",
+  "created_at": "2026-11-05T02:48:38.068688+00:00",
+  "builder_sha256": "6985688c3b099e67832627eee311572e487baa8935085c3ec0f90dc96e4d92ef",
   "inputs": {
     "kg_output_clean_v2/drugs.jsonl": {
       "size": 2248653,
@@ -25,33 +25,44 @@
     }
   },
   "counts": {
-    "ADVERSE_REACTION_MENTION": 46345,
-    "CAUTION_MENTION": 90667,
+    "ADVERSE_REACTION_MENTION": 46436,
+    "CAUTION_MENTION": 91026,
     "CLASS_MEMBERSHIP_ASSERTION": 16,
-    "CONTRAINDICATION_MENTION": 12022,
+    "CONTRAINDICATION_MENTION": 12038,
+    "ENZYME_MODULATION_MENTION": 250,
+    "EXPOSURE_CHANGE_MENTION": 3224,
     "HAS_INGREDIENT": 62077,
     "HAS_SYMPTOM": 54042,
     "INDICATION_MENTION": 19679,
-    "INTERACTION_MENTION": 9622,
-    "class_substring_interactions_omitted": 549,
+    "INTERACTION_MENTION": 9949,
+    "MECHANISM_ENTITY_MENTION": 26462,
+    "MECHANISM_MENTION": 13245,
+    "MECHANISM_OUTCOME_MENTION": 5209,
+    "MECHANISM_PARTNER_MENTION": 8536,
+    "MECHANISM_STATEMENT_MENTION": 30184,
+    "METABOLISM_MENTION": 1923,
+    "TRANSPORT_MENTION": 2739,
+    "class_substring_interactions_omitted": 556,
     "composition_sections_unparsed": 781,
     "entities_Condition": 1046,
     "entities_Disease": 8806,
     "entities_Drug": 11951,
     "entities_DrugClass": 18,
     "entities_Ingredient": 7502,
+    "entities_Mechanism": 49,
+    "entities_MechanismStatement": 18289,
     "entities_Population": 7,
     "entities_Symptom": 5977,
     "invalid_indication_candidates_omitted": 6,
-    "self_ingredient_interaction_mentions_omitted": 861
+    "self_ingredient_interaction_mentions_omitted": 932
   },
-  "nodes": 35307,
-  "edges": 294470,
+  "nodes": 53645,
+  "edges": 387035,
   "sources": 110019,
   "clinical_validation": false,
   "storage": "local_sqlite_property_graph_from_source_exports",
   "index": {
-    "size": 249880576,
-    "sha256": "13c5acee11721987b3ca67fc74e91237351c8139f0539319cade00ef65000911"
+    "size": 317829120,
+    "sha256": "c33c90365b3b0de1032790927ebacd38871be05cdb3f2a5f4ccf6a20fa5a37e1"
   }
 }

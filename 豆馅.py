@@ -1987,6 +1987,7 @@ def trace_details_html(trace):
             # 图谱路径在下方独立区域展示，不能被算作原始引用证据。
             if item.get("evidence_type") in (
                 _MH_CARD_TYPE, "evidence_backed_semantic_graph_path",
+                "dataset_category_graph_path", "category_discovery_source_path",
             ):
                 continue
             index = item.get("id")

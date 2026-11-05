@@ -1,0 +1,2080 @@
+{
+  "generated_at": "2026-11-04T09:04:04.647906+00:00",
+  "graph_snapshot": "2026-11-03T10:54:10.789555+00:00",
+  "scope": "read_only_local_exports_and_derived_graph_not_live_chroma_or_clinical_audit",
+  "edges_created": 0,
+  "summary": {
+    "no_pair_link_in_checked_sources": 1,
+    "graph_paths_available": 2,
+    "entity_resolution_or_clarification": 1
+  },
+  "cases": [
+    {
+      "question": "氯雷他定分散片我已经吃了，鼻塞还是好不了，医生开的布地奈德鼻喷雾剂可以两个一起用吗？还是说必须停掉一个？",
+      "category": "no_pair_link_in_checked_sources",
+      "next_step": "当前检查范围未找到两药连接依据；先核对或补充可靠来源，不能虚构相互作用边",
+      "graph_status": "no_connected_evidence_path",
+      "graph_seconds": 0.9361,
+      "returned_paths": 0,
+      "truncated": false,
+      "products": [
+        {
+          "drug_id": "drug_9b4df6c9b2ab8899e03f0f80",
+          "drug_name": "氯雷他定分散片",
+          "actual_patient_product_known": true,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_233e080d1a2cb88b72887409",
+                  "record_id": "sourcerecord_6c12cd9ae4ffb04ecd845e88",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5081i.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 19370492,
+                  "byte_length": 190,
+                  "row_sha256": "5327dad06078686e4a24bde896b423bcabafb503570d7b1c6ed33ce05fc93029",
+                  "quote_start": 0,
+                  "quote_end": 5,
+                  "quote_preview": "氯雷他定。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_3610b3a6f90b29b7d9e74c1d",
+                  "record_id": "sourcerecord_6c12cd9ae4ffb04ecd845e88",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5081i.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 19369267,
+                  "byte_length": 273,
+                  "row_sha256": "f5a1f75294c5d981b206cb38e2690e4aad1eb09e4295ae0d7ed1a1c9702cda95",
+                  "quote_start": 0,
+                  "quote_end": 32,
+                  "quote_preview": "用于治疗季节性过敏性鼻炎（减轻鼻部或非鼻部症状）及特发性荨麻疹。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 15,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_e07c98c80be56639e6a43ee0",
+                  "record_id": "sourcerecord_6c12cd9ae4ffb04ecd845e88",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5081i.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 19369540,
+                  "byte_length": 952,
+                  "row_sha256": "ef5832f9184a2bd13ac539ab4336eedf590549d9d5b2452afc2968ad059c839d",
+                  "quote_start": 0,
+                  "quote_end": 277,
+                  "quote_preview": "1.严重肝功能不全的患者请在医生指导下使用。 2.妊娠期及哺乳期妇女慎用。 3.在做皮试前约48小时左右应中止使用本品，因抗组胺药能阻止或降低皮试的阳性反应发生。 4.对本品过敏者禁用，过敏体质者慎用。 5.本品性状发生改变时禁止使用。 6.请将本品放在儿童不能接触的地方。 7.儿童必须在成人监护下使用。 8.如正在使用其他药品，使用本品前请咨询医师或药师。\n在每天10毫克的推荐剂量下，本品未见明显的镇静作用。 常见不良反应有乏力、头痛、嗜睡、口干、胃肠道不适（包括恶心、胃炎）以及皮疹等。罕见不良反应有脱发、过敏反应、肝功能异常、心动过速及心悸等。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 3,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_bfedd55b3d76325efa6ab259",
+                  "record_id": "sourcerecord_6c12cd9ae4ffb04ecd845e88",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5081i.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 19371391,
+                  "byte_length": 540,
+                  "row_sha256": "38625cc8b3e1ec1e4effa635abc660f52b9e569a75f4b7f8f3a1f484a67ea292",
+                  "quote_start": 0,
+                  "quote_end": 119,
+                  "quote_preview": "1.同时服用酮康唑、大环内酯类抗生素、西咪替盯茶碱等药物，会提高氯雷他定在血浆中的浓度，应慎用。其他已知能抑制肝脏代谢的药物，在未明确与氯雷他定相互作用前应谨慎合用。 2.如与其他药物同时使用可能会发生药物相互作用，详情请咨询医师或药师。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 12,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_6cf6cebc786e676cbb7dd6b7",
+                  "record_id": "sourcerecord_6c12cd9ae4ffb04ecd845e88",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5081i.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 19370922,
+                  "byte_length": 469,
+                  "row_sha256": "803d93b6b79f3052fa5b5c72f625eb06dcdaab51f51d53a2e4d14655ddee2126",
+                  "quote_start": 0,
+                  "quote_end": 96,
+                  "quote_preview": "在每天10毫克的推荐剂量下，本品未见明显的镇静作用。 常见不良反应有乏力、头痛、嗜睡、口干、胃肠道不适（包括恶心、胃炎）以及皮疹等。罕见不良反应有脱发、过敏反应、肝功能异常、心动过速及心悸等。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_0b6d34a59103e26945fa94a3",
+                  "record_id": "sourcerecord_6c12cd9ae4ffb04ecd845e88",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5081i.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 19370682,
+                  "byte_length": 240,
+                  "row_sha256": "ab159fc81a15b78279e106d8f5fb5960794661c012a17011709a7bacfd5396ff",
+                  "quote_start": 0,
+                  "quote_end": 24,
+                  "quote_preview": "口服。成人及12岁以上儿童：一日1次，一次1片。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_4a77b1a2a9b5d2388961ddee",
+          "drug_name": "布地奈德鼻喷雾剂",
+          "actual_patient_product_known": true,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_de386554ecd76e877f4a9fdf",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14390318,
+                  "byte_length": 267,
+                  "row_sha256": "b0ff6d471e3126eca430f664a95129fbe130a088ac5fd8a7478dfc5d352adfc2",
+                  "quote_start": 0,
+                  "quote_end": 30,
+                  "quote_preview": "预防和治疗常年性及季节性过敏性鼻炎，也可用于血管舒缩性鼻炎。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 20,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_fcfcb89eb000ef786e477054",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14390585,
+                  "byte_length": 1835,
+                  "row_sha256": "30d71915bf85aa44e375268183e2f4489c51fe45ef7ec79bd86250ac1a9f8ae0",
+                  "quote_start": 0,
+                  "quote_end": 604,
+                  "quote_preview": "1.使用本品14天后，症状仍未改善，请咨询医师。 2.自我治疗时间不得超过3个月，如需要超过3个月，应在医师指导下使用。 3.长期使用高剂量，可能发生糖皮质激素的全身作用。长期接受本品治疗的儿童和青少年，可能引起生长发育迟缓，应在医师指导下使用。 4.伴有鼻部真菌感染和疱疹的患者慎用。 5.使用全身性糖皮质激素转而使用本品者，应在医师指导下使用。 6.肺结核患者慎用。 7.本品仅为鼻腔用药，不得接触眼睛，若接触眼睛，请立即用水清洗。 8.6岁以下儿童不推荐使用本品。 9.孕妇及哺乳期妇女应避免使用本品。 10.运动员慎用。 11.如服用过量或出现严重不良反应，应立即就医。 12.对本品过敏者禁用，过敏体质者慎用。 13.本品性状发生改变时禁止使用。 14.请将本品放在儿童不能接触的地方。 15.儿童必须在成人监护下使用。 16.如正在使用其他药品，使用本品前请咨询医师或药师。\n约5％的患者会发生局部刺激的不良反应。 常见（>1/100）：气道：局部刺激、轻微的血性分泌物、鼻出血。 少见（1/1000）：全身：血管性水肿。 皮肤：荨麻疹、皮疹、皮炎、瘙痒。 气道：鼻中隔穿孔和黏膜溃疡。 速发或迟发的过敏反应，包括荨麻疹、皮疹、皮炎、血管神经性水肿和瘙痒已有报道。极少数病人在鼻腔内给予糖皮质激素后出现黏膜溃疡和鼻中隔穿孔。这些不良反应的原因（可能由糖皮质激素、这些疾病或其他因素引起）尚不清楚。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_98aabcaf15509a213725bf20",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14393660,
+                  "byte_length": 327,
+                  "row_sha256": "7ad0ae33680fbac140f616518ae5a8f06f1add97eb6971d01cf023f2e5d0814f",
+                  "quote_start": 0,
+                  "quote_end": 48,
+                  "quote_preview": "1.应避免与酮康唑合用。 2.如与其他药物同时使用可能会发生药物相互作用，详情请咨询医师或药师。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 14,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_9c782327e4e5bc3c0a839253",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14392879,
+                  "byte_length": 781,
+                  "row_sha256": "4801b020ad50e4a900cc4e66ea55e6264d0f7f11ca77b9e5b1e49e255defcc24",
+                  "quote_start": 0,
+                  "quote_end": 210,
+                  "quote_preview": "约5％的患者会发生局部刺激的不良反应。 常见（>1/100）：气道：局部刺激、轻微的血性分泌物、鼻出血。 少见（1/1000）：全身：血管性水肿。 皮肤：荨麻疹、皮疹、皮炎、瘙痒。 气道：鼻中隔穿孔和黏膜溃疡。 速发或迟发的过敏反应，包括荨麻疹、皮疹、皮炎、血管神经性水肿和瘙痒已有报道。极少数病人在鼻腔内给予糖皮质激素后出现黏膜溃疡和鼻中隔穿孔。这些不良反应的原因（可能由糖皮质激素、这些疾病或其他因素引起）尚不清楚。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_4a54c9f6f62cd29526d5f66d",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14392420,
+                  "byte_length": 459,
+                  "row_sha256": "fa4e390050c2f7d51119223a19d650768845d3f90fd881cb37771396768b0e62",
+                  "quote_start": 0,
+                  "quote_end": 103,
+                  "quote_preview": "鼻腔喷入：左手喷右侧鼻孔，右手喷左侧鼻孔，避免直接喷向鼻中隔。 成人：开始时每个鼻孔各2喷，早晚各1次。一日最大用量不超过8喷（256?g）。症状缓解后每天每个鼻孔喷1次，每次1喷。 6岁以上儿童：同成人。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        }
+      ],
+      "pair_diagnosis": {
+        "status": "diagnosed",
+        "source_identity_joins": [],
+        "raw_mentions_without_edges": [],
+        "unlinked_class_mentions": [
+          {
+            "class_name": "大环内酯类抗生素",
+            "interaction_edge_id": "edge_621d18acffa0f04404ebe623cac4ede5",
+            "reason": "类别仅为相互作用对象，不能假定另一药属于此类；该项本身不证明缺边"
+          }
+        ],
+        "class_source_review_leads": [],
+        "shared_third_partners": [
+          {
+            "name": "酮康唑",
+            "kind": "Drug",
+            "usable_for_pair_conclusion": false
+          },
+          {
+            "name": "酮康唑",
+            "kind": "Ingredient",
+            "usable_for_pair_conclusion": false
+          }
+        ],
+        "boundary": "仅核对两端制剂的本地相互作用原文及成分/明确类别归属，不代表全库或临床结论"
+      }
+    },
+    {
+      "question": "阿司匹林肠溶片与布洛芬片的成分和相互作用",
+      "category": "graph_paths_available",
+      "next_step": "图路径已经返回；若最终仍拒答，检查 evidence_flow 和审核原因",
+      "graph_status": "ok",
+      "graph_seconds": 0.0353,
+      "returned_paths": 4,
+      "truncated": false,
+      "products": [
+        {
+          "drug_id": "drug_5f145f046b1163232f6bb38d",
+          "drug_name": "阿司匹林肠溶片",
+          "actual_patient_product_known": true,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_44a78149b20ab5922aeb9f4b",
+                  "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 39477308,
+                  "byte_length": 190,
+                  "row_sha256": "a307daa20f5923843270541604d3a0b956c4793c0f6ff6e0707087f3eb65d79f",
+                  "quote_start": 0,
+                  "quote_end": 5,
+                  "quote_preview": "阿司匹林。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 5,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_5e87b1c4e12d0f469d719c66",
+                  "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 39472625,
+                  "byte_length": 600,
+                  "row_sha256": "9a99c59acb69ad772a1f66944a23a2c03adb388394c5894f1689df22baa19cc0",
+                  "quote_start": 0,
+                  "quote_end": 157,
+                  "quote_preview": "- 不稳定性心绞痛(标准治疗的一部分)； - 急性心肌梗死(标准治疗的一部分)； - 预防心肌梗死复发； - 动脉血管手术或介入手术后，如主动脉冠状动脉静脉搭桥术、经皮冠状动脉腔内血管成形术； - 预防短暂性脑缺血发作(TIA)和已出现早期症状后预防脑梗死。 说明：阿司匹林肠溶片因其活性成份的含量不宜用作止痛剂。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 4,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_4c2add0f320266b37d394dbc",
+                  "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 39473225,
+                  "byte_length": 696,
+                  "row_sha256": "89f84f9c439df3bba7d9ec43fd0c4816cd3d1d10dbb73b8312346e71ac681ff5",
+                  "quote_start": 0,
+                  "quote_end": 200,
+                  "quote_preview": "以下情况禁用阿司匹林肠溶片： - 对活性成分阿司匹林、其他水杨酸盐或处方中任何其他成分过敏\n- 水杨酸盐或含水杨酸物质(特别是非甾体抗炎药)导致哮喘的历史\n- 急性胃肠道溃疡\n- 出血体质\n- 肝功能或肾功能衰竭\n- 未接受适当治疗的重度心力衰竭\n- 与甲氨蝶呤(剂量为15mg/周或更多)合用(见[药物相互作用])\n- 妊娠的最后三个月，每天阿司匹林用量超过150mg(见[孕妇及哺乳期妇女用药])",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 18,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_9cbda7f18404bd4906ebe76c",
+                  "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 39473921,
+                  "byte_length": 3387,
+                  "row_sha256": "7f2473bdd25a7c0ddcbd1fced1eb624c2252b24ca8461f5da0f3c9289dfa750d",
+                  "quote_start": 0,
+                  "quote_end": 1149,
+                  "quote_preview": "以下情况必须严格遵守医嘱： - 对其他镇痛剂/抗炎药/抗风湿药或其他致敏性物质过敏(见[禁忌])； - 同时使用某些非甾体抗炎药(NSAIDs)，例如布洛芬或萘普生。这些药物可能减弱阿司匹林的抗血小板作用。如果患者正在使用阿司匹林或计划服用任何NSAIDs，应建议其咨询医生(见[药物相互作用])； - 其他过敏(比如：皮肤反应、瘙痒、风疹)、支气管哮喘、花粉热、鼻粘膜肿胀(鼻息肉)、慢性呼吸道疾病； - 同时使用抗凝药物； - 有胃肠道溃疡或胃肠道出血史； - 肝功能损害； - 对于肾功能或心血管循环受损的患者(例如：肾血管性疾病、充血性心衰、血容量不足、大手术、败血症或大出血性事件)，阿司匹林可能会进一步增加肾脏受损和急性肾衰竭的风险； - 对于需行手术者(包括拔牙等小手术)：能增加出血倾向。 - 对于重度葡萄糖-6-磷酸脱氢酶(G6PD)缺乏症患者，阿司匹林可能诱导溶血或溶血性贫血。可增加溶血风险的因素，如高剂量、发热或急性感染； 其他注意事项 低剂量阿司匹林减少尿酸的排泄，对易感者可能引起痛风。 儿童人群 患有发热性疾病的儿童或青少年不得服用阿司匹林肠溶片，除非有医嘱并且其他治疗措施已失败。此类疾病出现持续性呕吐可能是瑞氏综合征(Reye综合征)的信号。Reye综合征是一种极罕见的危及生命的疾病，需立即进行药物治疗。 如未咨询医生，不得长期或高剂量服用含有阿司匹林的药物。\n本品易于通过胎盘。动物试验在妊娠头3个月应用本品可致畸胎，如脊椎裂、头颅裂、面部裂、腿部畸形，以及中枢神经系统、内脏和骨骼的发育不全。在人类也有报道在应用本品后发生胎儿缺陷者。此外，在妊娠后3个月长期大",
+                  "quote_truncated": true,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 17,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_89d97269530577ddfdc1f701",
+                  "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 39478837,
+                  "byte_length": 2057,
+                  "row_sha256": "d34e88c9f540212ca661d9c8ebef22d4775dcf2c26e46531b17c8c4520c4df27",
+                  "quote_start": 0,
+                  "quote_end": 696,
+                  "quote_preview": "增强以下药物的作用，可能增加副作用风险： - 抗凝血药/溶栓剂：如在溶栓治疗前服用，阿司匹林能增加出血风险。因此，对于拟行溶栓治疗的患者，应注意外出血或内出血(比如：瘀伤)。 - 抗血小板药，比如：噻氯匹定、氯吡格雷：能延长出血时间。 - 其他非甾体抗炎药以及一般抗风湿药：增加胃肠道溃疡和出血风险。 - 全身糖皮质激素治疗(用于爱迪生氏病(Addison's病)替代治疗的氢化可的松除外)：增加胃肠道副作用的风险。 - 乙醇：增加胃肠道溃疡和胃出血风险。 - 地高辛：血浆水平增加。 - 降血糖药(胰岛素、磺酰脲类)：能降低血糖水平。 - 甲氨蝶呤：降低消除，在蛋白结合位点上被水杨酸盐替代。 - 丙戊酸：在蛋白结合位点上被水杨酸盐替代。 - 选择性血清素再吸收抑制剂(SSRIs)：由于存在协同作用，增加了胃肠道出血风险。 减弱以下药物的作用： - 醛固酮拮抗剂(螺内酯和坎利酸盐)； - 髓袢利尿剂(如呋塞米)； - 降压药(特别是血管紧张素转化酶抑制剂(ACEI))； - 排尿酸剂(如丙磺舒、苯溴马隆、苯磺唑酮)。 - NSAIDs：同时使用(同一天)某些NSAIDs(阿司匹林除外)，如布洛芬或萘普生会减弱阿司匹林的不可逆抗血小板作用。该相互作用的临床相关性尚不明确。心血管风险增加的患者使用某些NSAIDs，例如布洛芬或萘普生可能使阿司匹林的心血管保护作用降低(见[药理毒理])。如果同时服用安乃近，可能会降低乙酰水杨酸对血小板聚集的影响。因此，对于正在服用低剂量阿司匹林以保护心脏的患者，应谨慎使用该联合用药。 因此，除非有医嘱，否则阿司匹林肠溶片不得与上述任何药物合并服用。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_723c90ae44c9bee285d12844",
+                  "record_id": "sourcerecord_5fd63646c6cb8b2fac0856e7",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3023c.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 39477498,
+                  "byte_length": 1339,
+                  "row_sha256": "525d17791e18bde49715b6b83b2710edcd898f1ed193bbfc8e716ed13f369f05",
+                  "quote_start": 0,
+                  "quote_end": 439,
+                  "quote_preview": "用量 不稳定性心绞痛：建议每日剂量为1片阿司匹林肠溶片(相当于每天100mg阿司匹林)； 急性心肌梗死：建议每日剂量为1片阿司匹林肠溶片(相当于每天100mg阿司匹林)； 预防心肌梗死复发：建议每日剂量为3片阿司匹林肠溶片(相当于每天300mg阿司匹林)； 动脉血管手术或介入手术后，如主动脉冠状动脉静脉搭桥术(ACVB)、经皮冠状动脉腔内血管成形术(PTCA)：建议每日剂量为1片阿司匹林肠溶片(相当于每天100mg阿司匹林)； 主动脉冠状动脉静脉搭桥术(ACVB)后，开始使用阿司匹林肠溶片最佳时间为术后24小时。 预防短暂性脑缺血发作(TIA)和已出现早期症状后预防脑梗死：建议每日剂量为1片阿司匹林肠溶片(相当于每天100mg阿司匹林)。 用法 阿司匹林肠溶片应用适量水服用，最好在饭前至少30分钟服用。不应压碎、掰开或咀嚼肠溶片，以确保活性物质在小肠碱性环境中释放。 在治疗急性心肌梗死时，第一片阿司匹林应咬碎或嚼碎服用。 阿司匹林肠溶片应长期使用，使用期限请遵医嘱。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_5a79a5405650bb813493fba6",
+          "drug_name": "布洛芬片",
+          "actual_patient_product_known": true,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_d40d947420825f491eb7947e",
+                  "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14462191,
+                  "byte_length": 202,
+                  "row_sha256": "12d66a198e105436d073e0ed277d03eaf93bc595dd8a1174e22430426c333902",
+                  "quote_start": 0,
+                  "quote_end": 9,
+                  "quote_preview": "本品主要成分布洛芬",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 3,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_d6a2c24d1fc776db3d08b96f",
+                  "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14460152,
+                  "byte_length": 342,
+                  "row_sha256": "f4963060fcc66247dbd889fa95c8d3a515775ee4cb2a4b5bd88401c0da04e660",
+                  "quote_start": 0,
+                  "quote_end": 55,
+                  "quote_preview": "用于缓解轻至中度疼痛如头痛、关节痛、偏头痛、牙痛、肌肉痛、神经痛、痛经。也用于普通感冒或流行性感冒引起的发热。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 4,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_83f69d1deeed635fb67e68f0",
+                  "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14460494,
+                  "byte_length": 299,
+                  "row_sha256": "ce7e116a56fedf9d2723e2f17e2931911b47627fb5fddad5dd6d6ed1ebc1e2b4",
+                  "quote_start": 0,
+                  "quote_end": 40,
+                  "quote_preview": "对其他非甾体抗炎药过敏者禁用\n孕妇及哺乳期妇女禁用\n对阿司匹林过敏的哮喘患者禁用",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 20,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_7577484e9ca72319be3cad01",
+                  "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14460793,
+                  "byte_length": 1398,
+                  "row_sha256": "0ce272a75fde4e70cbb7d9022a370d7f456de3d72ef755adfb7814efba93cd47",
+                  "quote_start": 0,
+                  "quote_end": 433,
+                  "quote_preview": "1.本品为对症治疗药，不宜长期或大量使用，用于止痛不得超过5天，用于解热不得超过3天，如症状不缓解，请咨询医师或药师。 2.不能同时服用其他含有解热镇痛药的药品（如某些复方抗感冒药）。 3.服用本品期间不得饮酒或含有酒精的饮料。 4.有下列情况患者慎用：60岁以上、支气管哮喘、肝肾功能不全、凝血机制或血小板功能障碍（如血友病）。 5.下列情况患者应在医师指导下使用：有消化性溃疡史、胃肠道出血、心功能不全、高血压。 6.如服用过量或出现严重不良反应，应立即就医。 7.对本品过敏者禁用，过敏体质者慎用。 8.本品性状发生改变时禁止使用。 9.请将本品放在儿童不能接触的地方。 10.如正在使用其他药品，使用本品前请咨询医师或药师。\n1.少数病人可出现恶心、呕吐、胃烧灼感或轻度消化不良、胃肠道溃疡及出血、转氨酶升高、头痛、头晕、耳鸣、视力模糊、精神紧张、嗜睡、下肢水肿或体重骤增。 2.罕见皮疹、过敏性肾炎、膀胱炎、肾病综合征、肾乳头坏死或肾功能衰竭、支气管痉挛。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 4,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_02c972cac935414f04900e08",
+                  "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14463212,
+                  "byte_length": 807,
+                  "row_sha256": "1ab6b8c6972173b9f6f0194ae1b412c3cc619cb78f93abee8bce5e64d354aa1c",
+                  "quote_start": 0,
+                  "quote_end": 214,
+                  "quote_preview": "1.本品与其他解热、镇痛、抗炎药物同用时可增加胃肠道不良反应，并可能导致溃疡。 2.本品与肝素、双香豆素等抗凝药同用时，可导致凝血酶原时间延长，增加出血倾向。 3.本品与地高辛、甲氨蝶呤、口服降血糖药物同用时，能使这些药物的血药浓度增高，不宜同用。 4.本品与呋塞米（呋喃苯胺酸）同用时，后者的排钠和降压作用减弱；与抗高血压药同用时，也降低后者的降压效果。 5.如与其他药物同时使用可能会发生药物相互作用，详情请咨询医师或药师。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 14,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_85298885d514633dbc0dd757",
+                  "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14462687,
+                  "byte_length": 525,
+                  "row_sha256": "a2c1b16bc24b88610ca42f8580a983509e6fa2a264f81d0d9efb4e01a43f6893",
+                  "quote_start": 0,
+                  "quote_end": 116,
+                  "quote_preview": "1.少数病人可出现恶心、呕吐、胃烧灼感或轻度消化不良、胃肠道溃疡及出血、转氨酶升高、头痛、头晕、耳鸣、视力模糊、精神紧张、嗜睡、下肢水肿或体重骤增。 2.罕见皮疹、过敏性肾炎、膀胱炎、肾病综合征、肾乳头坏死或肾功能衰竭、支气管痉挛。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_59b71d40818a8702768637b0",
+                  "record_id": "sourcerecord_c7d47e0c04ec16768ef58321",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy24416.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14462393,
+                  "byte_length": 294,
+                  "row_sha256": "5e765e09d63ffedc20da99182ba71d3a3ea327ca95b0551e3ae0aec8bc21d966",
+                  "quote_start": 0,
+                  "quote_end": 44,
+                  "quote_preview": "口服。成人一次1片，若持续疼痛或发热，可间隔4～6小时重复用药1次，24小时不超过4次。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        }
+      ],
+      "pair_diagnosis": {
+        "status": "diagnosed",
+        "source_identity_joins": [
+          {
+            "edge_ids": [
+              "edge_3c8f1576a995192f4203b65d88d880ca",
+              "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+            ],
+            "kind": "source_identity_join"
+          },
+          {
+            "edge_ids": [
+              "edge_ca28c0e3f2bc6a83baeb09c7594dc2aa",
+              "edge_7ac2b16c499bcb8da1a0c191b0c86d8c"
+            ],
+            "kind": "source_identity_join"
+          }
+        ],
+        "raw_mentions_without_edges": [],
+        "unlinked_class_mentions": [
+          {
+            "class_name": "抗凝血药",
+            "interaction_edge_id": "edge_413497c8d4bba5e5b2ac2beccfb2e92a",
+            "reason": "类别仅为相互作用对象，不能假定另一药属于此类；该项本身不证明缺边"
+          },
+          {
+            "class_name": "抗血小板药",
+            "interaction_edge_id": "edge_9297387bf60ca5bc4b39a3283717096e",
+            "reason": "类别仅为相互作用对象，不能假定另一药属于此类；该项本身不证明缺边"
+          }
+        ],
+        "class_source_review_leads": [],
+        "shared_third_partners": [
+          {
+            "name": "呋塞米",
+            "kind": "Ingredient",
+            "usable_for_pair_conclusion": false
+          },
+          {
+            "name": "地高辛",
+            "kind": "Ingredient",
+            "usable_for_pair_conclusion": false
+          },
+          {
+            "name": "甲氨蝶呤",
+            "kind": "Ingredient",
+            "usable_for_pair_conclusion": false
+          }
+        ],
+        "boundary": "仅核对两端制剂的本地相互作用原文及成分/明确类别归属，不代表全库或临床结论"
+      }
+    },
+    {
+      "question": "我喷了布地奈德鼻喷雾剂好几天了，鼻子还是堵，而且今天鼻子里好像有点疼，这是药不管用还是我有其他问题",
+      "category": "graph_paths_available",
+      "next_step": "图路径已经返回；若最终仍拒答，检查 evidence_flow 和审核原因",
+      "graph_status": "ok",
+      "graph_seconds": 0.6836,
+      "returned_paths": 6,
+      "truncated": true,
+      "products": [
+        {
+          "drug_id": "drug_4a77b1a2a9b5d2388961ddee",
+          "drug_name": "布地奈德鼻喷雾剂",
+          "actual_patient_product_known": true,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_de386554ecd76e877f4a9fdf",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14390318,
+                  "byte_length": 267,
+                  "row_sha256": "b0ff6d471e3126eca430f664a95129fbe130a088ac5fd8a7478dfc5d352adfc2",
+                  "quote_start": 0,
+                  "quote_end": 30,
+                  "quote_preview": "预防和治疗常年性及季节性过敏性鼻炎，也可用于血管舒缩性鼻炎。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 20,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_fcfcb89eb000ef786e477054",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14390585,
+                  "byte_length": 1835,
+                  "row_sha256": "30d71915bf85aa44e375268183e2f4489c51fe45ef7ec79bd86250ac1a9f8ae0",
+                  "quote_start": 0,
+                  "quote_end": 604,
+                  "quote_preview": "1.使用本品14天后，症状仍未改善，请咨询医师。 2.自我治疗时间不得超过3个月，如需要超过3个月，应在医师指导下使用。 3.长期使用高剂量，可能发生糖皮质激素的全身作用。长期接受本品治疗的儿童和青少年，可能引起生长发育迟缓，应在医师指导下使用。 4.伴有鼻部真菌感染和疱疹的患者慎用。 5.使用全身性糖皮质激素转而使用本品者，应在医师指导下使用。 6.肺结核患者慎用。 7.本品仅为鼻腔用药，不得接触眼睛，若接触眼睛，请立即用水清洗。 8.6岁以下儿童不推荐使用本品。 9.孕妇及哺乳期妇女应避免使用本品。 10.运动员慎用。 11.如服用过量或出现严重不良反应，应立即就医。 12.对本品过敏者禁用，过敏体质者慎用。 13.本品性状发生改变时禁止使用。 14.请将本品放在儿童不能接触的地方。 15.儿童必须在成人监护下使用。 16.如正在使用其他药品，使用本品前请咨询医师或药师。\n约5％的患者会发生局部刺激的不良反应。 常见（>1/100）：气道：局部刺激、轻微的血性分泌物、鼻出血。 少见（1/1000）：全身：血管性水肿。 皮肤：荨麻疹、皮疹、皮炎、瘙痒。 气道：鼻中隔穿孔和黏膜溃疡。 速发或迟发的过敏反应，包括荨麻疹、皮疹、皮炎、血管神经性水肿和瘙痒已有报道。极少数病人在鼻腔内给予糖皮质激素后出现黏膜溃疡和鼻中隔穿孔。这些不良反应的原因（可能由糖皮质激素、这些疾病或其他因素引起）尚不清楚。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_98aabcaf15509a213725bf20",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14393660,
+                  "byte_length": 327,
+                  "row_sha256": "7ad0ae33680fbac140f616518ae5a8f06f1add97eb6971d01cf023f2e5d0814f",
+                  "quote_start": 0,
+                  "quote_end": 48,
+                  "quote_preview": "1.应避免与酮康唑合用。 2.如与其他药物同时使用可能会发生药物相互作用，详情请咨询医师或药师。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 14,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_9c782327e4e5bc3c0a839253",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14392879,
+                  "byte_length": 781,
+                  "row_sha256": "4801b020ad50e4a900cc4e66ea55e6264d0f7f11ca77b9e5b1e49e255defcc24",
+                  "quote_start": 0,
+                  "quote_end": 210,
+                  "quote_preview": "约5％的患者会发生局部刺激的不良反应。 常见（>1/100）：气道：局部刺激、轻微的血性分泌物、鼻出血。 少见（1/1000）：全身：血管性水肿。 皮肤：荨麻疹、皮疹、皮炎、瘙痒。 气道：鼻中隔穿孔和黏膜溃疡。 速发或迟发的过敏反应，包括荨麻疹、皮疹、皮炎、血管神经性水肿和瘙痒已有报道。极少数病人在鼻腔内给予糖皮质激素后出现黏膜溃疡和鼻中隔穿孔。这些不良反应的原因（可能由糖皮质激素、这些疾病或其他因素引起）尚不清楚。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_4a54c9f6f62cd29526d5f66d",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14392420,
+                  "byte_length": 459,
+                  "row_sha256": "fa4e390050c2f7d51119223a19d650768845d3f90fd881cb37771396768b0e62",
+                  "quote_start": 0,
+                  "quote_end": 103,
+                  "quote_preview": "鼻腔喷入：左手喷右侧鼻孔，右手喷左侧鼻孔，避免直接喷向鼻中隔。 成人：开始时每个鼻孔各2喷，早晚各1次。一日最大用量不超过8喷（256?g）。症状缓解后每天每个鼻孔喷1次，每次1喷。 6岁以上儿童：同成人。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        }
+      ],
+      "pair_diagnosis": {
+        "status": "skipped_unconfirmed_entities_or_not_interaction"
+      }
+    },
+    {
+      "question": "患者有严重的青光眼，同时正在服用西替利嗪（或弗雷他定），因为鼻炎鼻塞严重，能不能加上布地奈德喷雾剂？",
+      "category": "entity_resolution_or_clarification",
+      "next_step": "先核对药名和患者实际制剂，避免按错误实体补边",
+      "graph_status": "needs_medication_clarification",
+      "graph_seconds": null,
+      "returned_paths": 0,
+      "truncated": false,
+      "products": [
+        {
+          "drug_id": "drug_0f451952d47ac2f4b052111b",
+          "drug_name": "盐酸西替利嗪分散片",
+          "actual_patient_product_known": false,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_d8260f8fae0dd1ac03655aee",
+                  "record_id": "sourcerecord_f30520be10ac272ad8af93d9",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5476d.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29325524,
+                  "byte_length": 297,
+                  "row_sha256": "e46a5c8b0d42717dd43919c8f20cb5ba734b992411069c7313f593dad8617ee0",
+                  "quote_start": 0,
+                  "quote_end": 40,
+                  "quote_preview": "季节性和常年性过敏鼻炎，鼻结膜炎，荨麻疹，由药品、食品和昆虫叮咬引起的过敏反应。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_cceba48755ef75d5a4945104",
+                  "record_id": "sourcerecord_f30520be10ac272ad8af93d9",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5476d.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29325821,
+                  "byte_length": 205,
+                  "row_sha256": "9f284c281c04da2e756e98e0e67559cd90edb9bae98f20f97bc507d566763282",
+                  "quote_start": 0,
+                  "quote_end": 8,
+                  "quote_preview": "对本品过敏者禁用",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 9,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_211f6a0769321c32dbe39021",
+                  "record_id": "sourcerecord_f30520be10ac272ad8af93d9",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5476d.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29326026,
+                  "byte_length": 804,
+                  "row_sha256": "32d4ec47ffd8d8b99211c7b4c430faa9780dbb1b6b61129615281a555c1fb904",
+                  "quote_start": 0,
+                  "quote_end": 217,
+                  "quote_preview": "1．肾功能损害者用量应减半。 2．酒后避免使用。 3．司机、操作机器或高空作业人员慎用。\n不良反应轻微且为一过性，有困倦、嗜睡、头痛、眩晕、激动、口干及胃肠道不适等。偶有天门冬氨酸氨基转移酶轻度升高。\n妊娠期及哺乳期妇女禁用。\n2岁以下儿童禁用。\n有肾功能障碍的老年人应降低用药剂量。\n本药无特效拮抗剂，服用过量（一次性口服超过50mg），应进行胃肠灌洗和相应的支持治疗。严重超量患者应立即洗胃，采用支持疗法，并长期严密观察病情变化。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_bef055e1a1777bc313ce5a28",
+                  "record_id": "sourcerecord_f30520be10ac272ad8af93d9",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5476d.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29327734,
+                  "byte_length": 310,
+                  "row_sha256": "787e01af61645edb89f9a8bfa9e019659721d68af68ded357371846a180c8b0b",
+                  "quote_start": 0,
+                  "quote_end": 39,
+                  "quote_preview": "未发现有与其它药物相互作用的报道，但同时服用镇静药时应慎重。避免与镇静药合用。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 6,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_72251a6456e4a693143cd655",
+                  "record_id": "sourcerecord_f30520be10ac272ad8af93d9",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5476d.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29327382,
+                  "byte_length": 352,
+                  "row_sha256": "6da938d2891a5fec7f9271a51babbaf00227b236e582d67704125b1d65c353d9",
+                  "quote_start": 0,
+                  "quote_end": 55,
+                  "quote_preview": "不良反应轻微且为一过性，有困倦、嗜睡、头痛、眩晕、激动、口干及胃肠道不适等。偶有天门冬氨酸氨基转移酶轻度升高。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_379c790a6483c434146cb012",
+                  "record_id": "sourcerecord_f30520be10ac272ad8af93d9",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5476d.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29326830,
+                  "byte_length": 552,
+                  "row_sha256": "3d8340256ae0d8e1f87287c85f5fce59846d374f861e34893841c85cba081d8c",
+                  "quote_start": 0,
+                  "quote_end": 142,
+                  "quote_preview": "口服：成人或12岁以上儿童，一次1片，一日1次或遵医嘱。如出现不良反应，可改为早晚各半片。 2~5岁儿童，推荐起始剂量为1/4片，一日1次；最大剂量可增至半片，一日1次，或1/4片，每12小时1次。6~11岁儿童，根据症状的严重程度不同，推荐起始剂量为半片或1片，一日1次。或遵医嘱。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_65d8b9434bcf7dee249670b2",
+          "drug_name": "盐酸西替利嗪口服溶液",
+          "actual_patient_product_known": false,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_e28aff84fda91ef98953dd4b",
+                  "record_id": "sourcerecord_f406d147b08a3f59da12cfca",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy2167m.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29332245,
+                  "byte_length": 193,
+                  "row_sha256": "dddcc84e808eb765cde141b191915dd463e2b438d6fcdd055dcc4e7e9d7ec33a",
+                  "quote_start": 0,
+                  "quote_end": 6,
+                  "quote_preview": "盐酸西替利嗪",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 4,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_6c6a4582bd7f8f044fa4f0cb",
+                  "record_id": "sourcerecord_f406d147b08a3f59da12cfca",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy2167m.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29329109,
+                  "byte_length": 303,
+                  "row_sha256": "3b6a53d85ed12ef2fc4bc50c6b1f8b4fb6eb4943175328c8185658b8eb620253",
+                  "quote_start": 0,
+                  "quote_end": 42,
+                  "quote_preview": "季节性过敏性鼻炎、常年性过敏性鼻炎、过敏性结膜炎及过敏引起的瘙痒和荨麻疹的对症治疗。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_439d887153f5d7975d6fc126",
+                  "record_id": "sourcerecord_f406d147b08a3f59da12cfca",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy2167m.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29329412,
+                  "byte_length": 316,
+                  "row_sha256": "dc46942c940fa647cc1f27869952dfbd76fcf976e34ffdcf45bb082f884169ca",
+                  "quote_start": 0,
+                  "quote_end": 52,
+                  "quote_preview": "对本品成份、羟嗪或任何其他哌嗪衍生物过敏者禁用\n严重肾功能损害(肌酐清除率低于10mL/min)患者禁用",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 38,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_7f51bb79175fee1b243e6100",
+                  "record_id": "sourcerecord_f406d147b08a3f59da12cfca",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy2167m.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29329728,
+                  "byte_length": 2517,
+                  "row_sha256": "ca690c35131680be61af0309bf7341b42a1bde3a9cf16f40465a257da32db8a9",
+                  "quote_start": 0,
+                  "quote_end": 842,
+                  "quote_preview": "1.由于可能发生额外的警觉性降低以及对中枢神经系统性能的额外损害，应避免盐酸西替利嗪与酒精或其它中枢神经系统抑制剂合并使用。 2.因临床研究中某些患者服用西替利嗪出现嗜睡，司机或可能操作危险机器人员慎用。 3.癫痫患者以及有惊厥风险的患者应慎用。 4.因西替利嗪有可能增加尿潴留的风险，有尿潴留易感因素(例如脊髓损害、前列腺肥大)的患者慎用。 5.抗组胺药物会降低皮肤过敏测试结果的灵敏度，所以接受这类测试前应停药3天。\n?心脏症状： 罕见：心动过速 ?血液及淋巴症状： 十分罕见：血小板减少 ?神经系统症状： 偶见：感觉异常 罕见：惊厥 十分罕见：味觉障碍，运动障碍，肌张力障碍，晕厥，震颤 不详：耳聋，遗忘，记忆障碍 ?眼部症状： 十分罕见：视力调节障碍，视力模糊，眼球旋动 不详：血管炎 ?耳及迷路症状： 不详：眩晕 ?胃肠症状： 偶见：腹泻 ?肾脏及泌尿系统症状： 十分罕见：排尿困难，遗尿 不详：尿潴留 ?皮肤及皮下组织症状： 偶见：瘙痒症，皮疹 罕见：荨麻疹 十分罕见：血管神经性水肿，固定性药疹 ?全身症状以及用药部位症状： 偶见：无力，不适 罕见：水肿 ?免疫系统症状： 罕见：超敏反应 十分罕见：过敏性休克 ?肝胆症状： 罕见：肝功能异常(转氨酶、碱性磷酸酶、γ-GT和胆红素升高) ?新陈代谢和营养失调： 不详：食欲增加 ?精神症状： 偶见：激越 罕见：攻击性，意识错乱，抑郁，幻觉，失眠 十分罕见：抽动 不详：自杀观念 ?实验室检查： 罕见：体重增加\n不适用。\n不适用。\n已有盐酸西替利嗪的药物过量报道。1名成年患者服用150mg盐酸西替利嗪，该患者未表现出除嗜睡以外的临床症状",
+                  "quote_truncated": true,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 3,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_7a1d7ab77875534fd1f7b2f8",
+                  "record_id": "sourcerecord_f406d147b08a3f59da12cfca",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy2167m.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29334871,
+                  "byte_length": 450,
+                  "row_sha256": "2d6b8fe6c65d50b322dc1dfaaba711120dc88f60b7c5a3c65b371a50cfc79654",
+                  "quote_start": 0,
+                  "quote_end": 89,
+                  "quote_preview": "尚未发现与低剂量茶碱、阿奇霉素、伪麻黄碱、酮康唑或红霉素具有临床意义的药物相互作用。400mg剂量的茶碱导致西替利嗪的清除率有较小的降低，可能是由于较高的茶碱剂量具有较强的效果。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 34,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_c3f3b11ff19b1a9f465c8e33",
+                  "record_id": "sourcerecord_f406d147b08a3f59da12cfca",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy2167m.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29333526,
+                  "byte_length": 1345,
+                  "row_sha256": "9555ca84028e79e591fe1b42364db58a2b53e7a8f5325f6d1023f769ff8ea65c",
+                  "quote_start": 0,
+                  "quote_end": 425,
+                  "quote_preview": "?心脏症状： 罕见：心动过速 ?血液及淋巴症状： 十分罕见：血小板减少 ?神经系统症状： 偶见：感觉异常 罕见：惊厥 十分罕见：味觉障碍，运动障碍，肌张力障碍，晕厥，震颤 不详：耳聋，遗忘，记忆障碍 ?眼部症状： 十分罕见：视力调节障碍，视力模糊，眼球旋动 不详：血管炎 ?耳及迷路症状： 不详：眩晕 ?胃肠症状： 偶见：腹泻 ?肾脏及泌尿系统症状： 十分罕见：排尿困难，遗尿 不详：尿潴留 ?皮肤及皮下组织症状： 偶见：瘙痒症，皮疹 罕见：荨麻疹 十分罕见：血管神经性水肿，固定性药疹 ?全身症状以及用药部位症状： 偶见：无力，不适 罕见：水肿 ?免疫系统症状： 罕见：超敏反应 十分罕见：过敏性休克 ?肝胆症状： 罕见：肝功能异常(转氨酶、碱性磷酸酶、γ-GT和胆红素升高) ?新陈代谢和营养失调： 不详：食欲增加 ?精神症状： 偶见：激越 罕见：攻击性，意识错乱，抑郁，幻觉，失眠 十分罕见：抽动 不详：自杀观念 ?实验室检查： 罕见：体重增加",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_ad6533285bf5e935fea895f3",
+                  "record_id": "sourcerecord_f406d147b08a3f59da12cfca",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy2167m.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29332438,
+                  "byte_length": 1088,
+                  "row_sha256": "af51966129f6ff838c0f44840b26255984dc6527622901db7e3cfeca76714c97",
+                  "quote_start": 0,
+                  "quote_end": 372,
+                  "quote_preview": "推荐儿童使用。 6岁及6岁以上儿童：在大多数情况下，推荐剂量为每日10mg(10ml)，一次口服。若患者对不良反应较为敏感，可每日早晚各服一次，每次5mg(5ml)。 2～5岁的儿童：5mg(5ml)/次，每日一次；或2.5mg(2.5ml)/次，每日两次。 6个月～未满2岁儿童：早上和晚上各服用2.5mg(2.5ml)。 肝、肾功能损害患者的剂量调整：12岁以上(含12岁)的肾功能降低(肌酐清除率为11～31ml/min)患者、血液透析患者(肌酐清除率小于7ml/min)和肝功能损害患者，推荐剂量为5mg、每日一次。肝或肾功能损害的6～11岁儿童患者应使用较低的推荐剂量。因难以准确服用2.5mg以下剂量，并且缺乏6岁以下肝或肾功能损害的儿童患者的药代动力学及安全性信息，因此不推荐在6岁以下肝或肾功能损害的儿童患者中使用盐酸西替利嗪。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_9dc51bc6455052637417f37a",
+          "drug_name": "盐酸西替利嗪滴剂",
+          "actual_patient_product_known": false,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_36bf7fb4c750b721de490faa",
+                  "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29340114,
+                  "byte_length": 193,
+                  "row_sha256": "26b5e08c09da98a2702d77a10a83572ef64bcff0a7d25d393c06af8c24729976",
+                  "quote_start": 0,
+                  "quote_end": 6,
+                  "quote_preview": "盐酸西替利嗪",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 3,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_b68972d26d186d182e624c60",
+                  "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29336548,
+                  "byte_length": 303,
+                  "row_sha256": "f367a9471a450622c245e1dd91418bff7185da58747d749d3342d9165c1f52ed",
+                  "quote_start": 0,
+                  "quote_end": 42,
+                  "quote_preview": "治疗季节性鼻炎、常年性过敏性鼻炎以及非鼻部症状眼结膜炎，过敏引起的瘙痒和荨麻疹症状。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_4aba09df7d401ba5f2f5eeb2",
+                  "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29336851,
+                  "byte_length": 316,
+                  "row_sha256": "c1523181a17cc9c2d99af0036755b8131df8be22f7172827cdbf35ac2f222a81",
+                  "quote_start": 0,
+                  "quote_end": 52,
+                  "quote_preview": "对本品成份、羟嗪或任何其他哌嗪衍生物过敏者禁用\n禁用于终末期肾病患者(肾小球滤过率低于15ml/min)",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 26,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_6e03c3eb0c52bee72c98f5b1",
+                  "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29337167,
+                  "byte_length": 2947,
+                  "row_sha256": "40dcfad98bd575aa6f36dd943dc259d5089955e37d4dcdeef972e47c8acc7b00",
+                  "quote_start": 0,
+                  "quote_end": 966,
+                  "quote_preview": "肾功能不全患者必须适当调整服药剂量(见[用法用量]项)。 老年患者的肾功能或许有所衰退，可能需要适当调整剂量。 因西替利嗪有可能增加尿潴留的风险，有尿潴留易感因素(例如脊髓损害、前列腺肥大)的患者慎用。 癫痫患者以及有惊厥风险的患者应慎用。 抗组胺药物会降低皮肤过敏测试结果的灵敏度，所以接受这类测试前应停药3天。 10mg/ml口服滴剂中所含的尼泊金甲酯和尼泊金丙酯可能引起变态反应(可能为迟发型)。 西替利嗪可增强睡意，所以本品与酒精或中枢神经抑制药同服时应特别谨慎 驾驶或操作机械： 西替利嗪可增强睡意。因此，本品会影响驾驶能力和机械操作能力。 首次打开瓶盖3个月后请勿使用。\n偶有报告患者有轻微和短暂不良反应。如头痛，头晕，嗜睡，激动不安，口干，腹部不适。在测定精神运动功能的客观试验中，本品的镇静作用和安慰剂相似。罕有报道过敏反应。\n一项关于孕妇(300-1000名)使用西替利嗪的有限临床数据提示，该研究没有明确表明西替利嗪与畸形儿或胎儿/新生儿毒性有关。 动物试验表明，西替利嗪对于妊娠、胚胎发育、胎仔发育或产后发育没有直接或间接毒性。但是为了预防，盐酸西替利嗪不应给怀孕初期至三个月的孕妇服用。 哺乳期妇女不应使用西替利嗪，因为该药物会进入母乳。根据给药后的采样时间，乳汁中的药物浓度可达到血浆中药物浓度的25%～90%。在母乳喂养的婴儿中可能会观察到与西替利嗪相关的不良反应。\n1岁以下儿童：虽然有6个月到1岁婴儿服用西替利嗪的临床数据，但相关评估尚未完全结束。 对于肾功能不全的儿童患者，须根据患者的肾脏清除率和体重进行个性化剂量调整。 详见[用法用量]项。\n肾功能正常的老年患者",
+                  "quote_truncated": true,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 14,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_14f3baa66042c2136fa5631d",
+                  "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29341975,
+                  "byte_length": 1805,
+                  "row_sha256": "ab13b3a0a5d73dc7c4faeccc1169384e77997f01d5b18366844c788c62734739",
+                  "quote_start": 0,
+                  "quote_end": 598,
+                  "quote_preview": "同时使用阿奇霉素、西咪替丁、红霉素、酮康唑或伪麻黄碱不会影响西替利嗪的药代动力学参数。未观察到任何药效动力学相互作用。体外研究表明：西替利嗪不会影响华法林的蛋白结合。 同时使用阿奇霉素、红霉素、酮康唑、茶碱和伪麻黄碱不会显著改变临床实验室参数、生命机能和心电图结果。 在一项研究中同时给予茶碱(400mg/日)和西替利嗪(20mg/日)，观察到西替利嗪和茶碱的24小时浓度时间曲线下面积分别增大19%和11%，增幅轻微但是具有统计学意义，最高血浆水平分别升高7.7%和6.4%。同时，先接受茶碱再接受西替利嗪的患者，其西替利嗪和茶碱的清除率分别降低－16%和－10%。但先接受西替利嗪再接受茶碱的患者，其茶碱药代动力学参数无明显变化。 单次摄入10mg西替利嗪不会明显增强酒精的效果(0.8‰)；在16次心理计量学测试中，有一次可证明：10mg西替利嗪和5mg地西泮会产生药物相互作用，具有统计学意义。 同时使用10mg西替利嗪(每日一次)和格列吡嗪会导致血糖水平轻度降低。这一现象没有重要的临床意义，但仍然建议分开服药，最好早晨服用格列吡嗪、晚上服用西替利嗪。在进食时服用西替利嗪不会减少其吸收程度，但吸收会延缓1小时。 在多剂量研究中给予利托那韦(600mg，每日2次)和西替利嗪(10mg，每日1次)，西替利嗪暴露量增加了约40%，但与西替利嗪同服的利托那韦的暴露量变化却很小(-11%)。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 6,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_907d2923c4dd28af5271bea9",
+                  "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29341551,
+                  "byte_length": 424,
+                  "row_sha256": "cdf091f3a82e4829bc55424f223e26579b9e9e372f8a593a3203e00abbaef365",
+                  "quote_start": 0,
+                  "quote_end": 79,
+                  "quote_preview": "偶有报告患者有轻微和短暂不良反应。如头痛，头晕，嗜睡，激动不安，口干，腹部不适。在测定精神运动功能的客观试验中，本品的镇静作用和安慰剂相似。罕有报道过敏反应。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_63600eaf7e723b5becc82a53",
+                  "record_id": "sourcerecord_9b5e9887a4ccaa253be251cb",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy21665.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29340307,
+                  "byte_length": 1244,
+                  "row_sha256": "e59de5ceba3a57affc8602494a30c42abe8b00a13e9221468f9fd2241c96e5dd",
+                  "quote_start": 0,
+                  "quote_end": 426,
+                  "quote_preview": "盐酸西替利嗪滴剂口服给药。 推荐成年人和1岁以上儿童使用。 滴剂使用时，先按瓶盖上图示打开瓶盖，然后瓶口垂直向下，药液即会滴出，如果没有液滴在流动并且尚未取得正确数量的液滴，请将瓶口向上直立放置，然后再次将其倒置并继续滴取，药液可滴入汤匙中直接口服或用患者可以吞咽的水量稀释后服用。稀释后的溶液必须立即服用。 用量： 成年人：在大多数正常情况下，推荐剂量为每日1ml(10mg，约20滴)，一次口服。 建议可在晚餐期间用少液体送服此药。 若病人对不良反应敏感，可每日早晚两次服用，每次0.5ml(5mg，约10滴)。 6岁以上儿童：早上和晚上各服用0.5ml(5mg，约10滴)或每天一次1ml(10mg，约20滴)。 2-6岁儿童：早上和晚上各服用0.25ml(2.5mg，约5滴)或每天一次0.5ml(5mg，约10滴)。 1-2岁儿童：早上和晚上各服用0.25ml(2.5mg，约5滴)。 对于季节性鼻炎和眼结膜炎的儿童，最长治疗周期不超过4周。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_a284661ef246dc611946bbca",
+          "drug_name": "盐酸西替利嗪片",
+          "actual_patient_product_known": false,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_25e6b4e92ee16b34a7bda536",
+                  "record_id": "sourcerecord_48a9eb543c682e36ae8d69e6",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3546x.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29347439,
+                  "byte_length": 193,
+                  "row_sha256": "0de8b22efabfeded48a5fb3e6d0a6664e9e36c185ce0893284fc12d8d5921acc",
+                  "quote_start": 0,
+                  "quote_end": 6,
+                  "quote_preview": "盐酸西替利嗪",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 3,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_061ee83c14e6a304fb2cc8a2",
+                  "record_id": "sourcerecord_48a9eb543c682e36ae8d69e6",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3546x.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29345060,
+                  "byte_length": 294,
+                  "row_sha256": "3c6c5b2bfb219c38df12ed1c0d0c42c6301716ee28e414c36e1d2a813dc0c0be",
+                  "quote_start": 0,
+                  "quote_end": 39,
+                  "quote_preview": "季节性鼻炎、常年性过敏性鼻炎、过敏性结膜炎及过敏引起的瘙痒和荨麻疹的对症治疗。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_035a36b0f11cfab596616011",
+                  "record_id": "sourcerecord_48a9eb543c682e36ae8d69e6",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3546x.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29345354,
+                  "byte_length": 463,
+                  "row_sha256": "848aaff3619bd732277b7c5ca5e6c1e10b1e94e99c9405481ba5b89e5c4befbf",
+                  "quote_start": 0,
+                  "quote_end": 105,
+                  "quote_preview": "对本品成份、羟嗪或任何其他哌嗪衍生物过敏者禁用\n严重肾功能损害(肌酐清除率低于10ml/min)患者禁用\n本品含有乳糖\n有罕见的遗传性半乳糖不耐受、Lapp乳糖酶缺陷或葡萄糖-半乳糖吸收不良综合征的患者不可服用",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 12,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_066f211e79328b9a5efcb086",
+                  "record_id": "sourcerecord_48a9eb543c682e36ae8d69e6",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3546x.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29345817,
+                  "byte_length": 1622,
+                  "row_sha256": "f415ebb507b6ed5c6302f9873a7b3fa7b24ef987f8493104684435ff09f2ace2",
+                  "quote_start": 0,
+                  "quote_end": 518,
+                  "quote_preview": "1.治疗剂量下，未显示与酒精存在有显著临床意义的相互作用(血液酒精水平为0.5g/L)。虽然如此，服用本品时应谨慎饮酒。 2.因西替利嗪有可能增加尿潴留的风险，有尿潴留易感因素(例如脊髓损害、前列腺肥大)的患者慎用。 3.癫痫患者以及有惊厥风险的患者应慎用。 4.肾功能不全患者应在医生指导下使用。 5.孕妇给药时需特别注意。妊娠头3个月妇女不推荐使用。哺乳期妇女不可使用西替利嗪，因为该药物会进入母乳。 6.服药期间不得驾驶机、车、船、从事高空作业、机械作业及操作精密仪器。 7.对本品过敏者禁用，过敏体质者慎用。 8.抗组胺药物会降低皮肤过敏测试结果的灵敏度，所以接受这类测试前应停药3天。 9.本品性状发生改变时禁止使用。 10.请将本品放在儿童不能接触的地方。 11.儿童必须在成人监护下使用。2-6岁儿童建议使用盐酸西替利嗪滴剂。不建议6岁以下儿童服用本品，因包衣片无法准确调整剂量。 12.如正在使用其他药品，使用本品前请咨询医师或药师。\n偶有报告患者有轻微和短暂不良反应。如头痛，头晕，嗜睡，激动不安，口干，腹部不适。在测定精神运动功能的客观试验中，本品的镇静作用和安慰剂相似。罕有报道过敏反应。\n妊娠期及哺乳期妇女禁用。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_395f6d5e4fe1d6555c71dd13",
+                  "record_id": "sourcerecord_48a9eb543c682e36ae8d69e6",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3546x.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29348484,
+                  "byte_length": 353,
+                  "row_sha256": "404bc15fc66e2c80f442298112a6069a69896cc2cd6fce2f3ecbf738eb22d4fb",
+                  "quote_start": 0,
+                  "quote_end": 58,
+                  "quote_preview": "1.本品应谨慎与镇静剂(安眠药)或茶碱同服。 2.如与其他药物同时使用可能会发生药物相互作用，详情请咨询医师或药师。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 6,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_3a5a5e6f189f904d886e05db",
+                  "record_id": "sourcerecord_48a9eb543c682e36ae8d69e6",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3546x.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29348060,
+                  "byte_length": 424,
+                  "row_sha256": "81e9724228724c29a71e97ad7a77861fe67dce229eeb316886c153a08a6ec0be",
+                  "quote_start": 0,
+                  "quote_end": 79,
+                  "quote_preview": "偶有报告患者有轻微和短暂不良反应。如头痛，头晕，嗜睡，激动不安，口干，腹部不适。在测定精神运动功能的客观试验中，本品的镇静作用和安慰剂相似。罕有报道过敏反应。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_aa6e11940dcada36725e9166",
+                  "record_id": "sourcerecord_48a9eb543c682e36ae8d69e6",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3546x.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29347632,
+                  "byte_length": 428,
+                  "row_sha256": "c0516042cd8b9cc67c0818ec8b885a785bb2187bfd3b341880a0094542d651a7",
+                  "quote_start": 0,
+                  "quote_end": 90,
+                  "quote_preview": "口服。推荐成人和6岁以上儿童使用。成人：一次1片，可于晚餐时用少量液体送服，若对不良反应敏感，可每日早晚各1次，一次半片。6～12岁儿童：一次1片，一日1次；或一次半片，一日2次。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_d1a880ab3c73ccbe4f7fd314",
+          "drug_name": "盐酸西替利嗪糖浆",
+          "actual_patient_product_known": false,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_fdacd8f6ed3440bd2bf501e1",
+                  "record_id": "sourcerecord_8cc755534c530d63cfb6f846",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5848k.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29352157,
+                  "byte_length": 217,
+                  "row_sha256": "0fcd622e1fa5c1d584b4f01b5ccb2b16d1594ce3b865e8449c6fb8acf42775b5",
+                  "quote_start": 0,
+                  "quote_end": 14,
+                  "quote_preview": "本品主要成分为盐酸西替利嗪。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_4a472ddc66832afddaa41ad5",
+                  "record_id": "sourcerecord_8cc755534c530d63cfb6f846",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5848k.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29350020,
+                  "byte_length": 270,
+                  "row_sha256": "96dee0f65f4a5e0c168bc1d5ab09f77a3b0b3669d051e9c0077e99c6b3835f5c",
+                  "quote_start": 0,
+                  "quote_end": 31,
+                  "quote_preview": "用于季节性或常年性过敏性鼻炎、由过敏原引起的荨麻疹及皮肤瘙痒。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_0a00c700b8a135bdc8b00f30",
+                  "record_id": "sourcerecord_8cc755534c530d63cfb6f846",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5848k.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29350290,
+                  "byte_length": 235,
+                  "row_sha256": "b91154847ff054beca435fa07aa19b55acdf98d05c6e2ed2028818f08a1ad312",
+                  "quote_start": 0,
+                  "quote_end": 18,
+                  "quote_preview": "对本品过敏者、妊娠期及哺乳期妇女禁用",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 13,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_d6328c22e402725528741629",
+                  "record_id": "sourcerecord_8cc755534c530d63cfb6f846",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5848k.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29350525,
+                  "byte_length": 1632,
+                  "row_sha256": "ab48b169d2606d92d61f76bf5cc0b9f37fd3cacdd98ecac8050a042bdc66b1ec",
+                  "quote_start": 0,
+                  "quote_end": 511,
+                  "quote_preview": "1、肾功能损害者应减半量。 2、酒后避免使用。 3、司机、操作机器或高空作业人员慎用。 4、本品无特效拮抗剂，严重超量患者应立即洗胃，采用支持疗法，并长期严密观察病情变化。 5、同时服用镇静剂时应慎重。\n1、少数患者可出现头痛、口干、嗜睡、情绪不稳定等，但发生率很低。 2、极少数患者可出现皮疹、皮肤瘙痒、恶心、呕吐、腹泻等过敏反应。 3、迄今为止，尚未发现本药引起心律失常、QT间期延长、室性心动过速及肥胖等不良反应，但用药期间（尤其长期用药者）仍应加强观察及随访。\n妊娠及哺乳期妇女应禁用\n本品口服后，在1小时内达到血液浓度最高峰。在成人血浆中，半衰期大约10小时，在6-12岁儿童血浆中半衰期为6小时，在2-6岁儿童中为5小时，所以血浆代谢儿童要高于正常成人。2-12岁儿童用药剂量见（用法用量），2岁以下儿童用药的安全有效性尚未确证。\n西替利嗪主要通过肾脏代谢，所以肾损害的病人可能会有毒性反应，因为老年人肾功能下降，所以选择剂量时要慎重，同时也要进行肾功能监测。\n过量能引起嗜睡，出现于一次口服50mg。现今尚无特别的解毒剂，在过量服用的情况下，应尽快进行胃肠灌洗。除进行一般急救支持治疗外，还必须定时监察检查。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_e57a0e7f8ba9f7ca9f43f4d1",
+                  "record_id": "sourcerecord_8cc755534c530d63cfb6f846",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5848k.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29353454,
+                  "byte_length": 493,
+                  "row_sha256": "4e87ec9ef1a7f1e861fdcb0401001d349c66b5f6aa21024382e6aaf469dd1229",
+                  "quote_start": 0,
+                  "quote_end": 102,
+                  "quote_preview": "1、与可抑制中枢神经系统的药物（如巴比妥类、苯二氮卓类、肌松药、麻醉药、止痛药及吩噻嗪类镇静药）或三环类抗抑郁药合用，可引起严重嗜睡。 2、与茶碱合用，本药清除率下降，血药浓度升高，可增加本药的不良反应。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 11,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_4b8c554725eecd5b7321c551",
+                  "record_id": "sourcerecord_8cc755534c530d63cfb6f846",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5848k.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29352885,
+                  "byte_length": 569,
+                  "row_sha256": "8634d18c945870d903d4d3af908165c1d1f283fcfa3348a9d85d0b6f6162cff5",
+                  "quote_start": 0,
+                  "quote_end": 132,
+                  "quote_preview": "1、少数患者可出现头痛、口干、嗜睡、情绪不稳定等，但发生率很低。 2、极少数患者可出现皮疹、皮肤瘙痒、恶心、呕吐、腹泻等过敏反应。 3、迄今为止，尚未发现本药引起心律失常、QT间期延长、室性心动过速及肥胖等不良反应，但用药期间（尤其长期用药者）仍应加强观察及随访。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_9e9a0780ac94118af8953b69",
+                  "record_id": "sourcerecord_8cc755534c530d63cfb6f846",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy5848k.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29352374,
+                  "byte_length": 511,
+                  "row_sha256": "77a3b569e097d024071ab0c4bb58fc6d74798f250a9177a658682fb7384fc776",
+                  "quote_start": 0,
+                  "quote_end": 129,
+                  "quote_preview": "成人和12岁以上儿童：口服，每次10ml，一天一次，或遵医嘱。若出现不良反应，可改在早晚各一次，每次5ml。 6岁~11岁儿童：根据症状的严重程度不同，推荐起始剂量为5ml，每日一次，或遵医嘱。 2岁~5岁儿童：推荐起始剂量为2.5ml，每日一次，或遵医嘱。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_37541b18e0a5c0453a70921f",
+          "drug_name": "盐酸西替利嗪胶囊",
+          "actual_patient_product_known": false,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_b35ccb5ebe0698705edef7a0",
+                  "record_id": "sourcerecord_09a824ac95022eac9812df49",
+                  "field": "composition",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3373v.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29356192,
+                  "byte_length": 193,
+                  "row_sha256": "13920472e68b7a839f845a5282f0d8c594135c32a8271dbf17093117bcf3177c",
+                  "quote_start": 0,
+                  "quote_end": 6,
+                  "quote_preview": "盐酸西替利嗪",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_e5eaf1ec5fb091ed0f9df532",
+                  "record_id": "sourcerecord_09a824ac95022eac9812df49",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3373v.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29354972,
+                  "byte_length": 270,
+                  "row_sha256": "a0e6928ffe1af0fdec752800b64aecfc4a674fbda235e8035ab4b2d172bc2740",
+                  "quote_start": 0,
+                  "quote_end": 31,
+                  "quote_preview": "用于季节性或常年性过敏性鼻炎，由过敏原引起的荨麻疹及皮肤瘙痒。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_737363d4f2ff3eeca2cbcb55",
+                  "record_id": "sourcerecord_09a824ac95022eac9812df49",
+                  "field": "contraindications",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3373v.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29355242,
+                  "byte_length": 235,
+                  "row_sha256": "b7a828422dde46b63ac3fa359c859a68e1b7c3bbfeec0f142b4f191b806d07f8",
+                  "quote_start": 0,
+                  "quote_end": 18,
+                  "quote_preview": "对本品过敏者、妊娠期及哺乳期妇女禁用",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 8,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_5f6ebe32645fdb8592e75fad",
+                  "record_id": "sourcerecord_09a824ac95022eac9812df49",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3373v.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29355477,
+                  "byte_length": 715,
+                  "row_sha256": "1e0e3566409aff107cc5675e24173d7f688cc4f4c379aaec9df2bfd4340ea031",
+                  "quote_start": 0,
+                  "quote_end": 186,
+                  "quote_preview": "1、肾功能损害者用量应减半。 2、酒后避免使用。 3、司机、操作机器或高空作业人员慎用。 4、本药无特效拮抗剂，严重药物过量的患者应立即洗胃，采用支持疗法，并长期严密观察病情变化。 5、未发现有与其它药物相互作用的报道，但同时服用镇静剂时应慎重。\n不良反应轻微且为一过性，可能有困倦、思睡、头痛、眩晕、激动、口干、鼻干及胃肠道不适等。\n妊娠期及哺乳期妇女禁用。\n尚不明确。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 6,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_d5b3937c49ed5226aae08e45",
+                  "record_id": "sourcerecord_09a824ac95022eac9812df49",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3373v.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29356907,
+                  "byte_length": 316,
+                  "row_sha256": "1a216a4e40f78b9082492dbbfd5329263d2d3642a22748a68625f125b5d808f7",
+                  "quote_start": 0,
+                  "quote_end": 43,
+                  "quote_preview": "不良反应轻微且为一过性，可能有困倦、思睡、头痛、眩晕、激动、口干、鼻干及胃肠道不适等。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_4d6592600f7359f8c3b64729",
+                  "record_id": "sourcerecord_09a824ac95022eac9812df49",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy3373v.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 29356385,
+                  "byte_length": 522,
+                  "row_sha256": "c31543c93b0f78836f10e79a5f6c9e489e2a33399de4d60530236bd73cb1dd88",
+                  "quote_start": 0,
+                  "quote_end": 144,
+                  "quote_preview": "口服。成人或12岁以上儿童，每次10mg，一天1次或遵医嘱。如出现不良反应，可改为早晚各5mg；6岁-11岁儿童，根据症状的严重程度不同，推荐起始剂量为5mg或10mg，每日1次；2岁-5岁儿童推荐起始剂量为2.5mg，每日1次，最大剂量可增至5mg，每日1次或2.5mg每12小时1次。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        },
+        {
+          "drug_id": "drug_4a77b1a2a9b5d2388961ddee",
+          "drug_name": "布地奈德鼻喷雾剂",
+          "actual_patient_product_known": false,
+          "columns": [
+            {
+              "field": "composition",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "indication",
+              "source_sections": 1,
+              "graph_edges": 1,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_de386554ecd76e877f4a9fdf",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "indication",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14390318,
+                  "byte_length": 267,
+                  "row_sha256": "b0ff6d471e3126eca430f664a95129fbe130a088ac5fd8a7478dfc5d352adfc2",
+                  "quote_start": 0,
+                  "quote_end": 30,
+                  "quote_preview": "预防和治疗常年性及季节性过敏性鼻炎，也可用于血管舒缩性鼻炎。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "contraindications",
+              "source_sections": 0,
+              "graph_edges": 0,
+              "status": "source_missing_in_local_snapshot",
+              "sources": [],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "warnings",
+              "source_sections": 1,
+              "graph_edges": 20,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_fcfcb89eb000ef786e477054",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "warnings",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14390585,
+                  "byte_length": 1835,
+                  "row_sha256": "30d71915bf85aa44e375268183e2f4489c51fe45ef7ec79bd86250ac1a9f8ae0",
+                  "quote_start": 0,
+                  "quote_end": 604,
+                  "quote_preview": "1.使用本品14天后，症状仍未改善，请咨询医师。 2.自我治疗时间不得超过3个月，如需要超过3个月，应在医师指导下使用。 3.长期使用高剂量，可能发生糖皮质激素的全身作用。长期接受本品治疗的儿童和青少年，可能引起生长发育迟缓，应在医师指导下使用。 4.伴有鼻部真菌感染和疱疹的患者慎用。 5.使用全身性糖皮质激素转而使用本品者，应在医师指导下使用。 6.肺结核患者慎用。 7.本品仅为鼻腔用药，不得接触眼睛，若接触眼睛，请立即用水清洗。 8.6岁以下儿童不推荐使用本品。 9.孕妇及哺乳期妇女应避免使用本品。 10.运动员慎用。 11.如服用过量或出现严重不良反应，应立即就医。 12.对本品过敏者禁用，过敏体质者慎用。 13.本品性状发生改变时禁止使用。 14.请将本品放在儿童不能接触的地方。 15.儿童必须在成人监护下使用。 16.如正在使用其他药品，使用本品前请咨询医师或药师。\n约5％的患者会发生局部刺激的不良反应。 常见（>1/100）：气道：局部刺激、轻微的血性分泌物、鼻出血。 少见（1/1000）：全身：血管性水肿。 皮肤：荨麻疹、皮疹、皮炎、瘙痒。 气道：鼻中隔穿孔和黏膜溃疡。 速发或迟发的过敏反应，包括荨麻疹、皮疹、皮炎、血管神经性水肿和瘙痒已有报道。极少数病人在鼻腔内给予糖皮质激素后出现黏膜溃疡和鼻中隔穿孔。这些不良反应的原因（可能由糖皮质激素、这些疾病或其他因素引起）尚不清楚。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "drug_interactions",
+              "source_sections": 1,
+              "graph_edges": 2,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_98aabcaf15509a213725bf20",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "drug_interactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14393660,
+                  "byte_length": 327,
+                  "row_sha256": "7ad0ae33680fbac140f616518ae5a8f06f1add97eb6971d01cf023f2e5d0814f",
+                  "quote_start": 0,
+                  "quote_end": 48,
+                  "quote_preview": "1.应避免与酮康唑合用。 2.如与其他药物同时使用可能会发生药物相互作用，详情请咨询医师或药师。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "adverse_reactions",
+              "source_sections": 1,
+              "graph_edges": 14,
+              "status": "source_present",
+              "sources": [
+                {
+                  "section_id": "section_9c782327e4e5bc3c0a839253",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "adverse_reactions",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14392879,
+                  "byte_length": 781,
+                  "row_sha256": "4801b020ad50e4a900cc4e66ea55e6264d0f7f11ca77b9e5b1e49e255defcc24",
+                  "quote_start": 0,
+                  "quote_end": 210,
+                  "quote_preview": "约5％的患者会发生局部刺激的不良反应。 常见（>1/100）：气道：局部刺激、轻微的血性分泌物、鼻出血。 少见（1/1000）：全身：血管性水肿。 皮肤：荨麻疹、皮疹、皮炎、瘙痒。 气道：鼻中隔穿孔和黏膜溃疡。 速发或迟发的过敏反应，包括荨麻疹、皮疹、皮炎、血管神经性水肿和瘙痒已有报道。极少数病人在鼻腔内给予糖皮质激素后出现黏膜溃疡和鼻中隔穿孔。这些不良反应的原因（可能由糖皮质激素、这些疾病或其他因素引起）尚不清楚。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            },
+            {
+              "field": "dosage",
+              "source_sections": 1,
+              "graph_edges": 0,
+              "status": "text_only_by_design",
+              "sources": [
+                {
+                  "section_id": "section_4a54c9f6f62cd29526d5f66d",
+                  "record_id": "sourcerecord_3e61e1bce30007d576d3ad17",
+                  "field": "dosage",
+                  "source_url": "https://www.yaopinnet.com/huayao/hy7272b.htm",
+                  "source_file": "kg_output_clean_v2/sections.jsonl",
+                  "byte_start": 14392420,
+                  "byte_length": 459,
+                  "row_sha256": "fa4e390050c2f7d51119223a19d650768845d3f90fd881cb37771396768b0e62",
+                  "quote_start": 0,
+                  "quote_end": 103,
+                  "quote_preview": "鼻腔喷入：左手喷右侧鼻孔，右手喷左侧鼻孔，避免直接喷向鼻中隔。 成人：开始时每个鼻孔各2喷，早晚各1次。一日最大用量不超过8喷（256?g）。症状缓解后每天每个鼻孔喷1次，每次1喷。 6岁以上儿童：同成人。",
+                  "quote_truncated": false,
+                  "scope": "third_party_source_text_not_clinical_validation"
+                }
+              ],
+              "sources_omitted_from_report": 0
+            }
+          ]
+        }
+      ],
+      "pair_diagnosis": {
+        "status": "skipped_unconfirmed_entities_or_not_interaction"
+      }
+    }
+  ]
+}

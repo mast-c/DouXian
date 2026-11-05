@@ -39,6 +39,7 @@ PATIENT_TERMS = (
     (r"心慌", "symptom_word", ["心悸"]),
 )
 RISK_PATTERN = r"会(?:不会)?有(?:什么)?问题|有没有事|会不会(?:出事|有事|冲突|影响|中毒)|有事吗|要紧吗|有影响吗|有危险吗|有害吗|能不能|可不可以|能一起|可以一起|能吃吗|能用吗|行不行|能混着|能搭配|有没有影响|有冲突吗|还能吃|还可以吃|能再吃|可以再吃|有问题没"
+CLASSIFICATION_PATTERN = r"属于|属不属于|归属|分类|类别|哪(?:一)?类|什么类|算不算|中药还是西药|西药还是中药|是中药|是西药|是不是.{0,12}(?:类|抗生素)"
 
 
 def patient_intent(question: str, medicine_count: int = 0) -> dict:
@@ -50,13 +51,21 @@ def patient_intent(question: str, medicine_count: int = 0) -> dict:
     fields = []
     if interaction:
         fields += ["drug_interactions", "warnings"]
+    mechanism = bool(re.search(r"机制|原理|为什么(?:会|会有|会发生)|背后(?:的)?原因|药理(?:作用|原理)", q))
+    if mechanism:
+        fields += ["drug_interactions", "warnings"]
     if risk and medication:
         fields += ["contraindications", "warnings", "adverse_reactions"]
     if re.search(r"怎么吃|怎么用|怎么服|一天几次|吃多少|一次几片|饭前|饭后|剂量|用量", q):
         fields += ["dosage"]
     adverse = bool(re.search(r"副作用|不良反应|吃(?:了|完|药后).{0,16}(?:恶心|头晕|难受|拉肚子|起疹|不舒服|心慌|吐)|(?:越吃|吃完).{0,8}(?:疼|痛|痒)", q))
     reported_symptoms = [item for item in symptom_mentions(q) if item["assertion"] != "negated"]
-    if medicine_count and reported_symptoms and (
+    # Persistent pre-existing symptoms alone are not new drug reactions.
+    new_symptoms = [item for item in reported_symptoms if not (
+        re.search(r"(?:还是|仍然|仍|一直)$", q[max(0,item["start"]-4):item["start"]])
+        or re.match(r"(?:还是|仍然|仍|一直)(?:好不了|没好|未改善|没改善|未缓解|没缓解)", q[item["end"]:])
+    )]
+    if medicine_count and new_symptoms and (
         re.search(r"(?:吃|服|用|喷|涂|擦|滴|喝|打)(?:了|完|后)|服用后|用药后|之后|以后", q)
         or re.search(r"出现|开始|今天|昨天|最近|这两天|后来", q) and re.search(MEDICATION_ACTION, q)
     ):
@@ -70,7 +79,8 @@ def patient_intent(question: str, medicine_count: int = 0) -> dict:
         fields += ["indication"]
     if efficacy:
         fields += ["indication", "dosage", "warnings"]
-    return {"interaction_question": interaction, "risk_question": risk,
+    return {"interaction_question": interaction, "mechanism_question": mechanism, "risk_question": risk,
+            "classification_question": bool(re.search(CLASSIFICATION_PATTERN, q)),
             "adverse_event_question": adverse, "efficacy_question": efficacy,
             "drug_causality_asserted": False,
             "medication_context": medication, "fields": list(dict.fromkeys(fields)),
@@ -94,7 +104,7 @@ def core_candidate(stem: str) -> str:
     return stem
 
 
-def patient_boundary(text: str, start: int, end: int) -> bool:
+def patient_boundary(text: str, start: int, end: int, *, exact_product=False) -> bool:
     """Do not require professional grammar around a known drug name."""
     han = lambda c: bool(c) and "\u4e00" <= c <= "\u9fff"
     before_ok = not start or not han(text[start-1]) or bool(re.search(
@@ -103,10 +113,28 @@ def patient_boundary(text: str, start: int, end: int) -> bool:
         r"(?:的|是|和|与|跟|及|还|一块|同时|一起|能|可以|可不可以|会|有|没|是否|要|行|不|又|再|以后|后|之前|前|怎么|用|吃|服|吗|多久|一天|一日|每次|干什么|干嘛|治什么|管什么|安全吗|相克)", text[end:]))
     if re.search(r"(?:想了解|想知道|了解一下|了解|查询|介绍一下)$", text[:start]):
         before_ok = True
+    # Set operators introduce catalog entities, not medication actions.
+    if re.search(r"(?:排除|不包括|除了|除去|不要|包含)$", text[:start]):
+        before_ok = True
     if re.match(r"(?:已经|大概|约)?" + DURATION + r"(?:了|后|以后|以来|，|,|。|$)", text[end:]):
         after_ok = True
     if re.match(r"(?:没效果|不管用|不见效|效果|好像|似乎|到底|是不是|怎么样|如何)", text[end:]):
         after_ok = True
+    if re.match(r"(?:属于|属不属于|归属|算不算|算是|算哪|分类|类别|哪(?:一)?类)", text[end:]):
+        after_ok = True
+    # Known catalog names can be topics followed by a patient/action clause,
+    # or objects of a clinician's prescription. Do not accept arbitrary Han
+    # suffixes: "甲药片加强版" must not silently resolve to "甲药片".
+    if re.search(r"(?:医生|医师|大夫|医院|门诊)(?:给我|给他|给她|给患者)?(?:开|配)(?:了|的)$", text[:start]):
+        before_ok = True
+    if re.match(r"(?:我|我们|他|她|患者|病人)(?:(?:已经|正在|一直|之前|刚刚|刚|现在|还在|早就|也|还|已|没|没有|从未|不再)){0,3}(?:吃|服用|服|使用|用|喷|涂|停用|停服|停了)", text[end:]):
+        after_ok = True
+    if exact_product and before_ok:
+        # A complete catalog formulation is an entity before its intent is
+        # known. Free-form narrative after it must not need a phrase whitelist.
+        # Retain explicit checks for longer chemical/formulation names.
+        extension = r"(?:钠|钙|钾|镁|锌|盐|复方|缓释|肠溶|控释|胶囊|颗粒|注射液|加强版|增强版|改良版)"
+        return not bool(re.match(extension, text[end:]))
     return before_ok and after_ok
 
 
@@ -168,7 +196,8 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     priority = {"exact_product": 0, "source_catalog_alias": 1, "exact_ingredient": 2, "partial_form_search_candidate": 3,
                 "formulation_search_candidate": 3, "salt_name_search_candidate": 4}
     for token, start, end in lexicon.find(q[:600]):
-        if not patient_boundary(q, start, end):
+        is_exact = any(basis == "exact_product" for _, basis in terms[token])
+        if not patient_boundary(q, start, end, exact_product=is_exact):
             continue
         entries = sorted(terms[token], key=lambda v: (priority[v[1]], catalog_nodes[v[0]]["name"]))
         exact = [v for v in entries if v[1] == "exact_product"]

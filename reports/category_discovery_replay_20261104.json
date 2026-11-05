@@ -1,0 +1,2777 @@
+{
+  "generated_at": "2026-11-04T10:28:55.152941+00:00",
+  "scope": "real_local_sources_and_graph_no_cloud_model_calls",
+  "clinical_correctness_tested": false,
+  "remote_services_tested": false,
+  "replays": [
+    {
+      "question": "跟阿莫西林胶囊属于同一大类药物下的某种药物与其他大类的药物有没有相互作用的？",
+      "status": "ok",
+      "answer_route": "category_discovery_source_display",
+      "seconds": 1.5254,
+      "path_count": 6,
+      "paths": [
+        {
+          "id": "discoverypath_a103726a83f3cb9a36489367",
+          "nodes": [
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_29b4a7486f8f5b9d961d7644",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/0",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a2b98027b39ee75d2a8b6783",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/0",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/0",
+              "section_field": "dataset_category",
+              "quote": "\"阿莫西林胶囊\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_a2b98027b39ee75d2a8b6783",
+              "src": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类",
+              "section_field": "dataset_category",
+              "quote": "\"青霉素类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 2,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_category_structure_only"
+        },
+        {
+          "id": "discoverypath_48d0655bc6d55e521810473f",
+          "nodes": [
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            },
+            {
+              "id": "datasetcategory_5e417ebfd687c6212c6b2a01",
+              "kind": "DatasetCategory",
+              "name": "抗结核病药"
+            },
+            {
+              "id": "drug_027b6244b0da26e15d108e6b",
+              "kind": "Drug",
+              "name": "异烟肼片"
+            },
+            {
+              "id": "ingredient_bbbd5e1a052a524bd1634d63",
+              "kind": "Ingredient",
+              "name": "苯妥英钠"
+            },
+            {
+              "id": "drug_bcd80be3595a12da246ac1b3",
+              "kind": "Drug",
+              "name": "苯妥英钠片"
+            },
+            {
+              "id": "datasetcategory_3175ea53c36f6467a1cec424",
+              "kind": "DatasetCategory",
+              "name": "抗癫痫药"
+            },
+            {
+              "id": "datasetcategory_e4c53d2f791cadda67532657",
+              "kind": "DatasetCategory",
+              "name": "神经系统"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_9b6bc3585b1d53517124cc5d",
+              "src": {
+                "id": "datasetcategory_5e417ebfd687c6212c6b2a01",
+                "kind": "DatasetCategory",
+                "name": "抗结核病药"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/抗结核病药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/抗结核病药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/抗结核病药",
+              "section_field": "dataset_category",
+              "quote": "\"抗结核病药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_6d41a072e364d42f63a56bd0",
+              "src": {
+                "id": "drug_027b6244b0da26e15d108e6b",
+                "kind": "Drug",
+                "name": "异烟肼片"
+              },
+              "dst": {
+                "id": "datasetcategory_5e417ebfd687c6212c6b2a01",
+                "kind": "DatasetCategory",
+                "name": "抗结核病药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/抗结核病药/0",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_9b6bc3585b1d53517124cc5d",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/抗结核病药/0",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/抗结核病药/0",
+              "section_field": "dataset_category",
+              "quote": "\"异烟肼片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_03b16b60a585d49ad645afd2854c573c",
+              "src": {
+                "id": "drug_027b6244b0da26e15d108e6b",
+                "kind": "Drug",
+                "name": "异烟肼片"
+              },
+              "dst": {
+                "id": "ingredient_bbbd5e1a052a524bd1634d63",
+                "kind": "Ingredient",
+                "name": "苯妥英钠"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_ccb5d413cd03556aba82adee",
+              "record_id": "sourcerecord_cadbc3d16df3a13f1d3a4d82",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy3570b.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "549ccd2c419bb166a882e66a1f27ccfe105521c4cd08259c47bce005b57ea9a5",
+              "section_field": "drug_interactions",
+              "quote_start": 688,
+              "quote_end": 768,
+              "quote": "（11）与苯妥英钠或氨茶碱合用时可抑制二者在肝脏中的代谢，而导致苯妥英钠或氨茶碱血药浓度增高，故异烟肼与两者先后应用或合用时，苯妥英钠或氨茶碱的剂量应适当调整。",
+              "mention_start": 720,
+              "mention_end": 724,
+              "qualifiers": {
+                "caution": false,
+                "conditional": true,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_d29fe7909829f19abded3a9682e47981",
+              "src": {
+                "id": "drug_bcd80be3595a12da246ac1b3",
+                "kind": "Drug",
+                "name": "苯妥英钠片"
+              },
+              "dst": {
+                "id": "ingredient_bbbd5e1a052a524bd1634d63",
+                "kind": "Ingredient",
+                "name": "苯妥英钠"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_5c855d366dda7161af870be5",
+              "record_id": "sourcerecord_abd80d78524b535d2df051f8",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy1358y.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "1e0ce3b4add8233a6fdadb498f731aa310574a318fa6e72eb4ad7900a064ee6b",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 4,
+              "quote": "苯妥英钠",
+              "mention_start": 0,
+              "mention_end": 4,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_127ae7ae84cdf8956b4f1eda",
+              "src": {
+                "id": "drug_bcd80be3595a12da246ac1b3",
+                "kind": "Drug",
+                "name": "苯妥英钠片"
+              },
+              "dst": {
+                "id": "datasetcategory_3175ea53c36f6467a1cec424",
+                "kind": "DatasetCategory",
+                "name": "抗癫痫药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/神经系统/抗癫痫药/1",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_1d88f26accade14d96390054",
+              "top_id": "datasetcategory_e4c53d2f791cadda67532657",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/神经系统/抗癫痫药/1",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/神经系统/抗癫痫药/1",
+              "section_field": "dataset_category",
+              "quote": "\"苯妥英钠片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_1d88f26accade14d96390054",
+              "src": {
+                "id": "datasetcategory_3175ea53c36f6467a1cec424",
+                "kind": "DatasetCategory",
+                "name": "抗癫痫药"
+              },
+              "dst": {
+                "id": "datasetcategory_e4c53d2f791cadda67532657",
+                "kind": "DatasetCategory",
+                "name": "神经系统"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/神经系统/抗癫痫药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/神经系统/抗癫痫药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/神经系统/抗癫痫药",
+              "section_field": "dataset_category",
+              "quote": "\"抗癫痫药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 6,
+          "relations": [
+            "DATASET_CATEGORY_PARENT",
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_ffd0d49a83f217c598f442cc",
+          "nodes": [
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            },
+            {
+              "id": "datasetcategory_b5b55c601b2223b907fa94ff",
+              "kind": "DatasetCategory",
+              "name": "氨基糖苷类"
+            },
+            {
+              "id": "drug_030a7745b9b8d04c73fd58a1",
+              "kind": "Drug",
+              "name": "硫酸庆大霉素泡腾片"
+            },
+            {
+              "id": "ingredient_9b050388a378139c9d3bad64",
+              "kind": "Ingredient",
+              "name": "呋塞米"
+            },
+            {
+              "id": "drug_289abcee83f3a30d342a2357",
+              "kind": "Drug",
+              "name": "注射用呋塞米"
+            },
+            {
+              "id": "datasetcategory_3d70ee3aa88bf15040bae01d",
+              "kind": "DatasetCategory",
+              "name": "利尿药"
+            },
+            {
+              "id": "datasetcategory_a2ea958a739f3d73a3a73b59",
+              "kind": "DatasetCategory",
+              "name": "泌尿系统"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_f75b3b18651e01b2fb2ebbd5",
+              "src": {
+                "id": "datasetcategory_b5b55c601b2223b907fa94ff",
+                "kind": "DatasetCategory",
+                "name": "氨基糖苷类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/氨基糖苷类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/氨基糖苷类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/氨基糖苷类",
+              "section_field": "dataset_category",
+              "quote": "\"氨基糖苷类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_4b9010ffdd6e7547a84ef7d9",
+              "src": {
+                "id": "drug_030a7745b9b8d04c73fd58a1",
+                "kind": "Drug",
+                "name": "硫酸庆大霉素泡腾片"
+              },
+              "dst": {
+                "id": "datasetcategory_b5b55c601b2223b907fa94ff",
+                "kind": "DatasetCategory",
+                "name": "氨基糖苷类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/氨基糖苷类/47",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_f75b3b18651e01b2fb2ebbd5",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/氨基糖苷类/47",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/氨基糖苷类/47",
+              "section_field": "dataset_category",
+              "quote": "\"硫酸庆大霉素泡腾片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_72a2abdfe64e491d99b5643107a2a710",
+              "src": {
+                "id": "drug_030a7745b9b8d04c73fd58a1",
+                "kind": "Drug",
+                "name": "硫酸庆大霉素泡腾片"
+              },
+              "dst": {
+                "id": "ingredient_9b050388a378139c9d3bad64",
+                "kind": "Ingredient",
+                "name": "呋塞米"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_4c51f7ed49bff836e0d04a96",
+              "record_id": "sourcerecord_4577e4403cf6ed012756c19d",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy5076l.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "5fde0231f551c06441ae4eb51fb9c8ce9e8ed723596cf17a4892498df8b099d5",
+              "section_field": "drug_interactions",
+              "quote_start": 68,
+              "quote_end": 119,
+              "quote": " 2.与卷曲霉素、顺铂、依他尼酸、呋塞米或万古霉素等合用或先后连续应用，可增加耳毒性与肾毒性的可能性。",
+              "mention_start": 85,
+              "mention_end": 88,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": true
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_ed9ccd32eadd5ae51f2688a06c3f0d3a",
+              "src": {
+                "id": "drug_289abcee83f3a30d342a2357",
+                "kind": "Drug",
+                "name": "注射用呋塞米"
+              },
+              "dst": {
+                "id": "ingredient_9b050388a378139c9d3bad64",
+                "kind": "Ingredient",
+                "name": "呋塞米"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_bfef2c673fb8f44800bf70eb",
+              "record_id": "sourcerecord_1d2e990656816b6ff18953a1",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy4321p.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "eb4b35d29377c4a447738abe75d2b2254486bcac53a2436549649da59ce1948c",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 4,
+              "quote": "呋塞米。",
+              "mention_start": 0,
+              "mention_end": 3,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_ffc000264d0f91f2152ed650",
+              "src": {
+                "id": "drug_289abcee83f3a30d342a2357",
+                "kind": "Drug",
+                "name": "注射用呋塞米"
+              },
+              "dst": {
+                "id": "datasetcategory_3d70ee3aa88bf15040bae01d",
+                "kind": "DatasetCategory",
+                "name": "利尿药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/泌尿系统/利尿药/9",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a39483e0cc2b0131408109fb",
+              "top_id": "datasetcategory_a2ea958a739f3d73a3a73b59",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/泌尿系统/利尿药/9",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/泌尿系统/利尿药/9",
+              "section_field": "dataset_category",
+              "quote": "\"注射用呋塞米\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_a39483e0cc2b0131408109fb",
+              "src": {
+                "id": "datasetcategory_3d70ee3aa88bf15040bae01d",
+                "kind": "DatasetCategory",
+                "name": "利尿药"
+              },
+              "dst": {
+                "id": "datasetcategory_a2ea958a739f3d73a3a73b59",
+                "kind": "DatasetCategory",
+                "name": "泌尿系统"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/泌尿系统/利尿药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/泌尿系统/利尿药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/泌尿系统/利尿药",
+              "section_field": "dataset_category",
+              "quote": "\"利尿药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 6,
+          "relations": [
+            "DATASET_CATEGORY_PARENT",
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_1db302c311e6c2aa1995411d",
+          "nodes": [
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            },
+            {
+              "id": "datasetcategory_acd193069414350432050242",
+              "kind": "DatasetCategory",
+              "name": "头孢菌素类"
+            },
+            {
+              "id": "drug_053f5c7695426b3e3f5b4ff2",
+              "kind": "Drug",
+              "name": "头孢克洛片"
+            },
+            {
+              "id": "ingredient_7319039a9b10cc5ee30af46e",
+              "kind": "Ingredient",
+              "name": "布美他尼"
+            },
+            {
+              "id": "drug_1076ca41aba87e42756de5c4",
+              "kind": "Drug",
+              "name": "布美他尼片"
+            },
+            {
+              "id": "datasetcategory_3d70ee3aa88bf15040bae01d",
+              "kind": "DatasetCategory",
+              "name": "利尿药"
+            },
+            {
+              "id": "datasetcategory_a2ea958a739f3d73a3a73b59",
+              "kind": "DatasetCategory",
+              "name": "泌尿系统"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_20a007a0327a8f18e29a40a5",
+              "src": {
+                "id": "datasetcategory_acd193069414350432050242",
+                "kind": "DatasetCategory",
+                "name": "头孢菌素类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/头孢菌素类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/头孢菌素类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/头孢菌素类",
+              "section_field": "dataset_category",
+              "quote": "\"头孢菌素类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_76acb047c6913eef9cc40be7",
+              "src": {
+                "id": "drug_053f5c7695426b3e3f5b4ff2",
+                "kind": "Drug",
+                "name": "头孢克洛片"
+              },
+              "dst": {
+                "id": "datasetcategory_acd193069414350432050242",
+                "kind": "DatasetCategory",
+                "name": "头孢菌素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/头孢菌素类/44",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_20a007a0327a8f18e29a40a5",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/头孢菌素类/44",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/头孢菌素类/44",
+              "section_field": "dataset_category",
+              "quote": "\"头孢克洛片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_64366e5b7de8d6448f6d14f08c1d9ceb",
+              "src": {
+                "id": "drug_053f5c7695426b3e3f5b4ff2",
+                "kind": "Drug",
+                "name": "头孢克洛片"
+              },
+              "dst": {
+                "id": "ingredient_7319039a9b10cc5ee30af46e",
+                "kind": "Ingredient",
+                "name": "布美他尼"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_3e8cd230be4fc92ab8368711",
+              "record_id": "sourcerecord_3a16477d64aca60f150ff6a4",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy35857.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "1bd442054c63134b909c114c36101798b78dce726c493d8b380abcb798967b2a",
+              "section_field": "drug_interactions",
+              "quote_start": 0,
+              "quote_end": 63,
+              "quote": "1．呋塞米、依他尼酸、布美他尼等强利尿药，卡氮芥、链佐星等抗肿瘤药及氨基糖苷类抗生素等肾毒性药物与本品合用有增加肾毒性的可能。",
+              "mention_start": 11,
+              "mention_end": 15,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": true
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_e19c3cfd66a950a94c960440a0158653",
+              "src": {
+                "id": "drug_1076ca41aba87e42756de5c4",
+                "kind": "Drug",
+                "name": "布美他尼片"
+              },
+              "dst": {
+                "id": "ingredient_7319039a9b10cc5ee30af46e",
+                "kind": "Ingredient",
+                "name": "布美他尼"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_77a2c34a09f3bf4b4b577a2d",
+              "record_id": "sourcerecord_e8a898d704421dfb733f47d3",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy3257o.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "7ffafc93c317d751803586d9577ef4646d8fad957b73493d13f85dd57e92ab67",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 4,
+              "quote": "布美他尼",
+              "mention_start": 0,
+              "mention_end": 4,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_2f3b5598b66eb28258ff5906",
+              "src": {
+                "id": "drug_1076ca41aba87e42756de5c4",
+                "kind": "Drug",
+                "name": "布美他尼片"
+              },
+              "dst": {
+                "id": "datasetcategory_3d70ee3aa88bf15040bae01d",
+                "kind": "DatasetCategory",
+                "name": "利尿药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/泌尿系统/利尿药/8",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a39483e0cc2b0131408109fb",
+              "top_id": "datasetcategory_a2ea958a739f3d73a3a73b59",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/泌尿系统/利尿药/8",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/泌尿系统/利尿药/8",
+              "section_field": "dataset_category",
+              "quote": "\"布美他尼片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_a39483e0cc2b0131408109fb",
+              "src": {
+                "id": "datasetcategory_3d70ee3aa88bf15040bae01d",
+                "kind": "DatasetCategory",
+                "name": "利尿药"
+              },
+              "dst": {
+                "id": "datasetcategory_a2ea958a739f3d73a3a73b59",
+                "kind": "DatasetCategory",
+                "name": "泌尿系统"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/泌尿系统/利尿药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/泌尿系统/利尿药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/泌尿系统/利尿药",
+              "section_field": "dataset_category",
+              "quote": "\"利尿药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 6,
+          "relations": [
+            "DATASET_CATEGORY_PARENT",
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_2045ff1394120e36d31e0e85",
+          "nodes": [
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            },
+            {
+              "id": "datasetcategory_17d21a0ee8b2f663092f9aaa",
+              "kind": "DatasetCategory",
+              "name": "喹诺酮类"
+            },
+            {
+              "id": "drug_0677824a6f54f2fac5251193",
+              "kind": "Drug",
+              "name": "诺氟沙星胶囊"
+            },
+            {
+              "id": "ingredient_dd4f7b3c35a307420e839d35",
+              "kind": "Ingredient",
+              "name": "丙磺舒"
+            },
+            {
+              "id": "drug_6b19fc6e4f80a25d601147b9",
+              "kind": "Drug",
+              "name": "丙磺舒片"
+            },
+            {
+              "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+              "kind": "DatasetCategory",
+              "name": "抗痛风药"
+            },
+            {
+              "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "kind": "DatasetCategory",
+              "name": "镇痛解热"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_def94a7a121d82aa803f298e",
+              "src": {
+                "id": "datasetcategory_17d21a0ee8b2f663092f9aaa",
+                "kind": "DatasetCategory",
+                "name": "喹诺酮类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/喹诺酮类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/喹诺酮类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/喹诺酮类",
+              "section_field": "dataset_category",
+              "quote": "\"喹诺酮类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_5b7c1c2f1d875271354521b1",
+              "src": {
+                "id": "drug_0677824a6f54f2fac5251193",
+                "kind": "Drug",
+                "name": "诺氟沙星胶囊"
+              },
+              "dst": {
+                "id": "datasetcategory_17d21a0ee8b2f663092f9aaa",
+                "kind": "DatasetCategory",
+                "name": "喹诺酮类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/喹诺酮类/0",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_def94a7a121d82aa803f298e",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/喹诺酮类/0",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/喹诺酮类/0",
+              "section_field": "dataset_category",
+              "quote": "\"诺氟沙星胶囊\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_07ae0ddbe0440ff80ac9e5a4550cd587",
+              "src": {
+                "id": "drug_0677824a6f54f2fac5251193",
+                "kind": "Drug",
+                "name": "诺氟沙星胶囊"
+              },
+              "dst": {
+                "id": "ingredient_dd4f7b3c35a307420e839d35",
+                "kind": "Ingredient",
+                "name": "丙磺舒"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_67d551838c9c89ea257a5d88",
+              "record_id": "sourcerecord_6cc2359444cda62c7414fe0a",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy1142g.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "03aa4ba43464665a9b91986eff6d92ec5443f5230156739eebcda01a500b11e2",
+              "section_field": "drug_interactions",
+              "quote_start": 238,
+              "quote_end": 278,
+              "quote": " 5.丙磺舒可减少本品自肾小管分泌约50%，合用时可因本品血浓度增高而产生毒性。",
+              "mention_start": 241,
+              "mention_end": 244,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_5585781315529ede1133c8f3e26cbca0",
+              "src": {
+                "id": "drug_6b19fc6e4f80a25d601147b9",
+                "kind": "Drug",
+                "name": "丙磺舒片"
+              },
+              "dst": {
+                "id": "ingredient_dd4f7b3c35a307420e839d35",
+                "kind": "Ingredient",
+                "name": "丙磺舒"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_7ee0fcca6c79869a33763f2b",
+              "record_id": "sourcerecord_207f1a9d5632a4c70aac046c",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy1336a.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "eba0ec295062fa9f381175a38a115433cee329e48aa73748c93a9731c29b61c8",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 3,
+              "quote": "丙磺舒",
+              "mention_start": 0,
+              "mention_end": 3,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_05183c67ebcef683f158f08c",
+              "src": {
+                "id": "drug_6b19fc6e4f80a25d601147b9",
+                "kind": "Drug",
+                "name": "丙磺舒片"
+              },
+              "dst": {
+                "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+                "kind": "DatasetCategory",
+                "name": "抗痛风药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/抗痛风药/2",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_3f2335ea295337680b0afc7d",
+              "top_id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/抗痛风药/2",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/抗痛风药/2",
+              "section_field": "dataset_category",
+              "quote": "\"丙磺舒片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_3f2335ea295337680b0afc7d",
+              "src": {
+                "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+                "kind": "DatasetCategory",
+                "name": "抗痛风药"
+              },
+              "dst": {
+                "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+                "kind": "DatasetCategory",
+                "name": "镇痛解热"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/抗痛风药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/抗痛风药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/抗痛风药",
+              "section_field": "dataset_category",
+              "quote": "\"抗痛风药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 6,
+          "relations": [
+            "DATASET_CATEGORY_PARENT",
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_8684bc924af89829b83c6742",
+          "nodes": [
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            },
+            {
+              "id": "datasetcategory_acd193069414350432050242",
+              "kind": "DatasetCategory",
+              "name": "头孢菌素类"
+            },
+            {
+              "id": "drug_06834ab819248a2dbd13319a",
+              "kind": "Drug",
+              "name": "头孢拉定颗粒"
+            },
+            {
+              "id": "ingredient_dd4f7b3c35a307420e839d35",
+              "kind": "Ingredient",
+              "name": "丙磺舒"
+            },
+            {
+              "id": "drug_6b19fc6e4f80a25d601147b9",
+              "kind": "Drug",
+              "name": "丙磺舒片"
+            },
+            {
+              "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+              "kind": "DatasetCategory",
+              "name": "抗痛风药"
+            },
+            {
+              "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "kind": "DatasetCategory",
+              "name": "镇痛解热"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_20a007a0327a8f18e29a40a5",
+              "src": {
+                "id": "datasetcategory_acd193069414350432050242",
+                "kind": "DatasetCategory",
+                "name": "头孢菌素类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/头孢菌素类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/头孢菌素类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/头孢菌素类",
+              "section_field": "dataset_category",
+              "quote": "\"头孢菌素类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_65a54221437ea53a9c52f5b9",
+              "src": {
+                "id": "drug_06834ab819248a2dbd13319a",
+                "kind": "Drug",
+                "name": "头孢拉定颗粒"
+              },
+              "dst": {
+                "id": "datasetcategory_acd193069414350432050242",
+                "kind": "DatasetCategory",
+                "name": "头孢菌素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/头孢菌素类/27",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_20a007a0327a8f18e29a40a5",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/头孢菌素类/27",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/头孢菌素类/27",
+              "section_field": "dataset_category",
+              "quote": "\"头孢拉定颗粒\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_1a0553963ea39beed356fdc349fc3907",
+              "src": {
+                "id": "drug_06834ab819248a2dbd13319a",
+                "kind": "Drug",
+                "name": "头孢拉定颗粒"
+              },
+              "dst": {
+                "id": "ingredient_dd4f7b3c35a307420e839d35",
+                "kind": "Ingredient",
+                "name": "丙磺舒"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_b73e434427c328fdb33ab16a",
+              "record_id": "sourcerecord_aa0a4ee2a3013086946252cf",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy37971.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "da630d20ede52a458eb8c40559a5d98a7107a97a2c2e55605de2f1f194a5d79a",
+              "section_field": "drug_interactions",
+              "quote_start": 96,
+              "quote_end": 110,
+              "quote": "5.丙磺舒可延迟本品肾排泄。",
+              "mention_start": 98,
+              "mention_end": 101,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_5585781315529ede1133c8f3e26cbca0",
+              "src": {
+                "id": "drug_6b19fc6e4f80a25d601147b9",
+                "kind": "Drug",
+                "name": "丙磺舒片"
+              },
+              "dst": {
+                "id": "ingredient_dd4f7b3c35a307420e839d35",
+                "kind": "Ingredient",
+                "name": "丙磺舒"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_7ee0fcca6c79869a33763f2b",
+              "record_id": "sourcerecord_207f1a9d5632a4c70aac046c",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy1336a.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "eba0ec295062fa9f381175a38a115433cee329e48aa73748c93a9731c29b61c8",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 3,
+              "quote": "丙磺舒",
+              "mention_start": 0,
+              "mention_end": 3,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_05183c67ebcef683f158f08c",
+              "src": {
+                "id": "drug_6b19fc6e4f80a25d601147b9",
+                "kind": "Drug",
+                "name": "丙磺舒片"
+              },
+              "dst": {
+                "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+                "kind": "DatasetCategory",
+                "name": "抗痛风药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/抗痛风药/2",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_3f2335ea295337680b0afc7d",
+              "top_id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/抗痛风药/2",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/抗痛风药/2",
+              "section_field": "dataset_category",
+              "quote": "\"丙磺舒片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_3f2335ea295337680b0afc7d",
+              "src": {
+                "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+                "kind": "DatasetCategory",
+                "name": "抗痛风药"
+              },
+              "dst": {
+                "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+                "kind": "DatasetCategory",
+                "name": "镇痛解热"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/抗痛风药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/抗痛风药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/抗痛风药",
+              "section_field": "dataset_category",
+              "quote": "\"抗痛风药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 6,
+          "relations": [
+            "DATASET_CATEGORY_PARENT",
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        }
+      ],
+      "category_discovery": {
+        "plan": {
+          "version": 1,
+          "route": "category_candidate_source_join",
+          "level": "top",
+          "level_label": "一级大类",
+          "other_level": "top",
+          "level_basis": "explicit",
+          "seed_surface": "阿莫西林胶囊",
+          "seed_ids": [
+            "drug_9a84c0e39432de10ec7889a9"
+          ],
+          "original_question": "跟阿莫西林胶囊属于同一大类药物下的某种药物与其他大类的药物有没有相互作用的？",
+          "seed_candidates_truncated": false,
+          "exclude_seed": true,
+          "excluded_ids": [],
+          "partner_ids": [],
+          "other_category": true,
+          "fields": [
+            "drug_interactions"
+          ],
+          "operation": "interaction",
+          "different_ingredient": false,
+          "unsupported_negative_constraint": false,
+          "unsupported_clinical_advice": false,
+          "model_calls": 0,
+          "limits": {
+            "candidate_products": 48,
+            "medical_edges": 2400,
+            "identity_joins": 96,
+            "seconds": 3.0,
+            "evidence_chars": 32000,
+            "max_hops": 8
+          },
+          "policy": "dataset_candidate_selection_then_independent_product_source_evidence"
+        },
+        "status": "ok",
+        "missing_links": [
+          "interaction_partner_category_not_proven_or_overlaps",
+          "inferred_identity_join_route_conflict"
+        ],
+        "candidate_drugs_available": 808,
+        "candidate_drugs_searched": 48,
+        "coverage_complete": false,
+        "truncated": true,
+        "model_calls": 0,
+        "storage": "local_dataset_category_and_independently_verified_medical_graph",
+        "categories": [
+          "抗生素药物"
+        ],
+        "level_label": "一级大类",
+        "seed_surface": "阿莫西林胶囊",
+        "catalog_only_candidates": 30,
+        "candidate_names": [
+          "盐酸左氧氟沙星分散片",
+          "氧氟沙星颗粒",
+          "琥乙红霉素分散片",
+          "复方磺胺甲噁唑颗粒",
+          "头孢氨苄泡腾片",
+          "酮康唑乳膏",
+          "异烟肼片",
+          "注射用利福霉素钠",
+          "甲硝唑胶囊",
+          "乳酸诺氟沙星注射液",
+          "硫酸庆大霉素泡腾片",
+          "硬脂酸红霉素胶囊",
+          "去羟肌苷颗粒",
+          "头孢克洛片",
+          "氨苄西林-丙磺舒胶囊",
+          "诺氟沙星胶囊",
+          "头孢拉定颗粒",
+          "磷霉素钙胶囊",
+          "硫酸阿奇霉素注射液",
+          "盐酸乙胺丁醇胶囊",
+          "穿琥宁注射液",
+          "麦迪霉素胶囊",
+          "甲磺酸帕珠沙星注射液",
+          "复方甲硝唑栓",
+          "注射用头孢噻吩钠",
+          "乳糖酸阿奇霉素注射液",
+          "克洛己新片",
+          "利福昔明软胶囊",
+          "乳酸左氧氟沙星胶囊",
+          "头孢拉定分散片",
+          "头孢拉定片",
+          "头孢克洛分散片",
+          "注射用头孢匹胺",
+          "注射用头孢西丁钠",
+          "注射用磺苄西林钠",
+          "复方头孢克洛干混悬剂",
+          "注射用苯唑西林钠",
+          "克林霉素磷酸酯片",
+          "注射用氟康唑",
+          "注射用盐酸头孢甲肟",
+          "盐酸加替沙星片",
+          "小儿复方磺胺二甲嘧啶散",
+          "双氯青霉素钠片",
+          "盐酸芦氟沙星胶囊",
+          "盐酸伐昔洛韦胶囊",
+          "克拉霉素干混悬剂",
+          "盐酸洛美沙星分散片",
+          "注射用盐酸头孢替安"
+        ],
+        "medical_edges_scanned": 182,
+        "source_target_filters": [],
+        "identity_joins_checked": 45,
+        "matched_drug_pairs": 5,
+        "returned_examples": 5,
+        "seconds": 0.7415
+      },
+      "answer": "按“阿莫西林胶囊”所在的**一级大类**，找到 **5 条来源示例**（已排除该药本身）。\n\n**异烟肼片 × 苯妥英钠片** [2]\n\n资料原文：（11）与苯妥英钠或氨茶碱合用时可抑制二者在肝脏中的代谢，而导致苯妥英钠或氨茶碱血药浓度增高，故异烟肼与两者先后应用或合用时，苯妥英钠或氨茶碱的剂量应适当调整。\n\n**硫酸庆大霉素泡腾片 × 注射用呋塞米** [3]\n\n资料原文：2.与卷曲霉素、顺铂、依他尼酸、呋塞米或万古霉素等合用或先后连续应用，可增加耳毒性与肾毒性的可能性。\n\n**头孢克洛片 × 布美他尼片** [4]\n\n资料原文：1．呋塞米、依他尼酸、布美他尼等强利尿药，卡氮芥、链佐星等抗肿瘤药及氨基糖苷类抗生素等肾毒性药物与本品合用有增加肾毒性的可能。\n\n**诺氟沙星胶囊 × 丙磺舒片** [5]\n\n资料原文：5.丙磺舒可减少本品自肾小管分泌约50%，合用时可因本品血浓度增高而产生毒性。\n\n**头孢拉定颗粒 × 丙磺舒片** [6]\n\n资料原文：5.丙磺舒可延迟本品肾排泄。\n\n以上为本轮有限检索结果，不是完整清单。\n\n以上含成分或类别层面的来源线索，尚未核实该具体制剂组合的临床相互作用；不能据此判断合用安全。\n\n分类、成分与逐边原文请在证据栏的**多关系图路径**中展开查看。[1]"
+    },
+    {
+      "question": "阿莫西林胶囊同一子类的其他药与其他大类药物有没有相互作用？",
+      "status": "ok",
+      "answer_route": "category_discovery_source_display",
+      "seconds": 0.4545,
+      "path_count": 6,
+      "paths": [
+        {
+          "id": "discoverypath_a103726a83f3cb9a36489367",
+          "nodes": [
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_29b4a7486f8f5b9d961d7644",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/0",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a2b98027b39ee75d2a8b6783",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/0",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/0",
+              "section_field": "dataset_category",
+              "quote": "\"阿莫西林胶囊\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_a2b98027b39ee75d2a8b6783",
+              "src": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类",
+              "section_field": "dataset_category",
+              "quote": "\"青霉素类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 2,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_category_structure_only"
+        },
+        {
+          "id": "discoverypath_822b2a696e4d471fec14789f",
+          "nodes": [
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "drug_0b8996232454826572210fa5",
+              "kind": "Drug",
+              "name": "注射用苯唑西林钠"
+            },
+            {
+              "id": "ingredient_8347be5398918ef9066dd553",
+              "kind": "Ingredient",
+              "name": "维生素C"
+            },
+            {
+              "id": "drug_0004bcca11cfcfcf4907c4be",
+              "kind": "Drug",
+              "name": "维C银翘片"
+            },
+            {
+              "id": "datasetcategory_0dfba560ef62bd3bc4454224",
+              "kind": "DatasetCategory",
+              "name": "呼吸科（呼吸系统疾病）"
+            },
+            {
+              "id": "datasetcategory_4fe066dcdfecea471058fbb9",
+              "kind": "DatasetCategory",
+              "name": "内科用药"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_2419c10fd89cf75cdb03a37b",
+              "src": {
+                "id": "drug_0b8996232454826572210fa5",
+                "kind": "Drug",
+                "name": "注射用苯唑西林钠"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/12",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a2b98027b39ee75d2a8b6783",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/12",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/12",
+              "section_field": "dataset_category",
+              "quote": "\"注射用苯唑西林钠\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_3e43968ab867b0d67293032632a4b7be",
+              "src": {
+                "id": "drug_0b8996232454826572210fa5",
+                "kind": "Drug",
+                "name": "注射用苯唑西林钠"
+              },
+              "dst": {
+                "id": "ingredient_8347be5398918ef9066dd553",
+                "kind": "Ingredient",
+                "name": "维生素C"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_b9f72769bccb80f629c4dab5",
+              "record_id": "sourcerecord_dbbbf732da16ad362d9031d8",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy1822o.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "06ea8f5359360b7ea77b0259ae88168f0e12a6a66813c37a292b0d489576f890",
+              "section_field": "drug_interactions",
+              "quote_start": 0,
+              "quote_end": 54,
+              "quote": "1．本品与氨基糖苷类、去甲肾上腺素、间羟胺、苯巴比妥、维生素B族、维生素C等药物存在配伍禁忌，不宜同瓶滴注。",
+              "mention_start": 33,
+              "mention_end": 37,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": true,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_6d8c5ebee4b6fbec9ebce2897d68bf65",
+              "src": {
+                "id": "drug_0004bcca11cfcfcf4907c4be",
+                "kind": "Drug",
+                "name": "维C银翘片"
+              },
+              "dst": {
+                "id": "ingredient_8347be5398918ef9066dd553",
+                "kind": "Ingredient",
+                "name": "维生素C"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_fdc90ac5fa18b1807d7e82f2",
+              "record_id": "sourcerecord_d9396b9057f1c7ad7a552bbf",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/zhongyao/zy4320y.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "942e21cd1dd8ced7b3170a8491e57a434e19c59bfbf77f8c244e11a8d070a7f6",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 56,
+              "quote": "山银花、连翘、荆芥、淡豆豉、淡竹叶、牛蒡子、芦根、桔梗、甘草、马来酸氯苯那敏、对乙酰氨基酚、维生素C、薄荷素油。",
+              "mention_start": 46,
+              "mention_end": 50,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_f1cd505495368d911c55ed14",
+              "src": {
+                "id": "drug_0004bcca11cfcfcf4907c4be",
+                "kind": "Drug",
+                "name": "维C银翘片"
+              },
+              "dst": {
+                "id": "datasetcategory_0dfba560ef62bd3bc4454224",
+                "kind": "DatasetCategory",
+                "name": "呼吸科（呼吸系统疾病）"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_chinese.json",
+              "json_pointer": "/categories/内科用药/呼吸科（呼吸系统疾病）/0",
+              "source_sha256": "803115ef485bd625fd213255c38a01e2836088712f8b9a181b8287ca53f0f670",
+              "parent_edge": "edge_f5dc1d1801060d2a28727f48",
+              "top_id": "datasetcategory_4fe066dcdfecea471058fbb9",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_chinese.json:/categories/内科用药/呼吸科（呼吸系统疾病）/0",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_chinese.json",
+              "source_url": "",
+              "record_id": "/categories/内科用药/呼吸科（呼吸系统疾病）/0",
+              "section_field": "dataset_category",
+              "quote": "\"维C银翘片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_f5dc1d1801060d2a28727f48",
+              "src": {
+                "id": "datasetcategory_0dfba560ef62bd3bc4454224",
+                "kind": "DatasetCategory",
+                "name": "呼吸科（呼吸系统疾病）"
+              },
+              "dst": {
+                "id": "datasetcategory_4fe066dcdfecea471058fbb9",
+                "kind": "DatasetCategory",
+                "name": "内科用药"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_chinese.json",
+              "json_pointer": "/categories/内科用药/呼吸科（呼吸系统疾病）",
+              "source_sha256": "803115ef485bd625fd213255c38a01e2836088712f8b9a181b8287ca53f0f670",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_chinese.json:/categories/内科用药/呼吸科（呼吸系统疾病）",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_chinese.json",
+              "source_url": "",
+              "record_id": "/categories/内科用药/呼吸科（呼吸系统疾病）",
+              "section_field": "dataset_category",
+              "quote": "\"呼吸科（呼吸系统疾病）\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 5,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_aabd876ce50821a5345fa6b3",
+          "nodes": [
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "drug_1931ab6d4d53c43e74ae38fb",
+              "kind": "Drug",
+              "name": "阿奇霉素分散片"
+            },
+            {
+              "id": "ingredient_2cc53f8d31bff6657a80a98c",
+              "kind": "Ingredient",
+              "name": "茶碱"
+            },
+            {
+              "id": "drug_2dc7a73a650ed899639ecbc3",
+              "kind": "Drug",
+              "name": "茶碱缓释片"
+            },
+            {
+              "id": "datasetcategory_f0726060209d9e70fd4e088f",
+              "kind": "DatasetCategory",
+              "name": "平喘药"
+            },
+            {
+              "id": "datasetcategory_8534261702de75cd43035972",
+              "kind": "DatasetCategory",
+              "name": "呼吸系统"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_fb28c1b9f9a2a21283f51fdb",
+              "src": {
+                "id": "drug_1931ab6d4d53c43e74ae38fb",
+                "kind": "Drug",
+                "name": "阿奇霉素分散片"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/2",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a2b98027b39ee75d2a8b6783",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/2",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/2",
+              "section_field": "dataset_category",
+              "quote": "\"阿奇霉素分散片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_79bde6db1993f43bc8d0314009119f7a",
+              "src": {
+                "id": "drug_1931ab6d4d53c43e74ae38fb",
+                "kind": "Drug",
+                "name": "阿奇霉素分散片"
+              },
+              "dst": {
+                "id": "ingredient_2cc53f8d31bff6657a80a98c",
+                "kind": "Ingredient",
+                "name": "茶碱"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_ae0d77d0b4cb57e1f16a54af",
+              "record_id": "sourcerecord_dbbb59d77088555ae48ae661",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy2277v.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "ca144add46c058630f20ec75e24b2a59e90165bb4bd6f7f53c37422129de99ac",
+              "section_field": "drug_interactions",
+              "quote_start": 80,
+              "quote_end": 114,
+              "quote": "（2）与茶碱合用时能提高后者在血浆中的浓度，应注意检测血浆茶碱水平。",
+              "mention_start": 84,
+              "mention_end": 86,
+              "qualifiers": {
+                "caution": true,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_6461855ffeb682863bab589998cb9b44",
+              "src": {
+                "id": "drug_2dc7a73a650ed899639ecbc3",
+                "kind": "Drug",
+                "name": "茶碱缓释片"
+              },
+              "dst": {
+                "id": "ingredient_2cc53f8d31bff6657a80a98c",
+                "kind": "Ingredient",
+                "name": "茶碱"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_bd88b813d1a1b080ac6f33d9",
+              "record_id": "sourcerecord_1b10b9301ac1eb33d4d7d21d",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy1291h.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "1f5e42d949928c510b6c5316692d98867ee139939b935ad7cbb57446d541b0bd",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 2,
+              "quote": "茶碱",
+              "mention_start": 0,
+              "mention_end": 2,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_bc59cf64651543759ebefe6f",
+              "src": {
+                "id": "drug_2dc7a73a650ed899639ecbc3",
+                "kind": "Drug",
+                "name": "茶碱缓释片"
+              },
+              "dst": {
+                "id": "datasetcategory_f0726060209d9e70fd4e088f",
+                "kind": "DatasetCategory",
+                "name": "平喘药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/呼吸系统/平喘药/4",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_00adf0a62128ea88ae0efc7c",
+              "top_id": "datasetcategory_8534261702de75cd43035972",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/呼吸系统/平喘药/4",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/呼吸系统/平喘药/4",
+              "section_field": "dataset_category",
+              "quote": "\"茶碱缓释片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_00adf0a62128ea88ae0efc7c",
+              "src": {
+                "id": "datasetcategory_f0726060209d9e70fd4e088f",
+                "kind": "DatasetCategory",
+                "name": "平喘药"
+              },
+              "dst": {
+                "id": "datasetcategory_8534261702de75cd43035972",
+                "kind": "DatasetCategory",
+                "name": "呼吸系统"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/呼吸系统/平喘药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/呼吸系统/平喘药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/呼吸系统/平喘药",
+              "section_field": "dataset_category",
+              "quote": "\"平喘药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 5,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_3c5e7de2b68f4d4ee54efb98",
+          "nodes": [
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "drug_2cecc01e4016d3c8b2e035c1",
+              "kind": "Drug",
+              "name": "注射用萘夫西林钠"
+            },
+            {
+              "id": "ingredient_93d300e6a6c8cac978bf59fd",
+              "kind": "Ingredient",
+              "name": "苯巴比妥"
+            },
+            {
+              "id": "drug_1def34fbd8e663ea537bf766",
+              "kind": "Drug",
+              "name": "阿苯糖丸"
+            },
+            {
+              "id": "datasetcategory_3cd5a56755ddb2bf1f4c4f9d",
+              "kind": "DatasetCategory",
+              "name": "解热止痛、抗炎、抗风湿药"
+            },
+            {
+              "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "kind": "DatasetCategory",
+              "name": "镇痛解热"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_8ac7086d678cb67ed69fdf07",
+              "src": {
+                "id": "drug_2cecc01e4016d3c8b2e035c1",
+                "kind": "Drug",
+                "name": "注射用萘夫西林钠"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/42",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a2b98027b39ee75d2a8b6783",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/42",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/42",
+              "section_field": "dataset_category",
+              "quote": "\"注射用萘夫西林钠\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_1014095efedd12940c715c141a7094aa",
+              "src": {
+                "id": "drug_2cecc01e4016d3c8b2e035c1",
+                "kind": "Drug",
+                "name": "注射用萘夫西林钠"
+              },
+              "dst": {
+                "id": "ingredient_93d300e6a6c8cac978bf59fd",
+                "kind": "Ingredient",
+                "name": "苯巴比妥"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_af1b35186ad60c8c870c5c95",
+              "record_id": "sourcerecord_89699f96921f5e30ed45d69e",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy6606k.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "d27085a4da021dff4e9734429d05b6a8fd97170eb9e053a2b275dbe8e5e9ba7a",
+              "section_field": "drug_interactions",
+              "quote_start": 0,
+              "quote_end": 54,
+              "quote": "1.本品与氨基糖苷类、去甲肾上腺素、间羟胺、苯巴比妥、维生素B族、维生素C等药物存在配伍禁忌，不宜同瓶滴注。",
+              "mention_start": 22,
+              "mention_end": 26,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": true,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_63cfa32185f354269fd0dc9c4812b050",
+              "src": {
+                "id": "drug_1def34fbd8e663ea537bf766",
+                "kind": "Drug",
+                "name": "阿苯糖丸"
+              },
+              "dst": {
+                "id": "ingredient_93d300e6a6c8cac978bf59fd",
+                "kind": "Ingredient",
+                "name": "苯巴比妥"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_2e9b9886e39084608b4aaa56",
+              "record_id": "sourcerecord_e5ada7f1d2e0fa310098c3aa",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy1048p.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "00eb529be677a700cdb0dda8421fd637b29844de63b633c077f89d3b5e6696c6",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 30,
+              "quote": "本品为复方制剂，每丸含阿司匹林25毫克，苯巴比妥2.5毫克。",
+              "mention_start": 20,
+              "mention_end": 24,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_06c00abce923f4d988f4cda5",
+              "src": {
+                "id": "drug_1def34fbd8e663ea537bf766",
+                "kind": "Drug",
+                "name": "阿苯糖丸"
+              },
+              "dst": {
+                "id": "datasetcategory_3cd5a56755ddb2bf1f4c4f9d",
+                "kind": "DatasetCategory",
+                "name": "解热止痛、抗炎、抗风湿药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/解热止痛、抗炎、抗风湿药/127",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_3175e742c7515df72c37b31a",
+              "top_id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/解热止痛、抗炎、抗风湿药/127",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/解热止痛、抗炎、抗风湿药/127",
+              "section_field": "dataset_category",
+              "quote": "\"阿苯糖丸\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_3175e742c7515df72c37b31a",
+              "src": {
+                "id": "datasetcategory_3cd5a56755ddb2bf1f4c4f9d",
+                "kind": "DatasetCategory",
+                "name": "解热止痛、抗炎、抗风湿药"
+              },
+              "dst": {
+                "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+                "kind": "DatasetCategory",
+                "name": "镇痛解热"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/解热止痛、抗炎、抗风湿药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/解热止痛、抗炎、抗风湿药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/解热止痛、抗炎、抗风湿药",
+              "section_field": "dataset_category",
+              "quote": "\"解热止痛、抗炎、抗风湿药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 5,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_5cec9b2c57c483938404c60c",
+          "nodes": [
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "drug_32b99eaacf85f3ad5c291cc7",
+              "kind": "Drug",
+              "name": "氨苄西林片"
+            },
+            {
+              "id": "ingredient_80c43ad411cb3b876a1a53ba",
+              "kind": "Ingredient",
+              "name": "别嘌醇"
+            },
+            {
+              "id": "drug_566d492f2aded24387a56a86",
+              "kind": "Drug",
+              "name": "别嘌醇片"
+            },
+            {
+              "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+              "kind": "DatasetCategory",
+              "name": "抗痛风药"
+            },
+            {
+              "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "kind": "DatasetCategory",
+              "name": "镇痛解热"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_84811741fd4365bdb2de809b",
+              "src": {
+                "id": "drug_32b99eaacf85f3ad5c291cc7",
+                "kind": "Drug",
+                "name": "氨苄西林片"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/28",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a2b98027b39ee75d2a8b6783",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/28",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/28",
+              "section_field": "dataset_category",
+              "quote": "\"氨苄西林片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_eee21544345b2cf6a8b187bcea01740b",
+              "src": {
+                "id": "drug_32b99eaacf85f3ad5c291cc7",
+                "kind": "Drug",
+                "name": "氨苄西林片"
+              },
+              "dst": {
+                "id": "ingredient_80c43ad411cb3b876a1a53ba",
+                "kind": "Ingredient",
+                "name": "别嘌醇"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_51639d6991c2b243755dc501",
+              "record_id": "sourcerecord_659e4f7d2d1d0d5fa4f23cb0",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy4466w.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "ba7c49778debf3fdd7b1e2d236173fc29d17d2c0b8cb9b1c06ce6a61ac5070f2",
+              "section_field": "drug_interactions",
+              "quote_start": 49,
+              "quote_end": 81,
+              "quote": "3.别嘌醇可使氨苄西林皮疹反应发生率增加，尤其多见于高尿酸血症。",
+              "mention_start": 51,
+              "mention_end": 54,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_5a28ddea9b3869e65cf1ebabdfb49196",
+              "src": {
+                "id": "drug_566d492f2aded24387a56a86",
+                "kind": "Drug",
+                "name": "别嘌醇片"
+              },
+              "dst": {
+                "id": "ingredient_80c43ad411cb3b876a1a53ba",
+                "kind": "Ingredient",
+                "name": "别嘌醇"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_9b1e076931d8faa61708a89b",
+              "record_id": "sourcerecord_a3890c72215681abb8cdedb9",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy3134w.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "99b68fe050973c7d413e71c96d7e605c50590406cf04c500563482fa6512feea",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 3,
+              "quote": "别嘌醇",
+              "mention_start": 0,
+              "mention_end": 3,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_ced2120d8875fbdfcf2d8cb4",
+              "src": {
+                "id": "drug_566d492f2aded24387a56a86",
+                "kind": "Drug",
+                "name": "别嘌醇片"
+              },
+              "dst": {
+                "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+                "kind": "DatasetCategory",
+                "name": "抗痛风药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/抗痛风药/1",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_3f2335ea295337680b0afc7d",
+              "top_id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/抗痛风药/1",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/抗痛风药/1",
+              "section_field": "dataset_category",
+              "quote": "\"别嘌醇片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_3f2335ea295337680b0afc7d",
+              "src": {
+                "id": "datasetcategory_dea1fe84c39fb3850b86710d",
+                "kind": "DatasetCategory",
+                "name": "抗痛风药"
+              },
+              "dst": {
+                "id": "datasetcategory_a90cd6fe71d8324accf37ee7",
+                "kind": "DatasetCategory",
+                "name": "镇痛解热"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/镇痛解热/抗痛风药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/镇痛解热/抗痛风药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/镇痛解热/抗痛风药",
+              "section_field": "dataset_category",
+              "quote": "\"抗痛风药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 5,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        },
+        {
+          "id": "discoverypath_75f71a13234f884c648e1e5e",
+          "nodes": [
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "drug_35e1fccbc26f7df343c71b5c",
+              "kind": "Drug",
+              "name": "氨苄西林丙磺舒颗粒"
+            },
+            {
+              "id": "ingredient_b3a8bd1cfc16d2486eb221d3",
+              "kind": "Ingredient",
+              "name": "甲氨蝶呤"
+            },
+            {
+              "id": "drug_90cb751d9a40f377dfd77333",
+              "kind": "Drug",
+              "name": "甲氨蝶呤片"
+            },
+            {
+              "id": "datasetcategory_6e73749482cdb41fa7acc8e8",
+              "kind": "DatasetCategory",
+              "name": "抗代谢药"
+            },
+            {
+              "id": "datasetcategory_70bb085a0a003598068fad42",
+              "kind": "DatasetCategory",
+              "name": "抗肿瘤药物"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_c831c2d94a25435056691261",
+              "src": {
+                "id": "drug_35e1fccbc26f7df343c71b5c",
+                "kind": "Drug",
+                "name": "氨苄西林丙磺舒颗粒"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/51",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_a2b98027b39ee75d2a8b6783",
+              "top_id": "datasetcategory_86eda1135453caf3cab02441",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/51",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/51",
+              "section_field": "dataset_category",
+              "quote": "\"氨苄西林丙磺舒颗粒\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_3f82f1afe6a9e9002dbd16d12c59e56c",
+              "src": {
+                "id": "drug_35e1fccbc26f7df343c71b5c",
+                "kind": "Drug",
+                "name": "氨苄西林丙磺舒颗粒"
+              },
+              "dst": {
+                "id": "ingredient_b3a8bd1cfc16d2486eb221d3",
+                "kind": "Ingredient",
+                "name": "甲氨蝶呤"
+              },
+              "relation": "INTERACTION_MENTION",
+              "relation_label": "相互作用章节提及（非自动确认风险）",
+              "source_id": "section_b01703d699c352938f377f70",
+              "record_id": "sourcerecord_f109c624f09d77388a0a622d",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy7167j.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "bcb271730b5bf53d9d370ce3f11a697a73f6e4d805686322dea39e2a17b19b4e",
+              "section_field": "drug_interactions",
+              "quote_start": 166,
+              "quote_end": 200,
+              "quote": " 6．与甲氨蝶呤、磺胺药合用，丙磺舒可使后者血药浓度增高，毒性增大；",
+              "mention_start": 170,
+              "mention_end": 174,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "literal_mention_not_clinically_validated"
+            },
+            {
+              "id": "edge_b40557b5e38b923320a9f95cd56c4248",
+              "src": {
+                "id": "drug_90cb751d9a40f377dfd77333",
+                "kind": "Drug",
+                "name": "甲氨蝶呤片"
+              },
+              "dst": {
+                "id": "ingredient_b3a8bd1cfc16d2486eb221d3",
+                "kind": "Ingredient",
+                "name": "甲氨蝶呤"
+              },
+              "relation": "HAS_INGREDIENT",
+              "relation_label": "成分原文记载",
+              "source_id": "section_602a078c7f0fb2105e2300f4",
+              "record_id": "sourcerecord_369744ac904f69182c808a79",
+              "source_file": "kg_output_clean_v2/sections.jsonl",
+              "source_url": "https://www.yaopinnet.com/huayao/hy32289.htm",
+              "source_status": "third_party_unverified",
+              "source_sha256": "58f3c8c6073087257ebc2935ba5a899e12d09729bdd5746c4ac63048fe57555d",
+              "section_field": "composition",
+              "quote_start": 0,
+              "quote_end": 4,
+              "quote": "甲氨蝶呤",
+              "mention_start": 0,
+              "mention_end": 4,
+              "qualifiers": {
+                "caution": false,
+                "conditional": false,
+                "negative_or_absent": false,
+                "prohibition": false,
+                "uncertain": false
+              },
+              "status": "source_assertion_unverified"
+            },
+            {
+              "id": "edge_aadd56ea1d4fe371afc47fdf",
+              "src": {
+                "id": "drug_90cb751d9a40f377dfd77333",
+                "kind": "Drug",
+                "name": "甲氨蝶呤片"
+              },
+              "dst": {
+                "id": "datasetcategory_6e73749482cdb41fa7acc8e8",
+                "kind": "DatasetCategory",
+                "name": "抗代谢药"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗肿瘤药物/抗代谢药/19",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "parent_edge": "edge_c9384e2263777ddc7f77e2d0",
+              "top_id": "datasetcategory_70bb085a0a003598068fad42",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗肿瘤药物/抗代谢药/19",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗肿瘤药物/抗代谢药/19",
+              "section_field": "dataset_category",
+              "quote": "\"甲氨蝶呤片\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_c9384e2263777ddc7f77e2d0",
+              "src": {
+                "id": "datasetcategory_6e73749482cdb41fa7acc8e8",
+                "kind": "DatasetCategory",
+                "name": "抗代谢药"
+              },
+              "dst": {
+                "id": "datasetcategory_70bb085a0a003598068fad42",
+                "kind": "DatasetCategory",
+                "name": "抗肿瘤药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗肿瘤药物/抗代谢药",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗肿瘤药物/抗代谢药",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗肿瘤药物/抗代谢药",
+              "section_field": "dataset_category",
+              "quote": "\"抗代谢药\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 5,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "INTERACTION_MENTION",
+            "HAS_INGREDIENT",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_selection_and_independent_medical_source_statements"
+        }
+      ],
+      "category_discovery": {
+        "plan": {
+          "version": 1,
+          "route": "category_candidate_source_join",
+          "level": "leaf",
+          "level_label": "二级子类",
+          "other_level": "top",
+          "level_basis": "explicit",
+          "seed_surface": "阿莫西林胶囊",
+          "seed_ids": [
+            "drug_9a84c0e39432de10ec7889a9"
+          ],
+          "original_question": "阿莫西林胶囊同一子类的其他药与其他大类药物有没有相互作用？",
+          "seed_candidates_truncated": false,
+          "exclude_seed": true,
+          "excluded_ids": [],
+          "partner_ids": [],
+          "other_category": true,
+          "fields": [
+            "drug_interactions"
+          ],
+          "operation": "interaction",
+          "different_ingredient": false,
+          "unsupported_negative_constraint": false,
+          "unsupported_clinical_advice": false,
+          "model_calls": 0,
+          "limits": {
+            "candidate_products": 48,
+            "medical_edges": 2400,
+            "identity_joins": 96,
+            "seconds": 3.0,
+            "evidence_chars": 32000,
+            "max_hops": 8
+          },
+          "policy": "dataset_candidate_selection_then_independent_product_source_evidence"
+        },
+        "status": "ok",
+        "missing_links": [
+          "interaction_partner_category_not_proven_or_overlaps",
+          "inferred_identity_join_route_conflict"
+        ],
+        "candidate_drugs_available": 62,
+        "candidate_drugs_searched": 48,
+        "coverage_complete": false,
+        "truncated": true,
+        "model_calls": 0,
+        "storage": "local_dataset_category_and_independently_verified_medical_graph",
+        "categories": [
+          "青霉素类"
+        ],
+        "level_label": "二级子类",
+        "seed_surface": "阿莫西林胶囊",
+        "catalog_only_candidates": 2,
+        "candidate_names": [
+          "氨苄西林-丙磺舒胶囊",
+          "注射用磺苄西林钠",
+          "注射用苯唑西林钠",
+          "双氯青霉素钠片",
+          "乙氧萘青霉素钠胶囊",
+          "阿奇霉素分散片",
+          "注射用阿莫西林钠",
+          "阿莫西林咀嚼片",
+          "阿莫西林/双氯西林钠胶囊",
+          "氟氯西林钠阿莫西林胶囊",
+          "注射用萘夫西林钠",
+          "氨苄西林片",
+          "注射用阿莫西林钠克拉维酸钾",
+          "青霉素皮试剂",
+          "氨苄西林丙磺舒颗粒",
+          "注射用青霉素钠",
+          "青霉素V钾分散片",
+          "青霉素V钾胶囊",
+          "注射用盐酸阿奇霉素",
+          "注射用呋脲苄青霉素钾",
+          "托西酸舒他西林胶囊",
+          "注射用呋布西林钠",
+          "注射用羧苄西林钠",
+          "注射用美洛西林钠舒巴坦钠(4:1)",
+          "青霉素V钾颗粒剂",
+          "青霉素V钾片",
+          "氨苄西林干混悬剂",
+          "注射用普鲁卡因青霉素",
+          "氯唑西林钠颗粒",
+          "注射用美洛西林钠舒巴坦钠",
+          "盐酸巴氨西林片",
+          "氨苄西林丙磺舒分散片",
+          "注射用苄星青霉素",
+          "氨苄西林丙磺舒胶囊",
+          "氨苄西林胶囊",
+          "注射用青霉素钾",
+          "阿莫西林分散片",
+          "氯唑西林钠胶囊",
+          "阿莫西林颗粒",
+          "注射用氨苄西林钠舒巴坦钠",
+          "注射用氨苄西林钠",
+          "苯唑西林钠胶囊",
+          "托西酸舒他西林分散片",
+          "氨苄西林颗粒",
+          "注射用呋苄西林钠",
+          "氨苄西林丙磺舒口腔崩解片",
+          "注射用氨苄西林钠氯唑西林钠",
+          "苯唑西林钠片"
+        ],
+        "medical_edges_scanned": 288,
+        "source_target_filters": [],
+        "identity_joins_checked": 134,
+        "matched_drug_pairs": 5,
+        "returned_examples": 5,
+        "seconds": 0.4294
+      },
+      "answer": "按“阿莫西林胶囊”所在的**二级子类**，找到 **5 条来源示例**（已排除该药本身）。\n\n**注射用苯唑西林钠 × 维C银翘片** [2]\n\n资料原文：1．本品与氨基糖苷类、去甲肾上腺素、间羟胺、苯巴比妥、维生素B族、维生素C等药物存在配伍禁忌，不宜同瓶滴注。\n\n**阿奇霉素分散片 × 茶碱缓释片** [3]\n\n资料原文：（2）与茶碱合用时能提高后者在血浆中的浓度，应注意检测血浆茶碱水平。\n\n**注射用萘夫西林钠 × 阿苯糖丸** [4]\n\n资料原文：1.本品与氨基糖苷类、去甲肾上腺素、间羟胺、苯巴比妥、维生素B族、维生素C等药物存在配伍禁忌，不宜同瓶滴注。\n\n**氨苄西林片 × 别嘌醇片** [5]\n\n资料原文：3.别嘌醇可使氨苄西林皮疹反应发生率增加，尤其多见于高尿酸血症。\n\n**氨苄西林丙磺舒颗粒 × 甲氨蝶呤片** [6]\n\n资料原文：6．与甲氨蝶呤、磺胺药合用，丙磺舒可使后者血药浓度增高，毒性增大；\n\n以上为本轮有限检索结果，不是完整清单。\n\n以上含成分或类别层面的来源线索，尚未核实该具体制剂组合的临床相互作用；不能据此判断合用安全。\n\n分类、成分与逐边原文请在证据栏的**多关系图路径**中展开查看。[1]"
+    },
+    {
+      "question": "阿莫西林胶囊属于什么类药物？",
+      "status": "ok",
+      "answer_route": "dataset_category_source_display",
+      "seconds": 0.0816,
+      "path_count": 1,
+      "paths": [
+        {
+          "id": "categorypath_53a08ceca23cbf8430861a6d",
+          "nodes": [
+            {
+              "id": "drug_9a84c0e39432de10ec7889a9",
+              "kind": "Drug",
+              "name": "阿莫西林胶囊"
+            },
+            {
+              "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+              "kind": "DatasetCategory",
+              "name": "青霉素类"
+            },
+            {
+              "id": "datasetcategory_86eda1135453caf3cab02441",
+              "kind": "DatasetCategory",
+              "name": "抗生素药物"
+            }
+          ],
+          "edges": [
+            {
+              "id": "edge_29b4a7486f8f5b9d961d7644",
+              "src": {
+                "id": "drug_9a84c0e39432de10ec7889a9",
+                "kind": "Drug",
+                "name": "阿莫西林胶囊"
+              },
+              "dst": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "relation": "DATASET_CATEGORY_MEMBERSHIP",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类/0",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集分类记载",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类/0",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类/0",
+              "section_field": "dataset_category",
+              "quote": "\"阿莫西林胶囊\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            },
+            {
+              "id": "edge_a2b98027b39ee75d2a8b6783",
+              "src": {
+                "id": "datasetcategory_a697de7e21a859f3f1eba8d2",
+                "kind": "DatasetCategory",
+                "name": "青霉素类"
+              },
+              "dst": {
+                "id": "datasetcategory_86eda1135453caf3cab02441",
+                "kind": "DatasetCategory",
+                "name": "抗生素药物"
+              },
+              "relation": "DATASET_CATEGORY_PARENT",
+              "file": "drug_categories_western.json",
+              "json_pointer": "/categories/抗生素药物/青霉素类",
+              "source_sha256": "00ba4a563398ab0e29441fb72c57b59e28cc52ba24cc77185b59c84efd16e347",
+              "relation_label": "本地数据集上级分类",
+              "source_id": "drug_categories_western.json:/categories/抗生素药物/青霉素类",
+              "source_file": "data/raw/drug_db/MedGraphRAG-Drug-DB/drug_categories_western.json",
+              "source_url": "",
+              "record_id": "/categories/抗生素药物/青霉素类",
+              "section_field": "dataset_category",
+              "quote": "\"青霉素类\"",
+              "quote_start": null,
+              "quote_end": null,
+              "source_status": "local_dataset_unverified",
+              "status": "dataset_classification_not_pharmacological_assertion",
+              "verification_method": "json_pointer_structure_and_file_sha256"
+            }
+          ],
+          "hops": 2,
+          "relations": [
+            "DATASET_CATEGORY_MEMBERSHIP",
+            "DATASET_CATEGORY_PARENT"
+          ],
+          "verified_against_original": true,
+          "clinical_validation": false,
+          "evidence_scope": "dataset_category_structure_only"
+        }
+      ],
+      "category_discovery": {},
+      "answer": ""
+    }
+  ]
+}
