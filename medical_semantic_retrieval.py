@@ -17,7 +17,8 @@ import re
 import time
 
 from medical_semantic_graph import (
-    GraphBlocked, Lexicon, RELATIONS, FIELD_RELATIONS, MECHANISM_RELATIONS, digest, entity_id,
+    GraphBlocked, Lexicon, RELATIONS, FIELD_RELATIONS, MECHANISM_RELATIONS,
+    MECHANISM_STATEMENT_RELATIONS, digest, entity_id,
     class_assertion_spans, index_path, ingredient_spans, literal_entity_boundary, open_graph, qualifiers, verify_source,
 )
 from medical_query_understanding import understand_question, active_anchors
@@ -208,7 +209,7 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
         # Keep each mechanism statement as the bridge. Shared concepts such as
         # CYP2C19 are useful labels, but cannot connect unrelated drug records.
         anchors = {v for group in plan["anchors"] for v in group["node_ids"]}
-        mechanism_relations = set(MECHANISM_RELATIONS)
+        mechanism_relations = set(MECHANISM_RELATIONS) | set(MECHANISM_STATEMENT_RELATIONS)
         direct_relations = set(plan["requested_relations"])
         rows = []
         for anchor in sorted(anchors):
@@ -234,8 +235,9 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
                                    "血药浓度", "血浆浓度", "血清浓度", "生物利用度", "清除率", "半衰期"}
         rows.sort(key=lambda e: (
             0 if e["relation"] == "INTERACTION_MENTION" and group_index.get(e["src"]) is not None and group_index.get(e["dst"]) is not None and group_index[e["src"]] != group_index[e["dst"]] else
-            1 if e["relation"] in mechanism_relations and group_index.get(e["src"]) == 0 else
-            2 if e["relation"] in mechanism_relations else 3,
+            1 if e["relation"] in mechanism_relations - set(MECHANISM_STATEMENT_RELATIONS) and group_index.get(e["src"]) == 0 else
+            2 if e["relation"] in mechanism_relations - set(MECHANISM_STATEMENT_RELATIONS) else
+            3 if e["relation"] in MECHANISM_STATEMENT_RELATIONS else 4,
             nodes.get(e["dst"], {}).get("name") not in specific_mechanism_terms,
             e["dst"] in nodes and nodes[e["dst"]]["name"] in broad_concepts,
             e["section_field"] != "drug_interactions" if "section_field" in e else False,
@@ -254,8 +256,11 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
                    FROM edges a JOIN sources s ON s.id=a.source_id
                    JOIN edges b ON b.src=a.dst AND b.source_id=a.source_id
                    WHERE a.src=? AND a.relation='MECHANISM_STATEMENT_MENTION'
-                     AND b.relation IN ('MECHANISM_PARTNER_MENTION','MECHANISM_ENTITY_MENTION')
-                   ORDER BY CASE WHEN b.relation='MECHANISM_PARTNER_MENTION' THEN 0 ELSE 1 END,a.id,b.id
+                     AND b.relation IN ('MECHANISM_PARTNER_MENTION','MECHANISM_ENTITY_MENTION',
+                                        'STATEMENT_ENZYME_MENTION','STATEMENT_PROCESS_MENTION',
+                                        'STATEMENT_EXPOSURE_MENTION','STATEMENT_OUTCOME_MENTION')
+                   ORDER BY CASE WHEN b.relation='MECHANISM_PARTNER_MENTION' THEN 0
+                                 WHEN b.relation='MECHANISM_ENTITY_MENTION' THEN 1 ELSE 2 END,a.id,b.id
                    LIMIT ?""",
                 (anchor, max_neighbors),
             )
@@ -283,10 +288,57 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
                     candidates.append(route)
                     seen.add(route_key)
         if len(plan["anchors"]) > 1:
+            # A product-level interaction can name the other product's literal
+            # ingredient rather than its formulation. Join only through that
+            # formulation's independently sourced HAS_INGREDIENT edge.
+            groups = [set(g["node_ids"]) for g in plan["anchors"]]
+            for left in sorted(groups[0]):
+                for right in sorted(groups[1]):
+                    for owner, partner, covered in ((left, right, [0, 1]), (right, left, [0, 1])):
+                        rows = conn.execute(
+                            """SELECT e.*,s.record_id,s.drug_id,s.field AS section_field,
+                                      c.id AS composition_edge_id,c.src AS composition_src,
+                                      c.dst AS composition_dst,c.source_id AS composition_source_id,
+                                      c.quote_start AS composition_quote_start,c.quote_end AS composition_quote_end,
+                                      c.mention_start AS composition_mention_start,c.mention_end AS composition_mention_end,
+                                      c.qualifier_json AS composition_qualifier_json,c.status AS composition_status,
+                                      cs.record_id AS composition_record_id,cs.drug_id AS composition_drug_id,
+                                      cs.field AS composition_section_field
+                               FROM edges e JOIN sources s ON s.id=e.source_id
+                               JOIN edges c ON c.src=? AND c.dst=e.dst AND c.relation='HAS_INGREDIENT'
+                               JOIN sources cs ON cs.id=c.source_id
+                               WHERE e.src=? AND e.relation='INTERACTION_MENTION'
+                                 AND s.field='drug_interactions' AND cs.field='composition'
+                               ORDER BY e.id,c.id LIMIT ?""",
+                            (partner, owner, max_neighbors),
+                        )
+                        for row in rows:
+                            interaction = {k: row[k] for k in (
+                                "id", "src", "dst", "relation", "source_id", "quote_start", "quote_end",
+                                "mention_start", "mention_end", "qualifier_json", "status", "record_id", "drug_id", "section_field")}
+                            composition = {"id": row["composition_edge_id"], "src": row["composition_src"],
+                                           "dst": row["composition_dst"], "relation": "HAS_INGREDIENT",
+                                           "source_id": row["composition_source_id"],
+                                           "quote_start": row["composition_quote_start"],
+                                           "quote_end": row["composition_quote_end"],
+                                           "mention_start": row["composition_mention_start"],
+                                           "mention_end": row["composition_mention_end"],
+                                           "qualifier_json": row["composition_qualifier_json"],
+                                           "status": row["composition_status"],
+                                           "record_id": row["composition_record_id"],
+                                           "drug_id": row["composition_drug_id"],
+                                           "section_field": row["composition_section_field"]}
+                            route = {"node_ids": [owner, row["dst"], partner],
+                                     "edges": [interaction, composition],
+                                     "relations": ["INTERACTION_MENTION", "HAS_INGREDIENT"],
+                                     "covered_anchors": covered, "score": 220}
+                            key = tuple(edge["id"] for edge in route["edges"])
+                            if key not in seen:
+                                candidates.append(route)
+                                seen.add(key)
             # Join only statements that mention both requested anchors in the
             # same source section. This is a source-backed mechanism path, not
             # an inferred clinical interaction.
-            groups = [set(g["node_ids"]) for g in plan["anchors"]]
             for left in sorted(groups[0]):
                 for right in sorted(groups[1]):
                   # Either product's source may describe the interaction. Keep
@@ -350,6 +402,7 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
                         if key not in seen:
                             candidates.append(route)
                             seen.add(key)
+        direct_mechanism_edges = []
         for edge in rows:
             if edge["id"] in seen:
                 continue
@@ -357,15 +410,22 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
             src, dst = edge["src"], edge["dst"]
             if edge["relation"] == "MECHANISM_STATEMENT_MENTION":
                 continue
-            candidates.append({"node_ids": [src, dst], "edges": [edge], "relations": [edge["relation"]],
+            candidate = {"node_ids": [src, dst], "edges": [edge], "relations": [edge["relation"]],
                                "covered_anchors": [i for i, group in enumerate(plan["anchors"])
                                                    if src in group["node_ids"]],
-                               "score": (90 if edge["relation"] == "INTERACTION_MENTION" else
+                               "score": (120 if edge["relation"] in mechanism_relations - set(MECHANISM_STATEMENT_RELATIONS) else
+                                         90 if edge["relation"] == "INTERACTION_MENTION" else
+                                         50 if edge["relation"] in MECHANISM_STATEMENT_RELATIONS else
                                          65 if edge["relation"] in mechanism_relations
                                          and edge.get("section_field") == "drug_interactions" else
-                                         35 if edge["relation"] in mechanism_relations else 20)})
+                                         35 if edge["relation"] in mechanism_relations else 20)}
+            if edge["relation"] in mechanism_relations - set(MECHANISM_STATEMENT_RELATIONS):
+                direct_mechanism_edges.append(candidate)
+            else:
+                candidates.append(candidate)
             if len(candidates) >= max_paths * 3:
                 break
+        candidates.extend(direct_mechanism_edges)
         candidates.sort(key=lambda p: (
             len(plan["anchors"]) > 1
             and len(p["covered_anchors"]) == len(plan["anchors"])
@@ -374,9 +434,20 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
             len(plan["anchors"]) > 1 and len(p["covered_anchors"]) == len(plan["anchors"]),
             len(p["covered_anchors"]), p["score"],
         ), reverse=True)
+        pair_paths = [c for c in candidates if len(c["covered_anchors"]) == len(plan["anchors"])]
+        unpaired_paths_suppressed = 0
+        if len(plan["anchors"]) > 1 and pair_paths:
+            unpaired_paths_suppressed = len(candidates) - len(pair_paths)
+            candidates = pair_paths
         return candidates, {"mechanism_statements_are_independent": True,
                             "shared_mechanism_terms_not_used_as_pair_proof": True,
-                            "mechanism_pair_statement_paths": sum(len(c["covered_anchors"]) == len(plan["anchors"]) for c in candidates),
+                            "mechanism_pair_paths": len(pair_paths),
+                            "unpaired_mechanism_paths_suppressed": unpaired_paths_suppressed,
+                            "mechanism_pair_statement_paths": sum("MECHANISM_PARTNER_MENTION" in c["relations"]
+                                                                   for c in pair_paths),
+                            "mechanism_pair_interaction_ingredient_paths": sum(
+                                "INTERACTION_MENTION" in c["relations"] and "HAS_INGREDIENT" in c["relations"]
+                                for c in pair_paths),
                             "mechanism_edges_returned": sum(any(r in mechanism_relations for r in c["relations"]) for c in candidates)}
     groups = plan["anchors"]
     allowed = _allowed(plan, nodes)
@@ -574,7 +645,7 @@ def _proof(conn, root: Path, path: dict, nodes: dict, verified_sources: dict) ->
             ).fetchone()
             if not statement_edge or text[ms:me] != target["name"]:
                 raise GraphBlocked("Mechanism partner is not grounded in its source statement")
-        elif relation == "MECHANISM_ENTITY_MENTION":
+        elif relation in ("MECHANISM_ENTITY_MENTION", *MECHANISM_STATEMENT_RELATIONS):
             if origin["kind"] != "MechanismStatement" or target["kind"] != "Mechanism" or text[ms:me] != target["name"]:
                 raise GraphBlocked("Invalid mechanism concept endpoints")
             if not conn.execute(

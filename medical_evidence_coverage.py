@@ -5,7 +5,7 @@ import hashlib
 import json
 import re
 
-from medical_query_plan import FIELD_LABELS, FIELD_RELATIONS
+from medical_query_plan import FIELD_LABELS, FIELD_RELATIONS, MECHANISM_RELATIONS
 
 GRAPH_TYPE = "evidence_backed_semantic_graph_path"
 SECTION_TYPES = {"json_neo4j_text_verified", "unverified_drug_source_section"}
@@ -46,6 +46,13 @@ def build_answer_targets(question, understanding, plan):
                                            "names": m.get("candidate_drug_names", []) or [m["surface"]],
                                            "product_known": bool(m.get("actual_patient_product_known"))} for m in group],
                             "pair": len(group) == 2})
+    if understanding.get("intent", {}).get("mechanism_question"):
+        targets.append({"id": f"target_{len(targets)+1}", "field": "mechanism",
+                        "label": "与".join(m["surface"] for m in medicines) + "的药理机制",
+                        "medicines": [{"surface": m["surface"],
+                                       "names": m.get("candidate_drug_names", []) or [m["surface"]],
+                                       "product_known": bool(m.get("actual_patient_product_known"))} for m in medicines],
+                        "pair": len(medicines) == 2})
     return targets
 
 
@@ -139,6 +146,34 @@ def evidence_bindings(item, targets):
         return []
     for target in targets:
         medicines, field = target["medicines"], target["field"]
+        if field == "mechanism":
+            if graph:
+                edges = path.get("edges", [])
+                mechanism_edges = [e for e in edges
+                                   if e.get("relation") in MECHANISM_RELATIONS
+                                   and e.get("quote")
+                                   and e["quote"] in str(item.get("content") or "")]
+                path_drugs = {n.get("name") for n in path.get("nodes", []) if n.get("kind") == "Drug"}
+                covers_target = all(any(_matches(name, medicine) for name in path_drugs)
+                                    for medicine in medicines)
+                if mechanism_edges and covers_target:
+                    bindings.append({"target_id": target["id"], "source_verified": True,
+                                     "scope": "verified_mechanism_source_mention_not_causal_validation",
+                                     "edge_ids": [e.get("id") for e in mechanism_edges]})
+            elif item.get("evidence_type") in SECTION_TYPES and item.get("section_field") in ("drug_interactions", "warnings"):
+                owner = str(item.get("drug_name") or "")
+                text = original_text(item)
+                pair_is_explicit = (not target["pair"] or all(
+                    _matches(owner, medicine) or any(name in text for name in [medicine["surface"], *medicine["names"]])
+                    for medicine in medicines
+                ))
+                if text and pair_is_explicit and any(_matches(owner, m) for m in medicines):
+                    mechanism_terms = re.compile(r"CYP\w*|细胞色素|代谢|酶|转运|抑制|诱导|活性代谢物|血药浓度|血浆浓度|清除率|半衰期|生物利用度|机制")
+                    if mechanism_terms.search(text):
+                        bindings.append({"target_id": target["id"],
+                                         "source_verified": bool(item.get("parent_verified")),
+                                         "scope": "source_mechanism_text_pending_semantic_review", "edge_ids": []})
+            continue
         if graph:
             edges = path.get("edges", [])
             relevant = [e for e in edges if e.get("relation") == FIELD_RELATIONS.get(field)

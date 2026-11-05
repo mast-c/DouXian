@@ -122,6 +122,13 @@ class PatientQuestionUnderstandingTests(unittest.TestCase):
                 self.assertTrue(result["unresolved_medication_mentions"])
                 self.assertFalse(result["medicines"])
 
+    def test_disease_drug_question_is_not_an_unresolved_medicine_name(self):
+        for question in ("感冒应该吃什么药", "鼻炎用哪种药", "什么药适合治疗过敏性鼻炎"):
+            with self.subTest(question=question):
+                result = self.understand(question)
+                self.assertTrue(result["intent"]["drug_discovery_question"])
+                self.assertFalse(result["unresolved_medication_mentions"])
+
     def test_preexisting_symptom_is_not_assumed_to_be_drug_reaction(self):
         result = self.understand("我鼻塞严重，正在服用西替利嗪，能不能加上布地奈德喷雾剂")
         self.assertFalse(result["intent"]["adverse_event_question"])

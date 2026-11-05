@@ -19,7 +19,7 @@ import sqlite3
 import tempfile
 from urllib.parse import quote
 
-VERSION = "semantic-graph-4"
+VERSION = "semantic-graph-5"
 DEFAULT_INDEX = "semantic_graph/medical_graph.sqlite"
 SOURCE_DIR = "kg_output_clean_v2"
 DISEASE_FILE = "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json"
@@ -50,7 +50,14 @@ MECHANISM_RELATIONS = {
     "TRANSPORT_MENTION": "转运或排泄关系原文提及",
     "MECHANISM_OUTCOME_MENTION": "机制相关结果原文提及",
 }
+MECHANISM_STATEMENT_RELATIONS = {
+    "STATEMENT_ENZYME_MENTION": "机制陈述涉及酶或转运体",
+    "STATEMENT_PROCESS_MENTION": "机制陈述涉及药代过程",
+    "STATEMENT_EXPOSURE_MENTION": "机制陈述涉及暴露指标",
+    "STATEMENT_OUTCOME_MENTION": "机制陈述涉及作用结果",
+}
 RELATIONS.update(MECHANISM_RELATIONS)
+RELATIONS.update(MECHANISM_STATEMENT_RELATIONS)
 # Exact terms and broad pharmacology concepts collected from source language.
 # These are searchable concepts, not a pre-built pharmacological ontology.
 MECHANISM_TERMS = (
@@ -60,7 +67,7 @@ MECHANISM_TERMS = (
     "药理机制", "作用机制", "相互作用机制",
     "血药浓度", "血浆浓度", "血清浓度", "药物暴露", "生物利用度", "清除率", "半衰期",
     "吸收", "分布", "代谢", "排泄", "转运", "蛋白结合", "药效", "毒性", "肌病", "横纹肌溶解",
-    "肾毒性", "肝毒性", "耳毒性", "出血风险", "心律失常", "QT间期",
+    "肾毒性", "肝毒性", "耳毒性", "出血风险", "肌病风险", "心律失常", "QT间期",
 )
 MECHANISM_CLAUSE = re.compile(
     r"代谢|酶|底物|抑制|诱导|浓度|暴露|生物利用度|清除率|半衰期|吸收|分布|排泄|转运|"
@@ -81,6 +88,12 @@ MECHANISM_TARGETS = {
     "TRANSPORT_MENTION": re.compile(r"吸收|分布|排泄|转运|肾小管分泌"),
     "MECHANISM_OUTCOME_MENTION": re.compile(r"毒性|肌病|横纹肌溶解|出血风险|心律失常|QT间期|药效"),
 }
+MECHANISM_STATEMENT_ROLE_RULES = (
+    ("STATEMENT_ENZYME_MENTION", re.compile(r"CYP|细胞色素|药物代谢酶|代谢酶|酶活性|P-gp|P-糖蛋白|转运体", re.I)),
+    ("STATEMENT_PROCESS_MENTION", re.compile(r"吸收|分布|代谢|排泄|转运|肾小管分泌|首过|蛋白结合", re.I)),
+    ("STATEMENT_EXPOSURE_MENTION", re.compile(r"血药浓度|血浆浓度|血清浓度|药物暴露|生物利用度|清除率|半衰期", re.I)),
+    ("STATEMENT_OUTCOME_MENTION", re.compile(r"药效|毒性|肌病|横纹肌溶解|肾毒性|肝毒性|耳毒性|出血风险|心律失常|QT间期", re.I)),
+)
 POPULATIONS = ("孕妇", "妊娠期", "哺乳期妇女", "哺乳期", "儿童", "新生儿", "老年人")
 # Literal vocabulary, NOT a drug-to-class lookup or synonym map. Membership
 # requires an explicit self-classification sentence in the same product record.
@@ -206,13 +219,27 @@ def ingredient_spans(text: str) -> list[tuple[str, int, int]]:
 
 
 def qualifiers(text: str) -> dict:
-    # Multiple flags may coexist. Full source context, not these flags, governs meaning.
+    # Directional cues are literal features, not inferred pharmacological facts.
+    increase = bool(re.search(r"升高|增高|增加|增强|促进|延长", text))
+    decrease = bool(re.search(r"降低|下降|减少|减弱|缩短", text))
+    if increase and decrease:
+        change_direction = "mixed_or_multiple"
+    elif increase:
+        change_direction = "increase_like"
+    elif decrease:
+        change_direction = "decrease_like"
+    else:
+        change_direction = "not_stated"
+    inhibit = bool(re.search(r"抑制|阻断", text))
+    induce = bool(re.search(r"诱导|促进表达", text))
     return {
-        "negative_or_absent": bool(re.search(r"尚未见|未发现|无明显|无不良|无相互作用|不发生|没有抑制作用|无抑制作用|无显著.*相互作用", text)),
+        "negative_or_absent": bool(re.search(r"尚未见|未发现|未(?:能|曾)?(?:抑制|诱导|增加|升高|降低)|无明显|无不良|无相互作用|无(?:抑制|诱导)作用|不发生|没有(?:抑制|诱导)作用|无显著.*相互作用", text)),
         "uncertain": bool(re.search(r"尚不明确|尚不清楚|临床意义不明|相关性尚不明确|可能|据报", text)),
         "prohibition": bool(re.search(r"禁用|禁忌|禁止|不得|不应合用", text)),
         "caution": bool(re.search(r"慎用|谨慎|监测|注意", text)),
         "conditional": bool(re.search(r"如果|若|当|患者|妊娠|孕妇|剂量|超过|大于|≥|≤", text)),
+        "change_direction": change_direction,
+        "modulation": "mixed_or_multiple" if inhibit and induce else "inhibit" if inhibit else "induce" if induce else "not_stated",
     }
 
 
@@ -235,8 +262,8 @@ def clause_span(text: str, start: int, end: int) -> tuple[int, int]:
 def literal_entity_boundary(text: str, start: int, end: int, *, query: bool = False) -> bool:
     """Conservatively reject substrings of unknown longer clinical/chemical names."""
     han = lambda c: bool(c) and "\u4e00" <= c <= "\u9fff"
-    before = r"(?:对|有|与|及|或|和|如|为|于|伴|出现|导致|引起|包括|发生|患|的|用|含|本品|严重|急性|慢性|活动性|经|由|后|使)"
-    after = r"(?:患者|病人|者|时|及|或|和|与|的|等|伴|可|合|同|有|会|能|应|禁|慎|药物|类药|类|史|倾向|降低|增加|升高|增高|下降|血|被|不|代谢|排泄|抑制|诱导|清除|浓度|水平)"
+    before = r"(?:对|有|与|及|或|和|如|为|于|伴|出现|导致|引起|包括|发生|增加|减少|降低|升高|提高|患|的|用|含|本品|严重|急性|慢性|活动性|经|由|后|使)"
+    after = r"(?:患者|病人|者|时|及|或|和|与|的|等|伴|可|合|同|有|会|能|应|禁|慎|药物|类药|类|史|倾向|风险|发生|降低|增加|升高|增高|下降|血|被|不|代谢|排泄|抑制|诱导|清除|浓度|水平)"
     if query:
         before = r"(?:" + before + r"|请问|介绍|解释|分析|关于|使用|服用|比较|知道|一下|查询|查查|查找|列出|查|问|跟|以及|治|治疗|用于治疗|治疗了)"
         after = r"(?:" + after + r"|是|是否|有何|什么|怎么|如何|相关|之间|用的药|用药|常用药|所用药|治疗药|药跟|药和)"
@@ -245,6 +272,25 @@ def literal_entity_boundary(text: str, start: int, end: int, *, query: bool = Fa
     if end < len(text) and han(text[end]) and not re.match(after, text[end:]):
         return False
     return True
+
+
+def mechanism_entity_boundary(text: str, start: int, end: int, medicine_spans=()) -> bool:
+    """Allow an exposure concept directly suffixed to a literal medicine name.
+
+    Source text commonly omits a separator in phrases such as
+    ``阿托伐他汀血药浓度升高``. Keep this exception limited to exposure
+    concepts and exact medicine spans; other mechanism and clinical entities
+    retain the conservative boundary rule.
+    """
+    if literal_entity_boundary(text, start, end):
+        return True
+    name = text[start:end]
+    if re.fullmatch(r"CYP\d[A-Z0-9]*|细胞色素\s*P450|P-gp|P-糖蛋白|有机阴/阳离子转运体", name, re.I):
+        if re.search(r"(?:抑制|诱导|作用于|经|由|代谢)$", text[:start]):
+            return True
+    if not re.fullmatch(r"血药浓度|血浆浓度|血清浓度|药物暴露|生物利用度|清除率|半衰期", name):
+        return False
+    return any(medicine_end == start for _, _, medicine_end in medicine_spans)
 
 
 def class_assertion_spans(text: str):
@@ -453,9 +499,11 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
                 statement_text = text[qs:qe]
                 statement = entity("MechanismStatement", statement_text)
                 edge(drug, statement, "MECHANISM_STATEMENT_MENTION", sid, qs, qe, qs, qe)
+                medicine_mentions = [(name, a, b) for name, a, b in medicine_lexicon.find(raw)
+                                     if literal_entity_boundary(raw, a, b)]
                 concepts = list(mechanism_lexicon.find(raw))
                 concepts = [(name, a, b) for name, a, b in concepts
-                            if literal_entity_boundary(raw, a, b)]
+                            if mechanism_entity_boundary(raw, a, b, medicine_mentions)]
                 if not concepts:
                     generic = MECHANISM_CLAUSE.search(raw)
                     concepts = [(generic.group(), generic.start(), generic.end())] if generic and len(generic.group()) >= 2 else []
@@ -465,6 +513,10 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
                 for name, a, b in concepts:
                     ms, me = clause.start() + a, clause.start() + b
                     context = raw[max(0, a - 32):min(len(raw), b + 32)]
+                    statement_roles = [relation for relation, pattern in MECHANISM_STATEMENT_ROLE_RULES
+                                       if pattern.search(name)]
+                    for role in statement_roles:
+                        edge(statement, entity("Mechanism", name), role, sid, qs, qe, ms, me)
                     matched_relations = [rel for rel, pattern in MECHANISM_RELATION_RULES
                                          if pattern.search(context) and MECHANISM_TARGETS[rel].search(name)]
                     if not matched_relations:
@@ -472,9 +524,7 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
                     for relation in matched_relations:
                         edge(statement, entity("Mechanism", name), "MECHANISM_ENTITY_MENTION", sid, qs, qe, ms, me)
                         edge(drug, entity("Mechanism", name), relation, sid, qs, qe, ms, me)
-                for name, ms, me in medicine_lexicon.find(raw):
-                    if not literal_entity_boundary(raw, ms, me):
-                        continue
+                for name, ms, me in medicine_mentions:
                     for destination in medicines[name]:
                         if destination not in mechanism_partner_ids:
                             continue

@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from langchain_core.documents import Document
 from medical_query_plan import build_retrieval_plan, section_routing_question
 from medical_query_execution import execute_retrieval_plan
-from medical_semantic_graph import build_graph
+from medical_semantic_graph import build_graph, qualifiers
 from medical_semantic_retrieval import graph_insufficiency_message, search_semantic_graph
 from medical_semantic_graph_view import relation_label
 from medical_query_understanding import patient_intent
@@ -277,10 +277,89 @@ class GraphIntegrationTests(unittest.TestCase):
             self.assertTrue(any(edge["relation"] == "HAS_INGREDIENT" and edge["dst"]["name"] == "甲试鼻喷雾剂" for edge in evidence) is False)
             self.assertTrue(all(edge["quote"] == sections[-1]["text"] for edge in evidence))
 
+    def test_mechanism_pair_retrieves_interaction_via_exact_partner_ingredient(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fixture(root)
+            export = root / "kg_output_clean_v2"
+            drugs_path = export / "drugs.jsonl"
+            drugs = [json.loads(line) for line in drugs_path.read_text(encoding="utf-8").splitlines()]
+            drugs.append({"id": "drug_b", "name": "乙试片", "aliases": []})
+            drugs_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in drugs), encoding="utf-8")
+            records_path = export / "source_records.jsonl"
+            records = [json.loads(line) for line in records_path.read_text(encoding="utf-8").splitlines()]
+            records.append({"id": "record_b", "drug_id": "drug_b", "source_url": "https://example.invalid/b"})
+            records_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in records), encoding="utf-8")
+            sections_path = export / "sections.jsonl"
+            sections = [json.loads(line) for line in sections_path.read_text(encoding="utf-8").splitlines()]
+            sections.extend([
+                {"id": "sinteraction_pair", "record_id": "record_a", "field": "drug_interactions",
+                 "text": "与乙试素合用时需调整剂量。"},
+                {"id": "scomposition_pair", "record_id": "record_b", "field": "composition",
+                 "text": "主要成分：乙试素。"},
+                {"id": "sunpaired_mechanism", "record_id": "record_b", "field": "drug_interactions",
+                 "text": "本品经CYP3A4代谢。"},
+            ])
+            sections_path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in sections), encoding="utf-8")
+            build_graph(root)
+            question = "甲试鼻喷雾剂与乙试片合用有什么风险？作用机制是什么？"
+            excerpts, report = search_semantic_graph(question, project_root=root)
+            self.assertTrue(excerpts, report)
+            paired = [item for item in excerpts if set(item["graph_path"]["relations"]) == {
+                "INTERACTION_MENTION", "HAS_INGREDIENT"
+            } and {"甲试鼻喷雾剂", "乙试片"}.issubset(
+                {node["name"] for node in item["graph_path"]["nodes"]}
+            )]
+            self.assertTrue(paired, report)
+            self.assertEqual(report["stats"]["mechanism_pair_paths"], 1)
+            self.assertEqual(report["stats"]["mechanism_pair_statement_paths"], 0)
+            self.assertEqual(report["stats"]["mechanism_pair_interaction_ingredient_paths"], 1)
+            self.assertTrue(all(len(item["graph_path"]["nodes"]) == 3 for item in excerpts))
+            self.assertGreater(report["stats"]["unpaired_mechanism_paths_suppressed"], 0)
+            proof = paired[0]["graph_path"]
+            self.assertTrue(proof["verified_against_original"])
+            self.assertEqual({edge["quote"] for edge in proof["edges"]}, {
+                "与乙试素合用时需调整剂量。", "主要成分：乙试素。"
+            })
+
     def test_mechanism_relation_labels_are_specific_and_future_relations_are_legible(self):
         self.assertEqual(relation_label("MECHANISM_PARTNER_MENTION"), "机制陈述提及相关药物")
         self.assertEqual(relation_label("EXPOSURE_CHANGE_MENTION"), "药物暴露变化原文提及")
         self.assertNotEqual(relation_label("FUTURE_RELATION"), "资料关系")
+
+    def test_mechanism_role_edges_are_built_and_proven_from_the_same_statement(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fixture(root)
+            export = root / "kg_output_clean_v2"
+            sections = [json.loads(line) for line in (export / "sections.jsonl").read_text(encoding="utf-8").splitlines()]
+            clause = "本品经CYP3A4代谢，抑制该酶后血药浓度升高，并可能增加肌病风险。"
+            sections.append({"id": "smechanism_roles", "record_id": "record_a", "field": "drug_interactions", "text": clause})
+            (export / "sections.jsonl").write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in sections), encoding="utf-8")
+            build_graph(root)
+            conn = sqlite3.connect(root / "semantic_graph" / "medical_graph.sqlite")
+            try:
+                stored_roles = {row[0] for row in conn.execute(
+                    "SELECT DISTINCT relation FROM edges WHERE relation LIKE 'STATEMENT_%_MENTION'"
+                )}
+            finally:
+                conn.close()
+            self.assertEqual(stored_roles, {
+                "STATEMENT_ENZYME_MENTION", "STATEMENT_PROCESS_MENTION",
+                "STATEMENT_EXPOSURE_MENTION", "STATEMENT_OUTCOME_MENTION",
+            })
+            excerpts, report = search_semantic_graph("甲试鼻喷雾剂的药理机制是什么", project_root=root)
+            self.assertTrue(excerpts, report)
+            edges = [edge for item in excerpts for edge in item["graph_path"]["edges"]]
+            self.assertTrue(all(item["graph_path"]["verified_against_original"] for item in excerpts))
+            self.assertTrue(any(edge["quote"] == clause for edge in edges))
+
+    def test_literal_mechanism_qualifiers_keep_direction_modulation_and_conditions(self):
+        cues = qualifiers("若合用抑制剂，血药浓度可能升高；诱导代谢后暴露下降。")
+        self.assertEqual(cues["change_direction"], "mixed_or_multiple")
+        self.assertEqual(cues["modulation"], "mixed_or_multiple")
+        self.assertTrue(cues["conditional"])
+        self.assertTrue(qualifiers("未抑制CYP3A4")["negative_or_absent"])
 
     def test_mechanism_edges_are_built_and_verified_from_original_clause(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -300,6 +379,38 @@ class GraphIntegrationTests(unittest.TestCase):
             mechanism_edges = [edge for edge in proof_edges if edge["relation"].endswith("_MENTION") and edge["dst"]["kind"] == "Mechanism"]
             self.assertTrue(mechanism_edges)
             self.assertTrue(all(edge["quote"] == "本品经CYP3A4代谢，合用抑制剂后血药浓度升高。" for edge in mechanism_edges))
+
+    def test_mechanism_extraction_keeps_cyp_and_compound_exposure_mentions(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fixture(root)
+            export = root / "kg_output_clean_v2"
+            sections = [json.loads(line) for line in (export / "sections.jsonl").read_text(encoding="utf-8").splitlines()]
+            clause = "本品可抑制CYP3A4，升高甲试鼻喷雾剂血药浓度，可能增加肌病风险。"
+            sections.append({"id": "smechanism_compound_exposure", "record_id": "record_a",
+                             "field": "drug_interactions", "text": clause})
+            (export / "sections.jsonl").write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in sections), encoding="utf-8")
+            build_graph(root)
+            conn = sqlite3.connect(root / "semantic_graph" / "medical_graph.sqlite")
+            try:
+                rows = conn.execute("""SELECT e.relation, dst.name, s.text,
+                        substr(s.text, e.mention_start + 1, e.mention_end - e.mention_start),
+                        e.qualifier_json
+                    FROM edges e JOIN entities dst ON dst.id=e.dst
+                    JOIN sources s ON s.id=e.source_id
+                    WHERE e.source_id='smechanism_compound_exposure'
+                      AND e.relation IN ('ENZYME_MODULATION_MENTION', 'EXPOSURE_CHANGE_MENTION')""").fetchall()
+            finally:
+                conn.close()
+            cyp = [row for row in rows if row[1] == "CYP3A4"]
+            exposure = [row for row in rows if row[1] == "血药浓度"]
+            self.assertTrue(cyp, rows)
+            self.assertTrue(exposure, rows)
+            self.assertTrue(all(row[2] == clause for row in cyp + exposure))
+            self.assertTrue(any(row[3] == "CYP3A4" for row in cyp))
+            self.assertTrue(any(row[3] == "血药浓度" for row in exposure))
+            self.assertTrue(all(json.loads(row[4])["uncertain"] for row in exposure))
+            self.assertTrue(all(json.loads(row[4])["change_direction"] == "increase_like" for row in exposure))
 
     def test_one_traversal_shares_plan_and_verifies_originals(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -44,6 +44,10 @@ CLASSIFICATION_PATTERN = r"属于|属不属于|归属|分类|类别|哪(?:一)?�
 
 def patient_intent(question: str, medicine_count: int = 0) -> dict:
     q = str(question or "")
+    drug_discovery = bool(re.search(
+        r"(?:吃|服|用|治疗|缓解).{0,8}(?:什么|哪种|哪些|哪类)(?:药|药物|制剂)"
+        r"|(?:什么|哪种|哪些|哪类)(?:药|药物|制剂).{0,8}(?:治疗|缓解|适合)", q
+    ))
     explicit = bool(re.search(r"相互作用|合用|同用|同服|联用|配伍|(?:一起|一块|同时)(?:吃|用|服|喝)|同吃|混着|搭配|冲突|相克|犯冲", q))
     risk = bool(re.search(RISK_PATTERN + r"|安全吗|安全性|风险", q))
     medication = bool(re.search(r"吃|服|用药|打针|喷|涂|药", q))
@@ -80,6 +84,7 @@ def patient_intent(question: str, medicine_count: int = 0) -> dict:
     if efficacy:
         fields += ["indication", "dosage", "warnings"]
     return {"interaction_question": interaction, "mechanism_question": mechanism, "risk_question": risk,
+            "drug_discovery_question": drug_discovery,
             "classification_question": bool(re.search(CLASSIFICATION_PATTERN, q)),
             "adverse_event_question": adverse, "efficacy_question": efficacy,
             "drug_causality_asserted": False,
@@ -285,7 +290,11 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
         begin, end = match.start(1), match.start(1) + len(token)
         if len(token) < 2 or any(a < end and begin < b for a,b in occupied) or any(v in token for v in vague):
             continue
-        if token in {"药", "什么", "多少", "几次", "几片", "完", "饭", "东西", "多了", "错了", "药后", "药了", "这个", "那个", "行不行", "好不好", "没事吧", "安全吗"} or re.match(r"[一二三四五六七八九十两半\d]+(?:片|粒|颗|次|毫|天)",token) or re.search(r"不舒服|难受|头晕|拉肚子|过敏|恶心|药后|药会|完药|药能", token):
+        question_placeholder = bool(re.fullmatch(r"(?:什么|哪种|哪些|哪类)(?:药|药物|制剂)?", token))
+        if (token in {"药", "什么", "多少", "几次", "几片", "完", "饭", "东西", "多了", "错了", "药后", "药了", "这个", "那个", "行不行", "好不好", "没事吧", "安全吗"}
+                or question_placeholder and intent["drug_discovery_question"]
+                or re.match(r"[一二三四五六七八九十两半\d]+(?:片|粒|颗|次|毫|天)",token)
+                or re.search(r"不舒服|难受|头晕|拉肚子|过敏|恶心|药后|药会|完药|药能", token)):
             continue
         suggestions = sorted(t for t in terms if len(t) == len(token) and len(t) >= 3 and sum(a != b for a,b in zip(t,token)) == 1)[:5]
         if not (groups or intent["risk_question"] or intent["interaction_question"] or "药" in q

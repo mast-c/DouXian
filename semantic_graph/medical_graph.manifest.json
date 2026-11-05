@@ -1,7 +1,7 @@
 {
-  "version": "semantic-graph-4",
-  "created_at": "2026-11-05T02:48:38.068688+00:00",
-  "builder_sha256": "6985688c3b099e67832627eee311572e487baa8935085c3ec0f90dc96e4d92ef",
+  "version": "semantic-graph-5",
+  "created_at": "2026-11-05T04:20:17.927819+00:00",
+  "builder_sha256": "e436fae06d630cb9e7a800e5050f6c896837c3b2146c005320135e0ed59239ea",
   "inputs": {
     "kg_output_clean_v2/drugs.jsonl": {
       "size": 2248653,
@@ -25,24 +25,28 @@
     }
   },
   "counts": {
-    "ADVERSE_REACTION_MENTION": 46436,
-    "CAUTION_MENTION": 91026,
+    "ADVERSE_REACTION_MENTION": 46582,
+    "CAUTION_MENTION": 91439,
     "CLASS_MEMBERSHIP_ASSERTION": 16,
-    "CONTRAINDICATION_MENTION": 12038,
-    "ENZYME_MODULATION_MENTION": 250,
-    "EXPOSURE_CHANGE_MENTION": 3224,
+    "CONTRAINDICATION_MENTION": 12062,
+    "ENZYME_MODULATION_MENTION": 299,
+    "EXPOSURE_CHANGE_MENTION": 3336,
     "HAS_INGREDIENT": 62077,
     "HAS_SYMPTOM": 54042,
     "INDICATION_MENTION": 19679,
-    "INTERACTION_MENTION": 9949,
-    "MECHANISM_ENTITY_MENTION": 26462,
-    "MECHANISM_MENTION": 13245,
-    "MECHANISM_OUTCOME_MENTION": 5209,
-    "MECHANISM_PARTNER_MENTION": 8536,
+    "INTERACTION_MENTION": 10297,
+    "MECHANISM_ENTITY_MENTION": 26775,
+    "MECHANISM_MENTION": 13171,
+    "MECHANISM_OUTCOME_MENTION": 5462,
+    "MECHANISM_PARTNER_MENTION": 8858,
     "MECHANISM_STATEMENT_MENTION": 30184,
-    "METABOLISM_MENTION": 1923,
-    "TRANSPORT_MENTION": 2739,
-    "class_substring_interactions_omitted": 556,
+    "METABOLISM_MENTION": 1922,
+    "STATEMENT_ENZYME_MENTION": 316,
+    "STATEMENT_EXPOSURE_MENTION": 2285,
+    "STATEMENT_OUTCOME_MENTION": 5462,
+    "STATEMENT_PROCESS_MENTION": 4831,
+    "TRANSPORT_MENTION": 2742,
+    "class_substring_interactions_omitted": 561,
     "composition_sections_unparsed": 781,
     "entities_Condition": 1046,
     "entities_Disease": 8806,
@@ -54,15 +58,15 @@
     "entities_Population": 7,
     "entities_Symptom": 5977,
     "invalid_indication_candidates_omitted": 6,
-    "self_ingredient_interaction_mentions_omitted": 932
+    "self_ingredient_interaction_mentions_omitted": 1017
   },
   "nodes": 53645,
-  "edges": 387035,
+  "edges": 401837,
   "sources": 110019,
   "clinical_validation": false,
   "storage": "local_sqlite_property_graph_from_source_exports",
   "index": {
-    "size": 317829120,
-    "sha256": "c33c90365b3b0de1032790927ebacd38871be05cdb3f2a5f4ccf6a20fa5a37e1"
+    "size": 353841152,
+    "sha256": "ea5975868d6196cad9516c310cde250207d960d0e0dcc1c3cd11f1157bc2e062"
   }
 }

@@ -117,6 +117,31 @@ class CoverageTests(unittest.TestCase):
         item = graph(relation="INTERACTION_MENTION", field="drug_interactions")
         self.assertEqual(evidence_bindings(item, [pair]), [])
 
+    def test_mechanism_target_accepts_verified_mechanism_edges_only(self):
+        p = patient()
+        p["intent"]["mechanism_question"] = True
+        q = QUESTION + "背后的药理机制是什么"
+        mechanism_targets = build_answer_targets(q, p, build_retrieval_plan(q, p))
+        mechanism = next(t for t in mechanism_targets if t["field"] == "mechanism")
+        direct = graph(relation="INTERACTION_MENTION", field="drug_interactions")
+        self.assertEqual(evidence_bindings(direct, [mechanism]), [])
+        supported = graph(relation="MECHANISM_OUTCOME_MENTION", field="drug_interactions")
+        self.assertEqual(evidence_bindings(supported, [mechanism]), [])
+        supported["graph_path"]["nodes"].append({"id": "drug_"+B, "name": B, "kind": "Drug"})
+        self.assertEqual(evidence_bindings(supported, [mechanism])[0]["scope"],
+                         "verified_mechanism_source_mention_not_causal_validation")
+
+    def test_mechanism_target_accepts_verified_original_mechanism_section(self):
+        p = patient()
+        p["intent"]["mechanism_question"] = True
+        q = QUESTION + "为什么"
+        mechanism = next(t for t in build_answer_targets(q, p, build_retrieval_plan(q, p))
+                         if t["field"] == "mechanism")
+        row = section(A, "drug_interactions", A+"与"+B+"合用时抑制CYP3A4，使血药浓度升高。")
+        self.assertTrue(evidence_bindings(row, [mechanism]))
+        row["parent_verified"] = False
+        self.assertFalse(evidence_bindings(row, [mechanism])[0]["source_verified"])
+
     def test_only_actual_original_text_counts_for_pair_section(self):
         pair = next(t for t in targets() if t["pair"])
         row = section(A, "drug_interactions", "尚不明确。")
