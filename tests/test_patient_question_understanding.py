@@ -9,6 +9,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from medical_patient_context import patient_context_summary
 from medical_query_understanding import understand_question
+from medical_query_plan import build_retrieval_plan
+from medical_patient_context import symptom_mentions
+from medical_semantic_retrieval import patient_context_graph_intent
+from drug_graph_retriever import is_disease_drug_list_question, fields_for_question
 
 
 class PatientQuestionUnderstandingTests(unittest.TestCase):
@@ -18,11 +22,11 @@ class PatientQuestionUnderstandingTests(unittest.TestCase):
         exports = self.root / "kg_output_clean_v2"
         exports.mkdir()
         self.products = ["布地奈德鼻喷雾剂", "盐酸西替利嗪片", "氯雷他定片",
-                         "甲试药片", "甲试药注射液", "复方甲试药片"]
+                         "甲试药片", "甲试药注射液", "复方甲试药片", "感冒丸", "感冒软胶囊"]
         rows = [{"id": f"d{i}", "name": name, "aliases": []} for i, name in enumerate(self.products)]
         (exports / "drugs.jsonl").write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
         self.nodes = {row["id"]: {**row, "kind": "Drug"} for row in rows}
-        for i, name in enumerate(["青光眼", "鼻炎", "过敏性鼻炎"]):
+        for i, name in enumerate(["青光眼", "鼻炎", "过敏性鼻炎", "感冒"]):
             self.nodes[f"c{i}"] = {"id": f"c{i}", "kind": "Disease", "name": name}
 
     def tearDown(self):
@@ -123,11 +127,69 @@ class PatientQuestionUnderstandingTests(unittest.TestCase):
                 self.assertFalse(result["medicines"])
 
     def test_disease_drug_question_is_not_an_unresolved_medicine_name(self):
-        for question in ("感冒应该吃什么药", "鼻炎用哪种药", "什么药适合治疗过敏性鼻炎"):
+        for question in ("感冒应该吃什么药", "鼻炎用哪种药", "什么药适合治疗过敏性鼻炎",
+                         "过敏性鼻炎用药建议及注意事项"):
             with self.subTest(question=question):
                 result = self.understand(question)
                 self.assertTrue(result["intent"]["drug_discovery_question"])
                 self.assertFalse(result["unresolved_medication_mentions"])
+
+    def test_disease_medication_recommendation_uses_candidate_source_overview(self):
+        question = "过敏性鼻炎用药建议及注意事项"
+        self.assertTrue(is_disease_drug_list_question(question))
+        self.assertEqual(fields_for_question(question)[:2], ["indication", "warnings"])
+
+    def test_pregnancy_caution_wording_is_context_not_a_medicine_name(self):
+        for question in (
+            "发烧了应该吃什么药？孕妇吃应该注意什么？",
+            "发烧了应该吃什么药？孕妇吃的话应该注意什么？",
+        ):
+            with self.subTest(question=question):
+                result = self.understand(question)
+                pregnancy, = [c for c in result["patient_context"] if c["kind"] == "pregnancy"]
+                self.assertEqual(pregnancy["retrieval_terms"], ["妊娠", "孕妇"])
+                self.assertTrue(result["intent"]["risk_question"])
+                self.assertFalse(result["unresolved_medication_mentions"])
+
+    def test_fever_is_a_symptom_search_anchor_and_plans_source_candidates(self):
+        question = "发烧了应该吃什么药？孕妇吃的话应该注意什么？"
+        symptoms = symptom_mentions(question)
+        self.assertIn("发烧", [term for item in symptoms for term in item["retrieval_terms"]])
+        result = self.understand(question)
+        plan = build_retrieval_plan(question, result)
+        task, = plan["tasks"]
+        self.assertEqual(task["id"], "symptom_drug_source_candidates")
+        self.assertIn("妊娠", task["query"])
+        self.assertIn("contraindications", task["fields"])
+        self.assertEqual(task["claim_scope"], "source_candidates_not_patient_specific_recommendation")
+
+    def test_symptom_discovery_routes_automatically_but_negated_symptoms_do_not(self):
+        query = self.understand("发烧了应该吃什么药？")
+        self.assertTrue(patient_context_graph_intent(query))
+        negated = self.understand("我没有发烧，不需要吃什么药")
+        self.assertFalse(patient_context_graph_intent(negated))
+
+    def test_explicit_medicine_slot_survives_pregnancy_caution_wording(self):
+        result = self.understand("孕妇吃阿莫西林应该注意什么")
+        self.assertEqual(result["unresolved_medication_mentions"][0]["surface"], "阿莫西林")
+        self.assertTrue(result["intent"]["risk_question"])
+
+    def test_disease_name_wins_over_morphology_candidate_in_disease_question(self):
+        result = self.understand("感冒的症状是什么？应该吃什么药？")
+        self.assertFalse(result["medicines"])
+        disease, = [c for c in result["patient_context"] if c["kind"] == "disease_mention"]
+        self.assertEqual(disease["surface"], "感冒")
+        self.assertTrue(result["intent"]["symptom_question"])
+        self.assertTrue(result["intent"]["drug_discovery_question"])
+
+    def test_compound_disease_question_plans_each_retrieval_goal(self):
+        question = "感冒的症状是什么？应该吃什么药？与哪些药不能同服？"
+        understanding = self.understand(question)
+        plan = build_retrieval_plan(question, understanding)
+        self.assertEqual([task["id"] for task in plan["tasks"]], [
+            "disease_symptoms", "disease_drug_candidates", "disease_interaction_candidates",
+        ])
+        self.assertEqual(plan["status"], "planned")
 
     def test_preexisting_symptom_is_not_assumed_to_be_drug_reaction(self):
         result = self.understand("我鼻塞严重，正在服用西替利嗪，能不能加上布地奈德喷雾剂")

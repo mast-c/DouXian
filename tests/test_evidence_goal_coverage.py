@@ -82,6 +82,44 @@ def gap_document():
 
 
 class CoverageTests(unittest.TestCase):
+    def test_symptom_drug_sources_bind_as_candidates_not_recommendations(self):
+        question = "发烧了应该吃什么药？"
+        symptom = {"surface": "发烧", "kind": "symptom_word", "retrieval_terms": ["发烧", "发热"],
+                   "assertion": "user_reported"}
+        patient_query = {"medicines": [], "patient_context": [symptom],
+                         "intent": {"drug_discovery_question": True, "risk_question": False,
+                                    "symptom_question": False, "fields": ["indication"]}}
+        plan = build_retrieval_plan(question, patient_query)
+        targets = build_answer_targets(question, patient_query, plan)
+        self.assertEqual([target["field"] for target in targets], ["symptom_drug_candidates"])
+        item = {"evidence_type": "json_neo4j_text_verified", "section_field": "indication",
+                "parent_verified": True, "retrieval_task_ids": ["symptom_drug_source_candidates"],
+                "content": "药品：测试制剂\n证据原文：用于发热相关症状的说明书适应症候选。"}
+        binding, = evidence_bindings(item, targets)
+        self.assertEqual(binding["scope"], "symptom_related_candidate_leaflet_source_not_patient_recommendation")
+        self.assertTrue(binding["source_verified"])
+
+    def test_disease_symptom_path_is_bound_as_a_partial_answer_target(self):
+        question = "感冒的症状是什么？应该吃什么药？与哪些药不能同服？"
+        disease = {"surface": "感冒", "kind": "disease_mention", "assertion": "user_reported"}
+        patient_query = {"medicines": [], "patient_context": [disease],
+                         "intent": {"symptom_question": True, "drug_discovery_question": True,
+                                    "interaction_question": True, "fields": []}}
+        plan = {"status": "planned", "fields": ["indication"]}
+        answer_targets = build_answer_targets(question, patient_query, plan)
+        self.assertEqual([target["field"] for target in answer_targets],
+                         ["symptoms", "disease_drug_candidates", "disease_interactions"])
+        quote = "咳嗽、咽痛"
+        path = {"verified_against_original": True, "nodes": [
+                    {"id": "d", "kind": "Disease", "name": "感冒"},
+                    {"id": "s", "kind": "Symptom", "name": quote}],
+                "edges": [{"id": "e", "relation": "HAS_SYMPTOM", "section_field": "symptom",
+                           "src": {"name": "感冒"}, "quote": quote}]}
+        item = {"id": 1, "evidence_type": "evidence_backed_semantic_graph_path",
+                "graph_verified": True, "graph_path": path, "content": "原文：" + quote}
+        bound = evidence_bindings(item, answer_targets)
+        self.assertEqual([entry["target_id"] for entry in bound], ["target_1"])
+
     def test_two_compositions_and_pair_form_three_required_aspects(self):
         p = patient()
         required = required_source_aspects(QUESTION, p, targets())

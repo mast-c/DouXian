@@ -75,6 +75,7 @@ def timing_mentions(text: str, medicines: list[dict]) -> list[dict]:
 
 def symptom_mentions(text: str) -> list[dict]:
     patterns = (
+        (r"发烧|发热|低热|高热", ["发烧", "发热", "退热"]),
         (r"鼻子(?:还是|仍然|一直|还)?(?:很|特别|有点)?堵|鼻塞", ["鼻塞"]),
         (r"鼻子(?:里|里面|内)?[^，,。；;！？!?]{0,10}?(?:疼|痛)|鼻腔(?:疼痛|痛|疼)", ["鼻腔疼痛"]),
         (r"拉肚子|腹泻", ["腹泻"]),

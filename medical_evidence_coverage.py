@@ -21,7 +21,15 @@ def evidence_key(item):
 def build_answer_targets(question, understanding, plan):
     """Retrieval targets are NOT new user questions or proof of sufficiency."""
     medicines = understanding.get("medicines", [])
-    if not medicines or not plan or plan.get("status") != "planned":
+    if not plan or plan.get("status") != "planned":
+        return []
+    diseases = [c for c in understanding.get("patient_context", [])
+                if c.get("kind") == "disease_mention"
+                and c.get("assertion") not in ("negated", "other_person")]
+    symptoms = [c for c in understanding.get("patient_context", [])
+                if c.get("kind") == "symptom_word"
+                and c.get("assertion") not in ("negated", "other_person")]
+    if not medicines and not diseases and not symptoms:
         return []
     discovery = plan.get("category_discovery")
     if discovery:
@@ -34,8 +42,33 @@ def build_answer_targets(question, understanding, plan):
                  "discovery_roles": ["member", "source_field", "interaction_example"],
                  "candidate_names": candidate_names}]
     targets = []
+    intent = understanding.get("intent", {})
+    for disease in diseases:
+        if intent.get("symptom_question"):
+            targets.append({"id": f"target_{len(targets)+1}", "field": "symptoms",
+                            "label": disease["surface"] + "的症状", "disease": disease["surface"],
+                            "medicines": [], "pair": False})
+        if intent.get("drug_discovery_question"):
+            targets.append({"id": f"target_{len(targets)+1}", "field": "disease_drug_candidates",
+                            "label": disease["surface"] + "相关药品资料", "disease": disease["surface"],
+                            "medicines": [], "pair": False})
+        if intent.get("interaction_question"):
+            targets.append({"id": f"target_{len(targets)+1}", "field": "disease_interactions",
+                            "label": disease["surface"] + "相关药品的明确相互作用", "disease": disease["surface"],
+                            "medicines": [], "pair": False})
+    for symptom in symptoms:
+        if intent.get("drug_discovery_question"):
+            targets.append({"id": f"target_{len(targets)+1}", "field": "symptom_drug_candidates",
+                            "label": symptom["surface"] + "相关药品资料候选", "symptom": symptom["surface"],
+                            "medicines": [], "pair": False,
+                            "claim_scope": "source_candidates_not_patient_specific_recommendation"})
+        if intent.get("risk_question"):
+            targets.append({"id": f"target_{len(targets)+1}", "field": "patient_context_safety",
+                            "label": "用户背景相关的说明书禁忌及注意事项", "symptom": symptom["surface"],
+                            "medicines": [], "pair": False,
+                            "claim_scope": "source_candidates_not_patient_specific_recommendation"})
     interaction = understanding.get("intent", {}).get("interaction_question") and len(medicines) == 2
-    for field in plan.get("fields", []):
+    for field in plan.get("fields", []) if medicines else []:
         if field not in FIELD_LABELS:
             continue
         groups = [medicines] if interaction and field == "drug_interactions" else [[m] for m in medicines]
@@ -146,6 +179,43 @@ def evidence_bindings(item, targets):
         return []
     for target in targets:
         medicines, field = target["medicines"], target["field"]
+        if field == "symptom_drug_candidates":
+            if (item.get("evidence_type") in SECTION_TYPES
+                    and item.get("section_field") in ("indication", "contraindications", "warnings", "adverse_reactions")
+                    and "symptom_drug_source_candidates" in item.get("retrieval_task_ids", [])):
+                text = original_text(item)
+                if text:
+                    bindings.append({"target_id": target["id"],
+                                     "source_verified": bool(item.get("parent_verified")),
+                                     "scope": "symptom_related_candidate_leaflet_source_not_patient_recommendation",
+                                     "edge_ids": []})
+            continue
+        if field == "patient_context_safety":
+            if (item.get("evidence_type") in SECTION_TYPES
+                    and item.get("section_field") in ("contraindications", "warnings")
+                    and "symptom_drug_source_candidates" in item.get("retrieval_task_ids", [])):
+                text = original_text(item)
+                if text:
+                    bindings.append({"target_id": target["id"],
+                                     "source_verified": bool(item.get("parent_verified")),
+                                     "scope": "population_context_leaflet_source_not_patient_recommendation",
+                                     "edge_ids": []})
+            continue
+        if field == "symptoms" and graph:
+            relevant = [e for e in path.get("edges", [])
+                        if e.get("relation") == "HAS_SYMPTOM"
+                        and e.get("section_field") == "symptom"
+                        and e.get("src", {}).get("name") == target.get("disease")
+                        and e.get("quote") and e["quote"] in str(item.get("content") or "")]
+            if relevant:
+                bindings.append({"target_id": target["id"], "source_verified": True,
+                                 "scope": "disease_source_symptom_mention_not_diagnosis",
+                                 "edge_ids": [e.get("id") for e in relevant]})
+            continue
+        if field in ("disease_drug_candidates", "disease_interactions"):
+            # Candidate disease links and generic product warnings are not
+            # enough to answer treatment or named interaction questions.
+            continue
         if field == "mechanism":
             if graph:
                 edges = path.get("edges", [])

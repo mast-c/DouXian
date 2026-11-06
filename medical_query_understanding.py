@@ -30,7 +30,7 @@ VAGUE_MEDICINES = ("降糖药", "胃药", "消炎药", "感冒药", "降压药",
 DOSE_FORM_WORDS = {"片", "胶囊", "口服液", "颗粒", "软膏", "药", "复方", "缓释", "注射液", "盐酸", "肠溶", "缓释片"}
 # Retrieval vocabulary, not diagnoses or entity equivalence assertions.
 PATIENT_TERMS = (
-    (r"怀孕|有孕|备孕", "pregnancy", ["妊娠", "孕妇"]),
+    (r"孕妇|孕期|妊娠|怀孕|有孕|备孕", "pregnancy", ["妊娠", "孕妇"]),
     (r"喂奶|母乳|哺乳", "breastfeeding", ["哺乳期"]),
     (r"宝宝|小孩|孩子|儿童|婴儿", "child", ["儿童用药"]),
     (r"肾不好|肾功能不好", "renal_question", ["肾功能", "肾脏"]),
@@ -38,7 +38,7 @@ PATIENT_TERMS = (
     (r"拉肚子", "symptom_word", ["腹泻"]),
     (r"心慌", "symptom_word", ["心悸"]),
 )
-RISK_PATTERN = r"会(?:不会)?有(?:什么)?问题|有没有事|会不会(?:出事|有事|冲突|影响|中毒)|有事吗|要紧吗|有影响吗|有危险吗|有害吗|能不能|可不可以|能一起|可以一起|能吃吗|能用吗|行不行|能混着|能搭配|有没有影响|有冲突吗|还能吃|还可以吃|能再吃|可以再吃|有问题没"
+RISK_PATTERN = r"会(?:不会)?有(?:什么)?问题|有没有事|会不会(?:出事|有事|冲突|影响|中毒)|有事吗|要紧吗|有影响吗|有危险吗|有害吗|能不能|可不可以|能一起|可以一起|能吃吗|能用吗|行不行|能混着|能搭配|有没有影响|有冲突吗|还能吃|还可以吃|能再吃|可以再吃|有问题没|(?:应该|应当|需要|要|该)(?:注意|留意)|注意什么|注意哪些|有什么.{0,8}(?:注意|留意)"
 CLASSIFICATION_PATTERN = r"属于|属不属于|归属|分类|类别|哪(?:一)?类|什么类|算不算|中药还是西药|西药还是中药|是中药|是西药|是不是.{0,12}(?:类|抗生素)"
 
 
@@ -46,8 +46,10 @@ def patient_intent(question: str, medicine_count: int = 0) -> dict:
     q = str(question or "")
     drug_discovery = bool(re.search(
         r"(?:吃|服|用|治疗|缓解).{0,8}(?:什么|哪种|哪些|哪类)(?:药|药物|制剂)"
-        r"|(?:什么|哪种|哪些|哪类)(?:药|药物|制剂).{0,8}(?:治疗|缓解|适合)", q
+        r"|(?:什么|哪种|哪些|哪类)(?:药|药物|制剂).{0,8}(?:治疗|缓解|适合)"
+        r"|(?:用药|药物|药品).{0,6}(?:建议|推荐)|(?:建议|推荐).{0,6}(?:用药|药物|药品)", q
     ))
+    symptom_question = bool(re.search(r"症状|临床表现|有哪些表现|什么表现", q))
     explicit = bool(re.search(r"相互作用|合用|同用|同服|联用|配伍|(?:一起|一块|同时)(?:吃|用|服|喝)|同吃|混着|搭配|冲突|相克|犯冲", q))
     risk = bool(re.search(RISK_PATTERN + r"|安全吗|安全性|风险", q))
     medication = bool(re.search(r"吃|服|用药|打针|喷|涂|药", q))
@@ -85,6 +87,7 @@ def patient_intent(question: str, medicine_count: int = 0) -> dict:
         fields += ["indication", "dosage", "warnings"]
     return {"interaction_question": interaction, "mechanism_question": mechanism, "risk_question": risk,
             "drug_discovery_question": drug_discovery,
+            "symptom_question": symptom_question,
             "classification_question": bool(re.search(CLASSIFICATION_PATTERN, q)),
             "adverse_event_question": adverse, "efficacy_question": efficacy,
             "drug_causality_asserted": False,
@@ -253,6 +256,20 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
             "mentions": [mention],
         })
     intent = patient_intent(q, len(groups))
+    disease_names = {node["name"] for node in nodes.values() if node["kind"] == "Disease"}
+    disease_lookup_context = bool(re.search(
+        r"症状|表现|得了|患有|治疗|吃什么药|用什么药|应该吃|应该用|相关用药", q
+    ))
+    if disease_lookup_context:
+        # Morphology-based drug search candidates are weak matches. If the same
+        # surface is a catalog Disease, keep the disease reading in disease
+        # questions unless the user supplied a literal product/ingredient.
+        groups = [g for g in groups if not (
+            g["surface"] in disease_names
+            and g["basis"] == "generic_search_scope"
+            and not g.get("ingredient_ids")
+        )]
+        intent = patient_intent(q, len(groups))
     for previous, current in zip(groups, groups[1:]):
         if (current["role"] == "mentioned"
                 and previous["role"] in ("current", "taken", "proposed", "not_taken", "stopped")
@@ -267,7 +284,7 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
                 "diagnosis_asserted": False}
                for pattern, kind, synonyms in PATIENT_TERMS for match in re.finditer(pattern, q)]
     context.extend(symptom_mentions(q))
-    clinical_names = tuple(sorted({node["name"] for node in nodes.values() if node["kind"] == "Disease"}))
+    clinical_names = tuple(sorted(disease_names))
     for name, start, end in _clinical_lexicon(clinical_names).find(q[:600]):
         if any(m["start"] < end and start < m["end"] for m in groups):
             continue
@@ -286,7 +303,7 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     # Only inspect explicit medication slots. Suggestions require confirmation;
     # they are never injected into the graph or silently corrected.
     for match in re.finditer(r"(?:吃了|吃着|吃|服用|服了|用了|用着|喝了|药叫|药是|打了|喷了|加上|加用|换成|换用|[(（](?:或者|或))([\u4e00-\u9fffA-Za-z0-9·-]{2,24})", q):
-        token = re.split(r"又|然后|以后|之后|会不|会有|能不|还能|还可|可以|每天|一天|每次|一次|已经|因为|但是|有点|感觉|好几天|几天|后|和|跟|与", match.group(1))[0]
+        token = re.split(r"又|然后|以后|之后|会不|会有|能不|还能|还可|可以|应该|应当|需要|注意|留意|的话|每天|一天|每次|一次|已经|因为|但是|有点|感觉|好几天|几天|后|和|跟|与", match.group(1))[0]
         begin, end = match.start(1), match.start(1) + len(token)
         if len(token) < 2 or any(a < end and begin < b for a,b in occupied) or any(v in token for v in vague):
             continue

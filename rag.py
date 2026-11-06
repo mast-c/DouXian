@@ -83,8 +83,44 @@ from medical_category_graph import category_source_answer
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
-SYSTEM_PROMPT = """你叫豆馅，是面向中文医疗文献、药品资料和医疗知识图谱的智能问答助手。
-你的工作是解释检索到的医学信息并提供可追溯依据，不是代替执业医师进行诊断、处方或个人用药决策。
+SYSTEM_PROMPT = """你叫豆馅，你是一个医疗知识库的查询理解与检索规划助手。
+当用户提问时，请完成以下任务：
+
+1. 识别用户意图
+   例如：症状咨询、药物查询、用药风险、
+   特殊人群用药、药物比较等。
+   一个问题可以包含多个意图。
+
+2. 识别实体
+   实体不限于药品，还包括：
+   - 症状
+   - 疾病
+   - 特殊人群
+   - 药品
+   - 药物成分
+   - 剂型
+
+3. 对实体进行语义标准化
+   例如：
+   发烧 → 发热
+   怀孕的人 → 妊娠期人群
+   退烧药 → 解热镇痛药（药物类别）
+
+4. 将复杂问题拆分为独立的检索子问题。
+
+5. 重要规则：
+   - 未出现药品名称不代表识别失败。
+   - 不得虚构用户未提及的具体药品。
+   - 如果可以根据症状或人群检索，
+     则允许继续检索。
+   - 保留原始问题的限定条件。
+   - 不要直接判断某种药物是否适合孕妇。
+   - 即使缺少个人医疗信息，也可以检索
+     一般性的知识资料。
+
+只输出合法 JSON，包含：
+intents、entities、drug_names、
+sub_queries、can_retrieve。
 
 【工具与回答边界】
 - search_knowledge_base 用于检索本地医疗知识库；在用户咨询已上传文档、药品资料、适应症、禁忌、不良反应、相互作用或疾病知识时，优先使用真实检索证据。
@@ -841,6 +877,7 @@ class RagService:
                     "section_id": str(metadata.get("section_id") or ""),
                     "section_field": str(metadata.get("section_field") or ""),
                     "parent_verified": bool(metadata.get("provenance_verified") or False),
+                    "retrieval_task_ids": list(metadata.get("retrieval_task_ids") or []),
                 })
                 # 将 Python 字典转换成 JSON 字符串
             return json.dumps({
@@ -1276,8 +1313,11 @@ class RagService:
                 # Resolve patient wording before incidental diseases fan out.
                 _semantic_excerpts, _semantic_report = search_semantic_graph(
                     question, project_root=Path(__file__).resolve().parent,
+                    query_understanding_model=self.chat_model,
                 )
                 trace["semantic_graph"] = _semantic_report
+                if _semantic_report.get("query_understanding_llm"):
+                    trace["query_understanding_llm"] = _semantic_report["query_understanding_llm"]
                 _patient_query = _semantic_report.get("query_understanding", {})
                 trace["patient_query_understanding"] = _patient_query
                 _retrieval_plan = _semantic_report.get("retrieval_plan")
@@ -1383,6 +1423,8 @@ class RagService:
                     bool(_disease_excerpts)
                     and _disease_report.get("route") == "DISEASE_ONLY"
                     and not _patient_query.get("medicines")
+                    and not _patient_query.get("intent", {}).get("drug_discovery_question")
+                    and not _patient_query.get("intent", {}).get("interaction_question")
                 )
                 if _patient_query.get("medicines"):
                     _disease_excerpts = []
@@ -1712,6 +1754,7 @@ class RagService:
                         "ranking_group": str(item.get("ranking_group") or ""),
                         "ranking_support_quote": str(item.get("ranking_support_quote") or ""),
                         "parent_verified": bool(item.get("parent_verified") or False),
+                        "retrieval_task_ids": list(item.get("retrieval_task_ids") or []),
                         "disease_link_verified": bool(
                             item.get("disease_link_verified") or False
                         ),

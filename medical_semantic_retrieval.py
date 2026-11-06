@@ -1,7 +1,7 @@
 """Query-conditioned, bounded multi-relation traversal with complete proof bundles.
 
-No LLM extraction, embeddings, cloud calls or post-answer invented paths.
-Traversal may go against an edge's direction; its actual assertion direction is
+Graph traversal does not invent edges; optional LLM query hints must link
+to verified local graph nodes. Traversal may go against an edge's direction; its actual assertion direction is
 always preserved. A route connects source statements, not clinical implications.
 """
 from __future__ import annotations
@@ -22,6 +22,7 @@ from medical_semantic_graph import (
     class_assertion_spans, index_path, ingredient_spans, literal_entity_boundary, open_graph, qualifiers, verify_source,
 )
 from medical_query_understanding import understand_question, active_anchors
+from medical_llm_query_understanding import enhance_understanding
 from medical_query_plan import build_retrieval_plan
 from medical_category_graph import category_only, search_category_graph, extend_category_entities
 from medical_category_discovery import search_category_discovery
@@ -88,14 +89,196 @@ def recognize(question: str, surfaces: dict, lexicon: Lexicon, nodes: dict) -> l
     return groups
 
 
+def _augment_graph_anchors(question: str, groups: list[dict], nodes: dict, understanding: dict):
+    """Attach ONLY candidates whose names occur in the verified local graph.
+
+    The LLM cannot add a fabricated node or rewrite an ingredient into an
+    unverified formulation. Patient-context anchors are likewise tied to
+    graph node names, not to free-form semantic similarity.
+    """
+    by_name_kind = {}
+    for node_id, node in nodes.items():
+        by_name_kind.setdefault((node["name"], node["kind"]), []).append(node_id)
+    result = list(groups)
+    added = []
+
+    def add(surface, canonical, kind, origin):
+        if not isinstance(surface, str) or not surface or surface not in question:
+            return
+        if any(g["surface"] == surface for g in result):
+            return
+        ids = by_name_kind.get((canonical, kind), [])
+        if not ids:
+            return
+        start = question.find(surface)
+        group = {
+            "surface": surface, "node_ids": ids, "start": start,
+            "end": start + len(surface), "kinds": [kind],
+            "ambiguous": len(ids) > 1,
+            "source": origin,
+        }
+        result.append(group)
+        added.append({"surface": surface, "canonical": canonical, "kind": kind})
+
+    for mention in understanding.get("llm_medicine_mentions") or []:
+        if isinstance(mention, dict):
+            kind = mention.get("catalog_kind")
+            if kind in ("Drug", "Ingredient"):
+                add(mention.get("surface"), mention.get("canonical"), kind, "llm_catalog_verified")
+
+    clinical_kinds = {
+        "symptom_word": "Symptom", "disease_mention": "Disease",
+        "pregnancy": "Population", "breastfeeding": "Population",
+        "child": "Population", "special_population": "Population",
+    }
+    for context in understanding.get("patient_context") or []:
+        if not isinstance(context, dict) or context.get("assertion") == "negated":
+            continue
+        kind = clinical_kinds.get(context.get("kind"))
+        surface = context.get("surface")
+        if not kind or not isinstance(surface, str):
+            continue
+        for term in context.get("retrieval_terms") or (surface,):
+            if (term, kind) in by_name_kind:
+                add(surface, term, kind, "patient_context_catalog_verified")
+                break
+    return result, added
+
+
+# Only remove an upstream "unknown medication" flag when its *entire* text
+# reduces to already verified drug names plus recognizable patient-description
+# words. Unrecognized dosage forms and unfamiliar drug-like substrings remain
+# blockers. This fixes false spans such as "华法林抗凝的房颤患者".
+_NONMEDICAL_CONTEXT_FILLERS = re.compile(
+    r"一位|这位|一名|该|长期|一直|持续|目前|正在|已经|已|需要|需|"
+    r"服用|使用|口服|在吃|吃着|服药|用药|"
+    r"接受|进行|抗凝治疗|抗凝|治疗|"
+    r"患者|病人|人群|患有|患|因为|因|伴有|伴|的|"
+    r"准备|考虑|打算"
+)
+
+
+def _contextual_false_medication_span(surface: str, groups: list[dict], nodes: dict, background_context=()) -> bool:
+    if not isinstance(surface, str) or not surface or len(surface) > 90:
+        return False
+    drug_groups = [g for g in groups
+                   if set(g["kinds"]) & {"Drug", "Ingredient"} and g["surface"] in surface]
+    if not drug_groups:
+        return False
+    # Do not discard an unlinked exact product (e.g. a previously unseen capsule).
+    stripped = surface
+    for g in sorted(drug_groups, key=lambda v: len(v["surface"]), reverse=True):
+        stripped = stripped.replace(g["surface"], "", 1)
+    if re.search(r"胶囊|缓释片|控释片|分散片|注射液|滴眼液|颗粒|口服液|片剂|药片", stripped):
+        return False
+    background_names = {
+        v["name"] for v in nodes.values()
+        if v["kind"] in ("Disease", "Symptom", "Population")
+        and len(v["name"]) >= 2 and v["name"] in stripped
+    }
+    background_names.update(
+        v["surface"] for v in background_context
+        if isinstance(v, dict) and v.get("kind") in (
+            "symptom_word", "disease_mention", "pregnancy", "breastfeeding",
+            "child", "special_population",
+        ) and isinstance(v.get("surface"), str)
+        and v["surface"] in stripped
+    )
+    background_names = sorted(background_names, key=len, reverse=True)
+    for term in background_names:
+        stripped = stripped.replace(term, "")
+    stripped = _NONMEDICAL_CONTEXT_FILLERS.sub("", stripped)
+    stripped = re.sub(r"[\s，,。；;：:、！!？?（）()“”‘’]", "", stripped)
+    return not stripped
+
+
+def _recover_embedded_catalog_anchors(question: str, groups: list[dict],
+                                      nodes: dict, understanding: dict):
+    """Local repair for a known drug buried in a malformed patient-description span.
+
+    No fuzzy match and no assumption that a shared ingredient identifies an
+    exact patient formulation. Only accept if removing the catalog-confirmed
+    name leaves recognizable *non-medication context*, not a dosage form or
+    another unknown substance.
+    """
+    result, recovered = list(groups), []
+    background = understanding.get("patient_context") or []
+    by_name_kind = {}
+    for node_id, node in nodes.items():
+        if node["kind"] in ("Drug", "Ingredient") and len(node["name"]) >= 3:
+            by_name_kind.setdefault((node["name"], node["kind"]), []).append(node_id)
+
+    for entry in understanding.get("unresolved_medication_mentions") or []:
+        surface = entry.get("surface") if isinstance(entry, dict) else None
+        if not isinstance(surface, str) or surface not in question or len(surface) > 90:
+            continue
+        options = sorted(
+            ((name, kind, ids) for (name, kind), ids in by_name_kind.items()
+             if name in surface and len(ids) == 1
+             and not any(g["surface"] == name for g in result)),
+            key=lambda item: (-len(item[0]), item[1] != "Drug", item[0]),
+        )
+        for name, kind, ids in options:
+            start = question.find(name, question.find(surface))
+            if start < 0:
+                continue
+            candidate = {
+                "surface": name, "node_ids": ids, "start": start,
+                "end": start + len(name), "kinds": [kind],
+                "ambiguous": False, "source": "catalog_narrative_repair",
+            }
+            if _contextual_false_medication_span(
+                surface, result + [candidate], nodes, background
+            ):
+                result.append(candidate)
+                recovered.append({"surface": name, "kind": kind, "from": surface})
+                break
+    return result, recovered
+
+
+def _reconcile_false_unresolved(understanding: dict, groups: list[dict], nodes: dict):
+    """Do not discard genuine ambiguous/unknown medicines; repair narrative spans."""
+    remaining, resolved = [], []
+    for entry in understanding.get("unresolved_medication_mentions") or []:
+        surface = entry.get("surface") if isinstance(entry, dict) else None
+        if _contextual_false_medication_span(
+            surface, groups, nodes, understanding.get("patient_context") or []
+        ):
+            resolved.append(surface)
+        else:
+            remaining.append(entry)
+    if not resolved:
+        return understanding, []
+    merged = dict(understanding)
+    merged["unresolved_medication_mentions"] = remaining
+    merged["contextual_false_medication_spans"] = resolved
+    return merged, resolved
+
+
+def _focused_anchors(groups: list[dict], understanding: dict):
+    """Use primary entities as *required* path anchors, not all patient background."""
+    intent = understanding.get("intent") or {}
+    medicines = [g for g in groups if set(g["kinds"]) & {"Drug", "Ingredient"}]
+    if intent.get("interaction_question") and medicines:
+        primary = medicines
+    elif intent.get("drug_discovery_question") and not medicines:
+        clinical = [g for g in groups if set(g["kinds"]) & {"Disease", "Symptom"}]
+        primary = clinical or groups
+    else:
+        primary = groups
+    soft = [{"surface": g["surface"], "kinds": g["kinds"]}
+            for g in groups if g not in primary]
+    return primary, soft
+
+
 def query_plan(question: str, groups: list[dict], max_hops: int, patient_query: dict | None = None, retrieval_plan: dict | None = None) -> dict:
     desired = []
     for pattern, relations in (
         (r"症状|表现", ["HAS_SYMPTOM"]),
         (r"成分|组成|重复用药|相同", ["HAS_INGREDIENT"]),
         (r"禁忌|禁用", ["CONTRAINDICATION_MENTION"]),
-        (r"能否|能不能|可以.*用|能.*吃|注意|慎用", ["CAUTION_MENTION", "CONTRAINDICATION_MENTION"]),
-        (r"相互作用|合用|同用|一起|联用|配伍", ["INTERACTION_MENTION"]),
+        (r"能否|能不能|可以.*用|能.*吃|注意|慎用|风险|危险|安全", ["CAUTION_MENTION", "CONTRAINDICATION_MENTION"]),
+        (r"相互作用|合用|同用|一起|联用|配伍|加用|加服|并用|同服|联合用药|同时服用", ["INTERACTION_MENTION"]),
         (r"不良反应|副作用", ["ADVERSE_REACTION_MENTION"]),
         (r"机制|药理原理|作用原理", ["MECHANISM_MENTION", "METABOLISM_MENTION",
                                        "ENZYME_MODULATION_MENTION", "EXPOSURE_CHANGE_MENTION",
@@ -132,7 +315,8 @@ def query_plan(question: str, groups: list[dict], max_hops: int, patient_query: 
         "anchors": groups, "requested_relations": desired,
         "max_hops": max_hops, "requires_connected_anchors": len(groups) >= 2,
         "interaction_question": "INTERACTION_MENTION" in desired,
-        "drug_discovery": disease_pair or bool(re.search(r"哪些.{0,8}(?:药|制剂)|什么药|相关药|(?:药品|药物)有哪些|相同成分.*药|重复用药", question)),
+        "drug_discovery": disease_pair or bool((patient_query or {}).get("intent", {}).get("drug_discovery_question"))
+                          or bool(re.search(r"哪些.{0,8}(?:药|制剂)|什么药|相关药|(?:药品|药物)有哪些|相同成分.*药|重复用药", question)),
         "disease_pair_interaction": disease_pair,
         "patient_query": patient_query or {},
         "retrieval_plan_id": (retrieval_plan or {}).get("plan_id"),
@@ -157,6 +341,21 @@ def plan_medical_question(question: str, root: Path | str) -> dict | None:
             conn.close()
 
 
+def patient_context_graph_intent(understanding: dict) -> bool:
+    """Route symptom/population discovery through shared evidence retrieval."""
+    intent = understanding.get("intent", {})
+    patient_context = understanding.get("patient_context", [])
+    has_retrievable_patient_anchor = any(
+        item.get("kind") in ("symptom_word", "disease_mention", "pregnancy", "breastfeeding", "child", "special_population")
+        and item.get("assertion") not in ("negated", "other_person")
+        for item in patient_context
+    )
+    return bool(has_retrievable_patient_anchor and (
+        intent.get("drug_discovery_question") or intent.get("symptom_question")
+        or intent.get("risk_question")
+    ))
+
+
 def graph_intent(question: str, root: Path | str) -> bool:
     """Route medical relation questions in automatic mode through the same evidence chain."""
     if os.getenv("MEDICAL_SEMANTIC_GRAPH_ENABLED", "1") == "0":
@@ -168,8 +367,11 @@ def graph_intent(question: str, root: Path | str) -> bool:
         stat = target.stat()
         nodes, surfaces, lexicon = _catalog(str(target), stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
         understanding = understand_question(question, root=Path(root).resolve(), nodes=nodes)
-        return bool(understanding["medicines"] or understanding["vague_medicines"]
-                    or understanding["unresolved_medication_mentions"] or recognize(question, surfaces, lexicon, nodes))
+        if (understanding["medicines"] or understanding["vague_medicines"]
+                or understanding["unresolved_medication_mentions"]
+                or recognize(question, surfaces, lexicon, nodes)):
+            return True
+        return patient_context_graph_intent(understanding)
     except (OSError, ValueError, KeyError):
         return False
 
@@ -455,6 +657,7 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
     all_anchors = {identity for group in groups for identity in group["node_ids"]}
     group_sets = [set(g["node_ids"]) for g in groups]
     anchor_drugs = {v for v in all_anchors if nodes[v]["kind"] == "Drug"}
+    anchor_ingredients = {v for v in all_anchors if nodes[v]["kind"] == "Ingredient"}
     # Explicit pair plus multiple requested branches benefits from a bounded
     # path set. Single-aspect pairs stop when their actual connecting edge is found.
     adjacency = {}
@@ -559,9 +762,11 @@ def _traverse(conn, nodes: dict, plan: dict, *, max_paths: int, max_expansions: 
                 for i in range(1, len(path_nodes)-1)
             ):
                 continue
-            if not anchor_drugs and drugs_in_path:
-                # Disease/symptom discovery enters a drug ONLY via its own
-                # indication mention, never because another drug contraindicates it.
+            if not (anchor_drugs or anchor_ingredients) and drugs_in_path:
+                # Only symptom/disease discovery enters a drug via its own
+                # indication. An explicitly named Ingredient may reach its
+                # source-backed formulation through HAS_INGREDIENT, with the
+                # formulation identity shown in the proof (never equivalence).
                 if len(drugs_in_path) > 1:
                     continue
                 for drug_id in drugs_in_path:
@@ -705,7 +910,7 @@ def path_text(proof: dict) -> str:
 def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
                           max_hops: int = 5, max_paths: int = 6,
                           max_expansions: int = 2400, max_neighbors: int = 64,
-                          max_seconds: float = 3.0) -> tuple[list[dict], dict]:
+                          max_seconds: float = 3.0, query_understanding_model=None) -> tuple[list[dict], dict]:
     started = time.perf_counter()
     root = Path(project_root).resolve()
     report = {"status": "not_run", "paths": [], "storage": "local_derived_property_graph",
@@ -722,20 +927,53 @@ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
         nodes, surfaces, lexicon = _catalog(str(target), stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
         groups = recognize(question, surfaces, lexicon, nodes)
         patient_query = understand_question(question, root=root, nodes=nodes)
+        if query_understanding_model is not None:
+            patient_query, llm_report = enhance_understanding(
+                question, patient_query, query_understanding_model,
+                allowed_entity_names={
+                    kind: {v["name"] for v in nodes.values() if v["kind"] == kind}
+                    for kind in ("Drug", "Ingredient", "Disease", "Symptom", "Population")
+                },
+            )
+            report["query_understanding_llm"] = llm_report
         nodes, patient_query = extend_category_entities(question, root, nodes, patient_query)
+        groups, attached = _augment_graph_anchors(question, groups, nodes, patient_query)
+        groups, locally_repaired = _recover_embedded_catalog_anchors(
+            question, groups, nodes, patient_query
+        )
+        patient_query, contextual_repairs = _reconcile_false_unresolved(patient_query, groups, nodes)
+        report["entity_linking"] = {
+            "catalog_verified_anchors": attached,
+            "catalog_narrative_repairs": locally_repaired,
+            "reclassified_narrative_spans": contextual_repairs,
+            "remaining_unresolved_count": len(patient_query.get("unresolved_medication_mentions") or []),
+        }
         report["query_understanding"] = patient_query
         retrieval_plan = build_retrieval_plan(question, patient_query)
         report["retrieval_plan"] = retrieval_plan
         report["context_entities"] = groups
-        if patient_query["vague_medicines"]:
-            return [], {**report, "status": "needs_medication_clarification", "reason": "仅凭药物用途或大类不能确定成分，请补充药盒名称或成分"}
-        if patient_query["unresolved_medication_mentions"] or patient_query["ambiguous_aliases"] or patient_query["route_conflicts"]:
-            return [], {**report, "status": "needs_medication_clarification", "reason": "存在未确认的药名或有歧义的商品名，需要补充药盒名称或成分"}
+        discovery_intent = bool(patient_query.get("intent", {}).get("drug_discovery_question"))
+        interaction_intent = bool(patient_query.get("intent", {}).get("interaction_question"))
+        # Asking *which* drug treats a symptom is not the same as claiming to
+        # be taking a vaguely specified drug. Keep the latter blocked.
+        if patient_query.get("vague_medicines") and not (discovery_intent and not interaction_intent):
+            return [], {**report, "status": "needs_medication_clarification",
+                        "reason": "仅凭药物用途或大类不能确定成分，请补充药盒名称或成分"}
+        if (patient_query.get("unresolved_medication_mentions")
+                or patient_query.get("ambiguous_aliases") or patient_query.get("route_conflicts")):
+            return [], {**report, "status": "needs_medication_clarification",
+                        "reason": "存在未确认的药名或有歧义的商品名，需要补充药盒名称或成分"}
+        if (interaction_intent and patient_query.get("llm_unlinked_medication_mentions")):
+            return [], {**report, "status": "needs_medication_clarification",
+                        "reason": "存在图谱词典尚无法验证的药品或成分，不能忽略后继续推断相互作用"}
         if patient_query.get("alternative_medication_mentions") and patient_query["intent"]["interaction_question"]:
             return [], {**report, "status": "needs_medication_clarification", "reason": "问题包含备选药物，需先确认实际使用的药，不能当作全部同时服用"}
         # Explicit discovery through symptoms/diseases must keep those anchors.
         discovery = bool(re.search(r"相关药|哪些.{0,8}药|什么药|药品有哪些|药物有哪些", question))
         groups = active_anchors(groups, patient_query, nodes) if not discovery else groups
+        groups, soft_context_anchors = _focused_anchors(groups, patient_query)
+        report["primary_anchors"] = groups
+        report["soft_context_anchors"] = soft_context_anchors
         report["snapshot_created_at"] = manifest["created_at"]
         if len(question) > 600:
             return [], {**report, "status": "question_too_long", "reason": "请将图检索问题控制在600字内，避免遗漏后面的实体"}
@@ -749,12 +987,14 @@ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
         if unknown_products:
             return [], {**report, "status": "unresolved_named_entity", "unresolved_names": unknown_products,
                         "anchors": groups, "reason": "存在未解析的制剂全名，不能省略它再连接其他实体"}
-        if not groups:
-            return [], {**report, "status": "no_exact_entity", "reason": "未识别到可核对的药名或疾病，请补充药盒名称、成分或具体问题"}
         if len(groups) > 5 or any(g["ambiguous"] for g in groups):
             return [], {**report, "status": "ambiguous_or_too_many_entities", "anchors": groups}
-        if len(patient_query["medicines"]) > 2 and patient_query["intent"]["interaction_question"] and not retrieval_plan.get("category_discovery"):
-            return [], {**report, "status": "needs_medication_clarification", "reason": "识别到三种以上药物，请先逐对核对，避免遗漏药名"}
+        named_medicine_groups = [g for g in groups
+                                 if set(g["kinds"]) & {"Drug", "Ingredient"}]
+        if ((len(patient_query.get("medicines") or []) > 2 or len(named_medicine_groups) > 2)
+                and interaction_intent and not retrieval_plan.get("category_discovery")):
+            return [], {**report, "status": "needs_medication_clarification",
+                        "reason": "识别到三种以上药物，请先逐对核对，避免遗漏药名"}
         discovery = retrieval_plan.get("category_discovery")
         if discovery:
             discovery_excerpts, discovery_report = search_category_discovery(
@@ -776,6 +1016,10 @@ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
                                        "model_calls": 0, "scope": "dataset_category_only"}
                 return category_excerpts, report
             report["category_lookup"] = category_report
+        if not groups:
+            return [], {**report, "status": "no_exact_entity",
+                        "semantic_fallback_recommended": True,
+                        "reason": "当前图谱没有可核对的实体锚点；请尝试原始文本的语义或关键词检索，而非强制提供药名剂型"}
         plan = query_plan(question, groups, max_hops, patient_query, retrieval_plan)
         plan["patient_pair_interaction"] = (len(patient_query["medicines"]) == 2 and plan["interaction_question"]
                                             and not patient_query["intent"].get("mechanism_question") and not discovery)
@@ -802,6 +1046,15 @@ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
         for candidate in candidates:
             proof = _proof(conn, root, candidate, nodes, verified_sources)
             content = path_text(proof)
+            if soft_context_anchors:
+                contextual_labels = "、".join(
+                    x["surface"] for x in soft_context_anchors
+                )
+                content = (
+                    "证据范围提示：本图路径没有强制连接背景信息“" + contextual_labels
+                    + "”。这些背景的用药安全性仍须使用独立原文核对；不得将当前图路径视为已覆盖该限制条件。\\n"
+                    + content
+                )
             if patient_query["medicines"]:
                 labels = '；'.join(g["surface"] + '：' + ('已点名制剂' if g["actual_patient_product_known"] else '通用名/简称检索候选，实际剂型未确认') for g in patient_query["medicines"])
                 content = "用户用药名称解析（仅为检索范围）：" + labels + "。以下原文仅属于各自具体制剂，不是患者产品等价证明。\n" + content
@@ -888,6 +1141,12 @@ def graph_insufficiency_message(report: dict) -> str:
     patient = report.get("query_understanding", {})
     if report.get("status") == "retrieval_timeout":
         return "本轮图检索达到时间预算，尚未获得可引用路径。不能据此判断不存在相关关系；可补充具体药名或缩小问题范围后再检索。"
+    if report.get("status") == "no_exact_entity":
+        return ("本轮图谱缺少可核对的实体锚点，不能据此认定资料不存在。"
+                "建议在原始文档中用语义检索或关键词检索；确需核对具体制剂安全性时，再确认名称、成分和剂型。")
+    if report.get("status") == "no_connected_evidence_path":
+        return ("目前没有找到可逐边核实的图谱连接证据；这并不表示相关用药组合安全或不存在风险。"
+                "建议补充来源文档检索，必要时核对具体制剂。")
     if report.get("status") in ("needs_medication_clarification", "unresolved_named_entity"):
         text = "为了查到对应资料，请按药盒填写名称或成分，以及剂型（如普通片、缓释片、胶囊）。"
         if report.get("unresolved_names"):
@@ -903,9 +1162,13 @@ def graph_insufficiency_message(report: dict) -> str:
         if patient.get("vague_medicines"):
             text = "“" + "、".join(patient["vague_medicines"]) + "”包含多种不同成分，仅凭这类称呼无法判断合用影响。" + text
         for mention in patient.get("unresolved_medication_mentions", []):
-            text += "“" + mention["surface"] + "”暂未识别。"
+            if isinstance(mention, dict) and mention.get("surface"):
+                text += "“" + mention["surface"] + "”暂未识别。"
             if mention.get("suggestions"):
                 text += "是否指“" + "、".join(mention["suggestions"]) + "”？请核对，当前未自动替换。"
+        for mention in patient.get("llm_unlinked_medication_mentions", []):
+            if isinstance(mention, dict) and mention.get("surface"):
+                text += "“" + mention["surface"] + "”未能与图谱药品/成分节点核对。"
         return text
     cohort = report.get("plan", {}).get("disease_pair_search", {})
     if not cohort:

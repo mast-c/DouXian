@@ -178,7 +178,7 @@ def fields_for_question(question: str) -> list[str]:
     text = str(question or "")
     found: set[str] = set()
     patterns = (
-        (r"治疗|哪些药|什么药|药物有哪些|有哪些药物|适应症|适应证|用于什么|预防", ("indication",)),
+        (r"治疗|哪些药|什么药|药物有哪些|有哪些药物|适应症|适应证|用于什么|预防|用药.{0,6}(?:建议|推荐)", ("indication",)),
         (r"禁忌|禁用|不宜|不能用|过敏史|过敏体质|药物过敏|过敏反应|对.{1,20}过敏", ("contraindications",)),
         (r"不良反应|副作用|不适反应|毒性|安全性", ("adverse_reactions",)),
         (r"注意事项|警告|慎用|注意什么", ("warnings",)),
@@ -271,6 +271,7 @@ def is_disease_drug_list_question(question: str) -> bool:
     return bool(re.search(
         r"(?:药物|药品|药).{0,5}有哪些|有哪些.{0,5}(?:药物|药品|药)|"
         r"(?:什么|哪些)(?:药物|药品|药)|"
+        r"用药.{0,6}(?:建议|推荐)|(?:建议|推荐).{0,6}用药|"
         r"治疗.{0,24}(?:药物|药品|什么药|哪些药)",
         text,
     ))
