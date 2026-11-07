@@ -1,0 +1,530 @@
+--- baseline/rag.py
++++ v5.4/rag.py
+@@ -80,6 +80,11 @@
+ )
+ from medical_graph_visibility import graph_visibility_report
+ from medical_targeted_retry import retry_targeted_evidence
++from medical_evidence_contract import (
++    retain_provenance, split_retry_targets, verify_retry_integrity,
++    evidence_role_counts,
++)
++from copy import deepcopy
+ from medical_category_graph import (
+     category_source_answer, disease_classification_source_answer,
+ )
+@@ -168,6 +173,8 @@
+ 2. 不要编造原文、来源、疾病、疗效、剂量、适用人群、审核结果或引用编号。不要自行写“参考资料”列表，程序会附上来源。
+ 3. 对药品与疾病关系，先判断材料究竟描述治疗、预防、风险条件、合并症、禁忌、药物不良反应、背景提及还是明确否定；不把单纯提及、同段出现或危险因素解释为确定适应症。
+ 4. 区分制剂、成分、剂型、规格、给药途径及人群限制；资料没说明时不要自行补齐。特别注意：药品说明书原文中可能混有“某成分/辅料可辅助治疗某病”的陈述，不能因此声称包含该成分的整种制剂具有相同获批适应症。
++   对本地数据集的分类层级，只能说“本地分类文件将某药列于某类别”；不能说该分类证明两药相互作用、药理学等效或安全替代。
++   其他候选药与第三药的相互作用示例不能证明它与原问题指定的起始药存在相互作用；要分别核对两个明确对象的原文。
+ 5. 对来源可信度保持精确：第三方数据库、AI 辅助提取与待审核候选均不是官方核准说明书或临床指南。若本轮证据没有独立核验的官方批准信息，只能说“本轮资料记载的用途”或“当前证据无法核实批准状态”；不得将其概括为“法定适应症”“主要获批适应症”“正式批准范围”，也不得断言“未列入法定范围”或“未获批”。即使回答末尾注明“第三方来源待核验”，正文也不能出现上述未经证实的监管结论。
+ 6. 问到禁忌、相互作用、不良反应或给药方案时，必须保持药品全名、剂型、规格、栏目及原文条件一一对应，不得把其他药品/剂型的条文移入当前药品。原文仅写“出现腹泻可酌情减量”时，不得增写“每日2～3次减量”“超过3次停用”等未经提供的具体次数阈值；其他数值、剂量、频率、疗程和严重程度也必须能在对应药品的引文中找到原文支持。不要据此向具体个人提供处方或自行调整方案。
+ 7. 用户提问包含多个方面时，仅回答证据充分支持的部分；若缺失关键证据，明确说“当前知识库证据不足，无法可靠回答该问题”，无需硬凑结论。若前提与原文矛盾，应温和纠正并说明依据。
+@@ -1340,7 +1347,7 @@
+                 if _semantic_report.get("category_discovery"):
+                     discovered = set(_semantic_report["category_discovery"].get("candidate_names", []))
+                     for _target in _answer_targets:
+-                        if _target.get("id") == "target_discovered_sources":
++                        if _target.get("id") in ("target_discovered_sources", "target_seed_interaction"):
+                             _target["candidate_names"] = sorted(discovered)
+                 _evidence_flow = start_evidence_flow(_answer_targets)
+                 trace["evidence_flow"] = _evidence_flow
+@@ -1987,7 +1994,7 @@
+                             original_content = original_item.get("content")
+                             if not isinstance(original_content, str) or not original_content.strip():
+                                 continue
+-                            guard_excerpts.append({
++                            guard_excerpts.append(retain_provenance({
+                                 **graph_metadata(original_item),
+                                 "id": len(guard_excerpts) + 1,
+                                 "source": original_item.get("source", ""),
+@@ -2006,8 +2013,12 @@
+                                 "section_field": original_item.get("section_field", ""),
+                                 "chunk_id": original_item.get("chunk_id", ""),
+                                 "parent_verified": original_item.get("parent_verified", False),
+-                            })
+-
++                            }, original_item))
++
++                        trace["evidence_role_transport"] = {
++                            "merged_for_guard": evidence_role_counts(excerpts),
++                            "guard_before_retry": evidence_role_counts(guard_excerpts),
++                        }
+                         fast_kb_mode = (
+                             os.getenv("DOUXIAN_KB_MODE", "strict").strip().lower()
+                             == "fast"
+@@ -2050,6 +2061,10 @@
+                                     f"message={coverage.get('message', '')}"
+                                 )
+                         # BEGIN SELF_RAG_RETRY_V1_5
++                        # A retry is allowed to append new source evidence, never
++                        # silently renumber/remove or overwrite verified originals.
++                        _pre_retry_excerpts = deepcopy(guard_excerpts)
++                        _pre_retry_coverage = deepcopy(coverage)
+                         record_review(_evidence_flow, guard_excerpts, coverage)
+                         _evidence_flow["initial_review"] = _evidence_flow.get("aspects", [])
+                         # 只在第一轮审核为 partial/refuse 时，尝试补检一次。
+@@ -2069,16 +2084,47 @@
+                             _retry_started = time.perf_counter()
+                             try:
+                                 if _answer_targets:
+-                                    retry_result = retry_targeted_evidence(
+-                                        model=self.chat_model, question=question, targets=_answer_targets,
+-                                        excerpts=guard_excerpts, coverage=coverage,
+-                                        original_queries=kb_data.get("subqueries"),
+-                                        search=self.knowledge_service.search_hybrid,
+-                                        verify=lambda docs, routing: prepare_medical_documents(
+-                                            docs, routing, fetch_parent=self._get_medical_parent_section, limit=3,
+-                                        ),
+-                                        judge=lambda **params: reassess_fixed_aspects(original_coverage=coverage, **params),
++                                    _retry_targets, _retry_skipped_fields = split_retry_targets(
++                                        _answer_targets
+                                     )
++                                    if _retry_skipped_fields:
++                                        trace["targeted_retry_routing"] = {
++                                            "section_targets": [t.get("id") for t in _retry_targets],
++                                            "non_section_target_fields": _retry_skipped_fields,
++                                            "category_source_route": "existing_verified_category_paths",
++                                        }
++                                    if _retry_targets:
++                                        retry_result = retry_targeted_evidence(
++                                            model=self.chat_model, question=question, targets=_retry_targets,
++                                            excerpts=guard_excerpts, coverage=coverage,
++                                            original_queries=kb_data.get("subqueries"),
++                                            search=self.knowledge_service.search_hybrid,
++                                            verify=lambda docs, routing: prepare_medical_documents(
++                                                docs, routing, fetch_parent=self._get_medical_parent_section, limit=3,
++                                            ),
++                                            judge=lambda **params: reassess_fixed_aspects(original_coverage=coverage, **params),
++                                        )
++                                    else:
++                                        # The earlier classification paths were already
++                                        # source-verified and sent to Evidence Guard.
++                                        # Re-querying the leaflet-only retry module with
++                                        # dataset_category would raise KeyError.
++                                        # Leave the decision unchanged rather than
++                                        # misreporting this as a database failure.
++                                        retry_result = {
++                                            "coverage": coverage, "excerpts": guard_excerpts,
++                                            "retry_queries": [], "new_chunks": 0,
++                                            "status": "skipped_non_section_targets",
++                                            "execution": {
++                                                "unsupported_fields": _retry_skipped_fields,
++                                                "category_source_evidence_available": any(
++                                                    e.get("discovery_role") == "seed_category"
++                                                    and e.get("graph_verified")
++                                                    and (e.get("graph_path") or {}).get("verified_against_original")
++                                                    for e in guard_excerpts
++                                                ),
++                                            },
++                                        }
+                                 else:
+                                     retry_result = retry_insufficient_evidence(
+                                         model=self.chat_model,
+@@ -2128,6 +2174,13 @@
+                                 f"{time.perf_counter() - _retry_started:.2f}s "
+                                 f"(status={retry_result.get('status')})"
+                             )
++                        retry_result, _retry_integrity = verify_retry_integrity(
++                            _pre_retry_excerpts, _pre_retry_coverage, retry_result
++                        )
++                        trace["retry_evidence_integrity"] = _retry_integrity
++                        trace["evidence_role_transport"]["after_retry"] = evidence_role_counts(
++                            retry_result.get("excerpts")
++                        )
+                         coverage = retry_result["coverage"]
+                         guard_excerpts = retry_result["excerpts"]
+                         trace["self_rag_retry"] = {
+@@ -2189,7 +2242,7 @@
+                             preview_text = " ".join(preview_src.split())
+                             if len(preview_text) > 240:
+                                 preview_text = preview_text[:240].rstrip() + "…"
+-                            ui_evidence.append({
++                            ui_evidence.append(retain_provenance({
+                                 **graph_metadata(item),
+                                 "id": idx,
+                                 "source": source,
+@@ -2223,7 +2276,7 @@
+                                 "link_retrieval_route": str(
+                                     item.get("link_retrieval_route") or ""
+                                 ),
+-                            })
++                            }, item))
+                         trace["knowledge_evidence"] = ui_evidence
+                         _p3063_attach_multihop_path_cards(
+                             trace, question,
+--- baseline/medical_evidence_coverage.py
++++ v5.4/medical_evidence_coverage.py
+@@ -36,14 +36,30 @@
+         return []
+     discovery = plan.get("category_discovery")
+     if discovery:
+-        # The requested subjects are discovered products, not the seed drug.
++        # A category membership fact, a candidate list and a seed-specific
++        # interaction are three DIFFERENT questions; one path that happens to
++        # mention another drug's interaction must never satisfy all three.
+         candidate_names = list(discovery.get("candidate_names", []))
+-        return [{"id": "target_category", "field": "dataset_category", "label": "起始药物分类归属", "medicines": [], "pair": False,
+-                 "discovery_roles": ["seed_category", "seed_composition"]},
+-                {"id": "target_discovered_sources", "field": "discovered_sources",
+-                 "label": discovery["level_label"]+"候选药物的独立原文及约束核对", "medicines": [], "pair": False,
+-                 "discovery_roles": ["member", "source_field", "interaction_example"],
+-                 "candidate_names": candidate_names}]
++        operation = discovery.get("operation")
++        targets = [{"id": "target_category", "field": "dataset_category",
++                    "label": "起始药物在本地数据集的分类归属", "medicines": [], "pair": False,
++                    "discovery_roles": ["seed_category"]},
++                   {"id": "target_discovered_sources", "field": "discovered_sources",
++                    "label": discovery["level_label"]+"下已核实的分类候选", "medicines": [], "pair": False,
++                    "discovery_roles": ["member", "source_field", "interaction_example"],
++                    "candidate_names": candidate_names,
++                    "scope": "dataset_membership_candidates_not_pair_interaction"}]
++        if operation == "interaction" and discovery.get("interaction_scope") == "seed_pair":
++            targets.append({
++                "id": "target_seed_interaction", "field": "seed_pair_interaction",
++                "label": "同类候选与起始药物之间的具体相互作用原文",
++                "medicines": [], "pair": True,
++                "discovery_roles": ["interaction_example"],
++                "seed_surface": discovery.get("seed_surface") or "",
++                "candidate_names": candidate_names,
++                "scope": "requires_exact_both_endpoints_verified",
++            })
++        return targets
+     targets = []
+     intent = understanding.get("intent", {})
+     for disease in diseases:
+@@ -232,6 +248,53 @@
+     return name in medicine["names"]
+ 
+ 
++def _verified_seed_pair_interaction(item, seed_surface: str, candidate_names) -> bool:
++    """Accept a verified interaction edge only if it really involves SEED.
++
++    Shared categories or the interaction of candidate A with unrelated B are
++    not evidence that A interacts with the original user-mentioned seed drug.
++    Direct drug pairs and independently verified seed ingredient joins are
++    allowed as source MENTIONS, not clinically established interactions.
++    """
++    if not seed_surface or not item.get("graph_verified"):
++        return False
++    path = item.get("graph_path") or {}
++    if not path.get("verified_against_original"):
++        return False
++    edges = path.get("edges") or []
++    candidates = set(candidate_names or ()) - {seed_surface}
++    if not candidates:
++        return False
++    # This record's own product must be a verified category member.
++    product = item.get("product")
++    member = any(e.get("relation") == "DATASET_CATEGORY_MEMBERSHIP"
++                 and (e.get("src") or {}).get("name") == product
++                 for e in edges if isinstance(e, dict))
++    if not member or product not in candidates:
++        return False
++    for e in edges:
++        if not isinstance(e, dict) or e.get("relation") != "INTERACTION_MENTION":
++            continue
++        src, dst = e.get("src") or {}, e.get("dst") or {}
++        s_name, d_name = src.get("name"), dst.get("name")
++        if ({s_name, d_name} == {seed_surface, product}
++                and src.get("kind") == "Drug" and dst.get("kind") == "Drug"):
++            return True
++        # A->ingredient is connected to the SEED only when the exact
++        # seed Drug->Ingredient identity has its own verified source edge.
++        for comp in edges:
++            if not isinstance(comp, dict) or comp.get("relation") != "HAS_INGREDIENT":
++                continue
++            owner, ingredient = comp.get("src") or {}, comp.get("dst") or {}
++            if (owner.get("name") == seed_surface and s_name == product
++                    and dst.get("id") and ingredient.get("id") == dst.get("id")):
++                return True
++            if (owner.get("name") == product and s_name == seed_surface
++                    and dst.get("id") and ingredient.get("id") == dst.get("id")):
++                return True
++    return False
++
++
+ def evidence_bindings(item, targets):
+     """An available section/mention is a candidate, never clinical approval."""
+     bindings = []
+@@ -250,21 +313,60 @@
+                 role = item.get("discovery_role")
+                 if role not in target.get("discovery_roles", []):
+                     continue
+-                # Candidate membership alone is not the requested medical
+-                # source fact. Mixed paths carry the verified source edge.
++                # For interaction queries, member/interaction_example paths
++                # support candidate membership only; they never imply a
++                # pair interaction with the seed product.
++                if target.get("scope") == "dataset_membership_candidates_not_pair_interaction":
++                    member_edges = [e for e in path.get("edges", [])
++                                    if e.get("relation") == "DATASET_CATEGORY_MEMBERSHIP"
++                                    and e.get("src", {}).get("name") == item.get("product")]
++                    if not member_edges or item.get("product") not in target.get("candidate_names", []):
++                        continue
++                    bindings.append({"target_id": target["id"], "source_verified": True,
++                                     "scope": "verified_category_candidate_membership_only",
++                                     "edge_ids": [e.get("id") for e in member_edges]})
++                    continue
+                 if role not in ("interaction_example", "source_field"):
+                     continue
+                 bindings.append({"target_id": target["id"], "source_verified": True,
+                                  "scope": "literal_source_mention_not_clinical_conclusion",
+                                  "edge_ids": [e["id"] for e in path.get("edges", [])]})
++            elif target.get("id") == "target_seed_interaction":
++                if item.get("discovery_role") != "interaction_example":
++                    continue
++                if _verified_seed_pair_interaction(
++                        item, target.get("seed_surface") or "",
++                        target.get("candidate_names") or []):
++                    edges = [e.get("id") for e in path.get("edges") or []
++                             if e.get("relation") in ("INTERACTION_MENTION", "HAS_INGREDIENT")]
++                    bindings.append({"target_id": target["id"], "source_verified": True,
++                                     "scope": "specific_pair_source_mention_not_clinically_validated",
++                                     "edge_ids": edges})
+         return bindings
+-    if item.get("evidence_type") in SECTION_TYPES and any(t.get("id") == "target_discovered_sources" for t in targets):
++    if item.get("evidence_type") in SECTION_TYPES and any(
++            t.get("id") in ("target_discovered_sources", "target_seed_interaction")
++            for t in targets):
+         owner = str(item.get("drug_name") or "")
+-        if owner:
+-            return [{"target_id": t["id"], "source_verified": bool(item.get("parent_verified")),
+-                     "scope": "candidate_product_source_section_pending_semantic_review", "edge_ids": []}
+-                    for t in targets if t.get("id") == "target_discovered_sources"
+-                    and owner in t.get("candidate_names", [])]
++        text = original_text(item)
++        result = []
++        for t in targets:
++            if t.get("id") == "target_discovered_sources" and owner in t.get("candidate_names", []):
++                if t.get("scope") != "dataset_membership_candidates_not_pair_interaction":
++                    result.append({"target_id": t["id"],
++                                   "source_verified": bool(item.get("parent_verified")),
++                                   "scope": "candidate_source_section_pending_semantic_review",
++                                   "edge_ids": []})
++            if t.get("id") == "target_seed_interaction" and item.get("section_field") == "drug_interactions":
++                seed = t.get("seed_surface") or ""
++                candidates = set(t.get("candidate_names") or []) - {seed}
++                if item.get("parent_verified") and text and seed and (
++                    (owner == seed and any(candidate in text for candidate in candidates))
++                    or (owner in candidates and seed in text)
++                ):
++                    result.append({"target_id": t["id"], "source_verified": True,
++                                   "scope": "explicit_named_pair_leaflet_source_pending_review",
++                                   "edge_ids": []})
++        return result
+     if graph and not (item.get("graph_verified") and path.get("verified_against_original")):
+         return []
+     for target in targets:
+--- baseline/evidence_guard.py
++++ v5.4/evidence_guard.py
+@@ -61,6 +61,9 @@
+     且引句逐字等于完整科别字段及节点名称（如“皮肤科”）时可引用2至7字；
+     仅可陈述本地疾病资料对科别的分类记载，不能升级为临床诊断或权威病因分类。
+     对成分边，可引用原文中逐字出现的完整成分实体名（至少2字），例如“本品主要成分布洛芬”中的“布洛芬”。
++    对通过 JSON Pointer 与 SHA-256 原文件校验的 DATASET_CATEGORY_MEMBERSHIP → DATASET_CATEGORY_PARENT，
++    可逐字引用相应的完整类别节点名（含2至7字的短名）；此时引用的是结构化分类键，而非药品说明书引句。
++    必须注明“本地数据集分类记载”，不得将该类别升级为临床药理归类或相互作用证据。
+     否定、剂量、人群、尚不明确必须保持；第三种药物的共同提及不证明两药存在相互作用。
+ 19. 用户未给具体药名而询问两种疾病的用药是否相互作用时，可以用完整图路径回答
+     “本轮资料有哪些具体组合示例及各自记载”，无需证明两种疾病所有药品之间的关系。
+@@ -258,12 +261,78 @@
+ }
+ 
+ 
++def _verified_dataset_classification(item: dict):
++    """Return (drug, leaf, top) only for proven, ordered JSON category paths.
++
++    The upstream category verifier independently re-reads JSON Pointer and
++    hashes the on-disk source. This function checks that this exact verified
++    membership+parent chain is still attached to the evidence excerpt;
++    it does NOT declare any pharmacological or clinical fact.
++    """
++    if not isinstance(item, dict) or item.get("evidence_type") not in (
++        "dataset_category_graph_path", "category_discovery_source_path"
++    ):
++        return None
++    if item.get("evidence_type") == "category_discovery_source_path" and item.get("discovery_role") != "seed_category":
++        return None
++    path = item.get("graph_path") or {}
++    if not (item.get("graph_verified") and path.get("verified_against_original")):
++        return None
++    edges = path.get("edges") or []
++    if not isinstance(edges, list):
++        return None
++
++    def valid_source(edge):
++        return (
++            edge.get("verification_method") == "json_pointer_structure_and_file_sha256"
++            and str(edge.get("json_pointer") or "").startswith("/categories/")
++            and bool(re.fullmatch(r"[0-9a-fA-F]{64}", str(edge.get("source_sha256") or "")))
++            and edge.get("section_field") == "dataset_category"
++            and (edge.get("src") or {}).get("id")
++            and (edge.get("dst") or {}).get("id")
++            and (edge.get("src") or {}).get("name")
++            and (edge.get("dst") or {}).get("name")
++        )
++
++    for member in edges:
++        if (member.get("relation") != "DATASET_CATEGORY_MEMBERSHIP"
++                or not valid_source(member)
++                or (member.get("src") or {}).get("kind") not in ("Drug", "CatalogDrug")
++                or (member.get("dst") or {}).get("kind") != "DatasetCategory"):
++            continue
++        drug = member["src"]["name"]
++        leaf = member["dst"]["name"]
++        if str(member.get("quote") or "") != json.dumps(drug, ensure_ascii=False):
++            continue
++        for parent in edges:
++            if (parent.get("relation") != "DATASET_CATEGORY_PARENT"
++                    or not valid_source(parent)
++                    or (parent.get("src") or {}).get("id") != member["dst"]["id"]
++                    or (parent.get("src") or {}).get("kind") != "DatasetCategory"
++                    or (parent.get("dst") or {}).get("kind") != "DatasetCategory"
++                    or str(parent.get("quote") or "") != json.dumps(leaf, ensure_ascii=False)):
++                continue
++            return drug, leaf, parent["dst"]["name"]
++    return None
++
++
++def _is_verified_category_structure_quote(item: dict, quote: str) -> bool:
++    """Allow a complete verified *category key*, never a guessed substring."""
++    hierarchy = _verified_dataset_classification(item)
++    if not hierarchy:
++        return False
++    _, leaf, top = hierarchy
++    return _compact(quote) in (_compact(leaf), _compact(top))
++
++
+ def _is_complete_short_section_quote(item: dict, quote: str) -> bool:
+     """只允许短小、完整、逐字的医疗原文章节作为短引句。
+ 
+     不把药品名称、栏目标签、系统免责声明拼接成伪造的长引文；
+     仅放宽字数校验，不放宽医学语义的真实性判断。
+     """
++    if _is_verified_category_structure_quote(item, quote):
++        return 2 <= len(_compact(quote)) < 8
+     if item.get("evidence_type") in ("evidence_backed_semantic_graph_path", "category_discovery_source_path"):
+         path = item.get("graph_path") or {}
+         return bool(path.get("verified_against_original")) and any(
+@@ -387,9 +456,11 @@
+             if metadata.get("evidence_type") in ("evidence_backed_semantic_graph_path", "category_discovery_source_path"):
+                 # Generated path labels are never a substitute for source quotations.
+                 path = metadata.get("graph_path") or {}
+-                if not path.get("verified_against_original") or not any(
+-                    _compact(quote) in _compact(str(edge.get("quote") or ""))
+-                    for edge in path.get("edges", []) if isinstance(edge, dict)
++                if not path.get("verified_against_original") or not (
++                    any(
++                        _compact(quote) in _compact(str(edge.get("quote") or ""))
++                        for edge in path.get("edges", []) if isinstance(edge, dict)
++                    ) or _is_verified_category_structure_quote(metadata, quote)
+                 ):
+                     continue
+             # 引文必须有一定长度，而且确实逐字出现于原始 Chunk。
+@@ -445,6 +516,7 @@
+     # composition-field question. This is a data lookup, not clinical reasoning.
+     # Do not let a model's missed/short quote incorrectly erase that field.
+     verified_aspects = _restore_literal_composition(verified_aspects, excerpts)
++    verified_aspects = _restore_literal_dataset_category(verified_aspects, excerpts)
+     allowed_ids = {i for a in verified_aspects if a["status"] in ("supported", "refuted") for i in a["evidence_ids"]}
+     accepted = [
+         aspect["question"]
+@@ -472,6 +544,55 @@
+         "refused_questions": refused,
+         "message": "",
+     }
++
++
++def _restore_literal_dataset_category(aspects: list[dict], excerpts: list[dict]) -> list[dict]:
++    """Restore ONLY literal local-dataset classification, not medical claims.
++
++    This mirrors literal-composition recovery: a reviewer may quote the upper
++    category node name, which cannot be found in the JSON leaf-key edge quote.
++    We accept the category ONLY after source JSON Pointer/hash proof passed.
++    Never restore 'interacts with', safety, causal, dosage or candidate claims.
++    """
++    proven = []
++    for item in excerpts:
++        hierarchy = _verified_dataset_classification(item)
++        if not hierarchy:
++            continue
++        drug, leaf, top = hierarchy
++        if top not in str(item.get("content") or "") or leaf not in str(item.get("content") or ""):
++            continue
++        try:
++            evidence_id = int(item["id"])
++        except (KeyError, ValueError, TypeError):
++            continue
++        if evidence_id > 0:
++            proven.append((evidence_id, drug, leaf, top))
++    restored = []
++    for aspect in aspects:
++        if aspect.get("status") != "insufficient":
++            restored.append(aspect)
++            continue
++        question = str(aspect.get("question") or "")
++        # Restrict the explicit question to a classification/parent category;
++        # otherwise the same excerpt could be misapplied to pair interactions.
++        if (not re.search(r"分类|归属|所属|大类|类别|子类|上级类", question)
++                or re.search(r"相互作用|能否同用|联用|药物风险|不良反应|如何治疗|用法用量", question)):
++            restored.append(aspect)
++            continue
++        applicable = [(eid, leaf, top) for eid, drug, leaf, top in proven
++                      if drug in question]
++        # Multiple contradictory class labels must never be auto-resolved.
++        if not applicable or len({(leaf, top) for _, leaf, top in applicable}) != 1:
++            restored.append(aspect)
++            continue
++        evidence_id, leaf, top = applicable[0]
++        restored.append({**aspect, "status": "supported",
++                         "evidence_ids": [evidence_id],
++                         "quotes": [{"id": evidence_id, "quote": top}],
++                         "reason": "仅本地JSON数据集分类层级已按路径及文件哈希核对；不表示权威药理分类或临床结论",
++                         "validation_method": "verified_dataset_json_structure_only"})
++    return restored
+ 
+ 
+ def _restore_literal_composition(aspects: list[dict], excerpts: list[dict]) -> list[dict]:
+--- baseline/medical_category_discovery.py
++++ v5.4/medical_category_discovery.py
+@@ -74,8 +74,25 @@
+     if not seeds:
+         seeds = medicines[:1]
+     seed = seeds[0]
++    # When the FIRST-PASS LLM produced a seed-specific interaction subquery,
++    # constrain the partner to that verified seed. Otherwise general class
++    # interaction examples remain *examples*, not interaction-with-seed proof.
++    # This does not depend on medicine-specific wordlists or a new NER regex.
++    semantic_queries = understanding.get("semantic_sub_queries") or []
++    if not isinstance(semantic_queries, list):
++        semantic_queries = []
++    seed_pair_from_llm = interaction and any(
++        isinstance(q, str) and seed["surface"] in q and "相互作用" in q
++        for q in semantic_queries
++    )
+     # An explicitly named second medicine is a target constraint, not another seed.
+     partners = [i for m in seeds[1:] for i in m.get("candidate_drug_ids", [])] if interaction else []
++    if seed_pair_from_llm and not partners:
++        partners = list(seed.get("candidate_drug_ids") or [])
++    interaction_scope = (
++        "seed_pair" if seed_pair_from_llm or (interaction and len(seeds) > 1)
++        else "general_category_examples"
++    ) if interaction else "not_applicable"
+     return {"version": 1, "route": "category_candidate_source_join", "level": level,
+             "level_label": "一级大类" if level == "top" else "二级子类",
+             "other_level": other_level,
+@@ -85,6 +102,12 @@
+             "seed_candidates_truncated": bool(seed.get("candidates_truncated")),
+             "exclude_seed": not bool(re.search(r"包括(?:它|本品|原药)|包含(?:它|本品|原药)", question)),
+             "excluded_ids": sorted(set(excludes)), "partner_ids": sorted(set(partners)),
++            "interaction_scope": interaction_scope,
++            "interaction_scope_basis": (
++                "llm_subquery_named_seed" if seed_pair_from_llm
++                else "explicit_second_medicine" if interaction and len(seeds) > 1
++                else "general_examples_only"
++            ),
+             "other_category": bool(re.search(r"其他.{0,4}(?:类|类别)|其它.{0,4}(?:类|类别)|不同.{0,4}(?:类|类别)|跨类", question)),
+             "fields": list(dict.fromkeys(fields)), "operation": "interaction" if interaction else "source_fields" if fields else "members",
+             "different_ingredient": bool(re.search(r"不同成分|成分不同|成分不一样|成分有区别", question)),

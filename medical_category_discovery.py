@@ -17,12 +17,30 @@ from medical_query_plan import FIELD_RELATIONS
 
 EVIDENCE_TYPE = "category_discovery_source_path"
 SAME_CATEGORY = r"(?<!不)同(?:一)?(?:大类|子类|小类|类别|类)|这一类|这类|同属"
+_CATEGORY_OWNER = r"(?:所属|归属|所在)的?(?:大类|子类|小类|类别)"
+_CATEGORY_REFERENT = r"(?:该|此|这|那|同一|这一|那一)(?:大类|子类|小类|类别|类)(?:下|中|里|内)?"
+_CATEGORY_EXPANSION = r"哪些|哪几|具体.*?药|有(?:哪|什么).*?药|其他药|其它药|相互作用|同类药"
+
+
+def _category_scope_match(question):
+    direct = re.search(SAME_CATEGORY, question)
+    if direct:
+        return direct
+    # "所属的大类是什么？该大类下哪些药……" refers to the same
+    # category. Category membership may be obtained from a verified source;
+    # this is grammatical routing, not a drug/category identification rule.
+    owner = re.search(_CATEGORY_OWNER, question)
+    referent = re.search(_CATEGORY_REFERENT, question)
+    if owner and referent and re.search(_CATEGORY_EXPANSION, question[referent.start():]):
+        return referent
+    return None
 
 
 def category_discovery_plan(question, understanding):
     """Parse set operations independently of particular medicine names."""
     medicines = understanding.get("medicines", [])
-    if not medicines or not re.search(SAME_CATEGORY, question):
+    scope = _category_scope_match(question)
+    if not medicines or scope is None:
         return None
     intent = understanding.get("intent", {})
     interaction = bool(intent.get("interaction_question"))
@@ -39,7 +57,7 @@ def category_discovery_plan(question, understanding):
     # Category exploration is not a substitute for patient-specific advice.
     clinical = bool(intent.get("risk_question") or intent.get("efficacy_question") or re.search(
         r"我.{0,12}(?:能吃|能用|能服|可以吃|可以用)|能不能吃|能不能用|该吃|该用|推荐|换药|替代|剂量|用量|怎么吃|怎么用", question))
-    same = re.search(SAME_CATEGORY, question).group()
+    same = scope.group()
     level = "top" if "大类" in same else "leaf"
     other_level = ("top" if re.search(r"(?:其他|其它|不同).{0,2}大类", question) else
                    "leaf" if re.search(r"(?:其他|其它|不同).{0,2}(?:子类|小类)", question) else level)
@@ -56,8 +74,25 @@ def category_discovery_plan(question, understanding):
     if not seeds:
         seeds = medicines[:1]
     seed = seeds[0]
+    # When the FIRST-PASS LLM produced a seed-specific interaction subquery,
+    # constrain the partner to that verified seed. Otherwise general class
+    # interaction examples remain *examples*, not interaction-with-seed proof.
+    # This does not depend on medicine-specific wordlists or a new NER regex.
+    semantic_queries = understanding.get("semantic_sub_queries") or []
+    if not isinstance(semantic_queries, list):
+        semantic_queries = []
+    seed_pair_from_llm = interaction and any(
+        isinstance(q, str) and seed["surface"] in q and "相互作用" in q
+        for q in semantic_queries
+    )
     # An explicitly named second medicine is a target constraint, not another seed.
     partners = [i for m in seeds[1:] for i in m.get("candidate_drug_ids", [])] if interaction else []
+    if seed_pair_from_llm and not partners:
+        partners = list(seed.get("candidate_drug_ids") or [])
+    interaction_scope = (
+        "seed_pair" if seed_pair_from_llm or (interaction and len(seeds) > 1)
+        else "general_category_examples"
+    ) if interaction else "not_applicable"
     return {"version": 1, "route": "category_candidate_source_join", "level": level,
             "level_label": "一级大类" if level == "top" else "二级子类",
             "other_level": other_level,
@@ -67,6 +102,12 @@ def category_discovery_plan(question, understanding):
             "seed_candidates_truncated": bool(seed.get("candidates_truncated")),
             "exclude_seed": not bool(re.search(r"包括(?:它|本品|原药)|包含(?:它|本品|原药)", question)),
             "excluded_ids": sorted(set(excludes)), "partner_ids": sorted(set(partners)),
+            "interaction_scope": interaction_scope,
+            "interaction_scope_basis": (
+                "llm_subquery_named_seed" if seed_pair_from_llm
+                else "explicit_second_medicine" if interaction and len(seeds) > 1
+                else "general_examples_only"
+            ),
             "other_category": bool(re.search(r"其他.{0,4}(?:类|类别)|其它.{0,4}(?:类|类别)|不同.{0,4}(?:类|类别)|跨类", question)),
             "fields": list(dict.fromkeys(fields)), "operation": "interaction" if interaction else "source_fields" if fields else "members",
             "different_ingredient": bool(re.search(r"不同成分|成分不同|成分不一样|成分有区别", question)),

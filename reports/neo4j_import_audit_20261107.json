@@ -1,0 +1,475 @@
+{
+  "checked_at": "2026-11-07T09:42:20.272588+08:00",
+  "read_only": true,
+  "scope": "Neo4j inventory and per-type counts for current local semantic/category snapshots; not a per-record property comparison or raw-data extraction completeness audit",
+  "expected": {
+    "semantic": {
+      "nodes": {
+        "Condition": 1046,
+        "Disease": 8806,
+        "DiseaseCategory": 55,
+        "Drug": 11951,
+        "DrugClass": 18,
+        "Ingredient": 7502,
+        "Mechanism": 49,
+        "MechanismStatement": 18289,
+        "Population": 7,
+        "Symptom": 5977
+      },
+      "relations": {
+        "ADVERSE_REACTION_MENTION": 46582,
+        "CAUTION_MENTION": 91439,
+        "CLASS_MEMBERSHIP_ASSERTION": 16,
+        "CONTRAINDICATION_MENTION": 12062,
+        "DISEASE_CATEGORY_MENTION": 25590,
+        "ENZYME_MODULATION_MENTION": 299,
+        "EXPOSURE_CHANGE_MENTION": 3336,
+        "HAS_INGREDIENT": 62077,
+        "HAS_SYMPTOM": 54042,
+        "INDICATION_MENTION": 19679,
+        "INTERACTION_MENTION": 10297,
+        "MECHANISM_ENTITY_MENTION": 26775,
+        "MECHANISM_MENTION": 13171,
+        "MECHANISM_OUTCOME_MENTION": 5462,
+        "MECHANISM_PARTNER_MENTION": 8858,
+        "MECHANISM_STATEMENT_MENTION": 30184,
+        "METABOLISM_MENTION": 1922,
+        "STATEMENT_ENZYME_MENTION": 316,
+        "STATEMENT_EXPOSURE_MENTION": 2285,
+        "STATEMENT_OUTCOME_MENTION": 5462,
+        "STATEMENT_PROCESS_MENTION": 4831,
+        "TRANSPORT_MENTION": 2742
+      },
+      "snapshot": "7261a040927780ceaadf851dca6bc6c1a2b39c39af73abb2645df90c355e022f"
+    },
+    "category": {
+      "nodes": {
+        "CatalogDrug": 1662,
+        "DatasetCategory": 298,
+        "Drug": 6997
+      },
+      "relations": {
+        "DATASET_CATEGORY_MEMBERSHIP": 9049,
+        "DATASET_CATEGORY_PARENT": 267
+      },
+      "snapshot": "d6b2cfaf2c1b69a6e0dffc6d09f18464fb113f402d232769b2b123319d114f7c"
+    }
+  },
+  "total_nodes": 325516,
+  "node_labels": [
+    {
+      "label": "CatalogDrug",
+      "count": 1662
+    },
+    {
+      "label": "Chunk",
+      "count": 107787
+    },
+    {
+      "label": "Condition",
+      "count": 1046
+    },
+    {
+      "label": "DatasetCategory",
+      "count": 298
+    },
+    {
+      "label": "Disease",
+      "count": 8806
+    },
+    {
+      "label": "DiseaseCandidate",
+      "count": 19685
+    },
+    {
+      "label": "DiseaseCategory",
+      "count": 55
+    },
+    {
+      "label": "DiseaseDocument",
+      "count": 1150
+    },
+    {
+      "label": "DiseaseTerm",
+      "count": 1150
+    },
+    {
+      "label": "Drug",
+      "count": 11953
+    },
+    {
+      "label": "DrugAlias",
+      "count": 343
+    },
+    {
+      "label": "DrugClass",
+      "count": 18
+    },
+    {
+      "label": "IndicationClaim",
+      "count": 50
+    },
+    {
+      "label": "Ingredient",
+      "count": 7502
+    },
+    {
+      "label": "InteractionCandidate",
+      "count": 13275
+    },
+    {
+      "label": "Mechanism",
+      "count": 49
+    },
+    {
+      "label": "MechanismStatement",
+      "count": 18289
+    },
+    {
+      "label": "ModelAssessment",
+      "count": 60
+    },
+    {
+      "label": "NameMention",
+      "count": 7949
+    },
+    {
+      "label": "Population",
+      "count": 7
+    },
+    {
+      "label": "Section",
+      "count": 106445
+    },
+    {
+      "label": "SourceRecord",
+      "count": 11960
+    },
+    {
+      "label": "Symptom",
+      "count": 5977
+    }
+  ],
+  "relationship_types": [
+    {
+      "relation": "ADVERSE_REACTION_MENTION",
+      "count": 46582
+    },
+    {
+      "relation": "ALIAS_CANDIDATE_OF",
+      "count": 343
+    },
+    {
+      "relation": "ASSESSES",
+      "count": 60
+    },
+    {
+      "relation": "CAUTION_MENTION",
+      "count": 91439
+    },
+    {
+      "relation": "CLASS_MEMBERSHIP_ASSERTION",
+      "count": 16
+    },
+    {
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 12062
+    },
+    {
+      "relation": "DATASET_CATEGORY_MEMBERSHIP",
+      "count": 9049
+    },
+    {
+      "relation": "DATASET_CATEGORY_PARENT",
+      "count": 267
+    },
+    {
+      "relation": "DISEASE_CATEGORY_MENTION",
+      "count": 25590
+    },
+    {
+      "relation": "ENZYME_MODULATION_MENTION",
+      "count": 299
+    },
+    {
+      "relation": "EXACT_NAME_MATCH_TO_UNVERIFIED_ENCYCLOPEDIA",
+      "count": 1150
+    },
+    {
+      "relation": "EXPOSURE_CHANGE_MENTION",
+      "count": 3336
+    },
+    {
+      "relation": "FROM_RECORD",
+      "count": 19685
+    },
+    {
+      "relation": "HAS_CANDIDATE",
+      "count": 19685
+    },
+    {
+      "relation": "HAS_CHUNK",
+      "count": 107787
+    },
+    {
+      "relation": "HAS_INGREDIENT",
+      "count": 62077
+    },
+    {
+      "relation": "HAS_RECORD",
+      "count": 11960
+    },
+    {
+      "relation": "HAS_SECTION",
+      "count": 106445
+    },
+    {
+      "relation": "HAS_SYMPTOM",
+      "count": 54042
+    },
+    {
+      "relation": "INDICATION_MENTION",
+      "count": 19679
+    },
+    {
+      "relation": "INTERACTION_MENTION",
+      "count": 10297
+    },
+    {
+      "relation": "MECHANISM_ENTITY_MENTION",
+      "count": 26775
+    },
+    {
+      "relation": "MECHANISM_MENTION",
+      "count": 13171
+    },
+    {
+      "relation": "MECHANISM_OUTCOME_MENTION",
+      "count": 5462
+    },
+    {
+      "relation": "MECHANISM_PARTNER_MENTION",
+      "count": 8858
+    },
+    {
+      "relation": "MECHANISM_STATEMENT_MENTION",
+      "count": 30184
+    },
+    {
+      "relation": "MENTIONS_TERM",
+      "count": 19685
+    },
+    {
+      "relation": "METABOLISM_MENTION",
+      "count": 1922
+    },
+    {
+      "relation": "OBJECT",
+      "count": 50
+    },
+    {
+      "relation": "SOURCE_DRUG",
+      "count": 13076
+    },
+    {
+      "relation": "SOURCE_MENTION",
+      "count": 13275
+    },
+    {
+      "relation": "STATEMENT_ENZYME_MENTION",
+      "count": 316
+    },
+    {
+      "relation": "STATEMENT_EXPOSURE_MENTION",
+      "count": 2285
+    },
+    {
+      "relation": "STATEMENT_OUTCOME_MENTION",
+      "count": 5462
+    },
+    {
+      "relation": "STATEMENT_PROCESS_MENTION",
+      "count": 4831
+    },
+    {
+      "relation": "SUBJECT",
+      "count": 50
+    },
+    {
+      "relation": "SUPPORTED_BY",
+      "count": 32646
+    },
+    {
+      "relation": "TARGET_DRUG",
+      "count": 64
+    },
+    {
+      "relation": "TARGET_MENTION",
+      "count": 13275
+    },
+    {
+      "relation": "TRANSPORT_MENTION",
+      "count": 2742
+    }
+  ],
+  "total_relationships": 795979,
+  "population_relations": [
+    {
+      "name": "儿童",
+      "relation": "ADVERSE_REACTION_MENTION",
+      "count": 47
+    },
+    {
+      "name": "儿童",
+      "relation": "CAUTION_MENTION",
+      "count": 2160
+    },
+    {
+      "name": "儿童",
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 416
+    },
+    {
+      "name": "哺乳期",
+      "relation": "CAUTION_MENTION",
+      "count": 88
+    },
+    {
+      "name": "哺乳期",
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 22
+    },
+    {
+      "name": "哺乳期妇女",
+      "relation": "ADVERSE_REACTION_MENTION",
+      "count": 3
+    },
+    {
+      "name": "哺乳期妇女",
+      "relation": "CAUTION_MENTION",
+      "count": 2048
+    },
+    {
+      "name": "哺乳期妇女",
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 562
+    },
+    {
+      "name": "妊娠期",
+      "relation": "CAUTION_MENTION",
+      "count": 87
+    },
+    {
+      "name": "妊娠期",
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 31
+    },
+    {
+      "name": "孕妇",
+      "relation": "ADVERSE_REACTION_MENTION",
+      "count": 14
+    },
+    {
+      "name": "孕妇",
+      "relation": "CAUTION_MENTION",
+      "count": 3374
+    },
+    {
+      "name": "孕妇",
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 1935
+    },
+    {
+      "name": "新生儿",
+      "relation": "ADVERSE_REACTION_MENTION",
+      "count": 18
+    },
+    {
+      "name": "新生儿",
+      "relation": "CAUTION_MENTION",
+      "count": 328
+    },
+    {
+      "name": "新生儿",
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 56
+    },
+    {
+      "name": "老年人",
+      "relation": "ADVERSE_REACTION_MENTION",
+      "count": 23
+    },
+    {
+      "name": "老年人",
+      "relation": "CAUTION_MENTION",
+      "count": 334
+    },
+    {
+      "name": "老年人",
+      "relation": "CONTRAINDICATION_MENTION",
+      "count": 4
+    }
+  ],
+  "snapshot_checks": {
+    "semantic": {
+      "node_counts_match": true,
+      "relation_counts_match": true,
+      "actual_nodes": {
+        "Drug": 11951,
+        "Condition": 1046,
+        "Disease": 8806,
+        "DrugClass": 18,
+        "Ingredient": 7502,
+        "Mechanism": 49,
+        "MechanismStatement": 18289,
+        "Population": 7,
+        "Symptom": 5977,
+        "DiseaseCategory": 55
+      },
+      "actual_relations": {
+        "ADVERSE_REACTION_MENTION": 46582,
+        "CAUTION_MENTION": 91439,
+        "CLASS_MEMBERSHIP_ASSERTION": 16,
+        "CONTRAINDICATION_MENTION": 12062,
+        "ENZYME_MODULATION_MENTION": 299,
+        "EXPOSURE_CHANGE_MENTION": 3336,
+        "HAS_INGREDIENT": 62077,
+        "HAS_SYMPTOM": 54042,
+        "INDICATION_MENTION": 19679,
+        "INTERACTION_MENTION": 10297,
+        "MECHANISM_ENTITY_MENTION": 26775,
+        "MECHANISM_MENTION": 13171,
+        "MECHANISM_OUTCOME_MENTION": 5462,
+        "MECHANISM_PARTNER_MENTION": 8858,
+        "MECHANISM_STATEMENT_MENTION": 30184,
+        "METABOLISM_MENTION": 1922,
+        "STATEMENT_ENZYME_MENTION": 316,
+        "STATEMENT_EXPOSURE_MENTION": 2285,
+        "STATEMENT_OUTCOME_MENTION": 5462,
+        "STATEMENT_PROCESS_MENTION": 4831,
+        "TRANSPORT_MENTION": 2742,
+        "DISEASE_CATEGORY_MENTION": 25590
+      }
+    },
+    "category": {
+      "node_counts_match": true,
+      "relation_counts_match": true,
+      "actual_nodes": {
+        "Drug": 6997,
+        "CatalogDrug": 1662,
+        "DatasetCategory": 298
+      },
+      "actual_relations": {
+        "DATASET_CATEGORY_MEMBERSHIP": 9049,
+        "DATASET_CATEGORY_PARENT": 267
+      }
+    }
+  },
+  "classification_coverage": [
+    {
+      "total_drugs": 11953,
+      "drugs_with_dataset_category": 6997,
+      "drugs_with_explicit_class_assertion": 16
+    }
+  ]
+}

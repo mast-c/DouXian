@@ -1,0 +1,336 @@
+--- a/medical_llm_query_understanding.py
++++ b/medical_llm_query_understanding.py
+@@ -36,6 +36,12 @@
+    surface 必须是用户原句中的连续原文，尽量为最短完整名称，不要包含患者、治疗方式等描述。
+    可以提出 canonical 检索候选，但不得虚构未提及的具体药物、盐型、剂型或疾病。
+ 2. 识别全部查询意图，不要仅凭“有药名”就认为只是在查询药品本身。
++    “大类”“该大类”“所属的大类”“该类下的药”是前面已经点名药品或类别的指代/查询范围，
++    不是另一种药品，也不是需要用户提供药盒名称的未知产品。
++    对“某药所属的大类是什么、该大类下哪些药与其相互作用”应识别 classification
++    与 interaction 两种意图；以已点名制剂作为分类查询起点，后续候选是分类查询结果，
++    不得事先猜测有哪些药。对“荨麻疹属于什么疾病类型”应识别为 classification，
++    不能因某疾病也可能有症状而替换成 disease_symptoms。
+    intents 取值只能是 interaction, medication_safety, symptom_treatment, drug_discovery,
+    disease_symptoms, adverse_event, efficacy, mechanism, classification, source_lookup, dosage。
+ 3. 识别实体的 role: current(当前正在用), proposed(考虑加用), historical(曾经用),
+@@ -107,6 +113,20 @@
+     "contains_ingredient", "co_use", "treats", "concerns_population",
+     "alternative_to", "reported_after",
+ }
++
++# These are referential *noun phrases*, not names of products or drug classes.
++# This guard checks syntax after the LLM has parsed the question; it does not
++# guess named medicines, their formulations, or their category membership.
++_CATEGORY_REFERENCE = re.compile(
++    r"^(?:(?:这|那|该|此|同一|这一|那一|所属的?|所在的?|归属的?)\s*)?"
++    r"(?:大类|子类|小类|类别|分类|该类|这一类|这类|那类|同类)"
++    r"(?:下|中|里|内)?$"
++)
++
++
++def _is_category_reference(surface: str, intents: list[str]) -> bool:
++    return (isinstance(surface, str) and "classification" in intents
++            and bool(_CATEGORY_REFERENCE.fullmatch(surface.strip())))
+ SAFE_CANONICAL = {
+     "发烧": "发热", "低烧": "发热", "发热": "发热",
+     "孕妇": "妊娠", "怀孕": "妊娠", "孕期": "妊娠",
+@@ -583,6 +603,10 @@
+             if kind not in (*ENTITY_KIND, "drug_class") or not _valid_surface(question, surface):
+                 rejected += 1
+                 continue
++            # Avoid an LLM formatting/typing mistake that treats "该大类" as
++            # an unrecognized medicine. Keep actual named substances untouched.
++            if kind in ("drug", "ingredient", "drug_class") and _is_category_reference(surface, intents):
++                continue
+             role = item.get("role")
+             if role not in ROLE_VALUES:
+                 role = "mentioned"
+@@ -661,6 +685,8 @@
+             if not isinstance(product, dict) or not _valid_surface(question, product.get("surface")):
+                 continue
+             surface = product["surface"]
++            if _is_category_reference(surface, intents):
++                continue
+             kind = product.get("kind")
+             if kind not in UNKNOWN_KINDS:
+                 kind = "unspecified_product"
+--- a/medical_category_discovery.py
++++ b/medical_category_discovery.py
+@@ -17,12 +17,30 @@
+ 
+ EVIDENCE_TYPE = "category_discovery_source_path"
+ SAME_CATEGORY = r"(?<!不)同(?:一)?(?:大类|子类|小类|类别|类)|这一类|这类|同属"
++_CATEGORY_OWNER = r"(?:所属|归属|所在)的?(?:大类|子类|小类|类别)"
++_CATEGORY_REFERENT = r"(?:该|此|这|那|同一|这一|那一)(?:大类|子类|小类|类别|类)(?:下|中|里|内)?"
++_CATEGORY_EXPANSION = r"哪些|哪几|具体.*?药|有(?:哪|什么).*?药|其他药|其它药|相互作用|同类药"
++
++
++def _category_scope_match(question):
++    direct = re.search(SAME_CATEGORY, question)
++    if direct:
++        return direct
++    # "所属的大类是什么？该大类下哪些药……" refers to the same
++    # category. Category membership may be obtained from a verified source;
++    # this is grammatical routing, not a drug/category identification rule.
++    owner = re.search(_CATEGORY_OWNER, question)
++    referent = re.search(_CATEGORY_REFERENT, question)
++    if owner and referent and re.search(_CATEGORY_EXPANSION, question[referent.start():]):
++        return referent
++    return None
+ 
+ 
+ def category_discovery_plan(question, understanding):
+     """Parse set operations independently of particular medicine names."""
+     medicines = understanding.get("medicines", [])
+-    if not medicines or not re.search(SAME_CATEGORY, question):
++    scope = _category_scope_match(question)
++    if not medicines or scope is None:
+         return None
+     intent = understanding.get("intent", {})
+     interaction = bool(intent.get("interaction_question"))
+@@ -39,7 +57,7 @@
+     # Category exploration is not a substitute for patient-specific advice.
+     clinical = bool(intent.get("risk_question") or intent.get("efficacy_question") or re.search(
+         r"我.{0,12}(?:能吃|能用|能服|可以吃|可以用)|能不能吃|能不能用|该吃|该用|推荐|换药|替代|剂量|用量|怎么吃|怎么用", question))
+-    same = re.search(SAME_CATEGORY, question).group()
++    same = scope.group()
+     level = "top" if "大类" in same else "leaf"
+     other_level = ("top" if re.search(r"(?:其他|其它|不同).{0,2}大类", question) else
+                    "leaf" if re.search(r"(?:其他|其它|不同).{0,2}(?:子类|小类)", question) else level)
+--- a/medical_semantic_query_planner.py
++++ b/medical_semantic_query_planner.py
+@@ -267,15 +267,32 @@
+                     explain="疾病语义已识别但未链接图谱；必须独立检索疾病分类来源",
+                 ))
+             elif drug_groups:
+-                target = drug_groups[0]
+-                relations = ("CLASS_MEMBERSHIP_ASSERTION",) if "CLASS_MEMBERSHIP_ASSERTION" in allowed else ()
+-                default = f"{target['surface']}属于什么药物类别？"
++                chosen = focused(drug_groups, intent)
++                if len(chosen) > 1:
++                    add(_make_task(
++                        intent, "unresolved_classification", _clean_text(question), [],
++                        strategy="text_only", hops=0,
++                        explain="多个药品对象尚未完成分类指代消歧，不任选第一个药物",
++                    ))
++                    continue
++                target = chosen[0]
++                dataset_relations = (
++                    "DATASET_CATEGORY_MEMBERSHIP", "DATASET_CATEGORY_PARENT"
++                ) if {"DATASET_CATEGORY_MEMBERSHIP", "DATASET_CATEGORY_PARENT"} <= allowed else ()
++                primary_relations = dataset_relations or (
++                    ("CLASS_MEMBERSHIP_ASSERTION",)
++                    if "CLASS_MEMBERSHIP_ASSERTION" in allowed else ()
++                )
++                default = f"{target['surface']}在本地药品数据集中属于什么大类和子类？来源是什么？"
+                 add(_make_task(
+                     intent, "drug_classification",
+                     wording(intent, default, [target["surface"]]), [target],
+-                    strategy="direct" if relations else "text_only",
+-                    relations=relations, hops=1,
+-                    explain="仅核实药品资料中明确记载的药品类别",
++                    strategy=("dataset_category" if dataset_relations else
++                              "direct" if primary_relations else "text_only"),
++                    relations=primary_relations,
++                    hops=2 if dataset_relations else 1,
++                    requires_text=not bool(primary_relations),
++                    explain="优先报告本地数据集逐文件核验的大类/子类，不把数据集分类等同权威药理分类",
+                 ))
+             else:
+                 add(_make_task(
+@@ -439,7 +456,14 @@
+             ch in "？?；;。" and question[i+1:].strip()
+             for i, ch in enumerate(question[:1200])
+         )
+-        if not boundary_followed_by_text:
++        # A single classification question occasionally arrives as the LLM
++        # intent 'disease_symptoms'. Ask the model to revisit the *intent*,
++        # rather than fabricating a classification from keyword heuristics.
++        classification_mismatch = (
++            _classification_only_question(question)
++            and "classification" not in recorded
++        )
++        if not boundary_followed_by_text and not classification_mismatch:
+             return understanding, {"status": "not_needed", "model_calls": 0}
+ 
+     known_entities = [
+--- a/medical_semantic_retrieval.py
++++ b/medical_semantic_retrieval.py
+@@ -30,7 +30,10 @@
+ from medical_semantic_query_planner import (
+     build_semantic_task_plan, refine_semantic_tasks_with_model,
+ )
+-from medical_category_graph import category_only, search_category_graph, extend_category_entities
++from medical_category_graph import (
++    category_only, search_category_graph, extend_category_entities,
++    RELATIONS as DATASET_CATEGORY_RELATIONS,
++)
+ from medical_category_discovery import search_category_discovery
+ 
+ TRACE_KEY = "semantic_graph"
+@@ -491,7 +494,7 @@
+             )
+             tasks = build_semantic_task_plan(
+                 question, patient, semantic_groups,
+-                available_relations=set(RELATIONS),
++                available_relations=set(RELATIONS) | set(DATASET_CATEGORY_RELATIONS),
+             )
+             plan = {
+                 **plan,
+@@ -1304,6 +1307,79 @@
+             "status": "pending",
+         }
+         task_coverage.append(task_record)
++        if task["graph_strategy"] == "dataset_category":
++            # This graph is independent from the drug-leaflet SQLite graph.
++            # The category retriever verifies JSON pointers and SHA-256
++            # against the original dataset, so it must never go through
++            # _proof(), which checks a different sources/edges schema.
++            selected = [group_by_surface[s] for s in task["anchor_surfaces"]
++                        if s in group_by_surface]
++            if len(selected) != 1 or selected[0].get("ambiguous") or not (
++                set(selected[0].get("kinds") or []) & {"Drug"}
++            ):
++                task_record["status"] = "needs_entity_linking"
++                task_record["reason"] = "分类对象不是唯一已核实的具体药品"
++                continue
++            matched_ids = set(selected[0].get("node_ids") or [])
++            scoped_medicines = [m for m in understanding.get("medicines") or []
++                                if m.get("surface") == selected[0]["surface"]
++                                and set(m.get("candidate_drug_ids") or []) & matched_ids]
++            if not scoped_medicines:
++                scoped_medicines = [{"surface": selected[0]["surface"],
++                                     "candidate_drug_ids": sorted(matched_ids)}]
++            remaining = max(1, max_paths-len(excerpts))
++            try:
++                category_items, category_report = search_category_graph(
++                    task["query"], root, nodes,
++                    {"medicines": scoped_medicines,
++                     "intent": {"classification_question": True}},
++                    max_paths=remaining,
++                )
++            except (GraphBlocked, FileNotFoundError, ValueError, sqlite3.Error) as exc:
++                # Do not hide source corruption. Report it clearly and never
++                # label paths as verified when source checks failed.
++                task_record["status"] = "category_source_verification_blocked"
++                task_record["reason"] = type(exc).__name__
++                report["category_lookup_error_type"] = type(exc).__name__
++                continue
++            report["category_lookup"] = category_report
++            for item in category_items:
++                path = item.get("graph_path") or {}
++                if not item.get("graph_verified") or not path.get("verified_against_original"):
++                    continue
++                if (not path.get("nodes") or
++                        path["nodes"][0].get("id") not in matched_ids or
++                        set(path.get("relations") or ()) != {
++                            "DATASET_CATEGORY_MEMBERSHIP", "DATASET_CATEGORY_PARENT"
++                        }):
++                    continue
++                item = dict(item)
++                item["id"] = len(excerpts)+1
++                item["task_id"] = task["id"]
++                item["task_kind"] = task["kind"]
++                item["task_query"] = task["query"]
++                excerpts.append(item)
++                all_paths.append(path)
++                task_record["graph_evidence_refs"].append(path["id"])
++                task_record["verified_graph_paths"] += 1
++                task_record["verified_multi_hop_paths"] += int(path.get("hops", 0) > 1)
++            task_record["status"] = (
++                "graph_evidence_found" if task_record["verified_graph_paths"]
++                else "no_task_scoped_graph_evidence"
++            )
++            task_record["answer_coverage"] = (
++                "verified_dataset_classification_only"
++                if task_record["verified_graph_paths"] else "not_established"
++            )
++            task_record["text_evidence_status"] = "not_required_for_dataset_category"
++            if not category_items:
++                text_requests.append({
++                    "task_id": task["id"], "kind": task["kind"],
++                    "query": task["query"],
++                    "reason": "本地类别记录未命中；需核对原始分类数据而非编造药理类别",
++                    "executed": False,
++                })
++            continue
+         if is_unmet_text_request(task):
+             task_record["status"] = "needs_disease_classification_source"
+             task_record["reason"] = (
+@@ -1513,6 +1589,12 @@
+     if (tasks and all(task.get("kind") == "disease_classification" for task in tasks)
+             and excerpts and not needs_more):
+         report["answer_route"] = "disease_classification_source_display"
++    elif (tasks and all(task.get("kind") == "drug_classification" for task in tasks)
++            and excerpts and not needs_more and all(
++                item.get("evidence_type") == "dataset_category_graph_path"
++                for item in excerpts
++            )):
++        report["answer_route"] = "dataset_category_source_display"
+     return excerpts, report
+ 
+ 
+@@ -1620,7 +1702,7 @@
+         semantic_task_plan = (
+             build_semantic_task_plan(
+                 question, patient_query, groups,
+-                available_relations=set(RELATIONS),
++                available_relations=set(RELATIONS) | set(DATASET_CATEGORY_RELATIONS),
+             ) if llm_ok else None
+         )
+         if semantic_task_plan:
+@@ -1631,8 +1713,12 @@
+                 + [task["query"] for task in semantic_task_plan["tasks"]]
+             ))
+         tasks = semantic_task_plan["tasks"] if semantic_task_plan else []
++        # The existing category discovery executes a dependent chain:
++        # seed category -> same-category candidates -> their own independent
++        # source interaction statements. A generic per-intent route cannot
++        # replace that chain or the user receives an irrelevant path/refusal.
+         independent_task_route = bool(
+-            llm_ok and tasks and (
++            llm_ok and tasks and not retrieval_plan.get("category_discovery") and (
+                 len(tasks) > 1 or tasks[0]["kind"] in (
+                     "drug_adverse_event", "drug_interaction",
+                     "disease_classification", "unresolved_classification",
+--- a/evidence_guard.py
++++ b/evidence_guard.py
+@@ -57,6 +57,9 @@
+     引用图路径时，quote 必须取自逐边“原文”，不能引用程序生成的关系标签或解释边界。
+     需要多条边才能回答的方面应逐边给出必要引文，可重复使用同一个路径证据编号。
+     HAS_SYMPTOM/HAS_INGREDIENT 的完整结构化原文短于8字时，允许逐字引用2至7字的完整字段。
++    DISEASE_CATEGORY_MENTION 仅在图谱边已通过原文件核验、原文栏目为 category，
++    且引句逐字等于完整科别字段及节点名称（如“皮肤科”）时可引用2至7字；
++    仅可陈述本地疾病资料对科别的分类记载，不能升级为临床诊断或权威病因分类。
+     对成分边，可引用原文中逐字出现的完整成分实体名（至少2字），例如“本品主要成分布洛芬”中的“布洛芬”。
+     否定、剂量、人群、尚不明确必须保持；第三种药物的共同提及不证明两药存在相互作用。
+ 19. 用户未给具体药名而询问两种疾病的用药是否相互作用时，可以用完整图路径回答
+@@ -264,13 +267,23 @@
+     if item.get("evidence_type") in ("evidence_backed_semantic_graph_path", "category_discovery_source_path"):
+         path = item.get("graph_path") or {}
+         return bool(path.get("verified_against_original")) and any(
+-            edge.get("relation") in ("HAS_SYMPTOM", "HAS_INGREDIENT")
+-            and 2 <= len(_compact(quote)) < 8
++            2 <= len(_compact(quote)) < 8
+             and (
+-                _compact(str(edge.get("quote") or "")) == _compact(quote)
++                (edge.get("relation") in ("HAS_SYMPTOM", "HAS_INGREDIENT")
++                 and (
++                     _compact(str(edge.get("quote") or "")) == _compact(quote)
++                     or (
++                         _compact(str(edge.get("dst", {}).get("name") or "")) == _compact(quote)
++                         and _compact(quote) in _compact(str(edge.get("quote") or ""))
++                     )
++                 ))
+                 or (
+-                    _compact(str(edge.get("dst", {}).get("name") or "")) == _compact(quote)
+-                    and _compact(quote) in _compact(str(edge.get("quote") or ""))
++                    edge.get("relation") == "DISEASE_CATEGORY_MENTION"
++                    and edge.get("section_field") == "category"
++                    and (edge.get("src") or {}).get("kind") == "Disease"
++                    and (edge.get("dst") or {}).get("kind") == "DiseaseCategory"
++                    and _compact(str(edge.get("quote") or "")) == _compact(quote)
++                    and _compact(str((edge.get("dst") or {}).get("name") or "")) == _compact(quote)
+                 )
+             )
+             for edge in path.get("edges", []) if isinstance(edge, dict)

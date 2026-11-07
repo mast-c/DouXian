@@ -17,8 +17,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from langchain_core.documents import Document
 from medical_query_plan import build_retrieval_plan, section_routing_question
 from medical_query_execution import execute_retrieval_plan
-from medical_semantic_graph import build_graph, qualifiers
-from medical_semantic_retrieval import graph_insufficiency_message, search_semantic_graph
+from medical_semantic_graph import build_graph, open_graph, qualifiers
+from medical_semantic_retrieval import graph_insufficiency_message, search_semantic_graph, _proof
 from medical_semantic_graph_view import relation_label
 from medical_query_understanding import patient_intent
 from medical_quality_acceptance import make_export_payload
@@ -57,7 +57,8 @@ def fixture(root):
     (export / "disease_candidates_full.csv").write_text("section_id\n", encoding="utf-8")
     disease = root / "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json"
     disease.parent.mkdir(parents=True)
-    disease.write_text(json.dumps({"name": "试验病", "symptom": ["皮疹"]}, ensure_ascii=False)+'\n', encoding="utf-8")
+    disease.write_text(json.dumps({"name": "试验病", "symptom": ["皮疹"],
+                                   "category": ["疾病百科", "皮肤性病科", "皮肤科"]}, ensure_ascii=False)+'\n', encoding="utf-8")
     build_graph(root)
 
 
@@ -241,6 +242,78 @@ class BoundedExecutionTests(unittest.TestCase):
 
 
 class GraphIntegrationTests(unittest.TestCase):
+    def test_disease_category_path_is_source_verified_and_separate_from_drug_class(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            fixture(root)
+            conn, _ = open_graph(root)
+            try:
+                disease = dict(conn.execute(
+                    "SELECT * FROM entities WHERE kind='Disease' AND name='试验病'"
+                ).fetchone())
+                categories = [dict(row) for row in conn.execute(
+                    "SELECT e.*,s.record_id,s.drug_id,s.field AS section_field FROM edges e "
+                    "JOIN sources s ON s.id=e.source_id WHERE e.src=? "
+                    "AND e.relation='DISEASE_CATEGORY_MENTION' ORDER BY e.quote_start",
+                    (disease["id"],),
+                )]
+                self.assertEqual(len(categories), 3)
+                self.assertTrue(all(row["section_field"] == "category" for row in categories))
+                nodes = {row["id"]: dict(row) for row in conn.execute("SELECT * FROM entities")}
+                proof = _proof(conn, root, {
+                    "node_ids": [disease["id"], categories[0]["dst"]],
+                    "edges": [categories[0]], "relations": ["DISEASE_CATEGORY_MENTION"],
+                }, nodes, {})
+                self.assertEqual(proof["edges"][0]["quote"], "疾病百科")
+                self.assertEqual(proof["edges"][0]["dst"]["kind"], "DiseaseCategory")
+                self.assertEqual(proof["edges"][0]["source_status"], "third_party_unverified")
+            finally:
+                conn.close()
+            with patch.dict("os.environ", {"MEDICAL_QUERY_REQUIRE_LLM": "0", "MEDICAL_QUERY_DEBUG": "0"}):
+                with patch("medical_semantic_retrieval.select_medical_query_model",
+                           return_value=(None, "offline_test")):
+                    excerpts, report = search_semantic_graph(
+                        "试验病属于什么疾病类型？", project_root=root,
+                    )
+            self.assertEqual(report["query_understanding_mode"], "rule_fallback")
+            self.assertEqual(len(excerpts), 3)
+            self.assertEqual(report["answer_route"], "disease_classification_source_display")
+            self.assertTrue(all(
+                path["relations"] == ["DISEASE_CATEGORY_MENTION"]
+                and path["nodes"][0]["kind"] == "Disease"
+                and path["nodes"][1]["kind"] == "DiseaseCategory"
+                for path in report["paths"]
+            ))
+            stubs = {}
+            for name, symbol in (("knowledge_base", "KnowledgeBaseService"),
+                                 ("vector_stores", "VectorStoreService")):
+                module = ModuleType(name)
+                setattr(module, symbol, type(symbol, (), {}))
+                stubs[name] = module
+            with patch.dict(sys.modules, stubs):
+                import rag
+            service = rag.RagService.__new__(rag.RagService)
+            # The semantic planner must run in the same offline mode as the
+            # patched graph search; an uninitialised service otherwise raises
+            # before the source-only classification route is reached.
+            service.chat_model = None
+            service._call_tool = lambda *args, **kwargs: self.fail(
+                "literal disease classification should not call unrelated tools"
+            )
+            trace = {}
+            with patch.object(rag, "search_semantic_graph", return_value=(excerpts, report)), \
+                    patch.object(rag, "get_history"), contextlib.redirect_stdout(io.StringIO()):
+                answer = "".join(service._stream_agent(
+                    {"input": "试验病属于什么疾病类型？", "mode": "知识库",
+                     "trace": trace, "history": []}, "fixture"
+                ))
+            self.assertIn("疾病百科", answer)
+            self.assertIn("皮肤性病科", answer)
+            self.assertIn("不等同于权威疾病分类", answer)
+            bindings = trace["semantic_graph"]["evidence_bindings"]
+            self.assertEqual(len(bindings), 3)
+            self.assertTrue(all(item["cited_in_answer"] for item in bindings))
+
     def test_mechanism_pair_path_joins_both_anchors_from_either_source_owner(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

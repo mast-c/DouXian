@@ -141,7 +141,14 @@ class CategoryGraphTests(unittest.TestCase):
         (self.raw/'medical.json').write_text(json.dumps({'name':'试验病','symptom':['皮疹']},ensure_ascii=False)+'\n',encoding='utf-8')
         build_graph(self.root)
         q='甲试胶囊属于什么类药物'
-        excerpts,report=search_semantic_graph(q,project_root=self.root)
+        # This fixture is intentionally cloud-free.  The project .env enables
+        # MEDICAL_QUERY_REQUIRE_LLM for production, so override it here to
+        # exercise the deterministic classification fallback.
+        with patch.dict('os.environ', {'MEDICAL_QUERY_REQUIRE_LLM': '0',
+                                       'MEDICAL_QUERY_DEBUG': '0'}), \
+             patch('medical_semantic_retrieval.select_medical_query_model',
+                   return_value=(None, 'offline_test')):
+            excerpts,report=search_semantic_graph(q,project_root=self.root)
         self.assertEqual(report['answer_route'],'dataset_category_source_display')
         stubs={}
         for name,symbol in [('knowledge_base','KnowledgeBaseService'),('vector_stores','VectorStoreService')]:
@@ -151,6 +158,7 @@ class CategoryGraphTests(unittest.TestCase):
         with patch.dict(sys.modules,stubs):
             import rag
         service=rag.RagService.__new__(rag.RagService)
+        service.chat_model = None
         service._call_tool=lambda *a,**kw:self.fail('category lookup needs no network tools')
         trace={}
         with patch.object(rag,'search_semantic_graph',return_value=(excerpts,report)),patch.object(rag,'get_history'),contextlib.redirect_stdout(io.StringIO()):

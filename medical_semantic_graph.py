@@ -19,13 +19,14 @@ import sqlite3
 import tempfile
 from urllib.parse import quote
 
-VERSION = "semantic-graph-5"
+VERSION = "semantic-graph-6"
 DEFAULT_INDEX = "semantic_graph/medical_graph.sqlite"
 SOURCE_DIR = "kg_output_clean_v2"
 DISEASE_FILE = "data/raw/drug_db/MedGraphRAG-Drug-DB/medical.json"
 RELATIONS = {
     "CLASS_MEMBERSHIP_ASSERTION": "原文明确的药品类别记载（未临床核验）",
     "HAS_SYMPTOM": "资料列出的症状",
+    "DISEASE_CATEGORY_MENTION": "疾病资料列出的分类/科别",
     "HAS_INGREDIENT": "成分原文记载",
     "INDICATION_MENTION": "用途章节提及（非确证治疗）",
     "CONTRAINDICATION_MENTION": "禁忌章节提及（保留原文条件）",
@@ -384,7 +385,7 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
             inserted = conn.execute("INSERT OR IGNORE INTO edges VALUES(?,?,?,?,?,?,?,?,?,?,?)", (
                 identity, src, dst, relation, source_id, start, end, ms, me,
                 json.dumps(qualifiers(text[start:end]), ensure_ascii=False, sort_keys=True),
-                "source_assertion_unverified" if relation in ("HAS_INGREDIENT", "HAS_SYMPTOM", "CLASS_MEMBERSHIP_ASSERTION") else "literal_mention_not_clinically_validated",
+                "source_assertion_unverified" if relation in ("HAS_INGREDIENT", "HAS_SYMPTOM", "DISEASE_CATEGORY_MENTION", "CLASS_MEMBERSHIP_ASSERTION") else "literal_mention_not_clinically_validated",
             )).rowcount
             stats[relation] += inserted
 
@@ -415,6 +416,19 @@ def build_graph(root: Path | str, path: Path | str | None = None) -> dict:
                 symptom_names.add(symptom)
                 edge(disease, entity("Symptom", symptom), "HAS_SYMPTOM", sid, cursor, cursor + len(symptom))
                 cursor += len(symptom) + 1
+            categories = [c.strip() for c in row.get("category", [])
+                          if isinstance(c, str) and c.strip()]
+            if categories:
+                category_text = "\n".join(categories)
+                category_sid = "disease_categories_" + digest(oid)[:24]
+                source(category_sid, None, oid, "category", "", "third_party_unverified",
+                       category_text, DISEASE_FILE, (at, length, sha), "disease_category_list")
+                cursor = 0
+                for category in categories:
+                    edge(disease, entity("DiseaseCategory", category),
+                         "DISEASE_CATEGORY_MENTION", category_sid,
+                         cursor, cursor + len(category))
+                    cursor += len(category) + 1
         sections = {}
         ingredient_names = set()
         for row, at, length, sha in json_rows(root / names[2]):
@@ -631,6 +645,8 @@ def verify_source(root: Path, source: dict) -> None:
             raise GraphBlocked("Source identity mismatch")
     elif source["selector"] == "symptom_list":
         text = "\n".join(s for s in row["symptom"] if isinstance(s, str) and s.strip() and len(s) >= 2)
+    elif source["selector"] == "disease_category_list":
+        text = "\n".join(s.strip() for s in row["category"] if isinstance(s, str) and s.strip())
     else:
         raise GraphBlocked("Unknown source selector")
     if text != source["text"] or digest(text) != source["text_sha256"]:

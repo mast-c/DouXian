@@ -5,7 +5,10 @@ import hashlib
 import json
 import re
 
-from medical_query_plan import FIELD_LABELS, FIELD_RELATIONS, MECHANISM_RELATIONS
+from medical_query_plan import (
+    FIELD_LABELS, FIELD_RELATIONS, MECHANISM_RELATIONS,
+    _asks_disease_symptoms,
+)
 
 GRAPH_TYPE = "evidence_backed_semantic_graph_path"
 SECTION_TYPES = {"json_neo4j_text_verified", "unverified_drug_source_section"}
@@ -18,7 +21,7 @@ def evidence_key(item):
     return hashlib.sha256(json.dumps(identity, ensure_ascii=False).encode()).hexdigest()[:24]
 
 
-def build_answer_targets(question, understanding, plan):
+def _build_answer_targets_legacy(question, understanding, plan):
     """Retrieval targets are NOT new user questions or proof of sufficiency."""
     medicines = understanding.get("medicines", [])
     if not plan or plan.get("status") != "planned":
@@ -33,18 +36,40 @@ def build_answer_targets(question, understanding, plan):
         return []
     discovery = plan.get("category_discovery")
     if discovery:
-        # The requested subjects are discovered products, not the seed drug.
+        # A category membership fact, a candidate list and a seed-specific
+        # interaction are three DIFFERENT questions; one path that happens to
+        # mention another drug's interaction must never satisfy all three.
         candidate_names = list(discovery.get("candidate_names", []))
-        return [{"id": "target_category", "field": "dataset_category", "label": "起始药物分类归属", "medicines": [], "pair": False,
-                 "discovery_roles": ["seed_category", "seed_composition"]},
-                {"id": "target_discovered_sources", "field": "discovered_sources",
-                 "label": discovery["level_label"]+"候选药物的独立原文及约束核对", "medicines": [], "pair": False,
-                 "discovery_roles": ["member", "source_field", "interaction_example"],
-                 "candidate_names": candidate_names}]
+        operation = discovery.get("operation")
+        targets = [{"id": "target_category", "field": "dataset_category",
+                    "label": "起始药物在本地数据集的分类归属", "medicines": [], "pair": False,
+                    "discovery_roles": ["seed_category"]},
+                   {"id": "target_discovered_sources", "field": "discovered_sources",
+                    "label": discovery["level_label"]+"下已核实的分类候选", "medicines": [], "pair": False,
+                    "discovery_roles": ["member", "source_field", "interaction_example"],
+                    "candidate_names": candidate_names,
+                    "scope": "dataset_membership_candidates_not_pair_interaction"}]
+        if operation == "interaction" and discovery.get("interaction_scope") == "seed_pair":
+            targets.append({
+                "id": "target_seed_interaction", "field": "seed_pair_interaction",
+                "label": "同类候选与起始药物之间的具体相互作用原文",
+                "medicines": [], "pair": True,
+                "discovery_roles": ["interaction_example"],
+                "seed_surface": discovery.get("seed_surface") or "",
+                "candidate_names": candidate_names,
+                "scope": "requires_exact_both_endpoints_verified",
+            })
+        return targets
     targets = []
     intent = understanding.get("intent", {})
     for disease in diseases:
-        if intent.get("symptom_question"):
+        if intent.get("classification_question"):
+            targets.append({"id": f"target_{len(targets)+1}", "field": "disease_classification",
+                            "label": disease["surface"] + "的疾病分类/科别",
+                            "disease": disease["surface"],
+                            "medicines": [], "pair": False,
+                            "claim_scope": "source_explicit_classification_not_authoritative_taxonomy"})
+        if _asks_disease_symptoms(question, intent):
             targets.append({"id": f"target_{len(targets)+1}", "field": "symptoms",
                             "label": disease["surface"] + "的症状", "disease": disease["surface"],
                             "medicines": [], "pair": False})
@@ -87,6 +112,87 @@ def build_answer_targets(question, understanding, plan):
                                        "product_known": bool(m.get("actual_patient_product_known"))} for m in medicines],
                         "pair": len(medicines) == 2})
     return targets
+
+
+
+_SEMANTIC_KIND_FIELD = {
+    "drug_adverse_event": "adverse_reactions",
+    "drug_interaction": "drug_interactions",
+    "disease_classification": "disease_classification",
+    "unresolved_classification": "unresolved_classification",
+    "drug_classification": "dataset_category",
+    "drug_safety": "warnings",
+    "disease_symptoms": "symptoms",
+    "treatment_discovery": "indication",
+    "mechanism": "mechanism",
+    "dosage": "dosage",
+    "efficacy": "indication",
+}
+
+
+def build_answer_targets(question, understanding, plan, semantic_task_plan=None):
+    """Unify legacy targets with LLM subtask identities without inventing facts.
+
+    This creates retrieval COVERAGE GOALS, not medical conclusions. Each
+    graph edge/quote still has to pass original-source and Evidence Guard checks.
+    The existing positional 3-argument API remains compatible.
+    """
+    targets = _build_answer_targets_legacy(question, understanding, plan)
+    task_plan = semantic_task_plan or (plan or {}).get("semantic_task_plan") or {}
+    tasks = task_plan.get("tasks") if isinstance(task_plan, dict) else []
+    if not isinstance(tasks, list):
+        return targets
+    targets = [dict(t) for t in targets]
+    for task in tasks[:8]:
+        if not isinstance(task, dict):
+            continue
+        task_id, kind = task.get("id"), task.get("kind")
+        expected_field = _SEMANTIC_KIND_FIELD.get(kind)
+        anchors = task.get("anchor_surfaces") or []
+        if (not isinstance(task_id, str) or not task_id or expected_field is None
+                or not isinstance(anchors, list)):
+            continue
+        # Do not turn an unknown/ambiguous drug into a verified patient drug.
+        medicine_anchors = [name for name in anchors
+                            if isinstance(name, str) and any(
+                                m.get("surface") == name
+                                for m in understanding.get("medicines") or []
+                            )]
+        disease_anchors = [name for name in anchors if isinstance(name, str)
+                           and name not in medicine_anchors]
+        # Existing targets with the same semantic meaning remain valid;
+        # annotate only when the target is an unambiguous match.
+        matches = [t for t in targets if t.get("field") == expected_field and (
+            (expected_field == "disease_classification" and t.get("disease") in disease_anchors)
+            or (medicine_anchors and len(medicine_anchors) == 1
+                and len(t.get("medicines") or []) == 1
+                and t["medicines"][0].get("surface") == medicine_anchors[0])
+            or (kind == "drug_interaction" and len(medicine_anchors) == 2
+                and t.get("pair")
+                and {m.get("surface") for m in t.get("medicines") or []} == set(medicine_anchors))
+        )]
+        if len(matches) == 1 and not matches[0].get("semantic_task_id"):
+            target = matches[0]
+        else:
+            target = {
+                "id": "target_semantic_" + task_id,
+                "field": expected_field,
+                "label": task.get("query") or kind,
+                "medicines": [{
+                    "surface": name, "names": [name], "product_known": False,
+                } for name in medicine_anchors],
+                "pair": kind == "drug_interaction" and len(medicine_anchors) == 2,
+                "disease": (disease_anchors[0] if disease_anchors else None),
+                "claim_scope": "query_task_requires_independent_verified_source",
+            }
+            targets.append(target)
+        target["semantic_task_id"] = task_id
+        target["semantic_kind"] = kind
+        target["semantic_anchor_surfaces"] = [v for v in anchors if isinstance(v, str)]
+        target["semantic_requested_relations"] = list(task.get("graph_relations") or [])
+        target["text_evidence_pending"] = task.get("graph_strategy") == "text_only"
+    return targets
+
 
 
 def required_source_aspects(question, understanding, targets):
@@ -142,6 +248,53 @@ def _matches(name, medicine):
     return name in medicine["names"]
 
 
+def _verified_seed_pair_interaction(item, seed_surface: str, candidate_names) -> bool:
+    """Accept a verified interaction edge only if it really involves SEED.
+
+    Shared categories or the interaction of candidate A with unrelated B are
+    not evidence that A interacts with the original user-mentioned seed drug.
+    Direct drug pairs and independently verified seed ingredient joins are
+    allowed as source MENTIONS, not clinically established interactions.
+    """
+    if not seed_surface or not item.get("graph_verified"):
+        return False
+    path = item.get("graph_path") or {}
+    if not path.get("verified_against_original"):
+        return False
+    edges = path.get("edges") or []
+    candidates = set(candidate_names or ()) - {seed_surface}
+    if not candidates:
+        return False
+    # This record's own product must be a verified category member.
+    product = item.get("product")
+    member = any(e.get("relation") == "DATASET_CATEGORY_MEMBERSHIP"
+                 and (e.get("src") or {}).get("name") == product
+                 for e in edges if isinstance(e, dict))
+    if not member or product not in candidates:
+        return False
+    for e in edges:
+        if not isinstance(e, dict) or e.get("relation") != "INTERACTION_MENTION":
+            continue
+        src, dst = e.get("src") or {}, e.get("dst") or {}
+        s_name, d_name = src.get("name"), dst.get("name")
+        if ({s_name, d_name} == {seed_surface, product}
+                and src.get("kind") == "Drug" and dst.get("kind") == "Drug"):
+            return True
+        # A->ingredient is connected to the SEED only when the exact
+        # seed Drug->Ingredient identity has its own verified source edge.
+        for comp in edges:
+            if not isinstance(comp, dict) or comp.get("relation") != "HAS_INGREDIENT":
+                continue
+            owner, ingredient = comp.get("src") or {}, comp.get("dst") or {}
+            if (owner.get("name") == seed_surface and s_name == product
+                    and dst.get("id") and ingredient.get("id") == dst.get("id")):
+                return True
+            if (owner.get("name") == product and s_name == seed_surface
+                    and dst.get("id") and ingredient.get("id") == dst.get("id")):
+                return True
+    return False
+
+
 def evidence_bindings(item, targets):
     """An available section/mention is a candidate, never clinical approval."""
     bindings = []
@@ -160,24 +313,81 @@ def evidence_bindings(item, targets):
                 role = item.get("discovery_role")
                 if role not in target.get("discovery_roles", []):
                     continue
-                # Candidate membership alone is not the requested medical
-                # source fact. Mixed paths carry the verified source edge.
+                # For interaction queries, member/interaction_example paths
+                # support candidate membership only; they never imply a
+                # pair interaction with the seed product.
+                if target.get("scope") == "dataset_membership_candidates_not_pair_interaction":
+                    member_edges = [e for e in path.get("edges", [])
+                                    if e.get("relation") == "DATASET_CATEGORY_MEMBERSHIP"
+                                    and e.get("src", {}).get("name") == item.get("product")]
+                    if not member_edges or item.get("product") not in target.get("candidate_names", []):
+                        continue
+                    bindings.append({"target_id": target["id"], "source_verified": True,
+                                     "scope": "verified_category_candidate_membership_only",
+                                     "edge_ids": [e.get("id") for e in member_edges]})
+                    continue
                 if role not in ("interaction_example", "source_field"):
                     continue
                 bindings.append({"target_id": target["id"], "source_verified": True,
                                  "scope": "literal_source_mention_not_clinical_conclusion",
                                  "edge_ids": [e["id"] for e in path.get("edges", [])]})
+            elif target.get("id") == "target_seed_interaction":
+                if item.get("discovery_role") != "interaction_example":
+                    continue
+                if _verified_seed_pair_interaction(
+                        item, target.get("seed_surface") or "",
+                        target.get("candidate_names") or []):
+                    edges = [e.get("id") for e in path.get("edges") or []
+                             if e.get("relation") in ("INTERACTION_MENTION", "HAS_INGREDIENT")]
+                    bindings.append({"target_id": target["id"], "source_verified": True,
+                                     "scope": "specific_pair_source_mention_not_clinically_validated",
+                                     "edge_ids": edges})
         return bindings
-    if item.get("evidence_type") in SECTION_TYPES and any(t.get("id") == "target_discovered_sources" for t in targets):
+    if item.get("evidence_type") in SECTION_TYPES and any(
+            t.get("id") in ("target_discovered_sources", "target_seed_interaction")
+            for t in targets):
         owner = str(item.get("drug_name") or "")
-        if owner:
-            return [{"target_id": t["id"], "source_verified": bool(item.get("parent_verified")),
-                     "scope": "candidate_product_source_section_pending_semantic_review", "edge_ids": []}
-                    for t in targets if t.get("id") == "target_discovered_sources"
-                    and owner in t.get("candidate_names", [])]
+        text = original_text(item)
+        result = []
+        for t in targets:
+            if t.get("id") == "target_discovered_sources" and owner in t.get("candidate_names", []):
+                if t.get("scope") != "dataset_membership_candidates_not_pair_interaction":
+                    result.append({"target_id": t["id"],
+                                   "source_verified": bool(item.get("parent_verified")),
+                                   "scope": "candidate_source_section_pending_semantic_review",
+                                   "edge_ids": []})
+            if t.get("id") == "target_seed_interaction" and item.get("section_field") == "drug_interactions":
+                seed = t.get("seed_surface") or ""
+                candidates = set(t.get("candidate_names") or []) - {seed}
+                if item.get("parent_verified") and text and seed and (
+                    (owner == seed and any(candidate in text for candidate in candidates))
+                    or (owner in candidates and seed in text)
+                ):
+                    result.append({"target_id": t["id"], "source_verified": True,
+                                   "scope": "explicit_named_pair_leaflet_source_pending_review",
+                                   "edge_ids": []})
+        return result
     if graph and not (item.get("graph_verified") and path.get("verified_against_original")):
         return []
     for target in targets:
+        task_id = target.get("semantic_task_id")
+        if (task_id and task_id == item.get("task_id")
+                and not target.get("text_evidence_pending")
+                and item.get("graph_verified") and path.get("verified_against_original")
+                and isinstance(path.get("edges"), list)):
+            required = set(target.get("semantic_requested_relations") or ())
+            relations = {e.get("relation") for e in path["edges"]}
+            names = {n.get("name") for n in path.get("nodes") or ()}
+            # Verified graph evidence must actually cover its expected
+            # entities and at least one required relation; it is only a
+            # source-mention binding, not a clinical efficacy verdict.
+            if (set(target.get("semantic_anchor_surfaces") or ()).issubset(names)
+                    and (not required or bool(required & relations))):
+                bindings.append({
+                    "target_id": target["id"], "source_verified": True,
+                    "scope": "verified_task_graph_source_not_clinical_conclusion",
+                    "edge_ids": [edge.get("id") for edge in path["edges"]],
+                })
         medicines, field = target["medicines"], target["field"]
         if field == "symptom_drug_candidates":
             if (item.get("evidence_type") in SECTION_TYPES
@@ -210,6 +420,18 @@ def evidence_bindings(item, targets):
             if relevant:
                 bindings.append({"target_id": target["id"], "source_verified": True,
                                  "scope": "disease_source_symptom_mention_not_diagnosis",
+                                 "edge_ids": [e.get("id") for e in relevant]})
+            continue
+        if field == "disease_classification" and graph:
+            relevant = [e for e in path.get("edges", [])
+                        if e.get("relation") == "DISEASE_CATEGORY_MENTION"
+                        and e.get("section_field") == "category"
+                        and e.get("src", {}).get("name") == target.get("disease")
+                        and e.get("quote")
+                        and e["quote"] in str(item.get("content") or "")]
+            if relevant:
+                bindings.append({"target_id": target["id"], "source_verified": True,
+                                 "scope": "disease_source_classification_mention_not_authoritative_taxonomy",
                                  "edge_ids": [e.get("id") for e in relevant]})
             continue
         if field in ("disease_drug_candidates", "disease_interactions"):
@@ -274,7 +496,12 @@ def evidence_bindings(item, targets):
                 continue
             bindings.append({"target_id": target["id"], "source_verified": bool(item.get("parent_verified")),
                              "scope": "source_section_pending_semantic_review", "edge_ids": []})
-    return bindings
+    # Same original-source edge can satisfy both legacy and semantic target
+    # matching rules; do not count twice for source coverage.
+    unique = {}
+    for binding in bindings:
+        unique.setdefault(binding["target_id"], binding)
+    return list(unique.values())
 
 
 def select_target_evidence(ordinary, graph, targets, cap):

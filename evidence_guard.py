@@ -57,7 +57,13 @@ GUARD_SYSTEM_PROMPT = """
     引用图路径时，quote 必须取自逐边“原文”，不能引用程序生成的关系标签或解释边界。
     需要多条边才能回答的方面应逐边给出必要引文，可重复使用同一个路径证据编号。
     HAS_SYMPTOM/HAS_INGREDIENT 的完整结构化原文短于8字时，允许逐字引用2至7字的完整字段。
+    DISEASE_CATEGORY_MENTION 仅在图谱边已通过原文件核验、原文栏目为 category，
+    且引句逐字等于完整科别字段及节点名称（如“皮肤科”）时可引用2至7字；
+    仅可陈述本地疾病资料对科别的分类记载，不能升级为临床诊断或权威病因分类。
     对成分边，可引用原文中逐字出现的完整成分实体名（至少2字），例如“本品主要成分布洛芬”中的“布洛芬”。
+    对通过 JSON Pointer 与 SHA-256 原文件校验的 DATASET_CATEGORY_MEMBERSHIP → DATASET_CATEGORY_PARENT，
+    可逐字引用相应的完整类别节点名（含2至7字的短名）；此时引用的是结构化分类键，而非药品说明书引句。
+    必须注明“本地数据集分类记载”，不得将该类别升级为临床药理归类或相互作用证据。
     否定、剂量、人群、尚不明确必须保持；第三种药物的共同提及不证明两药存在相互作用。
 19. 用户未给具体药名而询问两种疾病的用药是否相互作用时，可以用完整图路径回答
     “本轮资料有哪些具体组合示例及各自记载”，无需证明两种疾病所有药品之间的关系。
@@ -255,22 +261,98 @@ _SHORT_MEDICAL_SECTION_TYPES = {
 }
 
 
+def _verified_dataset_classification(item: dict):
+    """Return (drug, leaf, top) only for proven, ordered JSON category paths.
+
+    The upstream category verifier independently re-reads JSON Pointer and
+    hashes the on-disk source. This function checks that this exact verified
+    membership+parent chain is still attached to the evidence excerpt;
+    it does NOT declare any pharmacological or clinical fact.
+    """
+    if not isinstance(item, dict) or item.get("evidence_type") not in (
+        "dataset_category_graph_path", "category_discovery_source_path"
+    ):
+        return None
+    if item.get("evidence_type") == "category_discovery_source_path" and item.get("discovery_role") != "seed_category":
+        return None
+    path = item.get("graph_path") or {}
+    if not (item.get("graph_verified") and path.get("verified_against_original")):
+        return None
+    edges = path.get("edges") or []
+    if not isinstance(edges, list):
+        return None
+
+    def valid_source(edge):
+        return (
+            edge.get("verification_method") == "json_pointer_structure_and_file_sha256"
+            and str(edge.get("json_pointer") or "").startswith("/categories/")
+            and bool(re.fullmatch(r"[0-9a-fA-F]{64}", str(edge.get("source_sha256") or "")))
+            and edge.get("section_field") == "dataset_category"
+            and (edge.get("src") or {}).get("id")
+            and (edge.get("dst") or {}).get("id")
+            and (edge.get("src") or {}).get("name")
+            and (edge.get("dst") or {}).get("name")
+        )
+
+    for member in edges:
+        if (member.get("relation") != "DATASET_CATEGORY_MEMBERSHIP"
+                or not valid_source(member)
+                or (member.get("src") or {}).get("kind") not in ("Drug", "CatalogDrug")
+                or (member.get("dst") or {}).get("kind") != "DatasetCategory"):
+            continue
+        drug = member["src"]["name"]
+        leaf = member["dst"]["name"]
+        if str(member.get("quote") or "") != json.dumps(drug, ensure_ascii=False):
+            continue
+        for parent in edges:
+            if (parent.get("relation") != "DATASET_CATEGORY_PARENT"
+                    or not valid_source(parent)
+                    or (parent.get("src") or {}).get("id") != member["dst"]["id"]
+                    or (parent.get("src") or {}).get("kind") != "DatasetCategory"
+                    or (parent.get("dst") or {}).get("kind") != "DatasetCategory"
+                    or str(parent.get("quote") or "") != json.dumps(leaf, ensure_ascii=False)):
+                continue
+            return drug, leaf, parent["dst"]["name"]
+    return None
+
+
+def _is_verified_category_structure_quote(item: dict, quote: str) -> bool:
+    """Allow a complete verified *category key*, never a guessed substring."""
+    hierarchy = _verified_dataset_classification(item)
+    if not hierarchy:
+        return False
+    _, leaf, top = hierarchy
+    return _compact(quote) in (_compact(leaf), _compact(top))
+
+
 def _is_complete_short_section_quote(item: dict, quote: str) -> bool:
     """只允许短小、完整、逐字的医疗原文章节作为短引句。
 
     不把药品名称、栏目标签、系统免责声明拼接成伪造的长引文；
     仅放宽字数校验，不放宽医学语义的真实性判断。
     """
+    if _is_verified_category_structure_quote(item, quote):
+        return 2 <= len(_compact(quote)) < 8
     if item.get("evidence_type") in ("evidence_backed_semantic_graph_path", "category_discovery_source_path"):
         path = item.get("graph_path") or {}
         return bool(path.get("verified_against_original")) and any(
-            edge.get("relation") in ("HAS_SYMPTOM", "HAS_INGREDIENT")
-            and 2 <= len(_compact(quote)) < 8
+            2 <= len(_compact(quote)) < 8
             and (
-                _compact(str(edge.get("quote") or "")) == _compact(quote)
+                (edge.get("relation") in ("HAS_SYMPTOM", "HAS_INGREDIENT")
+                 and (
+                     _compact(str(edge.get("quote") or "")) == _compact(quote)
+                     or (
+                         _compact(str(edge.get("dst", {}).get("name") or "")) == _compact(quote)
+                         and _compact(quote) in _compact(str(edge.get("quote") or ""))
+                     )
+                 ))
                 or (
-                    _compact(str(edge.get("dst", {}).get("name") or "")) == _compact(quote)
-                    and _compact(quote) in _compact(str(edge.get("quote") or ""))
+                    edge.get("relation") == "DISEASE_CATEGORY_MENTION"
+                    and edge.get("section_field") == "category"
+                    and (edge.get("src") or {}).get("kind") == "Disease"
+                    and (edge.get("dst") or {}).get("kind") == "DiseaseCategory"
+                    and _compact(str(edge.get("quote") or "")) == _compact(quote)
+                    and _compact(str((edge.get("dst") or {}).get("name") or "")) == _compact(quote)
                 )
             )
             for edge in path.get("edges", []) if isinstance(edge, dict)
@@ -374,9 +456,11 @@ def validate_judge_output(
             if metadata.get("evidence_type") in ("evidence_backed_semantic_graph_path", "category_discovery_source_path"):
                 # Generated path labels are never a substitute for source quotations.
                 path = metadata.get("graph_path") or {}
-                if not path.get("verified_against_original") or not any(
-                    _compact(quote) in _compact(str(edge.get("quote") or ""))
-                    for edge in path.get("edges", []) if isinstance(edge, dict)
+                if not path.get("verified_against_original") or not (
+                    any(
+                        _compact(quote) in _compact(str(edge.get("quote") or ""))
+                        for edge in path.get("edges", []) if isinstance(edge, dict)
+                    ) or _is_verified_category_structure_quote(metadata, quote)
                 ):
                     continue
             # 引文必须有一定长度，而且确实逐字出现于原始 Chunk。
@@ -432,6 +516,7 @@ def validate_judge_output(
     # composition-field question. This is a data lookup, not clinical reasoning.
     # Do not let a model's missed/short quote incorrectly erase that field.
     verified_aspects = _restore_literal_composition(verified_aspects, excerpts)
+    verified_aspects = _restore_literal_dataset_category(verified_aspects, excerpts)
     allowed_ids = {i for a in verified_aspects if a["status"] in ("supported", "refuted") for i in a["evidence_ids"]}
     accepted = [
         aspect["question"]
@@ -459,6 +544,55 @@ def validate_judge_output(
         "refused_questions": refused,
         "message": "",
     }
+
+
+def _restore_literal_dataset_category(aspects: list[dict], excerpts: list[dict]) -> list[dict]:
+    """Restore ONLY literal local-dataset classification, not medical claims.
+
+    This mirrors literal-composition recovery: a reviewer may quote the upper
+    category node name, which cannot be found in the JSON leaf-key edge quote.
+    We accept the category ONLY after source JSON Pointer/hash proof passed.
+    Never restore 'interacts with', safety, causal, dosage or candidate claims.
+    """
+    proven = []
+    for item in excerpts:
+        hierarchy = _verified_dataset_classification(item)
+        if not hierarchy:
+            continue
+        drug, leaf, top = hierarchy
+        if top not in str(item.get("content") or "") or leaf not in str(item.get("content") or ""):
+            continue
+        try:
+            evidence_id = int(item["id"])
+        except (KeyError, ValueError, TypeError):
+            continue
+        if evidence_id > 0:
+            proven.append((evidence_id, drug, leaf, top))
+    restored = []
+    for aspect in aspects:
+        if aspect.get("status") != "insufficient":
+            restored.append(aspect)
+            continue
+        question = str(aspect.get("question") or "")
+        # Restrict the explicit question to a classification/parent category;
+        # otherwise the same excerpt could be misapplied to pair interactions.
+        if (not re.search(r"分类|归属|所属|大类|类别|子类|上级类", question)
+                or re.search(r"相互作用|能否同用|联用|药物风险|不良反应|如何治疗|用法用量", question)):
+            restored.append(aspect)
+            continue
+        applicable = [(eid, leaf, top) for eid, drug, leaf, top in proven
+                      if drug in question]
+        # Multiple contradictory class labels must never be auto-resolved.
+        if not applicable or len({(leaf, top) for _, leaf, top in applicable}) != 1:
+            restored.append(aspect)
+            continue
+        evidence_id, leaf, top = applicable[0]
+        restored.append({**aspect, "status": "supported",
+                         "evidence_ids": [evidence_id],
+                         "quotes": [{"id": evidence_id, "quote": top}],
+                         "reason": "仅本地JSON数据集分类层级已按路径及文件哈希核对；不表示权威药理分类或临床结论",
+                         "validation_method": "verified_dataset_json_structure_only"})
+    return restored
 
 
 def _restore_literal_composition(aspects: list[dict], excerpts: list[dict]) -> list[dict]:

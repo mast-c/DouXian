@@ -120,6 +120,33 @@ class CoverageTests(unittest.TestCase):
         bound = evidence_bindings(item, answer_targets)
         self.assertEqual([entry["target_id"] for entry in bound], ["target_1"])
 
+    def test_disease_classification_is_planned_and_bound_separately_from_symptoms(self):
+        question = "荨麻疹属于什么疾病类型？"
+        disease = {"surface": "荨麻疹", "kind": "disease_mention",
+                   "assertion": "user_reported", "retrieval_terms": ["荨麻疹"]}
+        patient_query = {"medicines": [], "patient_context": [disease],
+                         "intent": {"classification_question": True,
+                                    "symptom_question": True, "fields": []}}
+        plan = build_retrieval_plan(question, patient_query)
+        self.assertEqual([task["id"] for task in plan["tasks"]],
+                         ["disease_classification"])
+        targets = build_answer_targets(question, patient_query, plan)
+        self.assertEqual([target["field"] for target in targets],
+                         ["disease_classification"])
+        category = "皮肤性病科"
+        path = {"verified_against_original": True, "nodes": [
+                    {"id": "d", "kind": "Disease", "name": "荨麻疹"},
+                    {"id": "c", "kind": "DiseaseCategory", "name": category}],
+                "edges": [{"id": "e", "relation": "DISEASE_CATEGORY_MENTION",
+                           "section_field": "category", "src": {"name": "荨麻疹"},
+                           "dst": {"name": category}, "quote": category}]}
+        item = {"id": 1, "evidence_type": "evidence_backed_semantic_graph_path",
+                "graph_verified": True, "graph_path": path,
+                "content": "原文：" + category}
+        bound = evidence_bindings(item, targets)
+        self.assertEqual([entry["target_id"] for entry in bound], ["target_1"])
+        self.assertIn("classification", bound[0]["scope"])
+
     def test_two_compositions_and_pair_form_three_required_aspects(self):
         p = patient()
         required = required_source_aspects(QUESTION, p, targets())

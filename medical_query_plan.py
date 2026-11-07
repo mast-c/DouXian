@@ -15,6 +15,17 @@ FIELD_RELATIONS = {
     "warnings": "CAUTION_MENTION", "contraindications": "CONTRAINDICATION_MENTION",
     "adverse_reactions": "ADVERSE_REACTION_MENTION", "drug_interactions": "INTERACTION_MENTION",
 }
+
+
+def _asks_disease_symptoms(question: str, intent: dict) -> bool:
+    """Ignore a generic LLM disease-symptom intent on classification-only asks."""
+    if not intent.get("symptom_question"):
+        return False
+    classification_wording = re.search(
+        r"属于|属不属于|疾病类型|疾病分类|归属|分类|类别|哪(?:一)?类|什么类", question
+    )
+    explicit_symptom_wording = re.search(r"症状|临床表现|有哪些表现|什么表现", question)
+    return not (classification_wording and not explicit_symptom_wording)
 MECHANISM_RELATIONS = [
     "MECHANISM_MENTION", "MECHANISM_STATEMENT_MENTION", "MECHANISM_PARTNER_MENTION",
     "MECHANISM_ENTITY_MENTION", "METABOLISM_MENTION", "ENZYME_MODULATION_MENTION",
@@ -72,7 +83,16 @@ def build_retrieval_plan(question: str, understanding: dict) -> dict:
     if (medicines or disease_question) and not blocked:
         if disease_question:
             disease_subject = "、".join(disease_terms)
-            if intent.get("symptom_question"):
+            if intent.get("classification_question"):
+                # Disease classification is a separate source goal.  Do not
+                # let a co-detected symptom intent replace it with HAS_SYMPTOM
+                # retrieval; the Disease -> DiseaseCategory edge is the only
+                # graph relation that can support this answer.
+                tasks.append({"id": "disease_classification", "fields": [],
+                              "query": disease_subject + "。原文检索目标：疾病资料列出的分类/科别及其来源。",
+                              "graph_relations": ["DISEASE_CATEGORY_MENTION"],
+                              "requires_connected_medicines": False})
+            if _asks_disease_symptoms(question, intent):
                 tasks.append({"id": "disease_symptoms", "fields": [],
                               "query": disease_subject + "。原文检索目标：疾病资料列出的症状及表现。",
                               "graph_relations": ["HAS_SYMPTOM"], "requires_connected_medicines": False})

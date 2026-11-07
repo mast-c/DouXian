@@ -22,6 +22,7 @@ CSS = """
 .kb-sg-node-ingredient{background:#edf7f2;border-color:#cbe3d4}
 .kb-sg-node-drugclass{background:#f8f3e9;border-color:#e9dbbd}
 .kb-sg-node-disease{background:#f5f0fc;border-color:#ded2ee}
+.kb-sg-node-diseasecategory{background:#edf6f1;border-color:#cde3d6}
 .kb-sg-node-symptom{background:#fff7eb;border-color:#efdebe}
 .kb-sg-node-population,.kb-sg-node-condition{background:#fff1ef;border-color:#ebd3ce}
 .kb-sg-kind{font-size:10px;color:#7b8a9a;line-height:1.5;margin-bottom:4px}
@@ -52,11 +53,12 @@ CSS = """
 @media(max-width:780px){.kb-sg-node{width:120px;flex-basis:120px}.kb-sg-edge{width:96px;flex-basis:96px}.kb-sg-chain{justify-content:flex-start}}
 """
 
-KINDS = {"Drug": "药品", "Ingredient": "成分", "DrugClass": "药物类别", "DatasetCategory": "数据集分类", "CatalogDrug": "分类目录药名", "Disease": "疾病", "Symptom": "症状", "Population": "人群", "Condition": "原文条件"}
+KINDS = {"Drug": "药品", "Ingredient": "成分", "DrugClass": "药物类别", "DatasetCategory": "数据集分类", "CatalogDrug": "分类目录药名", "Disease": "疾病", "DiseaseCategory": "疾病分类/科别", "Symptom": "症状", "Population": "人群", "Condition": "原文条件"}
 SHORT_RELATIONS = {
     "DATASET_CATEGORY_MEMBERSHIP": "数据集分类归属",
     "DATASET_CATEGORY_PARENT": "数据集上级分类",
     "CLASS_MEMBERSHIP_ASSERTION": "原文类别归属",
+    "DISEASE_CATEGORY_MENTION": "疾病资料列出的分类/科别",
     "HAS_INGREDIENT": "成分记载", "HAS_SYMPTOM": "症状记载",
     "INDICATION_MENTION": "用途章节提及", "CONTRAINDICATION_MENTION": "禁忌章节提及",
     "CAUTION_MENTION": "注意事项提及", "INTERACTION_MENTION": "相互作用提及",

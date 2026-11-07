@@ -1,6 +1,6 @@
 {
   "version": "dataset-category-1",
-  "signature": "d6b2cfaf2c1b69a6e0dffc6d09f18464fb113f402d232769b2b123319d114f7c",
+  "signature": "b54b65051a95e5fc69318d3e32476a3990887c90611dc939f9a77a4e1b9cd14b",
   "files": {
     "drug_categories_western.json": {
       "size": 173655,
@@ -19,6 +19,6 @@
   "pharmacological_class_equivalence": false,
   "index": {
     "size": 5652480,
-    "sha256": "8922a013661040a18b5cc312e9e8cb851d027f2c16b2c91db73f1d4f60e82d7e"
+    "sha256": "ad0b3151c44997e23c38c2a5256cf159384c2f4729dbe242e32ac86f28cbe6e3"
   }
 }

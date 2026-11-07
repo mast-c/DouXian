@@ -78,8 +78,16 @@ from medical_evidence_coverage import (
     build_answer_targets, required_source_aspects, start_evidence_flow,
     record_evidence_stage, record_review, record_answer_usage, coverage_hint,
 )
+from medical_graph_visibility import graph_visibility_report
 from medical_targeted_retry import retry_targeted_evidence
-from medical_category_graph import category_source_answer
+from medical_evidence_contract import (
+    retain_provenance, split_retry_targets, verify_retry_integrity,
+    evidence_role_counts,
+)
+from copy import deepcopy
+from medical_category_graph import (
+    category_source_answer, disease_classification_source_answer,
+)
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
@@ -165,6 +173,8 @@ MEDICAL_KB_ANSWER_PROMPT = """【当前模式：医疗知识库 / GraphRAG 证�
 2. 不要编造原文、来源、疾病、疗效、剂量、适用人群、审核结果或引用编号。不要自行写“参考资料”列表，程序会附上来源。
 3. 对药品与疾病关系，先判断材料究竟描述治疗、预防、风险条件、合并症、禁忌、药物不良反应、背景提及还是明确否定；不把单纯提及、同段出现或危险因素解释为确定适应症。
 4. 区分制剂、成分、剂型、规格、给药途径及人群限制；资料没说明时不要自行补齐。特别注意：药品说明书原文中可能混有“某成分/辅料可辅助治疗某病”的陈述，不能因此声称包含该成分的整种制剂具有相同获批适应症。
+   对本地数据集的分类层级，只能说“本地分类文件将某药列于某类别”；不能说该分类证明两药相互作用、药理学等效或安全替代。
+   其他候选药与第三药的相互作用示例不能证明它与原问题指定的起始药存在相互作用；要分别核对两个明确对象的原文。
 5. 对来源可信度保持精确：第三方数据库、AI 辅助提取与待审核候选均不是官方核准说明书或临床指南。若本轮证据没有独立核验的官方批准信息，只能说“本轮资料记载的用途”或“当前证据无法核实批准状态”；不得将其概括为“法定适应症”“主要获批适应症”“正式批准范围”，也不得断言“未列入法定范围”或“未获批”。即使回答末尾注明“第三方来源待核验”，正文也不能出现上述未经证实的监管结论。
 6. 问到禁忌、相互作用、不良反应或给药方案时，必须保持药品全名、剂型、规格、栏目及原文条件一一对应，不得把其他药品/剂型的条文移入当前药品。原文仅写“出现腹泻可酌情减量”时，不得增写“每日2～3次减量”“超过3次停用”等未经提供的具体次数阈值；其他数值、剂量、频率、疗程和严重程度也必须能在对应药品的引文中找到原文支持。不要据此向具体个人提供处方或自行调整方案。
 7. 用户提问包含多个方面时，仅回答证据充分支持的部分；若缺失关键证据，明确说“当前知识库证据不足，无法可靠回答该问题”，无需硬凑结论。若前提与原文矛盾，应温和纠正并说明依据。
@@ -1316,6 +1326,11 @@ class RagService:
                     query_understanding_model=self.chat_model,
                 )
                 trace["semantic_graph"] = _semantic_report
+                # Show graph paths independently from the stricter answer
+                # evidence cap. These diagnostics NEVER bypass Evidence Guard.
+                trace["graph_path_visibility"] = graph_visibility_report(
+                    _semantic_report, _semantic_excerpts
+                )
                 if _semantic_report.get("query_understanding_llm"):
                     trace["query_understanding_llm"] = _semantic_report["query_understanding_llm"]
                 _patient_query = _semantic_report.get("query_understanding", {})
@@ -1325,11 +1340,14 @@ class RagService:
                     trace["query_plan"] = _retrieval_plan
                 if _semantic_report.get("execution"):
                     trace.setdefault("query_execution", {})["graph"] = _semantic_report["execution"]
-                _answer_targets = build_answer_targets(question, _patient_query, _retrieval_plan)
+                _answer_targets = build_answer_targets(
+                    question, _patient_query, _retrieval_plan,
+                    semantic_task_plan=_semantic_report.get("semantic_task_plan"),
+                )
                 if _semantic_report.get("category_discovery"):
                     discovered = set(_semantic_report["category_discovery"].get("candidate_names", []))
                     for _target in _answer_targets:
-                        if _target.get("id") == "target_discovered_sources":
+                        if _target.get("id") in ("target_discovered_sources", "target_seed_interaction"):
                             _target["candidate_names"] = sorted(discovered)
                 _evidence_flow = start_evidence_flow(_answer_targets)
                 trace["evidence_flow"] = _evidence_flow
@@ -1360,6 +1378,39 @@ class RagService:
                     record_evidence_stage(_evidence_flow, "category_source_display", _semantic_excerpts)
                     reply = category_source_answer(_semantic_excerpts)
                     mark_graph_usage(trace, _semantic_excerpts, [i["id"] for i in _semantic_excerpts], reply)
+                    answer_parts.append(reply)
+                    yield reply
+                    finished = True
+                    return
+                if _semantic_report.get("answer_route") == "disease_classification_source_display":
+                    # This route only contains disease-category paths that
+                    # were verified against their original source records.
+                    # Display the literal dataset claim; do not generalize it
+                    # into a diagnosis or authoritative taxonomy.
+                    trace["knowledge_evidence"] = [
+                        {**graph_metadata(item), "id": item["id"],
+                         "source": item.get("source", ""),
+                         "section_path": item.get("section_path", ""),
+                         "preview": " ".join(str(item.get("content") or "").split())[:240],
+                         "content": item.get("content", ""),
+                         "source_status": item.get("source_status", ""),
+                         "clinical_status": item.get("clinical_status", "")}
+                        for item in _semantic_excerpts
+                    ]
+                    trace["knowledge_sources"] = list(dict.fromkeys(
+                        item.get("source", "") for item in _semantic_excerpts
+                        if item.get("source")
+                    ))
+                    trace["medical_answer_mode"] = _semantic_report["answer_route"]
+                    trace["evidence_coverage"] = {
+                        "decision": "structured_source_display",
+                        "scope": "verified_disease_source_classification_not_authoritative_taxonomy",
+                    }
+                    record_evidence_stage(_evidence_flow, "disease_classification_source_display",
+                                          _semantic_excerpts)
+                    reply = disease_classification_source_answer(_semantic_excerpts)
+                    mark_graph_usage(trace, _semantic_excerpts,
+                                     [item["id"] for item in _semantic_excerpts], reply)
                     answer_parts.append(reply)
                     yield reply
                     finished = True
@@ -1663,6 +1714,10 @@ class RagService:
                 merged_excerpts = merge_graph_evidence(
                     merged_excerpts, _semantic_excerpts, evidence_cap, targets=_answer_targets,
                 )
+                trace["graph_path_visibility"] = graph_visibility_report(
+                    _semantic_report, _semantic_excerpts, merged_excerpts
+                )
+                _semantic_report["display_inventory"] = trace["graph_path_visibility"]
                 record_evidence_stage(_evidence_flow, "merged_for_review", merged_excerpts,
                                       reason="合并名额限制；按回答目标覆盖优先保留")
                 tool_reports["search_semantic_graph"] = {
@@ -1939,7 +1994,7 @@ class RagService:
                             original_content = original_item.get("content")
                             if not isinstance(original_content, str) or not original_content.strip():
                                 continue
-                            guard_excerpts.append({
+                            guard_excerpts.append(retain_provenance({
                                 **graph_metadata(original_item),
                                 "id": len(guard_excerpts) + 1,
                                 "source": original_item.get("source", ""),
@@ -1958,8 +2013,12 @@ class RagService:
                                 "section_field": original_item.get("section_field", ""),
                                 "chunk_id": original_item.get("chunk_id", ""),
                                 "parent_verified": original_item.get("parent_verified", False),
-                            })
+                            }, original_item))
 
+                        trace["evidence_role_transport"] = {
+                            "merged_for_guard": evidence_role_counts(excerpts),
+                            "guard_before_retry": evidence_role_counts(guard_excerpts),
+                        }
                         fast_kb_mode = (
                             os.getenv("DOUXIAN_KB_MODE", "strict").strip().lower()
                             == "fast"
@@ -2002,6 +2061,10 @@ class RagService:
                                     f"message={coverage.get('message', '')}"
                                 )
                         # BEGIN SELF_RAG_RETRY_V1_5
+                        # A retry is allowed to append new source evidence, never
+                        # silently renumber/remove or overwrite verified originals.
+                        _pre_retry_excerpts = deepcopy(guard_excerpts)
+                        _pre_retry_coverage = deepcopy(coverage)
                         record_review(_evidence_flow, guard_excerpts, coverage)
                         _evidence_flow["initial_review"] = _evidence_flow.get("aspects", [])
                         # 只在第一轮审核为 partial/refuse 时，尝试补检一次。
@@ -2021,16 +2084,47 @@ class RagService:
                             _retry_started = time.perf_counter()
                             try:
                                 if _answer_targets:
-                                    retry_result = retry_targeted_evidence(
-                                        model=self.chat_model, question=question, targets=_answer_targets,
-                                        excerpts=guard_excerpts, coverage=coverage,
-                                        original_queries=kb_data.get("subqueries"),
-                                        search=self.knowledge_service.search_hybrid,
-                                        verify=lambda docs, routing: prepare_medical_documents(
-                                            docs, routing, fetch_parent=self._get_medical_parent_section, limit=3,
-                                        ),
-                                        judge=lambda **params: reassess_fixed_aspects(original_coverage=coverage, **params),
+                                    _retry_targets, _retry_skipped_fields = split_retry_targets(
+                                        _answer_targets
                                     )
+                                    if _retry_skipped_fields:
+                                        trace["targeted_retry_routing"] = {
+                                            "section_targets": [t.get("id") for t in _retry_targets],
+                                            "non_section_target_fields": _retry_skipped_fields,
+                                            "category_source_route": "existing_verified_category_paths",
+                                        }
+                                    if _retry_targets:
+                                        retry_result = retry_targeted_evidence(
+                                            model=self.chat_model, question=question, targets=_retry_targets,
+                                            excerpts=guard_excerpts, coverage=coverage,
+                                            original_queries=kb_data.get("subqueries"),
+                                            search=self.knowledge_service.search_hybrid,
+                                            verify=lambda docs, routing: prepare_medical_documents(
+                                                docs, routing, fetch_parent=self._get_medical_parent_section, limit=3,
+                                            ),
+                                            judge=lambda **params: reassess_fixed_aspects(original_coverage=coverage, **params),
+                                        )
+                                    else:
+                                        # The earlier classification paths were already
+                                        # source-verified and sent to Evidence Guard.
+                                        # Re-querying the leaflet-only retry module with
+                                        # dataset_category would raise KeyError.
+                                        # Leave the decision unchanged rather than
+                                        # misreporting this as a database failure.
+                                        retry_result = {
+                                            "coverage": coverage, "excerpts": guard_excerpts,
+                                            "retry_queries": [], "new_chunks": 0,
+                                            "status": "skipped_non_section_targets",
+                                            "execution": {
+                                                "unsupported_fields": _retry_skipped_fields,
+                                                "category_source_evidence_available": any(
+                                                    e.get("discovery_role") == "seed_category"
+                                                    and e.get("graph_verified")
+                                                    and (e.get("graph_path") or {}).get("verified_against_original")
+                                                    for e in guard_excerpts
+                                                ),
+                                            },
+                                        }
                                 else:
                                     retry_result = retry_insufficient_evidence(
                                         model=self.chat_model,
@@ -2080,6 +2174,13 @@ class RagService:
                                 f"{time.perf_counter() - _retry_started:.2f}s "
                                 f"(status={retry_result.get('status')})"
                             )
+                        retry_result, _retry_integrity = verify_retry_integrity(
+                            _pre_retry_excerpts, _pre_retry_coverage, retry_result
+                        )
+                        trace["retry_evidence_integrity"] = _retry_integrity
+                        trace["evidence_role_transport"]["after_retry"] = evidence_role_counts(
+                            retry_result.get("excerpts")
+                        )
                         coverage = retry_result["coverage"]
                         guard_excerpts = retry_result["excerpts"]
                         trace["self_rag_retry"] = {
@@ -2141,7 +2242,7 @@ class RagService:
                             preview_text = " ".join(preview_src.split())
                             if len(preview_text) > 240:
                                 preview_text = preview_text[:240].rstrip() + "…"
-                            ui_evidence.append({
+                            ui_evidence.append(retain_provenance({
                                 **graph_metadata(item),
                                 "id": idx,
                                 "source": source,
@@ -2175,7 +2276,7 @@ class RagService:
                                 "link_retrieval_route": str(
                                     item.get("link_retrieval_route") or ""
                                 ),
-                            })
+                            }, item))
                         trace["knowledge_evidence"] = ui_evidence
                         _p3063_attach_multihop_path_cards(
                             trace, question,

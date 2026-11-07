@@ -1,0 +1,8 @@
+GraphRAG v5.4 offline test report
+- v5.2: 11 / 11 passed
+- v5.3: 12 / 12 passed
+- v5.4: 14 / 14 passed
+- Total: 37 / 37 passed
+- medical_semantic_retrieval.py is byte-identical to released v5.3
+- medical_graph_visibility.py / medical_graph_path_ui.py unchanged
+- Real Qwen / Neo4j / live Streamlit not tested

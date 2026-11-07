@@ -1,0 +1,503 @@
+--- a/medical_semantic_retrieval.py
++++ b/medical_semantic_retrieval.py
+@@ -27,6 +27,9 @@
+     select_medical_query_model,
+ )
+ from medical_query_plan import build_retrieval_plan
++from medical_semantic_query_planner import (
++    build_semantic_task_plan, refine_semantic_tasks_with_model,
++)
+ from medical_category_graph import category_only, search_category_graph, extend_category_entities
+ from medical_category_discovery import search_category_discovery
+ 
+@@ -48,6 +51,9 @@
+ 患者可能使用通用名或简称。候选制剂仅供搜索，不代表已经识别患者实际产品；按已提供的
+ 具体制剂原文说明可能的相互作用，明确询问必要的药盒成分、剂型、剂量及肾功能等信息。
+ 不得因名称省略盐型或剂型就宣称没有资料，也不得将某个候选制剂的风险推广到所有剂型。
++复合问题应分别检查 task_coverage；单跳来源关系可以是证据，不必强拼多跳。
++疾病分类须来自疾病分类资料；不得将药品 CLASS_MEMBERSHIP_ASSERTION 当作疾病归属。
++没有检索到指定的跨药品关系，不代表不存在相互作用或两种药可以安全合用。
+ 机制问题应优先使用同一来源陈述连接到两种已识别药品的路径；若来源只点名成分，可沿该具体
+ 制剂的 HAS_INGREDIENT 原文边连接，并展示这一步。不要依靠 CYP、浓度等共享概念节点拼接
+ 不同来源；说明风险和机制时分别引用原文支持的结果与机制，不把字面提及升级为已证实临床因果。
+@@ -461,13 +467,14 @@
+         nodes, _, _ = _catalog(str(target), stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+         model = load_query_understanding_model_from_env()
+         patient = _empty_semantic_understanding(question)
++        semantic_groups = []
+         if model is not None:
+             patient, semantic_report = enhance_understanding(
+                 question, patient, model,
+                 allowed_entity_names=_semantic_catalog_payload(question, root, nodes),
+             )
+             if semantic_report.get("status") == "ok":
+-                _, patient, _ = _semantic_catalog_anchors(question, patient, nodes)
++                semantic_groups, patient, _ = _semantic_catalog_anchors(question, patient, nodes)
+             elif os.getenv("MEDICAL_QUERY_REQUIRE_LLM", "0").strip().lower() in ("1", "true", "on", "yes"):
+                 return None
+             else:
+@@ -476,7 +483,21 @@
+             return None
+         else:
+             patient = understand_question(question, root=root, nodes=nodes)
+-        return build_retrieval_plan(question, patient)
++        plan = build_retrieval_plan(question, patient)
++        if semantic_groups and (patient.get("llm_query_understanding") or {}).get("status") == "ok":
++            patient, _ = refine_semantic_tasks_with_model(
++                question, patient, semantic_groups, model,
++            )
++            tasks = build_semantic_task_plan(
++                question, patient, semantic_groups,
++                available_relations=set(RELATIONS),
++            )
++            plan = {
++                **plan,
++                "semantic_task_plan": tasks,
++                "text_retrieval_requests": tasks["text_retrieval_requests"],
++            }
++        return plan
+     except (OSError, ValueError, KeyError):
+         return None
+     finally:
+@@ -1124,20 +1145,351 @@
+     return "\n".join(text)
+ 
+ 
++def _task_has_grounded_relation(task: dict, proof: dict, selected: list[dict]) -> bool:
++    """Accept only paths whose *verified source edges* support this task.
++
++    A graph connection via another drug, shared symptom or other co-mention
++    is never automatically evidence of the requested adverse event or pair
++    interaction. This check also applies when the path came from Neo4j.
++    """
++    rows = proof.get("edges") or []
++    graph_ids = {n.get("id") for n in proof.get("nodes") or []}
++    if not rows or any(
++        not set(anchor.get("node_ids") or ()).intersection(graph_ids)
++        for anchor in selected
++    ):
++        return False
++    requested = set(task.get("graph_relations") or [])
++    if requested and not any(r.get("relation") in requested for r in rows):
++        return False
++    kind = task.get("kind")
++    anchor_ids = [
++        set(anchor.get("node_ids") or ())
++        for anchor in selected
++    ]
++    if kind == "drug_adverse_event":
++        if len(anchor_ids) != 2 or proof.get("hops") != 1:
++            return False
++        return any(
++            edge["src"]["id"] in anchor_ids[0]
++            and edge["dst"]["id"] in anchor_ids[1]
++            and edge["relation"] in ("ADVERSE_REACTION_MENTION", "CAUTION_MENTION")
++            for edge in rows
++        )
++    if kind == "drug_interaction":
++        if len(anchor_ids) != 2:
++            return False
++        for edge in rows:
++            if edge["relation"] != "INTERACTION_MENTION":
++                continue
++            a, b = edge["src"]["id"], edge["dst"]["id"]
++            if (a in anchor_ids[0] and b in anchor_ids[1]) or (
++                a in anchor_ids[1] and b in anchor_ids[0]
++            ):
++                return True
++            # One drug's source statement explicitly names the second
++            # drug's ingredient, and that ingredient belongs to the
++            # second drug through a separately verified composition edge.
++            for comp in rows:
++                if (comp["relation"] != "HAS_INGREDIENT"
++                        or comp["dst"]["id"] != b):
++                    continue
++                owner = comp["src"]["id"]
++                if (a in anchor_ids[0] and owner in anchor_ids[1]) or (
++                    a in anchor_ids[1] and owner in anchor_ids[0]
++                ):
++                    return True
++        return False
++    if kind in ("drug_safety", "drug_classification"):
++        if not anchor_ids:
++            return False
++        return any(
++            edge["src"]["id"] in anchor_ids[0]
++            and edge["relation"] in requested
++            for edge in rows
++        )
++    if kind == "disease_symptoms":
++        return any(edge["relation"] == "HAS_SYMPTOM"
++                   and edge["src"]["id"] in anchor_ids[0]
++                   for edge in rows) if anchor_ids else False
++    return True
++
++
++def _run_semantic_task_plan(
++    conn,
++    root: Path,
++    manifest: dict,
++    nodes: dict,
++    understanding: dict,
++    task_plan: dict,
++    *,
++    max_paths: int,
++    max_expansions: int,
++    max_neighbors: int,
++    max_seconds: float,
++    report: dict,
++) -> tuple[list[dict], dict]:
++    """Execute independently grounded task-scoped graph searches.
++
++    Only the existing _proof() validates graph edges, sources and quotations.
++    Text/classification tasks are surfaced as external search requests, not
++    silently answered from a drug class relation.
++    """
++    tasks = task_plan["tasks"]
++    groups = report.get("context_entities") or []
++    group_by_surface = {g["surface"]: g for g in groups}
++    to_search = [t for t in tasks if t["graph_strategy"] != "text_only"]
++    total_graph_tasks = len(to_search)
++    total_budget = max(0.01, min(10.0, max_seconds))
++    deadline = time.monotonic() + total_budget
++    excerpts: list[dict] = []
++    all_paths: list[dict] = []
++    task_coverage = []
++    aggregated_stats = Counter()
++    verified_sources = {}
++    seen_proofs = set()
++    traversals = 0
++    text_requests = list(task_plan.get("text_retrieval_requests") or [])
++
++    def is_unmet_text_request(task):
++        return task["kind"] in ("disease_classification", "unresolved_classification")
++
++    graph_number = 0
++    for task in tasks:
++        task_record = {
++            "id": task["id"], "kind": task["kind"], "query": task["query"],
++            "requested_entities": task["anchor_surfaces"],
++            "graph_strategy": task["graph_strategy"],
++            "requested_relations": task["graph_relations"],
++            "verified_graph_paths": 0,
++            "verified_direct_paths": 0,
++            "verified_multi_hop_paths": 0,
++            "graph_evidence_refs": [],
++            "text_retrieval_required": task["text_retrieval_required"],
++            "text_evidence_status": "not_executed_by_graph_retriever",
++            "answer_coverage": "not_established",
++            "status": "pending",
++        }
++        task_coverage.append(task_record)
++        if is_unmet_text_request(task):
++            task_record["status"] = "needs_disease_classification_source"
++            task_record["reason"] = (
++                "当前图谱的 CLASS_MEMBERSHIP_ASSERTION 仅验证 Drug -> DrugClass，"
++                "没有可逐边核验的 Disease -> DiseaseCategory 来源关系；"
++                "需由主应用执行疾病分类文本检索。"
++            )
++            continue
++        if task["graph_strategy"] == "text_only":
++            task_record["status"] = "needs_text_retrieval"
++            task_record["reason"] = "此子问题需要独立原文检索，不应由无关图关系替代"
++            continue
++
++        selected = [group_by_surface[surface]
++                    for surface in task["anchor_surfaces"] if surface in group_by_surface]
++        if (len(selected) != len(task["anchor_surfaces"])
++                or not selected or any(g.get("ambiguous") for g in selected)):
++            task_record["status"] = "needs_entity_linking"
++            task_record["reason"] = "部分目标未能唯一匹配到实际图谱节点"
++            continue
++
++        remaining = deadline - time.monotonic()
++        if remaining <= 0.02:
++            task_record["status"] = "search_budget_exhausted"
++            aggregated_stats["time_budget_exhausted"] += 1
++            continue
++        graph_number += 1
++        remaining_graph = max(1, total_graph_tasks - graph_number + 1)
++        # Reserve a fair share for subsequent tasks rather than letting the
++        # first high-fanout entity consume the whole per-request budget.
++        task_deadline = time.monotonic() + remaining / remaining_graph
++        raw_intent = dict(understanding.get("intent") or {})
++        scoped_intent = {k: (False if k.endswith("_question") else v)
++                         for k, v in raw_intent.items()}
++        scoped_intent["fields"] = []
++        scoped_intent["interaction_question"] = task["kind"] == "drug_interaction"
++        scoped_intent["mechanism_question"] = task["kind"] == "mechanism"
++        scoped_intent["drug_discovery_question"] = task["kind"] == "treatment_discovery"
++        scoped_understanding = {
++            **understanding, "intent": scoped_intent,
++            "llm_query_understanding": understanding.get("llm_query_understanding"),
++        }
++        search_plan = query_plan(
++            task["query"], selected, max(1, task["max_hops"]),
++            scoped_understanding, {"graph_relations": []},
++        )
++        search_plan.update({
++            "anchors": selected,
++            "requested_relations": task["graph_relations"],
++            "max_hops": max(1, task["max_hops"]),
++            "requires_connected_anchors": len(selected) > 1,
++            "interaction_question": task["kind"] == "drug_interaction",
++            "drug_discovery": task["kind"] == "treatment_discovery",
++            "disease_pair_interaction": False,
++            # The existing pair-specialized traversal is SQLite-only.
++            # Preserve the user-selected Neo4j backend when enabled.
++            "patient_pair_interaction": (
++                os.getenv("MEDICAL_SEMANTIC_GRAPH_BACKEND", "sqlite").strip().lower() != "neo4j"
++                and task["kind"] == "drug_interaction"
++                and len(selected) == 2
++                and len(understanding.get("medicines") or []) == 2
++            ),
++            "patient_query": scoped_understanding,
++            "_deadline": task_deadline,
++        })
++        slot_budget = max(1, min(max_paths, (max_paths + total_graph_tasks - 1) // max(1, total_graph_tasks)))
++        conn.set_progress_handler(lambda limit=task_deadline: int(time.monotonic() >= limit), 2000)
++        try:
++            candidates, task_stats = _traverse(
++                conn, nodes, search_plan,
++                max_paths=slot_budget,
++                max_expansions=max(1, max_expansions // max(1, total_graph_tasks)),
++                max_neighbors=max_neighbors,
++            )
++        except sqlite3.OperationalError as exc:
++            if "interrupted" not in str(exc).lower():
++                raise
++            candidates, task_stats = [], {"time_budget_exhausted": 1}
++        finally:
++            conn.set_progress_handler(None, 0)
++            search_plan.pop("_deadline", None)
++        traversals += 1
++        for key, value in (task_stats or {}).items():
++            if isinstance(value, (int, float)) and not isinstance(value, bool):
++                aggregated_stats[key] += value
++            elif value is True:
++                aggregated_stats[key] += 1
++
++        for candidate in candidates:
++            if task_record["verified_graph_paths"] >= slot_budget:
++                break
++            if len(excerpts) >= max_paths:
++                break
++            try:
++                proof = _proof(conn, root, candidate, nodes, verified_sources)
++            except (GraphBlocked, ValueError, KeyError, TypeError, AttributeError):
++                aggregated_stats["rejected_unverified_paths"] += 1
++                continue
++            # A connected route is not sufficient evidence for a claim.
++            # Check the actual evidence-bearing edge and both requested anchors.
++            if not _task_has_grounded_relation(task, proof, selected):
++                continue
++            task_record["verified_graph_paths"] += 1
++            task_record["verified_direct_paths"] += int(proof["hops"] == 1)
++            task_record["verified_multi_hop_paths"] += int(proof["hops"] > 1)
++            task_record["graph_evidence_refs"].append(proof["id"])
++            if proof["id"] in seen_proofs:
++                # The proof may help multiple tasks; show it once with
++                # per-task evidence refs rather than duplicated citations.
++                continue
++            seen_proofs.add(proof["id"])
++            content = path_text(proof)
++            if proof["hops"] == 1:
++                content = content.replace(
++                    "多关系图检索路径", "单跳直接关系原文证据", 1
++                )
++            content = (
++                "独立查询任务：" + task["id"] + " " + task["query"] + "。\\n"
++                + ("证据边界：原文中提及某不良反应不等于证明该药必然导致该疾病。\\n"
++                   if task["kind"] == "drug_adverse_event" else "")
++                + ("复合问题注意：其他子任务（特别是疾病分类）必须有独立原文；"
++                   "不得使用本任务的药品说明书路径补出疾病分类事实。\\n"
++                   if len(tasks) > 1 else "")
++                + content
++            )
++            urls = list(dict.fromkeys(edge["source_url"] for edge in proof["edges"]
++                                      if edge.get("source_url")))
++            excerpt = {
++                "id": len(excerpts) + 1,
++                "task_id": task["id"], "task_kind": task["kind"],
++                "task_query": task["query"],
++                "evidence_scope": "single_hop_direct" if proof["hops"] == 1 else "multi_hop",
++                "source": ("图谱单跳直接关系 " if proof["hops"] == 1
++                           else "多关系图路径 ") + proof["id"],
++                "section_path": " / ".join(RELATIONS[rel] for rel in proof["relations"]),
++                "content": content, "evidence_type": EVIDENCE_TYPE,
++                "source_url": "", "source_urls": urls,
++                "source_ids": list(dict.fromkeys(edge["source_id"] for edge in proof["edges"])),
++                "source_status": "third_party_unverified",
++                "clinical_status": "not_validated",
++                "graph_path": proof, "graph_verified": True,
++                "graph_snapshot_version": manifest["version"],
++                "parent_verified": False,
++                "_retrieval_tool": "search_semantic_graph",
++            }
++            excerpts.append(excerpt)
++            all_paths.append(proof)
++        task_record["status"] = (
++            "graph_evidence_found" if task_record["verified_graph_paths"]
++            else "search_budget_exhausted" if task_stats.get("time_budget_exhausted")
++            else "no_task_scoped_graph_evidence"
++        )
++        if task_record["verified_graph_paths"]:
++            # The source proof is only one component of the final answer.
++            task_record["answer_coverage"] = "graph_source_evidence_only"
++        else:
++            task_record["reason"] = (
++                "目标实体之间没有找到可核验图关系；"
++                "需按该任务检索原文，不能解释为疾病或风险不存在"
++            )
++
++    # All tasks remain independently visible even if their requested graph
++    # subset is absent. This is intentionally not a model-generated answer.
++    needs_more = [record["id"] for record in task_coverage
++                  if record["status"] != "graph_evidence_found"]
++    report.update({
++        "status": "ok" if excerpts else (
++            "source_retrieval_required" if text_requests
++            else "no_connected_evidence_path"
++        ),
++        "answer_route": "independent_semantic_tasks_source_verified",
++        "paths": all_paths,
++        "returned_paths": len(excerpts),
++        "multi_relation_paths": sum(len(set(p["relations"])) > 1 for p in all_paths),
++        "multi_hop_paths": sum(p["hops"] > 1 for p in all_paths),
++        "direct_relation_paths": sum(p["hops"] == 1 for p in all_paths),
++        "task_coverage": task_coverage,
++        "unanswered_task_ids": needs_more,
++        "all_subtasks_answered": False,  # Text/source review + Evidence Guard still required.
++        "all_subtasks_graph_search_completed": all(
++            rec["status"] in ("graph_evidence_found", "needs_text_retrieval",
++                              "needs_disease_classification_source")
++            for rec in task_coverage
++        ),
++        "text_retrieval_requests": text_requests,
++        "semantic_sub_queries": list(dict.fromkeys(
++            list(report.get("semantic_sub_queries") or []) +
++            [r["query"] for r in text_requests]
++        )),
++        "partial_answer_only": bool(needs_more or report.get("partial_answer_only")),
++        "execution": {
++            "traversals": traversals,
++            "task_count": len(tasks), "plan_id": "semantic_independent_tasks",
++            "traversal_budget_seconds": total_budget,
++        },
++        "stats": dict(aggregated_stats),
++        "source_verified_count": len(verified_sources),
++        "graph_backend": os.getenv("MEDICAL_SEMANTIC_GRAPH_BACKEND", "sqlite").strip().lower(),
++        "truncated": bool(aggregated_stats.get("time_budget_exhausted")
++                          or aggregated_stats.get("fanout_truncations")
++                          or aggregated_stats.get("expansion_budget_exhausted")),
++    })
++    return excerpts, report
++
++
+ def search_semantic_graph(question: str, *, project_root: Path | str, path=None,
+                           max_hops: int = 5, max_paths: int = 6,
+                           max_expansions: int = 2400, max_neighbors: int = 64,
+                           max_seconds: float = 3.0, query_understanding_model=None) -> tuple[list[dict], dict]:
+     started = time.perf_counter()
+     root = Path(project_root).resolve()
++    from medical_llm_query_understanding import _load_project_dotenv
++    _load_project_dotenv()
+     backend = os.getenv("MEDICAL_SEMANTIC_GRAPH_BACKEND", "sqlite").strip().lower()
+     report = {"status": "not_run", "paths": [],
+               "storage": "neo4j_with_local_source_verification" if backend == "neo4j" else "local_derived_property_graph",
+               "generation_evidence": True, "clinical_validation": False}
+     if os.getenv("MEDICAL_SEMANTIC_GRAPH_ENABLED", "1") == "0":
+         return [], {**report, "status": "disabled"}
+-    from medical_llm_query_understanding import _load_project_dotenv
+-    _load_project_dotenv()
+     conn = None
+     try:
+         if not 1 <= max_hops <= 5 or not 1 <= max_paths <= 8 or not 1 <= max_expansions <= 10_000 or not 1 <= max_neighbors <= 128:
+@@ -1211,12 +1563,44 @@
+             "remaining_unresolved_count": len(patient_query.get("unresolved_medication_mentions") or []),
+             "llm_is_primary": llm_ok,
+         }
++        if llm_ok:
++            # Older v4.x parsers may detect one intent but omit the second
++            # clause or its antecedent. A bounded, optional second LLM
++            # pass may add independently verified *query tasks*, not edges.
++            patient_query, task_refinement = refine_semantic_tasks_with_model(
++                question, patient_query, groups, model,
++            )
++            report["semantic_task_refinement"] = task_refinement
+         report["query_understanding"] = patient_query
+         report["semantic_sub_queries"] = patient_query.get("semantic_sub_queries") or []
+         report["semantic_query_relations"] = patient_query.get("semantic_query_relations") or []
+         retrieval_plan = build_retrieval_plan(question, patient_query)
+         report["retrieval_plan"] = retrieval_plan
+-        report["context_entities"] = groups
++        report["context_entities"] = list(groups)
++        semantic_task_plan = (
++            build_semantic_task_plan(
++                question, patient_query, groups,
++                available_relations=set(RELATIONS),
++            ) if llm_ok else None
++        )
++        if semantic_task_plan:
++            report["semantic_task_plan"] = semantic_task_plan
++            report["text_retrieval_requests"] = semantic_task_plan["text_retrieval_requests"]
++            report["semantic_sub_queries"] = list(dict.fromkeys(
++                list(report["semantic_sub_queries"])
++                + [task["query"] for task in semantic_task_plan["tasks"]]
++            ))
++        tasks = semantic_task_plan["tasks"] if semantic_task_plan else []
++        independent_task_route = bool(
++            llm_ok and tasks and (
++                len(tasks) > 1 or tasks[0]["kind"] in (
++                    "drug_adverse_event", "drug_interaction",
++                    "disease_classification", "unresolved_classification",
++                    "drug_classification", "drug_safety", "disease_symptoms",
++                )
++            )
++        )
++        report["independent_task_route"] = independent_task_route
+         discovery_intent = bool(patient_query.get("intent", {}).get("drug_discovery_question"))
+         interaction_intent = bool(patient_query.get("intent", {}).get("interaction_question"))
+         vague_categories = list(patient_query.get("vague_medicines") or [])
+@@ -1247,7 +1631,7 @@
+         }
+         if (vague_categories or unlinked_named) and not partial_scope and not (
+             discovery_intent and not interaction_intent
+-        ):
++        ) and not independent_task_route:
+             return [], {**report, "status": "needs_medication_clarification",
+                         "reason": "仅有未确认的药名/复方类别，缺少可核验的图谱实体；无法判断具体制剂合用安全性"}
+         if (patient_query.get("ambiguous_aliases") or patient_query.get("route_conflicts")
+@@ -1287,8 +1671,20 @@
+         if unknown_products:
+             return [], {**report, "status": "unresolved_named_entity", "unresolved_names": unknown_products,
+                         "anchors": groups, "reason": "存在未解析的制剂全名，不能省略它再连接其他实体"}
+-        if len(groups) > 5 or any(g["ambiguous"] for g in groups):
++        # The independent task planner searches only its own verified
++        # anchors; it does not require 5+ unrelated context nodes to fit
++        # into one path. Ambiguous catalog identities remain blocked.
++        if any(g["ambiguous"] for g in groups) or (
++            len(groups) > 5 and not independent_task_route
++        ):
+             return [], {**report, "status": "ambiguous_or_too_many_entities", "anchors": groups}
++        if independent_task_route:
++            return _run_semantic_task_plan(
++                conn, root, manifest, nodes, patient_query, semantic_task_plan,
++                max_paths=max_paths, max_expansions=max_expansions,
++                max_neighbors=max_neighbors, max_seconds=max_seconds,
++                report=report,
++            )
+         named_medicine_groups = [g for g in groups
+                                  if set(g["kinds"]) & {"Drug", "Ingredient"}]
+         if ((len(patient_query.get("medicines") or []) > 2 or len(named_medicine_groups) > 2)
+@@ -1453,6 +1849,10 @@
+ def graph_insufficiency_message(report: dict) -> str:
+     """Explain actual failed joins instead of a bare 'insufficient' response."""
+     patient = report.get("query_understanding", {})
++    if report.get("status") == "source_retrieval_required":
++        return ("已按语义拆分检索任务，但当前图谱无法直接覆盖全部子问题。"
++                "请按 text_retrieval_requests 检索原文或本地分类资料，"
++                "未执行的分类任务不能使用其他药品路径代答。")
+     if report.get("status") == "llm_unavailable":
+         return report.get("reason") or (
+             "大模型语义查询本轮未成功，系统未将规则抽取伪装成语义理解结果。"

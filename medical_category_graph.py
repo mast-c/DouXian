@@ -278,3 +278,28 @@ def category_source_answer(excerpts):
     lines.append("这是本地数据集的分类记载，尚未核验为权威药理分类。")
     lines.append("分类归属及来源位置可在证据栏的**多关系图路径**中展开查看。")
     return "\n\n".join(lines)
+
+
+def disease_classification_source_answer(excerpts):
+    """Display verified disease-source classifications without clinical inference."""
+    rows = []
+    seen = set()
+    for item in excerpts:
+        path = item.get("graph_path") or {}
+        edge = next((e for e in path.get("edges", [])
+                     if e.get("relation") == "DISEASE_CATEGORY_MENTION"
+                     and e.get("section_field") == "category"
+                     and e.get("quote")), None)
+        if not edge:
+            continue
+        disease = str(edge.get("src", {}).get("name") or "")
+        category = str(edge.get("quote") or "")
+        if not disease or not category or (disease, category) in seen:
+            continue
+        seen.add((disease, category))
+        rows.append(f"本地疾病资料将 **{disease}** 列为 **{category}**[{item['id']}]。")
+    if not rows:
+        return "已检索到分类路径，但未能整理出可展示的原文分类记录。"
+    rows.append("以上是本地资料中的分类/科别记载，不等同于权威疾病分类或个体诊断。")
+    rows.append("每条分类的原文和来源可在下方图路径证据中查看。")
+    return "\n\n".join(rows)

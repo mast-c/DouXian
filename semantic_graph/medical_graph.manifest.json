@@ -1,7 +1,7 @@
 {
-  "version": "semantic-graph-5",
-  "created_at": "2026-11-05T04:20:17.927819+00:00",
-  "builder_sha256": "e436fae06d630cb9e7a800e5050f6c896837c3b2146c005320135e0ed59239ea",
+  "version": "semantic-graph-6",
+  "created_at": "2026-11-06T11:38:11.381922+00:00",
+  "builder_sha256": "832435075ea9e38ca8ed26714a3e1c14f7e792c2f9599089e4426b5f251a07f2",
   "inputs": {
     "kg_output_clean_v2/drugs.jsonl": {
       "size": 2248653,
@@ -29,6 +29,7 @@
     "CAUTION_MENTION": 91439,
     "CLASS_MEMBERSHIP_ASSERTION": 16,
     "CONTRAINDICATION_MENTION": 12062,
+    "DISEASE_CATEGORY_MENTION": 25590,
     "ENZYME_MODULATION_MENTION": 299,
     "EXPOSURE_CHANGE_MENTION": 3336,
     "HAS_INGREDIENT": 62077,
@@ -50,6 +51,7 @@
     "composition_sections_unparsed": 781,
     "entities_Condition": 1046,
     "entities_Disease": 8806,
+    "entities_DiseaseCategory": 55,
     "entities_Drug": 11951,
     "entities_DrugClass": 18,
     "entities_Ingredient": 7502,
@@ -60,13 +62,13 @@
     "invalid_indication_candidates_omitted": 6,
     "self_ingredient_interaction_mentions_omitted": 1017
   },
-  "nodes": 53645,
-  "edges": 401837,
-  "sources": 110019,
+  "nodes": 53700,
+  "edges": 427427,
+  "sources": 118826,
   "clinical_validation": false,
   "storage": "local_sqlite_property_graph_from_source_exports",
   "index": {
-    "size": 353841152,
-    "sha256": "ea5975868d6196cad9516c310cde250207d960d0e0dcc1c3cd11f1157bc2e062"
+    "size": 375447552,
+    "sha256": "7261a040927780ceaadf851dca6bc6c1a2b39c39af73abb2645df90c355e022f"
   }
 }

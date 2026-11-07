@@ -35,6 +35,7 @@ PATIENT_TERMS = (
     (r"宝宝|小孩|孩子|儿童|婴儿", "child", ["儿童用药"]),
     (r"肾不好|肾功能不好", "renal_question", ["肾功能", "肾脏"]),
     (r"肝不好|肝功能不好", "hepatic_question", ["肝功能", "肝脏"]),
+    (r"发烧|发热|低烧|高烧|高热|有点烧", "symptom_word", ["发热"]),
     (r"拉肚子", "symptom_word", ["腹泻"]),
     (r"心慌", "symptom_word", ["心悸"]),
 )
@@ -50,8 +51,8 @@ def patient_intent(question: str, medicine_count: int = 0) -> dict:
         r"|(?:用药|药物|药品).{0,6}(?:建议|推荐)|(?:建议|推荐).{0,6}(?:用药|药物|药品)", q
     ))
     symptom_question = bool(re.search(r"症状|临床表现|有哪些表现|什么表现", q))
-    explicit = bool(re.search(r"相互作用|合用|同用|同服|联用|配伍|(?:一起|一块|同时)(?:吃|用|服|喝)|同吃|混着|搭配|冲突|相克|犯冲", q))
-    risk = bool(re.search(RISK_PATTERN + r"|安全吗|安全性|风险", q))
+    explicit = bool(re.search(r"相互作用|合用|同用|同服|联用|配伍|加用|加服|并用|再加用|(?:一起|一块|同时)(?:吃|用|服|喝)|同吃|混着|搭配|冲突|相克|犯冲", q))
+    risk = bool(re.search(RISK_PATTERN + r"|能否|可否|是否可以|是否能够|安全吗|安全性|风险", q))
     medication = bool(re.search(r"吃|服|用药|打针|喷|涂|药", q))
     interaction = explicit or (medicine_count >= 2 and medication and risk)
     fields = []
@@ -112,37 +113,84 @@ def core_candidate(stem: str) -> str:
     return stem
 
 
+def counterion_search_candidate(stem: str) -> str:
+    """A conservative abbreviated-name *search hint*, never chemical equivalence.
+
+    For example, a source formulation named 华法林钠片 can be considered as a
+    candidate for a query mentioning 华法林. The actual formulation and source
+    evidence remain explicit; do not assert clinical interchangeability.
+    """
+    if len(stem) >= 4 and stem[-1] in ("钠", "钾"):
+        return stem[:-1]
+    return stem
+
+
+# These are patterns for grammatical *context*, not drug-name aliases.
+# The guard below has higher priority: an unknown product/strength/formulation
+# suffix must NEVER become a known medicine just because its stem is known.
+_MEDICINE_NAME_EXTENSION = re.compile(
+    r"^(?:钠|钙|钾|镁|锌|盐|复方|缓释|肠溶|控释|分散|胶囊|颗粒|"
+    r"注射(?:液|用)?|口服液|糖浆|加强版|增强版|改良版|片剂|片|"
+    r"滴眼|滴鼻|滴耳|喷雾|气雾|软膏|乳膏|凝胶)"
+)
+_TREATMENT_CONTEXT_AFTER = re.compile(
+    r"^(?:用于|治疗|控制|预防|抗凝(?=治疗|的|用药|患者|病人|期间|[，,。；;、？！?！]|$)|"
+    r"抗感染(?=治疗|的|用药|患者|病人|[，,。；;]|$)|"
+    r"治疗(?=的|期间|用于|患者|病人|[，,。；;]|$)|"
+    r"预防(?=的|期间|患者|病人|[，,。；;]|$)|"
+    r"控制(?=的|期间|患者|病人|[，,。；;]|$))"
+)
+
+
 def patient_boundary(text: str, start: int, end: int, *, exact_product=False) -> bool:
-    """Do not require professional grammar around a known drug name."""
+    """Accept an explicit known name inside narrative, but reject longer formulations.
+
+    In "服用华法林抗凝的房颤患者", 华法林 is a standalone ingredient
+    followed by a therapeutic-purpose clause.  In "华法林缓释片", the
+    suffix could instead be part of an unverified formulation and is blocked.
+    """
     han = lambda c: bool(c) and "\u4e00" <= c <= "\u9fff"
+    prefix, suffix = text[:start], text[end:]
+
     before_ok = not start or not han(text[start-1]) or bool(re.search(
-        r"(?:吃|吃了|吃着|吃过|服|服了|服用|用了|用着|使用|喝|喝了|打|打了|喷|喷了|涂|涂了|加|加了|加上|加用|换用|换成|换了|停了|是|叫|叫做|买了|买的|药是|包括|和|与|跟|及|还有|以及|配|配了|搭配|一起|然后|再|同时|拿了|开了|比较|对比|介绍|请问|咨询|关于|查一下|想问|在用|用的|吃的|用|我|我的|或|或者|还是)$", text[:start]))
+        r"(?:吃|吃了|吃着|吃过|服|服了|服用|用了|用着|使用|喝|喝了|打|打了|"
+        r"喷|喷了|涂|涂了|加|加了|加上|加用|换用|换成|换了|停了|是|叫|"
+        r"叫做|买了|买的|药是|包括|和|与|跟|及|还有|以及|配|配了|搭配|"
+        r"一起|然后|再|同时|拿了|开了|比较|对比|介绍|请问|咨询|关于|"
+        r"查一下|想问|在用|用的|吃的|以|通过|接受|采用|选择|考虑|计划|拟|"
+        r"包含|含有|内含|含|成分含有|成分含|需要|需用|需|用|我|我的|或|或者|还是)$", prefix
+    ))
     after_ok = end == len(text) or not han(text[end]) or bool(re.match(
-        r"(?:的|是|和|与|跟|及|还|一块|同时|一起|能|可以|可不可以|会|有|没|是否|要|行|不|又|再|以后|后|之前|前|怎么|用|吃|服|吗|多久|一天|一日|每次|干什么|干嘛|治什么|管什么|安全吗|相克)", text[end:]))
-    if re.search(r"(?:想了解|想知道|了解一下|了解|查询|介绍一下)$", text[:start]):
+        r"(?:的|是|和|与|跟|及|还|一块|同时|一起|能|可以|可不可以|会|"
+        r"有|没|是否|要|行|不|又|再|以后|后|之前|前|怎么|用|吃|"
+        r"服|吗|多久|一天|一日|每次|干什么|干嘛|治什么|管什么|"
+        r"安全吗|相克)", suffix
+    ))
+
+    if re.search(r"(?:想了解|想知道|了解一下|了解|查询|介绍一下)$", prefix):
         before_ok = True
-    # Set operators introduce catalog entities, not medication actions.
-    if re.search(r"(?:排除|不包括|除了|除去|不要|包含)$", text[:start]):
+    if re.search(r"(?:排除|不包括|除了|除去|不要|包含)$", prefix):
         before_ok = True
-    if re.match(r"(?:已经|大概|约)?" + DURATION + r"(?:了|后|以后|以来|，|,|。|$)", text[end:]):
-        after_ok = True
-    if re.match(r"(?:没效果|不管用|不见效|效果|好像|似乎|到底|是不是|怎么样|如何)", text[end:]):
-        after_ok = True
-    if re.match(r"(?:属于|属不属于|归属|算不算|算是|算哪|分类|类别|哪(?:一)?类)", text[end:]):
-        after_ok = True
-    # Known catalog names can be topics followed by a patient/action clause,
-    # or objects of a clinician's prescription. Do not accept arbitrary Han
-    # suffixes: "甲药片加强版" must not silently resolve to "甲药片".
-    if re.search(r"(?:医生|医师|大夫|医院|门诊)(?:给我|给他|给她|给患者)?(?:开|配)(?:了|的)$", text[:start]):
+    if re.search(r"(?:医生|医师|大夫|医院|门诊)(?:给我|给他|给她|给患者)?(?:开|配)(?:了|的)$", prefix):
         before_ok = True
-    if re.match(r"(?:我|我们|他|她|患者|病人)(?:(?:已经|正在|一直|之前|刚刚|刚|现在|还在|早就|也|还|已|没|没有|从未|不再)){0,3}(?:吃|服用|服|使用|用|喷|涂|停用|停服|停了)", text[end:]):
+    if re.match(r"(?:已经|大概|约)?" + DURATION + r"(?:了|后|以后|以来|，|,|。|$)", suffix):
         after_ok = True
+    if re.match(r"(?:没效果|不管用|不见效|效果|好像|似乎|到底|是不是|怎么样|如何)", suffix):
+        after_ok = True
+    if re.match(r"(?:属于|属不属于|归属|算不算|算是|算哪|分类|类别|哪(?:一)?类)", suffix):
+        after_ok = True
+    if re.match(r"(?:我|我们|他|她|患者|病人)(?:(?:已经|正在|一直|之前|刚刚|刚|现在|还在|早就|也|还|已|没|没有|从未|不再)){0,3}(?:吃|服用|服|使用|用|喷|涂|停用|停服|停了)", suffix):
+        after_ok = True
+    # A treatment-purpose clause may immediately follow a generic drug name.
+    if before_ok and _TREATMENT_CONTEXT_AFTER.match(suffix):
+        after_ok = True
+
+    # Apply this extension guard to both exact products AND ingredient stems:
+    # a matched partial ingredient must not silently imply an unseen drug form.
+    if _MEDICINE_NAME_EXTENSION.match(suffix):
+        return False
     if exact_product and before_ok:
-        # A complete catalog formulation is an entity before its intent is
-        # known. Free-form narrative after it must not need a phrase whitelist.
-        # Retain explicit checks for longer chemical/formulation names.
-        extension = r"(?:钠|钙|钾|镁|锌|盐|复方|缓释|肠溶|控释|胶囊|颗粒|注射液|加强版|增强版|改良版)"
-        return not bool(re.match(extension, text[end:]))
+        return True
     return before_ok and after_ok
 
 
@@ -171,6 +219,9 @@ def _name_catalog(root: str, export_size: int, export_mtime: int, node_signature
             stem = formulation_stem(node["name"])
             if stem != node["name"] and not stem.startswith("复方"):
                 put(stem, node["id"], "formulation_search_candidate")
+                counterion_stem = counterion_search_candidate(stem)
+                if counterion_stem != stem:
+                    put(counterion_stem, node["id"], "counterion_search_candidate")
                 if node["name"].endswith("鼻喷雾剂"):
                     # A shortened formulation is a search candidate, never an
                     # assertion that nasal and other spray routes are equivalent.
@@ -193,6 +244,45 @@ def _name_catalog(root: str, export_size: int, export_mtime: int, node_signature
     return nodes, terms, Lexicon(terms)
 
 
+def catalog_aliases_for_question(question: str, *, root: Path, nodes: dict) -> dict:
+    """Return only names and source-backed aliases literally present in this question.
+
+    This is a *link validator*, not a classifier. A returned alias broadens
+    candidate retrieval and does NOT assert clinical interchangeability or
+    identify a patient's exact formulation.
+    """
+    source = root / SOURCE_DIR / "drugs.jsonl"
+    stat = source.stat()
+    catalog_nodes, terms, _ = _name_catalog(
+        str(root), stat.st_size, stat.st_mtime_ns,
+        tuple((node["id"], node["kind"], node["name"])
+              for node in nodes.values() if node["kind"] in ("Drug", "Ingredient")),
+    )
+    normalized = unicodedata.normalize("NFKC", str(question or ""))
+    found = {}
+    for surface, identities in terms.items():
+        if surface not in normalized:
+            continue
+        candidates = []
+        seen = set()
+        for (node_id, basis) in identities:
+            record = catalog_nodes.get(node_id)
+            if not record:
+                continue
+            identity = (record["kind"], record["name"], basis)
+            if identity in seen:
+                continue
+            seen.add(identity)
+            candidates.append({
+                "canonical": record["name"],
+                "kind": record["kind"],
+                "basis": basis,
+            })
+        if candidates:
+            found[surface] = candidates
+    return found
+
+
 def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     source = root / SOURCE_DIR / "drugs.jsonl"
     stat = source.stat()
@@ -202,7 +292,8 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     q = unicodedata.normalize("NFKC", str(question))
     groups = []
     priority = {"exact_product": 0, "source_catalog_alias": 1, "exact_ingredient": 2, "partial_form_search_candidate": 3,
-                "formulation_search_candidate": 3, "salt_name_search_candidate": 4}
+                "formulation_search_candidate": 3, "salt_name_search_candidate": 4,
+                "counterion_search_candidate": 5}
     for token, start, end in lexicon.find(q[:600]):
         is_exact = any(basis == "exact_product" for _, basis in terms[token])
         if not patient_boundary(q, start, end, exact_product=is_exact):
@@ -258,7 +349,7 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     intent = patient_intent(q, len(groups))
     disease_names = {node["name"] for node in nodes.values() if node["kind"] == "Disease"}
     disease_lookup_context = bool(re.search(
-        r"症状|表现|得了|患有|治疗|吃什么药|用什么药|应该吃|应该用|相关用药", q
+        r"症状|表现|得了|患有|治疗|吃什么药|用什么药|应该吃|应该用|相关用药|分类|类型|属于什么|归属|哪(?:一)?类", q
     ))
     if disease_lookup_context:
         # Morphology-based drug search candidates are weak matches. If the same
@@ -279,7 +370,8 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
                 current["mentions"][0][key] = previous[key]
             current["role_basis"] = "shared_medication_action"
             current["mentions"][0]["role_basis"] = "shared_medication_action"
-    context = [{"surface": match.group(), "kind": kind, "retrieval_terms": synonyms,
+    context = [{"surface": match.group(), "start": match.start(), "end": match.end(),
+                "kind": kind, "retrieval_terms": synonyms,
                 "assertion": context_assertion(q, match.start()),
                 "diagnosis_asserted": False}
                for pattern, kind, synonyms in PATIENT_TERMS for match in re.finditer(pattern, q)]
@@ -299,6 +391,37 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
         not any(a <= match.start() and match.end() <= b for a, b in occupied)
         for match in re.finditer(re.escape(term), q)
     )]
+    # A generic product category is not a single verified formulation. But
+    # the question may also explicitly specify one or more *real* ingredients
+    # ("含伪麻黄碱的复方感冒药"). Preserve those independent retrieval anchors.
+    vague_medicine_details = []
+    for category in vague:
+        for category_match in re.finditer(re.escape(category), q):
+            category_start = category_match.start()
+            prefix = q[max(0, category_start - 2):category_start]
+            phrase = ("复方" if prefix.endswith("复方") else "") + category
+            specified = []
+            for group in groups:
+                if not group.get("ingredient_ids"):
+                    continue
+                ingredient_start, ingredient_end = group["start"], group["end"]
+                # A composition clause, not just an arbitrary nearby drug name.
+                before = q[max(0, ingredient_start - 7):ingredient_start]
+                between = q[ingredient_end:category_start]
+                if (0 <= category_start - ingredient_end <= 16
+                        and re.search(r"(?:含有|包含|内含|含)$", before)
+                        and re.fullmatch(r"(?:的)?(?:复方)?", between)
+                        and not re.search(r"(?:不含|未含|没有|不包括)$", before)):
+                    specified.append(group["surface"])
+            vague_medicine_details.append({
+                "category": category,
+                "surface": phrase,
+                "start": category_start - (len(phrase) - len(category)),
+                "end": category_match.end(),
+                "named_ingredients": list(dict.fromkeys(specified)),
+                "full_composition_known": False,
+                "actual_product_confirmed": False,
+            })
     unresolved = []
     # Only inspect explicit medication slots. Suggestions require confirmation;
     # they are never injected into the graph or silently corrected.
@@ -323,6 +446,7 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
     alias_ambiguities = [g["surface"] for g in groups if g["basis"] == "source_catalog_alias" and len({core_candidate(formulation_stem(catalog_nodes[v]["name"])) for v in g["candidate_drug_ids"]}) > 1]
     route_conflicts = [g["surface"] for g in groups if g["route_hint"] and not g["candidate_drug_ids"] and g["route_excluded_candidates"]]
     return {"medicines": groups, "intent": intent, "vague_medicines": vague,
+            "vague_medicine_details": vague_medicine_details,
             "schema_version": 2, "normalized_question": q,
             "offset_basis": "normalized_question",
             "timing": timing_mentions(q, groups),
@@ -330,7 +454,7 @@ def understand_question(question: str, *, root: Path, nodes: dict) -> dict:
             "patient_context": context,
             "unresolved_medication_mentions": unresolved, "ambiguous_aliases": alias_ambiguities,
             "route_conflicts": route_conflicts,
-            "needs_product_details": any(not g["actual_patient_product_known"] for g in groups),
+            "needs_product_details": bool(vague) or any(not g["actual_patient_product_known"] for g in groups),
             "requested_details": ["药盒上的名称或成分", "剂型（普通片、缓释片、胶囊、针剂等）"],
             "policy": "query_expansion_only_not_patient_product_identification"}
 
@@ -341,19 +465,53 @@ def _clinical_lexicon(names: tuple):
 
 
 def active_anchors(exact_groups: list[dict], understanding: dict, nodes: dict) -> list[dict]:
-    medicines = understanding["medicines"]
+    """Keep catalog-verified extra drug anchors from LLM/local recovery.
+
+    Upstream `medicines` is not necessarily complete: a known medication may
+    have been missed by the boundary parser but independently verified against
+    the graph catalog.  Never add an unverified free-form model guess.
+    """
+    medicines = understanding.get("medicines") or []
     if not medicines:
         return exact_groups
     result = []
     for group in medicines:
-        ids = group["candidate_drug_ids"] or group["ingredient_ids"]
+        # A generic ingredient mention such as "甲硝唑" is not a named
+        # "甲硝唑片". Prefer the exact ingredient node for pair retrieval;
+        # concrete formulations remain source-backed downstream candidates.
+        # For an explicitly named product or a literal brand alias, retain
+        # the formulation candidates instead.
+        if group.get("basis") == "generic_search_scope" and group.get("ingredient_ids"):
+            raw_ids = group["ingredient_ids"]
+        else:
+            raw_ids = group.get("candidate_drug_ids") or group.get("ingredient_ids") or []
+        ids = [v for v in raw_ids if v in nodes]
         if ids:
-            result.append({"surface": group["surface"], "node_ids": ids,
-                           "kinds": sorted({nodes[v]["kind"] for v in ids}),
-                           "start": group["start"], "end": group["end"],
-                           "ambiguous": False, "search_candidates": not group["actual_patient_product_known"]})
+            result.append({
+                "surface": group["surface"], "node_ids": ids,
+                "kinds": sorted({nodes[v]["kind"] for v in ids}),
+                "start": group["start"], "end": group["end"],
+                "ambiguous": False,
+                "search_candidates": not group.get("actual_patient_product_known", False),
+            })
+
+    seen = {group["surface"] for group in result}
+    validated_extra_sources = {"llm_catalog_verified", "catalog_narrative_repair"}
+    for group in exact_groups:
+        if (group.get("source") in validated_extra_sources
+                and set(group.get("kinds") or []) & {"Drug", "Ingredient"}
+                and group.get("surface") not in seen
+                and group.get("node_ids")
+                and all(i in nodes and nodes[i]["kind"] in ("Drug", "Ingredient")
+                        for i in group["node_ids"])):
+            result.append(group)
+            seen.add(group["surface"])
+
     if len(medicines) == 1:
-        result.extend(g for g in exact_groups if any(k in ("Disease", "Symptom", "Population") for k in g["kinds"]))
-    # Diseases/symptoms stay in the trace as patient context. They must not
-    # force the drug-pair path through unrelated disease/symptom edges.
+        result.extend(
+            group for group in exact_groups
+            if group["surface"] not in seen
+            and set(group.get("kinds") or []) & {"Disease", "Symptom", "Population"}
+        )
+    # Background context must never be misused as a required interaction path.
     return result
